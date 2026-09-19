@@ -1,0 +1,28 @@
+:root{
+  --bg:#0e0e10; --fg:#ededf0; --dim:#9a9aa5; --accent:#8ab4f8; --border:#2a2a2e;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.7;
+}
+.wrap{max-width:720px; margin:0 auto; padding:3rem 1.5rem 6rem;}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+header.site{margin-bottom:2.5rem; padding-bottom:1rem; border-bottom:1px solid var(--border);}
+header.site .brand{font-weight:600; font-size:1.1rem}
+header.site nav{margin-top:.4rem; font-size:.9rem; color:var(--dim)}
+h1{font-size:1.8rem; margin-bottom:.3rem}
+.meta{color:var(--dim); font-size:.85rem; margin-bottom:2rem}
+.post-list{list-style:none; padding:0; margin:0}
+.post-list li{padding:1rem 0; border-bottom:1px solid var(--border)}
+.post-list .title{font-size:1.05rem; font-weight:600}
+.post-list .desc{color:var(--dim); font-size:.9rem; margin-top:.25rem}
+.post-list .date{color:var(--dim); font-size:.8rem}
+article{white-space:normal}
+article h2{margin-top:2rem}
+article code{background:#1c1c20; padding:.15em .4em; border-radius:4px; font-size:.9em}
+article pre{background:#1c1c20; padding:1rem; border-radius:6px; overflow-x:auto}
+article blockquote{border-left:3px solid var(--border); margin-left:0; padding-left:1rem; color:var(--dim)}
+footer{margin-top:3rem; color:var(--dim); font-size:.8rem}

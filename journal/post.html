@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post — GuinEeeeeeeeeeeeeeeeeeeeeeeerm</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <div class="brand">GuinEeeeeeeeeeeeeeeeeeeeeeeerm</div>
+    <nav><a href="../index.html">home</a> · <a href="index.html">journal</a></nav>
+  </header>
+  <div id="meta"></div>
+  <article id="content">Loading…</article>
+  <footer>© GuinEeeeeeeeeeeeeeeeeeeeeeeerm</footer>
+</div>
+<script>
+const params = new URLSearchParams(location.search);
+const slug = params.get('slug');
+Promise.all([
+  fetch('posts.json').then(r=>r.json()),
+  fetch(`posts/${slug}.md`).then(r=>r.text())
+]).then(([posts, md]) => {
+  const post = posts.find(p => p.slug === slug);
+  if (post) {
+    document.title = post.title + ' — GuinEeeeeeeeeeeeeeeeeeeeeeeerm';
+    document.getElementById('meta').innerHTML = `<h1>${post.title}</h1><div class="meta">${post.date}</div>`;
+  }
+  document.getElementById('content').innerHTML = marked.parse(md);
+}).catch(e => {
+  document.getElementById('content').textContent = '글을 불러올 수 없습니다.';
+});
+</script>
+</body>
+</html>
