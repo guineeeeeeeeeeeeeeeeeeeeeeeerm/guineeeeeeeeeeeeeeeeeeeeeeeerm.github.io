@@ -1,0 +1,181 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "readme-2",
+    "role": "implementer",
+    "brief": "Fix README.md, keeping every test green: (1) it tells the author to run `site-build` — that is a concept's name, not a command; the command is `python3 build.py`; (2) the newbie found it does not say what a visitor sees of a patch — the '패치 보기' toggle, outlines, the history on hover (Q-patch-view); (3) nor what a visitor sees of a post without a title and in what order posts appear (Q-feed: newest first, the first-paragraph stand-in). Do not change build.py or the tests.",
+    "closes": [
+      "Q-readme",
+      "Q-feed",
+      "Q-patch-view"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_readme.py"
+    ],
+    "gate": null,
+    "domain": "site",
+    "after": [
+      "newbie"
+    ]
+  },
+  "seq": 3,
+  "added": "2026-09-23T15:11:49+00:00",
+  "start": {
+    ".gitignore": "398d5461d396112af8843c54107b420c303ea084",
+    "mangsang/relations/R-79988df4.json": "31b3c9a315c1afa94e8a29b6042e30565d309b82",
+    "plan/PLAN.md": "78a9fea4d9d5eb572437f6be74b41b4b09d25806",
+    "README.md": "98787d0978e0881ff91d8978bd849ffef01dbad7",
+    "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
+    "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
+    "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "avatar/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "mangsang/relations/R-255f6e70.json": "8021848881e7bc78a716139f94cbd2c82f468af4",
+    "mangsang/relations/R-8bbfec2a.json": "ccb8bd7e24ba15de5b0066b500eae581e8580d49",
+    "mangsang/retired/R-255f6e70.json": "2d7eacd7896afd356b0edbb516da511586cf7ad1",
+    "mangsang/retired/R-8bbfec2a.json": "396ca35a94159d2637f6529d30bb3f58994672a9",
+    "tests/test_readme.py": "b5e982469ce14dc4aa40ce800b5246c65447cf85"
+  },
+  "touched_by_provider": [
+    "README.md"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0ced2-b3c9-7bf3-a190-5c92807df77d",
+    "effort": "xhigh",
+    "transcript": "readme-2.response.transcript.jsonl",
+    "versions": {
+      "used": {
+        "hacheong": "1.2.0+g6cc62df-dirty"
+      },
+      "locked": {
+        "chongdae": "1.4.1#93cda7da7d16",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.2.0#bdc80448e6b0",
+        "hunsu": "1.2.3#9398b102154d",
+        "mangsang": "1.4.0#ca57606d398c"
+      }
+    }
+  },
+  "non-claims": [
+    "(provider) README 내용의 전체 문장 일치 여부는 자동 검증 범위 밖입니다."
+  ],
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0ced4-3e21-7b31-b7d2-3d432132e0d3",
+    "effort": "xhigh",
+    "transcript": "readme-2.verify.response.transcript.jsonl",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.1.0"
+      },
+      "locked": {
+        "chongdae": "1.4.1#93cda7da7d16",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.2.0#bdc80448e6b0",
+        "hunsu": "1.2.3#9398b102154d",
+        "mangsang": "1.4.0#ca57606d398c"
+      }
+    }
+  },
+  "attempts": [
+    {
+      "status": "done",
+      "summary": "README.md를 수정해 실제 명령을 `python3 build.py`로 바로잡고, 피드와 패치 보기 동작 안내를 추가했습니다.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 0
+        }
+      ],
+      "decisions": [],
+      "non-claims": [
+        "README 내용의 전체 문장 일치 여부는 자동 검증 범위 밖입니다."
+      ],
+      "disputed-tests": [],
+      "worker": {
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "session": "01a0ced2-b3c9-7bf3-a190-5c92807df77d",
+        "effort": "xhigh",
+        "transcript": "readme-2.response.transcript.jsonl"
+      },
+      "member": "dakdol",
+      "domain": "site",
+      "retried": {
+        "by": "chongdae",
+        "auto": "the verifier rejected: 1 finding(s)",
+        "at": "2026-09-23T15:15:07+00:00"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "README.md:127",
+            "record_quote": "사이트를 만드는 명령(`python3 build.py`)",
+            "tree_quote": "이 `site-build` 명령은 `content/`의 글, 링크, 패치를 읽어",
+            "why": "`site-build`는 개념 이름이어야 하는데 README가 이를 명령으로 다시 표기해 실제 실행 명령과 혼동을 남긴다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "session": "01a0ced4-3e21-7b31-b7d2-3d432132e0d3",
+          "effort": "xhigh",
+          "transcript": "readme-2.verify.response.transcript.jsonl"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "1 finding(s)"
+      }
+    }
+  ]
+}

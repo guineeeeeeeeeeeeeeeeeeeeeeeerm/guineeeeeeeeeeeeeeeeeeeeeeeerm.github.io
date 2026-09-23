@@ -1,0 +1,63 @@
+{
+  "status": "done",
+  "summary": "README의 예시 글·링크·패치를 scratch 복사본에 적용하고 빌드했다. 빌드는 성공했고 생성 페이지의 글, 링크, 패치 결과를 확인했다.",
+  "tried": [
+    {
+      "command": "README의 post·link·patch 코드 블록을 지정된 content/ 경로에 저장",
+      "expected": "“아래 예시는 파일 이름과 경로까지 포함한 완전한 파일이므로 그대로 복사해 시작할 수 있습니다.”",
+      "observed": "hello 글, target 글, hello-target 링크, hello-wording 패치가 생성되었다.",
+      "ok": true
+    },
+    {
+      "command": "python3 build.py",
+      "expected": "“저장소 루트에서 다음 명령을 실행합니다.” — `python3 build.py`",
+      "observed": "종료 코드 0. `docs/index.html`, `docs/p/hello.html`, `docs/p/target.html`이 생성되었다.",
+      "ok": true
+    },
+    {
+      "command": "생성된 docs/index.html, docs/p/hello.html, docs/p/target.html 읽기",
+      "expected": "“만든 뒤에는 `docs/index.html`에서 목록을, `docs/p/<id>.html`에서 글 페이지를 확인합니다.”",
+      "observed": "목록에는 target이 먼저, hello가 다음에 나왔다. hello 페이지에는 ‘첫 번째 기록’, 태그, ‘패치 보기’ 버튼, ‘다른 글’에서 target.html로 가는 링크와 [1] 주석 링크가 나왔다. 패치 결과는 ‘안내점’이었다. target 페이지에는 본문과 hello.html로 돌아가는 ‘첫 번째 기록’ 링크가 나왔다.",
+      "ok": true
+    },
+    {
+      "command": "잘못된 anchor를 가진 링크를 넣고 python3 build.py 실행",
+      "expected": "“빌드가 실패하면 ... 표준 오류인 `stderr`를 먼저 봅니다. 오류는 파일 경로를 담은 한 줄로 나옵니다.”",
+      "observed": "종료 코드 1. stderr에 `content/links/bad-anchor.json`을 포함한 오류 한 줄이 나왔다.",
+      "ok": true
+    },
+    {
+      "command": "잘못된 링크를 제거하고 python3 build.py 재실행",
+      "expected": "“고친 뒤 저장소 루트에서 `python3 build.py`를 다시 실행하면 됩니다.”",
+      "observed": "종료 코드 0으로 다시 빌드되었다.",
+      "ok": true
+    }
+  ],
+  "findings": [
+    {
+      "kind": "surprise",
+      "quote": "패치는 원문을 고치지 않고 방문자에게 보이는 결과를 바꾸는 기록입니다.",
+      "observed": "패치된 글자뿐 아니라 방문자 페이지에 ‘패치 보기’ 버튼과 숨겨진 ‘패치 이력’ 영역도 나타났다.",
+      "why": "README는 결과가 바뀐다고 설명하지만 방문자용 패치 UI가 나타난다고는 설명하지 않는다."
+    },
+    {
+      "kind": "surprise",
+      "quote": "제목이 없는 짧은 글은 아래처럼 쓸 수 있습니다.",
+      "observed": "짧은 글은 목록에서 id인 `target`이 제목처럼 보이고, 글 페이지에는 visible한 제목 heading이 없이 ‘짧은 글’과 날짜부터 나온다.",
+      "why": "짧은 글 작성법은 설명하지만 제목이 없을 때 방문자에게 표시되는 대체 제목과 페이지 순서는 설명하지 않는다."
+    }
+  ],
+  "non-claims": [
+    "프로젝트의 소스 파일, 테스트, 계획서, 원본 content 파일은 열지 않았다.",
+    "이미지 파일 삽입과 실제 호스팅 환경의 브라우저 동작은 시험하지 않았다."
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cece-2f0d-7410-b3b2-bce94a5bb9b3",
+    "effort": "xhigh",
+    "transcript": "readme.newbie.response.transcript.jsonl"
+  },
+  "member": "chojja",
+  "domain": "site"
+}

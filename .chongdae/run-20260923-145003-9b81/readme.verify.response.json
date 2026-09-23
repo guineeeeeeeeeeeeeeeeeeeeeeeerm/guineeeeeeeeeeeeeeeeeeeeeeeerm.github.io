@@ -1,0 +1,12 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "verdict": "accept",
+  "findings": [],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cec9-a406-7c41-a067-a3d1986bd60c",
+    "effort": "xhigh",
+    "transcript": "readme.verify.response.transcript.jsonl"
+  }
+}

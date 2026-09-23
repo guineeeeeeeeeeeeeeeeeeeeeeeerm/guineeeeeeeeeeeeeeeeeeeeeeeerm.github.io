@@ -1,0 +1,20 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "verdict": "reject",
+  "findings": [
+    {
+      "kind": "plan-vs-code",
+      "where": "README.md:127",
+      "record_quote": "사이트를 만드는 명령(`python3 build.py`)",
+      "tree_quote": "이 `site-build` 명령은 `content/`의 글, 링크, 패치를 읽어",
+      "why": "`site-build`는 개념 이름이어야 하는데 README가 이를 명령으로 다시 표기해 실제 실행 명령과 혼동을 남긴다."
+    }
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0ced4-3e21-7b31-b7d2-3d432132e0d3",
+    "effort": "xhigh",
+    "transcript": "readme-2.verify.response.transcript.jsonl"
+  }
+}

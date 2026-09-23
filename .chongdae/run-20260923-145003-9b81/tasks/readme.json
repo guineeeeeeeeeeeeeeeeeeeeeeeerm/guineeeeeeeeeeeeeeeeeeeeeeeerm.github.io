@@ -1,6 +1,6 @@
 {
   "artifact-type": "chongdae/task@1",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "readme",
     "role": "implementer",
@@ -29,5 +29,346 @@
     ]
   },
   "seq": 2,
-  "added": "2026-09-23T14:52:26+00:00"
+  "added": "2026-09-23T14:52:26+00:00",
+  "start": {
+    ".gitignore": "398d5461d396112af8843c54107b420c303ea084",
+    "mangsang/relations/R-79988df4.json": "31b3c9a315c1afa94e8a29b6042e30565d309b82",
+    "plan/PLAN.md": "78a9fea4d9d5eb572437f6be74b41b4b09d25806",
+    "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
+    "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
+    "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "avatar/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "mangsang/relations/R-255f6e70.json": "8021848881e7bc78a716139f94cbd2c82f468af4",
+    "mangsang/relations/R-8bbfec2a.json": "ccb8bd7e24ba15de5b0066b500eae581e8580d49",
+    "mangsang/retired/R-255f6e70.json": "2d7eacd7896afd356b0edbb516da511586cf7ad1",
+    "mangsang/retired/R-8bbfec2a.json": "396ca35a94159d2637f6529d30bb3f58994672a9",
+    "tests/test_readme.py": "b5e982469ce14dc4aa40ce800b5246c65447cf85"
+  },
+  "response": {
+    "status": "done",
+    "summary": "한국어 작성자 안내서 README.md를 추가했고, 글·링크·패치 예시가 실제 빌드되도록 작성했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      }
+    ],
+    "decisions": [],
+    "non-claims": [
+      "호스팅 환경과 브라우저 표시 자체는 별도로 검증하지 않았습니다."
+    ],
+    "disputed-tests": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "session": "01a0cec7-13ae-7a03-a78d-aca4971c2f94",
+      "effort": "xhigh",
+      "transcript": "readme.response.transcript.jsonl"
+    },
+    "member": "dakdol",
+    "domain": "site"
+  },
+  "touched_by_provider": [
+    "README.md"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cec7-13ae-7a03-a78d-aca4971c2f94",
+    "effort": "xhigh",
+    "transcript": "readme.response.transcript.jsonl",
+    "versions": {
+      "used": {
+        "hacheong": "1.2.0"
+      },
+      "locked": {
+        "chongdae": "1.4.1#93cda7da7d16",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.2.0#bdc80448e6b0",
+        "hunsu": "1.2.3#9398b102154d",
+        "mangsang": "1.4.0#ca57606d398c"
+      }
+    }
+  },
+  "non-claims": [
+    "(provider) 호스팅 환경과 브라우저 표시 자체는 별도로 검증하지 않았습니다."
+  ],
+  "reported": true,
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "session": "01a0cec9-a406-7c41-a067-a3d1986bd60c",
+      "effort": "xhigh",
+      "transcript": "readme.verify.response.transcript.jsonl"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cec9-a406-7c41-a067-a3d1986bd60c",
+    "effort": "xhigh",
+    "transcript": "readme.verify.response.transcript.jsonl",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.1.0"
+      },
+      "locked": {
+        "chongdae": "1.4.1#93cda7da7d16",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.2.0#bdc80448e6b0",
+        "hunsu": "1.2.3#9398b102154d",
+        "mangsang": "1.4.0#ca57606d398c"
+      }
+    }
+  },
+  "stages": {
+    "newbie": {
+      "failed": [
+        {
+          "response": {
+            "status": "failed",
+            "summary": "README 예시로 글·링크·패치를 작성해 scratch 사이트를 빌드했고, 생성된 페이지를 방문자 관점에서 확인했다.",
+            "tried": [
+              {
+                "command": "README의 post, link, patch 코드 블록을 scratch 복사본에 작성",
+                "expected": "“아래 예시는 파일 이름과 경로까지 포함한 완전한 파일이므로 그대로 복사해 시작할 수 있습니다.”",
+                "observed": "hello.md, target.md, hello-target.json, hello-wording.json을 작성했다.",
+                "ok": true
+              },
+              {
+                "command": "python3 build.py",
+                "expected": "“저장소 루트에서 다음 명령을 실행합니다.”",
+                "observed": "exit 0으로 완료됐고 docs/가 생성됐다.",
+                "ok": true
+              },
+              {
+                "command": "생성된 docs/index.html, docs/p/hello.html, docs/p/target.html 읽기",
+                "expected": "“docs/index.html에서 목록을, docs/p/<id>.html에서 글 페이지를 확인합니다.”",
+                "observed": "목록과 글 페이지가 생성됐다. hello.html에는 링크의 [1], 패치된 ‘안내점’, target.html 링크가 보였다.",
+                "ok": true
+              },
+              {
+                "command": "anchor가 없는 bad-link.json을 추가하고 python3 build.py 실행",
+                "expected": "“오류는 파일 경로를 담은 한 줄로 나오므로 그 줄의 content/... 경로에 있는 파일을 열어 ... 확인합니다.”",
+                "observed": "exit 1; stderr에 bad-link.json의 파일 경로가 한 줄로 출력됐다.",
+                "ok": true
+              }
+            ],
+            "findings": [
+              {
+                "kind": "surprise",
+                "quote": "패치는 원문을 고치지 않고 방문자에게 보이는 결과를 바꾸는 기록입니다.",
+                "observed": "패치된 글 페이지에 ‘패치 보기’ 버튼과 숨겨진 패치 이력이 함께 표시됐다.",
+                "why": "README는 패치 결과는 설명하지만 방문자 화면의 패치 보기 버튼은 설명하지 않는다."
+              }
+            ],
+            "non-claims": [
+              "호스팅 환경과 실제 브라우저 렌더링은 별도로 검증하지 않았다.",
+              "readme-only: read what a newbie would not (docs/index.html) — the report is tainted by knowledge of the source"
+            ],
+            "worker": {
+              "host": "codex",
+              "model": "gpt-5.6-luna",
+              "session": "01a0cecb-6d35-7fd2-ac2f-3c5314bbf171",
+              "effort": "xhigh",
+              "transcript": "readme.newbie.response.transcript.jsonl"
+            },
+            "validation": {
+              "failed": [
+                "readme-only"
+              ]
+            },
+            "member": "chojja",
+            "domain": "site"
+          },
+          "by": {
+            "provider": "command",
+            "argv": [
+              "python3",
+              "{plugin:hacheong}/worker.py",
+              "--member",
+              "chojja",
+              "--request",
+              "{request}",
+              "--response",
+              "{response}",
+              "--host",
+              "codex",
+              "--model",
+              "gpt-5.6-luna",
+              "--effort",
+              "xhigh"
+            ],
+            "host": "codex",
+            "model": "gpt-5.6-luna",
+            "session": "01a0cecb-6d35-7fd2-ac2f-3c5314bbf171",
+            "effort": "xhigh",
+            "transcript": "readme.newbie.response.transcript.jsonl",
+            "versions": {
+              "used": {
+                "hacheong": "1.2.0"
+              },
+              "locked": {
+                "chongdae": "1.4.1#93cda7da7d16",
+                "dwitbuk": "1.1.0#bd655b0c1397",
+                "hacheong": "1.2.0#bdc80448e6b0",
+                "hunsu": "1.2.3#9398b102154d",
+                "mangsang": "1.4.0#ca57606d398c"
+              }
+            }
+          },
+          "when": "after"
+        }
+      ],
+      "response": {
+        "status": "done",
+        "summary": "README의 예시 글·링크·패치를 scratch 복사본에 적용하고 빌드했다. 빌드는 성공했고 생성 페이지의 글, 링크, 패치 결과를 확인했다.",
+        "tried": [
+          {
+            "command": "README의 post·link·patch 코드 블록을 지정된 content/ 경로에 저장",
+            "expected": "“아래 예시는 파일 이름과 경로까지 포함한 완전한 파일이므로 그대로 복사해 시작할 수 있습니다.”",
+            "observed": "hello 글, target 글, hello-target 링크, hello-wording 패치가 생성되었다.",
+            "ok": true
+          },
+          {
+            "command": "python3 build.py",
+            "expected": "“저장소 루트에서 다음 명령을 실행합니다.” — `python3 build.py`",
+            "observed": "종료 코드 0. `docs/index.html`, `docs/p/hello.html`, `docs/p/target.html`이 생성되었다.",
+            "ok": true
+          },
+          {
+            "command": "생성된 docs/index.html, docs/p/hello.html, docs/p/target.html 읽기",
+            "expected": "“만든 뒤에는 `docs/index.html`에서 목록을, `docs/p/<id>.html`에서 글 페이지를 확인합니다.”",
+            "observed": "목록에는 target이 먼저, hello가 다음에 나왔다. hello 페이지에는 ‘첫 번째 기록’, 태그, ‘패치 보기’ 버튼, ‘다른 글’에서 target.html로 가는 링크와 [1] 주석 링크가 나왔다. 패치 결과는 ‘안내점’이었다. target 페이지에는 본문과 hello.html로 돌아가는 ‘첫 번째 기록’ 링크가 나왔다.",
+            "ok": true
+          },
+          {
+            "command": "잘못된 anchor를 가진 링크를 넣고 python3 build.py 실행",
+            "expected": "“빌드가 실패하면 ... 표준 오류인 `stderr`를 먼저 봅니다. 오류는 파일 경로를 담은 한 줄로 나옵니다.”",
+            "observed": "종료 코드 1. stderr에 `content/links/bad-anchor.json`을 포함한 오류 한 줄이 나왔다.",
+            "ok": true
+          },
+          {
+            "command": "잘못된 링크를 제거하고 python3 build.py 재실행",
+            "expected": "“고친 뒤 저장소 루트에서 `python3 build.py`를 다시 실행하면 됩니다.”",
+            "observed": "종료 코드 0으로 다시 빌드되었다.",
+            "ok": true
+          }
+        ],
+        "findings": [
+          {
+            "kind": "surprise",
+            "quote": "패치는 원문을 고치지 않고 방문자에게 보이는 결과를 바꾸는 기록입니다.",
+            "observed": "패치된 글자뿐 아니라 방문자 페이지에 ‘패치 보기’ 버튼과 숨겨진 ‘패치 이력’ 영역도 나타났다.",
+            "why": "README는 결과가 바뀐다고 설명하지만 방문자용 패치 UI가 나타난다고는 설명하지 않는다."
+          },
+          {
+            "kind": "surprise",
+            "quote": "제목이 없는 짧은 글은 아래처럼 쓸 수 있습니다.",
+            "observed": "짧은 글은 목록에서 id인 `target`이 제목처럼 보이고, 글 페이지에는 visible한 제목 heading이 없이 ‘짧은 글’과 날짜부터 나온다.",
+            "why": "짧은 글 작성법은 설명하지만 제목이 없을 때 방문자에게 표시되는 대체 제목과 페이지 순서는 설명하지 않는다."
+          }
+        ],
+        "non-claims": [
+          "프로젝트의 소스 파일, 테스트, 계획서, 원본 content 파일은 열지 않았다.",
+          "이미지 파일 삽입과 실제 호스팅 환경의 브라우저 동작은 시험하지 않았다."
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "session": "01a0cece-2f0d-7410-b3b2-bce94a5bb9b3",
+          "effort": "xhigh",
+          "transcript": "readme.newbie.response.transcript.jsonl"
+        },
+        "member": "chojja",
+        "domain": "site"
+      },
+      "by": {
+        "provider": "command",
+        "argv": [
+          "python3",
+          "{plugin:hacheong}/worker.py",
+          "--member",
+          "chojja",
+          "--request",
+          "{request}",
+          "--response",
+          "{response}",
+          "--host",
+          "codex",
+          "--model",
+          "gpt-5.6-luna",
+          "--effort",
+          "xhigh"
+        ],
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "session": "01a0cece-2f0d-7410-b3b2-bce94a5bb9b3",
+        "effort": "xhigh",
+        "transcript": "readme.newbie.response.transcript.jsonl",
+        "versions": {
+          "used": {
+            "hacheong": "1.2.0"
+          },
+          "locked": {
+            "chongdae": "1.4.1#93cda7da7d16",
+            "dwitbuk": "1.1.0#bd655b0c1397",
+            "hacheong": "1.2.0#bdc80448e6b0",
+            "hunsu": "1.2.3#9398b102154d",
+            "mangsang": "1.4.0#ca57606d398c"
+          }
+        }
+      },
+      "when": "after"
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "touched": [
+    "README.md"
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "artifact-type": "chongdae/task@1",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "readme-tests",
     "role": "nitpick",
@@ -22,7 +22,8 @@
   "seq": 1,
   "added": "2026-09-23T14:52:26+00:00",
   "non-claims": [
-    "no check decides this task; done means the agent said so"
+    "no check decides this task; done means the agent said so",
+    "(provider) Sentence-by-sentence agreement with the plan is not mechanically claimed, per the contract’s non-claim."
   ],
   "start": {
     ".gitignore": "398d5461d396112af8843c54107b420c303ea084",
@@ -123,5 +124,82 @@
         "at": "2026-09-23T14:54:22+00:00"
       }
     }
-  }
+  },
+  "response": {
+    "status": "done",
+    "summary": "Added README contract tests that currently fail because README.md is absent.",
+    "tests": [
+      "tests/test_readme.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-readme",
+        "tests": [
+          "test_Q_readme_exists_and_is_a_Korean_author_guide",
+          "test_Q_readme_has_the_four_required_sections_and_covers_the_author_workflow",
+          "test_Q_readme_fenced_post_link_and_patch_examples_build_and_render"
+        ]
+      }
+    ],
+    "non-claims": [
+      "Sentence-by-sentence agreement with the plan is not mechanically claimed, per the contract’s non-claim."
+    ],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "session": "01a0cec2-b983-7ca2-aec0-a2bb493a3fd2",
+      "effort": "xhigh",
+      "transcript": "readme-tests.response.transcript.jsonl"
+    },
+    "member": "teujip",
+    "domain": "site"
+  },
+  "touched_by_provider": [
+    "tests/test_readme.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "teujip",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cec2-b983-7ca2-aec0-a2bb493a3fd2",
+    "effort": "xhigh",
+    "transcript": "readme-tests.response.transcript.jsonl",
+    "versions": {
+      "used": {
+        "hacheong": "1.2.0"
+      },
+      "locked": {
+        "chongdae": "1.4.1#93cda7da7d16",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.2.0#bdc80448e6b0",
+        "hunsu": "1.2.3#9398b102154d",
+        "mangsang": "1.4.0#ca57606d398c"
+      }
+    }
+  },
+  "reported": true,
+  "checks": [],
+  "touched": [
+    "mangsang/relations/R-255f6e70.json",
+    "mangsang/relations/R-79988df4.json",
+    "mangsang/relations/R-8bbfec2a.json",
+    "plan/PLAN.md",
+    "tests/test_readme.py"
+  ]
 }

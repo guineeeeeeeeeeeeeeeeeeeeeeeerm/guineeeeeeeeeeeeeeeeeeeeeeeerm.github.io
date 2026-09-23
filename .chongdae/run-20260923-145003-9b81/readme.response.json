@@ -1,0 +1,24 @@
+{
+  "status": "done",
+  "summary": "한국어 작성자 안내서 README.md를 추가했고, 글·링크·패치 예시가 실제 빌드되도록 작성했습니다.",
+  "verified": [
+    {
+      "check": "python3 -m unittest discover -s tests",
+      "exit": 0
+    }
+  ],
+  "decisions": [],
+  "non-claims": [
+    "호스팅 환경과 브라우저 표시 자체는 별도로 검증하지 않았습니다."
+  ],
+  "disputed-tests": [],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cec7-13ae-7a03-a78d-aca4971c2f94",
+    "effort": "xhigh",
+    "transcript": "readme.response.transcript.jsonl"
+  },
+  "member": "dakdol",
+  "domain": "site"
+}

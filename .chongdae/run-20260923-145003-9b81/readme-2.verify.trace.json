@@ -1,0 +1,37 @@
+{
+  "artifact-type": "chongdae/trace@1",
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "session": "01a0ced4-3e21-7b31-b7d2-3d432132e0d3"
+  },
+  "commands": [
+    {
+      "command": "sed -n '1,260p' README.md && printf '\\n--- tests/test_readme.py ---\\n' && sed -n '1,300p' tests/test_readme.py && printf '\\n--- build.py ---\\n' && sed -n '1,360p' build.py",
+      "exit": 0
+    },
+    {
+      "command": "rg -n -C 6 \"feed|first|80|title|patch|history|render|stderr|main|sort|written|Q-\" build.py tests",
+      "exit": 0
+    },
+    {
+      "command": "sed -n '520,900p' build.py && printf '\\n--- s1 feed tests ---\\n' && sed -n '320,445p' tests/test_s1.py && printf '\\n--- s3 patch-view tests ---\\n' && rg -n -C 10 \"patch-view|patch_view|history|deleted|outline|prior|previous|insert-before|insert-after|Q_patch\" tests/test_s3.py",
+      "exit": 0
+    },
+    {
+      "command": "sed -n '900,1180p' build.py && printf '\\n--- full README numbered ---\\n' && nl -ba README.md",
+      "exit": 0
+    },
+    {
+      "command": "sed -n '1180,1245p' build.py && rg -n -C 4 \"titleless|post_label|feed_item|render_feed|patch\" tests/test_readme.py tests/test_s1.py tests/test_s3.py",
+      "exit": 0
+    },
+    {
+      "command": "sed -n '340,455p' build.py && sed -n '1,120p' tests/test_s1.py && sed -n '1,115p' tests/test_s3.py",
+      "exit": 0
+    }
+  ],
+  "changed": [],
+  "kept-locally": "readme-2.verify.response.transcript.jsonl"
+}
