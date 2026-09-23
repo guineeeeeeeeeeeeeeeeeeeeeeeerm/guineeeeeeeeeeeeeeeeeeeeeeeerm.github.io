@@ -1,0 +1,34 @@
+{
+  "status": "done",
+  "summary": "Q-link has open rendering and list-semantics decisions, and no listed checks can select or observe it.",
+  "findings": [
+    {
+      "kind": "undecided",
+      "where": "Q-link",
+      "quote": "글 페이지에서 그 문자열은 `to` 글로 가는 링크가 되고, 바로 뒤에 위첨자 `[n]`이 붙는다.",
+      "why": "The contract does not fix the output markup for the link or superscript, nor the URL mapping from a post id to the target page."
+    },
+    {
+      "kind": "undecided",
+      "where": "Q-link — Decided",
+      "quote": "Decided (owner, `source:plan-11`): 받는 쪽 글(`to`)의 페이지 아래에 \"이 글을 가리키는 글\" 목록을 두고, 각 항목은 `from` 글의 제목(없으면 첫 문단 앞 80자)과 현재 사유를 보여준다.",
+      "why": "The contract does not specify the ordering of this list or whether links whose last event is `removed` are included."
+    },
+    {
+      "kind": "unchecked",
+      "where": "Q-link",
+      "quote": "`from`이나 `to`가 없는 글이면 빌드 오류다.",
+      "why": "The checks array is empty, so no runner invocation selects a Q-link test that could decide this acceptance sentence."
+    }
+  ],
+  "non-claims": [],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cde5-209e-7cd1-be8f-2631c0c0b0a2",
+    "effort": "xhigh",
+    "transcript": "s2-tests.quibble.response.transcript.jsonl"
+  },
+  "member": "sibi",
+  "domain": "code"
+}
