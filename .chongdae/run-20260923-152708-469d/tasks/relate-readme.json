@@ -1,0 +1,49 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "done",
+  "def": {
+    "id": "relate-readme",
+    "role": "session",
+    "brief": "one relation, quoted from the build section",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-23T15:27:08+00:00",
+  "start": {
+    "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
+    "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
+    "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "avatar/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "proposals.json": "1452d95939d51b0f127ae94e0dbe01fb78de966c",
+    "tests/test_readme.py": "aef2da53eaab25b19c5a1ee6e725267fe591abcf"
+  },
+  "non-claims": [
+    "no check decides this task; done means the agent said so",
+    "no session transcript here: what the session did for this task is its word alone"
+  ],
+  "checks": [],
+  "touched": [
+    "mangsang/relations/R-3bff092e.json"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-280_agent",
+    "effort": "medium",
+    "session": "90315036-5ae4-4e9b-9ce3-e6630159cc4c",
+    "model-unknown": "no session record (the SessionStart hook did not run for this session)",
+    "versions": {
+      "locked": {
+        "chongdae": "1.4.1#93cda7da7d16",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.2.0#bdc80448e6b0",
+        "hunsu": "1.2.3#9398b102154d",
+        "mangsang": "1.4.0#ca57606d398c"
+      }
+    }
+  }
+}
