@@ -1,0 +1,14 @@
+{
+  "id": "R-79a96c0a",
+  "src": "plan/PLAN.md#Q-post — 글 하나",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "`tags`: 쉼표로 구분한 태그 이름. 선택.",
+  "seen": {
+    "plan/PLAN.md#Q-post — 글 하나": "a21100d4bc12",
+    "concept:tag": "da4fe3afc21d"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+  }
+}

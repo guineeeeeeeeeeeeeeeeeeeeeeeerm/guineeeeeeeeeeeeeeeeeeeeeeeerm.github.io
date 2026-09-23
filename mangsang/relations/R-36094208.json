@@ -6,9 +6,9 @@
   "evidence": "언제 링크를 걸었는지, 왜 걸었는지의 사유도 관리되었으면 좋겠어.",
   "seen": {
     "source:plan-01": "cd3ce4b8b9cc",
-    "concept:link": "4df4bb05e617"
+    "concept:link": "7fd16ce1dc5b"
   },
   "confirmed": {
-    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+    "delegated": "Claude (claude-opus-5-5) re-read each quote against link's revised sentence (footnote display, plan-09): both-sides management, time and reason, kept-but-hidden history all still hold"
   }
 }

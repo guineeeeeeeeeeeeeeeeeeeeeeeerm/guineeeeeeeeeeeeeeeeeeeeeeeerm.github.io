@@ -1,0 +1,7 @@
+{
+  "name": "site-build",
+  "means": "글·링크·패치 파일에서 표준 라이브러리만 쓰는 Python 생성기가 정적 HTML을 docs/에 만들고, Pages가 그것을 서비스한다.",
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

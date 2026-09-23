@@ -1,0 +1,14 @@
+{
+  "id": "R-238e911e",
+  "src": "plan/PLAN.md#Q-feed — 첫 화면",
+  "predicate": "realizes",
+  "dst": "concept:feed",
+  "evidence": "`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다",
+  "seen": {
+    "plan/PLAN.md#Q-feed — 첫 화면": "042fd6858382",
+    "concept:feed": "c0480deb3518"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+  }
+}

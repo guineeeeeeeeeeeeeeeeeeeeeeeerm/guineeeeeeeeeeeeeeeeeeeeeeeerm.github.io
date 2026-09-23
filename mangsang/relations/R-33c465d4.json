@@ -1,0 +1,14 @@
+{
+  "id": "R-33c465d4",
+  "src": "source:plan-09",
+  "predicate": "realizes",
+  "dst": "concept:link",
+  "evidence": "주석 달듯이, 단어나 문장에 링크가 걸리면서 위에 [n]표시가 되어있고, 이를 주석으로 사유.",
+  "seen": {
+    "source:plan-09": "03e15b6691ee",
+    "concept:link": "7fd16ce1dc5b"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+  }
+}

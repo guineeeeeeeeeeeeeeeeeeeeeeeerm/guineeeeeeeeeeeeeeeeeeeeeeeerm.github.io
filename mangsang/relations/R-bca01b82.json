@@ -1,0 +1,14 @@
+{
+  "id": "R-bca01b82",
+  "src": "plan/PLAN.md#Q-ui — 화면 언어",
+  "predicate": "realizes",
+  "dst": "concept:ui-language",
+  "evidence": "사이트가 만드는 글자는 한국어다.",
+  "seen": {
+    "plan/PLAN.md#Q-ui — 화면 언어": "9c4d04fdbb1f",
+    "concept:ui-language": "e2a0a380d7e4"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+  }
+}

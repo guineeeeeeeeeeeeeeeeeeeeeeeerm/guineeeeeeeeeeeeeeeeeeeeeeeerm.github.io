@@ -1,0 +1,14 @@
+{
+  "id": "R-039d02c6",
+  "src": "source:plan-06",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "표준 라이브러리만 쓰는 Python 스크립트가 정적 HTML을 docs/에 만들어 함께 커밋.",
+  "seen": {
+    "source:plan-06": "1b7d8e9aa928",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+  }
+}

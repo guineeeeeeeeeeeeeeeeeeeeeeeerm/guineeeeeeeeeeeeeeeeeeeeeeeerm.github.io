@@ -1,0 +1,13 @@
+{
+  "id": "site-made",
+  "text": "사이트는 어떻게 만들어지고 서비스되나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "site-build"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

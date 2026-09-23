@@ -1,0 +1,14 @@
+{
+  "id": "R-c30dba09",
+  "src": "source:plan-08",
+  "predicate": "realizes",
+  "dst": "concept:ui-language",
+  "evidence": "사이트의 화면 글자(메뉴, 버튼, 안내 문구)는 어떤 언어로 할까요?",
+  "seen": {
+    "source:plan-08": "141c518b4f91",
+    "concept:ui-language": "e2a0a380d7e4"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+  }
+}

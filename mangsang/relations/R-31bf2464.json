@@ -1,0 +1,14 @@
+{
+  "id": "R-31bf2464",
+  "src": "plan/PLAN.md#Q-build — 생성기와 출력",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "`python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다.",
+  "seen": {
+    "plan/PLAN.md#Q-build — 생성기와 출력": "3b0e4309f0fa",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+  }
+}

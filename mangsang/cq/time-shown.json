@@ -1,0 +1,13 @@
+{
+  "id": "time-shown",
+  "text": "화면의 시각은 어떻게 보이나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "local-time"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

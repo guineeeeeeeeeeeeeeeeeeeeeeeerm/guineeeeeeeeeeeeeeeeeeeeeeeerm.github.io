@@ -1,0 +1,14 @@
+{
+  "id": "R-d1f901b6",
+  "src": "source:plan-01",
+  "predicate": "realizes",
+  "dst": "concept:local-time",
+  "evidence": "작성 시간(세계 표준시 기준)은 필수",
+  "seen": {
+    "source:plan-01": "cd3ce4b8b9cc",
+    "concept:local-time": "f3a31994b7da"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "feed-shows",
+  "text": "첫 화면은 무엇을 어떻게 보여주나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "feed"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

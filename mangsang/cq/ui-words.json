@@ -1,0 +1,13 @@
+{
+  "id": "ui-words",
+  "text": "사이트의 화면 글자는 어떤 언어인가?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "ui-language"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

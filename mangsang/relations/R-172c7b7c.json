@@ -1,0 +1,14 @@
+{
+  "id": "R-172c7b7c",
+  "src": "plan/PLAN.md#Q-post — 글 하나",
+  "predicate": "realizes",
+  "dst": "concept:post-type",
+  "evidence": "유형은 쓰기 전에 고르는 것이며,\n  빌드는 분량으로 유형을 판단하지 않는다.",
+  "seen": {
+    "plan/PLAN.md#Q-post — 글 하나": "a21100d4bc12",
+    "concept:post-type": "dce6f00332ed"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+  }
+}

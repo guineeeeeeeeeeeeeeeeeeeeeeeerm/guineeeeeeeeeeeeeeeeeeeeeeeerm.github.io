@@ -1,0 +1,7 @@
+{
+  "name": "local-time",
+  "means": "화면의 시각은 독자의 현지 시간으로 보인다. 저장은 항상 UTC다.",
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

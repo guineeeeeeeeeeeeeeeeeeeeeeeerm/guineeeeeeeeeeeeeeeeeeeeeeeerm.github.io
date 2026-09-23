@@ -1,0 +1,13 @@
+{
+  "id": "plan-sections-owned",
+  "text": "계획서의 모든 절이 어떤 개념의 투영인가?",
+  "verify": {
+    "kind": "coverage",
+    "predicate": "realizes",
+    "anchors": "plan/PLAN.md#Q-*",
+    "as": "src"
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}
