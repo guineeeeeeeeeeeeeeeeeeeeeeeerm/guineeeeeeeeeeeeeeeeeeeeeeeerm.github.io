@@ -13,10 +13,10 @@
       "fingerprint": "d9098a2c9127"
     },
     "chongdae": {
-      "version": "1.5.0",
+      "version": "1.5.1",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/chongdae",
       "marketplace": "chongdae",
-      "fingerprint": "69fd98d66be7"
+      "fingerprint": "ff6dbd4e373b"
     },
     "mangsang": {
       "version": "1.5.0",
@@ -45,7 +45,7 @@
     "mangsang:operate"
   ],
   "denied": [],
-  "skills-fingerprint": "f3c92cccd73c",
+  "skills-fingerprint": "cb6e97259e2e",
   "hooks": [
     {
       "event": "SessionStart",
