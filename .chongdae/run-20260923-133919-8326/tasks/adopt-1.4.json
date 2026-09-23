@@ -1,6 +1,6 @@
 {
   "artifact-type": "chongdae/task@1",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "adopt-1.4",
     "role": "session",
@@ -21,5 +21,28 @@
   },
   "non-claims": [
     "no check decides this task; done means the agent said so"
-  ]
+  ],
+  "checks": [],
+  "touched": [
+    "hunsu-judgments.json",
+    "hunsu.json",
+    "hunsu.lock.json"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-280_agent",
+    "effort": "medium",
+    "session": "90315036-5ae4-4e9b-9ce3-e6630159cc4c",
+    "model-unknown": "no session record (the SessionStart hook did not run for this session)",
+    "versions": {
+      "locked": {
+        "chongdae": "1.4.0#71b1cce5de61",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.2.0#bdc80448e6b0",
+        "hunsu": "1.2.3#9398b102154d",
+        "mangsang": "1.3.0#476d93a4c96a"
+      }
+    }
+  }
 }
