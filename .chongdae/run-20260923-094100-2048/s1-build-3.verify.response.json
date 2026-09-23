@@ -1,0 +1,20 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "verdict": "reject",
+  "findings": [
+    {
+      "kind": "plan-vs-code",
+      "where": "build.py:56-61",
+      "record_quote": "페이지의 자바스크립트가 이를 독자 브라우저의 시간대로 바꿔 `YYYY-MM-DD HH:MM`로 보여주고",
+      "tree_quote": "new Intl.DateTimeFormat(undefined, { year: \"numeric\", month: \"2-digit\", day: \"2-digit\", hour: \"2-digit\", minute: \"2-digit\", hourCycle: \"h23\" }).formatToParts(date); ... return `${values.year}-${values.month}-${values.day} ${values.hour}:${values.minute}`;",
+      "why": "The unspecified locale/calendar and `year: \"numeric\"` do not guarantee fixed four-digit Gregorian ASCII output. Valid years such as 0001 can render as `1-...`, and some browser locales use localized digits or calendars, so the required format is not guaranteed."
+    }
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cdc0-d4bc-7152-b2f5-61fffdd3eed1",
+    "effort": "xhigh",
+    "transcript": "s1-build-3.verify.response.transcript.jsonl"
+  }
+}

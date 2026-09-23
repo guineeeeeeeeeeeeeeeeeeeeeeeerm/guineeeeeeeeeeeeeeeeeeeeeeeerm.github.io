@@ -1,0 +1,157 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "s1-build-3",
+    "role": "implementer",
+    "brief": "Build build.py (and docs/assets/ it writes) so that every sentence of Q-build, Q-post, Q-feed, Q-time and Q-ui is true and tests/test_s1.py passes. Standard library only. Do not change the tests. A build.py from earlier attempts is in the tree (s1-build, s1-build-2 — dropped because two test fixtures contradicted the contract; both fixed): keep what matches the contract; the 80-character summary counts the rendered screen text, spaces between formatted spans included.",
+    "closes": [
+      "Q-build",
+      "Q-post",
+      "Q-feed",
+      "Q-time",
+      "Q-ui"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_s1.py"
+    ],
+    "gate": null,
+    "after": [
+      "newbie"
+    ]
+  },
+  "seq": 4,
+  "added": "2026-09-23T10:09:24+00:00",
+  "start": {
+    "mangsang/relations/R-172c7b7c.json": "a77ba8dac5c56518390da39f8083d00650fb04b0",
+    "mangsang/relations/R-238e911e.json": "1a332210099d244f2e5f94c39aa0cd635965c101",
+    "mangsang/relations/R-31bf2464.json": "b83a885f80be88476563c4321c3b5ff27890d54a",
+    "mangsang/relations/R-79a96c0a.json": "daf163050d0f630ea060eafe47afda737a6d4001",
+    "mangsang/relations/R-f0d8ae78.json": "b12cc4e6763b45c015cec95e96c9e2c5952abf12",
+    "plan/PLAN.md": "f8c954cb7a54621cd3a6f55d01aa690cdfa5e336",
+    "__pycache__/build.cpython-312.pyc": "aca4befaebc5b8cf0f5095d2c89182a7d5ecf520",
+    "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
+    "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
+    "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "avatar/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "build.py": "1dd0e3b28e22b1cc7618563782ada6ba69f7a3e4",
+    "tests/__pycache__/test_s1.cpython-312.pyc": "ca2426bc2b1a1251b7e3029d73145e0b82c8b11e",
+    "tests/test_s1.py": "e1a83ef7ea6c500c5cceea3ed6c50618afcc673f"
+  },
+  "touched_by_provider": [
+    "build.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cdbd-e22d-7913-9e03-70c29c5e950e",
+    "effort": "xhigh",
+    "transcript": "s1-build-3.response.transcript.jsonl"
+  },
+  "non-claims": [
+    "(provider) JavaScript localization was not executed in a browser; asset and source checks passed."
+  ],
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cdc0-d4bc-7152-b2f5-61fffdd3eed1",
+    "effort": "xhigh",
+    "transcript": "s1-build-3.verify.response.transcript.jsonl"
+  },
+  "attempts": [
+    {
+      "status": "done",
+      "summary": "Implemented the generator and fixed feed ordering for valid year extremes without platform timestamp conversion. All 28 tests pass.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 0
+        }
+      ],
+      "decisions": [],
+      "non-claims": [
+        "JavaScript localization was not executed in a browser; asset and source checks passed."
+      ],
+      "worker": {
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "session": "01a0cdbd-e22d-7913-9e03-70c29c5e950e",
+        "effort": "xhigh",
+        "transcript": "s1-build-3.response.transcript.jsonl"
+      },
+      "member": "dakdol",
+      "domain": "code",
+      "retried": {
+        "delegated": "Technical, delegated (plan-07): the verifier's finding stands — format the reader-local time from Date's local getters (getFullYear/getMonth/getDate/getHours/getMinutes), zero-padded, ASCII digits, four-digit year, so Q-time's YYYY-MM-DD HH:MM holds in every locale and calendar",
+        "at": "2026-09-23T10:18:04+00:00"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "build.py:56-61",
+            "record_quote": "페이지의 자바스크립트가 이를 독자 브라우저의 시간대로 바꿔 `YYYY-MM-DD HH:MM`로 보여주고",
+            "tree_quote": "new Intl.DateTimeFormat(undefined, { year: \"numeric\", month: \"2-digit\", day: \"2-digit\", hour: \"2-digit\", minute: \"2-digit\", hourCycle: \"h23\" }).formatToParts(date); ... return `${values.year}-${values.month}-${values.day} ${values.hour}:${values.minute}`;",
+            "why": "The unspecified locale/calendar and `year: \"numeric\"` do not guarantee fixed four-digit Gregorian ASCII output. Valid years such as 0001 can render as `1-...`, and some browser locales use localized digits or calendars, so the required format is not guaranteed."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "session": "01a0cdc0-d4bc-7152-b2f5-61fffdd3eed1",
+          "effort": "xhigh",
+          "transcript": "s1-build-3.verify.response.transcript.jsonl"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "1 finding(s)"
+      }
+    }
+  ]
+}
