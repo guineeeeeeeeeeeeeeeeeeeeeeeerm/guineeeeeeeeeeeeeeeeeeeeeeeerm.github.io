@@ -1,0 +1,156 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "s1-build-4",
+    "role": "implementer",
+    "brief": "build.py in the tree was built and verified under s1-build-3 (dropped only because the newbie stage cannot run on this project yet). Confirm every sentence of Q-build, Q-post, Q-feed, Q-time and Q-ui against it, fix anything that does not hold, and run the check. Do not change the tests.",
+    "closes": [
+      "Q-build",
+      "Q-post",
+      "Q-feed",
+      "Q-time",
+      "Q-ui"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_s1.py"
+    ],
+    "gate": null
+  },
+  "seq": 5,
+  "added": "2026-09-23T10:30:26+00:00",
+  "start": {
+    "mangsang/relations/R-172c7b7c.json": "a77ba8dac5c56518390da39f8083d00650fb04b0",
+    "mangsang/relations/R-238e911e.json": "1a332210099d244f2e5f94c39aa0cd635965c101",
+    "mangsang/relations/R-31bf2464.json": "b83a885f80be88476563c4321c3b5ff27890d54a",
+    "mangsang/relations/R-79a96c0a.json": "daf163050d0f630ea060eafe47afda737a6d4001",
+    "mangsang/relations/R-f0d8ae78.json": "b12cc4e6763b45c015cec95e96c9e2c5952abf12",
+    "plan/PLAN.md": "f8c954cb7a54621cd3a6f55d01aa690cdfa5e336",
+    "__pycache__/build.cpython-312.pyc": "aca4befaebc5b8cf0f5095d2c89182a7d5ecf520",
+    "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
+    "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
+    "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "avatar/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "build.py": "a3774c8eef762781a137111c08d9d722124dfb1b",
+    "docs/.nojekyll": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "docs/assets/site.css": "cf91d9bf9cf38b24b1877f4a03b6acd94a64e39e",
+    "docs/assets/time.js": "d0aa7baf1fc165812113d7410840f036768e6a4a",
+    "docs/index.html": "8e4d37461c2f58b95678fd1e48a28119de0be380",
+    "tests/__pycache__/test_s1.cpython-312.pyc": "ca2426bc2b1a1251b7e3029d73145e0b82c8b11e",
+    "tests/test_s1.py": "e1a83ef7ea6c500c5cceea3ed6c50618afcc673f"
+  },
+  "touched_by_provider": [],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cdd1-45c5-7351-8b21-ddd57a900971",
+    "effort": "xhigh",
+    "transcript": "s1-build-4.response.transcript.jsonl"
+  },
+  "non-claims": [
+    "(provider) The check suite validates the generator and inspects the time JavaScript asset; no browser runtime execution was performed."
+  ],
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cdd3-4921-72e2-9579-3ec1f9c76bc9",
+    "effort": "xhigh",
+    "transcript": "s1-build-4.verify.response.transcript.jsonl"
+  },
+  "attempts": [
+    {
+      "status": "done",
+      "summary": "Existing build.py satisfies the five requested contract sections; no source changes were required.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 0
+        }
+      ],
+      "decisions": [],
+      "non-claims": [
+        "The check suite validates the generator and inspects the time JavaScript asset; no browser runtime execution was performed."
+      ],
+      "worker": {
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "session": "01a0cdd1-45c5-7351-8b21-ddd57a900971",
+        "effort": "xhigh",
+        "transcript": "s1-build-4.response.transcript.jsonl"
+      },
+      "member": "dakdol",
+      "domain": "code",
+      "retried": {
+        "delegated": "Technical, delegated (plan-07): the verifier's edge is real and the contract was silent; Q-time now says a local year outside 0001-9999 keeps the UTC text and title. Implement that.",
+        "at": "2026-09-23T10:39:00+00:00"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "build.py:53-60",
+            "record_quote": "페이지의 자바스크립트가 이를 독자 브라우저의 시간대로 바꿔 `YYYY-MM-DD HH:MM`로 보여주고",
+            "tree_quote": "const pad = (value, width = 2) => String(value).padStart(width, \"0\"); ... `${pad(date.getFullYear(), 4)}-${pad(date.getMonth() + 1, 2)}-${pad(date.getDate(), 2)}`",
+            "why": "For valid input `9999-12-31T23:59:59Z`, a browser in UTC+14 gets local year 10000. `pad(..., 4)` does not limit the width, so the displayed value becomes `10000-01-01 ...`, violating the required four-digit `YYYY` format."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "session": "01a0cdd3-4921-72e2-9579-3ec1f9c76bc9",
+          "effort": "xhigh",
+          "transcript": "s1-build-4.verify.response.transcript.jsonl"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "1 finding(s)"
+      }
+    }
+  ]
+}
