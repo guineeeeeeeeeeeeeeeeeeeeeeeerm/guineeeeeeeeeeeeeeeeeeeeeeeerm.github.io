@@ -8,17 +8,17 @@
   },
   "plugins": {
     "hunsu": {
-      "version": "1.2.3",
+      "version": "1.3.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hunsu",
       "marketplace": "hunsu"
     },
     "chongdae": {
-      "version": "1.4.1",
+      "version": "1.5.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/chongdae",
       "marketplace": "chongdae"
     },
     "mangsang": {
-      "version": "1.4.0",
+      "version": "1.5.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/mangsang",
       "marketplace": "mangsang"
     },
@@ -28,7 +28,7 @@
       "marketplace": "dwitbuk"
     },
     "hacheong": {
-      "version": "1.2.0",
+      "version": "1.3.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hacheong",
       "marketplace": "hacheong"
     }

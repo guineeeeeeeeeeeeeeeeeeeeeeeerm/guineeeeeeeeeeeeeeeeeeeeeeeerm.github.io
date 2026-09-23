@@ -1,6 +1,6 @@
 {
   "artifact-type": "hunsu/judgments@1",
-  "skills-fingerprint": "f3120834b453",
+  "skills-fingerprint": "f3c92cccd73c",
   "skills": [
     "chongdae:run",
     "dwitbuk:review",
@@ -183,8 +183,8 @@
         "plugin:chongdae",
         "plugin:hunsu"
       ],
-      "members-fingerprint": "dc1ccde615e0",
-      "members-text-fingerprint": "6c058ffcb643",
+      "members-fingerprint": "5f9c04e43f59",
+      "members-text-fingerprint": "ec4fd3a696de",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"
