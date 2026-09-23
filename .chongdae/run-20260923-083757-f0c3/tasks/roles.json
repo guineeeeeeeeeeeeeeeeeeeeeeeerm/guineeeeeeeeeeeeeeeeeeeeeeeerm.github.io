@@ -1,0 +1,38 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "done",
+  "def": {
+    "id": "roles",
+    "role": "session",
+    "brief": "hunsu.json roles, reporters and settings as the ledger has them; re-judge what the assignment stales; lock",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-23T08:37:57+00:00",
+  "start": {
+    "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
+    "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
+    "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "avatar/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498"
+  },
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [
+    "hunsu.json",
+    "hunsu.lock.json"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-280_agent",
+    "effort": "medium",
+    "session": "90315036-5ae4-4e9b-9ce3-e6630159cc4c",
+    "model-unknown": "no session record (the SessionStart hook did not run for this session)"
+  }
+}
