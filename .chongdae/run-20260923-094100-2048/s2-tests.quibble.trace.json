@@ -1,0 +1,12 @@
+{
+  "artifact-type": "chongdae/trace@1",
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "session": "01a0cde5-209e-7cd1-be8f-2631c0c0b0a2"
+  },
+  "commands": [],
+  "changed": [],
+  "kept-locally": "s2-tests.quibble.response.transcript.jsonl"
+}
