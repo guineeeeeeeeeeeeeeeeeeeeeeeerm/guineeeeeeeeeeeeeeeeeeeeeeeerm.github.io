@@ -1,6 +1,6 @@
 {
   "artifact-type": "chongdae/task@1",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "readme-tests",
     "role": "nitpick",
@@ -23,7 +23,8 @@
   "added": "2026-09-23T14:52:26+00:00",
   "non-claims": [
     "no check decides this task; done means the agent said so",
-    "(provider) Sentence-by-sentence agreement with the plan is not mechanically claimed, per the contract’s non-claim."
+    "(provider) Sentence-by-sentence agreement with the plan is not mechanically claimed, per the contract’s non-claim.",
+    "(provider) Sentence-by-sentence agreement with the plan is not mechanically claimed, per the contract. `python3 -m unittest discover -s tests` passed: 54 tests."
   ],
   "start": {
     ".gitignore": "398d5461d396112af8843c54107b420c303ea084",
@@ -148,12 +149,12 @@
     ],
     "host": "codex",
     "model": "gpt-5.6-luna",
-    "session": "01a0cec2-b983-7ca2-aec0-a2bb493a3fd2",
+    "session": "01a0cedc-30f0-7033-badd-fc53e67214a8",
     "effort": "xhigh",
     "transcript": "readme-tests.response.transcript.jsonl",
     "versions": {
       "used": {
-        "hacheong": "1.2.0"
+        "hacheong": "1.2.0+g6cc62df-dirty"
       },
       "locked": {
         "chongdae": "1.4.1#93cda7da7d16",
@@ -166,6 +167,7 @@
   },
   "checks": [],
   "touched": [
+    "README.md",
     "mangsang/relations/R-255f6e70.json",
     "mangsang/relations/R-79988df4.json",
     "mangsang/relations/R-8bbfec2a.json",
@@ -221,5 +223,35 @@
       "contract_quote": "README.md is for the person who writes on this site; it must not speak the plan's own vocabulary. Remove the plan's section ids from headings (`Q-patch-view`, `Q-feed`, ...) and the concept names used as terms (`site-build`, `post-type`, ...): say it in plain Korean — the command is `python3 build.py`, headings name what the author does (새 글 쓰기, 링크 걸기, 패치 붙이기, 사이트 만들기, 방문자에게 보이는 모습).",
       "why": "테스트가 README에 `site-build`가 포함되어야 한다고 명시적으로 검사하는 반면, 계약은 `site-build`를 계획 용어로 제거하라고 명시합니다."
     }
-  ]
+  ],
+  "response": {
+    "status": "done",
+    "summary": "Removed the disputed `site-build` README assertion; all other contract tests remain unchanged.",
+    "tests": [
+      "tests/test_readme.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-readme",
+        "tests": [
+          "test_Q_readme_exists_and_is_a_Korean_author_guide",
+          "test_Q_readme_has_the_four_required_sections_and_covers_the_author_workflow",
+          "test_Q_readme_fenced_post_link_and_patch_examples_build_and_render"
+        ]
+      }
+    ],
+    "non-claims": [
+      "Sentence-by-sentence agreement with the plan is not mechanically claimed, per the contract. `python3 -m unittest discover -s tests` passed: 54 tests."
+    ],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "session": "01a0cedc-30f0-7033-badd-fc53e67214a8",
+      "effort": "xhigh",
+      "transcript": "readme-tests.response.transcript.jsonl"
+    },
+    "member": "teujip",
+    "domain": "site"
+  },
+  "reported": true
 }

@@ -40,9 +40,11 @@
     "mangsang/relations/R-8bbfec2a.json": "ccb8bd7e24ba15de5b0066b500eae581e8580d49",
     "mangsang/retired/R-255f6e70.json": "2d7eacd7896afd356b0edbb516da511586cf7ad1",
     "mangsang/retired/R-8bbfec2a.json": "396ca35a94159d2637f6529d30bb3f58994672a9",
-    "tests/test_readme.py": "b5e982469ce14dc4aa40ce800b5246c65447cf85"
+    "tests/test_readme.py": "aef2da53eaab25b19c5a1ee6e725267fe591abcf"
   },
-  "touched_by_provider": [],
+  "touched_by_provider": [
+    "README.md"
+  ],
   "performed_by": {
     "provider": "command",
     "argv": [
@@ -63,7 +65,7 @@
     ],
     "host": "codex",
     "model": "gpt-5.6-luna",
-    "session": "01a0cedb-8535-7fe0-a1e0-99b52a9bd0f5",
+    "session": "01a0cedc-e600-7f30-9632-10bd74ca1d35",
     "effort": "xhigh",
     "transcript": "readme-3.response.transcript.jsonl",
     "versions": {
@@ -79,9 +81,6 @@
       }
     }
   },
-  "rebaseline": [
-    "tests/test_readme.py"
-  ],
   "attempts": [
     {
       "status": "blocked",
@@ -113,5 +112,50 @@
         "at": "2026-09-23T15:22:11+00:00"
       }
     }
-  ]
+  ],
+  "rebaselined": [
+    {
+      "tests": [
+        "tests/test_readme.py"
+      ],
+      "at": "2026-09-23T15:22:58+00:00"
+    }
+  ],
+  "response": {
+    "status": "done",
+    "summary": "README.md를 평이한 한국어 저자 안내서로 정리하고 계획 식별자와 `site-build`·`feed`·`patch-view` 용어를 제거했습니다. 예시는 그대로 유지했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      }
+    ],
+    "decisions": [
+      {
+        "what": "빌드 절 제목",
+        "chosen": "`## 사이트 만들기 — 빌드`로 작성해 요구된 행동명과 보호 테스트의 빌드 절 탐색을 모두 만족시켰습니다.",
+        "alternatives": [
+          "`## 사이트 만들기`만 사용",
+          "기존 `## 빌드하기` 유지"
+        ]
+      }
+    ],
+    "non-claims": [
+      "지정된 테스트 범위 밖의 README 문장 전체 일치 여부는 별도로 주장하지 않습니다."
+    ],
+    "disputed-tests": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "session": "01a0cedc-e600-7f30-9632-10bd74ca1d35",
+      "effort": "xhigh",
+      "transcript": "readme-3.response.transcript.jsonl"
+    },
+    "member": "dakdol",
+    "domain": "site"
+  },
+  "accepted": {
+    "delegated": "Technical, delegated (plan-07): the build section's heading '사이트 만들기 — 빌드' keeps the plain-language name and the word the tests look for",
+    "at": "2026-09-23T15:25:17+00:00"
+  }
 }
