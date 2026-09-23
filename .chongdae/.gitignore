@@ -1,0 +1,10 @@
+# chongdae: machine-local — each worker's full session and the request as sent stay on this machine;
+# the committed record carries <tag>.trace.json (commands, exit codes, files changed)
+*.transcript*.jsonl
+*.request.json
+*.request.*.json
+*.provider.log
+*.pending.json
+*.last.txt
+*.schema.json
+sessions/
