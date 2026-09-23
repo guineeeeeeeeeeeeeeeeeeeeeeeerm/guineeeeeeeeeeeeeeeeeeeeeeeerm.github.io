@@ -1,0 +1,9 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "Plan how this site is run, as a mangsang model built from the owner's conversation",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
