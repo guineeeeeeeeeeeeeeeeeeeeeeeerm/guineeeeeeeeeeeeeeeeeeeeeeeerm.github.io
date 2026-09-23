@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "S4: the author's guide (README) — tried by a newbie as author and visitor (site domain)",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
