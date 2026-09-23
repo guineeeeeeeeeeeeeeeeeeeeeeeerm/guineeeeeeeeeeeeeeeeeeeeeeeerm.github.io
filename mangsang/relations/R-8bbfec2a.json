@@ -1,0 +1,14 @@
+{
+  "id": "R-8bbfec2a",
+  "src": "plan/PLAN.md#Q-readme — 글쓴이의 안내서",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "새 글을 쓰는 법(파일 위치와 이름, 헤더의",
+  "seen": {
+    "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "c63cd52b758a",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5) re-read Q-readme after the builder's heading decision; it still realizes its concept"
+  }
+}

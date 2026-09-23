@@ -1,0 +1,17 @@
+{
+  "id": "R-255f6e70",
+  "src": "plan/PLAN.md#Q-readme — 글쓴이의 안내서",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "사이트를 만드는 명령(`python3 build.py`)과 결과가",
+  "seen": {
+    "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "e9aed13fdb26",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  },
+  "retired": {
+    "why": "signed with the owner's name by mistake (Claude ran --by instead of --delegated); the owner did not review this relation — re-confirmed as a delegation"
+  }
+}

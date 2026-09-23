@@ -13,5 +13,8 @@
   },
   {
     "path": "tests/test_s3.py"
+  },
+  {
+    "path": "README.md"
   }
 ]

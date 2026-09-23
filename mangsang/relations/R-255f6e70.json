@@ -1,0 +1,14 @@
+{
+  "id": "R-255f6e70",
+  "src": "plan/PLAN.md#Q-readme — 글쓴이의 안내서",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "사이트를 만드는 명령(`python3 build.py`)과 결과가",
+  "seen": {
+    "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "c63cd52b758a",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5) re-read Q-readme after the builder's heading decision; it still realizes its concept"
+  }
+}

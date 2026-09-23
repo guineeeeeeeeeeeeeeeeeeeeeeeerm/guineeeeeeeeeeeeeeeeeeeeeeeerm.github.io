@@ -3,3 +3,4 @@ hunsu-conflicts.md
 *-response.transcript.jsonl
 .mangsang/
 __pycache__/
+.claude/settings.local.json
