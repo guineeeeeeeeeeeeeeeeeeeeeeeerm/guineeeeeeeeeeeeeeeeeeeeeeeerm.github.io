@@ -1,0 +1,9 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "Relate the README's build section to site-build",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
