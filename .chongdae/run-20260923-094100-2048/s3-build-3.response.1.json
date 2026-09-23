@@ -1,0 +1,31 @@
+{
+  "status": "done",
+  "summary": "Implemented ordered patch application, patched-body rendering, patched link anchors, and local Korean patch-view UI/assets. All 51 tests pass.",
+  "verified": [
+    {
+      "check": "python3 -m unittest discover -s tests",
+      "exit": 0
+    },
+    {
+      "check": "python3 -m py_compile build.py",
+      "exit": 0
+    },
+    {
+      "check": "node --check docs/assets/time.js",
+      "exit": 0
+    }
+  ],
+  "decisions": [],
+  "non-claims": [
+    "Browser interaction was not run in a browser; JavaScript syntax and generated markup/data were checked."
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0ce05-f52d-7a60-b04d-1cdcda937682",
+    "effort": "xhigh",
+    "transcript": "s3-build-3.response.transcript.jsonl"
+  },
+  "member": "dakdol",
+  "domain": "code"
+}
