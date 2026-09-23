@@ -1,0 +1,9 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "Adopt chongdae 1.4.0 and hacheong 1.2.0; traces regenerated without machine or internal names",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
