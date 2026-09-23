@@ -33,8 +33,126 @@
       "marketplace": "hacheong"
     }
   },
-  "roles": {},
-  "reporters": {},
+  "roles": {
+    "implementer": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "quibble": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "sibi",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "nitpick": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "teujip",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "newbie": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "chojja",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "verifier": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "coherence": [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "impact",
+      "--target",
+      "."
+    ]
+  },
+  "reporters": {
+    "chongdae": [
+      "python3",
+      "{plugin:chongdae}/chongdae.py",
+      "report",
+      "--since",
+      "{since}"
+    ],
+    "mangsang-impact": [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "impact",
+      "--findings"
+    ],
+    "mangsang-check": [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "check",
+      "--findings"
+    ],
+    "mangsang-cq": [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "cq",
+      "--findings"
+    ],
+    "hunsu": [
+      "python3",
+      "{plugin:hunsu}/hunsu.py",
+      "check",
+      "--findings"
+    ]
+  },
   "resolutions": {
     "reviewing a change or run": {
       "order": [
@@ -78,5 +196,10 @@
       }
     }
   },
-  "local-hooks-ok": []
+  "local-hooks-ok": [],
+  "settings": {
+    "dwitbuk": {
+      "stop-eyes": false
+    }
+  }
 }
