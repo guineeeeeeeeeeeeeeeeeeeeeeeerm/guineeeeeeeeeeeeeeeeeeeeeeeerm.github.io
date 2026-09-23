@@ -1,6 +1,6 @@
 {
   "artifact-type": "chongdae/task@1",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "s2-tests",
     "role": "nitpick",
@@ -110,5 +110,66 @@
         "at": "2026-09-23T10:53:42+00:00"
       }
     }
-  }
+  },
+  "response": {
+    "status": "done",
+    "summary": "Wrote Q-link contract tests; all 11 tests fail before the link feature exists, as required.",
+    "tests": [
+      "tests/test_s2.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-link",
+        "tests": [
+          "all 11 test_Q_link_* methods in tests/test_s2.py"
+        ]
+      }
+    ],
+    "non-claims": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "session": "01a0cde6-635b-7c62-9c33-8b9ca756d5a3",
+      "effort": "xhigh",
+      "transcript": "s2-tests.response.transcript.jsonl"
+    },
+    "member": "teujip",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "tests/__pycache__/test_s2.cpython-312.pyc",
+    "tests/test_s2.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "teujip",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cde6-635b-7c62-9c33-8b9ca756d5a3",
+    "effort": "xhigh",
+    "transcript": "s2-tests.response.transcript.jsonl"
+  },
+  "reported": true,
+  "checks": [],
+  "touched": [
+    "mangsang/relations/R-b3061cf0.json",
+    "plan/PLAN.md",
+    "tests/__pycache__/test_s2.cpython-312.pyc",
+    "tests/test_s2.py"
+  ]
 }

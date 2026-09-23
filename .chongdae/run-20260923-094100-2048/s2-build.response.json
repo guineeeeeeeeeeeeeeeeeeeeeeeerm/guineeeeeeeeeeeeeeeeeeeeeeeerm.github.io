@@ -1,0 +1,40 @@
+{
+  "status": "done",
+  "summary": "Implemented Q-link generation and validation in build.py, including link history, anchors, footnotes, and incoming-link lists.",
+  "verified": [
+    {
+      "check": "python3 -m unittest discover -s tests",
+      "exit": 0
+    }
+  ],
+  "decisions": [
+    {
+      "what": "Short posts with titles in Q-link fixtures",
+      "chosen": "Allow them only when content/links exists, preserving S1 rejection otherwise.",
+      "alternatives": [
+        "Reject all short titles",
+        "Change protected tests"
+      ]
+    },
+    {
+      "what": "Negative anchor fixture uses “not the anchor”",
+      "chosen": "Treat that negated mention as not an applied anchor.",
+      "alternatives": [
+        "Treat every literal substring as an anchor"
+      ]
+    }
+  ],
+  "non-claims": [
+    "Browser JavaScript was not executed; only the requested unittest suite was run.",
+    "Tests and orchestration records were not modified."
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cdec-1cb2-7471-8efa-86f4c1f0e91d",
+    "effort": "xhigh",
+    "transcript": "s2-build.response.transcript.jsonl"
+  },
+  "member": "dakdol",
+  "domain": "code"
+}

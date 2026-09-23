@@ -1,0 +1,30 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "s3-build",
+    "role": "implementer",
+    "brief": "Extend build.py and docs/assets/ so that every sentence of Q-patch and Q-patch-view is true and tests/test_s3.py passes, keeping tests/test_s1.py and tests/test_s2.py green. Standard library only; the page script has no external code. Do not change the tests.",
+    "closes": [
+      "Q-patch",
+      "Q-patch-view"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_s3.py"
+    ],
+    "gate": null
+  },
+  "seq": 9,
+  "added": "2026-09-23T10:54:11+00:00"
+}

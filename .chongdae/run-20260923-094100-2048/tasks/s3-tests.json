@@ -1,0 +1,27 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "s3-tests",
+    "role": "nitpick",
+    "brief": "Write tests/test_s3.py: the contract tests for Q-patch and Q-patch-view, written to fail now (build.py does not handle content/patches/ yet). Same harness as tests/test_s1.py (temporary directory, own content/, build.py run with sys.executable, read docs/). Cover every sentence: the patch file's shape; order by at then id; each anchor found exactly once in the body as patched so far (else build error naming the patch file); replace / insert-before / insert-after / delete; a patch on text an earlier patch made; the post file unchanged; the feed and the page showing the applied body; a link anchor that only exists after a patch; the '패치 보기' toggle only on posts with patches, off by default, and in the page the data a script needs to outline patched regions, mark deletions and show each region's history (time as <time>, reason, kind, previous text). Touch nothing but tests/test_s3.py.",
+    "closes": [
+      "Q-patch",
+      "Q-patch-view"
+    ],
+    "needs": [],
+    "checks": [],
+    "tests": [
+      "tests/test_s3.py"
+    ],
+    "gate": null,
+    "before": [
+      "quibble"
+    ]
+  },
+  "seq": 8,
+  "added": "2026-09-23T10:54:11+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ]
+}
