@@ -1,9 +1,9 @@
 {
   "enabledPlugins": {
     "hunsu@hunsu": true,
-    "chongdae@chongdae": true,
     "mangsang@mangsang": true,
     "dwitbuk@dwitbuk": true,
-    "hacheong@hacheong": true
+    "hacheong@hacheong": true,
+    "chongdae@chongdae": true
   }
 }

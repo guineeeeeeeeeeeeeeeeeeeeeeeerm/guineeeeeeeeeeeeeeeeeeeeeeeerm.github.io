@@ -2,3 +2,4 @@ hunsu.local.json
 hunsu-conflicts.md
 *-response.transcript.jsonl
 .mangsang/
+__pycache__/
