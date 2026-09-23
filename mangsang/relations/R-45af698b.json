@@ -1,0 +1,14 @@
+{
+  "id": "R-45af698b",
+  "src": "build.py:render_footnotes",
+  "predicate": "realizes",
+  "dst": "concept:link",
+  "evidence": "def render_footnotes(",
+  "seen": {
+    "build.py:render_footnotes": "4962f9e0dd8d",
+    "concept:link": "7fd16ce1dc5b"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

@@ -1,5 +1,17 @@
 [
   {
     "path": "plan/PLAN.md"
+  },
+  {
+    "path": "build.py"
+  },
+  {
+    "path": "tests/test_s1.py"
+  },
+  {
+    "path": "tests/test_s2.py"
+  },
+  {
+    "path": "tests/test_s3.py"
   }
 ]

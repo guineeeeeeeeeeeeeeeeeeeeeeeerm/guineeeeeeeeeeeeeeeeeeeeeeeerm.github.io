@@ -1,0 +1,14 @@
+{
+  "id": "R-4a8fcff7",
+  "src": "tests/test_s1.py:S1GeneratorContractTests",
+  "predicate": "realizes",
+  "dst": "concept:feed",
+  "evidence": "def test_Q_feed_orders_newest_first_and_ids_ascending_for_equal_times(self):",
+  "seen": {
+    "tests/test_s1.py:S1GeneratorContractTests": "b283b764a9a0",
+    "concept:feed": "c0480deb3518"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "R-a0409dab",
+  "src": "tests/test_s1.py:S1GeneratorContractTests",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "def test_Q_post_written_is_required(self):",
+  "seen": {
+    "tests/test_s1.py:S1GeneratorContractTests": "b283b764a9a0",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

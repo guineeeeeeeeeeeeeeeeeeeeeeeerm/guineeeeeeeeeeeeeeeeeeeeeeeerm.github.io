@@ -1,0 +1,14 @@
+{
+  "id": "R-2148e930",
+  "src": "tests/test_s3.py:S3PatchViewContractTests",
+  "predicate": "realizes",
+  "dst": "concept:patch-view",
+  "evidence": "class S3PatchViewContractTests(unittest.TestCase):",
+  "seen": {
+    "tests/test_s3.py:S3PatchViewContractTests": "17b4ad074041",
+    "concept:patch-view": "6be15e820155"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

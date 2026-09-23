@@ -1,0 +1,14 @@
+{
+  "id": "R-6cd16b55",
+  "src": "tests/test_s1.py:S1GeneratorContractTests",
+  "predicate": "realizes",
+  "dst": "concept:ui-language",
+  "evidence": "def test_Q_ui_sets_korean_document_language_and_korean_type_names(self):",
+  "seen": {
+    "tests/test_s1.py:S1GeneratorContractTests": "b283b764a9a0",
+    "concept:ui-language": "e2a0a380d7e4"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

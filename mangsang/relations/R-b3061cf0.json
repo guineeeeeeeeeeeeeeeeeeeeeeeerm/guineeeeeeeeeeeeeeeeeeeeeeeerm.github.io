@@ -5,10 +5,10 @@
   "dst": "concept:link",
   "evidence": "바로 뒤에 위첨자 `[n]`이 붙는다.",
   "seen": {
-    "plan/PLAN.md#Q-link — 주석으로 거는 링크": "6a668e5ff72b",
+    "plan/PLAN.md#Q-link — 주석으로 거는 링크": "a8a517d78a40",
     "concept:link": "7fd16ce1dc5b"
   },
   "confirmed": {
-    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+    "delegated": "Claude (claude-opus-5-5) re-read Q-link after the s2 quibble decisions (markup, backlink order); it still realizes link"
   }
 }

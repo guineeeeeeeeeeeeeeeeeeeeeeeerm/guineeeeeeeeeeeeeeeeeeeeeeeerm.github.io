@@ -5,10 +5,10 @@
   "dst": "concept:local-time",
   "evidence": "페이지의 자바스크립트가 이를 독자 브라우저의 시간대로 바꿔",
   "seen": {
-    "plan/PLAN.md#Q-time — 시각 표시": "c4dff66638dd",
+    "plan/PLAN.md#Q-time — 시각 표시": "040303c98767",
     "concept:local-time": "f3a31994b7da"
   },
   "confirmed": {
-    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+    "delegated": "Claude (claude-opus-5-5) re-read Q-time after adding the out-of-range year rule; it still realizes local-time"
   }
 }

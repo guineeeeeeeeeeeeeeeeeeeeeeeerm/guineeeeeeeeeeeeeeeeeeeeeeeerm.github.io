@@ -5,10 +5,10 @@
   "dst": "concept:patch-view",
   "evidence": "\"패치 보기\" 토글 버튼이 있다.",
   "seen": {
-    "plan/PLAN.md#Q-patch-view — 패치 보기": "337a0a8a650f",
+    "plan/PLAN.md#Q-patch-view — 패치 보기": "70f094aaab6b",
     "concept:patch-view": "6be15e820155"
   },
   "confirmed": {
-    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+    "delegated": "Claude (claude-opus-5-5) re-read Q-patch-view after clarifying the deletion marker (no width when off, a small mark when on); it still realizes patch-view"
   }
 }

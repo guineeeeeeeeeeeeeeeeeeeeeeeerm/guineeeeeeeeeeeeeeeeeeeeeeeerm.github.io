@@ -1,0 +1,14 @@
+{
+  "id": "R-16a108f1",
+  "src": "build.py:build",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "def build() -> None:",
+  "seen": {
+    "build.py:build": "c7b6cbf67f56",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

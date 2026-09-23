@@ -1,0 +1,14 @@
+{
+  "id": "R-c9ee93a6",
+  "src": "build.py:parse_link",
+  "predicate": "realizes",
+  "dst": "concept:link",
+  "evidence": "def parse_link(path: Path, posts_by_id: dict[str, Post]) -> Link:",
+  "seen": {
+    "build.py:parse_link": "96a24689fe94",
+    "concept:link": "7fd16ce1dc5b"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

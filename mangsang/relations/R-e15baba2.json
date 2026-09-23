@@ -1,0 +1,14 @@
+{
+  "id": "R-e15baba2",
+  "src": "build.py:apply_patches",
+  "predicate": "realizes",
+  "dst": "concept:patch",
+  "evidence": "def apply_patches(posts: list[Post], patches: list[Patch])",
+  "seen": {
+    "build.py:apply_patches": "1664838b8df7",
+    "concept:patch": "5a85490ec568"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "R-0b3b16d0",
+  "src": "build.py:parse_post",
+  "predicate": "realizes",
+  "dst": "concept:post-type",
+  "evidence": "\"short\"",
+  "seen": {
+    "build.py:parse_post": "cd89ddd36da9",
+    "concept:post-type": "dce6f00332ed"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

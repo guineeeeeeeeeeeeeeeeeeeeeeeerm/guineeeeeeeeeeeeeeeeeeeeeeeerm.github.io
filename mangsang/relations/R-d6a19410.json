@@ -1,0 +1,14 @@
+{
+  "id": "R-d6a19410",
+  "src": "tests/test_s2.py:S2LinkContractTests",
+  "predicate": "realizes",
+  "dst": "concept:link",
+  "evidence": "class S2LinkContractTests(unittest.TestCase):",
+  "seen": {
+    "tests/test_s2.py:S2LinkContractTests": "1508b884d7c5",
+    "concept:link": "7fd16ce1dc5b"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

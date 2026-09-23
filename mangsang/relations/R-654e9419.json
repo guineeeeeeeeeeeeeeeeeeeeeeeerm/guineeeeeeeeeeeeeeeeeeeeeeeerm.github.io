@@ -1,0 +1,14 @@
+{
+  "id": "R-654e9419",
+  "src": "build.py:render_feed",
+  "predicate": "realizes",
+  "dst": "concept:feed",
+  "evidence": "def render_feed(",
+  "seen": {
+    "build.py:render_feed": "d12ff1a46bad",
+    "concept:feed": "c0480deb3518"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}

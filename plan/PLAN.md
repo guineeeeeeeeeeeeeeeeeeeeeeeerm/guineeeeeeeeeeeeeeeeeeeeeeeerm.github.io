@@ -20,6 +20,11 @@ Concept: `site-build`.
 입력이 잘못되면 빌드는 stderr에 잘못된 파일의 경로를 포함한 한 줄을 쓰고 종료 코드 1로 끝나며, `docs/`는 빌드 전 그대로
 남는다(새 출력은 임시 디렉터리에 만든 뒤 교체한다). 잘못된 입력은 이 문서의 각 절이 "빌드 오류"라고 적은 경우다.
 
+Decided (technical, delegated): `build.py`는 저장소 루트에 있고, 실행한 현재 작업 디렉터리의 `content/`를 읽어 같은 디렉터리의
+`docs/`에 쓴다. 테스트는 `build.py`를 테스트 파일 위치 기준의 경로로 찾아 `sys.executable`로 실행하며, 작업 디렉터리를 새 임시
+디렉터리로 두어 테스트마다 자기 `content/`와 `docs/`를 갖는다. 테스트는 `tests/`에 있고 `python3 -m unittest discover -s tests`로
+돈다.
+
 Decided (technical, delegated): 저장소 루트의 기존 `index.html`은 `docs/`로 옮겨지지 않는다 — 피드가 새 첫 화면이다. Pages의
 서비스 위치를 main의 `/docs`로 바꾸는 것은 푸시할 때 소유자가 한다.
 
@@ -34,6 +39,9 @@ Concept: `post`, `post-type`, `tag`.
   빌드는 분량으로 유형을 판단하지 않는다.
 - `title`: 제목. `short`에서는 있으면 빌드 오류, `medium`과 `long`에서는 선택.
 - `tags`: 쉼표로 구분한 태그 이름. 선택. 앞뒤 공백은 무시하고, 빈 이름은 버린다.
+
+Decided after quibble (s1-tests, technical, delegated): 키와 값의 앞뒤 공백은 무시하고, 키는 대소문자를 구분한다. 콜론이 없는
+헤더 줄과 같은 키가 두 번 나오는 헤더는 빌드 오류다.
 
 그 밖의 키, 형식이 틀린 `written`, 목록에 없는 `type`, 두 글이 같은 `<id>`(파일 이름)인 경우는 빌드 오류다. 이미지만 있는
 글은 본문이 이미지 한 줄인 글이다.
@@ -53,10 +61,15 @@ Decided (owner, `source:plan-11`): 글 페이지와 피드 항목에 유형 이�
 
 Concept: `feed`.
 
-`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형 구분 없음, 같은 시각이면 `<id>` 순). 짧은
+`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형별로 나누지 않는다 — 항목마다 유형 이름이 붙는 것은 Q-post대로다. 같은
+시각이면 `<id>` 순). 짧은
 글은 본문 전체를 보여주고, 중간·긴 글은 제목과 시각을 보여준다. Decided (owner, `source:plan-11`): 제목이 없는 중간·긴
-글은 제목 자리에 본문 첫 문단의 앞 80자(잘렸으면 `…`)를 보여준다. 모든 항목은
+글은 제목 자리에 본문 첫 문단의 앞 80자(잘렸으면 `…`)를 보여준다. Decided after quibble (s1-tests, technical, delegated): 80자는 적용된 본문의 첫 문단을 HTML로 만든 뒤의 화면 글자(서식
+기호와 태그를 뺀 글자)에서 유니코드 문자 단위로 센다. 이미지만 있는 첫 문단은 이미지 설명(alt)을 글자로 쓴다. 모든 항목은
 그 글의 페이지로 가는 링크를 가진다. 피드의 본문은 적용된 본문이다.
+
+Dismissed after quibble (s1-tests): "checks가 비어 있다"는 다섯 건 — 트집 작업은 계약 테스트를 쓰는 작업이라 그 테스트가 검사이고,
+`s1-build`가 `python3 -m unittest discover -s tests`로 돌린다.
 
 ## Q-time — 시각 표시
 
@@ -65,6 +78,9 @@ Concept: `local-time`.
 화면의 모든 시각은 `<time datetime="YYYY-MM-DDTHH:MM:SSZ">` 요소로 나오며, 요소의 글자는 UTC로
 `YYYY-MM-DD HH:MM UTC`다. 페이지의 자바스크립트가 이를 독자 브라우저의 시간대로 바꿔 `YYYY-MM-DD HH:MM`로 보여주고, 요소의
 `title`에 UTC 표기를 남긴다. 자바스크립트가 없으면 UTC 글자가 그대로 보인다.
+
+Decided after the verifier (s1-build-4, technical, delegated): 현지 시각으로 바꾼 연도가 0001–9999 밖이면(예: UTC+14에서
+`9999-12-31T23:59:59Z`) 바꾸지 않고 UTC 글자와 `title`을 그대로 둔다. 숫자는 항상 ASCII다.
 
 ## Q-ui — 화면 언어
 
@@ -86,8 +102,17 @@ Concept: `link`.
 나오는 순서로 1부터 매긴다. 본문 아래 "주석" 목록의 `n`번 항목은 `to` 글의 제목(없으면 첫 문단 앞 80자)과 현재 사유,
 링크를 건 시각(`created`의 `at`)을 보여준다. `from`이나 `to`가 없는 글이면 빌드 오류다.
 
+Decided after quibble (s2-tests, technical, delegated): 앵커 글자는 `<a href="<to>.html">…</a>`가 되고 바로 뒤에
+`<sup><a href="#fn-<n>">[n]</a></sup>`가 붙는다. "주석" 목록은 `<ol>`이며 `n`번 항목의 `id`는 `fn-<n>`이다. 글 페이지 사이의
+링크는 같은 디렉터리(`docs/p/`) 기준의 상대 경로다.
+
 Decided (owner, `source:plan-11`): 받는 쪽 글(`to`)의 페이지 아래에 "이 글을 가리키는 글" 목록을 두고, 각 항목은 `from`
 글의 제목(없으면 첫 문단 앞 80자)과 현재 사유를 보여준다.
+
+Decided after quibble (s2-tests, technical, delegated): 이 목록은 링크를 건 시각(`created`의 `at`)의 최신순이고, 같으면 링크
+`id` 순이다. 마지막 이벤트가 `removed`인 링크는 넣지 않는다. 가리키는 글이 없으면 목록을 두지 않는다.
+
+Dismissed after quibble (s2-tests): "checks가 비어 있다" — 트집 작업의 테스트가 검사이고 `s2-build`가 돌린다.
 
 ## Q-patch — 패치
 
@@ -100,6 +125,12 @@ Concept: `patch`.
 `text`를 넣고, `delete`는 앵커를 지운다. 패치는 한 글 안에서만 작용하며 길이 제한은 없다. 글 파일 자체는 패치로 바뀌지
 않는다(원문은 남는다).
 
+Decided after quibble (s3-tests, technical, delegated): 패치 파일은 `content/patches/*.json`이고 파일 하나가 패치 하나다. `id`는
+문자열이며 파일 이름(확장자 제외)과 같아야 한다. JSON이 아니거나, 키 집합이 위와 다르거나, `op`가 목록에 없거나, `delete`에
+`text`가 있거나 다른 `op`에 없거나, `at`이 `written`과 같은 형식이 아니거나, `post`가 없는 글을 가리키면 빌드 오류이고, 오류
+줄은 그 패치 파일의 경로를 포함한다. 같은 `at`의 패치는 `id`의 문자열 순서로 적용한다. 앵커는 패치를 적용하기 전 그 순간의
+본문(글 파일의 본문에 앞선 패치를 적용한 것)에서 찾으므로, 다른 글이나 글 경계 밖을 가리킬 수 없다.
+
 Decided (owner, `source:plan-05`): 올린 글을 고치는 일반적인 방법은 패치 파일을 더하는 것이고, 글 파일을 직접 고치는 일은 이
 계획의 범위 밖이다(완전 삭제 `erasure`의 절차는 열린 질문이 답해진 뒤에 정한다).
 
@@ -111,3 +142,12 @@ Concept: `patch-view`.
 표시되고, 지운 자리에는 표시가 남는다. 그 영역에 마우스를 올리면 그 자리에 적용된 패치의 이력 — 각 패치의 시각(독자 현지
 시각), 사유, 종류, 이전 글자 — 이 보인다. 끄면 표시가 사라지고 적용된 본문만 보인다. Decided (owner, `source:plan-11`): 기본은 꺼짐이다. 겹치는 패치 같은 엣지
 케이스는 쓰면서 대응한다(열린 질문 `patch-view-edges`).
+
+Decided after quibble (s3-tests, technical, delegated): 한 패치의 영역은 그 패치가 넣은 글자다 — `replace`와 `insert-*`는 `text`
+전체, `delete`는 지운 자리의 표시 하나(패치 보기를 끄면 자리를 차지하지 않고, 켜면 작은 표시로 보인다 — 계약을 정정, s3-build-4 검증 후). 이후의 패치가 그 영역의 일부를 다시 바꾸면, 적용된 본문의 각 글자는 마지막으로
+그 글자를 만든 패치의 영역에 속하고, 앞선 패치의 영역은 남은 글자만큼 줄어든다(모두 사라지면 표시도 없다). 한 영역의 이력은 그
+영역의 글자를 만들거나 바꾼 패치들을 시각 순으로 보여준다. 각 항목의 시각은 Q-time의 `<time>` 표기와 같은 규칙으로 독자 현지
+시각이 되고, "이전 글자"는 `replace`와 `delete`에서는 앵커의 글자, `insert-*`에서는 없음("새로 넣음")이다. 이는 첫 기준이며,
+실제로 쓰다 드러나는 엣지 케이스는 `patch-view-edges`에서 다룬다.
+
+Dismissed after quibble (s3-tests): "checks가 비어 있다" 열한 건 — 트집 작업의 테스트가 검사이고 `s3-build`가 돌린다.

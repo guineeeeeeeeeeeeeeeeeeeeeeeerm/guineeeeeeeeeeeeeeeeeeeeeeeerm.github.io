@@ -1,0 +1,14 @@
+{
+  "id": "R-57e0fe67",
+  "src": "build.py:page_shell",
+  "predicate": "realizes",
+  "dst": "concept:ui-language",
+  "evidence": "lang=\"ko\"",
+  "seen": {
+    "build.py:page_shell": "33646ddd9c6e",
+    "concept:ui-language": "e2a0a380d7e4"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  }
+}
