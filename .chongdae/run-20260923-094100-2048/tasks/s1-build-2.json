@@ -1,0 +1,36 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "s1-build-2",
+    "role": "implementer",
+    "brief": "Build build.py (and docs/assets/ it writes) so that every sentence of Q-build, Q-post, Q-feed, Q-time and Q-ui is true and tests/test_s1.py passes. Standard library only. Do not change the tests. Do not create content/ posts beyond what the tests make in their temporary directories. A build.py from an earlier attempt (s1-build, dropped only because of a test fixture since fixed) is already in the tree: check it against the contract, finish or correct it.",
+    "closes": [
+      "Q-build",
+      "Q-post",
+      "Q-feed",
+      "Q-time",
+      "Q-ui"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_s1.py"
+    ],
+    "gate": null,
+    "after": [
+      "newbie"
+    ]
+  },
+  "seq": 3,
+  "added": "2026-09-23T09:58:32+00:00"
+}
