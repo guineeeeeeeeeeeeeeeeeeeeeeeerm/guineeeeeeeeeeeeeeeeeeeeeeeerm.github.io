@@ -70,7 +70,7 @@
     ],
     "host": "codex",
     "model": "gpt-5.6-luna",
-    "session": "01a0ced2-b3c9-7bf3-a190-5c92807df77d",
+    "session": "01a0ced5-b8b4-7780-969c-55ceb39cda6c",
     "effort": "xhigh",
     "transcript": "readme-2.response.transcript.jsonl",
     "versions": {
@@ -87,7 +87,8 @@
     }
   },
   "non-claims": [
-    "(provider) README 내용의 전체 문장 일치 여부는 자동 검증 범위 밖입니다."
+    "(provider) README 내용의 전체 문장 일치 여부는 자동 검증 범위 밖입니다.",
+    "(provider) The test suite does not verify every prose sentence in README.md."
   ],
   "verified_by": {
     "provider": "command",
@@ -107,9 +108,9 @@
     ],
     "host": "codex",
     "model": "gpt-5.6-luna",
-    "session": "01a0ced4-3e21-7b31-b7d2-3d432132e0d3",
+    "session": "01a0ced6-5819-7c60-8bbb-1b5b06c067eb",
     "effort": "xhigh",
-    "transcript": "readme-2.verify.response.transcript.jsonl",
+    "transcript": "readme-2.verify.2.response.transcript.jsonl",
     "versions": {
       "used": {
         "dwitbuk": "1.1.0"
@@ -170,6 +171,59 @@
           "session": "01a0ced4-3e21-7b31-b7d2-3d432132e0d3",
           "effort": "xhigh",
           "transcript": "readme-2.verify.response.transcript.jsonl"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "1 finding(s)"
+      }
+    },
+    {
+      "status": "done",
+      "summary": "README.md now describes `site-build` as a concept/task, while the executable command is clearly `python3 build.py`.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 0
+        }
+      ],
+      "decisions": [],
+      "non-claims": [
+        "The test suite does not verify every prose sentence in README.md."
+      ],
+      "disputed-tests": [],
+      "worker": {
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "session": "01a0ced5-b8b4-7780-969c-55ceb39cda6c",
+        "effort": "xhigh",
+        "transcript": "readme-2.response.transcript.jsonl"
+      },
+      "member": "dakdol",
+      "domain": "site",
+      "retried": {
+        "by": "chongdae",
+        "auto": "the verifier rejected: 1 finding(s)",
+        "at": "2026-09-23T15:16:06+00:00"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "README.md:127",
+            "record_quote": "사이트를 만드는 명령(`python3 build.py`)",
+            "tree_quote": "이 `site-build` 명령은 `content/`의 글, 링크, 패치를 읽어",
+            "why": "`site-build`는 계약상 개념 이름이지 실행 명령이 아니므로, README가 이를 다시 명령으로 부르면 실제 명령과 혼동을 남긴다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "session": "01a0ced6-5819-7c60-8bbb-1b5b06c067eb",
+          "effort": "xhigh",
+          "transcript": "readme-2.verify.2.response.transcript.jsonl"
         }
       },
       "rejected": {

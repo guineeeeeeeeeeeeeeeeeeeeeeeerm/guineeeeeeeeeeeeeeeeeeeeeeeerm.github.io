@@ -1,0 +1,12 @@
+{
+  "artifact-type": "chongdae/trace@1",
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "session": "01a0ced6-5819-7c60-8bbb-1b5b06c067eb"
+  },
+  "commands": [],
+  "changed": [],
+  "kept-locally": "readme-2.verify.2.response.transcript.jsonl"
+}
