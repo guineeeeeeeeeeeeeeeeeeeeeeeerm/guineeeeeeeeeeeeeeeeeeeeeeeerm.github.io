@@ -1,0 +1,75 @@
+{
+  "status": "done",
+  "summary": "Added the requested contract tests. Discovery ran 28 tests; all fail as intended because build.py is not present yet.",
+  "tests": [
+    "tests/test_s1.py"
+  ],
+  "covers": [
+    {
+      "section": "Q-build",
+      "tests": [
+        "test_Q_build_recreates_the_feed_posts_assets_images_and_nojekyll",
+        "test_Q_build_same_input_is_byte_identical_on_second_build",
+        "test_Q_build_generated_assets_have_no_external_script_font_or_style_urls",
+        "test_Q_build_bad_input_is_atomic_and_reports_one_bad_file_line"
+      ]
+    },
+    {
+      "section": "Q-post",
+      "tests": [
+        "test_Q_post_written_is_required",
+        "test_Q_post_type_is_required",
+        "test_Q_post_header_key_and_value_whitespace_are_ignored_but_key_case_matters",
+        "test_Q_post_bad_written_format_is_a_build_error",
+        "test_Q_post_unknown_header_key_is_a_build_error",
+        "test_Q_post_colonless_header_line_is_a_build_error",
+        "test_Q_post_duplicate_header_key_is_a_build_error",
+        "test_Q_post_short_title_is_forbidden_and_medium_long_titles_are_optional",
+        "test_Q_post_type_must_be_short_medium_or_long",
+        "test_Q_post_duplicate_ids_are_a_build_error",
+        "test_Q_post_empty_body_is_a_build_error",
+        "test_Q_post_tags_trim_whitespace_drop_empty_names_and_are_plain_text",
+        "test_Q_post_missing_image_is_a_build_error",
+        "test_Q_post_images_only_body_is_valid_and_renders_image",
+        "test_Q_post_markdown_subset_renders_and_html_is_shown_as_text",
+        "test_Q_post_page_shows_title_written_tags_and_type_name"
+      ]
+    },
+    {
+      "section": "Q-feed",
+      "tests": [
+        "test_Q_feed_orders_newest_first_and_ids_ascending_for_equal_times",
+        "test_Q_feed_short_shows_full_applied_body_medium_long_show_title_and_time",
+        "test_Q_feed_titleless_medium_or_long_uses_80_screen_characters_and_ellipsis",
+        "test_Q_feed_titleless_image_first_paragraph_uses_image_alt_text",
+        "test_Q_feed_every_item_links_to_its_post_page_and_has_applied_content"
+      ]
+    },
+    {
+      "section": "Q-time",
+      "tests": [
+        "test_Q_time_uses_utc_datetime_text_and_title_on_every_rendered_time",
+        "test_Q_time_asset_localizes_time_and_retains_utc_title_without_external_code"
+      ]
+    },
+    {
+      "section": "Q-ui",
+      "tests": [
+        "test_Q_ui_sets_korean_document_language_and_korean_type_names"
+      ]
+    }
+  ],
+  "non-claims": [
+    "The standard-library-only implementation constraint is not directly tested.",
+    "Korean UI coverage samples lang=ko and all three type names; arbitrary future menu, button, or 안내 문구 strings are not exhaustively enumerable."
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cda6-0285-7021-9916-d68cb440e2e3",
+    "effort": "xhigh",
+    "transcript": "s1-tests.response.transcript.jsonl"
+  },
+  "member": "teujip",
+  "domain": "code"
+}
