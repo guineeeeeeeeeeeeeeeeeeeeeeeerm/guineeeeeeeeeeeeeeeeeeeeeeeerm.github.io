@@ -1,0 +1,33 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "readme",
+    "role": "implementer",
+    "brief": "Write README.md: the author's guide Q-readme describes, in Korean, so that tests/test_readme.py passes and every earlier test stays green. Its examples must be complete files an author can copy. Do not change build.py's behavior or the tests.",
+    "closes": [
+      "Q-readme"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_readme.py"
+    ],
+    "gate": null,
+    "domain": "site",
+    "after": [
+      "newbie"
+    ]
+  },
+  "seq": 2,
+  "added": "2026-09-23T14:52:26+00:00"
+}
