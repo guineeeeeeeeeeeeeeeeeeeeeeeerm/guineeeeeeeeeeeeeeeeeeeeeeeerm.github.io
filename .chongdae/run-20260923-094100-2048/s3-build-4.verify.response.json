@@ -1,0 +1,20 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "verdict": "reject",
+  "findings": [
+    {
+      "kind": "plan-vs-code",
+      "where": "build.py:234-278, 712-733",
+      "record_quote": "한 패치의 영역은 그 패치가 넣은 글자다 — `replace`와 `insert-*`는 `text` 전체",
+      "tree_quote": "pieces.append(f\"\\x00guin-patch-start-{index}\\x00\")\npieces.extend(unit.text for unit in grouped)\npieces.append(f\"\\x00guin-patch-end-{index}\\x00\")\n...\nblocks = markdown_blocks(body)\nrendered_blocks = [render_block(block, content_root, post_path, image_prefix) for block in blocks]\nrendered = \"\\n\".join(rendered_blocks)",
+      "why": "여러 문단을 포함한 patch text는 시작·끝 표지가 서로 다른 블록 HTML에 들어가므로 전체 text를 하나의 patch-region으로 감싸지 못하고, 아웃라인과 이력이 전체 영역에 적용되지 않는다."
+    }
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0ce26-7544-7c42-95d0-f30eabff4dc1",
+    "effort": "xhigh",
+    "transcript": "s3-build-4.verify.response.transcript.jsonl"
+  }
+}
