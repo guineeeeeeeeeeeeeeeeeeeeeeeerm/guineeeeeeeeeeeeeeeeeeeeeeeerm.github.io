@@ -1,0 +1,9 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "Plan the site's first build: record the owner's build and product decisions, write plan/PLAN.md, relate it to the concepts",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
