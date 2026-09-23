@@ -1,0 +1,68 @@
+{
+  "artifact-type": "chongdae/trace@1",
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "session": "01a0cec2-b983-7ca2-aec0-a2bb493a3fd2"
+  },
+  "commands": [
+    {
+      "command": "pwd && rg --files -g '!*build.py' -g '!README.md' | sed -n '1,120p'",
+      "exit": 0
+    },
+    {
+      "command": "rg --files tests 2>/dev/null || true",
+      "exit": 0
+    },
+    {
+      "command": "sed -n '1,260p' tests/test_s3.py && sed -n '1,220p' tests/test_s2.py",
+      "exit": 0
+    },
+    {
+      "command": "rg -n \"\\[n\\]|\\[1\\]|\\[\\d|docs/p|reason-changed|remove\" tests/test_s2.py tests/test_s3.py | sed -n '1,220p'",
+      "exit": 0
+    },
+    {
+      "command": "python3 -m unittest discover -s tests -p 'test_readme.py'",
+      "exit": 1
+    },
+    {
+      "command": "python3 -m unittest discover -s tests -p 'test_readme.py'",
+      "exit": 1
+    },
+    {
+      "command": "python3 -m py_compile tests/test_readme.py",
+      "exit": 0
+    },
+    {
+      "command": "git diff --check && git status --short && git diff -- tests/test_readme.py | sed -n '1,260p'",
+      "exit": 0
+    },
+    {
+      "command": "sed -n '1,280p' tests/test_readme.py && python3 -m unittest discover -s tests -p 'test_readme.py'",
+      "exit": 1
+    },
+    {
+      "command": "find tests -maxdepth 2 -type f -name '*.pyc' -print",
+      "exit": 0
+    },
+    {
+      "command": "unlink tests/__pycache__/test_readme.cpython-312.pyc && find tests -maxdepth 2 -type f -name '*.pyc' -print",
+      "exit": 0
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests",
+      "exit": 1
+    },
+    {
+      "command": "git status --short --untracked-files=all && find tests -maxdepth 2 -type f -name '*.pyc' -print",
+      "exit": 0
+    }
+  ],
+  "changed": [
+    "add ./tests/test_readme.py",
+    "update ./tests/test_readme.py"
+  ],
+  "kept-locally": "readme-tests.response.transcript.1.jsonl"
+}

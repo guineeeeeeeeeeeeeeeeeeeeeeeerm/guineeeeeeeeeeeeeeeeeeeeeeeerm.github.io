@@ -1,0 +1,25 @@
+{
+  "status": "blocked",
+  "summary": "보호된 테스트가 brief와 충돌합니다. `tests/test_readme.py::QReadmeContractTests::test_Q_readme_exists_and_is_a_Korean_author_guide`는 README에 `site-build`를 반드시 포함하도록 요구하지만, brief는 해당 계획 용어를 제거하도록 요구합니다.",
+  "verified": [],
+  "decisions": [],
+  "non-claims": [
+    "충돌 때문에 파일을 수정하거나 지정된 테스트를 실행하지 않았습니다."
+  ],
+  "disputed-tests": [
+    {
+      "test": "tests/test_readme.py::QReadmeContractTests::test_Q_readme_exists_and_is_a_Korean_author_guide",
+      "contract_quote": "README.md is for the person who writes on this site; it must not speak the plan's own vocabulary. Remove the plan's section ids from headings (`Q-patch-view`, `Q-feed`, ...) and the concept names used as terms (`site-build`, `post-type`, ...): say it in plain Korean — the command is `python3 build.py`, headings name what the author does (새 글 쓰기, 링크 걸기, 패치 붙이기, 사이트 만들기, 방문자에게 보이는 모습).",
+      "why": "테스트가 README에 `site-build`가 포함되어야 한다고 명시적으로 검사하는 반면, 계약은 `site-build`를 계획 용어로 제거하라고 명시합니다."
+    }
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cedb-8535-7fe0-a1e0-99b52a9bd0f5",
+    "effort": "xhigh",
+    "transcript": "readme-3.response.transcript.jsonl"
+  },
+  "member": "dakdol",
+  "domain": "site"
+}

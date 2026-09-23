@@ -1,0 +1,17 @@
+{
+  "artifact-type": "chongdae/trace@1",
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "session": "01a0ced7-5019-7500-bc9c-64c3b382c460"
+  },
+  "commands": [
+    {
+      "command": "sed -n '1,240p' README.md && printf '\\n--- tests/test_readme.py ---\\n' && sed -n '1,260p' tests/test_readme.py",
+      "exit": 0
+    }
+  ],
+  "changed": [],
+  "kept-locally": "readme-2.verify.3.response.transcript.jsonl"
+}

@@ -1,0 +1,43 @@
+{
+  "status": "done",
+  "summary": "README 예시를 임시 복사본에서 따라 글·링크·패치를 작성하고 빌드했다. 피드 순서, 제목 없는 글의 80자 표시, 패치 보기 안내와 오류 경로 안내가 실제 결과와 맞았다.",
+  "tried": [
+    {
+      "command": "python3 build.py",
+      "expected": "README: \"실제 실행 명령인 `python3 build.py`\"이며 결과가 `docs/`에 생긴다.",
+      "observed": "종료 코드 0. `docs/index.html`과 글 페이지들이 생성됐다.",
+      "ok": true
+    },
+    {
+      "command": "생성된 docs/index.html과 docs/p/*.html 읽기",
+      "expected": "README: \"작성 시각의 최신순\"이며 제목 없는 글은 첫 문단 앞 80자를 표시한다.",
+      "observed": "피드는 최신순이었다. 제목 없는 medium은 첫 문단을, 80자 초과 long은 80자와 `…`을 표시했다.",
+      "ok": true
+    },
+    {
+      "command": "생성된 docs/p/hello.html 읽기",
+      "expected": "README: \"기본으로 꺼진 `패치 보기` 토글 버튼\"과 패치 영역·이력이 표시된다.",
+      "observed": "`패치 보기` 버튼, `aria-pressed=\"false\"`, 변경 영역, 패치 시각·사유·종류·이전 글자가 생성됐다.",
+      "ok": true
+    },
+    {
+      "command": "python3 build.py >build.stdout 2>build.stderr",
+      "expected": "README: \"오류는 파일 경로를 담은 한 줄로 나오므로\" stderr를 확인한다.",
+      "observed": "잘못된 패치로 종료 코드 1이었고 stderr 한 줄에 `content/patches/bad-anchor.json` 경로가 나왔다.",
+      "ok": true
+    }
+  ],
+  "findings": [],
+  "non-claims": [
+    "브라우저에서 토글 클릭과 마우스 오버 자체는 수행하지 않고 생성된 페이지의 HTML과 기본 상태를 읽었다."
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0ced8-244f-7073-9656-d164cac934f5",
+    "effort": "xhigh",
+    "transcript": "readme-2.newbie.3.response.transcript.jsonl"
+  },
+  "member": "chojja",
+  "domain": "site"
+}

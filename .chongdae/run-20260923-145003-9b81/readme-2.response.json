@@ -1,0 +1,24 @@
+{
+  "status": "done",
+  "summary": "README.md now clearly identifies `site-build` as a concept and `python3 build.py` as the executable command; requested feed and patch-view guidance remains included.",
+  "verified": [
+    {
+      "check": "python3 -m unittest discover -s tests",
+      "exit": 0
+    }
+  ],
+  "decisions": [],
+  "non-claims": [
+    "The test suite does not verify every prose sentence in README.md."
+  ],
+  "disputed-tests": [],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0ced6-9f85-7451-b9e0-01dd6e0e9dd4",
+    "effort": "xhigh",
+    "transcript": "readme-2.response.transcript.jsonl"
+  },
+  "member": "dakdol",
+  "domain": "site"
+}
