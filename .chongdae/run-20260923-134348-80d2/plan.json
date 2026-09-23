@@ -1,0 +1,9 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "Adopt mangsang 1.4.0: a signer roster; the multiple-choice rounds kept again, verbatim from the host transcript",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
