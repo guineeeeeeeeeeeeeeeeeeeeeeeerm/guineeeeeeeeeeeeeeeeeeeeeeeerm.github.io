@@ -1,0 +1,26 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "s2-tests",
+    "role": "nitpick",
+    "brief": "Write tests/test_s2.py: the contract tests for Q-link, written to fail now (build.py does not handle content/links/ yet). Same harness as tests/test_s1.py: each test makes a temporary directory with its own content/ (posts and content/links/*.json) and runs build.py there with sys.executable, then reads docs/. Cover every sentence of Q-link: the link file's shape and event rules; the current reason; a removed link not shown; the anchor found exactly once in the from-post's applied body (missing or twice: build error naming the link file); the anchor becoming a link to the to-post with a superscript [n] right after it, n in order of appearance; the 주석 list with the to-post's title (or first-paragraph stand-in), current reason and created time as <time>; the receiving post's '이 글을 가리키는 글' list; unknown from/to: build error. Touch nothing but tests/test_s2.py.",
+    "closes": [
+      "Q-link"
+    ],
+    "needs": [],
+    "checks": [],
+    "tests": [
+      "tests/test_s2.py"
+    ],
+    "gate": null,
+    "before": [
+      "quibble"
+    ]
+  },
+  "seq": 6,
+  "added": "2026-09-23T10:43:16+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ]
+}

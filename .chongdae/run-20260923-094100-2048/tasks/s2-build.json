@@ -1,0 +1,29 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "s2-build",
+    "role": "implementer",
+    "brief": "Extend build.py so that every sentence of Q-link is true and tests/test_s2.py passes, keeping tests/test_s1.py green. Standard library only. Do not change the tests.",
+    "closes": [
+      "Q-link"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_s2.py"
+    ],
+    "gate": null
+  },
+  "seq": 7,
+  "added": "2026-09-23T10:43:16+00:00"
+}
