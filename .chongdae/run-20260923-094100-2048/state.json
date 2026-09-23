@@ -1,9 +1,10 @@
 {
   "artifact-type": "chongdae/run@1",
-  "status": "running",
+  "status": "complete",
   "non-claims": [],
   "created": {
     "at": "2026-09-23T09:41:00+00:00",
     "based_on": "a4b166fc635814c707cd25b798a4c2883236e20c"
-  }
+  },
+  "open": []
 }
