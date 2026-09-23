@@ -1,0 +1,20 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "verdict": "reject",
+  "findings": [
+    {
+      "kind": "plan-vs-code",
+      "where": "build.py:302-313",
+      "record_quote": "80자는 적용된 본문의 첫 문단을 HTML로 만든 뒤의 화면 글자(서식 기호와 태그를 뺀 글자)에서 유니코드 문자 단위로 센다.",
+      "tree_quote": "summary = re.sub(r\"</(?:strong|em|code)>\\s+<(?=(?:strong|em|code)\\b)\", lambda match: match.group(0).replace(\" \", \"\"), rendered)",
+      "why": "The implementation removes whitespace between adjacent formatted spans before counting, although that whitespace remains in the rendered screen text. This can produce an incorrect 80-character titleless feed summary."
+    }
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cdb6-0185-7f32-a92a-513b6c007b58",
+    "effort": "xhigh",
+    "transcript": "s1-build-2.verify.response.transcript.jsonl"
+  }
+}
