@@ -13,10 +13,10 @@
       "fingerprint": "9398b102154d"
     },
     "chongdae": {
-      "version": "1.3.0",
+      "version": "1.4.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/chongdae",
       "marketplace": "chongdae",
-      "fingerprint": "506598757297"
+      "fingerprint": "71b1cce5de61"
     },
     "mangsang": {
       "version": "1.3.0",
@@ -31,10 +31,10 @@
       "fingerprint": "bd655b0c1397"
     },
     "hacheong": {
-      "version": "1.1.1",
+      "version": "1.2.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hacheong",
       "marketplace": "hacheong",
-      "fingerprint": "b5659ed65227"
+      "fingerprint": "bdc80448e6b0"
     }
   },
   "skills": [
@@ -45,7 +45,7 @@
     "mangsang:operate"
   ],
   "denied": [],
-  "skills-fingerprint": "6793ed440b50",
+  "skills-fingerprint": "78591142d16f",
   "hooks": [
     {
       "event": "SessionStart",
@@ -304,15 +304,13 @@
     "building a slice": {
       "accept": "A build member is hired by chongdae inside a run, so its session sees a run in progress and the guard admits the task's writes.",
       "reviewed": {
-        "by": "Claude Opus 5.5, in the owner's stead (asked to write the resolutions), 2026-09-23",
-        "why": "Read both quotes; the worker's edits happen within the run that hired it."
+        "delegated": "judge codex gpt-5.6-luna: The existing resolution directly explains why the build worker may make its required code changes while the run guard permits those writes."
       }
     },
     "writing tests for a slice": {
       "accept": "nitpick is a chongdae task of its own (`add tests --role nitpick`), so its test files are written inside a run.",
       "reviewed": {
-        "by": "Claude Opus 5.5, in the owner's stead (asked to write the resolutions), 2026-09-23",
-        "why": "Read both quotes. Not taken: the proposed deny, which would remove the only member that writes a contract's tests first."
+        "delegated": "judge codex gpt-5.6-luna: The existing resolution fits because nitpick remains the member responsible for writing contract tests, and the current chongdae mode explicitly permits writes through the active run."
       }
     },
     "locking the project environment": {

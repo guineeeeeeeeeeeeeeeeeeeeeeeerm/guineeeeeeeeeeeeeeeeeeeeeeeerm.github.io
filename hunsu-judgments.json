@@ -1,6 +1,6 @@
 {
   "artifact-type": "hunsu/judgments@1",
-  "skills-fingerprint": "4dc15fa00011",
+  "skills-fingerprint": "78591142d16f",
   "skills": [
     "chongdae:run",
     "dwitbuk:review",
@@ -81,40 +81,6 @@
       "findings-fingerprint": "4f53cda18c2b"
     },
     {
-      "situation": "building a slice",
-      "members": [
-        "hacheong:build"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "e17a582b7b63",
-      "members-text-fingerprint": "7786e97b1218",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [
-        {
-          "kind": "contradiction",
-          "members": [
-            "plugin:chongdae",
-            "hacheong:build"
-          ],
-          "quotes": {
-            "plugin:chongdae": "chongdae: no run in progress — the run is the agent's container, so Edit/Write are refused until one starts: `python3 \"<plugin:chongdae>/chongdae.py\" init --session --goal \"...\"` (tasks added as you go) or `... init --plan FILE`. The engine is that file; there is no `chongdae` binary.",
-            "hacheong:build": "Make the checks pass by changing the code, not the tests."
-          },
-          "why": "The build worker is instructed to modify code, but the standing chongdae mode refuses edits while no run is in progress.",
-          "proposed": {
-            "order": [
-              "plugin:chongdae",
-              "hacheong:build"
-            ]
-          }
-        }
-      ],
-      "findings-fingerprint": "c80e0b188b93"
-    },
-    {
       "situation": "disputing a contract",
       "members": [
         "hacheong:quibble"
@@ -128,39 +94,6 @@
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"
-    },
-    {
-      "situation": "writing tests for a slice",
-      "members": [
-        "hacheong:nitpick"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "a73cd1cb774c",
-      "members-text-fingerprint": "952a86d5fa0c",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [
-        {
-          "kind": "contradiction",
-          "members": [
-            "plugin:chongdae",
-            "hacheong:nitpick"
-          ],
-          "quotes": {
-            "plugin:chongdae": "chongdae: no run in progress — the run is the agent's container, so Edit/Write are refused until one starts: `python3 \"<plugin:chongdae>/chongdae.py\" init --session --goal \"...\"` (tasks added as you go) or `... init --plan FILE`.",
-            "hacheong:nitpick": "You write the tests that will decide a contract, before anyone builds it, and you write them to make the builder fail."
-          },
-          "why": "The nitpick member requires writing test files for this situation, while the chongdae mode refuses all Edit/Write actions because no run is in progress.",
-          "proposed": {
-            "deny": [
-              "hacheong:nitpick"
-            ]
-          }
-        }
-      ],
-      "findings-fingerprint": "97708c23c2f1"
     },
     {
       "situation": "trying the product as a newcomer",
@@ -244,6 +177,36 @@
         }
       ],
       "findings-fingerprint": "addd6c0db7da"
+    },
+    {
+      "situation": "building a slice",
+      "members": [
+        "hacheong:build"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "f80598e2c7d4",
+      "members-text-fingerprint": "b803646caff9",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "writing tests for a slice",
+      "members": [
+        "hacheong:nitpick"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "12e8666adb0d",
+      "members-text-fingerprint": "3b92ebe2c312",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
     }
   ],
   "rejected": []
