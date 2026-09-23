@@ -1,6 +1,6 @@
 {
   "artifact-type": "chongdae/task@1",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "readme-3",
     "role": "implementer",
@@ -157,5 +157,68 @@
   "accepted": {
     "delegated": "Technical, delegated (plan-07): the build section's heading '사이트 만들기 — 빌드' keeps the plain-language name and the word the tests look for",
     "at": "2026-09-23T15:25:17+00:00"
-  }
+  },
+  "non-claims": [
+    "(provider) 지정된 테스트 범위 밖의 README 문장 전체 일치 여부는 별도로 주장하지 않습니다."
+  ],
+  "reported": true,
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "session": "01a0cedf-123e-74e3-af81-e97ac0ab1666",
+      "effort": "xhigh",
+      "transcript": "readme-3.verify.2.response.transcript.jsonl"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cedf-123e-74e3-af81-e97ac0ab1666",
+    "effort": "xhigh",
+    "transcript": "readme-3.verify.2.response.transcript.jsonl",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.1.0"
+      },
+      "locked": {
+        "chongdae": "1.4.1#93cda7da7d16",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.2.0#bdc80448e6b0",
+        "hunsu": "1.2.3#9398b102154d",
+        "mangsang": "1.4.0#ca57606d398c"
+      }
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "touched": [
+    "README.md"
+  ]
 }
