@@ -1,0 +1,250 @@
+{
+  "artifact-type": "hunsu/judgments@1",
+  "skills-fingerprint": "4dc15fa00011",
+  "skills": [
+    "chongdae:run",
+    "dwitbuk:review",
+    "hacheong:hire",
+    "hunsu:compose",
+    "mangsang:operate",
+    "dwitbuk:eyes",
+    "hacheong:build",
+    "hacheong:newbie",
+    "hacheong:nitpick",
+    "hacheong:quibble"
+  ],
+  "judged-by": "codex gpt-5.6-luna",
+  "situations": [
+    {
+      "situation": "orchestrating a project run",
+      "members": [
+        "chongdae:run"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "ad3a24c5f75d",
+      "members-text-fingerprint": "4fdef1a447cf",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "reviewing a change or run",
+      "members": [
+        "dwitbuk:review",
+        "dwitbuk:eyes"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "76e4471f0e54",
+      "members-text-fingerprint": "92b514cab173",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [
+        {
+          "kind": "contradiction",
+          "members": [
+            "dwitbuk:review",
+            "plugin:chongdae"
+          ],
+          "quotes": {
+            "dwitbuk:review": "Commit `reviews/<id>.json` — it is a record like a run.",
+            "plugin:chongdae": "chongdae: no run in progress — the run is the agent's container, so Edit/Write are refused until one starts: `python3 \"<plugin:chongdae>/chongdae.py\" init --session --goal \"...\"` (tasks added as you go) or `... init --plan FILE`."
+          },
+          "why": "The review member requires writing and committing a review artifact, while the current chongdae mode refuses edits and writes until a run starts.",
+          "proposed": {
+            "order": [
+              "plugin:chongdae",
+              "dwitbuk:review"
+            ]
+          }
+        }
+      ],
+      "findings-fingerprint": "e87a983b8866"
+    },
+    {
+      "situation": "assigning slice work",
+      "members": [
+        "hacheong:hire"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "a8d9108184bb",
+      "members-text-fingerprint": "df738c23ae78",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "building a slice",
+      "members": [
+        "hacheong:build"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "e17a582b7b63",
+      "members-text-fingerprint": "7786e97b1218",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [
+        {
+          "kind": "contradiction",
+          "members": [
+            "plugin:chongdae",
+            "hacheong:build"
+          ],
+          "quotes": {
+            "plugin:chongdae": "chongdae: no run in progress — the run is the agent's container, so Edit/Write are refused until one starts: `python3 \"<plugin:chongdae>/chongdae.py\" init --session --goal \"...\"` (tasks added as you go) or `... init --plan FILE`. The engine is that file; there is no `chongdae` binary.",
+            "hacheong:build": "Make the checks pass by changing the code, not the tests."
+          },
+          "why": "The build worker is instructed to modify code, but the standing chongdae mode refuses edits while no run is in progress.",
+          "proposed": {
+            "order": [
+              "plugin:chongdae",
+              "hacheong:build"
+            ]
+          }
+        }
+      ],
+      "findings-fingerprint": "c80e0b188b93"
+    },
+    {
+      "situation": "disputing a contract",
+      "members": [
+        "hacheong:quibble"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "8c8b50e2bdfc",
+      "members-text-fingerprint": "4f836a6e50ab",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "writing tests for a slice",
+      "members": [
+        "hacheong:nitpick"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "a73cd1cb774c",
+      "members-text-fingerprint": "952a86d5fa0c",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [
+        {
+          "kind": "contradiction",
+          "members": [
+            "plugin:chongdae",
+            "hacheong:nitpick"
+          ],
+          "quotes": {
+            "plugin:chongdae": "chongdae: no run in progress — the run is the agent's container, so Edit/Write are refused until one starts: `python3 \"<plugin:chongdae>/chongdae.py\" init --session --goal \"...\"` (tasks added as you go) or `... init --plan FILE`.",
+            "hacheong:nitpick": "You write the tests that will decide a contract, before anyone builds it, and you write them to make the builder fail."
+          },
+          "why": "The nitpick member requires writing test files for this situation, while the chongdae mode refuses all Edit/Write actions because no run is in progress.",
+          "proposed": {
+            "deny": [
+              "hacheong:nitpick"
+            ]
+          }
+        }
+      ],
+      "findings-fingerprint": "97708c23c2f1"
+    },
+    {
+      "situation": "trying the product as a newcomer",
+      "members": [
+        "hacheong:newbie"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "7f7908d9c75a",
+      "members-text-fingerprint": "ac2e8c28b04d",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "locking the project environment",
+      "members": [
+        "hunsu:compose"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "ea79b422e076",
+      "members-text-fingerprint": "a40aba2b8316",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [
+        {
+          "kind": "contradiction",
+          "members": [
+            "hunsu:compose",
+            "plugin:chongdae"
+          ],
+          "quotes": {
+            "hunsu:compose": "2. Exit 2: the last line (`decision: ...`) is a question for the user. Ask it as is. Apply the answer — `hunsu add <plugin>`, an edit to `hunsu.json` (`engines`, `resolutions`, `local-hooks-ok` for a hook the whole team runs), `local-hooks-ok` in `hunsu.local.json` for a user-level hook that is only this person's (not committed), or the judge round (`judge request` → `judge_worker.py` per packet → `judge consume`; then show the user `hunsu-conflicts.md` and propose `resolutions`, marking any they did not read \"reviewed\": false) — and run step 1 again.",
+            "plugin:chongdae": "chongdae: no run in progress — the run is the agent's container, so Edit/Write are refused until one starts: `python3 \"<plugin:chongdae>/chongdae.py\" init --session --goal \"...\"` (tasks added as you go) or `... init --plan FILE`. The engine is that file; there is no `chongdae` binary."
+          },
+          "why": "hunsu:compose permits and requires editing project manifests during the lock flow, while plugin:chongdae refuses Edit/Write because no run is in progress.",
+          "proposed": {
+            "order": [
+              "plugin:chongdae",
+              "hunsu:compose"
+            ]
+          }
+        }
+      ],
+      "findings-fingerprint": "6237d7d16752"
+    },
+    {
+      "situation": "maintaining project concepts and relations",
+      "members": [
+        "mangsang:operate"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "a6bc506b57bb",
+      "members-text-fingerprint": "6bb223b20caf",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [
+        {
+          "kind": "contradiction",
+          "members": [
+            "mangsang:operate",
+            "plugin:chongdae"
+          ],
+          "quotes": {
+            "mangsang:operate": "After a slice: propose relations in a `proposals.json` — `{\"relations\": [{\"src\", \"predicate\", \"dst\", \"evidence\"}]}` — the slice's section/symbols/tests each `realizes concept:NAME` (evidence quotes the concept's `means` or the projection's text), plus plan-section↔symbol (`documents`) and test↔symbol (`verifies`) where they say more than the concept does.",
+            "plugin:chongdae": "chongdae: no run in progress — the run is the agent's container, so Edit/Write are refused until one starts: `python3 \"<plugin:chongdae>/chongdae.py\" init --session --goal \"...\"` (tasks added as you go) or `... init --plan FILE`."
+          },
+          "why": "mangsang:operate requires writing relation artifacts and declarations, while plugin:chongdae forbids Edit/Write while no run is active.",
+          "proposed": {
+            "order": [
+              "plugin:chongdae",
+              "mangsang:operate"
+            ]
+          }
+        }
+      ],
+      "findings-fingerprint": "addd6c0db7da"
+    }
+  ],
+  "rejected": []
+}
