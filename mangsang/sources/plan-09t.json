@@ -1,0 +1,8 @@
+{
+  "id": "plan-09t",
+  "text": "The user answered: \"첫 화면(메인 페이지)은 어떻게 보여줄까요?\"=\"모든 글을 최신순 한 줄로 (추천)\", \"글 페이지에 연결된 글(링크)은 어떻게 보여줄까요? 링크는 양쪽 글 모두에 표시되고, 변경 기록은 보여주지 않는 것으로 이미 정했습니다.\"=\"주석 달듯이, 단어나 문장에 링크가 걸리면서 위에 [n]표시가 되어있고, 이를 주석으로 사유.\", \"화면의 시각은 어떻게 보여줄까요? (저장은 항상 UTC)\"=\"독자 현지 시간\", \"사이트의 화면 글자(메뉴, 버튼, 안내 문구)는 어떤 언어로 할까요?\"=\"한국어\". Read the answers carefully — they may request clarification, changes, or that you not proceed — and follow what they actually say.",
+  "speaker": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+  "locator": "session 90315036-5ae4-4e9b-9ce3-e6630159cc4c, answer e8d4d7cb-6722-4ee3-b876-32bb13f9645c at 2026-09-23T09:33:54.899Z",
+  "replies-to": "plan-08t",
+  "verbatim-from": "host transcript"
+}

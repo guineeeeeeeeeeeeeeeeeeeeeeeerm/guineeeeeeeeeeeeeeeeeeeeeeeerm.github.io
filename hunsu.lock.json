@@ -19,10 +19,10 @@
       "fingerprint": "93cda7da7d16"
     },
     "mangsang": {
-      "version": "1.3.0",
+      "version": "1.4.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/mangsang",
       "marketplace": "mangsang",
-      "fingerprint": "476d93a4c96a"
+      "fingerprint": "ca57606d398c"
     },
     "dwitbuk": {
       "version": "1.1.0",
@@ -45,7 +45,7 @@
     "mangsang:operate"
   ],
   "denied": [],
-  "skills-fingerprint": "6e0c2f282826",
+  "skills-fingerprint": "f3120834b453",
   "hooks": [
     {
       "event": "SessionStart",
@@ -326,8 +326,7 @@
         "mangsang:operate"
       ],
       "reviewed": {
-        "by": "Claude Opus 5.5, in the owner's stead (asked to write the resolutions), 2026-09-23",
-        "why": "Read both quotes; checks are read-only and need no run, declarations and relations are written inside one."
+        "delegated": "judge codex gpt-5.6-luna: The run is already in progress, so chongdae can govern the writes before mangsang:operate maintains concepts and relations."
       }
     }
   },

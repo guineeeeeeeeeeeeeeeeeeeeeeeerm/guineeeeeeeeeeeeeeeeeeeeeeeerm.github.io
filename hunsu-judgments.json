@@ -1,6 +1,6 @@
 {
   "artifact-type": "hunsu/judgments@1",
-  "skills-fingerprint": "78591142d16f",
+  "skills-fingerprint": "f3120834b453",
   "skills": [
     "chongdae:run",
     "dwitbuk:review",
@@ -145,40 +145,6 @@
       "findings-fingerprint": "6237d7d16752"
     },
     {
-      "situation": "maintaining project concepts and relations",
-      "members": [
-        "mangsang:operate"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "a6bc506b57bb",
-      "members-text-fingerprint": "6bb223b20caf",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [
-        {
-          "kind": "contradiction",
-          "members": [
-            "mangsang:operate",
-            "plugin:chongdae"
-          ],
-          "quotes": {
-            "mangsang:operate": "After a slice: propose relations in a `proposals.json` — `{\"relations\": [{\"src\", \"predicate\", \"dst\", \"evidence\"}]}` — the slice's section/symbols/tests each `realizes concept:NAME` (evidence quotes the concept's `means` or the projection's text), plus plan-section↔symbol (`documents`) and test↔symbol (`verifies`) where they say more than the concept does.",
-            "plugin:chongdae": "chongdae: no run in progress — the run is the agent's container, so Edit/Write are refused until one starts: `python3 \"<plugin:chongdae>/chongdae.py\" init --session --goal \"...\"` (tasks added as you go) or `... init --plan FILE`."
-          },
-          "why": "mangsang:operate requires writing relation artifacts and declarations, while plugin:chongdae forbids Edit/Write while no run is active.",
-          "proposed": {
-            "order": [
-              "plugin:chongdae",
-              "mangsang:operate"
-            ]
-          }
-        }
-      ],
-      "findings-fingerprint": "addd6c0db7da"
-    },
-    {
       "situation": "building a slice",
       "members": [
         "hacheong:build"
@@ -204,6 +170,21 @@
       ],
       "members-fingerprint": "12e8666adb0d",
       "members-text-fingerprint": "3b92ebe2c312",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "maintaining project concepts and relations",
+      "members": [
+        "mangsang:operate"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "dc1ccde615e0",
+      "members-text-fingerprint": "6c058ffcb643",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"

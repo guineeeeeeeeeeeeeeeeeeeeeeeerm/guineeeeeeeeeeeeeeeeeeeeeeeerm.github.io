@@ -1,0 +1,14 @@
+{
+  "id": "R-ea87eca4",
+  "src": "source:plan-09t",
+  "predicate": "realizes",
+  "dst": "concept:ui-language",
+  "evidence": "=\"한국어\"",
+  "seen": {
+    "source:plan-09t": "6d7b916a643a",
+    "concept:ui-language": "e2a0a380d7e4"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "R-f046cfd3",
+  "src": "source:plan-09t",
+  "predicate": "realizes",
+  "dst": "concept:local-time",
+  "evidence": "독자 현지 시간",
+  "seen": {
+    "source:plan-09t": "6d7b916a643a",
+    "concept:local-time": "f3a31994b7da"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "R-75fb4e8c",
+  "src": "source:plan-09t",
+  "predicate": "realizes",
+  "dst": "concept:link",
+  "evidence": "주석 달듯이, 단어나 문장에 링크가 걸리면서 위에 [n]표시가 되어있고, 이를 주석으로 사유.",
+  "seen": {
+    "source:plan-09t": "6d7b916a643a",
+    "concept:link": "7fd16ce1dc5b"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)"
+  }
+}

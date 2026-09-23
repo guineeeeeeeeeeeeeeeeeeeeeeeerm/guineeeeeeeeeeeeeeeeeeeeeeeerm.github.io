@@ -1,0 +1,8 @@
+{
+  "id": "plan-07t",
+  "text": "Your questions have been answered: \"사이트를 어떤 방식으로 만들까요? 패치 오버레이, 양방향 링크처럼 직접 처리할 로직이 많아서, 생성 방식이 중요합니다.\"=\"Python 생성기 → docs/ (추천)\", \"구현은 누가 할까요?\"=\"하청 + 루나 (추천)\", \"작업 중 나오는 결정(시비가 찾은 미정 사항, 작업자가 계약 밖에서 내린 선택, 게이트 승인)은 누가 할까요?\"=\"제품 결정은 직접, 기술 결정은 위임 (추천)\". You can now continue with these answers in mind.",
+  "speaker": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+  "locator": "session 90315036-5ae4-4e9b-9ce3-e6630159cc4c, answer 97054f34-a30b-4097-9d12-252731105b6b at 2026-09-23T08:37:17.494Z",
+  "replies-to": "plan-06t",
+  "verbatim-from": "host transcript"
+}
