@@ -1,0 +1,14 @@
+{
+  "id": "R-3bff092e",
+  "src": "README.md#사이트 만들기 — 빌드",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "python3 build.py",
+  "seen": {
+    "README.md#사이트 만들기 — 빌드": "130f86725c95",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5): the author's guide as a projection of the concepts it teaches; technical, delegated (plan-07)"
+  }
+}
