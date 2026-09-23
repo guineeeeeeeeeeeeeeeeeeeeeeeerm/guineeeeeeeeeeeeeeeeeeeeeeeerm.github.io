@@ -1,0 +1,43 @@
+{
+  "status": "done",
+  "summary": "Added tests/test_s3.py with 12 contract tests. All fail before patch support exists, for the expected build-error reason.",
+  "tests": [
+    "tests/test_s3.py"
+  ],
+  "covers": [
+    {
+      "section": "Q-patch",
+      "tests": [
+        "test_Q_patch_file_shape_and_validation_errors_name_the_patch_file",
+        "test_Q_patch_applies_replace_insert_before_insert_after_and_delete_in_at_then_id_order",
+        "test_Q_patch_same_at_uses_string_id_order_and_later_patch_may_anchor_text_earlier_patch_made",
+        "test_Q_patch_sorts_by_at_before_id",
+        "test_Q_patch_anchor_must_occur_exactly_once_in_the_current_post_body",
+        "test_Q_patch_has_no_length_limit_and_is_scoped_to_one_post",
+        "test_Q_patch_link_anchor_can_exist_only_after_the_patch"
+      ]
+    },
+    {
+      "section": "Q-patch-view",
+      "tests": [
+        "test_Q_patch_view_toggle_exists_only_for_patched_posts_and_is_off_by_default",
+        "test_Q_patch_view_exposes_regions_history_and_time_data_for_a_script",
+        "test_Q_patch_view_marks_deletions_as_zero_width_regions_with_previous_text",
+        "test_Q_patch_view_later_patch_shrinks_the_earlier_region_and_keeps_each_final_owner_history",
+        "test_Q_patch_view_insert_history_has_no_previous_text"
+      ]
+    }
+  ],
+  "non-claims": [
+    "“올린 글을 고치는 일반적인 방법은 패치 파일을 더하는 것이고, 글 파일을 직접 고치는 일은 이 계획의 범위 밖이다(완전 삭제 erasure의 절차는 열린 질문이 답해진 뒤에 정한다).” — workflow policy, not observable build behavior."
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0cdf7-6492-7ef0-91ab-a8c18add7aa4",
+    "effort": "xhigh",
+    "transcript": "s3-tests.response.transcript.jsonl"
+  },
+  "member": "teujip",
+  "domain": "code"
+}
