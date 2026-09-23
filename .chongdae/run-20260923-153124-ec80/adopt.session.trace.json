@@ -1,0 +1,14 @@
+{
+  "artifact-type": "chongdae/trace@1",
+  "worker": {
+    "host": "claude-code",
+    "agent": "claude-code_2-1-280_agent",
+    "session": "90315036-5ae4-4e9b-9ce3-e6630159cc4c",
+    "model": "claude-opus-5-5"
+  },
+  "window-from": "2026-09-23T15:31:24+00:00",
+  "changed": [],
+  "commands-run": 7,
+  "command-lines": "kept in the local session transcript, not in the record",
+  "elsewhere": "6 command(s) or edit(s) outside this project, kept only in the local session"
+}
