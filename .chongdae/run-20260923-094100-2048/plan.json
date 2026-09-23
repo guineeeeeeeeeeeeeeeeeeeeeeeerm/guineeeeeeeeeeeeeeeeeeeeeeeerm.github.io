@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "S1: the generator — posts, feed, local time, Korean UI (Q-build, Q-post, Q-feed, Q-time, Q-ui)",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
