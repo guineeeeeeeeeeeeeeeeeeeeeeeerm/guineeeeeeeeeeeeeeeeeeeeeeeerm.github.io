@@ -1,0 +1,29 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "todo",
+  "def": {
+    "id": "s2-build-2",
+    "role": "implementer",
+    "brief": "Extend build.py so that every sentence of Q-link is true and tests/test_s2.py passes, keeping tests/test_s1.py green. Standard library only. Do not change the tests. The tree has an earlier attempt (s2-build, dropped): keep its link implementation where it matches the contract, and remove its two rejected special cases — short posts may never have a title (Q-post), and an anchor is found by exact substring, with no rule about negated mentions.",
+    "closes": [
+      "Q-link"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_s2.py"
+    ],
+    "gate": null
+  },
+  "seq": 10,
+  "added": "2026-09-23T11:09:07+00:00"
+}
