@@ -1,0 +1,9 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "Adopt hunsu 1.3.0, chongdae 1.5.0, mangsang 1.5.0, hacheong 1.3.0",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
