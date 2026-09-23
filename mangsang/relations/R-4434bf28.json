@@ -1,0 +1,14 @@
+{
+  "id": "R-4434bf28",
+  "src": "source:plan-04",
+  "predicate": "realizes",
+  "dst": "concept:patch-view",
+  "evidence": "글 화면의 show patches 토글을 켜면 패치된 영역에 아웃라인이 보이고, 그 영역에 마우스를 올리면 패치 히스토리가 보인다.",
+  "seen": {
+    "source:plan-04": "77feace69b2b",
+    "concept:patch-view": "6be15e820155"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

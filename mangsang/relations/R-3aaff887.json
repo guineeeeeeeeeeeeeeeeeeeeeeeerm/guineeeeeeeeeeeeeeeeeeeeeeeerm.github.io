@@ -1,0 +1,14 @@
+{
+  "id": "R-3aaff887",
+  "src": "source:plan-03",
+  "predicate": "realizes",
+  "dst": "concept:patch-view",
+  "evidence": "show patches 같은 버튼을 토글하면 아웃라인이 표시되고, 호버하면 히스토리를 보여주는 식으로 구현한다고 생각하자.",
+  "seen": {
+    "source:plan-03": "fab26de8f1f8",
+    "concept:patch-view": "6be15e820155"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "link-records",
+  "text": "두 글의 연결은 무엇을 기록하나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "link"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

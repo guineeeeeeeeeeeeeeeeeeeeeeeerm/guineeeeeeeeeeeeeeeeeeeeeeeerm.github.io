@@ -1,0 +1,13 @@
+{
+  "id": "patch-seen",
+  "text": "독자는 패치를 어떻게 보나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "patch-view"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "R-8378591b",
+  "src": "source:plan-03",
+  "predicate": "realizes",
+  "dst": "concept:post-type",
+  "evidence": "글 유형을 먼저 정하고 이에 맞는 글을 작성하는 식.",
+  "seen": {
+    "source:plan-03": "fab26de8f1f8",
+    "concept:post-type": "dce6f00332ed"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

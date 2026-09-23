@@ -1,0 +1,14 @@
+{
+  "id": "R-4ae43cd0",
+  "src": "source:plan-04",
+  "predicate": "realizes",
+  "dst": "concept:post-type",
+  "evidence": "분량이 유형을 정하지 않고, 정한 유형에 맞춰 쓴다.",
+  "seen": {
+    "source:plan-04": "77feace69b2b",
+    "concept:post-type": "dce6f00332ed"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

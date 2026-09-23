@@ -1,0 +1,14 @@
+{
+  "id": "edit-how",
+  "text": "이미 올린 글은 어떻게 고치나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "patch",
+      "erasure"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

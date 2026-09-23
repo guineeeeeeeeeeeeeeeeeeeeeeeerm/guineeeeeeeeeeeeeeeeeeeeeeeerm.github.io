@@ -1,0 +1,14 @@
+{
+  "id": "R-175188e3",
+  "src": "source:plan-04",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "사이트에 올리는 글 하나. 주로 글이고 가끔 이미지가 들어가며, 이미지만 있어도 된다.",
+  "seen": {
+    "source:plan-04": "77feace69b2b",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

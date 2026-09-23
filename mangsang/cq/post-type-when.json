@@ -1,0 +1,13 @@
+{
+  "id": "post-type-when",
+  "text": "글의 유형은 언제, 어떻게 정해지나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "post-type"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

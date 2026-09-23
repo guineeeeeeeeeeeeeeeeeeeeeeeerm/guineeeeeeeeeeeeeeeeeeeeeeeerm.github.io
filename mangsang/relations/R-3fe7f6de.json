@@ -1,0 +1,14 @@
+{
+  "id": "R-3fe7f6de",
+  "src": "source:plan-04",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "글에 선택적으로 붙이는 분류 이름.",
+  "seen": {
+    "source:plan-04": "77feace69b2b",
+    "concept:tag": "da4fe3afc21d"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "R-86160d58",
+  "src": "source:plan-03",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "짧은 글은 제목이 없어야해.",
+  "seen": {
+    "source:plan-03": "fab26de8f1f8",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

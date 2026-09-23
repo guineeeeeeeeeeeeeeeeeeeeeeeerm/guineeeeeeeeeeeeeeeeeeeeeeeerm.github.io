@@ -1,0 +1,14 @@
+{
+  "id": "R-964681c3",
+  "src": "source:plan-01",
+  "predicate": "realizes",
+  "dst": "concept:patch",
+  "evidence": "특정 글 위에 기생하는 '패치' 종류의 글도 있어야해.",
+  "seen": {
+    "source:plan-01": "cd3ce4b8b9cc",
+    "concept:patch": "5a85490ec568"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

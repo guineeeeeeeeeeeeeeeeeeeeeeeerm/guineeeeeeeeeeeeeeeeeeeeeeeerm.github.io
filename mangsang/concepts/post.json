@@ -1,0 +1,7 @@
+{
+  "name": "post",
+  "means": "사이트에 올리는 글 하나. 주로 글이고 가끔 이미지가 들어가며, 이미지만 있어도 된다. 작성 시각(UTC)은 반드시 있고, 태그는 선택이다. 짧은 글에는 제목이 없고, 중간 글과 긴 글에서는 제목이 선택이다.",
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

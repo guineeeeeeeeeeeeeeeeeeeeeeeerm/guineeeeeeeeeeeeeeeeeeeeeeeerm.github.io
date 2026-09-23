@@ -1,0 +1,14 @@
+{
+  "id": "post-fields",
+  "text": "글 하나에 반드시 있어야 하는 것과 있어도 없어도 되는 것은?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "post",
+      "tag"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

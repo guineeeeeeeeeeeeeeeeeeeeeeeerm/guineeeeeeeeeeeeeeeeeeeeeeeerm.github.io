@@ -1,0 +1,15 @@
+{
+  "id": "grounded",
+  "text": "모든 개념이 누군가 한 말에 근거하는가?",
+  "verify": {
+    "kind": "projection",
+    "media": {
+      "said": [
+        "source:"
+      ]
+    }
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

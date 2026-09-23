@@ -1,0 +1,10 @@
+{
+  "id": "patch-on-patch",
+  "text": "패치 위의 패치를 어떤 구조로 저장하고 적용하나? (구현하면서 정하기로 함)",
+  "verify": {
+    "kind": "open"
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

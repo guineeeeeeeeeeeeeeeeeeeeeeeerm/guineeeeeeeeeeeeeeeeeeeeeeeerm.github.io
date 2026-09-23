@@ -1,0 +1,14 @@
+{
+  "id": "R-f2306fa1",
+  "src": "source:plan-01",
+  "predicate": "realizes",
+  "dst": "concept:post-type",
+  "evidence": "글 길이에 따라서 유형을 나누려고 해.",
+  "seen": {
+    "source:plan-01": "cd3ce4b8b9cc",
+    "concept:post-type": "dce6f00332ed"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "R-1d041a42",
+  "src": "source:plan-04",
+  "predicate": "realizes",
+  "dst": "concept:link",
+  "evidence": "건 시각과 사유가 기록되고, 링크를 지우거나 사유를 고친 기록도 남는다.",
+  "seen": {
+    "source:plan-04": "77feace69b2b",
+    "concept:link": "4df4bb05e617"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

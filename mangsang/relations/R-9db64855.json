@@ -1,0 +1,14 @@
+{
+  "id": "R-9db64855",
+  "src": "source:plan-05",
+  "predicate": "realizes",
+  "dst": "concept:erasure",
+  "evidence": "불가피한 경우 패치가 아닌 기록 완전 삭제가 필요할 수도 있을 것 같은데 이는 특수한 경우고",
+  "seen": {
+    "source:plan-05": "e9fd6a89ebd3",
+    "concept:erasure": "ed029c409c46"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

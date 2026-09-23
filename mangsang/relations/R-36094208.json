@@ -1,0 +1,14 @@
+{
+  "id": "R-36094208",
+  "src": "source:plan-01",
+  "predicate": "realizes",
+  "dst": "concept:link",
+  "evidence": "언제 링크를 걸었는지, 왜 걸었는지의 사유도 관리되었으면 좋겠어.",
+  "seen": {
+    "source:plan-01": "cd3ce4b8b9cc",
+    "concept:link": "4df4bb05e617"
+  },
+  "confirmed": {
+    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+  }
+}

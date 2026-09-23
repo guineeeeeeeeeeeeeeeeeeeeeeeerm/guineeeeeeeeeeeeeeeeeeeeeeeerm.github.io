@@ -1,0 +1,13 @@
+{
+  "id": "patch-scope",
+  "text": "패치는 무엇을 어디까지 바꿀 수 있고, 무엇이 기록되나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "patch"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}

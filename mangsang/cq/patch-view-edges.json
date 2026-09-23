@@ -1,0 +1,10 @@
+{
+  "id": "patch-view-edges",
+  "text": "패치 표시의 엣지 케이스는 어떻게 처리하나? (쓰면서 문제가 생길 때 대응)",
+  "verify": {
+    "kind": "open"
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+  }
+}
