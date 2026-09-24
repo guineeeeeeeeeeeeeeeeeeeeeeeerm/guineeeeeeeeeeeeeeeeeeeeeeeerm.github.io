@@ -13,10 +13,10 @@
       "fingerprint": "9d1b44a52d8d"
     },
     "chongdae": {
-      "version": "1.6.0",
+      "version": "1.7.1",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/chongdae",
       "marketplace": "chongdae",
-      "fingerprint": "d49466cf02f1"
+      "fingerprint": "ffa704accdaa"
     },
     "mangsang": {
       "version": "1.5.0",
@@ -25,10 +25,10 @@
       "fingerprint": "64a8b2aa7c00"
     },
     "dwitbuk": {
-      "version": "1.2.0",
+      "version": "1.4.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/dwitbuk",
       "marketplace": "dwitbuk",
-      "fingerprint": "00e30e814425"
+      "fingerprint": "54592aed93a0"
     },
     "hacheong": {
       "version": "1.3.0",
@@ -45,7 +45,7 @@
     "mangsang:operate"
   ],
   "denied": [],
-  "skills-fingerprint": "f68ba1525d31",
+  "skills-fingerprint": "1ffe1f4aa8c1",
   "hooks": [
     {
       "event": "SessionStart",
@@ -58,6 +58,12 @@
       "matcher": "Edit|Write|MultiEdit|NotebookEdit",
       "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/pre_write.py\"",
       "source": "plugin:chongdae"
+    },
+    {
+      "event": "SessionStart",
+      "matcher": "startup|resume|clear",
+      "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/session_start.py\"",
+      "source": "plugin:dwitbuk"
     },
     {
       "event": "Stop",
@@ -303,8 +309,7 @@
         "dwitbuk:review"
       ],
       "reviewed": {
-        "by": "Claude Opus 5.5, in the owner's stead (asked to write the resolutions), 2026-09-23",
-        "why": "Read both quotes. The review record is written inside a run; start one before committing reviews/<id>.json."
+        "delegated": "judge codex gpt-5.6-luna: The existing order remains compatible: chongdae governs the active run and its writes, then dwitbuk:review performs the review."
       }
     },
     "building a slice": {

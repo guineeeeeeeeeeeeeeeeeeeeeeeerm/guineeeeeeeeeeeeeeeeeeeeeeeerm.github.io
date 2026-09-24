@@ -1,6 +1,6 @@
 {
   "artifact-type": "hunsu/judgments@1",
-  "skills-fingerprint": "f3c92cccd73c",
+  "skills-fingerprint": "1ffe1f4aa8c1",
   "skills": [
     "chongdae:run",
     "dwitbuk:review",
@@ -15,56 +15,6 @@
   ],
   "judged-by": "codex gpt-5.6-luna",
   "situations": [
-    {
-      "situation": "orchestrating a project run",
-      "members": [
-        "chongdae:run"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "ad3a24c5f75d",
-      "members-text-fingerprint": "4fdef1a447cf",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [],
-      "findings-fingerprint": "4f53cda18c2b"
-    },
-    {
-      "situation": "reviewing a change or run",
-      "members": [
-        "dwitbuk:review",
-        "dwitbuk:eyes"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "76e4471f0e54",
-      "members-text-fingerprint": "92b514cab173",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [
-        {
-          "kind": "contradiction",
-          "members": [
-            "dwitbuk:review",
-            "plugin:chongdae"
-          ],
-          "quotes": {
-            "dwitbuk:review": "Commit `reviews/<id>.json` — it is a record like a run.",
-            "plugin:chongdae": "chongdae: no run in progress — the run is the agent's container, so Edit/Write are refused until one starts: `python3 \"<plugin:chongdae>/chongdae.py\" init --session --goal \"...\"` (tasks added as you go) or `... init --plan FILE`."
-          },
-          "why": "The review member requires writing and committing a review artifact, while the current chongdae mode refuses edits and writes until a run starts.",
-          "proposed": {
-            "order": [
-              "plugin:chongdae",
-              "dwitbuk:review"
-            ]
-          }
-        }
-      ],
-      "findings-fingerprint": "e87a983b8866"
-    },
     {
       "situation": "assigning slice work",
       "members": [
@@ -185,6 +135,39 @@
       ],
       "members-fingerprint": "5f9c04e43f59",
       "members-text-fingerprint": "ec4fd3a696de",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "orchestrating a project run",
+      "members": [
+        "chongdae:run"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:dwitbuk",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "d1ffbb6a845d",
+      "members-text-fingerprint": "ed0ae57a360d",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "reviewing a change or run",
+      "members": [
+        "dwitbuk:review",
+        "dwitbuk:eyes"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:dwitbuk",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "3f7648f5e7f4",
+      "members-text-fingerprint": "b87d7821135d",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"
