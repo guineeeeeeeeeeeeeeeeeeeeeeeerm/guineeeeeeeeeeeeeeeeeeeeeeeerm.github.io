@@ -237,7 +237,14 @@
         "mangsang/relations/R-bde4aa13.json"
       ],
       "text": "3 file(s) changed since 74cfa1b3c0fcc72d42e81d033f7fe062b5bb0402; no completed run recorded touching them",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실: session 태스크는 run으로 기록할 때 done이 되는데, 세션이 그 뒤에 relate-sitegen-4의 관계 세 개를 걸었다. 관계 자체는 확인했다(impact·check 문제 없음)",
+        "by": null,
+        "finding_text": "3 file(s) changed since 74cfa1b3c0fcc72d42e81d033f7fe062b5bb0402; no completed run recorded touching them",
+        "where": "mangsang/relations/R-992df010.json, R-b6901a39.json, R-bde4aa13.json"
+      }
     },
     {
       "kind": "non-claim",
@@ -247,7 +254,7 @@
       "first-seen": "review-20260924-200341-8680",
       "disposition": {
         "as": "accepted",
-        "delegated": "소유자가 종류별 처리안을 승인했다(2026-09-24 '1번부터 배포하고 쭉 진행'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언: 글과 docs/는 소유자의 결정으로 run 밖의 절차를 따른다",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
         "by": null,
         "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
         "where": "settings.chongdae.outside-runs"
@@ -257,49 +264,105 @@
       "kind": "non-claim",
       "where": "run-20260924-110157-f416, run-20260924-111724-533a",
       "text": "no check decides this task  [x2]",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "no check decides this task  [x2]",
+        "where": "run-20260924-110157-f416, run-20260924-111724-533a"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-111724-533a",
       "text": "(provider) \"리팩터링의 판정은 두 가지다: 모든 테스트가 통과하고, 저장소의 content/로 빌드한 docs/가 리팩터링 전과 바이트 단위로 같다.\" — byte-for-byte output parity is not newly tested.",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "(provider) \"리팩터링의 판정은 두 가지다: 모든 테스트가 통과하고, 저장소의 content/로 빌드한 docs/가 리팩터링 전과 바이트 단위로 같다.\" — byte-for-byte output parity is not newly tested.",
+        "where": "run-20260924-111724-533a"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-111724-533a",
       "text": "dropped, not done: 잘못 맡김: 도우미를 옮기는 리팩터링을 트집(계약 테스트를 쓰는 역할)에게 보냈다. 트집은 역할대로 구조 테스트(QBuildTestSupportContractTests)를 test_s1.py에 더했을 뿐 옮긴 이가 없어 체크가 실패했다. 그 구조 테스트는 동작이 아니라 코드 배치를 묶어 두므로 버린다(test_s1.py 되돌림). 옮기는 일은 구현자 태스크 tests-support-2로 다시 넣는다.",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "dropped, not done: 잘못 맡김: 도우미를 옮기는 리팩터링을 트집(계약 테스트를 쓰는 역할)에게 보냈다. 트집은 역할대로 구조 테스트(QBuildTestSupportContractTests)를 test_s1.py에 더했을 뿐 옮긴 이가 없어 체크가 실패했다. 그 구조 테스트는 동작이 아니라 코드 배치를 묶어 두므로 버린다(test_s1.py 되돌림). 옮기는 일은 구현자 태스크 tests-support-2로 다시 넣는다.",
+        "where": "run-20260924-111724-533a"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-111724-533a",
       "text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 작업 결과(sitegen/)는 트리에 있고 세션이 직접 돌려 본 테스트·docs 비교는 통과했다: split-build-2가 그 위에서 확인·마무리한다.",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 작업 결과(sitegen/)는 트리에 있고 세션이 직접 돌려 본 테스트·docs 비교는 통과했다: split-build-2가 그 위에서 확인·마무리한다.",
+        "where": "run-20260924-111724-533a"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-111724-533a",
       "text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 순서를 split-build-2 뒤로 다시 넣는다(tests-support-3).",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 순서를 split-build-2 뒤로 다시 넣는다(tests-support-3).",
+        "where": "run-20260924-111724-533a"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-111724-533a",
       "text": "(provider) 별도 정적 분석 검사는 실행하지 않았습니다.",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "(provider) 별도 정적 분석 검사는 실행하지 않았습니다.",
+        "where": "run-20260924-111724-533a"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-111724-533a",
       "text": "(provider) unittest는 이 트리에서 98개 테스트를 보고했으며, 기존 HEAD도 98개였습니다. 테스트 이름·클래스는 변경하지 않았습니다.",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "(provider) unittest는 이 트리에서 98개 테스트를 보고했으며, 기존 HEAD도 98개였습니다. 테스트 이름·클래스는 변경하지 않았습니다.",
+        "where": "run-20260924-111724-533a"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-111724-533a",
       "text": "(provider) 기존 build.py/sitegen/plan 변경은 수정하지 않았습니다.",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "(provider) 기존 build.py/sitegen/plan 변경은 수정하지 않았습니다.",
+        "where": "run-20260924-111724-533a"
+      }
     },
     {
       "kind": "unchanged",
