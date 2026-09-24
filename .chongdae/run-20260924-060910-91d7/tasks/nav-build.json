@@ -1,0 +1,130 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "done",
+  "def": {
+    "id": "nav-build",
+    "role": "session",
+    "brief": "build.py: 폴더 방식 출력과 링크(docs/p/<id>/index.html, docs/about/index.html), 모든 페이지에 피드·소개 메뉴, content/about.md 필수; README를 새 주소와 필수 소개 글에 맞춤",
+    "closes": [
+      "Q-build",
+      "Q-feed",
+      "Q-link",
+      "Q-about",
+      "Q-readme"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_s1.py",
+      "tests/test_s2.py",
+      "tests/test_s3.py",
+      "tests/test_readme.py",
+      "tests/test_about.py"
+    ],
+    "gate": null,
+    "domain": "site"
+  },
+  "seq": 3,
+  "added": "2026-09-24T06:10:49+00:00",
+  "start": {
+    "plan/PLAN.md": "c8bf3a39ad88751ba32adf0e5a55fdfa37c8bfae",
+    "tests/test_about.py": "e4cf3cd9a80fe384595b7dd19c9f1916a9a41377",
+    "tests/test_readme.py": "a578d407978e986f8f4bda95d89d40f207ced893",
+    "tests/test_s1.py": "f0930acbba61f5608bb94292fd88f929cfa83a4f",
+    "tests/test_s2.py": "1c777856ce4db8408ca80bf44503d0afdb9c0ae4",
+    "tests/test_s3.py": "e2f4e2de4481894cf7132bcd2376848f40f96871",
+    "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
+    "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
+    "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "avatar/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "mangsang/sources/about-06.json": "b33c42f4ab60797346c8fbbf196f7ccde292415e",
+    "mangsang/sources/about-07.json": "4100e830d631f2e0e095cb8e66308161d841d79a",
+    "mangsang/sources/about-08.json": "fad146c497c5e2c53584f1896345374d32b67bfd"
+  },
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "session": "01a0d20a-e755-78e2-92b7-3fed82c81bf1",
+      "effort": "xhigh",
+      "transcript": "nav-build.verify.response.transcript.jsonl"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0d20a-e755-78e2-92b7-3fed82c81bf1",
+    "effort": "xhigh",
+    "transcript": "nav-build.verify.response.transcript.jsonl",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.1.0"
+      },
+      "locked": {
+        "chongdae": "1.5.1#ff6dbd4e373b",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.3.0#d9098a2c9127",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "touched": [
+    "README.md",
+    "build.py"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-281_agent",
+    "effort": "medium",
+    "session": "d515e4e2-9bca-4949-9cd1-f22b8447a5ab",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "locked": {
+        "chongdae": "1.5.1#ff6dbd4e373b",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.3.0#d9098a2c9127",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  }
+}

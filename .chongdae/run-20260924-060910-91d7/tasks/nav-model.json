@@ -1,0 +1,147 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "done",
+  "def": {
+    "id": "nav-model",
+    "role": "session",
+    "brief": "mangsang: 폴더 주소·메뉴·소개 필수 변경 뒤 오래된 관계를 다시 읽고 재확인, 소유자 결정 출처(about-06~08) 연결",
+    "closes": [],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "{plugin:mangsang}/mangsang.py",
+        "check"
+      ]
+    ],
+    "tests": [],
+    "gate": null,
+    "domain": "plan"
+  },
+  "seq": 4,
+  "added": "2026-09-24T06:36:28+00:00",
+  "start": {
+    "README.md": "02996fffdcc4c8c5067ab2c61ddf06ade6cd5421",
+    "build.py": "639a8d5cdcede82040ab25199a04553a5e26d6cc",
+    "docs/index.html": "677081da00a87131068dfba23a6409f368693bdb",
+    "plan/PLAN.md": "c8bf3a39ad88751ba32adf0e5a55fdfa37c8bfae",
+    "tests/test_about.py": "e4cf3cd9a80fe384595b7dd19c9f1916a9a41377",
+    "tests/test_readme.py": "a578d407978e986f8f4bda95d89d40f207ced893",
+    "tests/test_s1.py": "f0930acbba61f5608bb94292fd88f929cfa83a4f",
+    "tests/test_s2.py": "1c777856ce4db8408ca80bf44503d0afdb9c0ae4",
+    "tests/test_s3.py": "e2f4e2de4481894cf7132bcd2376848f40f96871",
+    "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
+    "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
+    "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "avatar/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "content/about.md": "a4af0ea8b6cf5278aa80e7adbc59fa0d59502f26",
+    "content/images/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "content/images/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "docs/about/index.html": "03db81bbfa42b286d68e9133b083295b2246591c",
+    "docs/images/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "docs/images/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "mangsang/sources/about-06.json": "b33c42f4ab60797346c8fbbf196f7ccde292415e",
+    "mangsang/sources/about-07.json": "4100e830d631f2e0e095cb8e66308161d841d79a",
+    "mangsang/sources/about-08.json": "fad146c497c5e2c53584f1896345374d32b67bfd"
+  },
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "session": "01a0d221-9efc-7473-b8b8-f4ed42e021b4",
+      "effort": "xhigh",
+      "transcript": "nav-model.verify.response.transcript.jsonl"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0d221-9efc-7473-b8b8-f4ed42e021b4",
+    "effort": "xhigh",
+    "transcript": "nav-model.verify.response.transcript.jsonl",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.1.0"
+      },
+      "locked": {
+        "chongdae": "1.5.1#ff6dbd4e373b",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.3.0#d9098a2c9127",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "check"
+    ]
+  ],
+  "touched": [
+    "mangsang/relations/R-13649af8.json",
+    "mangsang/relations/R-172c7b7c.json",
+    "mangsang/relations/R-195522d4.json",
+    "mangsang/relations/R-1bad332a.json",
+    "mangsang/relations/R-255f6e70.json",
+    "mangsang/relations/R-31bf2464.json",
+    "mangsang/relations/R-3bff092e.json",
+    "mangsang/relations/R-45af698b.json",
+    "mangsang/relations/R-4a8fcff7.json",
+    "mangsang/relations/R-52c631b6.json",
+    "mangsang/relations/R-57e0fe67.json",
+    "mangsang/relations/R-622acaf9.json",
+    "mangsang/relations/R-654e9419.json",
+    "mangsang/relations/R-6cd16b55.json",
+    "mangsang/relations/R-79a96c0a.json",
+    "mangsang/relations/R-808b04e4.json",
+    "mangsang/relations/R-8bbfec2a.json",
+    "mangsang/relations/R-99d140ee.json",
+    "mangsang/relations/R-a0409dab.json",
+    "mangsang/relations/R-b2351df1.json",
+    "mangsang/relations/R-b3061cf0.json",
+    "mangsang/relations/R-b577795a.json",
+    "mangsang/relations/R-bd007fe0.json",
+    "mangsang/relations/R-ce52d9f1.json",
+    "mangsang/relations/R-d245a428.json",
+    "mangsang/relations/R-d3f2cb80.json",
+    "mangsang/relations/R-d6a19410.json",
+    "mangsang/relations/R-f0d8ae78.json"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-281_agent",
+    "effort": "medium",
+    "session": "d515e4e2-9bca-4949-9cd1-f22b8447a5ab",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "locked": {
+        "chongdae": "1.5.1#ff6dbd4e373b",
+        "dwitbuk": "1.1.0#bd655b0c1397",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.3.0#d9098a2c9127",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  }
+}
