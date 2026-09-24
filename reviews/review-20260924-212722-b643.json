@@ -1,0 +1,149 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260924-212722-b643",
+  "since": "3777e9ff4ed89feca696f45807d1ee7bbdcc056c",
+  "head": "fd13ed46b6c0269c20b05c8d369636022fd2a95e",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a, run-20260924-122715-ff15",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "(provider) \"리팩터링의 판정은 두 가지다: 모든 테스트가 통과하고, 저장소의 content/로 빌드한 docs/가 리팩터링 전과 바이트 단위로 같다.\" — byte-for-byte output parity is not newly tested.",
+      "layer": "objection",
+      "first-seen": "review-20260924-211351-2d8f",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "(provider) \"리팩터링의 판정은 두 가지다: 모든 테스트가 통과하고, 저장소의 content/로 빌드한 docs/가 리팩터링 전과 바이트 단위로 같다.\" — byte-for-byte output parity is not newly tested.",
+        "where": "run-20260924-111724-533a"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "dropped, not done: 잘못 맡김: 도우미를 옮기는 리팩터링을 트집(계약 테스트를 쓰는 역할)에게 보냈다. 트집은 역할대로 구조 테스트(QBuildTestSupportContractTests)를 test_s1.py에 더했을 뿐 옮긴 이가 없어 체크가 실패했다. 그 구조 테스트는 동작이 아니라 코드 배치를 묶어 두므로 버린다(test_s1.py 되돌림). 옮기는 일은 구현자 태스크 tests-support-2로 다시 넣는다.",
+      "layer": "objection",
+      "first-seen": "review-20260924-211351-2d8f",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "dropped, not done: 잘못 맡김: 도우미를 옮기는 리팩터링을 트집(계약 테스트를 쓰는 역할)에게 보냈다. 트집은 역할대로 구조 테스트(QBuildTestSupportContractTests)를 test_s1.py에 더했을 뿐 옮긴 이가 없어 체크가 실패했다. 그 구조 테스트는 동작이 아니라 코드 배치를 묶어 두므로 버린다(test_s1.py 되돌림). 옮기는 일은 구현자 태스크 tests-support-2로 다시 넣는다.",
+        "where": "run-20260924-111724-533a"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 작업 결과(sitegen/)는 트리에 있고 세션이 직접 돌려 본 테스트·docs 비교는 통과했다: split-build-2가 그 위에서 확인·마무리한다.",
+      "layer": "objection",
+      "first-seen": "review-20260924-211351-2d8f",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 작업 결과(sitegen/)는 트리에 있고 세션이 직접 돌려 본 테스트·docs 비교는 통과했다: split-build-2가 그 위에서 확인·마무리한다.",
+        "where": "run-20260924-111724-533a"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 순서를 split-build-2 뒤로 다시 넣는다(tests-support-3).",
+      "layer": "objection",
+      "first-seen": "review-20260924-211351-2d8f",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 순서를 split-build-2 뒤로 다시 넣는다(tests-support-3).",
+        "where": "run-20260924-111724-533a"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "(provider) 별도 정적 분석 검사는 실행하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260924-211351-2d8f",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "(provider) 별도 정적 분석 검사는 실행하지 않았습니다.",
+        "where": "run-20260924-111724-533a"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "(provider) unittest는 이 트리에서 98개 테스트를 보고했으며, 기존 HEAD도 98개였습니다. 테스트 이름·클래스는 변경하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260924-211351-2d8f",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "(provider) unittest는 이 트리에서 98개 테스트를 보고했으며, 기존 HEAD도 98개였습니다. 테스트 이름·클래스는 변경하지 않았습니다.",
+        "where": "run-20260924-111724-533a"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "(provider) 기존 build.py/sitegen/plan 변경은 수정하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260924-211351-2d8f",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "(provider) 기존 build.py/sitegen/plan 변경은 수정하지 않았습니다.",
+        "where": "run-20260924-111724-533a"
+      }
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 89,
+      "text": "89 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 89)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-211351-2d8f",
+      "seen-in": "review-20260924-211351-2d8f",
+      "count": 31,
+      "text": "31 observation(s) written in review-20260924-211351-2d8f and unchanged since (delegated 31)"
+    }
+  ]
+}
