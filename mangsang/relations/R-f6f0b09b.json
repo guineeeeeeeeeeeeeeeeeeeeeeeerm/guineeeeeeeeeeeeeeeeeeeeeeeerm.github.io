@@ -1,0 +1,14 @@
+{
+  "id": "R-f6f0b09b",
+  "src": "source:tg-03",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "태그를 누르면 그 태그가 달린 글만 모은 페이지(`/tags/<태그>/`)로 갑니다.",
+  "seen": {
+    "source:tg-03": "8395ac342ed4",
+    "concept:tag": "7bfee5732100"
+  },
+  "confirmed": {
+    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "tg-03",
+  "text": "두 글은 공개됐습니다(https://guineeeeeeeeeeeeeeeeeeeeeeeerm.github.io/). 태그는 말씀대로 **기록 파일로만** 답니다.\n\n태그 클라우드 위치는 이렇게 하겠습니다.\n\n**피드 옆에 둡니다.** 넓은 화면에서는 피드 오른쪽, 모바일에서는 피드 아래입니다.\n- 글을 보면서 태그도 함께 보이니 둘러보기 쉽습니다.\n- 메뉴에 `태그` 탭은 따로 만들지 않습니다.\n- 태그를 누르면 그 태그가 달린 글만 모은 페이지(`/tags/<태그>/`)로 갑니다.\n- 글 페이지의 태그도 같은 페이지로 가는 링크가 됩니다.\n\n이렇게 진행할까요?",
+  "speaker": "Claude (claude-opus-5-5)",
+  "locator": "session d515e4e2-9bca-4949-9cd1-f22b8447a5ab, agent 185b87b3-43cf-4cc2-877c-aaafb0538a51 at 2026-09-24T09:07:18.562Z",
+  "replies-to": "tg-02",
+  "verbatim-from": "host transcript"
+}

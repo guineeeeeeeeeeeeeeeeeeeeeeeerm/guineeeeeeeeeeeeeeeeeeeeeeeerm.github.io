@@ -276,16 +276,13 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertIn(f"{ID}.md", result.stderr)
 
-    def test_Q_post_tags_trim_whitespace_drop_empty_names_and_are_plain_text(self):
-        text = post_text(tags="  alpha, , beta  ,   ", body="태그 본문")
+    def test_Q_post_tags_header_is_a_build_error(self):
+        # source:tg-01: tags are events in the tag table (Q-tag), never a header line
+        text = post_text(tags="alpha, beta", body="태그 본문")
         with temporary_site({f"{ID}.md": text}) as root:
-            self.assert_build_succeeds(root)
-            page = (root / "docs" / "p" / ID / "index.html").read_text(encoding="utf-8")
-            self.assertIn("alpha", page)
-            self.assertIn("beta", page)
-            self.assertNotRegex(page, r"href=[\"'][^\"']*(?:alpha|beta)")
-            self.assertNotIn("tag list", page.lower())
-            self.assertFalse((root / "docs" / "tags").exists())
+            result = run_build(root)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn(f"{ID}.md", result.stderr)
 
     def test_Q_post_missing_image_is_a_build_error(self):
         body = "![missing](images/not-present.png)"
@@ -337,11 +334,10 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assertIn("&lt;span&gt;literal HTML&lt;/span&gt;", page)
             self.assertNotIn("<span>literal HTML</span>", page)
 
-    def test_Q_post_page_shows_title_written_and_tags_but_no_type_name(self):
+    def test_Q_post_page_shows_title_and_written_but_no_type_name(self):
         text = post_text(
             post_type="long",
             title="A visible title",
-            tags="alpha,beta",
             body="page body",
         )
         with temporary_site({f"{ID}.md": text}) as root:
@@ -349,8 +345,6 @@ class S1GeneratorContractTests(unittest.TestCase):
             page = (root / "docs" / "p" / ID / "index.html").read_text(encoding="utf-8")
             self.assertIn("A visible title", page)
             self.assertIn("page body", page)
-            self.assertIn("alpha", page)
-            self.assertIn("beta", page)
             self.assertNotIn("긴 글", page)   # source:fd-04: the type is chosen before writing, not shown
 
     def test_Q_feed_orders_newest_first(self):

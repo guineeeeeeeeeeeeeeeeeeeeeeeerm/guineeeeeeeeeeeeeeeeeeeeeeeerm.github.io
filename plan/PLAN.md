@@ -4,9 +4,16 @@
 Python 생성기가 정적 HTML을 `docs/`에 만든다. GitHub Pages가 `docs/`를 서비스한다. 기획의 근거는 `mangsang/`의 원문과
 개념이다: 아래 각 절은 개념 하나 이상의 투영이며, 첫 줄에 그 개념을 적는다.
 
-용어: **글 파일**은 `content/posts/<id>.md`, **링크 파일**은 `content/links/<id>.json`, **패치 파일**은
-`content/patches/<id>.json`이다. 글의 `<id>`는 작성 시각 `YYYYMMDD-HHMMSS`(UTC)이고(Q-post), 링크와 패치의 `<id>`는
-영문 소문자·숫자·하이픈(`[a-z0-9-]+`)이다. **빌드**는 `python3 build.py`이다.
+용어: **글 파일**은 `content/posts/<id>.md`이고, 글의 `<id>`는 작성 시각 `YYYYMMDD-HHMMSS`(UTC)다(Q-post). **기록 표**는 글에
+붙는 기록을 종류마다 모은 파일이다: `content/links.jsonl`(Q-link), `content/patches.jsonl`(Q-patch), `content/shares.jsonl`
+(Q-share), `content/tags.jsonl`(Q-tag). 링크와 패치의 id는 영문 소문자·숫자·하이픈(`[a-z0-9-]+`)이다. **빌드**는
+`python3 build.py`이다.
+
+Decided (owner, `source:tb-01`, `source:tb-02`, `source:tb-04`; 제안 `source:tb-03`): 글에 붙는 기록은 관계형 DB의 표처럼 다룬다.
+기록 종류마다 JSONL 파일 하나가 표이고, 한 줄이 JSON 객체 하나(행 하나, 사건 하나)다. 표에는 줄을 덧붙이기만 하고 지난 줄을
+고치지 않는다 — 이력이 표 자체에 남는다. 지금 살아 있는 링크, 지금 달린 태그 같은 현재 상태는 빌드가 표에서 계산한다. 빈 줄은
+무시하고, 표 파일이 없으면 그 기록이 없는 것이다. 한 줄이 JSON 객체가 아니거나 그 표의 규칙에 어긋나면 빌드 오류이고, 오류 줄은
+`<표 파일 경로>:<줄 번호>`를 포함한다.
 **본문**은 글 파일의 헤더 다음 텍스트이고, **적용된 본문**은 그 글의 패치를 모두 적용한 뒤의 본문이다.
 
 ## Q-build — 생성기와 출력
@@ -44,7 +51,8 @@ Concept: `post`, `post-type`, `tag`.
 - `type`: `short`(짧은 글), `medium`(중간 글), `long`(긴 글) 중 하나. 반드시 있다. 유형은 쓰기 전에 고르는 것이며,
   빌드는 분량으로 유형을 판단하지 않는다.
 - `title`: 제목. `short`에서는 있으면 빌드 오류, `medium`과 `long`에서는 선택.
-- `tags`: 쉼표로 구분한 태그 이름. 선택. 앞뒤 공백은 무시하고, 빈 이름은 버린다.
+Decided (owner, `source:tg-01`): 태그는 헤더에 쓰지 않는다 — 태그를 달고 떼는 일은 시각과 이유가 있는 사건으로 표에 남긴다(Q-tag).
+헤더의 `tags`는 그 밖의 키처럼 빌드 오류다.
 
 Decided after quibble (s1-tests, technical, delegated): 키와 값의 앞뒤 공백은 무시하고, 키는 대소문자를 구분한다. 콜론이 없는
 헤더 줄과 같은 키가 두 번 나오는 헤더는 빌드 오류다.
@@ -75,7 +83,7 @@ Decided (owner, `source:br-01`, `source:br-03`, 제안 `source:br-02`): 문단�
 
 글 페이지 `docs/p/<id>/index.html`은 제목(있으면), 작성 시각, 태그, 본문을 보여준다.
 
-Decided (owner, `source:plan-11`): 태그는 글 페이지에 글자로만 표시하고, 태그별 목록 페이지는 아직 만들지 않는다.
+Decided (owner, `source:plan-11`; 태그 부분은 `source:tg-04`로 바뀜): 태그는 글 페이지에 나오고, 태그별 페이지로 가는 링크다(Q-tag).
 Decided (owner, `source:fd-04`; `source:plan-11`의 "유형 이름을 작게 표시한다"를 바꿈): 유형 이름(짧은 글/중간 글/긴 글)은 화면에
 표시하지 않는다. 유형은 쓰기 전에 고르는 것이고, 피드에서 무엇을 보여줄지(Q-feed)를 정할 뿐이다.
 
@@ -127,15 +135,18 @@ Concept: `ui-language`.
 
 Concept: `link`.
 
-링크 파일: `{"id", "from": <글 id>, "anchor": <문자열>, "to": <글 id>, "events": [<이벤트>...]}`. 이벤트는
-`{"at": <UTC 시각>, "action": "created" | "reason-changed" | "removed", "why": <문자열>}`이며, 첫 이벤트는 `created`, 시각은
-오름차순이다. 현재 사유는 마지막 `created` 또는 `reason-changed`의 `why`다. 마지막 이벤트가 `removed`면 그 링크는 화면에
-나오지 않지만 파일은 남는다(변경 기록은 관리하되 화면에 보이지 않는다).
+링크 표 `content/links.jsonl`의 한 줄은 링크 사건 하나다. 링크를 거는 줄은 `{"link": <링크 id>, "from": <글 id>, "to": <글 id>,
+"anchor": <문자열>, "action": "created", "at": <UTC 시각>, "why": <문자열>}`이고, 그 뒤의 사건은 `{"link", "action":
+"reason-changed" | "removed", "at", "why"}`다. 한 링크의 첫 사건은 `created`이고 `created`는 한 번뿐이며, 사건의 시각은
+줄 순서대로 내려가지 않는다. 현재 사유는 마지막 `created` 또는 `reason-changed`의 `why`다. 마지막 사건이 `removed`면 그 링크는
+화면에 나오지 않지만 기록은 남는다(변경 기록은 관리하되 화면에 보이지 않는다). 키 집합이 위와 다르거나, `created`가 아닌 사건이
+먼저 오거나, `created`가 두 번이거나, 시각이 내려가면 빌드 오류이고 오류 줄은 그 표의 줄을 가리킨다.
 
 `anchor`는 `from` 글의 적용된 본문에 그대로 나오는 문자열이며, 정확히 한 번 나와야 한다(없거나 두 번 이상이면 빌드
 오류). 글 페이지에서 그 문자열은 `to` 글로 가는 링크가 되고, 바로 뒤에 위첨자 `[n]`이 붙는다. `n`은 그 글 안에서 앵커가
 나오는 순서로 1부터 매긴다. 본문 아래 "주석" 목록의 `n`번 항목은 `to` 글의 제목(없으면 첫 문단 앞 80자)과 현재 사유,
-링크를 건 시각(`created`의 `at`)을 보여준다. `from`이나 `to`가 없는 글이면 빌드 오류다.
+링크를 건 시각(`created`의 `at`)을 보여준다. `from`이나 `to`가 없는 글이거나, 앵커가 없거나 두 번 이상 나오면 빌드
+오류이고 오류 줄은 그 링크의 `created` 줄을 가리킨다.
 
 Decided after quibble (s2-tests, technical, delegated): 앵커 글자는 `<a href="../<to>/">…</a>`가 되고 바로 뒤에
 `<sup><a href="#fn-<n>">[n]</a></sup>`가 붙는다. "주석" 목록은 `<ol>`이며 `n`번 항목의 `id`는 `fn-<n>`이다. 글 페이지 사이의
@@ -153,20 +164,20 @@ Dismissed after quibble (s2-tests): "checks가 비어 있다" — 트집 작업�
 
 Concept: `patch`.
 
-패치 파일: `{"id", "post": <글 id>, "at": <UTC 시각>, "why": <문자열>, "op": "replace" | "insert-before" | "insert-after" |
-"delete", "anchor": <문자열>, "text": <문자열>}` (`delete`에는 `text`가 없다). 한 글의 패치는 `at` 오름차순(같으면 `id`
+패치 표 `content/patches.jsonl`의 한 줄은 패치 하나다: `{"id", "post": <글 id>, "at": <UTC 시각>, "why": <문자열>, "op":
+"replace" | "insert-before" | "insert-after" | "delete", "anchor": <문자열>, "text": <문자열>}` (`delete`에는 `text`가 없다). 한 글의 패치는 `at` 오름차순(같으면 `id`
 순)으로 차례로 적용되고, 각 패치의 `anchor`는 그때까지 적용된 본문에 정확히 한 번 나와야 한다(아니면 빌드 오류). 그래서 앞선
 패치가 만든 글에 패치를 붙일 수 있다. `replace`는 앵커를 `text`로 바꾸고, `insert-before`/`insert-after`는 앵커 앞/뒤에
 `text`를 넣고, `delete`는 앵커를 지운다. 패치는 한 글 안에서만 작용하며 길이 제한은 없다. 글 파일 자체는 패치로 바뀌지
 않는다(원문은 남는다).
 
-Decided after quibble (s3-tests, technical, delegated): 패치 파일은 `content/patches/*.json`이고 파일 하나가 패치 하나다. `id`는
-문자열이며 파일 이름(확장자 제외)과 같아야 한다. JSON이 아니거나, 키 집합이 위와 다르거나, `op`가 목록에 없거나, `delete`에
-`text`가 있거나 다른 `op`에 없거나, `at`이 `written`과 같은 형식이 아니거나, `post`가 없는 글을 가리키면 빌드 오류이고, 오류
-줄은 그 패치 파일의 경로를 포함한다. 같은 `at`의 패치는 `id`의 문자열 순서로 적용한다. 앵커는 패치를 적용하기 전 그 순간의
+Decided after quibble (s3-tests, technical, delegated; 표로 옮김 `source:tb-04`): `id`는 문자열이며 표 안에서 한 번만 나온다.
+JSON 객체가 아니거나, 키 집합이 위와 다르거나, `op`가 목록에 없거나, `delete`에 `text`가 있거나 다른 `op`에 없거나, `at`이
+`written`과 같은 형식이 아니거나, `post`가 없는 글을 가리키거나, `id`가 겹치거나, 앵커가 그 순간의 본문에 정확히 한 번 나오지
+않으면 빌드 오류이고, 오류 줄은 그 패치의 줄(`content/patches.jsonl:<줄 번호>`)을 가리킨다. 같은 `at`의 패치는 `id`의 문자열 순서로 적용한다. 앵커는 패치를 적용하기 전 그 순간의
 본문(글 파일의 본문에 앞선 패치를 적용한 것)에서 찾으므로, 다른 글이나 글 경계 밖을 가리킬 수 없다.
 
-Decided (owner, `source:plan-05`): 올린 글을 고치는 일반적인 방법은 패치 파일을 더하는 것이고, 글 파일을 직접 고치는 일은 이
+Decided (owner, `source:plan-05`): 올린 글을 고치는 일반적인 방법은 패치를 더하는 것이고, 글 파일을 직접 고치는 일은 이
 계획의 범위 밖이다(완전 삭제 `erasure`의 절차는 열린 질문이 답해진 뒤에 정한다).
 
 ## Q-patch-view — 패치 보기
@@ -192,16 +203,17 @@ Dismissed after quibble (s3-tests): "checks가 비어 있다" 열한 건 — 트
 Concept: `post`, `site-build`.
 
 저장소 루트의 `README.md`는 이 사이트에 글을 올리는 사람을 위한 한국어 안내서다. 새 글을 쓰는 법(파일 위치와 이름, 헤더의
-`written`·`type`·`title`·`tags` 각각의 규칙과 예시, 본문에 쓸 수 있는 문법, 이미지 넣는 법), 링크를 거는 법(링크 파일의 모양,
+`written`·`type`·`title` 각각의 규칙과 예시, 본문에 쓸 수 있는 문법, 이미지 넣는 법), 링크를 거는 법(링크 파일의 모양,
 사유를 바꾸거나 지우는 법), 패치를 붙이는 법(패치 파일의 모양, `op` 네 가지), 사이트를 만드는 명령(`python3 build.py`)과 결과가
 생기는 곳(`docs/`), 빌드 오류가 났을 때 무엇을 보면 되는지를 담는다. 안내서의 예시를 그대로 따라 한 글·링크·패치는 빌드 오류 없이
 만들어진다. 안내서에 적힌 규칙은 이 계획서의 규칙과 어긋나지 않는다.
 
 Decided after quibble (readme-tests, technical, delegated): 한국어 — 코드 블록 밖 본문 글자 중 한글이 절반 이상이다. 담는다 —
-새 글, 링크, 패치, 빌드 각각에 `##` 절이 있고, 새 글 절에 `written`·`type`·`title`·`tags`, 패치 절에 `op` 네 가지, 빌드 절에
+새 글, 링크, 패치, 빌드 각각에 `##` 절이 있고, 새 글 절에 `written`·`type`·`title`, 패치 절에 `op` 네 가지, 빌드 절에
 `python3 build.py`와 `docs/`, 그리고 빌드 오류가 stderr에 파일 경로를 담은 한 줄로 나온다는 설명이 있다. 예시는 정보 문자열에 종류와
-경로를 적은 코드 블록이다: ```` ```post content/posts/<id>.md ````, ```` ```link content/links/<id>.json ````,
-```` ```patch content/patches/<id>.json ````. 테스트는 그 블록들을 그대로 임시 사이트에 쓰고 빌드해, 글 페이지가 생기고, 링크의
+경로를 적은 코드 블록이다: ```` ```post content/posts/<id>.md ````, ```` ```link content/links.jsonl ````,
+```` ```patch content/patches.jsonl ````(표로 옮김 `source:tb-04` — 블록의 줄들이 그 표의 줄들이다). 안내서에는 태그를 달고 떼는 절과
+```` ```tag content/tags.jsonl ```` 예시도 있다. 테스트는 그 블록들을 그대로 임시 사이트에 쓰고 빌드해, 글 페이지가 생기고, 링크의
 `[n]`이 붙고, 패치가 적용된 글자가 보이는지 본다. 계획서와 어긋나지 않는다 — 예시가 실제 `build.py`로 오류 없이 빌드되는 것이 그
 증거다(빌드가 이 계획서의 규칙을 강제한다); 그 밖의 문장 대 문장 일치는 기계로 관찰하지 않는다(non-claim).
 
@@ -243,10 +255,33 @@ Decided (owner, `source:fd-01`, `source:fd-03`; 제안 `source:fd-00`): 글이 �
 않았고, 공유할 때 기록 파일 하나를 더하면 되도록 간단해야 한다.
 
 Decided (technical, session): 공유는 글을 올린 뒤에 생기는 일이라 글 파일의 헤더가 아니라 링크·패치처럼 별도의 기록이다.
-공유 파일은 `content/shares/<id>.json`이고 파일 하나가 공유 하나다: `{"id", "post": <글 id>, "where": <곳>, "url": <주소>,
-"at": <UTC 시각>}`. `id`는 파일 이름(확장자 제외)과 같다. `where`는 빌드가 아는 곳 중 하나다 — 처음은 `x`, `threads`,
-`linkedin`이고, 곳을 늘리는 일은 빌드에 이름과 아이콘을 더하는 사이트 작업이다. `url`은 `https://`로 시작한다. JSON이 아니거나,
-키 집합이 위와 다르거나, `id`가 파일 이름과 다르거나, `post`가 없는 글이거나, `where`가 모르는 곳이거나, `url`·`at`의 형식이
-틀리면 빌드 오류이고 오류 줄은 그 공유 파일의 경로를 포함한다. 한 글에 공유가 여럿이면 `at` 순(같으면 `id` 순)으로 배지를
-단다. 배지는 사이트 안에 그린 흑백 아이콘(SVG)이고 외부에서 가져오지 않으며, 곳의 이름을 `aria-label`로 가진다. 공유가 없는
+공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다: `{"post": <글 id>, "where": <곳>, "url": <주소>, "at": <UTC 시각>}`
+(표로 옮김 `source:tb-04`). `where`는 빌드가 아는 곳 중 하나다 — 처음은 `x`, `threads`,
+`linkedin`이고, 곳을 늘리는 일은 빌드에 이름과 아이콘을 더하는 사이트 작업이다. `url`은 `https://`로 시작한다. JSON 객체가
+아니거나, 키 집합이 위와 다르거나, `post`가 없는 글이거나, `where`가 모르는 곳이거나, `url`·`at`의 형식이 틀리면 빌드 오류이고
+오류 줄은 그 공유의 줄을 가리킨다. 한 글에 공유가 여럿이면 `at` 순(같으면 줄 순서)으로 배지를 단다. 배지는 사이트 안에 그린 흑백 아이콘(SVG)이고 외부에서 가져오지 않으며, 곳의 이름을 `aria-label`로 가진다. 공유가 없는
 글에는 배지 자리가 없다.
+
+## Q-tag — 태그와 태그 클라우드
+
+Concept: `tag`.
+
+Decided (owner, `source:tg-01`, `source:tb-01`; 제안 `source:tb-03`): 태그를 달고 떼는 일은 시각과 이유가 있는 사건이다. 태그 표
+`content/tags.jsonl`의 한 줄이 사건 하나다: `{"post": <글 id>, "tag": <태그 이름>, "action": "added" | "removed", "at": <UTC
+시각>, "why": <문자열>}`. 태그 목록을 손으로 관리하지 않는다 — 글에 지금 달린 태그, 태그마다의 글, 태그 클라우드는 빌드가 표에서
+계산한다. 글·태그 짝의 마지막 사건이 `added`면 그 태그가 지금 달려 있다.
+
+Decided (technical, session): 한 글·태그 짝의 첫 사건은 `added`이고, 사건은 `added`와 `removed`가 번갈아 온다(떼었다 다시 달 수
+있다). 사건의 시각은 줄 순서대로 내려가지 않는다. 태그 이름은 1–40자이고, 앞뒤 공백이 없으며, `/`·`\`·줄바꿈을 담지 않고
+`.`이나 `..`이 아니다. 키 집합이 다르거나, `post`가 없는 글이거나, 이름·사건 순서·시각이 규칙에 어긋나면 빌드 오류이고 오류 줄은
+그 표의 줄을 가리킨다.
+
+Decided (owner, `source:tg-03`, `source:tg-04`): 태그 클라우드는 피드 옆에 둔다 — 넓은 화면에서는 피드 오른쪽, 좁은 화면(모바일)에서는
+피드 아래. 메뉴에 태그 탭은 두지 않는다. 태그를 누르면 그 태그가 달린 글만 모은 페이지로 간다. 글 페이지의 태그도 그 페이지로
+가는 링크다.
+
+Decided (technical, session): 피드 페이지의 클라우드는 `<aside class="tag-cloud">`이고, 지금 달린 태그를 이름 순으로 한 번씩
+보여준다. 태그마다 달린 글 수를 함께 적고, 글이 많을수록 글씨가 크다(`0.9rem`–`1.6rem`). 달린 태그가 하나도 없으면 클라우드가
+없다. 태그 페이지는 `docs/tags/<태그>/index.html`(주소 `/tags/<태그>/`, 링크에서는 퍼센트 인코딩)이고 제목은 "태그: <태그>"다.
+그 태그가 지금 달린 글을 피드와 같은 상자로 최신순으로 보여주고, 상자마다 그 태그를 단 이유(마지막 `added`의 `why`)와 시각을
+적는다. 글 페이지는 지금 달린 태그를 이름 순으로 태그 페이지 링크로 보여준다.

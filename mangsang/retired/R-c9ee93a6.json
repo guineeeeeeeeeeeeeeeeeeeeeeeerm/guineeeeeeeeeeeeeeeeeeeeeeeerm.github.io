@@ -10,5 +10,8 @@
   },
   "confirmed": {
     "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "parse_link (one file per link) is gone: the link table is read by parse_links; re-proposed there"
   }
 }

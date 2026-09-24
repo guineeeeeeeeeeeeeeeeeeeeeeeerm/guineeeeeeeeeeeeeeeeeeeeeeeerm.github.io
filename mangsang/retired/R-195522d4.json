@@ -10,5 +10,8 @@
   },
   "confirmed": {
     "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "the header-tags test became 'a tags header is a build error' (source:tg-01); tags are projected in tests/test_tags.py now"
   }
 }

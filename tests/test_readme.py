@@ -12,7 +12,7 @@ README = ROOT / "README.md"
 BUILD = ROOT / "build.py"
 
 FENCED_EXAMPLE = re.compile(
-    r"(?ms)^```(?P<kind>post|link|patch|about)[ \t]+(?P<path>content/[^\s`]+)[ \t]*\n"
+    r"(?ms)^```(?P<kind>post|link|patch|about|share|tag)[ \t]+(?P<path>content/[^\s`]+)[ \t]*\n"
     r"(?P<body>.*?)^```[ \t]*$"
 )
 FENCED_BLOCK = re.compile(r"(?ms)^```[^\n]*\n.*?^```[ \t]*$")
@@ -68,26 +68,28 @@ class QReadmeContractTests(unittest.TestCase):
         link = section(text, "링크")
         patch = section(text, "패치")
         build = section(text, "빌드")
+        tag = section(text, "태그")
 
         for name, content in {
             "새 글": post,
             "링크": link,
             "패치": patch,
             "빌드": build,
+            "태그": tag,
         }.items():
             with self.subTest(section=name):
                 self.assertTrue(content, f"README needs a ## section for {name}")
 
         self.assertIn("content/posts/", post)
-        for field in ("written", "type", "title", "tags"):
+        for field in ("written", "type", "title"):
             with self.subTest(post_header=field):
                 self.assertRegex(post, rf"\b{field}\b")
         self.assertRegex(post, r"(?i)본문|마크다운|markdown")
         self.assertIn("이미지", post)
         self.assertRegex(post, r"!\[[^\]]*\]\([^)]*\)")
 
-        self.assertIn("content/links/", link)
-        for field in ("id", "from", "anchor", "to", "events"):
+        self.assertIn("content/links.jsonl", link)   # the link table (Q-link)
+        for field in ("link", "from", "to", "anchor", "action", "at", "why"):
             with self.subTest(link_field=field):
                 self.assertRegex(link, rf"[\"'`]?{field}[\"'`]?\b")
         for action in ("created", "reason-changed", "removed"):
@@ -95,7 +97,7 @@ class QReadmeContractTests(unittest.TestCase):
                 self.assertIn(action, link)
         self.assertRegex(link, r"사유|이유")
 
-        self.assertIn("content/patches/", patch)
+        self.assertIn("content/patches.jsonl", patch)   # the patch table (Q-patch)
         for field in ("id", "post", "at", "why", "op", "anchor", "text"):
             with self.subTest(patch_field=field):
                 self.assertRegex(patch, rf"[\"'`]?{field}[\"'`]?\b")
@@ -107,10 +109,15 @@ class QReadmeContractTests(unittest.TestCase):
             with self.subTest(build_instruction=required):
                 self.assertIn(required, build)
 
+        self.assertIn("content/tags.jsonl", tag)   # the tag table (Q-tag)
+        for field in ("post", "tag", "action", "at", "why", "added", "removed"):
+            with self.subTest(tag_field=field):
+                self.assertRegex(tag, rf"[\"'`]?{field}[\"'`]?\b")
+
     def test_Q_readme_fenced_post_link_and_patch_examples_build_and_render(self):
         text = self.readme_or_fail()
         examples = examples_from(text)
-        by_kind = {kind: [] for kind in ("post", "link", "patch", "about")}
+        by_kind = {kind: [] for kind in ("post", "link", "patch", "about", "share", "tag")}
         for example in examples:
             by_kind[example["kind"]].append(example)
 
@@ -155,10 +162,11 @@ class QReadmeContractTests(unittest.TestCase):
                         marker = words[0]
                     self.assertIn(marker, rendered)
 
+            rows = lambda example: [json.loads(line) for line in example["body"].splitlines() if line.strip()]
             for example in by_kind["link"]:
-                link = json.loads(example["body"])
+                link = next(row for row in rows(example) if row.get("action") == "created")
                 source_page = root / "docs" / "p" / link["from"] / "index.html"
-                with self.subTest(link=link.get("id")):
+                with self.subTest(link=link.get("link")):
                     self.assertTrue(source_page.is_file())
                     self.assertRegex(
                         source_page.read_text(encoding="utf-8"),
@@ -167,14 +175,25 @@ class QReadmeContractTests(unittest.TestCase):
                     )
 
             for example in by_kind["patch"]:
-                patch = json.loads(example["body"])
-                post_page = root / "docs" / "p" / patch["post"] / "index.html"
-                with self.subTest(patch=patch.get("id")):
-                    self.assertTrue(post_page.is_file())
-                    document = post_page.read_text(encoding="utf-8")
-                    if patch.get("op") != "delete":
-                        self.assertTrue(patch.get("text"))
-                        self.assertIn(patch["text"], document)
+                for patch in rows(example):
+                    post_page = root / "docs" / "p" / patch["post"] / "index.html"
+                    with self.subTest(patch=patch.get("id")):
+                        self.assertTrue(post_page.is_file())
+                        document = post_page.read_text(encoding="utf-8")
+                        if patch.get("op") != "delete":
+                            self.assertTrue(patch.get("text"))
+                            self.assertIn(patch["text"], document)
+
+            for example in by_kind["tag"]:
+                current = {}
+                for row in rows(example):
+                    current[(row["post"], row["tag"])] = row["action"]
+                for (post_id, tag), action in current.items():
+                    with self.subTest(tag=tag):
+                        page = root / "docs" / "tags" / tag / "index.html"
+                        if action == "added":
+                            self.assertTrue(page.is_file())
+                            self.assertIn(f"p/{post_id}/", page.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":

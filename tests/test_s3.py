@@ -74,24 +74,15 @@ def temporary_site(posts, patches=None, links=None):
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(text, encoding="utf-8")
 
-        for filename, data in (patches or {}).items():
-            path = content / "patches" / filename
-            path.parent.mkdir(parents=True, exist_ok=True)
-            if isinstance(data, str):
-                path.write_text(data, encoding="utf-8")
-            else:
-                path.write_text(
-                    json.dumps(data, ensure_ascii=False), encoding="utf-8"
-                )
-
-        if links:
-            links_directory = content / "links"
-            links_directory.mkdir()
-            for filename, data in links.items():
-                path = links_directory / filename
-                path.write_text(
-                    json.dumps(data, ensure_ascii=False), encoding="utf-8"
-                )
+        # the patch table (Q-patch): one row per patch, in the order given (str lines as they are)
+        lines = [data if isinstance(data, str) else json.dumps(data, ensure_ascii=False) for data in (patches or {}).values()]
+        if lines:
+            (content / "patches.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
+        # the link table (Q-link): each link's creation row
+        rows = [{"link": d["id"], "from": d["from"], "to": d["to"], "anchor": d["anchor"], "action": "created",
+                 "at": d["events"][0]["at"], "why": d["events"][0]["why"]} for d in (links or {}).values()]
+        if rows:
+            (content / "links.jsonl").write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n", encoding="utf-8")
 
         yield root
 
@@ -134,7 +125,7 @@ class S3PatchContractTests(unittest.TestCase):
             result = run_build(root)
             self.assertEqual(result.returncode, 1)
             self.assertEqual(len(result.stderr.strip().splitlines()), 1)
-            self.assertIn(f"patches/{filename}", result.stderr)
+            self.assertIn("patches.jsonl:1", result.stderr)   # the one row given names itself
 
     def test_Q_patch_file_shape_and_validation_errors_name_the_patch_file(self):
         base = patch_data("valid", I['post'], "anchor", text="changed")
@@ -146,7 +137,7 @@ class S3PatchContractTests(unittest.TestCase):
             "missing-id.json": {key: value for key, value in base.items() if key != "id"},
             "extra-key.json": {**base, "extra": True},
             "id-not-string.json": {**base, "id": 7},
-            "id-does-not-match.json": {**base, "id": "different"},
+            "bad-id.json": {**base, "id": "Not An Id"},
             "bad-op.json": {**base, "op": "append"},
             "delete-has-text.json": {**base, "op": "delete", "text": "forbidden"},
             "replace-missing-text.json": {key: value for key, value in base.items() if key != "text"},
@@ -156,6 +147,13 @@ class S3PatchContractTests(unittest.TestCase):
         for filename, value in invalid.items():
             with self.subTest(filename=filename):
                 self.assert_bad_patch(filename, value)
+
+        # an id appears once in the table: the second row with it is the error
+        with temporary_site({f"{I['post']}.md": post_text(body="anchor", written=W['post'])},
+                            {"one": base, "again": {**base, "anchor": "changed", "text": "twice"}}) as root:
+            result = run_build(root)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("patches.jsonl:2", result.stderr)
 
     def test_Q_patch_applies_replace_insert_before_insert_after_and_delete_in_at_then_id_order(self):
         posts = {
@@ -241,6 +239,19 @@ class S3PatchContractTests(unittest.TestCase):
                 posts[f"{I['other']}.md"] = post_text(body="only-in-other", written=W['other'])
             with self.subTest(filename=filename):
                 self.assert_bad_patch(filename, patch, posts=posts)
+
+    def test_Q_link_anchor_may_span_patched_and_original_text(self):
+        # Q-link: the anchor is text of the applied body; patch regions do not split it
+        posts = {
+            f"{I['source']}.md": post_text(body="old text tail", written=W['source']),
+            f"{I['target']}.md": post_text("medium", title="Target", body="target body", written=W['target']),
+        }
+        patches = {"new": patch_data("new-word", I['source'], "old", text="new")}
+        links = {"across": link_data("across", I['source'], "new text", I['target'])}
+        with temporary_site(posts, patches, links) as root:
+            self.assert_build_succeeds(root)
+            document = page(root, I['source'])
+            self.assertRegex(document, r'<a href="\.\./%s/">[^<]*new[^<]*text</a>' % I['target'])
 
     def test_Q_patch_has_no_length_limit_and_is_scoped_to_one_post(self):
         long_text = "긴 글자" * 3000

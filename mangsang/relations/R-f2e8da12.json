@@ -1,0 +1,14 @@
+{
+  "id": "R-f2e8da12",
+  "src": "README.md#태그 달기",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "태그는 `content/tags.jsonl`에 줄로 답니다.",
+  "seen": {
+    "README.md#태그 달기": "f957a1fd1cc2",
+    "concept:tag": "7bfee5732100"
+  },
+  "confirmed": {
+    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

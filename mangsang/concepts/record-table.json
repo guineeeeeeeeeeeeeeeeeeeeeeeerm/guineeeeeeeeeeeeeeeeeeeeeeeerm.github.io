@@ -1,0 +1,8 @@
+{
+  "name": "record-table",
+  "means": "글에 붙는 기록(링크, 패치, 공유, 태그)을 관계형 DB의 표처럼 종류마다 JSONL 파일 하나에 행으로 모으는 방식. 줄을 덧붙이기만 하고 지난 줄은 고치지 않아 이력이 표에 남으며, 지금 살아 있는 링크나 지금 달린 태그 같은 현재 상태는 빌드가 표에서 계산한다.",
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:tb-04"
+  }
+}

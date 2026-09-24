@@ -1,0 +1,14 @@
+{
+  "id": "R-54779ef7",
+  "src": "plan/PLAN.md#Q-tag — 태그와 태그 클라우드",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "태그를 달고 떼는 일은 시각과 이유가 있는 사건이다.",
+  "seen": {
+    "plan/PLAN.md#Q-tag — 태그와 태그 클라우드": "3e34bf0b031b",
+    "concept:tag": "7bfee5732100"
+  },
+  "confirmed": {
+    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

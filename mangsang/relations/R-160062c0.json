@@ -1,0 +1,14 @@
+{
+  "id": "R-160062c0",
+  "src": "source:tg-04",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "ㄱㄱ.",
+  "seen": {
+    "source:tg-04": "a5693b46928b",
+    "concept:tag": "7bfee5732100"
+  },
+  "confirmed": {
+    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

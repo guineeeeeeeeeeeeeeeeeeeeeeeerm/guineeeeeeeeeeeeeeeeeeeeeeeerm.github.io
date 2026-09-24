@@ -3,12 +3,12 @@
   "src": "plan/PLAN.md#Q-share — 공유 기록과 배지",
   "predicate": "realizes",
   "dst": "concept:share",
-  "evidence": "공유 파일은 `content/shares/<id>.json`이고 파일 하나가 공유 하나다",
+  "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다",
   "seen": {
-    "plan/PLAN.md#Q-share — 공유 기록과 배지": "23ff749d4a5c",
+    "plan/PLAN.md#Q-share — 공유 기록과 배지": "0d878a7a6d12",
     "concept:share": "ae8d0b44fd09"
   },
   "confirmed": {
-    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5): Q-share's record moved into the share table (source:tb-04); still the share's record. Technical, delegated (plan-07)"
   }
 }

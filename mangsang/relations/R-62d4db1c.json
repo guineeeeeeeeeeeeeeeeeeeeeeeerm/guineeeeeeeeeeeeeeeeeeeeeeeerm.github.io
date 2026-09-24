@@ -5,10 +5,10 @@
   "dst": "concept:patch",
   "evidence": "그래서 앞선\n패치가 만든 글에 패치를 붙일 수 있다.",
   "seen": {
-    "plan/PLAN.md#Q-patch — 패치": "2fa5f97ce433",
+    "plan/PLAN.md#Q-patch — 패치": "9de28e1c8fef",
     "concept:patch": "5a85490ec568"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read Q-patch / Q-patch-view after the s3 quibble decisions; each still realizes its concept"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
   }
 }

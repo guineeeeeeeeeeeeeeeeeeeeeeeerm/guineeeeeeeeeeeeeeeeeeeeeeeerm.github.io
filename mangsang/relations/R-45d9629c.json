@@ -1,0 +1,14 @@
+{
+  "id": "R-45d9629c",
+  "src": "source:tg-01",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "\"태그는 어떻게 달까요?\"=\"기록 파일로만 (Recommended)\"",
+  "seen": {
+    "source:tg-01": "12f5b9dc68d9",
+    "concept:tag": "7bfee5732100"
+  },
+  "confirmed": {
+    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

@@ -5,10 +5,10 @@
   "dst": "concept:feed",
   "evidence": "# the whole box is the way into the post",
   "seen": {
-    "build.py:feed_item": "a3917810abca",
+    "build.py:feed_item": "794a6757f7f3",
     "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5): feed_item now makes the whole box the post's link (fd-04); it still projects the feed. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
   }
 }

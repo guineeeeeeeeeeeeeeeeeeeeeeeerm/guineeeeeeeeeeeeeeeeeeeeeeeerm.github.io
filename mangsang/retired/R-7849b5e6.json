@@ -10,5 +10,8 @@
   },
   "confirmed": {
     "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "parse_share (one file per share) is gone: the share table is read by parse_shares; re-proposed there"
   }
 }

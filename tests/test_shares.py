@@ -18,8 +18,9 @@ def post_text(written=WRITTEN, body="본문"):
     return f"written: {written}\ntype: short\n\n{body}"
 
 
-def share(share_id, post=ID, where="x", url="https://x.com/someone/status/1", at="2024-02-04T00:00:00Z"):
-    return {"id": share_id, "post": post, "where": where, "url": url, "at": at}
+def share(post=ID, where="x", url="https://x.com/someone/status/1", at="2024-02-04T00:00:00Z"):
+    """One row of the share table (Q-share)."""
+    return {"post": post, "where": where, "url": url, "at": at}
 
 
 @contextmanager
@@ -31,11 +32,9 @@ def temporary_site(shares=None):
         (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
         (content / "posts" / f"{ID}.md").write_text(post_text(), encoding="utf-8")
         (content / "posts" / f"{OTHER}.md").write_text(post_text(OTHER_AT, "공유되지 않은 글"), encoding="utf-8")
-        if shares is not None:
-            (content / "shares").mkdir()
-            for name, value in shares.items():
-                path = content / "shares" / name
-                path.write_text(value if isinstance(value, str) else json.dumps(value, ensure_ascii=False), encoding="utf-8")
+        if shares is not None:   # the share table: one row per share, in the order given (str lines as they are)
+            lines = [value if isinstance(value, str) else json.dumps(value, ensure_ascii=False) for value in shares.values()]
+            (content / "shares.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
         yield root
 
 
@@ -60,12 +59,12 @@ class ShareContractTests(unittest.TestCase):
         result = run_build(root)
         self.assertEqual(result.returncode, 0, msg=f"stderr={result.stderr!r}")
 
-    def assert_fails_naming(self, root, name):
+    def assert_fails_naming(self, root, line):
         result = run_build(root)
         self.assertEqual(result.returncode, 1, msg=result.stderr)
-        lines = [line for line in result.stderr.splitlines() if line.strip()]
+        lines = [text for text in result.stderr.splitlines() if text.strip()]
         self.assertEqual(len(lines), 1, msg=result.stderr)
-        self.assertIn(f"shares/{name}", lines[0].replace("\\", "/"))
+        self.assertIn(f"shares.jsonl:{line}", lines[0].replace("\\", "/"))
 
     def test_without_shares_there_are_no_badges(self):
         with temporary_site() as root:
@@ -74,7 +73,7 @@ class ShareContractTests(unittest.TestCase):
             self.assertEqual(badges(read(root, f"p/{ID}/index.html")), [])
 
     def test_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):
-        with temporary_site({"on-x.json": share("on-x")}) as root:
+        with temporary_site({"on-x": share()}) as root:
             self.assert_builds(root)
             for page in (item_of(read(root, "index.html"), ID), read(root, f"p/{ID}/index.html")):
                 found = badges(page)
@@ -90,32 +89,30 @@ class ShareContractTests(unittest.TestCase):
 
     def test_the_first_places_are_x_threads_and_linkedin_in_share_time_order(self):
         shares = {
-            "c.json": share("c", where="linkedin", url="https://www.linkedin.com/posts/1", at="2024-02-06T00:00:00Z"),
-            "a.json": share("a", where="threads", url="https://www.threads.net/@someone/post/1", at="2024-02-05T00:00:00Z"),
-            "b.json": share("b", where="x", url="https://x.com/someone/status/1", at="2024-02-04T00:00:00Z"),
+            "linkedin": share(where="linkedin", url="https://www.linkedin.com/posts/1", at="2024-02-06T00:00:00Z"),
+            "threads": share(where="threads", url="https://www.threads.net/@someone/post/1", at="2024-02-05T00:00:00Z"),
+            "x": share(where="x", url="https://x.com/someone/status/1", at="2024-02-04T00:00:00Z"),
         }
         with temporary_site(shares) as root:
             self.assert_builds(root)
             labels = [re.search(r'aria-label="([^"]+)"', b).group(1) for b in badges(read(root, f"p/{ID}/index.html"))]
             self.assertEqual(labels, ["X", "Threads", "LinkedIn"])
 
-    def test_a_bad_share_file_is_a_build_error_naming_it(self):
-        base = share("s")
+    def test_a_bad_share_row_is_a_build_error_naming_its_line(self):
+        base = share()
         cases = {
-            "not-json.json": "{ not json",
-            "missing-url.json": {k: v for k, v in base.items() if k != "url"},
-            "extra-key.json": {**base, "id": "extra-key", "extra": 1},
-            "id-mismatch.json": {**base, "id": "different"},
-            "no-such-post.json": {**base, "id": "no-such-post", "post": "20990101-000000"},
-            "unknown-place.json": {**base, "id": "unknown-place", "where": "myspace"},
-            "http-url.json": {**base, "id": "http-url", "url": "http://x.com/1"},
-            "bad-at.json": {**base, "id": "bad-at", "at": "2024-02-04 00:00"},
+            "not-json": "{ not json",
+            "missing-url": {k: v for k, v in base.items() if k != "url"},
+            "extra-key": {**base, "extra": 1},
+            "no-such-post": {**base, "post": "20990101-000000"},
+            "unknown-place": {**base, "where": "myspace"},
+            "http-url": {**base, "url": "http://x.com/1"},
+            "bad-at": {**base, "at": "2024-02-04 00:00"},
         }
         for name, value in cases.items():
             with self.subTest(name=name):
-                with temporary_site({name: value}) as root:
-                    self.assert_fails_naming(root, name)
-
+                with temporary_site({"good": base, name: value}) as root:
+                    self.assert_fails_naming(root, 2)
 
 if __name__ == "__main__":
     unittest.main()

@@ -5,10 +5,10 @@
   "dst": "concept:post-type",
   "evidence": "\"short\"",
   "seen": {
-    "build.py:parse_post": "f4ba542b50ae",
+    "build.py:parse_post": "780bf82083cb",
     "concept:post-type": "dce6f00332ed"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "id": "R-15cb7f6a",
+  "src": "source:tb-01",
+  "predicate": "realizes",
+  "dst": "concept:record-table",
+  "evidence": "나는 relational db같은 접근을 생각하고 있었는데, 그러면 큰 파일 하나 안에서 내용을 관리하면 되는 거 아니야?",
+  "seen": {
+    "source:tb-01": "b9a065ae3fac",
+    "concept:record-table": "ce5af6e7c90f"
+  },
+  "confirmed": {
+    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

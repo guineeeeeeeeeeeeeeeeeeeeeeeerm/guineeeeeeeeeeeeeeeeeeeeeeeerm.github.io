@@ -5,10 +5,10 @@
   "dst": "concept:post",
   "evidence": "새 글을 쓰는 법(파일 위치와 이름, 헤더의",
   "seen": {
-    "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "0a5832b8bc5f",
+    "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "264a5d064c17",
     "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
   }
 }

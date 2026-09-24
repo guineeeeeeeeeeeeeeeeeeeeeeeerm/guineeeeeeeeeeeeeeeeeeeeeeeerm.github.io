@@ -1,0 +1,14 @@
+{
+  "id": "records-kept",
+  "text": "글에 붙는 기록은 어떻게 저장되고, 현재 상태는 어떻게 정해지나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "record-table"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:tb-04"
+  }
+}

@@ -42,16 +42,14 @@ def temporary_site(posts, links):
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(text, encoding="utf-8")
 
-        links_directory = content / "links"
-        links_directory.mkdir()
-        for filename, data in links.items():
-            path = links_directory / filename
-            if isinstance(data, str):
-                path.write_text(data, encoding="utf-8")
-            else:
-                path.write_text(
-                    json.dumps(data, ensure_ascii=False), encoding="utf-8"
-                )
+        # the link table (Q-link): a link object becomes its rows — its creation, then its later events; a list is
+        # written as the rows it holds (str lines as they are)
+        lines = []
+        for data in links.values():
+            rows = data if isinstance(data, list) else link_rows(data)
+            lines += [row if isinstance(row, str) else json.dumps(row, ensure_ascii=False) for row in rows]
+        if lines:
+            (content / "links.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
         yield root
 
@@ -73,6 +71,18 @@ def link_data(link_id, from_id, anchor, to_id, events):
         "to": to_id,
         "events": events,
     }
+
+
+def link_rows(link):
+    """A link as table rows: `created` carries from, to and anchor; later events only the link, action, time and why."""
+    rows = []
+    for event in link.get("events", []):
+        row = {"link": link["id"], "action": event["action"], "at": event["at"], "why": event["why"]}
+        if event["action"] == "created":
+            row = {"link": link["id"], "from": link["from"], "to": link["to"], "anchor": link["anchor"], **row}
+            row = {key: row[key] for key in ("link", "from", "to", "anchor", "action", "at", "why")}
+        rows.append(row)
+    return rows
 
 
 def created(at, why):
@@ -101,118 +111,39 @@ class S2LinkContractTests(unittest.TestCase):
         )
         return result
 
-    def test_Q_link_file_shape_and_event_rules_are_validated(self):
+    def test_Q_link_rows_and_event_rules_are_validated_and_errors_name_the_row(self):
         posts = {
             f"{I['from']}.md": post_text(body="anchor", written=W['from']),
             f"{I['to']}.md": post_text("medium", title="To", body="target", written=W['to']),
         }
-        invalid_links = {
-            "missing-id.json": {
-                "from": I['from'],
-                "anchor": "anchor",
-                "to": I['to'],
-                "events": [created(WRITTEN, "why")],
-            },
-            "missing-from.json": {
-                "id": "missing-from",
-                "anchor": "anchor",
-                "to": I['to'],
-                "events": [created(WRITTEN, "why")],
-            },
-            "missing-anchor.json": {
-                "id": "missing-anchor",
-                "from": I['from'],
-                "to": I['to'],
-                "events": [created(WRITTEN, "why")],
-            },
-            "missing-to.json": {
-                "id": "missing-to",
-                "from": I['from'],
-                "anchor": "anchor",
-                "events": [created(WRITTEN, "why")],
-            },
-            "missing-events.json": {
-                "id": "missing-events",
-                "from": I['from'],
-                "anchor": "anchor",
-                "to": I['to'],
-            },
-            "events-not-list.json": {
-                "id": "events-not-list",
-                "from": I['from'],
-                "anchor": "anchor",
-                "to": I['to'],
-                "events": {"at": WRITTEN, "action": "created", "why": "why"},
-            },
-            "event-missing-at.json": link_data(
-                "event-missing-at",
-                I['from'],
-                "anchor",
-                I['to'],
-                [{"action": "created", "why": "why"}],
-            ),
-            "event-missing-why.json": link_data(
-                "event-missing-why",
-                I['from'],
-                "anchor",
-                I['to'],
-                [{"at": WRITTEN, "action": "created"}],
-            ),
-            "wrong-first-event.json": link_data(
-                "wrong-first-event",
-                I['from'],
-                "anchor",
-                I['to'],
-                [changed("2024-02-03T04:05:06Z", "why")],
-            ),
-            "unknown-action.json": link_data(
-                "unknown-action",
-                I['from'],
-                "anchor",
-                I['to'],
-                [
-                    {
-                        "at": "2024-02-03T04:05:06Z",
-                        "action": "paused",
-                        "why": "why",
-                    }
-                ],
-            ),
-            "non-utc-at.json": link_data(
-                "non-utc-at",
-                I['from'],
-                "anchor",
-                I['to'],
-                [created("2024-02-03T13:05:06+09:00", "why")],
-            ),
-            "descending-time.json": link_data(
-                "descending-time",
-                I['from'],
-                "anchor",
-                I['to'],
-                [
-                    created("2024-02-03T04:05:07Z", "first"),
-                    changed("2024-02-03T04:05:06Z", "second"),
-                ],
-            ),
+        good = {"link": "l", "from": I['from'], "to": I['to'], "anchor": "anchor", "action": "created", "at": WRITTEN, "why": "why"}
+        without = lambda key: {k: v for k, v in good.items() if k != key}
+        invalid = {   # rows, and the line the error must name
+            "not-json": (["{ not json"], 1),
+            "not-an-object": (['["a list"]'], 1),
+            "missing-link": ([without("link")], 1),
+            "missing-from": ([without("from")], 1),
+            "missing-to": ([without("to")], 1),
+            "missing-anchor": ([without("anchor")], 1),
+            "missing-at": ([without("at")], 1),
+            "missing-why": ([without("why")], 1),
+            "extra-key": ([{**good, "extra": 1}], 1),
+            "bad-link-id": ([{**good, "link": "Bad Id"}], 1),
+            "unknown-action": ([{**good, "action": "paused"}], 1),
+            "action-not-a-string": ([good, {"link": "l", "action": ["removed"], "at": WRITTEN, "why": "why"}], 2),
+            "non-utc-at": ([{**good, "at": "2024-02-03T13:05:06+09:00"}], 1),
+            "first-event-not-created": ([{"link": "l", "action": "reason-changed", "at": WRITTEN, "why": "why"}], 1),
+            "created-twice": ([good, good], 2),
+            "change-carries-from": ([good, {"link": "l", "from": I['from'], "action": "removed", "at": WRITTEN, "why": "gone"}], 2),
+            "descending-time": ([{**good, "at": "2024-02-03T04:05:07Z"}, {"link": "l", "action": "reason-changed", "at": "2024-02-03T04:05:06Z", "why": "second"}], 2),
         }
-
-        for filename, link in invalid_links.items():
-            with self.subTest(filename=filename), temporary_site(
-                posts, {filename: link}
-            ) as root:
+        for name, (rows, line) in invalid.items():
+            with self.subTest(case=name), temporary_site(posts, {name: rows}) as root:
                 result = run_build(root)
                 self.assertEqual(result.returncode, 1)
-                self.assertIn(filename, result.stderr)
+                self.assertIn(f"links.jsonl:{line}", result.stderr)
 
-        with temporary_site(
-            posts,
-            {
-                "valid.json": link_data(
-                    "valid", I['from'], "anchor", I['to'], [created(WRITTEN, "why")]
-                )
-            },
-        ) as root:
+        with temporary_site(posts, {"valid": [good, {"link": "l", "action": "removed", "at": WRITTEN, "why": "gone"}]}) as root:
             self.assert_build_succeeds(root)
 
     def test_Q_link_current_reason_is_last_created_or_reason_changed_and_time_is_created_at(self):
@@ -264,7 +195,8 @@ class S2LinkContractTests(unittest.TestCase):
 
         with temporary_site(posts, links) as root:
             self.assert_build_succeeds(root)
-            self.assertTrue((root / "content" / "links" / "removed.json").is_file())
+            table = (root / "content" / "links.jsonl").read_text(encoding="utf-8")
+            self.assertIn('"action": "removed"', table)   # the record stays in the table; only the page drops the link
             self.assertNotIn(f'href="../{I["to"]}/"', page(root, I['from']))
             self.assertNotIn("should disappear", page(root, I['from']))
             self.assertNotIn("이 글을 가리키는 글", page(root, I['to']))
@@ -285,7 +217,7 @@ class S2LinkContractTests(unittest.TestCase):
             ) as root:
                 result = run_build(root)
                 self.assertEqual(result.returncode, 1)
-                self.assertIn("bad-anchor.json", result.stderr)
+                self.assertIn("links.jsonl:1", result.stderr)
 
         with temporary_site(
             {f"{I['from']}.md": post_text(body="anchor", written=W['from']), f"{I['to']}.md": post_text(body="target", written=W['to'])},
@@ -490,7 +422,7 @@ class S2LinkContractTests(unittest.TestCase):
             ) as root:
                 result = run_build(root)
                 self.assertEqual(result.returncode, 1)
-                self.assertIn(filename, result.stderr)
+                self.assertIn("links.jsonl:1", result.stderr)
 
         with temporary_site(
             {f"{I['from']}.md": post_text(body="anchor", written=W['from']), f"{I['to']}.md": post_text(body="target", written=W['to'])},

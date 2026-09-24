@@ -1,7 +1,8 @@
 {
   "name": "tag",
-  "means": "글에 선택적으로 붙이는 분류 이름.",
+  "means": "글에 붙이는 분류 이름. 태그를 달고 떼는 일은 시각과 이유가 있는 사건으로 태그 표에 남고, 글에 지금 달린 태그와 태그마다의 글은 빌드가 계산한다. 피드 옆 태그 클라우드(글이 많은 태그일수록 크게)와 태그별 페이지로 글을 둘러본다.",
   "declared": {
-    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:tb-04"
   }
 }

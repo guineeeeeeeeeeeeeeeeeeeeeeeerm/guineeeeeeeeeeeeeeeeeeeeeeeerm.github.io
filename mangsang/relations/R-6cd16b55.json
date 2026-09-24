@@ -5,10 +5,10 @@
   "dst": "concept:ui-language",
   "evidence": "def test_Q_ui_sets_korean_document_language_and_shows_no_type_names(self):",
   "seen": {
-    "tests/test_s1.py:S1GeneratorContractTests": "a59d18133b6b",
+    "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
     "concept:ui-language": "e2a0a380d7e4"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5): the UI-language test now checks Korean pages without type names (fd-04). Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
   }
 }

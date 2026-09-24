@@ -1,0 +1,14 @@
+{
+  "id": "R-8267e735",
+  "src": "build.py:tag_cloud",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "def tag_cloud(taggings: dict[str, list[Tagging]], root: str = \"\") -> str:",
+  "seen": {
+    "build.py:tag_cloud": "a22f0d66b6ba",
+    "concept:tag": "7bfee5732100"
+  },
+  "confirmed": {
+    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

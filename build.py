@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
+from urllib.parse import quote
 
 
 TYPE_NAMES = {
@@ -53,6 +54,17 @@ header a { font-weight: 700; text-decoration: none; }
 .shares { display: inline-flex; gap: .5rem; align-items: center; }
 .share-badge { position: relative; z-index: 1; display: inline-flex; color: #374151; }
 .share-badge svg { width: 1.1rem; height: 1.1rem; }
+.tag-cloud { margin-top: 2rem; }
+.tag-cloud h2 { font-size: 1rem; margin: 0 0 .75rem; color: #6b7280; }
+.tag-cloud ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem .9rem; align-items: baseline; }
+.tag-cloud .count { color: #9ca3af; font-size: .75rem; margin-left: .15rem; }
+.tags a { color: inherit; }
+.tag-reason { color: #6b7280; font-size: .875rem; margin: .5rem 0 0; }
+@media (min-width: 64rem) {
+  body:has(.feed-layout) { max-width: 70rem; }
+  .feed-layout { display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: 2.5rem; align-items: start; }
+  .tag-cloud { margin-top: 4.5rem; position: sticky; top: 2rem; }
+}
 .type { font-size: .8rem; color: #6b7280; }
 .tags { margin-top: .75rem; color: #6b7280; font-size: .9rem; }
 .body { margin-top: 1.25rem; line-height: 1.7; }
@@ -138,7 +150,6 @@ class Post:
         self.post_type = fields["type"]
         self.written = fields["written"]
         self.title = fields.get("title", "")
-        self.tags = [tag.strip() for tag in fields.get("tags", "").split(",") if tag.strip()]
 
 
 @dataclass(frozen=True)
@@ -326,6 +337,36 @@ class Link:
         return self.events[-1]["action"] != "removed"
 
 
+# The records attached to posts, one table each: a JSONL file whose every line is one row (one event), appended to and
+# never edited. What is current — the live links, the tags a post has now — is computed from the rows here.
+TABLES = ("links.jsonl", "patches.jsonl", "shares.jsonl", "tags.jsonl")
+RECORD_ID_RE = re.compile(r"[a-z0-9-]+")
+
+
+def table_rows(content_root: Path, name: str) -> list[tuple[Path, dict]]:
+    """(where, row) for every non-empty line of a table; `where` names the file and the line (`…/links.jsonl:3`) for errors."""
+    path = content_root / name
+    if not path.is_file():
+        return []
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError):
+        fail(path)
+    rows = []
+    for number, line in enumerate(text.split("\n"), 1):
+        if not line.strip():
+            continue
+        where = Path(f"{path}:{number}")
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            fail(where)
+        if not isinstance(row, dict):
+            fail(where)
+        rows.append((where, row))
+    return rows
+
+
 def source_name(path: Path) -> str:
     return path.as_posix()
 
@@ -362,7 +403,7 @@ def parse_post(path: Path, content_root: Path) -> Post:
         key, value = line.split(":", 1)
         key = key.strip()
         value = value.strip()
-        if key not in {"written", "type", "title", "tags"} or key in fields:
+        if key not in {"written", "type", "title"} or key in fields:
             fail(path)
         fields[key] = value
 
@@ -397,8 +438,10 @@ def post_files(content_root: Path) -> list[Path]:
         if not path.is_file():
             continue
         relative = path.relative_to(content_root)
-        if relative.parts and relative.parts[0] in {"images", "links", "patches", "shares"}:
+        if relative.parts and relative.parts[0] == "images":
             continue
+        if relative.as_posix() in TABLES:
+            continue   # the record tables are not posts
         if relative.as_posix() == ABOUT_FILE:
             continue
         result.append(path)
@@ -430,83 +473,89 @@ SHARE_PLACES = {
 @dataclass(frozen=True)
 class Share:
     path: Path
-    share_id: str
     post_id: str
     where: str
     url: str
     at: str
-
-
-def parse_share(path: Path, posts_by_id: dict[str, "Post"]) -> Share:
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError):
-        fail(path)
-    if not isinstance(data, dict) or set(data) != {"id", "post", "where", "url", "at"}:
-        fail(path)
-    share_id, post_id, where, url, at = (require_string(data[key], path) for key in ("id", "post", "where", "url", "at"))
-    if share_id != path.stem or post_id not in posts_by_id or where not in SHARE_PLACES:
-        fail(path)
-    if not re.fullmatch(r"https://\S+", url):
-        fail(path)
-    parse_written(at, path)
-    return Share(path, share_id, post_id, where, url, at)
+    line: int
 
 
 def parse_shares(content_root: Path, posts: list["Post"]) -> dict[str, list[Share]]:
-    """post id -> its shares, in the order they were shared (then by id)."""
-    folder = content_root / "shares"
+    """The share table -> post id -> its shares, in the order they were shared (then by line)."""
     posts_by_id = {post.post_id: post for post in posts}
-    shares = [parse_share(path, posts_by_id) for path in sorted(folder.glob("*.json"))] if folder.is_dir() else []
+    shares = []
+    for line, (where, data) in enumerate(table_rows(content_root, "shares.jsonl")):
+        if set(data) != {"post", "where", "url", "at"}:
+            fail(where)
+        post_id, place, url, at = (require_string(data[key], where) for key in ("post", "where", "url", "at"))
+        if post_id not in posts_by_id or place not in SHARE_PLACES or not re.fullmatch(r"https://\S+", url):
+            fail(where)
+        parse_written(at, where)
+        shares.append(Share(where, post_id, place, url, at, line))
     out: dict[str, list[Share]] = {}
-    for item in sorted(shares, key=lambda item: (item.at, item.share_id)):
+    for item in sorted(shares, key=lambda item: (item.at, item.line)):
         out.setdefault(item.post_id, []).append(item)
     return out
 
 
-def patch_files(content_root: Path) -> list[Path]:
-    patches_root = content_root / "patches"
-    if not patches_root.is_dir():
-        return []
-    return sorted(
-        (path for path in patches_root.glob("*.json") if path.is_file()),
-        key=lambda path: path.relative_to(content_root).as_posix(),
-    )
+@dataclass(frozen=True)
+class Tagging:
+    """A tag a post has now: when it was (last) added and why."""
+    tag: str
+    at: str
+    why: str
 
 
-def parse_patch(path: Path, posts_by_id: dict[str, Post]) -> Patch:
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError):
-        fail(path)
-    if not isinstance(data, dict):
-        fail(path)
+def valid_tag(tag: str) -> bool:
+    return (0 < len(tag) <= 40 and tag == tag.strip() and tag not in {".", ".."}
+            and not any(ch in tag for ch in "/\\\n\r"))
 
-    common = {"id", "post", "at", "why", "op", "anchor"}
-    if not common.issubset(data):
-        fail(path)
-    op = require_string(data["op"], path)
-    if op not in {"replace", "insert-before", "insert-after", "delete"}:
-        fail(path)
-    expected = common if op == "delete" else common | {"text"}
-    if set(data) != expected:
-        fail(path)
 
-    patch_id = require_string(data["id"], path)
-    post_id = require_string(data["post"], path)
-    at = require_string(data["at"], path)
-    why = require_string(data["why"], path)
-    anchor = require_string(data["anchor"], path)
-    if not patch_id or patch_id != path.stem or post_id not in posts_by_id:
-        fail(path)
-    parse_written(at, path)
-    text = None if op == "delete" else require_string(data["text"], path)
-    return Patch(path, patch_id, post_id, at, why, op, anchor, text)
+def parse_tags(content_root: Path, posts: list["Post"]) -> dict[str, list[Tagging]]:
+    """The tag table -> post id -> the tags it has now (by name). A post-tag pair's events alternate added/removed from
+    `added`; its last event decides."""
+    posts_by_id = {post.post_id: post for post in posts}
+    last: dict[tuple[str, str], tuple[str, str, str]] = {}
+    for where, data in table_rows(content_root, "tags.jsonl"):
+        if set(data) != {"post", "tag", "action", "at", "why"}:
+            fail(where)
+        post_id, tag, action, at, why = (require_string(data[key], where) for key in ("post", "tag", "action", "at", "why"))
+        if post_id not in posts_by_id or not valid_tag(tag) or action not in {"added", "removed"}:
+            fail(where)
+        parse_written(at, where)
+        previous = last.get((post_id, tag))
+        if (previous is None and action != "added") or (previous and (previous[0] == action or at < previous[1])):
+            fail(where)
+        last[(post_id, tag)] = (action, at, why)
+    out: dict[str, list[Tagging]] = {}
+    for (post_id, tag), (action, at, why) in sorted(last.items()):
+        if action == "added":
+            out.setdefault(post_id, []).append(Tagging(tag, at, why))
+    return out
 
 
 def parse_patches(content_root: Path, posts: list[Post]) -> list[Patch]:
+    """The patch table: one row, one patch."""
     posts_by_id = {post.post_id: post for post in posts}
-    return [parse_patch(path, posts_by_id) for path in patch_files(content_root)]
+    patches: list[Patch] = []
+    seen: set[str] = set()
+    for where, data in table_rows(content_root, "patches.jsonl"):
+        common = {"id", "post", "at", "why", "op", "anchor"}
+        if not common.issubset(data):
+            fail(where)
+        op = require_string(data["op"], where)
+        if op not in {"replace", "insert-before", "insert-after", "delete"}:
+            fail(where)
+        if set(data) != (common if op == "delete" else common | {"text"}):
+            fail(where)
+        patch_id, post_id, at, why, anchor = (require_string(data[key], where) for key in ("id", "post", "at", "why", "anchor"))
+        if not RECORD_ID_RE.fullmatch(patch_id) or patch_id in seen or post_id not in posts_by_id:
+            fail(where)
+        seen.add(patch_id)
+        parse_written(at, where)
+        text = None if op == "delete" else require_string(data["text"], where)
+        patches.append(Patch(where, patch_id, post_id, at, why, op, anchor, text))
+    return patches
 
 
 def apply_patches(posts: list[Post], patches: list[Patch]) -> dict[str, PatchState]:
@@ -516,80 +565,47 @@ def apply_patches(posts: list[Post], patches: list[Patch]) -> dict[str, PatchSta
     return states
 
 
-def link_files(content_root: Path) -> list[Path]:
-    links_root = content_root / "links"
-    if not links_root.is_dir():
-        return []
-    return sorted(
-        (path for path in links_root.rglob("*") if path.is_file()),
-        key=lambda path: path.relative_to(content_root).as_posix(),
-    )
-
-
 def require_string(value: object, path: Path) -> str:
     if not isinstance(value, str):
         fail(path)
     return value
 
 
-def parse_link(path: Path, posts_by_id: dict[str, Post]) -> Link:
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError):
-        fail(path)
-    if not isinstance(data, dict):
-        fail(path)
-
-    required = {"id", "from", "anchor", "to", "events"}
-    if set(data) != required:
-        fail(path)
-    link_id = require_string(data["id"], path)
-    from_id = require_string(data["from"], path)
-    anchor = require_string(data["anchor"], path)
-    to_id = require_string(data["to"], path)
-    if not link_id or not anchor or from_id not in posts_by_id or to_id not in posts_by_id:
-        fail(path)
-
-    raw_events = data["events"]
-    if not isinstance(raw_events, list) or not raw_events:
-        fail(path)
-    events: list[dict[str, str]] = []
-    previous_at: datetime | None = None
-    for raw_event in raw_events:
-        if not isinstance(raw_event, dict) or set(raw_event) != {"at", "action", "why"}:
-            fail(path)
-        at = require_string(raw_event["at"], path)
-        action = require_string(raw_event["action"], path)
-        why = require_string(raw_event["why"], path)
-        if action not in {"created", "reason-changed", "removed"}:
-            fail(path)
-        try:
-            event_at = datetime.strptime(at, "%Y-%m-%dT%H:%M:%SZ").replace(
-                tzinfo=timezone.utc
-            )
-        except ValueError:
-            fail(path)
-        if previous_at is not None and event_at < previous_at:
-            fail(path)
-        previous_at = event_at
-        events.append({"at": at, "action": action, "why": why})
-    if events[0]["action"] != "created":
-        fail(path)
-
-    return Link(path, link_id, from_id, anchor, to_id, events)
-
-
 def parse_links(
     content_root: Path, posts: list[Post], patch_states: dict[str, PatchState]
 ) -> list[Link]:
+    """The link table: a link is created by one row (from, to, anchor) and changed by later rows of the same `link`."""
     posts_by_id = {post.post_id: post for post in posts}
-    links = []
-    seen_ids: set[str] = set()
-    for path in link_files(content_root):
-        link = parse_link(path, posts_by_id)
-        if link.link_id in seen_ids:
-            fail(path)
-        seen_ids.add(link.link_id)
+    by_id: dict[str, Link] = {}
+    for where, row in table_rows(content_root, "links.jsonl"):
+        action = row.get("action")
+        if not isinstance(action, str):
+            fail(where)
+        if action == "created":
+            if set(row) != {"link", "from", "to", "anchor", "action", "at", "why"}:
+                fail(where)
+            link_id, from_id, to_id, anchor = (require_string(row[key], where) for key in ("link", "from", "to", "anchor"))
+            if not RECORD_ID_RE.fullmatch(link_id) or link_id in by_id or not anchor:
+                fail(where)
+            if from_id not in posts_by_id or to_id not in posts_by_id:
+                fail(where)
+            by_id[link_id] = Link(where, link_id, from_id, anchor, to_id, [])
+        elif action in {"reason-changed", "removed"}:
+            if set(row) != {"link", "action", "at", "why"}:
+                fail(where)
+            link_id = require_string(row["link"], where)
+            if link_id not in by_id:
+                fail(where)   # a link's first event is its creation
+        else:
+            fail(where)
+        at = parse_written(require_string(row["at"], where), where)
+        why = require_string(row["why"], where)
+        link = by_id[link_id]
+        if link.events and at < link.events[-1]["at"]:
+            fail(where)
+        link.events.append({"at": at, "action": action, "why": why})
+    links = list(by_id.values())
+    for link in links:
         source_body = patch_states[link.from_id].body
         positions = []
         start = 0
@@ -600,8 +616,7 @@ def parse_links(
             positions.append(position)
             start = position + 1
         if len(positions) != 1:
-            fail(path)
-        links.append(link)
+            fail(link.source)
     return links
 
 
@@ -846,12 +861,27 @@ def apply_anchor_replacements(
     replacements: list[tuple[str, str]],
     error_path: Path,
 ) -> tuple[str, dict[str, str]]:
+    # An anchor is text of the applied body (Q-link): find it in what a reader sees — the body without the patch-region
+    # markers — so an anchor spanning patched and original text is found. Markers inside it are kept, starts before the
+    # link and ends after, so every region stays whole.
+    visible_positions = []
+    index = 0
+    while index < len(body):
+        marker = PATCH_MARKER_RE.match(body, index)
+        if marker:
+            index = marker.end()
+            continue
+        visible_positions.append(index)
+        index += 1
+    visible = "".join(body[i] for i in visible_positions)
     occurrences = []
     for anchor, replacement in replacements:
-        position = body.find(anchor)
-        if position < 0:
+        position = visible.find(anchor)
+        if position < 0 or not anchor:
             fail(error_path)
-        occurrences.append((position, position + len(anchor), anchor, replacement))
+        start = visible_positions[position]
+        end = visible_positions[position + len(anchor) - 1] + 1
+        occurrences.append((start, end, anchor, replacement))
     occurrences.sort(key=lambda item: (item[0], item[2]))
 
     pieces = []
@@ -861,8 +891,11 @@ def apply_anchor_replacements(
         if start < cursor:
             fail(error_path)
         token = f"\x00guin-link-{index}\x00"
+        inner = [marker.group(0) for marker in PATCH_MARKER_RE.finditer(body, start, end)]
         pieces.append(body[cursor:start])
+        pieces.extend(m for m in inner if "-start-" in m)
         pieces.append(token)
+        pieces.extend(m for m in inner if "-end-" in m)
         tokens[token] = replacement
         cursor = end
     pieces.append(body[cursor:])
@@ -1122,6 +1155,7 @@ def render_post_page(
     links: list[Link],
     patch_states: dict[str, PatchState],
     shares: list[Share] | None = None,
+    taggings: list[Tagging] | None = None,
 ) -> str:
     patch_state = patch_states[post.post_id]
     outgoing = [
@@ -1162,9 +1196,9 @@ def render_post_page(
     title = post.title or "글"
     heading = f'<h1 class="post-title">{html.escape(post.title, quote=False)}</h1>' if post.title else ""
     tags = ""
-    if post.tags:
+    if taggings:
         tags = '<div class="tags">태그: ' + ", ".join(
-            f'<span class="tag">{html.escape(tag, quote=False)}</span>' for tag in post.tags
+            f'<a class="tag" href="../../tags/{quote(item.tag, safe="")}/">{html.escape(item.tag, quote=False)}</a>' for item in taggings
         ) + "</div>"
     article = f'''<main>
 <article class="post">
@@ -1194,11 +1228,12 @@ def item_footer(post: Post, shares: list[Share]) -> str:
             + (f'<span class="shares">{badges}</span>' if badges else "") + "</footer>")
 
 
-def feed_item(post: Post, content_root: Path, patch_state: PatchState, shares: list[Share] | None = None) -> str:
+def feed_item(post: Post, content_root: Path, patch_state: PatchState, shares: list[Share] | None = None,
+              root: str = "", reason: Tagging | None = None) -> str:
     body_html, first_text = render_body(
-        patch_state.body, content_root, post.source, "images/"
+        patch_state.body, content_root, post.source, root + "images/"
     )
-    href = f"p/{post.post_id}/"
+    href = f"{root}p/{post.post_id}/"
     if post.post_type == "short":
         # a short post has no title line: its whole body is the item
         title = None
@@ -1209,11 +1244,30 @@ def feed_item(post: Post, content_root: Path, patch_state: PatchState, shares: l
     # the whole box is the way into the post — its links, the posts pointing at it, its patches, its shares: one empty
     # link covering the box (CSS), with the share badges above it, so no link sits inside another
     link = f'<a class="item-link" href="{html.escape(href, quote=True)}" aria-label="{html.escape(title or "글 보기", quote=True)}"></a>'
+    why = (f'<p class="tag-reason">이 태그를 단 이유: {html.escape(reason.why, quote=False)} · {time_element(reason.at)}</p>'
+           if reason else "")
     return f'''<article class="feed-item">
 {link}
 {top}
-{item_footer(post, shares or [])}
+{why}{item_footer(post, shares or [])}
 </article>'''
+
+
+def tag_cloud(taggings: dict[str, list[Tagging]], root: str = "") -> str:
+    """Every tag a post has now, by name, with how many posts; the more posts, the larger. No tags, no cloud."""
+    counts: dict[str, int] = {}
+    for items in taggings.values():
+        for item in items:
+            counts[item.tag] = counts.get(item.tag, 0) + 1
+    if not counts:
+        return ""
+    low, high = min(counts.values()), max(counts.values())
+    entries = []
+    for tag in sorted(counts):
+        size = 0.9 + (0.7 * (counts[tag] - low) / (high - low) if high > low else 0.2)
+        entries.append(f'<li><a class="tag" href="{root}tags/{quote(tag, safe="")}/" style="font-size: {size:.2f}rem">'
+                       f'{html.escape(tag, quote=False)}</a><span class="count">{counts[tag]}</span></li>')
+    return '<aside class="tag-cloud">\n<h2>태그</h2>\n<ul>' + "".join(entries) + "</ul>\n</aside>"
 
 
 def render_feed(
@@ -1221,14 +1275,37 @@ def render_feed(
     content_root: Path,
     patch_states: dict[str, PatchState],
     shares: dict[str, list[Share]] | None = None,
+    taggings: dict[str, list[Tagging]] | None = None,
 ) -> str:
     ordered = sorted(posts, key=lambda post: post.post_id)
     ordered.sort(key=lambda post: post.written, reverse=True)
     items = "\n".join(
         feed_item(post, content_root, patch_states[post.post_id], (shares or {}).get(post.post_id, [])) for post in ordered
     )
-    body = f"<main>\n<h1>피드</h1>\n<section class=\"feed\">\n{items}\n</section>\n</main>"
+    body = (f'<div class="feed-layout">\n<main>\n<h1>피드</h1>\n<section class="feed">\n{items}\n</section>\n</main>\n'
+            f'{tag_cloud(taggings or {})}\n</div>')
     return page_shell("피드", "", body, current="feed")
+
+
+def render_tag_page(
+    tag: str,
+    posts: list[Post],
+    content_root: Path,
+    patch_states: dict[str, PatchState],
+    shares: dict[str, list[Share]],
+    taggings: dict[str, list[Tagging]],
+) -> str:
+    """The posts that have this tag now, newest first, each with why the tag is there."""
+    tagged = [(post, next(item for item in taggings.get(post.post_id, []) if item.tag == tag)) for post in posts
+              if any(item.tag == tag for item in taggings.get(post.post_id, []))]
+    tagged.sort(key=lambda pair: pair[0].written, reverse=True)
+    items = "\n".join(
+        feed_item(post, content_root, patch_states[post.post_id], shares.get(post.post_id, []), root="../../", reason=reason)
+        for post, reason in tagged
+    )
+    title = f"태그: {tag}"
+    body = f'<main>\n<h1>{html.escape(title, quote=False)}</h1>\n<section class="feed">\n{items}\n</section>\n</main>'
+    return page_shell(title, "../../", body)
 
 
 def parse_about(content_root: Path) -> str:
@@ -1272,7 +1349,9 @@ def write_output(
     patch_states: dict[str, PatchState],
     about_page: str,
     shares: dict[str, list[Share]] | None = None,
+    taggings: dict[str, list[Tagging]] | None = None,
 ) -> None:
+    shares, taggings = shares or {}, taggings or {}
     (output_root / "assets").mkdir(parents=True, exist_ok=True)
     (output_root / "p").mkdir(parents=True, exist_ok=True)
     (output_root / "assets" / "site.css").write_bytes(CSS.encode("utf-8"))
@@ -1280,14 +1359,20 @@ def write_output(
     (output_root / ".nojekyll").write_bytes(b"")
     copy_images(content_root, output_root)
     (output_root / "index.html").write_bytes(
-        render_feed(posts, content_root, patch_states, shares).encode("utf-8")
+        render_feed(posts, content_root, patch_states, shares, taggings).encode("utf-8")
     )
     (output_root / "about").mkdir()
     (output_root / "about" / "index.html").write_bytes(about_page.encode("utf-8"))
     for post in posts:
-        page = render_post_page(post, content_root, posts, links, patch_states, (shares or {}).get(post.post_id, []))
+        page = render_post_page(post, content_root, posts, links, patch_states, shares.get(post.post_id, []), taggings.get(post.post_id, []))
         (output_root / "p" / post.post_id).mkdir()
         (output_root / "p" / post.post_id / "index.html").write_bytes(page.encode("utf-8"))
+    for tag in sorted({item.tag for items in taggings.values() for item in items}):
+        folder = output_root / "tags" / tag
+        folder.mkdir(parents=True)
+        (folder / "index.html").write_bytes(
+            render_tag_page(tag, posts, content_root, patch_states, shares, taggings).encode("utf-8")
+        )
 
 
 def install_output(staging: Path, docs: Path) -> None:
@@ -1320,10 +1405,11 @@ def build() -> None:
     links = parse_links(content_root, posts, patch_states)
     about_page = parse_about(content_root)
     shares = parse_shares(content_root, posts)
+    taggings = parse_tags(content_root, posts)
 
     staging = Path(tempfile.mkdtemp(prefix=".docs-staging-", dir=str(root)))
     try:
-        write_output(posts, content_root, staging, links, patch_states, about_page, shares)
+        write_output(posts, content_root, staging, links, patch_states, about_page, shares, taggings)
         install_output(staging, docs)
     except Exception:
         if staging.exists():
