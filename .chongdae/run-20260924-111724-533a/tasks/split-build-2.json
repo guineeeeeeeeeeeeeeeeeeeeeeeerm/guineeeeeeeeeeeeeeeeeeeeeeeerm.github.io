@@ -1,0 +1,174 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.7.1",
+  "status": "done",
+  "def": {
+    "id": "split-build-2",
+    "role": "implementer",
+    "brief": "Q-build의 코드 구조 결정대로 build.py를 sitegen/ 패키지로 나누는 일. 이전 시도(split-build)의 결과가 이미 트리에 있다(build.py 진입점, sitegen/records·markdown·patches·pages·output, sitegen/assets/site.css·time.js): 그것을 브리프와 대조해 확인하고 모자란 것만 고친다. 기준: 동작 불변, build.py는 진입점만, 모듈 사이 순환 import 없음, CSS·JS는 패키지 위치 기준으로 읽어 docs/assets/에 바이트 그대로, 표준 라이브러리만, 함수·클래스 이름 유지(mangsang 관계가 이름에 걸려 있다). 판정: 테스트 전부 통과, 저장소 content/로 빌드한 docs/가 커밋된 것과 바이트 단위로 같음(git diff 없음, docs/에 새 파일 없음). 테스트와 plan/은 고치지 않는다. 체크는 적힌 명령 그대로 따로따로 돌린다.",
+    "closes": [
+      "Q-build"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      [
+        "python3",
+        "build.py"
+      ],
+      [
+        "git",
+        "diff",
+        "--exit-code",
+        "--stat",
+        "--",
+        "docs"
+      ]
+    ],
+    "tests": [
+      "tests/test_about.py tests/test_feed_layout.py tests/test_ids.py tests/test_images.py tests/test_linebreaks.py tests/test_readme.py tests/test_s1.py tests/test_s2.py tests/test_s3.py tests/test_shares.py tests/test_tags.py"
+    ],
+    "gate": null,
+    "domain": "code"
+  },
+  "seq": 5,
+  "added": "2026-09-24T11:41:01+00:00",
+  "response": {
+    "status": "done",
+    "summary": "build.py/sitegen 리팩터링 상태를 확인했고, 모든 지정 검사를 통과했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "python3 build.py",
+        "exit": 0
+      },
+      {
+        "check": "git diff --exit-code --stat -- docs",
+        "exit": 0
+      }
+    ],
+    "decisions": [],
+    "non-claims": [
+      "별도 정적 분석 검사는 실행하지 않았습니다."
+    ],
+    "disputed-tests": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "dakdol",
+    "domain": "code"
+  },
+  "touched_by_provider": [],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.3.0",
+        "chongdae": "1.7.1"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 7,
+      "commands-failed": 0
+    }
+  },
+  "non-claims": [
+    "(provider) 별도 정적 분석 검사는 실행하지 않았습니다."
+  ],
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.4.1",
+        "chongdae": "1.7.1"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 37,
+      "commands-failed": 2
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ],
+    [
+      "git",
+      "diff",
+      "--exit-code",
+      "--stat",
+      "--",
+      "docs"
+    ]
+  ],
+  "touched": []
+}

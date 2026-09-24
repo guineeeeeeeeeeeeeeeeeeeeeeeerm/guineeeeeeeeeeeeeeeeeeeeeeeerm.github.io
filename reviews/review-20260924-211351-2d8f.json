@@ -1,0 +1,313 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260924-211351-2d8f",
+  "since": "74cfa1b3c0fcc72d42e81d033f7fe062b5bb0402",
+  "head": "3777e9ff4ed89feca696f45807d1ee7bbdcc056c",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "delegated",
+      "where": "R-05c2f196 tests/test_shares.py:ShareContractTests realizes concept:share",
+      "text": "re-confirmed by delegation: 테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-12a51184 sitegen/pages.py:item_footer realizes concept:share",
+      "text": "re-confirmed by delegation: 세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-1f7d565a sitegen/pages.py:render_footnotes realizes concept:link",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-2148e930 tests/test_s3.py:S3PatchViewContractTests realizes concept:patch-view",
+      "text": "re-confirmed by delegation: 테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-2bfa6e13 sitegen/markdown.py:render_block realizes concept:post",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-30693c0f sitegen/pages.py:parse_about realizes concept:about",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-31bf2464 plan/PLAN.md#Q-build — 생성기와 출력 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Q-build에 코드 구조 결정(소유자 source:rf-03)을 더했을 뿐, 절은 여전히 site-build(content/를 읽어 docs/를 만드는 생성기)의 투영이다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-3fb831c1 sitegen/patches.py:patch_data_script realizes concept:patch-view",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-495f2164 sitegen/records.py:parse_post realizes concept:post-type",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-4e4aba7c sitegen/patches.py:apply_patches realizes concept:patch",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-5057ac55 sitegen/records.py:parse_post realizes concept:post",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-52c631b6 tests/test_about.py:AboutPageContractTests realizes concept:about",
+      "text": "re-confirmed by delegation: 테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-559d700c sitegen/records.py:table_rows realizes concept:record-table",
+      "text": "re-confirmed by delegation: 세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6f9820d5 tests/test_images.py:ImageWidthContractTests realizes concept:post",
+      "text": "re-confirmed by delegation: 테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-70cb93b7 sitegen/pages.py:render_feed realizes concept:feed",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-7d96af0b sitegen/pages.py:tag_cloud realizes concept:tag",
+      "text": "re-confirmed by delegation: 세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-84ace9d5 sitegen/output.py:build realizes concept:site-build",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-992df010 sitegen/records.py:parse_shares realizes concept:share",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 증거는 이전 관계의 인용 그대로(parse_tags는 시그니처의 \"Post\" 따옴표가 빠진 것만 다르다)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-a5b4fc82 tests/test_tags.py:TagContractTests realizes concept:tag",
+      "text": "re-confirmed by delegation: 테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-aa27e2d9 sitegen/pages.py:render_tag_page realizes concept:tag",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 증거는 이전 관계의 인용 그대로이고, 그 문장은 restore-comments가 되살렸다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-b2351df1 tests/test_s3.py:S3PatchContractTests realizes concept:patch",
+      "text": "re-confirmed by delegation: 테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-b6901a39 sitegen/records.py:parse_tags realizes concept:tag",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 증거는 이전 관계의 인용 그대로(parse_tags는 시그니처의 \"Post\" 따옴표가 빠진 것만 다르다)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-b8e226db sitegen/records.py:time_element realizes concept:local-time",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-bde4aa13 sitegen/records.py:parse_links realizes concept:link",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 증거는 이전 관계의 인용 그대로(parse_tags는 시그니처의 \"Post\" 따옴표가 빠진 것만 다르다)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-c04f0fd0 sitegen/pages.py:feed_item realizes concept:feed",
+      "text": "re-confirmed by delegation: 리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 증거는 이전 관계의 인용 그대로이고, 그 문장은 restore-comments가 되살렸다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-cc70f89b sitegen/pages.py:page_shell realizes concept:ui-language",
+      "text": "re-confirmed by delegation: 세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-cf5a38bf tests/test_s2.py:S2LinkContractTests realizes concept:record-table",
+      "text": "re-confirmed by delegation: 테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d6a19410 tests/test_s2.py:S2LinkContractTests realizes concept:link",
+      "text": "re-confirmed by delegation: 테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-e3e622a4 sitegen/records.py:time_id realizes concept:post",
+      "text": "re-confirmed by delegation: 세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-e400208a tests/test_ids.py:PostIdIsTheMomentItWasWrittenTests realizes concept:post",
+      "text": "re-confirmed by delegation: 테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-e47892a4 sitegen/markdown.py:image_width realizes concept:post",
+      "text": "re-confirmed by delegation: 세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "outside-run",
+      "where": "mangsang/relations/R-992df010.json, R-b6901a39.json, R-bde4aa13.json",
+      "files": [
+        "mangsang/relations/R-992df010.json",
+        "mangsang/relations/R-b6901a39.json",
+        "mangsang/relations/R-bde4aa13.json"
+      ],
+      "text": "3 file(s) changed since 74cfa1b3c0fcc72d42e81d033f7fe062b5bb0402; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 종류별 처리안을 승인했다(2026-09-24 '1번부터 배포하고 쭉 진행'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언: 글과 docs/는 소유자의 결정으로 run 밖의 절차를 따른다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-110157-f416, run-20260924-111724-533a",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "(provider) \"리팩터링의 판정은 두 가지다: 모든 테스트가 통과하고, 저장소의 content/로 빌드한 docs/가 리팩터링 전과 바이트 단위로 같다.\" — byte-for-byte output parity is not newly tested.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "dropped, not done: 잘못 맡김: 도우미를 옮기는 리팩터링을 트집(계약 테스트를 쓰는 역할)에게 보냈다. 트집은 역할대로 구조 테스트(QBuildTestSupportContractTests)를 test_s1.py에 더했을 뿐 옮긴 이가 없어 체크가 실패했다. 그 구조 테스트는 동작이 아니라 코드 배치를 묶어 두므로 버린다(test_s1.py 되돌림). 옮기는 일은 구현자 태스크 tests-support-2로 다시 넣는다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 작업 결과(sitegen/)는 트리에 있고 세션이 직접 돌려 본 테스트·docs 비교는 통과했다: split-build-2가 그 위에서 확인·마무리한다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 순서를 split-build-2 뒤로 다시 넣는다(tests-support-3).",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "(provider) 별도 정적 분석 검사는 실행하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "(provider) unittest는 이 트리에서 98개 테스트를 보고했으며, 기존 HEAD도 98개였습니다. 테스트 이름·클래스는 변경하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-111724-533a",
+      "text": "(provider) 기존 build.py/sitegen/plan 변경은 수정하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 89,
+      "text": "89 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 89)"
+    }
+  ]
+}

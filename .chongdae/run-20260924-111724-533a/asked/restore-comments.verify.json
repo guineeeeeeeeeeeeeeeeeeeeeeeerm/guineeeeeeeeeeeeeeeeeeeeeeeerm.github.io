@@ -1,0 +1,70 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.7.1",
+  "stage": "verify",
+  "run": "run-20260924-111724-533a",
+  "task": "restore-comments",
+  "role": "verifier",
+  "target": ".",
+  "goal": "리팩터링: build.py 모듈 분리, CSS·JS 파일 분리, 테스트 도우미 공통화",
+  "brief": "split-build-2가 build.py를 sitegen/으로 나누면서 설계 이유를 적은 docstring과 주석을 지웠다. 리팩터링은 동작뿐 아니라 설명도 보존해야 한다. 커밋된 이전 build.py(git show HEAD:build.py)에 있던 docstring과 주석을 전부, 글자 그대로, 옮겨진 같은 함수·클래스·상수 자리에 되살린다. 지워진 docstring: table_rows, time_id, parse_shares, parse_tags, parse_patches, parse_links, image_width, page_shell, item_footer, tag_cloud, render_tag_page. 지워진 주석 15개(블록 주석과 줄 끝 주석) — 예: '# the whole box is the way into the post …'(feed_item), '# The records attached to posts, one table each …'(TABLES), '# Where a post can be shared …'(SHARE_PLACES), '# An anchor is text of the applied body (Q-link) …'(apply_anchor_replacements). 이전 build.py의 모든 '#' 주석과 docstring이 sitegen/ 어딘가에 같은 글자로 있어야 한다. 코드 동작은 바꾸지 않는다. 판정: 테스트 전부 통과, docs/ 변화 없음. 테스트와 plan/은 고치지 않는다. 체크는 적힌 명령 그대로 따로따로 돌린다.",
+  "closes": [
+    "Q-build"
+  ],
+  "contract": {
+    "Q-build": "contract/Q-build-2daaaa4b.md"
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ],
+    [
+      "git",
+      "diff",
+      "--exit-code",
+      "--stat",
+      "--",
+      "docs"
+    ]
+  ],
+  "tests": [
+    "tests/support.py tests/test_about.py tests/test_feed_layout.py tests/test_ids.py tests/test_images.py tests/test_linebreaks.py tests/test_readme.py tests/test_s1.py tests/test_s2.py tests/test_s3.py tests/test_shares.py tests/test_tags.py"
+  ],
+  "domain": "code",
+  "response": "./.chongdae/run-20260924-111724-533a/local/restore-comments.verify.response.json",
+  "touched": [
+    "sitegen/__init__.py",
+    "sitegen/markdown.py",
+    "sitegen/pages.py",
+    "sitegen/patches.py",
+    "sitegen/records.py"
+  ],
+  "built": {
+    "summary": "sitegen에 이전 build.py의 docstring과 주석을 복원했습니다. 모든 검사 통과.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "python3 build.py",
+        "exit": 0
+      },
+      {
+        "check": "git diff --exit-code --stat -- docs",
+        "exit": 0
+      }
+    ],
+    "non-claims": []
+  },
+  "touched_since": []
+}

@@ -1,0 +1,40 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.7.1",
+  "status": "done",
+  "def": {
+    "id": "relate-sitegen-4",
+    "role": "session",
+    "brief": "parse_shares -> share, parse_tags -> tag, parse_links -> link 재제안",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 11,
+  "added": "2026-09-24T12:13:19+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-281_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.7.1"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 0,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-24T12:13:19+00:00"
+    }
+  }
+}

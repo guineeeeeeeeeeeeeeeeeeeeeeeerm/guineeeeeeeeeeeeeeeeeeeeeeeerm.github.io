@@ -1,0 +1,47 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.7.1",
+  "status": "done",
+  "def": {
+    "id": "relate-sitegen-3",
+    "role": "session",
+    "brief": "item_footer, table_rows, tag_cloud, page_shell, time_id, image_width 관계 재확인",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 10,
+  "added": "2026-09-24T12:12:54+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [
+    "mangsang/relations/R-12a51184.json",
+    "mangsang/relations/R-559d700c.json",
+    "mangsang/relations/R-7d96af0b.json",
+    "mangsang/relations/R-cc70f89b.json",
+    "mangsang/relations/R-e3e622a4.json",
+    "mangsang/relations/R-e47892a4.json"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-281_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.7.1"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 0,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-24T12:12:54+00:00"
+    }
+  }
+}

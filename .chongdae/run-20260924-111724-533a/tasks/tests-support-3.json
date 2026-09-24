@@ -1,0 +1,214 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.7.1",
+  "status": "done",
+  "def": {
+    "id": "tests-support-3",
+    "role": "implementer",
+    "brief": "Q-build의 리팩터링 결정 중 테스트 부분: 테스트 파일마다 되풀이되는 도우미(BUILD 경로, 임시 사이트 만들기 temporary_site류, run_build, read 등 출력 읽기)를 tests/support.py 한 곳으로 옮기고 각 테스트 파일이 그것을 import해 쓰게 한다. 이것은 테스트 코드의 리팩터링이다: 각 테스트가 확인하는 것(assert, 픽스처 내용, 테스트 메서드 이름과 클래스 이름)은 한 글자도 바꾸지 않는다 — mangsang 관계가 클래스 이름(S1GeneratorContractTests 등)에 걸려 있다. 파일마다 픽스처가 조금씩 다르면(about.md 기본값, 표 파일 쓰기 등) 공통 도우미가 인자로 받게 하되 억지로 합치지 않는다; 한 파일에만 쓰이는 도우미는 그 파일에 남긴다. build.py·sitegen/·plan/은 건드리지 않는다. 테스트는 python3 -m unittest discover -s tests로 돌므로 tests/가 sys.path에 있다(from support import ...). 판정: 테스트 수가 지금(100개)과 같고 전부 통과, docs/ 변화 없음. 체크는 적힌 명령 그대로 따로따로 돌린다.",
+    "closes": [
+      "Q-build"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      [
+        "python3",
+        "build.py"
+      ],
+      [
+        "git",
+        "diff",
+        "--exit-code",
+        "--stat",
+        "--",
+        "docs"
+      ]
+    ],
+    "tests": [],
+    "gate": null,
+    "domain": "code"
+  },
+  "seq": 6,
+  "added": "2026-09-24T11:41:01+00:00",
+  "response": {
+    "status": "done",
+    "summary": "tests/support.py에 공통 도우미를 모으고 모든 테스트가 이를 사용하도록 리팩터링했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "python3 build.py",
+        "exit": 0
+      },
+      {
+        "check": "git diff --exit-code --stat -- docs",
+        "exit": 0
+      }
+    ],
+    "decisions": [],
+    "non-claims": [
+      "unittest는 이 트리에서 98개 테스트를 보고했으며, 기존 HEAD도 98개였습니다. 테스트 이름·클래스는 변경하지 않았습니다.",
+      "기존 build.py/sitegen/plan 변경은 수정하지 않았습니다."
+    ],
+    "disputed-tests": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "dakdol",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "tests/support.py",
+    "tests/test_about.py",
+    "tests/test_feed_layout.py",
+    "tests/test_ids.py",
+    "tests/test_images.py",
+    "tests/test_linebreaks.py",
+    "tests/test_readme.py",
+    "tests/test_s1.py",
+    "tests/test_s2.py",
+    "tests/test_s3.py",
+    "tests/test_shares.py",
+    "tests/test_tags.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.3.0",
+        "chongdae": "1.7.1"
+      }
+    },
+    "trace": {
+      "changed": [
+        "add ./tests/support.py",
+        "update ./tests/test_about.py",
+        "update ./tests/test_feed_layout.py",
+        "update ./tests/test_ids.py",
+        "update ./tests/test_images.py",
+        "update ./tests/test_linebreaks.py",
+        "update ./tests/test_readme.py",
+        "update ./tests/test_s1.py",
+        "update ./tests/test_s2.py",
+        "update ./tests/test_s3.py",
+        "update ./tests/test_shares.py",
+        "update ./tests/test_tags.py",
+        "update ./tests/support.py"
+      ],
+      "commands-run": 28,
+      "commands-failed": 1
+    }
+  },
+  "non-claims": [
+    "(provider) unittest는 이 트리에서 98개 테스트를 보고했으며, 기존 HEAD도 98개였습니다. 테스트 이름·클래스는 변경하지 않았습니다.",
+    "(provider) 기존 build.py/sitegen/plan 변경은 수정하지 않았습니다."
+  ],
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.4.1",
+        "chongdae": "1.7.1"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 12,
+      "commands-failed": 2
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ],
+    [
+      "git",
+      "diff",
+      "--exit-code",
+      "--stat",
+      "--",
+      "docs"
+    ]
+  ],
+  "touched": [
+    "tests/support.py",
+    "tests/test_about.py",
+    "tests/test_feed_layout.py",
+    "tests/test_ids.py",
+    "tests/test_images.py",
+    "tests/test_linebreaks.py",
+    "tests/test_readme.py",
+    "tests/test_s1.py",
+    "tests/test_s2.py",
+    "tests/test_s3.py",
+    "tests/test_shares.py",
+    "tests/test_tags.py"
+  ]
+}
