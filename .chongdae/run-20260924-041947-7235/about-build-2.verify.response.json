@@ -1,0 +1,20 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "verdict": "reject",
+  "findings": [
+    {
+      "kind": "plan-vs-code",
+      "where": "build.py:inline_markdown",
+      "record_quote": "본문 문법은 Q-post와 같고, 여기에 바깥 링크 `[글자](주소)`가 더해진다.",
+      "tree_quote": "if external_links:\n    pieces: list[str] = []\n    cursor = 0\n    for match in EXTERNAL_LINK_RE.finditer(text):\n        pieces.append(inline_markdown(text[cursor : match.start()], content_root, post_path, image_prefix))\n        ...\n        pieces.append(inline_markdown(text[cursor:], content_root, post_path, image_prefix))",
+      "why": "바깥 링크를 일반 인라인 문법보다 먼저 잘라 내므로 링크가 인라인 코드나 강조 구문 안에 있을 때 Q-post 서식이 깨진다. 예를 들어 백틱으로 감싼 `[x](https://example.com)`이 코드가 아니라 링크로 렌더링되고, 링크 주변의 `**` 강조도 분리된다."
+    }
+  ],
+  "worker": {
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "session": "01a0d1a6-cced-70e1-90cd-604e89bd3ed8",
+    "effort": "xhigh",
+    "transcript": "about-build-2.verify.response.transcript.jsonl"
+  }
+}

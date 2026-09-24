@@ -2,9 +2,9 @@
   "artifact-type": "chongdae/task@1",
   "status": "done",
   "def": {
-    "id": "about-plan",
+    "id": "about-tests-2",
     "role": "session",
-    "brief": "plan/PLAN.md에 Q-about 절: 소유자가 대화에서 정한 소개 페이지(content/about.md, 옛 첫 화면 모양, 두 이미지, 바깥 링크)와 Q-readme 보강",
+    "brief": "tests/test_about.py: Q-about을 계약 테스트로 쓴다(임시 사이트에 about.md와 이미지를 두고 빌드). about-tests는 작업 전에 run이 지나가며 완료로 기록되어 대신한다",
     "closes": [
       "Q-about"
     ],
@@ -12,11 +12,12 @@
     "checks": [],
     "tests": [],
     "gate": null,
-    "domain": "plan"
+    "domain": "site"
   },
-  "seq": 1,
-  "added": "2026-09-24T04:20:14+00:00",
+  "seq": 4,
+  "added": "2026-09-24T04:21:05+00:00",
   "start": {
+    "plan/PLAN.md": "637f85acc0cebde54674e3a04af3bda1c850054b",
     "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
     "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
     "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
@@ -27,7 +28,7 @@
   ],
   "checks": [],
   "touched": [
-    "plan/PLAN.md"
+    "tests/test_about.py"
   ],
   "performed_by": {
     "provider": "session",
