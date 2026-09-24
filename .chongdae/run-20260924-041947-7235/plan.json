@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "소개 페이지: content/about.md를 예전 첫 화면 같은 docs/about.html로",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
