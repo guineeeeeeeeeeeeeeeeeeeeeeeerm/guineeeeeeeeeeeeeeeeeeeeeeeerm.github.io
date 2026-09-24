@@ -25,10 +25,10 @@
       "fingerprint": "64a8b2aa7c00"
     },
     "dwitbuk": {
-      "version": "1.4.0",
+      "version": "1.4.1",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/dwitbuk",
       "marketplace": "dwitbuk",
-      "fingerprint": "54592aed93a0"
+      "fingerprint": "48c339ce94a7"
     },
     "hacheong": {
       "version": "1.3.0",
@@ -45,7 +45,7 @@
     "mangsang:operate"
   ],
   "denied": [],
-  "skills-fingerprint": "1ffe1f4aa8c1",
+  "skills-fingerprint": "a8098bcdd300",
   "hooks": [
     {
       "event": "SessionStart",
