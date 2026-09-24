@@ -1,0 +1,28 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-071928-d367",
+  "task": "adopt",
+  "role": "verifier",
+  "target": ".",
+  "goal": "chongdae 1.6.0, hunsu 1.4.0, dwitbuk 1.2.0 반영; outside-runs와 dev-settings 선언",
+  "brief": "새 버전 기록(hunsu add), settings.chongdae.outside-runs = content/, docs/; dev-settings = chongdae commit-records false; hunsu lock",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "{plugin:hunsu}/hunsu.py",
+      "check"
+    ]
+  ],
+  "tests": [],
+  "domain": "plan",
+  "response": "./.chongdae/run-20260924-071928-d367/adopt.verify.response.json",
+  "touched": [
+    "hunsu.json",
+    "hunsu.lock.json"
+  ],
+  "built": null
+}
