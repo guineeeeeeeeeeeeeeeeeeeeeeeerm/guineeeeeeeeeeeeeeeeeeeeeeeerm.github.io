@@ -1,0 +1,35 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-091515-9861",
+  "task": "tables-regress",
+  "role": "verifier",
+  "target": ".",
+  "goal": "기록을 표(JSONL)로: links, patches, shares, tags; 헤더 tags 제거; 태그 클라우드와 태그 페이지",
+  "brief": "검증자가 찾은 두 결함의 회귀 테스트: 문자열이 아닌 action은 행 오류, 패치된 글자와 원문에 걸친 앵커도 링크",
+  "closes": [
+    "Q-link"
+  ],
+  "contract": {
+    "Q-link": "## Q-link — 주석으로 거는 링크\n\nConcept: `link`.\n\n링크 표 `content/links.jsonl`의 한 줄은 링크 사건 하나다. 링크를 거는 줄은 `{\"link\": <링크 id>, \"from\": <글 id>, \"to\": <글 id>,\n\"anchor\": <문자열>, \"action\": \"created\", \"at\": <UTC 시각>, \"why\": <문자열>}`이고, 그 뒤의 사건은 `{\"link\", \"action\":\n\"reason-changed\" | \"removed\", \"at\", \"why\"}`다. 한 링크의 첫 사건은 `created`이고 `created`는 한 번뿐이며, 사건의 시각은\n줄 순서대로 내려가지 않는다. 현재 사유는 마지막 `created` 또는 `reason-changed`의 `why`다. 마지막 사건이 `removed`면 그 링크는\n화면에 나오지 않지만 기록은 남는다(변경 기록은 관리하되 화면에 보이지 않는다). 키 집합이 위와 다르거나, `created`가 아닌 사건이\n먼저 오거나, `created`가 두 번이거나, 시각이 내려가면 빌드 오류이고 오류 줄은 그 표의 줄을 가리킨다.\n\n`anchor`는 `from` 글의 적용된 본문에 그대로 나오는 문자열이며, 정확히 한 번 나와야 한다(없거나 두 번 이상이면 빌드\n오류). 글 페이지에서 그 문자열은 `to` 글로 가는 링크가 되고, 바로 뒤에 위첨자 `[n]`이 붙는다. `n`은 그 글 안에서 앵커가\n나오는 순서로 1부터 매긴다. 본문 아래 \"주석\" 목록의 `n`번 항목은 `to` 글의 제목(없으면 첫 문단 앞 80자)과 현재 사유,\n링크를 건 시각(`created`의 `at`)을 보여준다. `from`이나 `to`가 없는 글이거나, 앵커가 없거나 두 번 이상 나오면 빌드\n오류이고 오류 줄은 그 링크의 `created` 줄을 가리킨다.\n\nDecided after quibble (s2-tests, technical, delegated): 앵커 글자는 `<a href=\"../<to>/\">…</a>`가 되고 바로 뒤에\n`<sup><a href=\"#fn-<n>\">[n]</a></sup>`가 붙는다. \"주석\" 목록은 `<ol>`이며 `n`번 항목의 `id`는 `fn-<n>`이다. 글 페이지 사이의\n링크는 상대 경로다(주소 형식은 Q-build의 폴더 방식 주소).\n\nDecided (owner, `source:plan-11`): 받는 쪽 글(`to`)의 페이지 아래에 \"이 글을 가리키는 글\" 목록을 두고, 각 항목은 `from`\n글의 제목(없으면 첫 문단 앞 80자)과 현재 사유를 보여준다.\n\nDecided after quibble (s2-tests, technical, delegated): 이 목록은 링크를 건 시각(`created`의 `at`)의 최신순이고, 같으면 링크\n`id` 순이다. 마지막 이벤트가 `removed`인 링크는 넣지 않는다. 가리키는 글이 없으면 목록을 두지 않는다.\n\nDismissed after quibble (s2-tests): \"checks가 비어 있다\" — 트집 작업의 테스트가 검사이고 `s2-build`가 돌린다."
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "tests": [],
+  "domain": "site",
+  "response": "./.chongdae/run-20260924-091515-9861/tables-regress.verify.response.json",
+  "touched": [
+    "tests/test_s2.py",
+    "tests/test_s3.py"
+  ],
+  "built": null
+}
