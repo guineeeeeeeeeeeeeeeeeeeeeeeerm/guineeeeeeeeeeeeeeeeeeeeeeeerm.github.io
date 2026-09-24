@@ -1,0 +1,14 @@
+{
+  "id": "R-d2ea1a75",
+  "src": "source:fd-01",
+  "predicate": "realizes",
+  "dst": "concept:feed",
+  "evidence": "각 글 영역은 분리되어야 함.",
+  "seen": {
+    "source:fd-01": "ab9840cd9e35",
+    "concept:feed": "881481885910"
+  },
+  "confirmed": {
+    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

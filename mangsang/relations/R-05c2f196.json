@@ -1,0 +1,14 @@
+{
+  "id": "R-05c2f196",
+  "src": "tests/test_shares.py:ShareContractTests",
+  "predicate": "realizes",
+  "dst": "concept:share",
+  "evidence": "def test_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):",
+  "seen": {
+    "tests/test_shares.py:ShareContractTests": "5e8916cd5d05",
+    "concept:share": "ae8d0b44fd09"
+  },
+  "confirmed": {
+    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

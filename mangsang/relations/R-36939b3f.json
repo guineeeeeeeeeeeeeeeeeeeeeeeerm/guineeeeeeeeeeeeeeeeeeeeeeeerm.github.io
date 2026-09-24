@@ -6,9 +6,9 @@
   "evidence": "모든 글을 최신순 한 줄로 (추천)",
   "seen": {
     "source:plan-09t": "6d7b916a643a",
-    "concept:feed": "c0480deb3518"
+    "concept:feed": "881481885910"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the feed layout and share records (run-20260924-082355-b147): the feed's order, what a short or titled post shows and the menu are unchanged by the new box, footer and badges; Q-about's text is unchanged (Q-share now follows it). Technical, delegated (plan-07)"
   }
 }

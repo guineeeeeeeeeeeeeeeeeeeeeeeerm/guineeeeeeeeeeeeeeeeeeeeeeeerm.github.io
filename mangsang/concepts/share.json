@@ -1,0 +1,8 @@
+{
+  "name": "share",
+  "means": "글을 올린 뒤 다른 곳(X, 스레드, 링크드인 등)에 공유한 기록. 글 파일이 아니라 공유마다 별도 기록으로 남고, 피드 항목과 글 페이지 하단에 곳마다 흑백 아이콘 배지로 보이며, 배지를 누르면 공유한 글로 간다.",
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:fd-03"
+  }
+}

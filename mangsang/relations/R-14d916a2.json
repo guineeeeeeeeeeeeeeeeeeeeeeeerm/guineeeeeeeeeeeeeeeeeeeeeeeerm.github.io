@@ -1,0 +1,14 @@
+{
+  "id": "R-14d916a2",
+  "src": "build.py:feed_item",
+  "predicate": "realizes",
+  "dst": "concept:feed",
+  "evidence": "# a short post has no title line: its whole body is the item, and its time links to it",
+  "seen": {
+    "build.py:feed_item": "9f13610d0bd0",
+    "concept:feed": "881481885910"
+  },
+  "confirmed": {
+    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

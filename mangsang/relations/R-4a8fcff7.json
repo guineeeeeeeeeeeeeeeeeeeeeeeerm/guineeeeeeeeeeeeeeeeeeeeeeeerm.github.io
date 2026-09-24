@@ -6,9 +6,9 @@
   "evidence": "def test_Q_feed_orders_newest_first(self):",
   "seen": {
     "tests/test_s1.py:S1GeneratorContractTests": "0cd7cac7036c",
-    "concept:feed": "c0480deb3518"
+    "concept:feed": "881481885910"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5): the feed-order test lost its equal-times half (a post's id is its moment; two cannot share one) and was renamed; it still checks newest first. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the feed layout and share records (run-20260924-082355-b147): the feed's order, what a short or titled post shows and the menu are unchanged by the new box, footer and badges; Q-about's text is unchanged (Q-share now follows it). Technical, delegated (plan-07)"
   }
 }

@@ -92,6 +92,16 @@ Concept: `feed`.
 Dismissed after quibble (s1-tests): "checks가 비어 있다"는 다섯 건 — 트집 작업은 계약 테스트를 쓰는 작업이라 그 테스트가 검사이고,
 `s1-build`가 `python3 -m unittest discover -s tests`로 돌린다.
 
+Decided (owner, `source:fd-01`, `source:fd-02`, `source:fd-03`): 피드 항목의 양식 —
+- 항목마다 분리된 상자(`<article class="feed-item">`)다.
+- 제목은 있을 때만 맨 위에 굵게 나오고 글 페이지로 가는 링크다. 짧은 글에는 제목 줄이 없다(제목 자리에 `<id>`를 쓰지 않는다).
+  제목이 없는 중간·긴 글은 위의 80자가 제목 자리에 온다.
+- 짧은 글은 요약 없이 본문 전체를 보여준다. 짧은 글이기 때문이다.
+- 항목 하단(`<footer class="item-footer">`)에 유형 이름과 작성 시각(Q-time의 독자 현지 시각)이 나오고, 작성 시각이 그 글의
+  페이지로 가는 링크다(X, 스레드처럼). 그 뒤에 공유 배지가 붙는다(Q-share).
+- 본문 글씨는 읽기 좋게 키운다(18px, `1.125rem`).
+Decided (technical, session): 글 페이지도 같은 하단(유형, 작성 시각, 공유 배지)을 본문 아래에 둔다 — 디자인 일관성(`source:about-09`).
+
 ## Q-time — 시각 표시
 
 Concept: `local-time`.
@@ -219,3 +229,20 @@ Decided (owner, `source:about-06`): 소개 글은 반드시 있다 — `content/
 
 Decided (technical, session): 바깥 링크는 `<a href="<주소>">글자</a>`이며 글자는 서식 없이 글자로 보인다. 소개 페이지의 본문은 글
 페이지처럼 `<article class="post">` 안의 `<div class="body">`에 놓이고, 소개 페이지만의 스타일은 없다.
+
+## Q-share — 공유 기록과 배지
+
+Concept: `share`.
+
+Decided (owner, `source:fd-01`, `source:fd-03`; 제안 `source:fd-00`): 글이 다른 곳(X, 스레드, 링크드인 등)에 공유되면 그 기록을
+남기고, 피드 항목과 글 페이지 하단에 곳마다 흑백 아이콘 배지를 단다. 배지는 그 공유 글로 가는 링크다. 아직 아무 곳에도 공유하지
+않았고, 공유할 때 기록 파일 하나를 더하면 되도록 간단해야 한다.
+
+Decided (technical, session): 공유는 글을 올린 뒤에 생기는 일이라 글 파일의 헤더가 아니라 링크·패치처럼 별도의 기록이다.
+공유 파일은 `content/shares/<id>.json`이고 파일 하나가 공유 하나다: `{"id", "post": <글 id>, "where": <곳>, "url": <주소>,
+"at": <UTC 시각>}`. `id`는 파일 이름(확장자 제외)과 같다. `where`는 빌드가 아는 곳 중 하나다 — 처음은 `x`, `threads`,
+`linkedin`이고, 곳을 늘리는 일은 빌드에 이름과 아이콘을 더하는 사이트 작업이다. `url`은 `https://`로 시작한다. JSON이 아니거나,
+키 집합이 위와 다르거나, `id`가 파일 이름과 다르거나, `post`가 없는 글이거나, `where`가 모르는 곳이거나, `url`·`at`의 형식이
+틀리면 빌드 오류이고 오류 줄은 그 공유 파일의 경로를 포함한다. 한 글에 공유가 여럿이면 `at` 순(같으면 `id` 순)으로 배지를
+단다. 배지는 사이트 안에 그린 흑백 아이콘(SVG)이고 외부에서 가져오지 않으며, 곳의 이름을 `aria-label`로 가진다. 공유가 없는
+글에는 배지 자리가 없다.

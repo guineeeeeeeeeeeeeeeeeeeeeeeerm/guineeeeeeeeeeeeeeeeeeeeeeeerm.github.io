@@ -1,0 +1,14 @@
+{
+  "id": "R-a3188744",
+  "src": "build.py:item_footer",
+  "predicate": "realizes",
+  "dst": "concept:share",
+  "evidence": "f'<a class=\"share-badge\" href=\"{html.escape(item.url, quote=True)}\"",
+  "seen": {
+    "build.py:item_footer": "c4677b06b114",
+    "concept:share": "ae8d0b44fd09"
+  },
+  "confirmed": {
+    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

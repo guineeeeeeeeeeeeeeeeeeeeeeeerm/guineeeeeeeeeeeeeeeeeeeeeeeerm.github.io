@@ -1,0 +1,14 @@
+{
+  "id": "share-shown",
+  "text": "글이 어디에 공유되었는지는 어떻게 기록되고 보이나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "share"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:fd-03"
+  }
+}

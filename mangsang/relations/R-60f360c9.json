@@ -1,0 +1,14 @@
+{
+  "id": "R-60f360c9",
+  "src": "tests/test_feed_layout.py:FeedLayoutContractTests",
+  "predicate": "realizes",
+  "dst": "concept:feed",
+  "evidence": "def test_a_short_post_has_no_title_line_and_shows_its_whole_body(self):",
+  "seen": {
+    "tests/test_feed_layout.py:FeedLayoutContractTests": "422a05f4d39b",
+    "concept:feed": "881481885910"
+  },
+  "confirmed": {
+    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

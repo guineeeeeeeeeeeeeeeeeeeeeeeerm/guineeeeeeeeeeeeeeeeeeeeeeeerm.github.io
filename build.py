@@ -37,14 +37,20 @@ ABOUT_FILE = "about.md"
 
 CSS = """\
 :root { color-scheme: light; font-family: system-ui, sans-serif; }
-body { margin: 0 auto; max-width: 48rem; padding: 2rem 1.25rem; color: #202124; background: #fff; }
+body { margin: 0 auto; max-width: 48rem; padding: 2rem 1.25rem; color: #202124; background: #fff; font-size: 1.125rem; line-height: 1.7; }
 a { color: inherit; }
 header { margin-bottom: 2rem; }
 header a { font-weight: 700; text-decoration: none; }
 .feed { display: grid; gap: 1.25rem; }
-.feed-item, .post { border-bottom: 1px solid #e5e7eb; padding-bottom: 1.25rem; }
+.feed-item { border: 1px solid #e5e7eb; border-radius: .75rem; padding: 1rem 1.25rem; }
+.post { padding-bottom: 1.25rem; }
 .post-title, .feed-title { margin: 0 0 .5rem; }
-.meta { color: #6b7280; font-size: .875rem; display: flex; gap: .75rem; align-items: center; }
+.item-footer { color: #6b7280; font-size: .875rem; display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-top: .75rem; }
+.item-footer a { color: inherit; text-decoration: none; }
+.item-footer a:hover { text-decoration: underline; }
+.shares { display: inline-flex; gap: .5rem; align-items: center; }
+.share-badge { display: inline-flex; color: #374151; }
+.share-badge svg { width: 1.1rem; height: 1.1rem; }
 .type { font-size: .8rem; color: #6b7280; }
 .tags { margin-top: .75rem; color: #6b7280; font-size: .9rem; }
 .body { margin-top: 1.25rem; line-height: 1.7; }
@@ -389,7 +395,7 @@ def post_files(content_root: Path) -> list[Path]:
         if not path.is_file():
             continue
         relative = path.relative_to(content_root)
-        if relative.parts and relative.parts[0] in {"images", "links", "patches"}:
+        if relative.parts and relative.parts[0] in {"images", "links", "patches", "shares"}:
             continue
         if relative.as_posix() == ABOUT_FILE:
             continue
@@ -407,6 +413,53 @@ def parse_posts(content_root: Path) -> list[Post]:
         by_id[post.post_id] = path
         posts.append(post)
     return posts
+
+
+# Where a post can be shared: the name shown to a reader and a monochrome icon drawn here (nothing is fetched). Adding a
+# place is adding a line here.
+SHARE_PLACES = {
+    "x": ("X", '<path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>'),
+    "threads": ("Threads", '<path d="M16.5 11.5c-.4-3-2.2-4.3-4.6-4.3-2.8 0-4.7 2-4.7 5s1.9 5 4.7 5c2.3 0 4.2-1.3 4.2-3.4 0-1.8-1.4-2.9-3.6-2.9-1.9 0-3 .9-3 2.1 0 1.1.9 1.9 2.4 1.9 2.7 0 4.1-2.3 3.4-6.4M20 12a8 8 0 1 1-8-8c3.7 0 6.3 2 7.3 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'),
+    "linkedin": ("LinkedIn", '<rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>'
+                 '<path d="M8 10.5V17M8 7.2v.1M11.5 17v-6.5M11.5 13.2c0-1.6 1-2.7 2.3-2.7s2.2.9 2.2 2.6V17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'),
+}
+
+
+@dataclass(frozen=True)
+class Share:
+    path: Path
+    share_id: str
+    post_id: str
+    where: str
+    url: str
+    at: str
+
+
+def parse_share(path: Path, posts_by_id: dict[str, "Post"]) -> Share:
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        fail(path)
+    if not isinstance(data, dict) or set(data) != {"id", "post", "where", "url", "at"}:
+        fail(path)
+    share_id, post_id, where, url, at = (require_string(data[key], path) for key in ("id", "post", "where", "url", "at"))
+    if share_id != path.stem or post_id not in posts_by_id or where not in SHARE_PLACES:
+        fail(path)
+    if not re.fullmatch(r"https://\S+", url):
+        fail(path)
+    parse_written(at, path)
+    return Share(path, share_id, post_id, where, url, at)
+
+
+def parse_shares(content_root: Path, posts: list["Post"]) -> dict[str, list[Share]]:
+    """post id -> its shares, in the order they were shared (then by id)."""
+    folder = content_root / "shares"
+    posts_by_id = {post.post_id: post for post in posts}
+    shares = [parse_share(path, posts_by_id) for path in sorted(folder.glob("*.json"))] if folder.is_dir() else []
+    out: dict[str, list[Share]] = {}
+    for item in sorted(shares, key=lambda item: (item.at, item.share_id)):
+        out.setdefault(item.post_id, []).append(item)
+    return out
 
 
 def patch_files(content_root: Path) -> list[Path]:
@@ -1066,6 +1119,7 @@ def render_post_page(
     posts: list[Post],
     links: list[Link],
     patch_states: dict[str, PatchState],
+    shares: list[Share] | None = None,
 ) -> str:
     patch_state = patch_states[post.post_id]
     outgoing = [
@@ -1113,10 +1167,10 @@ def render_post_page(
     article = f'''<main>
 <article class="post">
 {heading}
-<div class="meta"><span class="type">{TYPE_NAMES[post.post_type]}</span>{time_element(post.written)}</div>
 {tags}
 {patch_controls}
 <div class="body">{body_html}</div>
+{item_footer(post, "./", shares or [])}
 {patch_catalog}
 {render_footnotes(post, content_root, posts, outgoing, patch_states)}
 {render_incoming_links(post, content_root, posts, [link for link in links if link.active and link.to_id == post.post_id], patch_states)}
@@ -1126,20 +1180,33 @@ def render_post_page(
     return page_shell(title, "../../", article)
 
 
-def feed_item(post: Post, content_root: Path, patch_state: PatchState) -> str:
+def item_footer(post: Post, href: str, shares: list[Share]) -> str:
+    """The bottom of a post, in the feed and on its page: its type, the time it was written (a link to the post), where it
+    was shared."""
+    badges = "".join(
+        f'<a class="share-badge" href="{html.escape(item.url, quote=True)}" aria-label="{SHARE_PLACES[item.where][0]}" '
+        f'title="{SHARE_PLACES[item.where][0]}"><svg viewBox="0 0 24 24" aria-hidden="true">{SHARE_PLACES[item.where][1]}</svg></a>'
+        for item in shares
+    )
+    return (f'<footer class="item-footer"><span class="type">{TYPE_NAMES[post.post_type]}</span>'
+            f'<a href="{html.escape(href, quote=True)}">{time_element(post.written)}</a>'
+            + (f'<span class="shares">{badges}</span>' if badges else "") + "</footer>")
+
+
+def feed_item(post: Post, content_root: Path, patch_state: PatchState, shares: list[Share] | None = None) -> str:
     body_html, first_text = render_body(
         patch_state.body, content_root, post.source, "images/"
     )
+    href = f"p/{post.post_id}/"
     if post.post_type == "short":
-        content = f'<div class="body">{body_html}</div>'
-        link_text = post.post_id
+        # a short post has no title line: its whole body is the item, and its time links to it
+        top = f'<div class="body">{body_html}</div>'
     else:
-        link_text = post.title or first_text[:80] + ("…" if len(first_text) > 80 else "")
-        content = ""
+        title = post.title or first_text[:80] + ("…" if len(first_text) > 80 else "")
+        top = f'<h2 class="feed-title"><a href="{html.escape(href, quote=True)}">{html.escape(title, quote=False)}</a></h2>'
     return f'''<article class="feed-item">
-<div class="meta"><span class="type">{TYPE_NAMES[post.post_type]}</span>{time_element(post.written)}</div>
-<h2 class="feed-title"><a href="p/{html.escape(post.post_id, quote=True)}/">{html.escape(link_text, quote=False)}</a></h2>
-{content}
+{top}
+{item_footer(post, href, shares or [])}
 </article>'''
 
 
@@ -1147,11 +1214,12 @@ def render_feed(
     posts: list[Post],
     content_root: Path,
     patch_states: dict[str, PatchState],
+    shares: dict[str, list[Share]] | None = None,
 ) -> str:
     ordered = sorted(posts, key=lambda post: post.post_id)
     ordered.sort(key=lambda post: post.written, reverse=True)
     items = "\n".join(
-        feed_item(post, content_root, patch_states[post.post_id]) for post in ordered
+        feed_item(post, content_root, patch_states[post.post_id], (shares or {}).get(post.post_id, [])) for post in ordered
     )
     body = f"<main>\n<h1>피드</h1>\n<section class=\"feed\">\n{items}\n</section>\n</main>"
     return page_shell("피드", "", body, current="feed")
@@ -1197,6 +1265,7 @@ def write_output(
     links: list[Link],
     patch_states: dict[str, PatchState],
     about_page: str,
+    shares: dict[str, list[Share]] | None = None,
 ) -> None:
     (output_root / "assets").mkdir(parents=True, exist_ok=True)
     (output_root / "p").mkdir(parents=True, exist_ok=True)
@@ -1205,12 +1274,12 @@ def write_output(
     (output_root / ".nojekyll").write_bytes(b"")
     copy_images(content_root, output_root)
     (output_root / "index.html").write_bytes(
-        render_feed(posts, content_root, patch_states).encode("utf-8")
+        render_feed(posts, content_root, patch_states, shares).encode("utf-8")
     )
     (output_root / "about").mkdir()
     (output_root / "about" / "index.html").write_bytes(about_page.encode("utf-8"))
     for post in posts:
-        page = render_post_page(post, content_root, posts, links, patch_states)
+        page = render_post_page(post, content_root, posts, links, patch_states, (shares or {}).get(post.post_id, []))
         (output_root / "p" / post.post_id).mkdir()
         (output_root / "p" / post.post_id / "index.html").write_bytes(page.encode("utf-8"))
 
@@ -1244,10 +1313,11 @@ def build() -> None:
     patch_states = apply_patches(posts, patches)
     links = parse_links(content_root, posts, patch_states)
     about_page = parse_about(content_root)
+    shares = parse_shares(content_root, posts)
 
     staging = Path(tempfile.mkdtemp(prefix=".docs-staging-", dir=str(root)))
     try:
-        write_output(posts, content_root, staging, links, patch_states, about_page)
+        write_output(posts, content_root, staging, links, patch_states, about_page, shares)
         install_output(staging, docs)
     except Exception:
         if staging.exists():

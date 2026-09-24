@@ -28,5 +28,11 @@
   },
   {
     "path": "tests/test_ids.py"
+  },
+  {
+    "path": "tests/test_feed_layout.py"
+  },
+  {
+    "path": "tests/test_shares.py"
   }
 ]

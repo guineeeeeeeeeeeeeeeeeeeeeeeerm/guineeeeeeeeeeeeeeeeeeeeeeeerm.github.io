@@ -5,10 +5,10 @@
   "dst": "concept:site-build",
   "evidence": "def build() -> None:",
   "seen": {
-    "build.py:build": "fefa01da1254",
+    "build.py:build": "c64e6457d7fe",
     "concept:site-build": "66de2d1eaeaa"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after about-build-2: build() still builds the site (now also the about page); page_shell still emits lang=\"ko\" and Korean menu words (피드, 소개); render_feed still renders the feed (a has_about flag added); Q-readme still promises the build command and how to write a post (one paragraph on the about page added). Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the feed layout and share records (run-20260924-082355-b147): the feed's order, what a short or titled post shows and the menu are unchanged by the new box, footer and badges; Q-about's text is unchanged (Q-share now follows it). Technical, delegated (plan-07)"
   }
 }

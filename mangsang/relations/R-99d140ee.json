@@ -6,9 +6,9 @@
   "evidence": "\"메인 페이지(사이트 첫 주소)는 어떤 모습이 좋을까요?\"=\"피드 + 항상 보이는 메뉴\"",
   "seen": {
     "source:about-06": "a9e259c96675",
-    "concept:feed": "c0480deb3518"
+    "concept:feed": "881481885910"
   },
   "confirmed": {
-    "delegated": "The owner's decisions of 2026-09-24 (feed as the first page with an always-present menu, a required about page, folder URLs as recommended and approved in about-08) grounded in their sources, proposed by Claude (claude-opus-5-5); technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the feed layout and share records (run-20260924-082355-b147): the feed's order, what a short or titled post shows and the menu are unchanged by the new box, footer and badges; Q-about's text is unchanged (Q-share now follows it). Technical, delegated (plan-07)"
   }
 }

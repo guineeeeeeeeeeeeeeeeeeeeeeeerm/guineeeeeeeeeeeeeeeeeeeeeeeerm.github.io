@@ -1,0 +1,14 @@
+{
+  "id": "R-7849b5e6",
+  "src": "build.py:parse_share",
+  "predicate": "realizes",
+  "dst": "concept:share",
+  "evidence": "def parse_share(path: Path, posts_by_id: dict[str, \"Post\"]) -> Share:",
+  "seen": {
+    "build.py:parse_share": "53f42fd30a6e",
+    "concept:share": "ae8d0b44fd09"
+  },
+  "confirmed": {
+    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}
