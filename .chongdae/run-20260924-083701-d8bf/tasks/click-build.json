@@ -1,0 +1,45 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.6.0",
+  "status": "dropped",
+  "def": {
+    "id": "click-build",
+    "role": "session",
+    "brief": "build.py: 유형 이름 표시 제거, 시각은 글자만, 피드 항목에 상자를 덮는 링크(item-link), 배지는 그 위",
+    "closes": [
+      "Q-feed",
+      "Q-post",
+      "Q-ui"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_s1.py",
+      "tests/test_feed_layout.py",
+      "tests/test_shares.py"
+    ],
+    "gate": null,
+    "domain": "site"
+  },
+  "seq": 3,
+  "added": "2026-09-24T08:38:04+00:00",
+  "dropped": {
+    "why": "Its protected tests could not see the new feed: test_s1's anchor_text helper reads a title from the link's text, and the box link is empty (its name is the aria-label; the title is the h2). The helper is the tests' to change, in their own task (click-tests-2); the build went aside as a patch and returns as click-build-2.",
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "at": "2026-09-24T08:38:48+00:00",
+    "chongdae": "chongdae 1.6.0"
+  },
+  "touched": [],
+  "non-claims": [
+    "dropped, not done: Its protected tests could not see the new feed: test_s1's anchor_text helper reads a title from the link's text, and the box link is empty (its name is the aria-label; the title is the h2). The helper is the tests' to change, in their own task (click-tests-2); the build went aside as a patch and returns as click-build-2."
+  ]
+}
