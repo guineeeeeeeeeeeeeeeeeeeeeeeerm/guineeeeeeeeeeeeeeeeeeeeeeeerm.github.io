@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.7.1",
-  "status": "todo",
+  "status": "dropped",
   "def": {
     "id": "tests-support-2",
     "role": "implementer",
@@ -30,5 +30,30 @@
     "domain": "code"
   },
   "seq": 4,
-  "added": "2026-09-24T11:23:01+00:00"
+  "added": "2026-09-24T11:23:01+00:00",
+  "dropped": {
+    "why": "세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 순서를 split-build-2 뒤로 다시 넣는다(tests-support-3).",
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "at": "2026-09-24T11:41:00+00:00",
+    "chongdae": "chongdae 1.7.1"
+  },
+  "touched": [
+    "build.py",
+    "mangsang/relations/R-31bf2464.json",
+    "mangsang/sources/rf-01.json",
+    "mangsang/sources/rf-02.json",
+    "mangsang/sources/rf-03.json",
+    "plan/PLAN.md",
+    "sitegen/__init__.py",
+    "sitegen/assets/site.css",
+    "sitegen/assets/time.js",
+    "sitegen/markdown.py",
+    "sitegen/output.py",
+    "sitegen/pages.py",
+    "sitegen/patches.py",
+    "sitegen/records.py"
+  ],
+  "non-claims": [
+    "dropped, not done: 세션이 체크를 잘못 짰다: 따옴표가 겹친 sh -c 체크는 워커가 실제로 돌렸는데도(기록 item_4, item_8) 셸 감싸기 때문에 기록의 명령과 글자가 달라 checks-ran 검증을 두 번 넘지 못했다. 겹치지 않는 체크 세 개(테스트, 빌드, docs diff)로 다시 넣는다. 순서를 split-build-2 뒤로 다시 넣는다(tests-support-3)."
+  ]
 }
