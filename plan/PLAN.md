@@ -172,3 +172,26 @@ Decided after quibble (readme-tests, technical, delegated): 한국어 — 코드
 
 Decided by the builder (readme-3, technical, accepted as delegated): 안내서는 계획서의 어휘(절 id, 개념 이름)를 쓰지 않고, 제목은 글쓴이가
 하는 일로 붙인다. 빌드 절의 제목은 `사이트 만들기 — 빌드`다.
+
+Decided (technical, session): 안내서에는 소개 페이지를 쓰는 법(`content/about.md`, 헤더 없음, 바깥 링크)도 `##` 절로 담는다.
+예시는 ```` ```about content/about.md ```` 블록이며, 테스트는 다른 예시처럼 그대로 빌드해 `docs/about.html`이 생기는지 본다.
+
+## Q-about — 소개 페이지
+
+Concept: `about`.
+
+Decided (owner, `source:about-01`, `source:about-03`): 사이트에 소개 페이지를 하나 둔다. 소개 글은 `content/about.md`에 쓰고, 긴작업 org를 한국어로
+짧게 설명하고 그 org로 가는 링크를 건다. 모양은 저장소 루트의 옛 첫 화면(`index.html`)처럼 어두운 배경에 가운데 정렬이며,
+`avatar.png`와 `org_logo.png`를 쓴다. 소개 글은 주인이 쓰는 글이다 — 사이트를 만드는 일(이 절의 빌드)과 달리, 글을 쓰고 고치는
+일은 run 밖의 절차다.
+
+`content/about.md`는 헤더가 없고 파일 전체가 본문이다. 본문 문법은 Q-post와 같고, 여기에 바깥 링크 `[글자](주소)`가 더해진다.
+주소는 `http://` 또는 `https://`로 시작해야 한다. 바깥 링크는 소개 페이지에서만 링크가 된다(글 본문의 문법은 그대로다).
+`content/about.md`는 글이 아니다 — 글 목록, 피드, 링크와 패치의 대상에 들지 않는다. 파일이 없으면 소개 페이지도 없다.
+
+빌드는 `docs/about.html`을 만든다. 제목은 "소개"이고, 배경 `#0e0e10`에 글자 `#ededf0`, 본문은 화면 가운데에 가운데 정렬로 놓인다.
+이미지는 글과 같이 `content/images/`에서 온다. 소개 페이지가 있으면 모든 페이지 위쪽 메뉴에 "피드" 옆에 "소개" 링크가 붙는다.
+본문이 비었거나 바깥 링크의 주소가 `http://`·`https://`로 시작하지 않으면 빌드 오류이고, 오류 줄은 `content/about.md`를 포함한다.
+
+Decided (technical, session): 바깥 링크는 `<a href="<주소>">글자</a>`이며 글자는 서식 없이 글자로 보인다. 소개 페이지의 `<body>`는
+`class="about"`을 가진다.

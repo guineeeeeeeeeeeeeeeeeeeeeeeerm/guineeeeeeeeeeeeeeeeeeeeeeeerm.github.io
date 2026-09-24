@@ -1,0 +1,14 @@
+{
+  "id": "about-shown",
+  "text": "소개 페이지에는 무엇이 어떻게 보이나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "about"
+    ]
+  },
+  "declared": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:about-05"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "R-d245a428",
+  "src": "build.py:parse_about",
+  "predicate": "realizes",
+  "dst": "concept:about",
+  "evidence": "return page_shell(\"소개\", \"\", f\"<main>\\n{rendered}\\n</main>\", True, \"about\")",
+  "seen": {
+    "build.py:parse_about": "8501931aa61b",
+    "concept:about": "89fd6f1990c2"
+  },
+  "confirmed": {
+    "delegated": "The about concept's projections and grounding, proposed by Claude (claude-opus-5-5) after about-build-2 passed its checks and the verifier; the owner approved the concept and its question in source:about-05; technical, delegated (plan-07)"
+  }
+}

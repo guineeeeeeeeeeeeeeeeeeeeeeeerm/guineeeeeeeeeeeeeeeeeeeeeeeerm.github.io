@@ -33,6 +33,8 @@ INLINE_RE = re.compile(
     r"|\*(?!\s)(.+?)(?<!\s)\*"
 )
 PATCH_MARKER_RE = re.compile(r"\x00guin-patch-(?:start|end)-\d+\x00")
+INLINE_WITH_LINKS_RE = re.compile(INLINE_RE.pattern + r"|\[([^\]]*)\]\(([^)]*)\)")
+ABOUT_FILE = "about.md"
 
 CSS = """\
 :root { color-scheme: light; font-family: system-ui, sans-serif; }
@@ -58,6 +60,12 @@ header a { font-weight: 700; text-decoration: none; }
 img { max-width: 100%; height: auto; }
 blockquote { border-left: .25rem solid #d1d5db; margin: 1rem 0; padding-left: 1rem; color: #4b5563; }
 code { background: #f3f4f6; padding: .1rem .25rem; }
+header a + a { margin-left: .75rem; }
+body.about { max-width: none; min-height: 100vh; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0e0e10; color: #ededf0; text-align: center; }
+body.about header { position: absolute; top: 1rem; left: 1.25rem; margin: 0; }
+body.about main { max-width: 36rem; line-height: 1.7; }
+body.about img { max-width: 10rem; }
+body.about code { background: #1f1f23; }
 """
 
 JS = """\
@@ -384,6 +392,8 @@ def post_files(content_root: Path) -> list[Path]:
         relative = path.relative_to(content_root)
         if relative.parts and relative.parts[0] in {"images", "links", "patches"}:
             continue
+        if relative.as_posix() == ABOUT_FILE:
+            continue
         result.append(path)
     return sorted(result, key=lambda path: path.relative_to(content_root).as_posix())
 
@@ -562,12 +572,26 @@ def image_source(content_root: Path, image_path: str, post_path: Path) -> Path:
     return candidate
 
 
-def inline_markdown(text: str, content_root: Path, post_path: Path, image_prefix: str) -> str:
+def inline_markdown(
+    text: str,
+    content_root: Path,
+    post_path: Path,
+    image_prefix: str,
+    external_links: bool = False,
+) -> str:
     pieces: list[str] = []
     cursor = 0
-    for match in INLINE_RE.finditer(text):
+    pattern = INLINE_WITH_LINKS_RE if external_links else INLINE_RE
+    for match in pattern.finditer(text):
         pieces.append(html.escape(text[cursor : match.start()], quote=False))
-        if match.group(1) is not None:
+        if external_links and match.group(6) is not None:
+            label, address = match.group(6), match.group(7).strip()
+            if not re.match(r"https?://\S+$", address):
+                fail(post_path)
+            pieces.append(
+                f'<a href="{html.escape(address, quote=True)}">{html.escape(label, quote=False)}</a>'
+            )
+        elif match.group(1) is not None:
             alt, image_path = match.group(1), match.group(2)
             image_source(content_root, image_path, post_path)
             pieces.append(
@@ -662,23 +686,22 @@ def render_block(
     content_root: Path,
     post_path: Path,
     image_prefix: str,
+    external_links: bool = False,
 ) -> str:
     kind, value = block
+
+    def inline(text: str) -> str:
+        return inline_markdown(text, content_root, post_path, image_prefix, external_links)
+
     if kind == "heading":
         level, text = value  # type: ignore[misc]
-        return f'<h{level}>{inline_markdown(text, content_root, post_path, image_prefix)}</h{level}>'
+        return f'<h{level}>{inline(text)}</h{level}>'
     if kind == "list":
         items = value  # type: ignore[assignment]
-        rendered = [
-            f"<li>{inline_markdown(item, content_root, post_path, image_prefix)}</li>"
-            for item in items
-        ]
-        return "<ul>" + "".join(rendered) + "</ul>"
+        return "<ul>" + "".join(f"<li>{inline(item)}</li>" for item in items) + "</ul>"
     if kind == "quote":
-        text = "\n".join(value)  # type: ignore[arg-type]
-        return f"<blockquote>{inline_markdown(text, content_root, post_path, image_prefix)}</blockquote>"
-    text = "\n".join(value)  # type: ignore[arg-type]
-    return f"<p>{inline_markdown(text, content_root, post_path, image_prefix)}</p>"
+        return f"<blockquote>{inline(chr(10).join(value))}</blockquote>"  # type: ignore[arg-type]
+    return f"<p>{inline(chr(10).join(value))}</p>"  # type: ignore[arg-type]
 
 
 def block_content_bounds(rendered: str) -> tuple[int, int]:
@@ -933,7 +956,11 @@ def patch_history_catalog(state: PatchState) -> str:
     return '<div class="patch-history-catalog" hidden><ul>' + "".join(items) + "</ul></div>"
 
 
-def page_shell(title: str, root_link: str, body: str) -> str:
+def page_shell(
+    title: str, root_link: str, body: str, has_about: bool = False, body_class: str = ""
+) -> str:
+    about_link = f'<a href="{root_link}about.html">소개</a>' if has_about else ""
+    body_open = f'<body class="{body_class}">' if body_class else "<body>"
     return f'''<!doctype html>
 <html lang="ko">
 <head>
@@ -943,8 +970,8 @@ def page_shell(title: str, root_link: str, body: str) -> str:
 <link rel="stylesheet" href="{root_link}assets/site.css">
 <script src="{root_link}assets/time.js" defer></script>
 </head>
-<body>
-<header><a href="{root_link}index.html">피드</a></header>
+{body_open}
+<header><a href="{root_link}index.html">피드</a>{about_link}</header>
 {body}
 </body>
 </html>
@@ -1021,6 +1048,7 @@ def render_post_page(
     posts: list[Post],
     links: list[Link],
     patch_states: dict[str, PatchState],
+    has_about: bool = False,
 ) -> str:
     patch_state = patch_states[post.post_id]
     outgoing = [
@@ -1078,7 +1106,7 @@ def render_post_page(
 </article>
 </main>
 {patch_script}'''
-    return page_shell(title, "../", article)
+    return page_shell(title, "../", article, has_about)
 
 
 def feed_item(post: Post, content_root: Path, patch_state: PatchState) -> str:
@@ -1099,7 +1127,10 @@ def feed_item(post: Post, content_root: Path, patch_state: PatchState) -> str:
 
 
 def render_feed(
-    posts: list[Post], content_root: Path, patch_states: dict[str, PatchState]
+    posts: list[Post],
+    content_root: Path,
+    patch_states: dict[str, PatchState],
+    has_about: bool = False,
 ) -> str:
     ordered = sorted(posts, key=lambda post: post.post_id)
     ordered.sort(key=lambda post: post.written, reverse=True)
@@ -1107,7 +1138,24 @@ def render_feed(
         feed_item(post, content_root, patch_states[post.post_id]) for post in ordered
     )
     body = f"<main>\n<h1>피드</h1>\n<section class=\"feed\">\n{items}\n</section>\n</main>"
-    return page_shell("피드", "", body)
+    return page_shell("피드", "", body, has_about)
+
+
+def parse_about(content_root: Path) -> str | None:
+    path = content_root / ABOUT_FILE
+    if not path.is_file():
+        return None
+    try:
+        body = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError):
+        fail(path)
+    if not body.strip():
+        fail(path)
+    blocks = markdown_blocks(body)
+    rendered = "\n".join(
+        render_block(block, content_root, path, "images/", external_links=True) for block in blocks
+    )
+    return page_shell("소개", "", f"<main>\n{rendered}\n</main>", True, "about")
 
 
 def copy_images(content_root: Path, output_root: Path) -> None:
@@ -1131,7 +1179,9 @@ def write_output(
     output_root: Path,
     links: list[Link],
     patch_states: dict[str, PatchState],
+    about_page: str | None = None,
 ) -> None:
+    has_about = about_page is not None
     (output_root / "assets").mkdir(parents=True, exist_ok=True)
     (output_root / "p").mkdir(parents=True, exist_ok=True)
     (output_root / "assets" / "site.css").write_bytes(CSS.encode("utf-8"))
@@ -1139,10 +1189,12 @@ def write_output(
     (output_root / ".nojekyll").write_bytes(b"")
     copy_images(content_root, output_root)
     (output_root / "index.html").write_bytes(
-        render_feed(posts, content_root, patch_states).encode("utf-8")
+        render_feed(posts, content_root, patch_states, has_about).encode("utf-8")
     )
+    if about_page is not None:
+        (output_root / "about.html").write_bytes(about_page.encode("utf-8"))
     for post in posts:
-        page = render_post_page(post, content_root, posts, links, patch_states)
+        page = render_post_page(post, content_root, posts, links, patch_states, has_about)
         (output_root / "p" / f"{post.post_id}.html").write_bytes(page.encode("utf-8"))
 
 
@@ -1174,10 +1226,11 @@ def build() -> None:
     patches = parse_patches(content_root, posts)
     patch_states = apply_patches(posts, patches)
     links = parse_links(content_root, posts, patch_states)
+    about_page = parse_about(content_root)
 
     staging = Path(tempfile.mkdtemp(prefix=".docs-staging-", dir=str(root)))
     try:
-        write_output(posts, content_root, staging, links, patch_states)
+        write_output(posts, content_root, staging, links, patch_states, about_page)
         install_output(staging, docs)
     except Exception:
         if staging.exists():

@@ -1,0 +1,171 @@
+import re
+import subprocess
+import sys
+import tempfile
+import unittest
+from contextlib import contextmanager
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+BUILD = ROOT / "build.py"
+README = ROOT / "README.md"
+WRITTEN = "2024-02-03T04:05:06Z"
+ORG = "https://github.com/example-org"
+
+ABOUT_EXAMPLE = re.compile(
+    r"(?ms)^```about[ \t]+content/about\.md[ \t]*\n(?P<body>.*?)^```[ \t]*$"
+)
+IMAGE_PATH = re.compile(r"!\[[^\]]*\]\((images/[^)]+)\)")
+
+
+def post_text(body="본문", post_type="short", title=None):
+    lines = [f"written: {WRITTEN}", f"type: {post_type}"]
+    if title is not None:
+        lines.append(f"title: {title}")
+    return "\n".join(lines) + "\n\n" + body
+
+
+@contextmanager
+def temporary_site(files, images=None):
+    with tempfile.TemporaryDirectory() as directory:
+        root = Path(directory)
+        content = root / "content"
+        content.mkdir()
+        for relative, text in files.items():
+            path = content / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text, encoding="utf-8")
+        for name, data in (images or {}).items():
+            path = content / "images" / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+        yield root
+
+
+def run_build(root):
+    return subprocess.run(
+        [sys.executable, str(BUILD)], cwd=root, capture_output=True, text=True
+    )
+
+
+def read(root, relative):
+    return (root / "docs" / relative).read_text(encoding="utf-8")
+
+
+def menu(document):
+    match = re.search(r"(?s)<header>(.*?)</header>", document)
+    return match.group(1) if match else ""
+
+
+class AboutPageContractTests(unittest.TestCase):
+    def assert_builds(self, root):
+        result = run_build(root)
+        self.assertEqual(result.returncode, 0, msg=f"stderr={result.stderr!r}")
+
+    def assert_fails_naming_about(self, root):
+        docs = root / "docs"
+        docs.mkdir()
+        (docs / "keep.html").write_text("before", encoding="utf-8")
+        result = run_build(root)
+        self.assertEqual(result.returncode, 1, msg=f"stderr={result.stderr!r}")
+        lines = [line for line in result.stderr.splitlines() if line.strip()]
+        self.assertEqual(len(lines), 1, msg=result.stderr)
+        self.assertIn("content/about.md", lines[0].replace("\\", "/"))
+        self.assertEqual((docs / "keep.html").read_text(encoding="utf-8"), "before")
+
+    def test_about_md_becomes_the_about_page_with_its_images(self):
+        about = (
+            "![나](images/avatar.png)\n\n"
+            "안녕하세요, **저**입니다.\n\n"
+            "## 긴작업\n\n"
+            "![긴작업 로고](images/org_logo.png)\n\n"
+            f"LLM 시대의 개발 도구를 만듭니다. [긴작업]({ORG})\n"
+        )
+        images = {"avatar.png": b"avatar", "org_logo.png": b"logo"}
+        with temporary_site({"about.md": about}, images) as root:
+            self.assert_builds(root)
+            page = read(root, "about.html")
+            self.assertIn('<html lang="ko">', page)
+            self.assertIn("<title>소개</title>", page)
+            self.assertRegex(page, r'<body[^>]*class="about"')
+            self.assertIn('src="images/avatar.png"', page)
+            self.assertIn('src="images/org_logo.png"', page)
+            self.assertIn("<strong>저</strong>", page)
+            self.assertIn("<h2>긴작업</h2>", page)
+            self.assertIn(f'<a href="{ORG}">긴작업</a>', page)
+            self.assertEqual((root / "docs" / "images" / "avatar.png").read_bytes(), b"avatar")
+
+    def test_the_about_page_looks_like_the_old_first_page(self):
+        with temporary_site({"about.md": "안녕하세요.\n"}) as root:
+            self.assert_builds(root)
+            css = read(root, "assets/site.css").lower()
+            rule = re.search(r"(?s)body\.about\s*\{(.*?)\}", css)
+            self.assertIsNotNone(rule, msg="a rule for body.about")
+            self.assertIn("#0e0e10", rule.group(1))
+            self.assertIn("#ededf0", rule.group(1))
+            self.assertIn("text-align: center", css)
+
+    def test_about_md_is_not_a_post(self):
+        with temporary_site(
+            {"about.md": "소개 글\n", "posts/hello.md": post_text("글 하나")}
+        ) as root:
+            self.assert_builds(root)
+            self.assertFalse((root / "docs" / "p" / "about.html").exists())
+            feed = read(root, "index.html")
+            self.assertNotIn("소개 글", feed)
+            self.assertIn("글 하나", feed)
+
+    def test_every_page_links_to_the_about_page_when_there_is_one(self):
+        with temporary_site(
+            {"about.md": "소개 글\n", "posts/hello.md": post_text("글 하나")}
+        ) as root:
+            self.assert_builds(root)
+            self.assertRegex(menu(read(root, "index.html")), r'<a href="about\.html">소개</a>')
+            self.assertRegex(menu(read(root, "p/hello.html")), r'<a href="\.\./about\.html">소개</a>')
+            self.assertRegex(menu(read(root, "about.html")), r'<a href="index\.html">피드</a>')
+
+    def test_no_about_md_means_no_about_page_and_no_menu_link(self):
+        with temporary_site({"posts/hello.md": post_text("글 하나")}) as root:
+            self.assert_builds(root)
+            self.assertFalse((root / "docs" / "about.html").exists())
+            self.assertNotIn("소개", menu(read(root, "index.html")))
+            self.assertNotIn("소개", menu(read(root, "p/hello.html")))
+
+    def test_external_links_are_links_only_on_the_about_page(self):
+        body = f"여기로 [가기]({ORG})\n"
+        with temporary_site({"posts/hello.md": post_text(body)}) as root:
+            self.assert_builds(root)
+            page = read(root, "p/hello.html")
+            self.assertNotIn(f'href="{ORG}"', page)
+            self.assertIn(f"[가기]({ORG})", page)
+
+    def test_an_external_link_must_be_http_or_https(self):
+        for address in ("javascript:alert(1)", "p/hello.html", "mailto:me@example.com", ""):
+            with self.subTest(address=address):
+                with temporary_site({"about.md": f"[여기]({address})\n"}) as root:
+                    self.assert_fails_naming_about(root)
+
+    def test_an_empty_about_md_is_a_build_error(self):
+        with temporary_site({"about.md": "\n  \n"}) as root:
+            self.assert_fails_naming_about(root)
+
+    def test_a_missing_image_on_the_about_page_is_a_build_error(self):
+        with temporary_site({"about.md": "![나](images/none.png)\n"}) as root:
+            self.assert_fails_naming_about(root)
+
+    def test_the_readme_shows_how_to_write_the_about_page_and_its_example_builds(self):
+        text = README.read_text(encoding="utf-8")
+        match = ABOUT_EXAMPLE.search(text)
+        self.assertIsNotNone(match, msg="README needs a ```about content/about.md example")
+        heading = text.rfind("\n## ", 0, match.start())
+        self.assertIn("소개", text[heading : text.find("\n", heading + 1)])
+        body = match.group("body")
+        images = {path[len("images/"):]: b"image" for path in IMAGE_PATH.findall(body)}
+        with temporary_site({"about.md": body}, images) as root:
+            self.assert_builds(root)
+            self.assertTrue((root / "docs" / "about.html").is_file())
+
+
+if __name__ == "__main__":
+    unittest.main()

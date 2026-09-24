@@ -1,0 +1,8 @@
+{
+  "id": "about-03",
+  "text": "Your questions have been answered: \"소개 글(긴작업 org 설명)은 어디에 둘까요?\"=\"content/about.md (Recommended)\", \"소개 페이지는 어떤 모양이 좋을까요?\"=\"예전 첫 화면처럼\" selected preview:\n┌──────────────────────────────┐\n│░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│\n│░░░░░░░░░░ [avatar] ░░░░░░░░░░│\n│░░░ Hi! I'm GuinEee…rm! ░░░░░░│\n│░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│\n│░░ 긴작업 — LLM 시대 개발 도구 ░░│\n│░░░░░░ github.com/…keop ░░░░░░░│\n│░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│\n└──────────────────────────────┘, \"avatar/ 폴더의 이미지를 쓸까요?\"=\"avatar.png, org_logo.png\", \"사이트 기능 부분은 어떤 방식으로 진행할까요?\"=\"session run, 내가 직접 (Recommended)\". You can now continue with these answers in mind.",
+  "speaker": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+  "locator": "session d515e4e2-9bca-4949-9cd1-f22b8447a5ab, answer 8d27a61b-f0ac-4944-8226-f619c6ddfa45 at 2026-09-24T04:19:25.944Z",
+  "replies-to": "about-02",
+  "verbatim-from": "host transcript"
+}

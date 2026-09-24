@@ -5,10 +5,10 @@
   "dst": "concept:site-build",
   "evidence": "def build() -> None:",
   "seen": {
-    "build.py:build": "c7b6cbf67f56",
+    "build.py:build": "fefa01da1254",
     "concept:site-build": "66de2d1eaeaa"
   },
   "confirmed": {
-    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after about-build-2: build() still builds the site (now also the about page); page_shell still emits lang=\"ko\" and Korean menu words (피드, 소개); render_feed still renders the feed (a has_about flag added); Q-readme still promises the build command and how to write a post (one paragraph on the about page added). Technical, delegated (plan-07)"
   }
 }

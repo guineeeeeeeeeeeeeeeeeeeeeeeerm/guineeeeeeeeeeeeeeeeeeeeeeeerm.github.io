@@ -16,5 +16,8 @@
   },
   {
     "path": "README.md"
+  },
+  {
+    "path": "tests/test_about.py"
   }
 ]

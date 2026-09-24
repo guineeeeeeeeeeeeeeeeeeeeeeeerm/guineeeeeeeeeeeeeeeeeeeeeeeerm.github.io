@@ -5,10 +5,10 @@
   "dst": "concept:site-build",
   "evidence": "사이트를 만드는 명령(`python3 build.py`)과 결과가",
   "seen": {
-    "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "c63cd52b758a",
+    "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "d467447a88b7",
     "concept:site-build": "66de2d1eaeaa"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read Q-readme after the builder's heading decision; it still realizes its concept"
+    "delegated": "Claude (claude-opus-5-5) re-read each after about-build-2: build() still builds the site (now also the about page); page_shell still emits lang=\"ko\" and Korean menu words (피드, 소개); render_feed still renders the feed (a has_about flag added); Q-readme still promises the build command and how to write a post (one paragraph on the about page added). Technical, delegated (plan-07)"
   }
 }
