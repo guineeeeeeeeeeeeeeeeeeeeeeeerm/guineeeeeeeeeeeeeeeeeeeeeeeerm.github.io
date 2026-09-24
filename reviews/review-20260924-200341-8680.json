@@ -1,0 +1,42 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260924-200341-8680",
+  "since": "068db2a3fb2ae2bf2467041978889adca4c417ab",
+  "head": "74cfa1b3c0fcc72d42e81d033f7fe062b5bb0402",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "self-performed",
+      "where": "run-20260924-105233-acb3/declare-reviewer",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): 환경 선언(hunsu.json roles)과 lock은 이 세션의 일이다: 코드를 짓는 일이 아니다",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-110157-f416",
+      "text": "no check decides this task",
+      "layer": "objection"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 120,
+      "text": "120 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 120)"
+    }
+  ]
+}
