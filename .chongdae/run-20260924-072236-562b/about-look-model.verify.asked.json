@@ -1,0 +1,42 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-072236-562b",
+  "task": "about-look-model",
+  "role": "verifier",
+  "target": ".",
+  "goal": "소개 페이지를 글 페이지와 같은 디자인으로(흰 배경, 왼쪽 정렬)",
+  "brief": "mangsang: about 개념의 뜻을 소유자 결정(about-09)대로 고치고 투영 재확인",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "check"
+    ]
+  ],
+  "tests": [],
+  "domain": "plan",
+  "response": "./.chongdae/run-20260924-072236-562b/about-look-model.verify.response.json",
+  "touched": [
+    "mangsang/concepts/about.json",
+    "mangsang/relations/R-07681623.json",
+    "mangsang/relations/R-1496730a.json",
+    "mangsang/relations/R-1bad332a.json",
+    "mangsang/relations/R-52c631b6.json",
+    "mangsang/relations/R-57e0fe67.json",
+    "mangsang/relations/R-738ae1b0.json",
+    "mangsang/relations/R-abd77125.json",
+    "mangsang/relations/R-bd007fe0.json",
+    "mangsang/relations/R-bfc00d09.json",
+    "mangsang/relations/R-ce52d9f1.json",
+    "mangsang/relations/R-d245a428.json",
+    "mangsang/retired/R-1496730a.json",
+    "mangsang/retired/R-52c631b6.json",
+    "mangsang/retired/R-738ae1b0.json",
+    "mangsang/retired/R-bfc00d09.json"
+  ],
+  "built": null
+}
