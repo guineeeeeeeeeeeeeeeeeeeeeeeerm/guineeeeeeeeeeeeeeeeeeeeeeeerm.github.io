@@ -1,0 +1,2075 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260924-195304-ccf5",
+  "since": "7777f43",
+  "head": "068db2a3fb2ae2bf2467041978889adca4c417ab",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s1-build-2 attempt 1",
+      "text": "retry after done passed by delegation: Technical, delegated (plan-07): the verifier's finding stands — the summary drops whitespace between adjacent formatted spans that the rendered text keeps; count the 80 characters from the screen text as Q-feed says",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-094100-2048/s1-build-2 attempt 1: build.py:302-313",
+      "text": "plan-vs-code: The implementation removes whitespace between adjacent formatted spans before counting, although that whitespace remains in the rendered screen text. This can produce an incorrect 80-character titleless feed summary. — record: “80자는 적용된 본문의 첫 문단을 HTML로 만든 뒤의 화면 글자(서식 기호와 태그를 뺀 글자)에서 유니코드 문자 단위로 센다.” — tree: “summary = re.sub(r\"</(?:strong|em|code)>\\s+<(?=(?:strong|em|code)\\b)\", lambda match: match.group(0).replace(\" \", \"\"), rendered)”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s1-build-3 attempt 1",
+      "text": "retry after done passed by delegation: Technical, delegated (plan-07): the verifier's finding stands — format the reader-local time from Date's local getters (getFullYear/getMonth/getDate/getHours/getMinutes), zero-padded, ASCII digits, four-digit year, so Q-time's YYYY-MM-DD HH:MM holds in every locale and calendar",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-094100-2048/s1-build-3 attempt 1: build.py:56-61",
+      "text": "plan-vs-code: The unspecified locale/calendar and `year: \"numeric\"` do not guarantee fixed four-digit Gregorian ASCII output. Valid years such as 0001 can render as `1-...`, and some browser locales use localized digits or calendars, so the required format is not guaranteed. — record: “페이지의 자바스크립트가 이를 독자 브라우저의 시간대로 바꿔 `YYYY-MM-DD HH:MM`로 보여주고” — tree: “new Intl.DateTimeFormat(undefined, { year: \"numeric\", month: \"2-digit\", day: \"2-digit\", hour: \"2-digit\", minute: \"2-digit\", hourCycle: \"h23\" }).formatToParts(date); ... return `${values.year}-${values.month}-${values.day} ${values.hour}:${values.minute}`;”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s1-build-4 attempt 1",
+      "text": "retry after done passed by delegation: Technical, delegated (plan-07): the verifier's edge is real and the contract was silent; Q-time now says a local year outside 0001-9999 keeps the UTC text and title. Implement that.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-094100-2048/s1-build-4 attempt 1: build.py:53-60",
+      "text": "plan-vs-code: For valid input `9999-12-31T23:59:59Z`, a browser in UTC+14 gets local year 10000. `pad(..., 4)` does not limit the width, so the displayed value becomes `10000-01-01 ...`, violating the required four-digit `YYYY` format. — record: “페이지의 자바스크립트가 이를 독자 브라우저의 시간대로 바꿔 `YYYY-MM-DD HH:MM`로 보여주고” — tree: “const pad = (value, width = 2) => String(value).padStart(width, \"0\"); ... `${pad(date.getFullYear(), 4)}-${pad(date.getMonth() + 1, 2)}-${pad(date.getDate(), 2)}`”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s1-build-4 attempt 2",
+      "text": "retry after failed passed by delegation: Technical, delegated (plan-07): the fix is in the tree and the suite passes; the answer was refused only because a verified entry named a description instead of the argv that ran. Report the argv.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s1-build-4 attempt 3",
+      "text": "retry after failed passed by delegation: Technical, delegated (plan-07): the validator was right — the reported node command was a tidied rewrite of the one that ran (different variable names). In verified, copy each command character for character from what you ran, or list only the task's check.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s1-build attempt 1",
+      "text": "retry after blocked passed by delegation: Technical, delegated (plan-07): the contract was right and one fixture was wrong — tests/test_s1.py line 122 made a titled post with the default type short, which Q-post forbids; the session changed it to medium. No contract change.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s1-tests (quibble, before)",
+      "text": "contradiction @ Q-feed ↔ Q-post: Q-feed는 피드에서 유형 구분이 없다고 하지만 Q-post는 피드 항목에 유형 이름을 표시하도록 요구한다. — “`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형 구분 없음, 같은 시각이면 `<id>` 순). / Decided (owner, `source:plan-11`): 글 페이지와 피드 항목에 유형 이름(짧은 글/중간 글/긴 글)을 작게 표시한다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s1-tests (quibble, before)",
+      "text": "undecided @ Q-post: 중복 헤더 키, 콜론이 없는 헤더 줄, 키와 콜론 주변 공백의 처리 방식이 정해져 있지 않아 테스트와 구현이 동작을 정해야 한다. — “헤더는 파일 첫 줄부터 빈 줄 전까지의 `key: value` 줄들이다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s1-tests (quibble, before)",
+      "text": "undecided @ Q-feed: 80자를 원문 Markdown에서 셀지, 적용된 본문에서 셀지, 서식 문자를 포함할지 정해져 있지 않다. — “제목이 없는 중간·긴 글은 제목 자리에 본문 첫 문단의 앞 80자(잘렸으면 `…`)를 보여준다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s1-tests (quibble, before)",
+      "text": "unchecked @ Q-build: checks가 비어 있어 Q-build를 선택해 실행하는 argv가 없다. — “`python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s1-tests (quibble, before)",
+      "text": "unchecked @ Q-post: checks가 비어 있어 Q-post를 선택해 실행하는 argv가 없다. — “Decided (owner, `source:plan-11`): 본문이 빈 글은 빌드 오류다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s1-tests (quibble, before)",
+      "text": "unchecked @ Q-feed: checks가 비어 있어 Q-feed를 선택해 실행하는 argv가 없다. — “모든 항목은 그 글의 페이지로 가는 링크를 가진다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s1-tests (quibble, before)",
+      "text": "unchecked @ Q-time: checks가 비어 있어 Q-time을 선택해 실행하는 argv가 없다. — “화면의 모든 시각은 `<time datetime=\"YYYY-MM-DDTHH:MM:SSZ\">` 요소로 나오며, 요소의 글자는 UTC로 `YYYY-MM-DD HH:MM UTC`다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s1-tests (quibble, before)",
+      "text": "unchecked @ Q-ui: checks가 비어 있어 Q-ui를 선택해 실행하는 argv가 없다. — “메뉴, 버튼, 안내 문구, 유형 이름(짧은 글/중간 글/긴 글) 등 사이트가 만드는 글자는 한국어다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s1-tests quibble",
+      "text": "quibble findings (8) accepted by delegation: Technical decisions and a wording fix, delegated by the owner (plan-07: product decisions asked, technical ones delegated): header parsing, the 80-character count, 'not split by type' clarified; the five 'no checks' findings dismissed — the tests this task writes are the checks s1-build runs. Written into plan/PLAN.md.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s2-build-3 attempt 1",
+      "text": "retry after failed passed by delegation: Technical, delegated (plan-07): the claim was true — the check ran quoted (-p 'test_s[12].py'); hacheong's checks-ran compares raw strings. Report the command exactly as you ran it, quotes included.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s2-tests (quibble, before)",
+      "text": "undecided @ Q-link: The contract does not fix the output markup for the link or superscript, nor the URL mapping from a post id to the target page. — “글 페이지에서 그 문자열은 `to` 글로 가는 링크가 되고, 바로 뒤에 위첨자 `[n]`이 붙는다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s2-tests (quibble, before)",
+      "text": "undecided @ Q-link — Decided: The contract does not specify the ordering of this list or whether links whose last event is `removed` are included. — “Decided (owner, `source:plan-11`): 받는 쪽 글(`to`)의 페이지 아래에 \"이 글을 가리키는 글\" 목록을 두고, 각 항목은 `from` 글의 제목(없으면 첫 문단 앞 80자)과 현재 사유를 보여준다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s2-tests (quibble, before)",
+      "text": "unchecked @ Q-link: The checks array is empty, so no runner invocation selects a Q-link test that could decide this acceptance sentence. — “`from`이나 `to`가 없는 글이면 빌드 오류다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s2-tests quibble",
+      "text": "quibble findings (3) accepted by delegation: Technical decisions, delegated (plan-07): link markup and relative URLs, backlink order and removed links excluded, written into plan/PLAN.md; the 'no checks' finding dismissed as in S1.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s3-build-3 attempt 1",
+      "text": "retry after done passed by delegation: Technical, delegated (plan-07): the verifier's three findings stand and the contract already decides each — an anchor found twice is a build error with no exception for patched regions; a region's history is in at/id order; region positions must be computed in the rendered text the page script walks (mark regions in the HTML at build time rather than handing the script Markdown offsets).",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-094100-2048/s3-build-3 attempt 1: build.py:266-288",
+      "text": "plan-vs-code: 중복 앵커 중 하나가 앞선 패치가 만든 영역이면, 현재 본문에 두 번 있어도 빌드 오류 없이 그 후보를 적용한다. — record: “각 패치의 `anchor`는 그때까지 적용된 본문에 정확히 한 번 나와야 한다(아니면 빌드 오류).” — tree: “`if len(positions) != 1` 뒤에 `if any(unit.history ...)`로 후보를 골라 `positions = patched_positions`로 계속 적용한다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-094100-2048/s3-build-3 attempt 1: build.py:252-264, 879-887",
+      "text": "plan-vs-code: 서로 다른 최종 영역의 이력을 합칠 때 `at`/`id`로 정렬하지 않아 패치 적용 시각 순서가 뒤섞일 수 있다. — record: “한 영역의 이력은 그 영역의 글자를 만들거나 바꾼 패치들을 시각 순으로 보여준다.” — tree: “`result.append(previous)`와 `result.append(patch)`가 단위 순회 순서로 실행되고, `region.history`가 그대로 `patches` 배열로 직렬화된다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-094100-2048/s3-build-3 attempt 1: build.py:313-362, docs/assets/time.js:115-139",
+      "text": "plan-vs-code: Markdown 문법이나 블록 공백이 있는 본문에서는 두 좌표계가 달라져 패치 영역을 잘못 감싸거나 아예 감싸지 못한다. DOM의 UTF-16 길이와 Python 문자열 길이도 다를 수 있다. — record: “켜면 패치가 바꾸거나 넣은 영역이 테두리(아웃라인)로 표시된다. 한 패치의 영역은 그 패치가 넣은 글자다 — `replace`와 `insert-*`는 `text` 전체.” — tree: “빌드는 `body_offset += len(unit.text)`로 원문 Markdown 오프셋을 만들지만, 스크립트는 `document.createTreeWalker(root, NodeFilter.SHOW_TEXT)`와 `nodeValue.length`로 렌더링된 텍스트 오프셋을 계산한다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s3-build-4 attempt 1",
+      "text": "retry after done passed by delegation: Technical, delegated (plan-07): the finding stands — a patch has no length limit (plan-03), so its text may span paragraphs. Wrap the region piecewise: every block the region crosses gets its own wrapper for the part inside it, all carrying the same patch id and history, so the outline and hover cover the whole text. Report each command exactly as you ran it.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-094100-2048/s3-build-4 attempt 1: build.py:234-278, 712-733",
+      "text": "plan-vs-code: 여러 문단을 포함한 patch text는 시작·끝 표지가 서로 다른 블록 HTML에 들어가므로 전체 text를 하나의 patch-region으로 감싸지 못하고, 아웃라인과 이력이 전체 영역에 적용되지 않는다. — record: “한 패치의 영역은 그 패치가 넣은 글자다 — `replace`와 `insert-*`는 `text` 전체” — tree: “pieces.append(f\"\\x00guin-patch-start-{index}\\x00\")\npieces.extend(unit.text for unit in grouped)\npieces.append(f\"\\x00guin-patch-end-{index}\\x00\")\n...\nblocks = markdown_blocks(body)\nrendered_blocks = [render_block(block, content_root, post_path, image_prefix) for block in blocks]\nrendered = \"\\n\".join(rendered_blocks)”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s3-build-4 attempt 2",
+      "text": "retry after done passed by delegation: Technical, delegated (plan-07): the verifier read the contract right but the contract said less than it meant — 'no width' was about the view being off; Q-patch-view now says the deletion marker takes no space when the view is off and shows as a small mark when on, which is what the tree does. Confirm against the corrected sentence; change nothing that already holds.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-094100-2048/s3-build-4 attempt 2: build.py:54",
+      "text": "plan-vs-code: 삭제 영역에 .55rem의 양의 너비를 부여하므로 계약의 폭 없는 표시와 contradicted된다. — record: “`delete`는 지운 자리의 폭 없는 표시 하나” — tree: “.patch-view-on .patch-region[data-patch-deleted=\"true\"] { display: inline-block; width: .55rem; height: 1.1em; vertical-align: text-bottom; background: #dbeafe; }”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "undecided @ Q-patch: 패치 파일의 이름·발견 규칙·파일 수와 잘못된 형식의 처리 방식이 정해져 있지 않다. — “패치 파일: `{\"id\", \"post\", <글 id>, \"at\", <UTC 시각>, \"why\", <문자열>, \"op\": \"replace\" | \"insert-before\" | \"insert-after\" | \"delete\", \"anchor\": <문자열>, \"text\": <문자열>}` (`delete`에는 `text`가 없다).”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "undecided @ Q-patch: `id`의 타입과 같은 시각에서의 정렬 기준이 정해져 있지 않다. — “한 글의 패치는 `at` 오름차순(같으면 `id` 순)으로 차례로 적용되고, 각 패치의 `anchor`는 그때까지 적용된 본문에 정확히 한 번 나와야 한다(아니면 빌드 오류).”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "undecided @ Q-patch: 존재하지 않는 글을 가리키는 패치나 글 경계를 벗어난 참조의 처리 방식이 정해져 있지 않다. — “패치는 한 글 안에서만 작용하며 길이 제한은 없다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "undecided @ Q-patch-view: 겹치는 패치의 적용 결과와 표시 영역·이력의 의미를 빌드 전에 결정하지 않았다. — “겹치는 패치 같은 엣지 케이스는 쓰면서 대응한다(열린 질문 `patch-view-edges`).”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "undecided @ Q-patch-view: replace/insert의 영역 경계와 delete의 표시 위치·범위가 정해져 있지 않다. — “켜면 패치가 바꾸거나 넣은 영역이 테두리(아웃라인)로 표시되고, 지운 자리에는 표시가 남는다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "undecided @ Q-patch-view: 독자 현지 시각의 표현과 insert/delete에서의 `이전 글자`가 무엇인지 정해져 있지 않다. — “그 영역에 마우스를 올리면 그 자리에 적용된 패치의 이력 — 각 패치의 시각(독자 현지 시각), 사유, 종류, 이전 글자 — 이 보인다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “패치 파일: `{\"id\", \"post\", <글 id>, \"at\", <UTC 시각>, \"why\", <문자열>, \"op\": \"replace\" | \"insert-before\" | \"insert-after\" | \"delete\", \"anchor\": <문자열>, \"text\": <문자열>}` (`delete`에는 `text`가 없다).”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “한 글의 패치는 `at` 오름차순(같으면 `id` 순)으로 차례로 적용되고, 각 패치의 `anchor`는 그때까지 적용된 본문에 정확히 한 번 나와야 한다(아니면 빌드 오류).”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “그래서 앞선 패치가 만든 글에 패치를 붙일 수 있다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “`replace`는 앵커를 `text`로 바꾸고, `insert-before`/`insert-after`는 앵커 앞/뒤에 `text`를 넣고, `delete`는 앵커를 지운다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “패치는 한 글 안에서만 작용하며 길이 제한은 없다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “글 파일 자체는 패치로 바뀌지 않는다(원문은 남는다).”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch-view: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “패치가 하나 이상 있는 글의 페이지에는 \"패치 보기\" 토글 버튼이 있다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch-view: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “켜면 패치가 바꾸거나 넣은 영역이 테두리(아웃라인)로 표시되고, 지운 자리에는 표시가 남는다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch-view: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “그 영역에 마우스를 올리면 그 자리에 적용된 패치의 이력 — 각 패치의 시각(독자 현지 시각), 사유, 종류, 이전 글자 — 이 보인다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch-view: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “끄면 표시가 사라지고 적용된 본문만 보인다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-094100-2048/s3-tests (quibble, before)",
+      "text": "unchecked @ Q-patch-view: checks가 비어 있어 이 문장을 선택하는 테스트가 없다. — “기본은 꺼짐이다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-094100-2048/s3-tests quibble",
+      "text": "quibble findings (17) accepted by delegation: Technical decisions, delegated (plan-07): patch file discovery and validation, same-time order, regions and their history, 'previous text' per op, written into plan/PLAN.md; eleven 'no checks' findings dismissed.",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-145003-9b81/readme-2 attempt 1: README.md:127",
+      "text": "plan-vs-code: `site-build`는 개념 이름이어야 하는데 README가 이를 명령으로 다시 표기해 실제 실행 명령과 혼동을 남긴다. — record: “사이트를 만드는 명령(`python3 build.py`)” — tree: “이 `site-build` 명령은 `content/`의 글, 링크, 패치를 읽어”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260923-145003-9b81/readme-2 attempt 2: README.md:127",
+      "text": "plan-vs-code: `site-build`는 계약상 개념 이름이지 실행 명령이 아니므로, README가 이를 다시 명령으로 부르면 실제 명령과 혼동을 남긴다. — record: “사이트를 만드는 명령(`python3 build.py`)” — tree: “이 `site-build` 명령은 `content/`의 글, 링크, 패치를 읽어”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-145003-9b81/readme-3",
+      "text": "provider decisions (1) passed by delegation: Technical, delegated (plan-07): the build section's heading '사이트 만들기 — 빌드' keeps the plain-language name and the word the tests look for",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-145003-9b81/readme-tests (quibble, before)",
+      "text": "undecided @ Q-readme: “한국어”의 판정 기준이 정해져 있지 않아 테스트가 어떤 문자 비율이나 내용 기준을 요구할지 결정해야 한다. — “저장소 루트의 `README.md`는 이 사이트에 글을 올리는 사람을 위한 한국어 안내서다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-145003-9b81/readme-tests (quibble, before)",
+      "text": "undecided @ Q-readme: “담는다”와 각 항목을 “다룬다”의 최소 증거가 정해져 있지 않아 테스트가 단순 키워드, 설명, 예시, 또는 실행 가능한 절차 중 무엇을 요구할지 결정해야 한다. — “저장소 루트의 `README.md`는 이 사이트에 글을 올리는 사람을 위한 한국어 안내서다. 새 글을 쓰는 법(파일 위치와 이름, 헤더의 `written`·`type`·`title`·`tags` 각각의 규칙과 예시, 본문에 쓸 수 있는 문법, 이미지 넣는 법), 링크를 거는 법(링크 파일의 모양, 사유를 바꾸거나 지우는 법), 패치를 붙이는 법(패치 파일의 모양, `op` 네 가지), 사이트를 만드는 명령(`python3 build.py`)과 결과가 생기는 곳(`docs/`), 빌드 오류가 났을 때 무엇을 보면 되는지를 담는다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-145003-9b81/readme-tests (quibble, before)",
+      "text": "undecided @ brief: 여러 fenced block 중 어떤 것이 post·link·patch 예시인지, 그리고 어떤 페이지의 어떤 텍스트가 그것들을 “show”하는지 정해져 있지 않다. — “and — the sentence that matters most — that the README's own examples work: extract the example post, link and patch files the README shows (from its fenced blocks), write them into a temporary site's content/, run build.py there with sys.executable and check it exits 0 and the pages show them.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-145003-9b81/readme-tests (quibble, before)",
+      "text": "unchecked @ Q-readme: 나열된 체크는 unittest discover뿐이며, README의 규칙과 계획서 규칙을 비교하거나 불일치를 관찰하는 방법이 없다. — “안내서에 적힌 규칙은 이 계획서의 규칙과 어긋나지 않는다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260923-145003-9b81/readme-tests quibble",
+      "text": "quibble findings (4) accepted by delegation: Technical decisions, delegated (plan-07): what counts as Korean, the minimum each item needs, examples as fenced blocks with kind and path, plan-consistency evidenced by the examples building (the rest a non-claim) — written into plan/PLAN.md",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-145003-9b81/readme (newbie, after)",
+      "text": "surprise @ : README는 결과가 바뀐다고 설명하지만 방문자용 패치 UI가 나타난다고는 설명하지 않는다. — “패치는 원문을 고치지 않고 방문자에게 보이는 결과를 바꾸는 기록입니다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "stage-finding",
+      "where": "run-20260923-145003-9b81/readme (newbie, after)",
+      "text": "surprise @ : 짧은 글 작성법은 설명하지만 제목이 없을 때 방문자에게 표시되는 대체 제목과 페이지 순서는 설명하지 않는다. — “제목이 없는 짧은 글은 아래처럼 쓸 수 있습니다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260924-041947-7235/about-build-2 attempt 1: build.py:inline_markdown",
+      "text": "plan-vs-code: 바깥 링크를 일반 인라인 문법보다 먼저 잘라 내므로 링크가 인라인 코드나 강조 구문 안에 있을 때 Q-post 서식이 깨진다. 예를 들어 백틱으로 감싼 `[x](https://example.com)`이 코드가 아니라 링크로 렌더링되고, 링크 주변의 `**` 강조도 분리된다. — record: “본문 문법은 Q-post와 같고, 여기에 바깥 링크 `[글자](주소)`가 더해진다.” — tree: “if external_links:\n    pieces: list[str] = []\n    cursor = 0\n    for match in EXTERNAL_LINK_RE.finditer(text):\n        pieces.append(inline_markdown(text[cursor : match.start()], content_root, post_path, image_prefix))\n        ...\n        pieces.append(inline_markdown(text[cursor:], content_root, post_path, image_prefix))”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260924-041947-7235/about-build-2 attempt 2: build.py:inline_markdown",
+      "text": "plan-vs-code: 바깥 링크를 Q-post 인라인 문법보다 먼저 분리하므로 코드나 강조 안의 `[x](https://example.com)`도 링크로 렌더링되어 기존 Q-post 문법이 깨진다. — record: “본문 문법은 Q-post와 같고, 여기에 바깥 링크 `[글자](주소)`가 더해진다.” — tree: “if external_links:\n    for match in EXTERNAL_LINK_RE.finditer(text):\n        pieces.append(inline_markdown(text[cursor : match.start()], content_root, post_path, image_prefix))”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260924-041947-7235/about-build-2 attempt 3",
+      "text": "retry after session passed by delegation: technical (plan-07): the verifier's finding fixed in the tree — external links are one alternative of the inline pattern, so code and strong spans keep their literal text as in Q-post",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260924-041947-7235/about-build-2 attempt 3: build.py:inline_markdown",
+      "text": "plan-vs-code: 바깥 링크를 Q-post 인라인 문법보다 먼저 분리하므로 코드나 강조 구문 안의 `[x](https://example.com)`도 링크로 렌더링된다. 따라서 기존 Q-post 문법이 유지되지 않는다. — record: “본문 문법은 Q-post와 같고, 여기에 바깥 링크 `[글자](주소)`가 더해진다.” — tree: “if external_links:\n    for match in EXTERNAL_LINK_RE.finditer(text):\n        pieces.append(inline_markdown(text[cursor : match.start()], content_root, post_path, image_prefix))\n        ...\n        pieces.append(inline_markdown(text[cursor:], content_root, post_path, image_prefix))”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260924-091515-9861/tables-build attempt 1",
+      "text": "retry after session passed by delegation: technical (plan-07): both findings fixed in the tree — a link row's action that is not a string is a row error, not a crash; an anchor is found in the applied body as a reader sees it (patch-region markers skipped), markers inside it kept whole around the link",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260924-091515-9861/tables-build attempt 1: build.py:580-598",
+      "text": "plan-vs-code: JSON에서 action이 배열이나 객체이면 집합 membership 검사에서 TypeError가 발생해 `fail(where)`로 처리되지 않는다. 따라서 잘못된 링크 행이 파일:줄 한 줄의 빌드 오류가 되지 않는다. — record: “그 뒤의 사건은 `reason-changed` 또는 `removed`이고, 사건 규칙에 어긋나면 빌드 오류이며 오류 줄은 그 표의 줄을 가리킨다.” — tree: “`elif action in {\"reason-changed\", \"removed\"}:`”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260924-091515-9861/tables-build attempt 1: build.py:895-905",
+      "text": "plan-vs-code: 패치 영역 마커가 링크 앵커를 검색하기 전에 삽입된다. 적용된 본문에서 패치된 문자와 인접한 원문 문자를 함께 포함하는 유효한 앵커는 마커 때문에 연속 문자열로 찾지 못해 링크가 렌더링되지 않고 빌드 오류가 된다. — record: “`anchor`는 `from` 글의 적용된 본문에 그대로 나오는 문자열이며, 정확히 한 번 나와야 한다. 글 페이지에서 그 문자열은 `to` 글로 가는 링크가 된다.” — tree: “`body, regions = patch_state.regions_and_marked_body()` 뒤에 `body, tokens = apply_anchor_replacements(body, replacements, post_path)`를 호출하고, `apply_anchor_replacements`는 `position = body.find(anchor)`가 음수이면 실패한다.”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-0189beda source:plan-09",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-039d02c6 source:plan-06",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-07681623 source:about-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-13649af8 source:about-07",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-15cb7f6a source:tb-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-160062c0 source:tg-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-16ad7dac source:plan-08",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-175188e3 source:plan-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-1d041a42 source:plan-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-1d1ab035 source:id-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-213599c9 source:br-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-239592ec source:tb-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-2734cf9c source:id-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-2912ea7a source:fd-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-33c465d4 source:plan-09",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-34758265 source:plan-09",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-351d7180 source:id-02",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-36094208 source:plan-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-36939b3f source:plan-09t",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-3aaff887 source:plan-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-3fe7f6de source:plan-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-4434bf28 source:plan-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-45d9629c source:tg-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-4a88956c source:plan-05",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-4ae43cd0 source:plan-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-4dd07452 source:fd-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-5441a85c source:fd-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-5c34cc96 source:tb-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-65bd95bf source:img-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-670bf94c source:plan-07t",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-6a6f2635 source:plan-07",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-75fb4e8c source:plan-09t",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-77c0b9b2 source:plan-09",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-7ce0b03f source:img-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-808b04e4 source:about-08",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-8378591b source:plan-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-86069584 source:plan-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-86160d58 source:plan-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-8910354d source:plan-05",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-8a48d960 source:tb-02",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-8a6e09c9 source:fd-02",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-8b66abbb source:fd-00",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-8e89e4a4 source:plan-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-93e7262a source:fd-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-964681c3 source:plan-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-99d140ee source:about-06",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-9db64855 source:plan-05",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-9fbf61d7 source:plan-10",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-a88e39b5 source:plan-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-abd77125 source:about-09",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-c30dba09 source:plan-08",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-ce52d9f1 source:about-06",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-d1f901b6 source:plan-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-d2ea1a75 source:fd-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-d6b73249 source:br-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-da477bbd source:plan-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-dee4c930 source:plan-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-ea87eca4 source:plan-09t",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-ebb5f321 source:fd-04",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-f046cfd3 source:plan-09t",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-f2306fa1 source:plan-01",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "broken",
+      "where": "R-f6f0b09b source:tg-03",
+      "text": "dead anchor(s): the relation points at nothing",
+      "source": "mangsang",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-0189beda source:plan-09 realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-039d02c6 source:plan-06 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-05c2f196 tests/test_shares.py:ShareContractTests realizes concept:share",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-07681623 source:about-01 realizes concept:about",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised meaning (about-09: the post page's look): each quote still grounds or projects the about page — its existence, its file, the Korean org description and link, the required file, the Korean menu; none depended on the dark centered look (about-01's 'first page' wish is what about-09 revised). technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-0b3b16d0 build.py:parse_post realizes concept:post-type",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-13649af8 source:about-07 realizes concept:site-build",
+      "text": "re-confirmed by delegation: The owner's decisions of 2026-09-24 (feed as the first page with an always-present menu, a required about page, folder URLs as recommended and approved in about-08) grounded in their sources, proposed by Claude (claude-opus-5-5); technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-14d916a2 build.py:feed_item realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-15cb7f6a source:tb-01 realizes concept:record-table",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-160062c0 source:tg-04 realizes concept:tag",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-16a108f1 build.py:build realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-16ad7dac source:plan-08 realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-172c7b7c plan/PLAN.md#Q-post — 글 하나 realizes concept:post-type",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-175188e3 source:plan-04 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-1bad332a README.md#소개 페이지 쓰기 realizes concept:about",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised meaning (about-09: the post page's look): each quote still grounds or projects the about page — its existence, its file, the Korean org description and link, the required file, the Korean menu; none depended on the dark centered look (about-01's 'first page' wish is what about-09 revised). technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-1d041a42 source:plan-04 realizes concept:link",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each quote against link's revised sentence (footnote display, plan-09): both-sides management, time and reason, kept-but-hidden history all still hold",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-1d1ab035 source:id-03 realizes concept:post",
+      "text": "re-confirmed by delegation: The owner's id rule (id-01..03) grounded and projected in code and tests, proposed by Claude (claude-opus-5-5) after id-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-213599c9 source:br-03 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-2148e930 tests/test_s3.py:S3PatchViewContractTests realizes concept:patch-view",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-238e911e plan/PLAN.md#Q-feed — 첫 화면 realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-239592ec source:tb-03 realizes concept:record-table",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-255f6e70 plan/PLAN.md#Q-readme — 글쓴이의 안내서 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-2734cf9c source:id-01 realizes concept:post",
+      "text": "re-confirmed by delegation: The owner's id rule (id-01..03) grounded and projected in code and tests, proposed by Claude (claude-opus-5-5) after id-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-2912ea7a source:fd-04 realizes concept:feed",
+      "text": "re-confirmed by delegation: The owner's fd-04 grounded in feed and post-type, and the whole-box link projected in its test, proposed by Claude (claude-opus-5-5) after click-build-2 passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-29a40373 README.md#공유 기록 남기기 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5): the README's share section now adds a row to the share table (source:tb-04); it still teaches recording a share. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-31bf2464 plan/PLAN.md#Q-build — 생성기와 출력 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the folder-URL change (run-20260924-060910-91d7): every quoted sentence or symbol is still in its anchor, and the anchors changed only in output paths, link form (folders, no file names), the always-present 피드·소개 menu and the required content/about.md — none of which the related concept's meaning depends on. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-33c465d4 source:plan-09 realizes concept:link",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-33d3ddd0 build.py:render_block realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-34758265 source:plan-09 realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-351d7180 source:id-02 realizes concept:post",
+      "text": "re-confirmed by delegation: The owner's id rule (id-01..03) grounded and projected in code and tests, proposed by Claude (claude-opus-5-5) after id-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-36094208 source:plan-01 realizes concept:link",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each quote against link's revised sentence (footnote display, plan-09): both-sides management, time and reason, kept-but-hidden history all still hold",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-36939b3f source:plan-09t realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-36e86d46 build.py:image_width realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-3aaff887 source:plan-03 realizes concept:patch-view",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-3bff092e README.md#사이트 만들기 — 빌드 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the folder-URL change (run-20260924-060910-91d7): every quoted sentence or symbol is still in its anchor, and the anchors changed only in output paths, link form (folders, no file names), the always-present 피드·소개 menu and the required content/about.md — none of which the related concept's meaning depends on. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-3fe7f6de source:plan-04 realizes concept:tag",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-4434bf28 source:plan-04 realizes concept:patch-view",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-45a1f1c2 plan/PLAN.md#Q-time — 시각 표시 realizes concept:local-time",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read Q-time after adding the out-of-range year rule; it still realizes local-time",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-45af698b build.py:render_footnotes realizes concept:link",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the folder-URL change (run-20260924-060910-91d7): every quoted sentence or symbol is still in its anchor, and the anchors changed only in output paths, link form (folders, no file names), the always-present 피드·소개 menu and the required content/about.md — none of which the related concept's meaning depends on. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-45d9629c source:tg-01 realizes concept:tag",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-4a88956c source:plan-05 realizes concept:link",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each quote against link's revised sentence (footnote display, plan-09): both-sides management, time and reason, kept-but-hidden history all still hold",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-4a8fcff7 tests/test_s1.py:S1GeneratorContractTests realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-4ae43cd0 source:plan-04 realizes concept:post-type",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-4dd07452 source:fd-01 realizes concept:share",
+      "text": "re-confirmed by delegation: The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-52c631b6 tests/test_about.py:AboutPageContractTests realizes concept:about",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-5441a85c source:fd-03 realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-54779ef7 plan/PLAN.md#Q-tag — 태그와 태그 클라우드 realizes concept:tag",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-57e0fe67 build.py:page_shell realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised meaning (about-09: the post page's look): each quote still grounds or projects the about page — its existence, its file, the Korean org description and link, the required file, the Korean menu; none depended on the dark centered look (about-01's 'first page' wish is what about-09 revised). technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-5c34cc96 source:tb-04 realizes concept:record-table",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-60f360c9 tests/test_feed_layout.py:FeedLayoutContractTests realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-610b15de README.md#기록 표에 대해 realizes concept:record-table",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-622acaf9 tests/test_s1.py:S1GeneratorContractTests realizes concept:local-time",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-62d4db1c plan/PLAN.md#Q-patch — 패치 realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-654e9419 build.py:render_feed realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-65bd95bf source:img-01 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-670bf94c source:plan-07t realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6a6f2635 source:plan-07 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6a9cbb87 plan/PLAN.md#Q-share — 공유 기록과 배지 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5): Q-share's record moved into the share table (source:tb-04); still the share's record. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6cd16b55 tests/test_s1.py:S1GeneratorContractTests realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6f5dd3d8 README.md#새 글 쓰기 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6f9820d5 tests/test_images.py:ImageWidthContractTests realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-75fb4e8c source:plan-09t realizes concept:link",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-77c0b9b2 source:plan-09 realizes concept:local-time",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-79988df4 plan/PLAN.md#Q-patch-view — 패치 보기 realizes concept:patch-view",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read Q-readme after the quibble decisions; it still realizes its concept",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-7ce0b03f source:img-03 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-808b04e4 source:about-08 realizes concept:site-build",
+      "text": "re-confirmed by delegation: The owner's decisions of 2026-09-24 (feed as the first page with an always-present menu, a required about page, folder URLs as recommended and approved in about-08) grounded in their sources, proposed by Claude (claude-opus-5-5); technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8267e735 build.py:tag_cloud realizes concept:tag",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8378591b source:plan-03 realizes concept:post-type",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-86069584 source:plan-03 realizes concept:link",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each quote against link's revised sentence (footnote display, plan-09): both-sides management, time and reason, kept-but-hidden history all still hold",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-86160d58 source:plan-03 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-88d256c7 build.py:time_id realizes concept:post",
+      "text": "re-confirmed by delegation: The owner's id rule (id-01..03) grounded and projected in code and tests, proposed by Claude (claude-opus-5-5) after id-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8910354d source:plan-05 realizes concept:patch",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8a48d960 source:tb-02 realizes concept:record-table",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8a6e09c9 source:fd-02 realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8a728335 build.py:patch_data_script realizes concept:patch-view",
+      "text": "re-confirmed by delegation: Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8b66abbb source:fd-00 realizes concept:share",
+      "text": "re-confirmed by delegation: The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8bbfec2a plan/PLAN.md#Q-readme — 글쓴이의 안내서 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8e89e4a4 source:plan-04 realizes concept:patch",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8fc81536 build.py:table_rows realizes concept:record-table",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-93550351 build.py:parse_links realizes concept:link",
+      "text": "re-confirmed by delegation: The link and share readers moved to the tables (parse_links, parse_shares); the concepts did not; Claude (claude-opus-5-5); technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-93e7262a source:fd-03 realizes concept:share",
+      "text": "re-confirmed by delegation: The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-964681c3 source:plan-01 realizes concept:patch",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-99d140ee source:about-06 realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-9db64855 source:plan-05 realizes concept:erasure",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-9f2a1281 build.py:parse_shares realizes concept:share",
+      "text": "re-confirmed by delegation: The link and share readers moved to the tables (parse_links, parse_shares); the concepts did not; Claude (claude-opus-5-5); technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-9fbf61d7 source:plan-10 realizes concept:link",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-a0409dab tests/test_s1.py:S1GeneratorContractTests realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-a3188744 build.py:item_footer realizes concept:share",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-a5b4fc82 tests/test_tags.py:TagContractTests realizes concept:tag",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-a5f28421 tests/test_linebreaks.py:LineBreakContractTests realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-a88e39b5 source:plan-01 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-aad4f423 build.py:render_tag_page realizes concept:tag",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-abd77125 source:about-09 realizes concept:about",
+      "text": "re-confirmed by delegation: The revised about concept grounded in the owner's decision (about-09) and its test re-related under the renamed test, proposed by Claude (claude-opus-5-5) after about-look-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-b2351df1 tests/test_s3.py:S3PatchContractTests realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-b3061cf0 plan/PLAN.md#Q-link — 주석으로 거는 링크 realizes concept:link",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-b577795a tests/test_s1.py:S1GeneratorContractTests realizes concept:post-type",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-bca01b82 plan/PLAN.md#Q-ui — 화면 언어 realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-bd007fe0 plan/PLAN.md#Q-about — 소개 페이지 realizes concept:about",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the feed layout and share records (run-20260924-082355-b147): the feed's order, what a short or titled post shows and the menu are unchanged by the new box, footer and badges; Q-about's text is unchanged (Q-share now follows it). Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-c30dba09 source:plan-08 realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-ce52d9f1 source:about-06 realizes concept:about",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised meaning (about-09: the post page's look): each quote still grounds or projects the about page — its existence, its file, the Korean org description and link, the required file, the Korean menu; none depended on the dark centered look (about-01's 'first page' wish is what about-09 revised). technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-cf5a38bf tests/test_s2.py:S2LinkContractTests realizes concept:record-table",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d1f901b6 source:plan-01 realizes concept:local-time",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d245a428 build.py:parse_about realizes concept:about",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5): parse_about still renders content/about.md as the about page, now in the post page's frame. technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d2ea1a75 source:fd-01 realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d3f2cb80 tests/test_s1.py:S1GeneratorContractTests realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d6a19410 tests/test_s2.py:S2LinkContractTests realizes concept:link",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d6b73249 source:br-01 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-da477bbd source:plan-01 realizes concept:tag",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-dee4c930 source:plan-03 realizes concept:patch",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-e15baba2 build.py:apply_patches realizes concept:patch",
+      "text": "re-confirmed by delegation: Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-e400208a tests/test_ids.py:PostIdIsTheMomentItWasWrittenTests realizes concept:post",
+      "text": "re-confirmed by delegation: The owner's id rule (id-01..03) grounded and projected in code and tests, proposed by Claude (claude-opus-5-5) after id-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-ea87eca4 source:plan-09t realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-ebb5f321 source:fd-04 realizes concept:post-type",
+      "text": "re-confirmed by delegation: The owner's fd-04 grounded in feed and post-type, and the whole-box link projected in its test, proposed by Claude (claude-opus-5-5) after click-build-2 passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f046cfd3 source:plan-09t realizes concept:local-time",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f0d8ae78 plan/PLAN.md#Q-post — 글 하나 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f2306fa1 source:plan-01 realizes concept:post-type",
+      "text": "re-confirmed by delegation: Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links.",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f2e8da12 README.md#태그 달기 realizes concept:tag",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f55b7289 build.py:time_element realizes concept:local-time",
+      "text": "re-confirmed by delegation: Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f6f0b09b source:tg-03 realizes concept:tag",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f735aadc build.py:parse_post realizes concept:post",
+      "text": "re-confirmed by delegation: Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-fd923c73 build.py:parse_tags realizes concept:tag",
+      "text": "re-confirmed by delegation: The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "drift",
+      "where": "plugin mangsang",
+      "text": "plugin mangsang: content differs from what the lock recorded for version 1.5.0 — a version names one content: bump it in plugin.json (patch at least), then `hunsu lock` (or, when the release itself was rewritten under this version, `hunsu add mangsang --take-content \"why\"` and lock)",
+      "source": "hunsu",
+      "layer": "objection"
+    },
+    {
+      "kind": "drift",
+      "where": "plugin hacheong",
+      "text": "plugin hacheong: content differs from what the lock recorded for version 1.3.0 — a version names one content: bump it in plugin.json (patch at least), then `hunsu lock` (or, when the release itself was rewritten under this version, `hunsu add hacheong --take-content \"why\"` and lock)",
+      "source": "hunsu",
+      "layer": "objection"
+    },
+    {
+      "kind": "drift",
+      "where": "9 situation(s) were judged about other text of their members (assigning slice work; disputing a contract; trying the product as a newcomer; locking the project environment; building a slice; writing tests for a slice; maintaining project concepts and relations; orchestrating a project run; reviewing a change or run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
+      "text": "9 situation(s) were judged about other text of their members (assigning slice work; disputing a contract; trying the product as a newcomer; locking the project environment; building a slice; writing tests for a slice; maintaining project concepts and relations; orchestrating a project run; reviewing a change or run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
+      "source": "hunsu",
+      "layer": "objection"
+    },
+    {
+      "kind": "outside-run",
+      "where": "content/about.md",
+      "files": [
+        "content/about.md"
+      ],
+      "text": "1 file(s) changed since 7777f43; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "outside-run",
+      "where": "content/images/avatar_paint_primary.png, org_logo.png",
+      "files": [
+        "content/images/avatar_paint_primary.png",
+        "content/images/org_logo.png"
+      ],
+      "text": "2 file(s) changed since 7777f43; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "outside-run",
+      "where": "content/posts/20260924-075921.md, 20260924-085456.md",
+      "files": [
+        "content/posts/20260924-075921.md",
+        "content/posts/20260924-085456.md"
+      ],
+      "text": "2 file(s) changed since 7777f43; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "outside-run",
+      "where": "docs/images/avatar_paint_primary.png, org_logo.png",
+      "files": [
+        "docs/images/avatar_paint_primary.png",
+        "docs/images/org_logo.png"
+      ],
+      "text": "2 file(s) changed since 7777f43; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "outside-run",
+      "where": "docs/p/20260924-075921/index.html",
+      "files": [
+        "docs/p/20260924-075921/index.html"
+      ],
+      "text": "1 file(s) changed since 7777f43; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "outside-run",
+      "where": "docs/p/20260924-085456/index.html",
+      "files": [
+        "docs/p/20260924-085456/index.html"
+      ],
+      "text": "1 file(s) changed since 7777f43; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "outside-run",
+      "where": "mangsang/relations/R-8a728335.json, R-e15baba2.json, R-f55b7289.json",
+      "files": [
+        "mangsang/relations/R-8a728335.json",
+        "mangsang/relations/R-e15baba2.json",
+        "mangsang/relations/R-f55b7289.json"
+      ],
+      "text": "3 file(s) changed since 7777f43; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "outside-run",
+      "where": "mangsang/retired/R-255f6e70.json, R-8bbfec2a.json",
+      "files": [
+        "mangsang/retired/R-255f6e70.json",
+        "mangsang/retired/R-8bbfec2a.json"
+      ],
+      "text": "2 file(s) changed since 7777f43; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "outside-run",
+      "where": "mangsang/sources/about-09.json, br-01.json, br-02.json, br-03.json … (+21)",
+      "files": [
+        "mangsang/sources/about-09.json",
+        "mangsang/sources/br-01.json",
+        "mangsang/sources/br-02.json",
+        "mangsang/sources/br-03.json",
+        "mangsang/sources/fd-00.json",
+        "mangsang/sources/fd-01.json",
+        "mangsang/sources/fd-02.json",
+        "mangsang/sources/fd-03.json",
+        "mangsang/sources/fd-04.json",
+        "mangsang/sources/id-01.json",
+        "mangsang/sources/id-02.json",
+        "mangsang/sources/id-03.json",
+        "mangsang/sources/id-04.json",
+        "mangsang/sources/img-01.json",
+        "mangsang/sources/img-02.json",
+        "mangsang/sources/img-03.json",
+        "mangsang/sources/post-01.json",
+        "mangsang/sources/tb-01.json",
+        "mangsang/sources/tb-02.json",
+        "mangsang/sources/tb-03.json",
+        "mangsang/sources/tb-04.json",
+        "mangsang/sources/tg-01.json",
+        "mangsang/sources/tg-02.json",
+        "mangsang/sources/tg-03.json",
+        "mangsang/sources/tg-04.json"
+      ],
+      "text": "25 file(s) changed since 7777f43; no completed run recorded touching them",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-082501-29e9, run-20260923-083757-f0c3, run-20260923-093439-83eb, run-20260923-094100-2048, run-20260923-131712-6bae, run-20260923-133919-8326, run-20260923-134128-7a50, run-20260923-134348-80d2, run-20260923-145003-9b81, run-20260923-152708-469d, run-20260923-153124-ec80, run-20260923-154529-ac29, run-20260924-041947-7235, run-20260924-060910-91d7, run-20260924-072236-562b, run-20260924-073550-4de1, run-20260924-074512-d1f6, run-20260924-080644-6c6d, run-20260924-082355-b147, run-20260924-083701-d8bf, run-20260924-091515-9861",
+      "text": "no check decides this task  [x35]",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) Browser execution of time.js was not performed",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "dropped, not done: tests/test_s1.py's 80-character test expected the space between two formatted spans to be dropped, which Q-feed's screen-text rule keeps (the verifier caught the build's hack for it). The session corrected the test to the contract",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) JavaScript localization was not executed in a browser",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) Browser execution was not run",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "dropped, not done: Built and verified (checks green, the verifier's two findings fixed)",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) The check suite validates the generator and inspects the time JavaScript asset",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) The check suite does not run a real browser integration test.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) The protected tests, plan, and run records were not modified in this pass.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "dropped, not done: Its start snapshot holds the nitpick's tests with one wrong fixture (a titled short post, line 122)",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) The standard-library-only implementation constraint is not directly tested.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) Korean UI coverage samples lang=ko and all three type names",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "dropped, not done: Its check ran every test in tests/, and tests/test_s3.py (written before it, red until S3 is built) cannot pass yet — an ordering the session introduced. S1 and S2 tests pass on the tree. Re-added as s2-build-3 with its check limited to test_s1.py and test_s2.py.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) tests/test_s3.py was not run because it is the next slice.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) I did not modify tests, plan/, or .chongdae/.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "dropped, not done: The build met two wrong fixtures in tests/test_s2.py with decisions against the contract: short posts with titles (forbidden by Q-post, an owner's rule) allowed when links exist, and a 'negated mention' rule for a missing-anchor case whose body did contain the anchor. Both rejected. The session corrected the fixtures (titled test posts are medium",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "dropped, not done: Reordered after s2-build-3.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) Browser interaction was not run in a browser",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "dropped, not done: Fifth nitpick fixture against the contract: body 'old text' patched 'old'->'new text' leaves 'text' twice, so the next patch's anchor must be a build error by Q-patch, yet the test expected success (the source of the verifier-rejected duplicate-anchor exception). The session corrected the body to 'old tail'",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) Browser interaction was not run.  [x3]",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "dropped, not done: Reordered: it was queued before s2-build-2 (the corrected links build), and must extend build.py after it. Re-added as s3-build-2 at the end.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-094100-2048",
+      "text": "(provider) “올린 글을 고치는 일반적인 방법은 패치 파일을 더하는 것이고, 글 파일을 직접 고치는 일은 이 계획의 범위 밖이다(완전 삭제 erasure의 절차는 열린 질문이 답해진 뒤에 정한다).” — workflow policy, not observable build behavior.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-145003-9b81",
+      "text": "(provider) README 내용의 전체 문장 일치 여부는 자동 검증 범위 밖입니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-145003-9b81",
+      "text": "(provider) The test suite does not verify every prose sentence in README.md.  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-145003-9b81",
+      "text": "(provider) 지정된 테스트 범위 밖의 README 문장 전체 일치 여부는 별도로 주장하지 않습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-145003-9b81",
+      "text": "(provider) Sentence-by-sentence agreement with the plan is not mechanically claimed, per the contract’s non-claim.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-145003-9b81",
+      "text": "(provider) Sentence-by-sentence agreement with the plan is not mechanically claimed, per the contract. `python3 -m unittest discover -s tests` passed: 54 tests.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-145003-9b81",
+      "text": "(provider) 호스팅 환경과 브라우저 표시 자체는 별도로 검증하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260923-152708-469d",
+      "text": "no session transcript here: what the session did for this task is its word alone",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-041947-7235",
+      "text": "dropped, not done: Registered with --tests on the same task that writes them: the contract's tests must come from their own task before the build takes its snapshot. Re-added as about-tests then about-build-2",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-083701-d8bf",
+      "text": "dropped, not done: Its protected tests could not see the new feed: test_s1's anchor_text helper reads a title from the link's text, and the box link is empty (its name is the aria-label",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-104932-eace",
+      "text": "no `reviewer` role in the lock: nobody reviewed this run's record when it ended",
+      "layer": "objection"
+    }
+  ]
+}
