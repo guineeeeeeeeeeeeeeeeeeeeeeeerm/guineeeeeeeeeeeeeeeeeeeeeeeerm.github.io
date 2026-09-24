@@ -1,0 +1,35 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-073550-4de1",
+  "task": "img-model",
+  "role": "verifier",
+  "target": ".",
+  "goal": "이미지 표시 너비: ![설명|N](images/파일)",
+  "brief": "mangsang: 이미지 너비 문법(Q-post)의 출처·코드·테스트를 post 개념에 잇고, 오래된 관계 재확인",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "check"
+    ]
+  ],
+  "tests": [],
+  "domain": "plan",
+  "response": "./.chongdae/run-20260924-073550-4de1/img-model.verify.response.json",
+  "touched": [
+    "mangsang/registry.json",
+    "mangsang/relations/R-172c7b7c.json",
+    "mangsang/relations/R-36e86d46.json",
+    "mangsang/relations/R-65bd95bf.json",
+    "mangsang/relations/R-6f5dd3d8.json",
+    "mangsang/relations/R-6f9820d5.json",
+    "mangsang/relations/R-79a96c0a.json",
+    "mangsang/relations/R-7ce0b03f.json",
+    "mangsang/relations/R-f0d8ae78.json"
+  ],
+  "built": null
+}

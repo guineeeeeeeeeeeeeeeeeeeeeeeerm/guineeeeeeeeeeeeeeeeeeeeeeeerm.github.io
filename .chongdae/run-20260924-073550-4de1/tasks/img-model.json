@@ -1,0 +1,104 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.6.0",
+  "status": "done",
+  "def": {
+    "id": "img-model",
+    "role": "session",
+    "brief": "mangsang: 이미지 너비 문법(Q-post)의 출처·코드·테스트를 post 개념에 잇고, 오래된 관계 재확인",
+    "closes": [],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "{plugin:mangsang}/mangsang.py",
+        "check"
+      ]
+    ],
+    "tests": [],
+    "gate": null,
+    "domain": "plan"
+  },
+  "seq": 4,
+  "added": "2026-09-24T07:39:22+00:00",
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.2.0",
+        "chongdae": "1.6.0"
+      },
+      "locked": {
+        "chongdae": "1.6.0#d49466cf02f1",
+        "dwitbuk": "1.2.0#00e30e814425",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.4.1#9d1b44a52d8d",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "check"
+    ]
+  ],
+  "touched": [
+    "mangsang/registry.json",
+    "mangsang/relations/R-172c7b7c.json",
+    "mangsang/relations/R-36e86d46.json",
+    "mangsang/relations/R-65bd95bf.json",
+    "mangsang/relations/R-6f5dd3d8.json",
+    "mangsang/relations/R-6f9820d5.json",
+    "mangsang/relations/R-79a96c0a.json",
+    "mangsang/relations/R-7ce0b03f.json",
+    "mangsang/relations/R-f0d8ae78.json"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-281_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.6.0"
+      },
+      "locked": {
+        "chongdae": "1.6.0#d49466cf02f1",
+        "dwitbuk": "1.2.0#00e30e814425",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.4.1#9d1b44a52d8d",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  }
+}
