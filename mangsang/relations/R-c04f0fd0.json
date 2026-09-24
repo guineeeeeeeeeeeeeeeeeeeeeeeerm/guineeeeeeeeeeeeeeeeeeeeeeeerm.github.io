@@ -5,10 +5,10 @@
   "dst": "concept:feed",
   "evidence": "# the whole box is the way into the post",
   "seen": {
-    "sitegen/pages.py:feed_item": "794a6757f7f3",
+    "sitegen/pages.py:feed_item": "e91e6d1d7a58",
     "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 증거는 이전 관계의 인용 그대로이고, 그 문장은 restore-comments가 되살렸다"
+    "delegated": "세션이 diff를 읽었다: item_footer는 배지 아이콘을 icons.svg의 symbol로 가리키는 root 인자만 더했고 feed_item은 그 root를 넘길 뿐이다; ShareContractTests는 아이콘 한 번 정의 계약을 더했고 트집이 메서드 이름에 Q_share_ 접두어를 붙였다. 각각 여전히 share/feed 개념의 투영이다"
   }
 }

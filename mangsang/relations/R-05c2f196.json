@@ -3,12 +3,12 @@
   "src": "tests/test_shares.py:ShareContractTests",
   "predicate": "realizes",
   "dst": "concept:share",
-  "evidence": "def test_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):",
+  "evidence": "def test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):",
   "seen": {
-    "tests/test_shares.py:ShareContractTests": "a4c497407799",
+    "tests/test_shares.py:ShareContractTests": "9b45b08e8845",
     "concept:share": "ae8d0b44fd09"
   },
   "confirmed": {
-    "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
+    "delegated": "세션이 diff를 읽었다: item_footer는 배지 아이콘을 icons.svg의 symbol로 가리키는 root 인자만 더했고 feed_item은 그 root를 넘길 뿐이다; ShareContractTests는 아이콘 한 번 정의 계약을 더했고 트집이 메서드 이름에 Q_share_ 접두어를 붙였다. 각각 여전히 share/feed 개념의 투영이다"
   }
 }
