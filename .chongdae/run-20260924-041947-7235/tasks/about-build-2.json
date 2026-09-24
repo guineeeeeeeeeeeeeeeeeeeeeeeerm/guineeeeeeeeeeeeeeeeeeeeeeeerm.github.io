@@ -54,9 +54,9 @@
     ],
     "host": "codex",
     "model": "gpt-5.6-luna",
-    "session": "01a0d1a6-cced-70e1-90cd-604e89bd3ed8",
+    "session": "01a0d1a8-8a4e-71f2-b01d-87ef71e21709",
     "effort": "xhigh",
-    "transcript": "about-build-2.verify.response.transcript.jsonl",
+    "transcript": "about-build-2.verify.2.response.transcript.jsonl",
     "versions": {
       "used": {
         "dwitbuk": "1.1.0"
@@ -96,6 +96,38 @@
           "session": "01a0d1a6-cced-70e1-90cd-604e89bd3ed8",
           "effort": "xhigh",
           "transcript": "about-build-2.verify.response.transcript.jsonl"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "1 finding(s)"
+      }
+    },
+    {
+      "status": "session",
+      "retried": {
+        "by": "chongdae",
+        "auto": "the verifier rejected: 1 finding(s)",
+        "at": "2026-09-24T04:26:08+00:00"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "build.py:inline_markdown",
+            "record_quote": "본문 문법은 Q-post와 같고, 여기에 바깥 링크 `[글자](주소)`가 더해진다.",
+            "tree_quote": "if external_links:\n    for match in EXTERNAL_LINK_RE.finditer(text):\n        pieces.append(inline_markdown(text[cursor : match.start()], content_root, post_path, image_prefix))",
+            "why": "바깥 링크를 Q-post 인라인 문법보다 먼저 분리하므로 코드나 강조 안의 `[x](https://example.com)`도 링크로 렌더링되어 기존 Q-post 문법이 깨진다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "session": "01a0d1a8-8a4e-71f2-b01d-87ef71e21709",
+          "effort": "xhigh",
+          "transcript": "about-build-2.verify.2.response.transcript.jsonl"
         }
       },
       "rejected": {
