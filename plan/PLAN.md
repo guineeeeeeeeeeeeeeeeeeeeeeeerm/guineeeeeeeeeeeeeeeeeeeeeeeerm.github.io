@@ -21,7 +21,7 @@ Decided (owner, `source:tb-01`, `source:tb-02`, `source:tb-04`; 제안 `source:t
 Concept: `site-build`.
 
 `python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다. 결과는 `docs/index.html`(피드), 글마다
-`docs/p/<id>/index.html`, `docs/about/index.html`(소개, Q-about), `docs/assets/`(CSS, 자바스크립트), `docs/images/`(`content/images/`의 복사본), 빈 파일
+`docs/p/<id>/index.html`, `docs/about/index.html`(소개, Q-about), `docs/assets/`(CSS, 자바스크립트, 아이콘), `docs/images/`(`content/images/`의 복사본), 빈 파일
 `docs/.nojekyll`이다. 같은 입력이면 출력이 바이트 단위로 같다(빌드 시각 같은 값은 넣지 않는다). 표준 라이브러리만 쓴다.
 외부에서 가져오는 스크립트·글꼴·스타일은 없다.
 
@@ -272,6 +272,12 @@ Decided (technical, session): 공유는 글을 올린 뒤에 생기는 일이라
 아니거나, 키 집합이 위와 다르거나, `post`가 없는 글이거나, `where`가 모르는 곳이거나, `url`·`at`의 형식이 틀리면 빌드 오류이고
 오류 줄은 그 공유의 줄을 가리킨다. 한 글에 공유가 여럿이면 `at` 순(같으면 줄 순서)으로 배지를 단다. 배지는 사이트 안에 그린 흑백 아이콘(SVG)이고 외부에서 가져오지 않으며, 곳의 이름을 `aria-label`로 가진다. 공유가 없는
 글에는 배지 자리가 없다.
+
+Decided (owner, `source:ic-01`, `source:ic-03`; 제안 `source:ic-02`): 아이콘의 모양은 사이트 전체에서 한 번만 정의한다. 빌드는
+곳마다의 아이콘을 `docs/assets/icons.svg` 한 파일에 `<symbol id="share-<곳>">`으로 쓰고, 배지의 `<svg>`는 모양을 직접 담지
+않고 그 파일을 가리킨다(`<use href="<페이지 기준 상대 경로>assets/icons.svg#share-<곳>">`). 그래서 배지가 몇 개든 페이지에
+아이콘 모양(`<path>` 등)이 되풀이되지 않고, 아이콘 파일은 사이트 안의 파일이라 외부에서 가져오는 것이 아니다. 아이콘은 여전히
+흑백이고 글자색을 따른다(`currentColor`).
 
 ## Q-tag — 태그와 태그 클라우드
 

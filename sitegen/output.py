@@ -21,6 +21,7 @@ from .records import (
     parse_posts,
     parse_shares,
     parse_tags,
+    share_icons_svg,
 )
 
 
@@ -57,6 +58,7 @@ def write_output(
     (output_root / "p").mkdir(parents=True, exist_ok=True)
     (output_root / "assets" / "site.css").write_bytes((ASSETS / "site.css").read_bytes())
     (output_root / "assets" / "time.js").write_bytes((ASSETS / "time.js").read_bytes())
+    (output_root / "assets" / "icons.svg").write_bytes(share_icons_svg().encode("utf-8"))
     (output_root / ".nojekyll").write_bytes(b"")
     copy_images(content_root, output_root)
     (output_root / "index.html").write_bytes(

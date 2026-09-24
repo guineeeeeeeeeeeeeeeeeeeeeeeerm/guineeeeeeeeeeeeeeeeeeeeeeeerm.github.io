@@ -221,6 +221,14 @@ SHARE_PLACES = {
 }
 
 
+def share_icons_svg() -> str:
+    symbols = "".join(
+        f'<symbol id="share-{place}" viewBox="0 0 24 24">{icon}</symbol>'
+        for place, (_, icon) in SHARE_PLACES.items()
+    )
+    return f'<svg xmlns="http://www.w3.org/2000/svg">{symbols}</svg>\n'
+
+
 @dataclass(frozen=True)
 class Share:
     path: Path

@@ -22,6 +22,8 @@ SHARE_POSTS = {
     f"posts/{OTHER}.md": post_text(OTHER_AT, "공유되지 않은 글"),
 }
 
+KNOWN_PLACES = ("x", "threads", "linkedin")
+
 
 def item_of(feed, post_id):
     return next(item for item in re.findall(r'(?s)<article class="feed-item">(.*?)</article>', feed) if f'p/{post_id}/' in item)
@@ -43,13 +45,13 @@ class ShareContractTests(unittest.TestCase):
         self.assertEqual(len(lines), 1, msg=result.stderr)
         self.assertIn(f"shares.jsonl:{line}", lines[0].replace("\\", "/"))
 
-    def test_without_shares_there_are_no_badges(self):
+    def test_Q_share_without_shares_there_are_no_badges(self):
         with temporary_site(posts=SHARE_POSTS) as root:
             self.assert_builds(root)
             self.assertEqual(badges(read(root, "index.html")), [])
             self.assertEqual(badges(read(root, f"p/{ID}/index.html")), [])
 
-    def test_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):
+    def test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):
         with temporary_site(posts=SHARE_POSTS, shares={"on-x": share()}) as root:
             self.assert_builds(root)
             for page in (item_of(read(root, "index.html"), ID), read(root, f"p/{ID}/index.html")):
@@ -64,7 +66,7 @@ class ShareContractTests(unittest.TestCase):
                 self.assertRegex(read(root, "assets/site.css"), r"\.share-badge\s*\{[^}]*z-index", msg="a badge sits above the box's link")
             self.assertEqual(badges(item_of(read(root, "index.html"), OTHER)), [], msg="only the shared post has it")
 
-    def test_the_first_places_are_x_threads_and_linkedin_in_share_time_order(self):
+    def test_Q_share_the_first_places_are_x_threads_and_linkedin_in_share_time_order(self):
         shares = {
             "linkedin": share(where="linkedin", url="https://www.linkedin.com/posts/1", at="2024-02-06T00:00:00Z"),
             "threads": share(where="threads", url="https://www.threads.net/@someone/post/1", at="2024-02-05T00:00:00Z"),
@@ -75,7 +77,7 @@ class ShareContractTests(unittest.TestCase):
             labels = [re.search(r'aria-label="([^"]+)"', b).group(1) for b in badges(read(root, f"p/{ID}/index.html"))]
             self.assertEqual(labels, ["X", "Threads", "LinkedIn"])
 
-    def test_a_bad_share_row_is_a_build_error_naming_its_line(self):
+    def test_Q_share_a_bad_share_row_is_a_build_error_naming_its_line(self):
         base = share()
         cases = {
             "not-json": "{ not json",
@@ -90,6 +92,83 @@ class ShareContractTests(unittest.TestCase):
             with self.subTest(name=name):
                 with temporary_site(posts=SHARE_POSTS, shares={"good": base, name: value}) as root:
                     self.assert_fails_naming(root, 2)
+
+    def test_Q_share_Q_build_icons_svg_defines_each_known_share_symbol_once(self):
+        with temporary_site(posts=SHARE_POSTS, shares={"on-x": share()}) as root:
+            self.assert_builds(root)
+            icons_path = root / "docs" / "assets" / "icons.svg"
+            self.assertTrue(icons_path.is_file(), "the build must emit docs/assets/icons.svg")
+            icons = icons_path.read_text(encoding="utf-8")
+
+            for place in KNOWN_PLACES:
+                symbols = re.findall(
+                    rf'<symbol\b[^>]*\bid="share-{place}"[^>]*>', icons
+                )
+                self.assertEqual(len(symbols), 1, msg=place)
+                symbol = re.search(
+                    rf'<symbol\b[^>]*\bid="share-{place}"[^>]*>(.*?)</symbol>',
+                    icons,
+                    re.DOTALL,
+                )
+                self.assertIsNotNone(symbol, msg=place)
+                self.assertRegex(symbol.group(1), r"currentColor", msg=place)
+
+    def test_Q_share_badges_use_icon_paths_relative_to_each_page(self):
+        shares = {
+            "linkedin": share(
+                where="linkedin",
+                url="https://www.linkedin.com/posts/1",
+                at="2024-02-06T00:00:00Z",
+            ),
+            "threads": share(
+                where="threads",
+                url="https://www.threads.net/@someone/post/1",
+                at="2024-02-05T00:00:00Z",
+            ),
+            "x": share(at="2024-02-04T00:00:00Z"),
+        }
+        with temporary_site(posts=SHARE_POSTS, shares=shares) as root:
+            self.assert_builds(root)
+            pages = (
+                item_of(read(root, "index.html"), ID),
+                read(root, f"p/{ID}/index.html"),
+            )
+            expected = [
+                "assets/icons.svg#share-x",
+                "assets/icons.svg#share-threads",
+                "assets/icons.svg#share-linkedin",
+            ]
+
+            self.assertEqual(
+                re.findall(r'<use\b[^>]*\bhref="([^"]+)"', pages[0]),
+                expected,
+            )
+            self.assertEqual(
+                re.findall(r'<use\b[^>]*\bhref="([^"]+)"', pages[1]),
+                [href.replace("assets/", "../../assets/", 1) for href in expected],
+            )
+
+    def test_Q_share_badge_markup_has_no_repeated_path_shape(self):
+        shares = {
+            "x": share(),
+            "threads": share(
+                where="threads",
+                url="https://www.threads.net/@someone/post/1",
+                at="2024-02-05T00:00:00Z",
+            ),
+        }
+        with temporary_site(posts=SHARE_POSTS, shares=shares) as root:
+            self.assert_builds(root)
+            for page in (
+                item_of(read(root, "index.html"), ID),
+                read(root, f"p/{ID}/index.html"),
+            ):
+                found = badges(page)
+                self.assertEqual(len(found), 2, msg=page)
+                for badge in found:
+                    self.assertNotIn("<path", badge.lower())
+                    self.assertRegex(badge, r"<svg\b")
+                    self.assertRegex(badge, r"<use\b[^>]*\bhref=")
 
 if __name__ == "__main__":
     unittest.main()

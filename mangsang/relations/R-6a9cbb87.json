@@ -5,10 +5,10 @@
   "dst": "concept:share",
   "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다",
   "seen": {
-    "plan/PLAN.md#Q-share — 공유 기록과 배지": "0d878a7a6d12",
+    "plan/PLAN.md#Q-share — 공유 기록과 배지": "6c6298714579",
     "concept:share": "ae8d0b44fd09"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5): Q-share's record moved into the share table (source:tb-04); still the share's record. Technical, delegated (plan-07)"
+    "delegated": "절에 배지 아이콘을 한 번만 정의한다는 결정(소유자 source:ic-03)과 assets의 아이콘 파일을 더했을 뿐, 절은 여전히 같은 개념의 투영이다"
   }
 }

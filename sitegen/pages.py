@@ -166,7 +166,7 @@ def render_post_page(
 {tags}
 {patch_controls}
 <div class="body">{body_html}</div>
-{item_footer(post, shares or [])}
+{item_footer(post, shares or [], "../../")}
 {patch_catalog}
 {render_footnotes(post, content_root, posts, outgoing, patch_states)}
 {render_incoming_links(post, content_root, posts, [link for link in links if link.active and link.to_id == post.post_id], patch_states)}
@@ -176,12 +176,12 @@ def render_post_page(
     return page_shell(title, "../../", article)
 
 
-def item_footer(post: Post, shares: list[Share]) -> str:
+def item_footer(post: Post, shares: list[Share], root: str = "") -> str:
     """The bottom of a post, in the feed and on its page: the time it was written (text, not a link) and where it was
     shared. No type name: the type is chosen before writing, not shown (source:fd-04)."""
     badges = "".join(
         f'<a class="share-badge" href="{html.escape(item.url, quote=True)}" aria-label="{SHARE_PLACES[item.where][0]}" '
-        f'title="{SHARE_PLACES[item.where][0]}"><svg viewBox="0 0 24 24" aria-hidden="true">{SHARE_PLACES[item.where][1]}</svg></a>'
+        f'title="{SHARE_PLACES[item.where][0]}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="{root}assets/icons.svg#share-{item.where}"/></svg></a>'
         for item in shares
     )
     return (f'<footer class="item-footer">{time_element(post.written)}'
@@ -209,7 +209,7 @@ def feed_item(post: Post, content_root: Path, patch_state: PatchState, shares: l
     return f'''<article class="feed-item">
 {link}
 {top}
-{why}{item_footer(post, shares or [])}
+{why}{item_footer(post, shares or [], root)}
 </article>'''
 
 

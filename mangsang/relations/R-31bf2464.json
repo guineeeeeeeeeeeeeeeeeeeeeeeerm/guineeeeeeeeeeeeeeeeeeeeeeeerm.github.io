@@ -5,10 +5,10 @@
   "dst": "concept:site-build",
   "evidence": "`python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다.",
   "seen": {
-    "plan/PLAN.md#Q-build — 생성기와 출력": "a8a911d28eeb",
+    "plan/PLAN.md#Q-build — 생성기와 출력": "ce9fc1f4f761",
     "concept:site-build": "66de2d1eaeaa"
   },
   "confirmed": {
-    "delegated": "Q-build에 코드 구조 결정(소유자 source:rf-03)을 더했을 뿐, 절은 여전히 site-build(content/를 읽어 docs/를 만드는 생성기)의 투영이다"
+    "delegated": "절에 배지 아이콘을 한 번만 정의한다는 결정(소유자 source:ic-03)과 assets의 아이콘 파일을 더했을 뿐, 절은 여전히 같은 개념의 투영이다"
   }
 }
