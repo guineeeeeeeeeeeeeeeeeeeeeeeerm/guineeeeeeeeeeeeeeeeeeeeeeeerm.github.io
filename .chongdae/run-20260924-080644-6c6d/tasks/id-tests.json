@@ -1,0 +1,53 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.6.0",
+  "status": "done",
+  "def": {
+    "id": "id-tests",
+    "role": "session",
+    "brief": "계약 테스트: 글 id를 작성 시각 형식으로(가짜 글 이름 교체, 한 테스트의 여러 글은 서로 다른 시각), id 규칙의 새 테스트, 같은 시각 id 순 테스트 정리",
+    "closes": [
+      "Q-post",
+      "Q-feed"
+    ],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null,
+    "domain": "site"
+  },
+  "seq": 2,
+  "added": "2026-09-24T08:07:22+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [
+    "tests/test_about.py",
+    "tests/test_ids.py",
+    "tests/test_images.py",
+    "tests/test_linebreaks.py",
+    "tests/test_s1.py",
+    "tests/test_s2.py",
+    "tests/test_s3.py"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-281_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.6.0"
+      },
+      "locked": {
+        "chongdae": "1.6.0#d49466cf02f1",
+        "dwitbuk": "1.2.0#00e30e814425",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.4.1#9d1b44a52d8d",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  }
+}

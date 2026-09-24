@@ -1,0 +1,115 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.6.0",
+  "status": "done",
+  "def": {
+    "id": "id-build",
+    "role": "session",
+    "brief": "build.py: 글 id가 written의 시각(YYYYMMDD-HHMMSS)이 아니면 빌드 오류; README: 글 이름 규칙과 예시 id",
+    "closes": [
+      "Q-post",
+      "Q-feed",
+      "Q-readme"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_s1.py",
+      "tests/test_s2.py",
+      "tests/test_s3.py",
+      "tests/test_about.py",
+      "tests/test_images.py",
+      "tests/test_linebreaks.py",
+      "tests/test_ids.py"
+    ],
+    "gate": null,
+    "domain": "site"
+  },
+  "seq": 3,
+  "added": "2026-09-24T08:11:58+00:00",
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.2.0",
+        "chongdae": "1.6.0"
+      },
+      "locked": {
+        "chongdae": "1.6.0#d49466cf02f1",
+        "dwitbuk": "1.2.0#00e30e814425",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.4.1#9d1b44a52d8d",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "touched": [
+    "README.md",
+    "build.py"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-281_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.6.0"
+      },
+      "locked": {
+        "chongdae": "1.6.0#d49466cf02f1",
+        "dwitbuk": "1.2.0#00e30e814425",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.4.1#9d1b44a52d8d",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-080644-6c6d",
+  "task": "id-build",
+  "role": "verifier",
+  "target": ".",
+  "goal": "글의 id(파일 이름)는 작성 시각 YYYYMMDD-HHMMSS(UTC), 빌드가 강제",
+  "brief": "build.py: 글 id가 written의 시각(YYYYMMDD-HHMMSS)이 아니면 빌드 오류; README: 글 이름 규칙과 예시 id",
+  "closes": [
+    "Q-post",
+    "Q-feed",
+    "Q-readme"
+  ],
+  "contract": {
+    "Q-post": "## Q-post — 글 하나\n\nConcept: `post`, `post-type`, `tag`.\n\n글 파일은 헤더와 본문으로 이루어진다. 헤더는 파일 첫 줄부터 빈 줄 전까지의 `key: value` 줄들이다.\n\n- `written`: 작성 시각. `YYYY-MM-DDTHH:MM:SSZ` 형식의 UTC. 반드시 있고, 글의 `<id>`와 같은 시각이다.\n- `type`: `short`(짧은 글), `medium`(중간 글), `long`(긴 글) 중 하나. 반드시 있다. 유형은 쓰기 전에 고르는 것이며,\n  빌드는 분량으로 유형을 판단하지 않는다.\n- `title`: 제목. `short`에서는 있으면 빌드 오류, `medium`과 `long`에서는 선택.\n- `tags`: 쉼표로 구분한 태그 이름. 선택. 앞뒤 공백은 무시하고, 빈 이름은 버린다.\n\nDecided after quibble (s1-tests, technical, delegated): 키와 값의 앞뒤 공백은 무시하고, 키는 대소문자를 구분한다. 콜론이 없는\n헤더 줄과 같은 키가 두 번 나오는 헤더는 빌드 오류다.\n\n그 밖의 키, 형식이 틀린 `written`, 목록에 없는 `type`, 두 글이 같은 `<id>`(파일 이름)인 경우는 빌드 오류다.\n\nDecided (owner, `source:id-01`, `source:id-02`, `source:id-03`, `source:id-04`): 글의 `<id>`, 곧 글 파일의 이름은 작성 시각이다 —\n`YYYYMMDD-HHMMSS`(UTC, 예: `20260924-075921`). 제목은 늘 있는 것이 아니고 글에 붙은 메타데이터 중 하나일 뿐 정체성이 아니며, 글의\n정체성은 태그, 연결 관계, 수정 내역에 있어 파일 이름에 담을 수 없다. 관례가 아니라 빌드가 지킨다: `<id>`가 이 형식이 아니거나\n`written`과 다른 시각이면 빌드 오류이고, 오류 줄은 그 글 파일의 경로를 포함한다. 이미지만 있는\n글은 본문이 이미지 한 줄인 글이다.\n\nDecided (owner, `source:plan-11`): 본문이 빈 글은 빌드 오류다.\n\n본문은 Markdown의 부분집합이다: 빈 줄로 나뉜 문단, `#`/`##`/`###` 제목, `- ` 목록, `> ` 인용, `**굵게**`, `*기울임*`,\n`` `코드` ``, 이미지 `![설명](images/파일)`. 이미지 경로가 `content/images/`에 없으면 빌드 오류다. 본문의 HTML은 글자로\n보인다(태그로 해석되지 않는다).\n\nDecided (owner, `source:img-01`, `source:img-03`): 이미지의 표시 너비를 정할 수 있다 — `![설명|N](images/파일)`에서 `N`은 CSS\n픽셀 단위의 너비이고 높이는 비율대로 따른다. 원본 파일은 그대로다. `N`이 없으면 지금처럼 원본 크기(칸 너비를 넘지 않음)로 보인다.\nDecided (technical, session): `N`은 1부터 9999까지의 정수이고 `<img … width=\"N\">`이 된다. 설명 끝의 `|` 뒤가 정수가 아니면 설명의\n일부로 본다. `|0`은 빌드 오류다. 설명(`alt`)에는 `|N`이 들어가지 않는다 — 피드의 80자처럼 이미지 설명을 글자로 쓰는 곳도 같다.\n소개 페이지에서도 같다(Q-about).\n\nDecided (owner, `source:br-01`, `source:br-03`, 제안 `source:br-02`): 문단과 인용 안에서 줄을 바꾸면 화면에서도 줄이 바뀐다 —\n파일에 보이는 대로 보인다. 빈 줄은 지금처럼 문단을 나눈다. Decided (technical, session): 줄바꿈은 `<br>`이 된다. 피드의 짧은 글\n본문도 같다. 80자를 세는 화면 글자는 전과 같다(줄바꿈 한 글자).\n\n글 페이지 `docs/p/<id>/index.html`은 제목(있으면), 작성 시각, 태그, 본문을 보여준다.\n\nDecided (owner, `source:plan-11`): 글 페이지와 피드 항목에 유형 이름(짧은 글/중간 글/긴 글)을 작게 표시한다. 태그는 글\n페이지에 글자로만 표시하고, 태그별 목록 페이지는 아직 만들지 않는다.",
+    "Q-feed": "## Q-feed — 첫 화면\n\nConcept: `feed`.\n\n`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형별로 나누지 않는다 — 항목마다 유형 이름이 붙는 것은 Q-post대로다. 글의 `<id>`가\n작성 시각이라 두 글의 시각이 같을 수 없다). 짧은\n글은 본문 전체를 보여주고, 중간·긴 글은 제목과 시각을 보여준다. Decided (owner, `source:plan-11`): 제목이 없는 중간·긴\n글은 제목 자리에 본문 첫 문단의 앞 80자(잘렸으면 `…`)를 보여준다. Decided after quibble (s1-tests, technical, delegated): 80자는 적용된 본문의 첫 문단을 HTML로 만든 뒤의 화면 글자(서식\n기호와 태그를 뺀 글자)에서 유니코드 문자 단위로 센다. 이미지만 있는 첫 문단은 이미지 설명(alt)을 글자로 쓴다. 모든 항목은\n그 글의 페이지로 가는 링크를 가진다. 피드의 본문은 적용된 본문이다.\n\nDismissed after quibble (s1-tests): \"checks가 비어 있다\"는 다섯 건 — 트집 작업은 계약 테스트를 쓰는 작업이라 그 테스트가 검사이고,\n`s1-build`가 `python3 -m unittest discover -s tests`로 돌린다.",
+    "Q-readme": "## Q-readme — 글쓴이의 안내서\n\nConcept: `post`, `site-build`.\n\n저장소 루트의 `README.md`는 이 사이트에 글을 올리는 사람을 위한 한국어 안내서다. 새 글을 쓰는 법(파일 위치와 이름, 헤더의\n`written`·`type`·`title`·`tags` 각각의 규칙과 예시, 본문에 쓸 수 있는 문법, 이미지 넣는 법), 링크를 거는 법(링크 파일의 모양,\n사유를 바꾸거나 지우는 법), 패치를 붙이는 법(패치 파일의 모양, `op` 네 가지), 사이트를 만드는 명령(`python3 build.py`)과 결과가\n생기는 곳(`docs/`), 빌드 오류가 났을 때 무엇을 보면 되는지를 담는다. 안내서의 예시를 그대로 따라 한 글·링크·패치는 빌드 오류 없이\n만들어진다. 안내서에 적힌 규칙은 이 계획서의 규칙과 어긋나지 않는다.\n\nDecided after quibble (readme-tests, technical, delegated): 한국어 — 코드 블록 밖 본문 글자 중 한글이 절반 이상이다. 담는다 —\n새 글, 링크, 패치, 빌드 각각에 `##` 절이 있고, 새 글 절에 `written`·`type`·`title`·`tags`, 패치 절에 `op` 네 가지, 빌드 절에\n`python3 build.py`와 `docs/`, 그리고 빌드 오류가 stderr에 파일 경로를 담은 한 줄로 나온다는 설명이 있다. 예시는 정보 문자열에 종류와\n경로를 적은 코드 블록이다: ```` ```post content/posts/<id>.md ````, ```` ```link content/links/<id>.json ````,\n```` ```patch content/patches/<id>.json ````. 테스트는 그 블록들을 그대로 임시 사이트에 쓰고 빌드해, 글 페이지가 생기고, 링크의\n`[n]`이 붙고, 패치가 적용된 글자가 보이는지 본다. 계획서와 어긋나지 않는다 — 예시가 실제 `build.py`로 오류 없이 빌드되는 것이 그\n증거다(빌드가 이 계획서의 규칙을 강제한다); 그 밖의 문장 대 문장 일치는 기계로 관찰하지 않는다(non-claim).\n\nDecided by the builder (readme-3, technical, accepted as delegated): 안내서는 계획서의 어휘(절 id, 개념 이름)를 쓰지 않고, 제목은 글쓴이가\n하는 일로 붙인다. 빌드 절의 제목은 `사이트 만들기 — 빌드`다.\n\nDecided (technical, session): 안내서에는 소개 페이지를 쓰는 법(`content/about.md`, 헤더 없음, 바깥 링크)도 `##` 절로 담는다.\n예시는 ```` ```about content/about.md ```` 블록이며, 테스트는 다른 예시처럼 그대로 빌드해 `docs/about/index.html`이 생기는지 본다."
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "tests": [
+    "tests/test_s1.py",
+    "tests/test_s2.py",
+    "tests/test_s3.py",
+    "tests/test_about.py",
+    "tests/test_images.py",
+    "tests/test_linebreaks.py",
+    "tests/test_ids.py"
+  ],
+  "domain": "site",
+  "response": "./.chongdae/run-20260924-080644-6c6d/id-build.verify.response.json",
+  "touched": [
+    "README.md",
+    "build.py"
+  ],
+  "built": null
+}
