@@ -1,0 +1,29 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.7.1",
+  "stage": "verify",
+  "run": "run-20260924-104932-eace",
+  "task": "adopt-1.7",
+  "role": "verifier",
+  "target": ".",
+  "goal": "chongdae 1.7.1, dwitbuk 1.4.0 반영",
+  "brief": "새 버전 설치, hunsu add, check, lock",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "{plugin:hunsu}/hunsu.py",
+      "check"
+    ]
+  ],
+  "tests": [],
+  "domain": "plan",
+  "response": "./.chongdae/run-20260924-104932-eace/local/adopt-1.7.verify.response.json",
+  "touched": [
+    "hunsu-judgments.json",
+    "hunsu.json",
+    "hunsu.lock.json"
+  ],
+  "built": null
+}
