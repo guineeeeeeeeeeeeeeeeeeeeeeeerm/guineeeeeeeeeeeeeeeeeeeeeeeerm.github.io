@@ -701,6 +701,10 @@ def render_block(
     def inline(text: str) -> str:
         return inline_markdown(text, content_root, post_path, image_prefix, external_links)
 
+    def lines(value: list[str]) -> str:
+        # a line break in the file is a line break on the page: what the author sees is what the reader sees
+        return inline(chr(10).join(value)).replace(chr(10), "<br>" + chr(10))
+
     if kind == "heading":
         level, text = value  # type: ignore[misc]
         return f'<h{level}>{inline(text)}</h{level}>'
@@ -708,8 +712,8 @@ def render_block(
         items = value  # type: ignore[assignment]
         return "<ul>" + "".join(f"<li>{inline(item)}</li>" for item in items) + "</ul>"
     if kind == "quote":
-        return f"<blockquote>{inline(chr(10).join(value))}</blockquote>"  # type: ignore[arg-type]
-    return f"<p>{inline(chr(10).join(value))}</p>"  # type: ignore[arg-type]
+        return f"<blockquote>{lines(value)}</blockquote>"  # type: ignore[arg-type]
+    return f"<p>{lines(value)}</p>"  # type: ignore[arg-type]
 
 
 def block_content_bounds(rendered: str) -> tuple[int, int]:

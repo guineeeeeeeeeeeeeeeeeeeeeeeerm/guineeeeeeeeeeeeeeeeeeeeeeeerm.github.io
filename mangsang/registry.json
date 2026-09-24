@@ -22,5 +22,8 @@
   },
   {
     "path": "tests/test_images.py"
+  },
+  {
+    "path": "tests/test_linebreaks.py"
   }
 ]

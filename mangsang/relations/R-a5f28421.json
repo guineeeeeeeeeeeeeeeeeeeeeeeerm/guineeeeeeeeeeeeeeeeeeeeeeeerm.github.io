@@ -1,0 +1,14 @@
+{
+  "id": "R-a5f28421",
+  "src": "tests/test_linebreaks.py:LineBreakContractTests",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "def test_a_line_break_inside_a_paragraph_is_a_line_break_on_the_page(self):",
+  "seen": {
+    "tests/test_linebreaks.py:LineBreakContractTests": "e57f558c0a8e",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "The line-break rule grounded in the owner's question and approval (br-01, br-03) and projected in code and tests, proposed by Claude (claude-opus-5-5) after br-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

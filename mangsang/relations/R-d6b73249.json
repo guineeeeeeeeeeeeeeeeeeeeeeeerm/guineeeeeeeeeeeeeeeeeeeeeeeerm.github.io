@@ -1,0 +1,14 @@
+{
+  "id": "R-d6b73249",
+  "src": "source:br-01",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "줄 나누고 싶으면 어떻게 써야해?",
+  "seen": {
+    "source:br-01": "b570a998836a",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "The line-break rule grounded in the owner's question and approval (br-01, br-03) and projected in code and tests, proposed by Claude (claude-opus-5-5) after br-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "R-213599c9",
+  "src": "source:br-03",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "ㄱㄱㄱ",
+  "seen": {
+    "source:br-03": "028e086c5ad8",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "The line-break rule grounded in the owner's question and approval (br-01, br-03) and projected in code and tests, proposed by Claude (claude-opus-5-5) after br-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

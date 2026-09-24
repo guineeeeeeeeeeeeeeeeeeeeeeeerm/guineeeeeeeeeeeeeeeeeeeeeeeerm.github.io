@@ -1,0 +1,14 @@
+{
+  "id": "R-33d3ddd0",
+  "src": "build.py:render_block",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "return inline(chr(10).join(value)).replace(chr(10), \"<br>\" + chr(10))",
+  "seen": {
+    "build.py:render_block": "1919e3365ab2",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "The line-break rule grounded in the owner's question and approval (br-01, br-03) and projected in code and tests, proposed by Claude (claude-opus-5-5) after br-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

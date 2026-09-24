@@ -5,10 +5,10 @@
   "dst": "concept:post-type",
   "evidence": "유형은 쓰기 전에 고르는 것이며,\n  빌드는 분량으로 유형을 판단하지 않는다.",
   "seen": {
-    "plan/PLAN.md#Q-post — 글 하나": "ebce07aebb02",
+    "plan/PLAN.md#Q-post — 글 하나": "b4eda0397cab",
     "concept:post-type": "dce6f00332ed"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the image-width addition (run-20260924-073550-4de1): the sections gained the width syntax only; each quoted sentence still stands and still projects its concept. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the line-break addition (run-20260924-074512-d1f6): the sections gained one rule about line breaks; each quoted sentence still stands and still projects its concept. Technical, delegated (plan-07)"
   }
 }
