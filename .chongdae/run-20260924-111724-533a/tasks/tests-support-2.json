@@ -1,0 +1,34 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.7.1",
+  "status": "todo",
+  "def": {
+    "id": "tests-support-2",
+    "role": "implementer",
+    "brief": "Q-build의 리팩터링 결정 중 테스트 부분: 테스트 파일마다 되풀이되는 도우미(BUILD 경로, 임시 사이트 만들기 temporary_site류, run_build, read 등 출력 읽기)를 tests/support.py 한 곳으로 옮기고 각 테스트 파일이 그것을 import해 쓰게 한다. 이것은 테스트 코드의 리팩터링이다: 각 테스트가 확인하는 것(assert, 픽스처 내용, 테스트 메서드 이름과 클래스 이름)은 한 글자도 바꾸지 않는다 — mangsang 관계가 클래스 이름(S1GeneratorContractTests 등)에 걸려 있다. 파일마다 픽스처가 조금씩 다르면(about.md 기본값, 표 파일 쓰기 등) 공통 도우미가 인자로 받게 하되 억지로 합치지 않는다; 한 파일에만 쓰이는 도우미는 그 파일에 남긴다. build.py·sitegen/·plan/은 건드리지 않는다. 테스트는 python3 -m unittest discover -s tests로 돌므로 tests/가 sys.path에 있다(from support import ...). 판정: 테스트 수가 지금과 같고 전부 통과, docs/ 변화 없음.",
+    "closes": [
+      "Q-build"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      [
+        "sh",
+        "-c",
+        "python3 build.py && git diff --exit-code --stat -- docs && test -z \"$(git status --porcelain -- docs)\""
+      ]
+    ],
+    "tests": [],
+    "gate": null,
+    "domain": "code"
+  },
+  "seq": 4,
+  "added": "2026-09-24T11:23:01+00:00"
+}
