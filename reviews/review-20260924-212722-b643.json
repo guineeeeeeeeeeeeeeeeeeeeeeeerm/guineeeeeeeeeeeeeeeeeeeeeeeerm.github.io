@@ -29,7 +29,14 @@
       "kind": "non-claim",
       "where": "run-20260924-111724-533a, run-20260924-122715-ff15",
       "text": "no check decides this task  [x2]",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언: session 태스크(관계 정리, 환경 반영)는 체크가 아니라 mangsang impact·check와 hunsu check(모두 문제 없음)로 확인했다",
+        "by": null,
+        "finding_text": "no check decides this task  [x2]",
+        "where": "run-20260924-111724-533a, run-20260924-122715-ff15"
+      }
     },
     {
       "kind": "non-claim",
