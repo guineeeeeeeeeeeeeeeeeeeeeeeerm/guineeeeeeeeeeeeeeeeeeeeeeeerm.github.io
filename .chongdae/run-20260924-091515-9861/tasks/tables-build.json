@@ -1,0 +1,114 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.6.0",
+  "status": "todo",
+  "def": {
+    "id": "tables-build",
+    "role": "session",
+    "brief": "build.py: 기록 표(links/patches/shares/tags .jsonl)를 읽고 검증(오류는 파일:줄), 헤더 tags 제거, 태그 클라우드(피드 옆·모바일 아래)와 태그 페이지, 글 페이지 태그 링크; README: 기록 표 절, 링크·패치·공유 행 예시, 태그 달기",
+    "closes": [
+      "Q-link",
+      "Q-patch",
+      "Q-share",
+      "Q-tag",
+      "Q-post",
+      "Q-feed",
+      "Q-readme"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_readme.py",
+      "tests/test_s1.py",
+      "tests/test_s2.py",
+      "tests/test_s3.py",
+      "tests/test_shares.py",
+      "tests/test_tags.py"
+    ],
+    "gate": null,
+    "domain": "site"
+  },
+  "seq": 4,
+  "added": "2026-09-24T09:23:08+00:00",
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.2.0",
+        "chongdae": "1.6.0"
+      },
+      "locked": {
+        "chongdae": "1.6.0#d49466cf02f1",
+        "dwitbuk": "1.2.0#00e30e814425",
+        "hacheong": "1.3.0#eb6ef501bc62",
+        "hunsu": "1.4.1#9d1b44a52d8d",
+        "mangsang": "1.5.0#64a8b2aa7c00"
+      }
+    }
+  },
+  "attempts": [
+    {
+      "status": "session",
+      "retried": {
+        "delegated": "technical (plan-07): both findings fixed in the tree — a link row's action that is not a string is a row error, not a crash; an anchor is found in the applied body as a reader sees it (patch-region markers skipped), markers inside it kept whole around the link",
+        "at": "2026-09-24T09:30:19+00:00",
+        "chongdae": "chongdae 1.6.0"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "build.py:580-598",
+            "record_quote": "그 뒤의 사건은 `reason-changed` 또는 `removed`이고, 사건 규칙에 어긋나면 빌드 오류이며 오류 줄은 그 표의 줄을 가리킨다.",
+            "tree_quote": "`elif action in {\"reason-changed\", \"removed\"}:`",
+            "why": "JSON에서 action이 배열이나 객체이면 집합 membership 검사에서 TypeError가 발생해 `fail(where)`로 처리되지 않는다. 따라서 잘못된 링크 행이 파일:줄 한 줄의 빌드 오류가 되지 않는다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "build.py:895-905",
+            "record_quote": "`anchor`는 `from` 글의 적용된 본문에 그대로 나오는 문자열이며, 정확히 한 번 나와야 한다. 글 페이지에서 그 문자열은 `to` 글로 가는 링크가 된다.",
+            "tree_quote": "`body, regions = patch_state.regions_and_marked_body()` 뒤에 `body, tokens = apply_anchor_replacements(body, replacements, post_path)`를 호출하고, `apply_anchor_replacements`는 `position = body.find(anchor)`가 음수이면 실패한다.",
+            "why": "패치 영역 마커가 링크 앵커를 검색하기 전에 삽입된다. 적용된 본문에서 패치된 문자와 인접한 원문 문자를 함께 포함하는 유효한 앵커는 마커 때문에 연속 문자열로 찾지 못해 링크가 렌더링되지 않고 빌드 오류가 된다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "2 finding(s)"
+      }
+    }
+  ]
+}
