@@ -1,0 +1,11 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.6.0",
+  "goal": "피드: 유형 표시 없음, 시각은 글자만, 글 상자 전체가 글 페이지 링크",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
