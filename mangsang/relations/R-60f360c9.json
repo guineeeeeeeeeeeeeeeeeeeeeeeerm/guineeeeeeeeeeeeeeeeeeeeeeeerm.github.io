@@ -5,10 +5,10 @@
   "dst": "concept:feed",
   "evidence": "def test_a_short_post_has_no_title_line_and_shows_its_whole_body(self):",
   "seen": {
-    "tests/test_feed_layout.py:FeedLayoutContractTests": "422a05f4d39b",
-    "concept:feed": "881481885910"
+    "tests/test_feed_layout.py:FeedLayoutContractTests": "9fac378ab126",
+    "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
   }
 }

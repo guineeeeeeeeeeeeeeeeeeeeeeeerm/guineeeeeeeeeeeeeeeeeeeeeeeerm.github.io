@@ -1,0 +1,7 @@
+{
+  "id": "fd-04",
+  "text": "지금 구현된 내용이 좀 어색해.\n- 글 유형을 표시할 필요는 없어보여.\n- 시간을 클릭하면 글로 가는 것도 이상해. <- 시간은 클릭 가능하지 않게 하는 것이 좋아보이는데, 그렇다면 글 전체를 클릭 가능하게 하는 것이 좋을듯.\n\n글을 클릭하면 이 글과 연결된 다른 글들 및 각종 정보들에 들어갈 수 있으니 이유가 될 것 같아.",
+  "speaker": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+  "locator": "session d515e4e2-9bca-4949-9cd1-f22b8447a5ab, person aa1f6f09-38ef-4a63-9226-65269ce27517 at 2026-09-24T08:36:42.786Z",
+  "verbatim-from": "host transcript"
+}

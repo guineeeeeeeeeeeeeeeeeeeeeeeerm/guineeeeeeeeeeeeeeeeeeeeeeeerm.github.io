@@ -1,0 +1,14 @@
+{
+  "id": "R-ebb5f321",
+  "src": "source:fd-04",
+  "predicate": "realizes",
+  "dst": "concept:post-type",
+  "evidence": "글 유형을 표시할 필요는 없어보여.",
+  "seen": {
+    "source:fd-04": "1ea96a659b99",
+    "concept:post-type": "dce6f00332ed"
+  },
+  "confirmed": {
+    "delegated": "The owner's fd-04 grounded in feed and post-type, and the whole-box link projected in its test, proposed by Claude (claude-opus-5-5) after click-build-2 passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

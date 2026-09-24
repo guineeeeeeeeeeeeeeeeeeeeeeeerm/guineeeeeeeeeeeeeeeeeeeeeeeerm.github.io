@@ -3,12 +3,12 @@
   "src": "build.py:feed_item",
   "predicate": "realizes",
   "dst": "concept:feed",
-  "evidence": "# a short post has no title line: its whole body is the item, and its time links to it",
+  "evidence": "# the whole box is the way into the post",
   "seen": {
-    "build.py:feed_item": "9f13610d0bd0",
-    "concept:feed": "881481885910"
+    "build.py:feed_item": "a3917810abca",
+    "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5): feed_item now makes the whole box the post's link (fd-04); it still projects the feed. Technical, delegated (plan-07)"
   }
 }

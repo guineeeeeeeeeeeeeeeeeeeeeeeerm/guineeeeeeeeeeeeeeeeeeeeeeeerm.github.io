@@ -85,6 +85,7 @@ class ShareContractTests(unittest.TestCase):
                 self.assertNotRegex(found[0], r'src="https?://')
                 footer = re.search(r'(?s)<footer class="item-footer">(.*?)</footer>', page).group(1)
                 self.assertIn(found[0], footer, msg="badges sit in the footer")
+                self.assertRegex(read(root, "assets/site.css"), r"\.share-badge\s*\{[^}]*z-index", msg="a badge sits above the box's link")
             self.assertEqual(badges(item_of(read(root, "index.html"), OTHER)), [], msg="only the shared post has it")
 
     def test_the_first_places_are_x_threads_and_linkedin_in_share_time_order(self):

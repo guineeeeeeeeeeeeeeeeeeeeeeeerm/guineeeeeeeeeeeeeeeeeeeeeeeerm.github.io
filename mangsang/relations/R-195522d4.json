@@ -5,10 +5,10 @@
   "dst": "concept:tag",
   "evidence": "def test_Q_post_tags_trim_whitespace_drop_empty_names_and_are_plain_text(self):",
   "seen": {
-    "tests/test_s1.py:S1GeneratorContractTests": "0cd7cac7036c",
+    "tests/test_s1.py:S1GeneratorContractTests": "a59d18133b6b",
     "concept:tag": "da4fe3afc21d"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
   }
 }

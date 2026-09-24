@@ -75,14 +75,15 @@ Decided (owner, `source:br-01`, `source:br-03`, 제안 `source:br-02`): 문단�
 
 글 페이지 `docs/p/<id>/index.html`은 제목(있으면), 작성 시각, 태그, 본문을 보여준다.
 
-Decided (owner, `source:plan-11`): 글 페이지와 피드 항목에 유형 이름(짧은 글/중간 글/긴 글)을 작게 표시한다. 태그는 글
-페이지에 글자로만 표시하고, 태그별 목록 페이지는 아직 만들지 않는다.
+Decided (owner, `source:plan-11`): 태그는 글 페이지에 글자로만 표시하고, 태그별 목록 페이지는 아직 만들지 않는다.
+Decided (owner, `source:fd-04`; `source:plan-11`의 "유형 이름을 작게 표시한다"를 바꿈): 유형 이름(짧은 글/중간 글/긴 글)은 화면에
+표시하지 않는다. 유형은 쓰기 전에 고르는 것이고, 피드에서 무엇을 보여줄지(Q-feed)를 정할 뿐이다.
 
 ## Q-feed — 첫 화면
 
 Concept: `feed`.
 
-`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형별로 나누지 않는다 — 항목마다 유형 이름이 붙는 것은 Q-post대로다. 글의 `<id>`가
+`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형별로 나누지 않는다. 글의 `<id>`가
 작성 시각이라 두 글의 시각이 같을 수 없다). 짧은
 글은 본문 전체를 보여주고, 중간·긴 글은 제목과 시각을 보여준다. Decided (owner, `source:plan-11`): 제목이 없는 중간·긴
 글은 제목 자리에 본문 첫 문단의 앞 80자(잘렸으면 `…`)를 보여준다. Decided after quibble (s1-tests, technical, delegated): 80자는 적용된 본문의 첫 문단을 HTML로 만든 뒤의 화면 글자(서식
@@ -94,13 +95,16 @@ Dismissed after quibble (s1-tests): "checks가 비어 있다"는 다섯 건 — 
 
 Decided (owner, `source:fd-01`, `source:fd-02`, `source:fd-03`): 피드 항목의 양식 —
 - 항목마다 분리된 상자(`<article class="feed-item">`)다.
-- 제목은 있을 때만 맨 위에 굵게 나오고 글 페이지로 가는 링크다. 짧은 글에는 제목 줄이 없다(제목 자리에 `<id>`를 쓰지 않는다).
+- 제목은 있을 때만 맨 위에 굵게 나온다. 짧은 글에는 제목 줄이 없다(제목 자리에 `<id>`를 쓰지 않는다).
   제목이 없는 중간·긴 글은 위의 80자가 제목 자리에 온다.
 - 짧은 글은 요약 없이 본문 전체를 보여준다. 짧은 글이기 때문이다.
-- 항목 하단(`<footer class="item-footer">`)에 유형 이름과 작성 시각(Q-time의 독자 현지 시각)이 나오고, 작성 시각이 그 글의
-  페이지로 가는 링크다(X, 스레드처럼). 그 뒤에 공유 배지가 붙는다(Q-share).
+- 항목 하단(`<footer class="item-footer">`)에 작성 시각(Q-time의 독자 현지 시각)이 나오고, 그 뒤에 공유 배지가 붙는다(Q-share).
+Decided (owner, `source:fd-04`; 위의 유형 이름과 "시각이 링크"를 바꿈): 시각은 링크가 아니다. 항목 상자 전체가 그 글의 페이지로 가는
+링크다 — 글을 누르면 이 글과 연결된 다른 글들과 각종 정보(주석, 이 글을 가리키는 글, 패치, 공유)로 들어간다. 상자 안의 공유
+배지는 따로 눌려 공유한 글로 간다. Decided (technical, session): 상자 링크는 상자를 덮는 투명한 링크(`<a class="item-link">`)이고,
+배지는 그 위에 놓인다(링크 안에 링크를 넣지 않는다). 제목이 있으면 제목이 그 링크의 이름이 되고, 없으면 "글 보기"다.
 - 본문 글씨는 읽기 좋게 키운다(18px, `1.125rem`).
-Decided (technical, session): 글 페이지도 같은 하단(유형, 작성 시각, 공유 배지)을 본문 아래에 둔다 — 디자인 일관성(`source:about-09`).
+Decided (technical, session): 글 페이지도 같은 하단(작성 시각, 공유 배지)을 본문 아래에 둔다 — 디자인 일관성(`source:about-09`).
 
 ## Q-time — 시각 표시
 
@@ -117,7 +121,7 @@ Decided after the verifier (s1-build-4, technical, delegated): 현지 시각으�
 
 Concept: `ui-language`.
 
-메뉴, 버튼, 안내 문구, 유형 이름(짧은 글/중간 글/긴 글) 등 사이트가 만드는 글자는 한국어다. `<html lang="ko">`.
+메뉴, 버튼, 안내 문구 등 사이트가 만드는 글자는 한국어다. `<html lang="ko">`.
 
 ## Q-link — 주석으로 거는 링크
 

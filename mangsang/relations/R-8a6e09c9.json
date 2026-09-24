@@ -6,9 +6,9 @@
   "evidence": "짧은 글의 경우 요약이 필요 없어야함.",
   "seen": {
     "source:fd-02": "f7bf02c2375f",
-    "concept:feed": "881481885910"
+    "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "The share concept and the feed's new layout grounded in the owner's words (fd-01..03, on the proposal fd-00) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after feed-build passed its checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
   }
 }

@@ -78,10 +78,10 @@ class FeedLayoutContractTests(unittest.TestCase):
             self.assertIn("둘째 줄도 나온다.", item)
             self.assertNotIn("…", item)
 
-    def test_a_title_comes_first_in_bold_and_links_to_the_post(self):
+    def test_a_title_comes_first_in_bold(self):
         with temporary_site(SITE) as root:
             item = item_of(self.build(root), pid(MEDIUM_AT))
-            title = re.search(r'(?s)<h2 class="feed-title"><a href="p/%s/">(.*?)</a></h2>' % pid(MEDIUM_AT), item)
+            title = re.search(r'(?s)<h2 class="feed-title">(.*?)</h2>', item)
             self.assertIsNotNone(title, msg=item)
             self.assertEqual(title.group(1), "중간 글 제목")
             self.assertLess(item.index("feed-title"), item.index("item-footer"))
@@ -90,9 +90,9 @@ class FeedLayoutContractTests(unittest.TestCase):
     def test_an_untitled_medium_or_long_post_keeps_its_80_characters_in_the_title_place(self):
         with temporary_site(SITE) as root:
             item = item_of(self.build(root), pid(UNTITLED_AT))
-            self.assertRegex(item, r'<h2 class="feed-title"><a href="p/%s/">제목 없는 긴 글의 첫 문단</a></h2>' % pid(UNTITLED_AT))
+            self.assertIn('<h2 class="feed-title">제목 없는 긴 글의 첫 문단</h2>', item)
 
-    def test_the_footer_at_the_bottom_has_the_type_and_the_time_linking_to_the_post(self):
+    def test_the_footer_at_the_bottom_has_the_time_as_plain_text_and_no_type(self):
         with temporary_site(SITE) as root:
             feed = self.build(root)
             for written, type_name in ((SHORT_AT, "짧은 글"), (MEDIUM_AT, "중간 글"), (UNTITLED_AT, "긴 글")):
@@ -101,8 +101,23 @@ class FeedLayoutContractTests(unittest.TestCase):
                     footer = re.search(r'(?s)<footer class="item-footer">(.*?)</footer>', item)
                     self.assertIsNotNone(footer, msg=item)
                     self.assertTrue(item.rstrip().endswith("</footer>"), msg="the footer is the item's last part")
-                    self.assertIn(type_name, footer.group(1))
-                    self.assertRegex(footer.group(1), r'<a href="p/%s/"><time datetime="%s"' % (pid(written), written))
+                    self.assertNotIn(type_name, footer.group(1))
+                    self.assertIn(f'<time datetime="{written}"', footer.group(1))
+                    self.assertNotIn("<a", footer.group(1), msg="the time is not a link (no shares here)")
+
+    def test_the_whole_box_links_to_the_post_by_one_empty_covering_link(self):
+        with temporary_site(SITE) as root:
+            feed = self.build(root)
+            for written, name in ((SHORT_AT, "글 보기"), (MEDIUM_AT, "중간 글 제목"), (UNTITLED_AT, "제목 없는 긴 글의 첫 문단")):
+                with self.subTest(post=pid(written)):
+                    item = item_of(feed, pid(written))
+                    links = re.findall(r'<a class="item-link"[^>]*></a>', item)
+                    self.assertEqual(len(links), 1, msg=item)
+                    self.assertIn(f'href="p/{pid(written)}/"', links[0])
+                    self.assertIn(f'aria-label="{name}"', links[0])
+            css = read(root, "assets/site.css")
+            self.assertRegex(css, r"\.feed-item\s*\{[^}]*position:\s*relative")
+            self.assertRegex(css, r"\.item-link::after\s*\{[^}]*inset:\s*0")
 
     def test_the_post_page_has_the_same_footer_under_its_body(self):
         with temporary_site(SITE) as root:
@@ -110,8 +125,9 @@ class FeedLayoutContractTests(unittest.TestCase):
             page = read(root, f"p/{pid(SHORT_AT)}/index.html")
             footer = re.search(r'(?s)<footer class="item-footer">(.*?)</footer>', page)
             self.assertIsNotNone(footer, msg=page)
-            self.assertIn("짧은 글", footer.group(1))
+            self.assertNotIn("짧은 글", footer.group(1))
             self.assertIn(f'datetime="{SHORT_AT}"', footer.group(1))
+            self.assertNotIn("<a", footer.group(1))
             self.assertLess(page.index('<div class="body">'), page.index('<footer class="item-footer">'))
 
     def test_body_text_is_set_larger_for_reading(self):

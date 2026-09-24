@@ -3,12 +3,12 @@
   "src": "tests/test_s1.py:S1GeneratorContractTests",
   "predicate": "realizes",
   "dst": "concept:ui-language",
-  "evidence": "def test_Q_ui_sets_korean_document_language_and_korean_type_names(self):",
+  "evidence": "def test_Q_ui_sets_korean_document_language_and_shows_no_type_names(self):",
   "seen": {
-    "tests/test_s1.py:S1GeneratorContractTests": "0cd7cac7036c",
+    "tests/test_s1.py:S1GeneratorContractTests": "a59d18133b6b",
     "concept:ui-language": "e2a0a380d7e4"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5): the UI-language test now checks Korean pages without type names (fd-04). Technical, delegated (plan-07)"
   }
 }

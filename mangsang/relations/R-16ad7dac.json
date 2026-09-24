@@ -6,9 +6,9 @@
   "evidence": "유형 구분 없이 시간순 피드. 짧은 글은 본문 전체를, 중간·긴 글은 제목(없으면 첫 줄)과 시각만 보여주고 누르면 글 페이지로.",
   "seen": {
     "source:plan-08": "141c518b4f91",
-    "concept:feed": "881481885910"
+    "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the feed layout and share records (run-20260924-082355-b147): the feed's order, what a short or titled post shows and the menu are unchanged by the new box, footer and badges; Q-about's text is unchanged (Q-share now follows it). Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
   }
 }

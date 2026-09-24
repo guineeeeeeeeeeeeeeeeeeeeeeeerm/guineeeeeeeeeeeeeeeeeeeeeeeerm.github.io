@@ -5,10 +5,10 @@
   "dst": "concept:feed",
   "evidence": "`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다",
   "seen": {
-    "plan/PLAN.md#Q-feed — 첫 화면": "d0b6d31ef444",
-    "concept:feed": "881481885910"
+    "plan/PLAN.md#Q-feed — 첫 화면": "ac6a8704a750",
+    "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the feed layout and share records (run-20260924-082355-b147): the feed's order, what a short or titled post shows and the menu are unchanged by the new box, footer and badges; Q-about's text is unchanged (Q-share now follows it). Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
   }
 }

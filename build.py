@@ -42,14 +42,16 @@ a { color: inherit; }
 header { margin-bottom: 2rem; }
 header a { font-weight: 700; text-decoration: none; }
 .feed { display: grid; gap: 1.25rem; }
-.feed-item { border: 1px solid #e5e7eb; border-radius: .75rem; padding: 1rem 1.25rem; }
+.feed-item { position: relative; border: 1px solid #e5e7eb; border-radius: .75rem; padding: 1rem 1.25rem; }
+.feed-item:hover { border-color: #9ca3af; }
+.item-link::after { content: ""; position: absolute; inset: 0; border-radius: .75rem; }
 .post { padding-bottom: 1.25rem; }
 .post-title, .feed-title { margin: 0 0 .5rem; }
 .item-footer { color: #6b7280; font-size: .875rem; display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-top: .75rem; }
 .item-footer a { color: inherit; text-decoration: none; }
 .item-footer a:hover { text-decoration: underline; }
 .shares { display: inline-flex; gap: .5rem; align-items: center; }
-.share-badge { display: inline-flex; color: #374151; }
+.share-badge { position: relative; z-index: 1; display: inline-flex; color: #374151; }
 .share-badge svg { width: 1.1rem; height: 1.1rem; }
 .type { font-size: .8rem; color: #6b7280; }
 .tags { margin-top: .75rem; color: #6b7280; font-size: .9rem; }
@@ -1170,7 +1172,7 @@ def render_post_page(
 {tags}
 {patch_controls}
 <div class="body">{body_html}</div>
-{item_footer(post, "./", shares or [])}
+{item_footer(post, shares or [])}
 {patch_catalog}
 {render_footnotes(post, content_root, posts, outgoing, patch_states)}
 {render_incoming_links(post, content_root, posts, [link for link in links if link.active and link.to_id == post.post_id], patch_states)}
@@ -1180,16 +1182,15 @@ def render_post_page(
     return page_shell(title, "../../", article)
 
 
-def item_footer(post: Post, href: str, shares: list[Share]) -> str:
-    """The bottom of a post, in the feed and on its page: its type, the time it was written (a link to the post), where it
-    was shared."""
+def item_footer(post: Post, shares: list[Share]) -> str:
+    """The bottom of a post, in the feed and on its page: the time it was written (text, not a link) and where it was
+    shared. No type name: the type is chosen before writing, not shown (source:fd-04)."""
     badges = "".join(
         f'<a class="share-badge" href="{html.escape(item.url, quote=True)}" aria-label="{SHARE_PLACES[item.where][0]}" '
         f'title="{SHARE_PLACES[item.where][0]}"><svg viewBox="0 0 24 24" aria-hidden="true">{SHARE_PLACES[item.where][1]}</svg></a>'
         for item in shares
     )
-    return (f'<footer class="item-footer"><span class="type">{TYPE_NAMES[post.post_type]}</span>'
-            f'<a href="{html.escape(href, quote=True)}">{time_element(post.written)}</a>'
+    return (f'<footer class="item-footer">{time_element(post.written)}'
             + (f'<span class="shares">{badges}</span>' if badges else "") + "</footer>")
 
 
@@ -1199,14 +1200,19 @@ def feed_item(post: Post, content_root: Path, patch_state: PatchState, shares: l
     )
     href = f"p/{post.post_id}/"
     if post.post_type == "short":
-        # a short post has no title line: its whole body is the item, and its time links to it
+        # a short post has no title line: its whole body is the item
+        title = None
         top = f'<div class="body">{body_html}</div>'
     else:
         title = post.title or first_text[:80] + ("…" if len(first_text) > 80 else "")
-        top = f'<h2 class="feed-title"><a href="{html.escape(href, quote=True)}">{html.escape(title, quote=False)}</a></h2>'
+        top = f'<h2 class="feed-title">{html.escape(title, quote=False)}</h2>'
+    # the whole box is the way into the post — its links, the posts pointing at it, its patches, its shares: one empty
+    # link covering the box (CSS), with the share badges above it, so no link sits inside another
+    link = f'<a class="item-link" href="{html.escape(href, quote=True)}" aria-label="{html.escape(title or "글 보기", quote=True)}"></a>'
     return f'''<article class="feed-item">
+{link}
 {top}
-{item_footer(post, href, shares or [])}
+{item_footer(post, shares or [])}
 </article>'''
 
 

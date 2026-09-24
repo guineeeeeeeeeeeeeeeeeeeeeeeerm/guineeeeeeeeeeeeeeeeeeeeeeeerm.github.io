@@ -1,0 +1,14 @@
+{
+  "id": "R-2912ea7a",
+  "src": "source:fd-04",
+  "predicate": "realizes",
+  "dst": "concept:feed",
+  "evidence": "글을 클릭하면 이 글과 연결된 다른 글들 및 각종 정보들에 들어갈 수 있으니 이유가 될 것 같아.",
+  "seen": {
+    "source:fd-04": "1ea96a659b99",
+    "concept:feed": "033b1f6b1672"
+  },
+  "confirmed": {
+    "delegated": "The owner's fd-04 grounded in feed and post-type, and the whole-box link projected in its test, proposed by Claude (claude-opus-5-5) after click-build-2 passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

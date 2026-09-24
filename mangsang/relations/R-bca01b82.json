@@ -5,10 +5,10 @@
   "dst": "concept:ui-language",
   "evidence": "사이트가 만드는 글자는 한국어다.",
   "seen": {
-    "plan/PLAN.md#Q-ui — 화면 언어": "9c4d04fdbb1f",
+    "plan/PLAN.md#Q-ui — 화면 언어": "1ba1ca889cb4",
     "concept:ui-language": "e2a0a380d7e4"
   },
   "confirmed": {
-    "delegated": "Grounding of the concepts the owner approved (plan-11) in the sources and in plan/PLAN.md's sections, proposed by Claude (claude-opus-5-5); the owner approved the concepts and the plan, not each link"
+    "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
   }
 }

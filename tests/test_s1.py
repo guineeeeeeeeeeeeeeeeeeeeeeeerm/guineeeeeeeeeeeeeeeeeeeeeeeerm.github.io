@@ -1,10 +1,10 @@
+import html
 import re
 import subprocess
 import sys
 import tempfile
 import unittest
 from contextlib import contextmanager
-from html.parser import HTMLParser
 from pathlib import Path
 
 
@@ -85,36 +85,14 @@ def files_snapshot(directory):
     }
 
 
-class AnchorTextParser(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.current = None
-        self.links = []
-
-    def handle_starttag(self, tag, attrs):
-        if tag == "a":
-            self.current = {"href": dict(attrs).get("href"), "text": []}
-
-    def handle_data(self, data):
-        if self.current is not None:
-            self.current["text"].append(data)
-
-    def handle_endtag(self, tag):
-        if tag == "a" and self.current is not None:
-            self.links.append(
-                (self.current["href"], "".join(self.current["text"]))
-            )
-            self.current = None
-
-
-def anchor_text(document, post_id):
-    parser = AnchorTextParser()
-    parser.feed(document)
-    suffix = f"/{post_id}/"
-    for href, text in parser.links:
-        if href and (href == f"p/{post_id}/" or href.endswith(suffix)):
-            return text
-    raise AssertionError(f"no link for {post_id!r}")
+def title_text(document, post_id):
+    """The text in a feed item's title place (source:fd-04: the whole box is the link; the title is text in it)."""
+    for item in re.findall(r'(?s)<article class="feed-item">(.*?)</article>', document):
+        if f'href="p/{post_id}/"' in item:
+            title = re.search(r'(?s)<h2 class="feed-title">(.*?)</h2>', item)
+            if title:
+                return html.unescape(re.sub(r"<[^>]+>", "", title.group(1)))
+    raise AssertionError(f"no titled feed item for {post_id!r}")
 
 
 class S1GeneratorContractTests(unittest.TestCase):
@@ -359,7 +337,7 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assertIn("&lt;span&gt;literal HTML&lt;/span&gt;", page)
             self.assertNotIn("<span>literal HTML</span>", page)
 
-    def test_Q_post_page_shows_title_written_tags_and_type_name(self):
+    def test_Q_post_page_shows_title_written_and_tags_but_no_type_name(self):
         text = post_text(
             post_type="long",
             title="A visible title",
@@ -373,7 +351,7 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assertIn("page body", page)
             self.assertIn("alpha", page)
             self.assertIn("beta", page)
-            self.assertIn("긴 글", page)
+            self.assertNotIn("긴 글", page)   # source:fd-04: the type is chosen before writing, not shown
 
     def test_Q_feed_orders_newest_first(self):
         old, mid, new = "2024-01-01T00:00:00Z", WRITTEN, "2024-03-01T00:00:00Z"
@@ -407,9 +385,8 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assertNotIn("medium body must not be the summary", feed)
             self.assertNotIn("long body must not be the summary", feed)
             self.assertIn("2024-02-03 04:05 UTC", feed)
-            self.assertIn("짧은 글", feed)
-            self.assertIn("중간 글", feed)
-            self.assertIn("긴 글", feed)
+            for type_name in ["짧은 글", "중간 글", "긴 글"]:
+                self.assertNotIn(type_name, feed)   # source:fd-04: no type names on screen
 
     def test_Q_feed_titleless_medium_or_long_uses_80_screen_characters_and_ellipsis(self):
         # the screen text keeps the space between the two formatted spans: 40 + 1 + 41 characters
@@ -420,7 +397,7 @@ class S1GeneratorContractTests(unittest.TestCase):
         ) as root:
             self.assert_build_succeeds(root)
             feed = (root / "docs" / "index.html").read_text(encoding="utf-8")
-            link = anchor_text(feed, ID)
+            link = title_text(feed, ID)
             self.assertIn(screen_text[:80] + "…", link)
             self.assertNotIn(screen_text[:81], link)
 
@@ -431,7 +408,7 @@ class S1GeneratorContractTests(unittest.TestCase):
         ) as root:
             self.assert_build_succeeds(root)
             feed = (root / "docs" / "index.html").read_text(encoding="utf-8")
-            self.assertIn("A small alt", anchor_text(feed, ID))
+            self.assertIn("A small alt", title_text(feed, ID))
 
     def test_Q_feed_every_item_links_to_its_post_page_and_has_applied_content(self):
         posts = {
@@ -472,7 +449,7 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assertRegex(scripts, r"title")
             self.assertRegex(scripts, r"(?:toLocale|Intl\.DateTimeFormat)")
 
-    def test_Q_ui_sets_korean_document_language_and_korean_type_names(self):
+    def test_Q_ui_sets_korean_document_language_and_shows_no_type_names(self):
         posts = {
             f"{ID}.md": post_text("short"),
             f"{pid(W2)}.md": post_text("medium", written=W2, title="중간"),
@@ -483,7 +460,7 @@ class S1GeneratorContractTests(unittest.TestCase):
             feed = (root / "docs" / "index.html").read_text(encoding="utf-8")
             self.assertRegex(feed, r"<html\b[^>]*lang=[\"']ko[\"']")
             for type_name in ["짧은 글", "중간 글", "긴 글"]:
-                self.assertIn(type_name, feed)
+                self.assertNotIn(type_name, feed)
             for post_id, type_name in [
                 (ID, "짧은 글"),
                 (pid(W2), "중간 글"),
@@ -493,7 +470,7 @@ class S1GeneratorContractTests(unittest.TestCase):
                     encoding="utf-8"
                 )
                 self.assertRegex(document, r"<html\b[^>]*lang=[\"']ko[\"']")
-                self.assertIn(type_name, document)
+                self.assertNotIn(type_name, document)
 
 
 if __name__ == "__main__":
