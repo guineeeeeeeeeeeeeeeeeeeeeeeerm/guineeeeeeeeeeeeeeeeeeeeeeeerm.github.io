@@ -1,0 +1,11 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.6.0",
+  "goal": "피드 양식: 글마다 분리된 상자, 제목은 있을 때만, 하단에 현지 시각과 공유 배지; 공유 기록(content/shares)",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
