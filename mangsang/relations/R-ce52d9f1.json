@@ -1,0 +1,14 @@
+{
+  "id": "R-ce52d9f1",
+  "src": "source:about-06",
+  "predicate": "realizes",
+  "dst": "concept:about",
+  "evidence": "\"소개 글(content/about.md)이 없을 때는 어떻게 할까요?\"=\"소개 글을 필수로\"",
+  "seen": {
+    "source:about-06": "a9e259c96675",
+    "concept:about": "89fd6f1990c2"
+  },
+  "confirmed": {
+    "delegated": "The owner's decisions of 2026-09-24 (feed as the first page with an always-present menu, a required about page, folder URLs as recommended and approved in about-08) grounded in their sources, proposed by Claude (claude-opus-5-5); technical, delegated (plan-07)"
+  }
+}

@@ -957,9 +957,12 @@ def patch_history_catalog(state: PatchState) -> str:
 
 
 def page_shell(
-    title: str, root_link: str, body: str, has_about: bool = False, body_class: str = ""
+    title: str, root_link: str, body: str, body_class: str = "", current: str = ""
 ) -> str:
-    about_link = f'<a href="{root_link}about.html">소개</a>' if has_about else ""
+    """`root_link` leads from the page's folder to the site root ("", "../", "../../"); the menu links to folders, never to
+    a file name, and a page links to itself as `./`."""
+    feed_href = "./" if current == "feed" else root_link or "./"
+    about_href = "./" if current == "about" else f"{root_link}about/"
     body_open = f'<body class="{body_class}">' if body_class else "<body>"
     return f'''<!doctype html>
 <html lang="ko">
@@ -971,7 +974,7 @@ def page_shell(
 <script src="{root_link}assets/time.js" defer></script>
 </head>
 {body_open}
-<header><a href="{root_link}index.html">피드</a>{about_link}</header>
+<header><a href="{feed_href}">피드</a><a href="{about_href}">소개</a></header>
 {body}
 </body>
 </html>
@@ -984,7 +987,7 @@ def post_label(
     if post.title:
         return post.title
     body = patch_state.body if patch_state is not None else post.body
-    _, first_text = render_body(body, content_root, post.source, "../images/")
+    _, first_text = render_body(body, content_root, post.source, "../../images/")
     return first_text[:80]
 
 
@@ -1010,7 +1013,7 @@ def render_footnotes(
         )
         reason = html.escape(link.current_reason, quote=False)
         items.append(
-            f'<li id="fn-{number}"><a href="{html.escape(link.to_id + ".html", quote=True)}">'
+            f'<li id="fn-{number}"><a href="{html.escape("../" + link.to_id + "/", quote=True)}">'
             f"{label}</a> — {reason} — {time_element(link.created_at)}</li>"
         )
     return '<section class="footnotes">\n<h2>주석</h2>\n<ol>\n' + "\n".join(items) + "\n</ol>\n</section>"
@@ -1036,7 +1039,7 @@ def render_incoming_links(
         )
         reason = html.escape(link.current_reason, quote=False)
         items.append(
-            f'<li><a href="{html.escape(link.from_id + ".html", quote=True)}">'
+            f'<li><a href="{html.escape("../" + link.from_id + "/", quote=True)}">'
             f"{label}</a> — {reason}</li>"
         )
     return '<section class="incoming-links">\n<h2>이 글을 가리키는 글</h2>\n<ul>\n' + "\n".join(items) + "\n</ul>\n</section>"
@@ -1048,7 +1051,6 @@ def render_post_page(
     posts: list[Post],
     links: list[Link],
     patch_states: dict[str, PatchState],
-    has_about: bool = False,
 ) -> str:
     patch_state = patch_states[post.post_id]
     outgoing = [
@@ -1057,7 +1059,7 @@ def render_post_page(
     outgoing.sort(key=lambda link: (link_position(post, link, patch_state), link.link_id))
     replacements = []
     for number, link in enumerate(outgoing, start=1):
-        target_href = html.escape(link.to_id + ".html", quote=True)
+        target_href = html.escape("../" + link.to_id + "/", quote=True)
         anchor_text = html.escape(link.anchor, quote=False)
         replacements.append(
             (
@@ -1070,7 +1072,7 @@ def render_post_page(
         patch_state.body,
         content_root,
         post.source,
-        "../images/",
+        "../../images/",
         replacements,
         patch_state,
     )
@@ -1106,7 +1108,7 @@ def render_post_page(
 </article>
 </main>
 {patch_script}'''
-    return page_shell(title, "../", article, has_about)
+    return page_shell(title, "../../", article)
 
 
 def feed_item(post: Post, content_root: Path, patch_state: PatchState) -> str:
@@ -1121,7 +1123,7 @@ def feed_item(post: Post, content_root: Path, patch_state: PatchState) -> str:
         content = ""
     return f'''<article class="feed-item">
 <div class="meta"><span class="type">{TYPE_NAMES[post.post_type]}</span>{time_element(post.written)}</div>
-<h2 class="feed-title"><a href="p/{html.escape(post.post_id, quote=True)}.html">{html.escape(link_text, quote=False)}</a></h2>
+<h2 class="feed-title"><a href="p/{html.escape(post.post_id, quote=True)}/">{html.escape(link_text, quote=False)}</a></h2>
 {content}
 </article>'''
 
@@ -1130,7 +1132,6 @@ def render_feed(
     posts: list[Post],
     content_root: Path,
     patch_states: dict[str, PatchState],
-    has_about: bool = False,
 ) -> str:
     ordered = sorted(posts, key=lambda post: post.post_id)
     ordered.sort(key=lambda post: post.written, reverse=True)
@@ -1138,13 +1139,13 @@ def render_feed(
         feed_item(post, content_root, patch_states[post.post_id]) for post in ordered
     )
     body = f"<main>\n<h1>피드</h1>\n<section class=\"feed\">\n{items}\n</section>\n</main>"
-    return page_shell("피드", "", body, has_about)
+    return page_shell("피드", "", body, current="feed")
 
 
-def parse_about(content_root: Path) -> str | None:
+def parse_about(content_root: Path) -> str:
     path = content_root / ABOUT_FILE
     if not path.is_file():
-        return None
+        fail(path)
     try:
         body = path.read_text(encoding="utf-8")
     except (OSError, UnicodeError):
@@ -1153,9 +1154,9 @@ def parse_about(content_root: Path) -> str | None:
         fail(path)
     blocks = markdown_blocks(body)
     rendered = "\n".join(
-        render_block(block, content_root, path, "images/", external_links=True) for block in blocks
+        render_block(block, content_root, path, "../images/", external_links=True) for block in blocks
     )
-    return page_shell("소개", "", f"<main>\n{rendered}\n</main>", True, "about")
+    return page_shell("소개", "../", f"<main>\n{rendered}\n</main>", "about", current="about")
 
 
 def copy_images(content_root: Path, output_root: Path) -> None:
@@ -1179,9 +1180,8 @@ def write_output(
     output_root: Path,
     links: list[Link],
     patch_states: dict[str, PatchState],
-    about_page: str | None = None,
+    about_page: str,
 ) -> None:
-    has_about = about_page is not None
     (output_root / "assets").mkdir(parents=True, exist_ok=True)
     (output_root / "p").mkdir(parents=True, exist_ok=True)
     (output_root / "assets" / "site.css").write_bytes(CSS.encode("utf-8"))
@@ -1189,13 +1189,14 @@ def write_output(
     (output_root / ".nojekyll").write_bytes(b"")
     copy_images(content_root, output_root)
     (output_root / "index.html").write_bytes(
-        render_feed(posts, content_root, patch_states, has_about).encode("utf-8")
+        render_feed(posts, content_root, patch_states).encode("utf-8")
     )
-    if about_page is not None:
-        (output_root / "about.html").write_bytes(about_page.encode("utf-8"))
+    (output_root / "about").mkdir()
+    (output_root / "about" / "index.html").write_bytes(about_page.encode("utf-8"))
     for post in posts:
-        page = render_post_page(post, content_root, posts, links, patch_states, has_about)
-        (output_root / "p" / f"{post.post_id}.html").write_bytes(page.encode("utf-8"))
+        page = render_post_page(post, content_root, posts, links, patch_states)
+        (output_root / "p" / post.post_id).mkdir()
+        (output_root / "p" / post.post_id / "index.html").write_bytes(page.encode("utf-8"))
 
 
 def install_output(staging: Path, docs: Path) -> None:

@@ -1,0 +1,14 @@
+{
+  "id": "R-13649af8",
+  "src": "source:about-07",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "`/index.html`, `/p/hello.html` 대신 `/`, `/p/hello/`, `/about/` 같은 폴더 방식입니다.",
+  "seen": {
+    "source:about-07": "cce713be4246",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "delegated": "The owner's decisions of 2026-09-24 (feed as the first page with an always-present menu, a required about page, folder URLs as recommended and approved in about-08) grounded in their sources, proposed by Claude (claude-opus-5-5); technical, delegated (plan-07)"
+  }
+}

@@ -85,12 +85,12 @@ class AboutPageContractTests(unittest.TestCase):
         images = {"avatar.png": b"avatar", "org_logo.png": b"logo"}
         with temporary_site({"about.md": about}, images) as root:
             self.assert_builds(root)
-            page = read(root, "about.html")
+            page = read(root, "about/index.html")
             self.assertIn('<html lang="ko">', page)
             self.assertIn("<title>소개</title>", page)
             self.assertRegex(page, r'<body[^>]*class="about"')
-            self.assertIn('src="images/avatar.png"', page)
-            self.assertIn('src="images/org_logo.png"', page)
+            self.assertIn('src="../images/avatar.png"', page)
+            self.assertIn('src="../images/org_logo.png"', page)
             self.assertIn("<strong>저</strong>", page)
             self.assertIn("<h2>긴작업</h2>", page)
             self.assertIn(f'<a href="{ORG}">긴작업</a>', page)
@@ -111,32 +111,36 @@ class AboutPageContractTests(unittest.TestCase):
             {"about.md": "소개 글\n", "posts/hello.md": post_text("글 하나")}
         ) as root:
             self.assert_builds(root)
-            self.assertFalse((root / "docs" / "p" / "about.html").exists())
+            self.assertFalse((root / "docs" / "p" / "about").exists())
             feed = read(root, "index.html")
             self.assertNotIn("소개 글", feed)
             self.assertIn("글 하나", feed)
 
-    def test_every_page_links_to_the_about_page_when_there_is_one(self):
+    def test_every_page_has_the_feed_and_about_menu_as_folder_links(self):
         with temporary_site(
             {"about.md": "소개 글\n", "posts/hello.md": post_text("글 하나")}
         ) as root:
             self.assert_builds(root)
-            self.assertRegex(menu(read(root, "index.html")), r'<a href="about\.html">소개</a>')
-            self.assertRegex(menu(read(root, "p/hello.html")), r'<a href="\.\./about\.html">소개</a>')
-            self.assertRegex(menu(read(root, "about.html")), r'<a href="index\.html">피드</a>')
+            for page, feed, about in (
+                ("index.html", "./", "about/"),
+                ("p/hello/index.html", "../../", "../../about/"),
+                ("about/index.html", "../", "./"),
+            ):
+                with self.subTest(page=page):
+                    header = menu(read(root, page))
+                    self.assertIn(f'<a href="{feed}">피드</a>', header)
+                    self.assertIn(f'<a href="{about}">소개</a>', header)
+                    self.assertNotIn(".html", header)
 
-    def test_no_about_md_means_no_about_page_and_no_menu_link(self):
+    def test_a_missing_about_md_is_a_build_error(self):
         with temporary_site({"posts/hello.md": post_text("글 하나")}) as root:
-            self.assert_builds(root)
-            self.assertFalse((root / "docs" / "about.html").exists())
-            self.assertNotIn("소개", menu(read(root, "index.html")))
-            self.assertNotIn("소개", menu(read(root, "p/hello.html")))
+            self.assert_fails_naming_about(root)
 
     def test_external_links_are_links_only_on_the_about_page(self):
         body = f"여기로 [가기]({ORG})\n"
-        with temporary_site({"posts/hello.md": post_text(body)}) as root:
+        with temporary_site({"about.md": "소개\n", "posts/hello.md": post_text(body)}) as root:
             self.assert_builds(root)
-            page = read(root, "p/hello.html")
+            page = read(root, "p/hello/index.html")
             self.assertNotIn(f'href="{ORG}"', page)
             self.assertIn(f"[가기]({ORG})", page)
 
@@ -164,7 +168,7 @@ class AboutPageContractTests(unittest.TestCase):
         images = {path[len("images/"):]: b"image" for path in IMAGE_PATH.findall(body)}
         with temporary_site({"about.md": body}, images) as root:
             self.assert_builds(root)
-            self.assertTrue((root / "docs" / "about.html").is_file())
+            self.assertTrue((root / "docs" / "about" / "index.html").is_file())
 
 
 if __name__ == "__main__":

@@ -5,10 +5,10 @@
   "dst": "concept:link",
   "evidence": "class S2LinkContractTests(unittest.TestCase):",
   "seen": {
-    "tests/test_s2.py:S2LinkContractTests": "1508b884d7c5",
+    "tests/test_s2.py:S2LinkContractTests": "cab6087607bb",
     "concept:link": "7fd16ce1dc5b"
   },
   "confirmed": {
-    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the folder-URL change (run-20260924-060910-91d7): every quoted sentence or symbol is still in its anchor, and the anchors changed only in output paths, link form (folders, no file names), the always-present 피드·소개 menu and the required content/about.md — none of which the related concept's meaning depends on. Technical, delegated (plan-07)"
   }
 }

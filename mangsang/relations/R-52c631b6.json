@@ -5,10 +5,10 @@
   "dst": "concept:about",
   "evidence": "def test_the_about_page_looks_like_the_old_first_page(self):",
   "seen": {
-    "tests/test_about.py:AboutPageContractTests": "bc77a2fbe6e3",
+    "tests/test_about.py:AboutPageContractTests": "51a3934b5227",
     "concept:about": "89fd6f1990c2"
   },
   "confirmed": {
-    "delegated": "The about concept's projections and grounding, proposed by Claude (claude-opus-5-5) after about-build-2 passed its checks and the verifier; the owner approved the concept and its question in source:about-05; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the folder-URL change (run-20260924-060910-91d7): every quoted sentence or symbol is still in its anchor, and the anchors changed only in output paths, link form (folders, no file names), the always-present 피드·소개 menu and the required content/about.md — none of which the related concept's meaning depends on. Technical, delegated (plan-07)"
   }
 }

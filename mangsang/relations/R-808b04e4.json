@@ -1,0 +1,14 @@
+{
+  "id": "R-808b04e4",
+  "src": "source:about-08",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "ㄱㄱ 추천대로",
+  "seen": {
+    "source:about-08": "8b1856bfe754",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "delegated": "The owner's decisions of 2026-09-24 (feed as the first page with an always-present menu, a required about page, folder URLs as recommended and approved in about-08) grounded in their sources, proposed by Claude (claude-opus-5-5); technical, delegated (plan-07)"
+  }
+}

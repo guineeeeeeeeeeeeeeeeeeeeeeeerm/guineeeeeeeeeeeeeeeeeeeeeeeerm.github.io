@@ -12,7 +12,7 @@ README = ROOT / "README.md"
 BUILD = ROOT / "build.py"
 
 FENCED_EXAMPLE = re.compile(
-    r"(?ms)^```(?P<kind>post|link|patch)[ \t]+(?P<path>content/[^\s`]+)[ \t]*\n"
+    r"(?ms)^```(?P<kind>post|link|patch|about)[ \t]+(?P<path>content/[^\s`]+)[ \t]*\n"
     r"(?P<body>.*?)^```[ \t]*$"
 )
 FENCED_BLOCK = re.compile(r"(?ms)^```[^\n]*\n.*?^```[ \t]*$")
@@ -110,7 +110,7 @@ class QReadmeContractTests(unittest.TestCase):
     def test_Q_readme_fenced_post_link_and_patch_examples_build_and_render(self):
         text = self.readme_or_fail()
         examples = examples_from(text)
-        by_kind = {kind: [] for kind in ("post", "link", "patch")}
+        by_kind = {kind: [] for kind in ("post", "link", "patch", "about")}
         for example in examples:
             by_kind[example["kind"]].append(example)
 
@@ -127,6 +127,9 @@ class QReadmeContractTests(unittest.TestCase):
                 path = root / example["path"]
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text(example["body"].lstrip("\n") + "\n", encoding="utf-8")
+                for image in re.findall(r"!\[[^\]]*\]\((images/[^)]+)\)", example["body"]):
+                    (root / "content" / image).parent.mkdir(parents=True, exist_ok=True)
+                    (root / "content" / image).write_bytes(b"image")   # an example's image stands in as bytes
 
             result = run_build(root)
             self.assertEqual(
@@ -137,7 +140,7 @@ class QReadmeContractTests(unittest.TestCase):
 
             for example in by_kind["post"]:
                 post_id = Path(example["path"]).stem
-                document = root / "docs" / "p" / f"{post_id}.html"
+                document = root / "docs" / "p" / post_id / "index.html"
                 with self.subTest(post=post_id):
                     self.assertTrue(document.is_file())
                     rendered = document.read_text(encoding="utf-8")
@@ -154,7 +157,7 @@ class QReadmeContractTests(unittest.TestCase):
 
             for example in by_kind["link"]:
                 link = json.loads(example["body"])
-                source_page = root / "docs" / "p" / f"{link['from']}.html"
+                source_page = root / "docs" / "p" / link["from"] / "index.html"
                 with self.subTest(link=link.get("id")):
                     self.assertTrue(source_page.is_file())
                     self.assertRegex(
@@ -165,7 +168,7 @@ class QReadmeContractTests(unittest.TestCase):
 
             for example in by_kind["patch"]:
                 patch = json.loads(example["body"])
-                post_page = root / "docs" / "p" / f"{patch['post']}.html"
+                post_page = root / "docs" / "p" / patch["post"] / "index.html"
                 with self.subTest(patch=patch.get("id")):
                     self.assertTrue(post_page.is_file())
                     document = post_page.read_text(encoding="utf-8")

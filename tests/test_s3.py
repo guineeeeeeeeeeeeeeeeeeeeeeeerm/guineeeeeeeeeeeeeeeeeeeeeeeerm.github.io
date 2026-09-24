@@ -57,6 +57,7 @@ def temporary_site(posts, patches=None, links=None):
         root = Path(directory)
         content = root / "content"
         content.mkdir()
+        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
 
         for filename, text in posts.items():
             path = content / filename
@@ -95,7 +96,7 @@ def run_build(root):
 
 
 def page(root, post_id):
-    return (root / "docs" / "p" / f"{post_id}.html").read_text(encoding="utf-8")
+    return (root / "docs" / "p" / post_id / "index.html").read_text(encoding="utf-8")
 
 
 def patch_script_source(document):
@@ -264,7 +265,7 @@ class S3PatchContractTests(unittest.TestCase):
             self.assert_build_succeeds(root)
             document = page(root, "source")
             self.assertIn("new anchor", document)
-            self.assertRegex(document, r'href=["\']target\.html["\']')
+            self.assertRegex(document, r'href=["\']\.\./target/["\']')
 
 
 class S3PatchViewContractTests(unittest.TestCase):

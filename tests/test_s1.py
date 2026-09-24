@@ -33,6 +33,7 @@ def temporary_site(posts, images=None, old_docs=None, root_index=None):
         root = Path(directory)
         content = root / "content"
         content.mkdir()
+        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
         for filename, text in posts.items():
             path = content / filename
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -100,9 +101,9 @@ class AnchorTextParser(HTMLParser):
 def anchor_text(document, post_id):
     parser = AnchorTextParser()
     parser.feed(document)
-    suffix = f"/{post_id}.html"
+    suffix = f"/{post_id}/"
     for href, text in parser.links:
-        if href and (href == f"p/{post_id}.html" or href.endswith(suffix)):
+        if href and (href == f"p/{post_id}/" or href.endswith(suffix)):
             return text
     raise AssertionError(f"no link for {post_id!r}")
 
@@ -133,7 +134,7 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assert_build_succeeds(root)
             docs = root / "docs"
             self.assertTrue((docs / "index.html").is_file())
-            self.assertTrue((docs / "p" / "hello.html").is_file())
+            self.assertTrue((docs / "p" / "hello" / "index.html").is_file())
             self.assertTrue(any((docs / "assets").glob("*.css")))
             self.assertTrue(any((docs / "assets").glob("*.js")))
             self.assertEqual((docs / "images" / "picture.bin").read_bytes(), image)
@@ -204,7 +205,7 @@ class S1GeneratorContractTests(unittest.TestCase):
         valid = " written :   " + WRITTEN + "  \n type : short \n\n본문"
         with temporary_site({"spaces.md": valid}) as root:
             self.assert_build_succeeds(root)
-            self.assertTrue((root / "docs" / "p" / "spaces.html").is_file())
+            self.assertTrue((root / "docs" / "p" / "spaces" / "index.html").is_file())
 
         with temporary_site(
             {"case.md": "Written: " + WRITTEN + "\ntype: short\n\n본문"}
@@ -259,10 +260,10 @@ class S1GeneratorContractTests(unittest.TestCase):
         }
         with temporary_site(posts) as root:
             self.assert_build_succeeds(root)
-            medium = (root / "docs" / "p" / "medium.html").read_text(encoding="utf-8")
-            long = (root / "docs" / "p" / "long.html").read_text(encoding="utf-8")
+            medium = (root / "docs" / "p" / "medium" / "index.html").read_text(encoding="utf-8")
+            long = (root / "docs" / "p" / "long" / "index.html").read_text(encoding="utf-8")
             self.assertIn("Medium title", medium)
-            self.assertTrue((root / "docs" / "p" / "long.html").is_file())
+            self.assertTrue((root / "docs" / "p" / "long" / "index.html").is_file())
             self.assertNotIn("None", long)
 
     def test_Q_post_type_must_be_short_medium_or_long(self):
@@ -292,7 +293,7 @@ class S1GeneratorContractTests(unittest.TestCase):
         text = post_text(tags="  alpha, , beta  ,   ", body="태그 본문")
         with temporary_site({"tags.md": text}) as root:
             self.assert_build_succeeds(root)
-            page = (root / "docs" / "p" / "tags.html").read_text(encoding="utf-8")
+            page = (root / "docs" / "p" / "tags" / "index.html").read_text(encoding="utf-8")
             self.assertIn("alpha", page)
             self.assertIn("beta", page)
             self.assertNotRegex(page, r"href=[\"'][^\"']*(?:alpha|beta)")
@@ -313,7 +314,7 @@ class S1GeneratorContractTests(unittest.TestCase):
             images={"only.png": b"image bytes"},
         ) as root:
             self.assert_build_succeeds(root)
-            page = (root / "docs" / "p" / "image-only.html").read_text(
+            page = (root / "docs" / "p" / "image-only" / "index.html").read_text(
                 encoding="utf-8"
             )
             self.assertRegex(page, r"<img\b[^>]*alt=[\"']Only alt")
@@ -334,7 +335,7 @@ class S1GeneratorContractTests(unittest.TestCase):
             images={"photo.png": b"photo"},
         ) as root:
             self.assert_build_succeeds(root)
-            page = (root / "docs" / "p" / "markdown.html").read_text(
+            page = (root / "docs" / "p" / "markdown" / "index.html").read_text(
                 encoding="utf-8"
             )
             self.assertRegex(page, r"<h1\b[^>]*>One</h1>")
@@ -358,7 +359,7 @@ class S1GeneratorContractTests(unittest.TestCase):
         )
         with temporary_site({"page.md": text}) as root:
             self.assert_build_succeeds(root)
-            page = (root / "docs" / "p" / "page.html").read_text(encoding="utf-8")
+            page = (root / "docs" / "p" / "page" / "index.html").read_text(encoding="utf-8")
             self.assertIn("A visible title", page)
             self.assertIn("page body", page)
             self.assertIn("alpha", page)
@@ -380,7 +381,7 @@ class S1GeneratorContractTests(unittest.TestCase):
         with temporary_site(posts) as root:
             self.assert_build_succeeds(root)
             feed = (root / "docs" / "index.html").read_text(encoding="utf-8")
-            positions = [feed.index(f"p/{post_id}.html") for post_id in ["new", "a-tie", "b-tie", "z-old"]]
+            positions = [feed.index(f"p/{post_id}/") for post_id in ["new", "a-tie", "b-tie", "z-old"]]
             self.assertEqual(positions, sorted(positions))
             self.assertLess(feed.index("a-tie"), feed.index("b-tie"))
 
@@ -437,15 +438,15 @@ class S1GeneratorContractTests(unittest.TestCase):
         with temporary_site(posts) as root:
             self.assert_build_succeeds(root)
             feed = (root / "docs" / "index.html").read_text(encoding="utf-8")
-            self.assertRegex(feed, r'href=["\']p/one\.html["\']')
-            self.assertRegex(feed, r'href=["\']p/two\.html["\']')
+            self.assertRegex(feed, r'href=["\']p/one/["\']')
+            self.assertRegex(feed, r'href=["\']p/two/["\']')
             self.assertIn("<strong>shown in feed</strong>", feed)
 
     def test_Q_time_uses_utc_datetime_text_and_title_on_every_rendered_time(self):
         text = post_text("medium", title="timed")
         with temporary_site({"timed.md": text}) as root:
             self.assert_build_succeeds(root)
-            for filename in [root / "docs" / "index.html", root / "docs" / "p" / "timed.html"]:
+            for filename in [root / "docs" / "index.html", root / "docs" / "p" / "timed" / "index.html"]:
                 document = filename.read_text(encoding="utf-8")
                 self.assertRegex(
                     document,
@@ -485,7 +486,7 @@ class S1GeneratorContractTests(unittest.TestCase):
                 ("medium", "중간 글"),
                 ("long", "긴 글"),
             ]:
-                document = (root / "docs" / "p" / f"{post_id}.html").read_text(
+                document = (root / "docs" / "p" / f"{post_id}" / "index.html").read_text(
                     encoding="utf-8"
                 )
                 self.assertRegex(document, r"<html\b[^>]*lang=[\"']ko[\"']")

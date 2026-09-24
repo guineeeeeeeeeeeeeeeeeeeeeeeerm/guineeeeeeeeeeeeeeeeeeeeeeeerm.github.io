@@ -13,7 +13,7 @@ Python 생성기가 정적 HTML을 `docs/`에 만든다. GitHub Pages가 `docs/`
 Concept: `site-build`.
 
 `python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다. 결과는 `docs/index.html`(피드), 글마다
-`docs/p/<id>.html`, `docs/assets/`(CSS, 자바스크립트), `docs/images/`(`content/images/`의 복사본), 빈 파일
+`docs/p/<id>/index.html`, `docs/about/index.html`(소개, Q-about), `docs/assets/`(CSS, 자바스크립트), `docs/images/`(`content/images/`의 복사본), 빈 파일
 `docs/.nojekyll`이다. 같은 입력이면 출력이 바이트 단위로 같다(빌드 시각 같은 값은 넣지 않는다). 표준 라이브러리만 쓴다.
 외부에서 가져오는 스크립트·글꼴·스타일은 없다.
 
@@ -24,6 +24,11 @@ Decided (technical, delegated): `build.py`는 저장소 루트에 있고, 실행
 `docs/`에 쓴다. 테스트는 `build.py`를 테스트 파일 위치 기준의 경로로 찾아 `sys.executable`로 실행하며, 작업 디렉터리를 새 임시
 디렉터리로 두어 테스트마다 자기 `content/`와 `docs/`를 갖는다. 테스트는 `tests/`에 있고 `python3 -m unittest discover -s tests`로
 돈다.
+
+Decided (owner, `source:about-06`, `source:about-08`): 주소는 폴더 방식이다 — 첫 화면 `/`, 글 `/p/<id>/`, 소개 `/about/`.
+사이트가 만드는 링크는 파일 이름(`index.html`, `.html`)을 쓰지 않고 폴더로 건다: 피드로는 `./`(글 페이지에서 `../../`,
+소개에서 `../`), 글로는 `p/<id>/`, 소개로는 `about/`. 공통 파일과 이미지도 각 페이지 위치 기준의 상대 경로다. 첫 화면은 피드이고,
+모든 페이지 위쪽 메뉴에 "피드"와 "소개" 링크가 항상 있다.
 
 Decided (technical, delegated): 저장소 루트의 기존 `index.html`은 `docs/`로 옮겨지지 않는다 — 피드가 새 첫 화면이다. Pages의
 서비스 위치를 main의 `/docs`로 바꾸는 것은 푸시할 때 소유자가 한다.
@@ -52,7 +57,7 @@ Decided (owner, `source:plan-11`): 본문이 빈 글은 빌드 오류다.
 `` `코드` ``, 이미지 `![설명](images/파일)`. 이미지 경로가 `content/images/`에 없으면 빌드 오류다. 본문의 HTML은 글자로
 보인다(태그로 해석되지 않는다).
 
-글 페이지 `docs/p/<id>.html`은 제목(있으면), 작성 시각, 태그, 본문을 보여준다.
+글 페이지 `docs/p/<id>/index.html`은 제목(있으면), 작성 시각, 태그, 본문을 보여준다.
 
 Decided (owner, `source:plan-11`): 글 페이지와 피드 항목에 유형 이름(짧은 글/중간 글/긴 글)을 작게 표시한다. 태그는 글
 페이지에 글자로만 표시하고, 태그별 목록 페이지는 아직 만들지 않는다.
@@ -102,9 +107,9 @@ Concept: `link`.
 나오는 순서로 1부터 매긴다. 본문 아래 "주석" 목록의 `n`번 항목은 `to` 글의 제목(없으면 첫 문단 앞 80자)과 현재 사유,
 링크를 건 시각(`created`의 `at`)을 보여준다. `from`이나 `to`가 없는 글이면 빌드 오류다.
 
-Decided after quibble (s2-tests, technical, delegated): 앵커 글자는 `<a href="<to>.html">…</a>`가 되고 바로 뒤에
+Decided after quibble (s2-tests, technical, delegated): 앵커 글자는 `<a href="../<to>/">…</a>`가 되고 바로 뒤에
 `<sup><a href="#fn-<n>">[n]</a></sup>`가 붙는다. "주석" 목록은 `<ol>`이며 `n`번 항목의 `id`는 `fn-<n>`이다. 글 페이지 사이의
-링크는 같은 디렉터리(`docs/p/`) 기준의 상대 경로다.
+링크는 상대 경로다(주소 형식은 Q-build의 폴더 방식 주소).
 
 Decided (owner, `source:plan-11`): 받는 쪽 글(`to`)의 페이지 아래에 "이 글을 가리키는 글" 목록을 두고, 각 항목은 `from`
 글의 제목(없으면 첫 문단 앞 80자)과 현재 사유를 보여준다.
@@ -174,7 +179,7 @@ Decided by the builder (readme-3, technical, accepted as delegated): 안내서�
 하는 일로 붙인다. 빌드 절의 제목은 `사이트 만들기 — 빌드`다.
 
 Decided (technical, session): 안내서에는 소개 페이지를 쓰는 법(`content/about.md`, 헤더 없음, 바깥 링크)도 `##` 절로 담는다.
-예시는 ```` ```about content/about.md ```` 블록이며, 테스트는 다른 예시처럼 그대로 빌드해 `docs/about.html`이 생기는지 본다.
+예시는 ```` ```about content/about.md ```` 블록이며, 테스트는 다른 예시처럼 그대로 빌드해 `docs/about/index.html`이 생기는지 본다.
 
 ## Q-about — 소개 페이지
 
@@ -187,10 +192,11 @@ Decided (owner, `source:about-01`, `source:about-03`): 사이트에 소개 페�
 
 `content/about.md`는 헤더가 없고 파일 전체가 본문이다. 본문 문법은 Q-post와 같고, 여기에 바깥 링크 `[글자](주소)`가 더해진다.
 주소는 `http://` 또는 `https://`로 시작해야 한다. 바깥 링크는 소개 페이지에서만 링크가 된다(글 본문의 문법은 그대로다).
-`content/about.md`는 글이 아니다 — 글 목록, 피드, 링크와 패치의 대상에 들지 않는다. 파일이 없으면 소개 페이지도 없다.
+`content/about.md`는 글이 아니다 — 글 목록, 피드, 링크와 패치의 대상에 들지 않는다.
 
-빌드는 `docs/about.html`을 만든다. 제목은 "소개"이고, 배경 `#0e0e10`에 글자 `#ededf0`, 본문은 화면 가운데에 가운데 정렬로 놓인다.
-이미지는 글과 같이 `content/images/`에서 온다. 소개 페이지가 있으면 모든 페이지 위쪽 메뉴에 "피드" 옆에 "소개" 링크가 붙는다.
+빌드는 `docs/about/index.html`을 만든다. 제목은 "소개"이고, 배경 `#0e0e10`에 글자 `#ededf0`, 본문은 화면 가운데에 가운데 정렬로 놓인다.
+이미지는 글과 같이 `content/images/`에서 온다. 모든 페이지 위쪽 메뉴에 "피드"와 "소개" 링크가 붙는다(Q-build).
+Decided (owner, `source:about-06`): 소개 글은 반드시 있다 — `content/about.md`가 없으면 빌드 오류이고, 오류 줄은 `content/about.md`를 포함한다.
 본문이 비었거나 바깥 링크의 주소가 `http://`·`https://`로 시작하지 않으면 빌드 오류이고, 오류 줄은 `content/about.md`를 포함한다.
 
 Decided (technical, session): 바깥 링크는 `<a href="<주소>">글자</a>`이며 글자는 서식 없이 글자로 보인다. 소개 페이지의 `<body>`는

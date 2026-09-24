@@ -25,6 +25,7 @@ def temporary_site(posts, links):
         root = Path(directory)
         content = root / "content"
         content.mkdir()
+        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
 
         for filename, text in posts.items():
             path = content / filename
@@ -77,7 +78,7 @@ def removed(at, why):
 
 
 def page(root, post_id):
-    return (root / "docs" / "p" / f"{post_id}.html").read_text(encoding="utf-8")
+    return (root / "docs" / "p" / post_id / "index.html").read_text(encoding="utf-8")
 
 
 class S2LinkContractTests(unittest.TestCase):
@@ -254,7 +255,7 @@ class S2LinkContractTests(unittest.TestCase):
         with temporary_site(posts, links) as root:
             self.assert_build_succeeds(root)
             self.assertTrue((root / "content" / "links" / "removed.json").is_file())
-            self.assertNotIn('href="to.html"', page(root, "from"))
+            self.assertNotIn('href="../to/"', page(root, "from"))
             self.assertNotIn("should disappear", page(root, "from"))
             self.assertNotIn("이 글을 가리키는 글", page(root, "to"))
 
@@ -309,11 +310,11 @@ class S2LinkContractTests(unittest.TestCase):
             self.assert_build_succeeds(root)
             document = page(root, "from")
             self.assertIn(
-                '<a href="one.html">first</a><sup><a href="#fn-1">[1]</a></sup>',
+                '<a href="../one/">first</a><sup><a href="#fn-1">[1]</a></sup>',
                 document,
             )
             self.assertIn(
-                '<a href="two.html">second</a><sup><a href="#fn-2">[2]</a></sup>',
+                '<a href="../two/">second</a><sup><a href="#fn-2">[2]</a></sup>',
                 document,
             )
 
