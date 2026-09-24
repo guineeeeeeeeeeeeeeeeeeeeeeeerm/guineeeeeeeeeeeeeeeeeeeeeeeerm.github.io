@@ -1,0 +1,11 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.6.0",
+  "goal": "기록을 표(JSONL)로: links, patches, shares, tags; 헤더 tags 제거; 태그 클라우드와 태그 페이지",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
