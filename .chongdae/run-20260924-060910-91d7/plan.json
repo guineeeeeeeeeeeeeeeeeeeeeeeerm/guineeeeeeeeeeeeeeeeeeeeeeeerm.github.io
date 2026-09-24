@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "goal": "폴더 방식 주소, 항상 보이는 피드·소개 메뉴, 소개 글 필수",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
