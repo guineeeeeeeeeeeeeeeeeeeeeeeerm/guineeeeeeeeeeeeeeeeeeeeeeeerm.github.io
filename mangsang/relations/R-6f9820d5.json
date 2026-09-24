@@ -5,10 +5,10 @@
   "dst": "concept:post",
   "evidence": "def test_a_width_after_the_bar_sets_the_display_width_and_leaves_the_alt(self):",
   "seen": {
-    "tests/test_images.py:ImageWidthContractTests": "def90435b45f",
+    "tests/test_images.py:ImageWidthContractTests": "1e2b258a94ee",
     "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
+    "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
   }
 }

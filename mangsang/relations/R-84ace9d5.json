@@ -1,0 +1,14 @@
+{
+  "id": "R-84ace9d5",
+  "src": "sitegen/output.py:build",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "def build() -> None:",
+  "seen": {
+    "sitegen/output.py:build": "efe6cd824463",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "delegated": "리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로"
+  }
+}

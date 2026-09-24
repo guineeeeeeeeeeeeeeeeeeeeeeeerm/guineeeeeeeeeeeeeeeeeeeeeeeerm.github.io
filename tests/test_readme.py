@@ -1,15 +1,12 @@
 import json
 import re
-import subprocess
-import sys
 import tempfile
 import unittest
 from pathlib import Path
+from support import ROOT, run_build
 
 
-ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
-BUILD = ROOT / "build.py"
 
 FENCED_EXAMPLE = re.compile(
     r"(?ms)^```(?P<kind>post|link|patch|about|share|tag)[ \t]+(?P<path>content/[^\s`]+)[ \t]*\n"
@@ -32,15 +29,6 @@ def section(text, heading):
 
 def examples_from(text):
     return [match.groupdict() for match in FENCED_EXAMPLE.finditer(text)]
-
-
-def run_build(root):
-    return subprocess.run(
-        [sys.executable, str(BUILD)],
-        cwd=root,
-        capture_output=True,
-        text=True,
-    )
 
 
 class QReadmeContractTests(unittest.TestCase):

@@ -1,14 +1,8 @@
-import json
 import re
-import subprocess
-import sys
-import tempfile
 import unittest
-from contextlib import contextmanager
-from pathlib import Path
+from support import read, run_build, temporary_site
 
 
-BUILD = Path(__file__).resolve().parents[1] / "build.py"
 WRITTEN = "2024-02-03T04:05:06Z"
 ID = "20240203-040506"   # Q-post: a post's id is the moment it was written (WRITTEN)
 OTHER_AT, OTHER = "2024-02-03T04:05:07Z", "20240203-040507"
@@ -23,27 +17,10 @@ def share(post=ID, where="x", url="https://x.com/someone/status/1", at="2024-02-
     return {"post": post, "where": where, "url": url, "at": at}
 
 
-@contextmanager
-def temporary_site(shares=None):
-    with tempfile.TemporaryDirectory() as directory:
-        root = Path(directory)
-        content = root / "content"
-        (content / "posts").mkdir(parents=True)
-        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
-        (content / "posts" / f"{ID}.md").write_text(post_text(), encoding="utf-8")
-        (content / "posts" / f"{OTHER}.md").write_text(post_text(OTHER_AT, "공유되지 않은 글"), encoding="utf-8")
-        if shares is not None:   # the share table: one row per share, in the order given (str lines as they are)
-            lines = [value if isinstance(value, str) else json.dumps(value, ensure_ascii=False) for value in shares.values()]
-            (content / "shares.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
-        yield root
-
-
-def run_build(root):
-    return subprocess.run([sys.executable, str(BUILD)], cwd=root, capture_output=True, text=True)
-
-
-def read(root, relative):
-    return (root / "docs" / relative).read_text(encoding="utf-8")
+SHARE_POSTS = {
+    f"posts/{ID}.md": post_text(),
+    f"posts/{OTHER}.md": post_text(OTHER_AT, "공유되지 않은 글"),
+}
 
 
 def item_of(feed, post_id):
@@ -67,13 +44,13 @@ class ShareContractTests(unittest.TestCase):
         self.assertIn(f"shares.jsonl:{line}", lines[0].replace("\\", "/"))
 
     def test_without_shares_there_are_no_badges(self):
-        with temporary_site() as root:
+        with temporary_site(posts=SHARE_POSTS) as root:
             self.assert_builds(root)
             self.assertEqual(badges(read(root, "index.html")), [])
             self.assertEqual(badges(read(root, f"p/{ID}/index.html")), [])
 
     def test_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):
-        with temporary_site({"on-x": share()}) as root:
+        with temporary_site(posts=SHARE_POSTS, shares={"on-x": share()}) as root:
             self.assert_builds(root)
             for page in (item_of(read(root, "index.html"), ID), read(root, f"p/{ID}/index.html")):
                 found = badges(page)
@@ -93,7 +70,7 @@ class ShareContractTests(unittest.TestCase):
             "threads": share(where="threads", url="https://www.threads.net/@someone/post/1", at="2024-02-05T00:00:00Z"),
             "x": share(where="x", url="https://x.com/someone/status/1", at="2024-02-04T00:00:00Z"),
         }
-        with temporary_site(shares) as root:
+        with temporary_site(posts=SHARE_POSTS, shares=shares) as root:
             self.assert_builds(root)
             labels = [re.search(r'aria-label="([^"]+)"', b).group(1) for b in badges(read(root, f"p/{ID}/index.html"))]
             self.assertEqual(labels, ["X", "Threads", "LinkedIn"])
@@ -111,7 +88,7 @@ class ShareContractTests(unittest.TestCase):
         }
         for name, value in cases.items():
             with self.subTest(name=name):
-                with temporary_site({"good": base, name: value}) as root:
+                with temporary_site(posts=SHARE_POSTS, shares={"good": base, name: value}) as root:
                     self.assert_fails_naming(root, 2)
 
 if __name__ == "__main__":

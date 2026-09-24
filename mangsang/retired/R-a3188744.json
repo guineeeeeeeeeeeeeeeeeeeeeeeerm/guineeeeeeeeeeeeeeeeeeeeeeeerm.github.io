@@ -1,0 +1,17 @@
+{
+  "id": "R-a3188744",
+  "src": "build.py:item_footer",
+  "predicate": "realizes",
+  "dst": "concept:share",
+  "evidence": "f'<a class=\"share-badge\" href=\"{html.escape(item.url, quote=True)}\"",
+  "seen": {
+    "build.py:item_footer": "7b80101a7c24",
+    "concept:share": "ae8d0b44fd09"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "리팩터링(run-20260924-111724-533a split-build-2): 함수가 이름 그대로 build.py에서 sitegen/ 모듈로 옮겨졌다; 개념은 그대로이고 새 위치로 다시 건다"
+  }
+}

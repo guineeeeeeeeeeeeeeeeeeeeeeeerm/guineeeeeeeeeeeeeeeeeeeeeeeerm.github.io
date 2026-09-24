@@ -1,0 +1,17 @@
+{
+  "id": "R-f55b7289",
+  "src": "build.py:time_element",
+  "predicate": "realizes",
+  "dst": "concept:local-time",
+  "evidence": "def time_element(written: str) -> str:",
+  "seen": {
+    "build.py:time_element": "c88f8fb5a0f9",
+    "concept:local-time": "f3a31994b7da"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "리팩터링(run-20260924-111724-533a split-build-2): 함수가 이름 그대로 build.py에서 sitegen/ 모듈로 옮겨졌다; 개념은 그대로이고 새 위치로 다시 건다"
+  }
+}

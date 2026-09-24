@@ -1,19 +1,9 @@
 import re
-import subprocess
-import sys
-import tempfile
 import unittest
-from contextlib import contextmanager
-from pathlib import Path
+from support import pid, read, run_build, temporary_site
 
 
-BUILD = Path(__file__).resolve().parents[1] / "build.py"
 SHORT_AT, MEDIUM_AT, UNTITLED_AT = "2024-02-03T04:05:06Z", "2024-02-03T04:05:07Z", "2024-02-03T04:05:08Z"
-
-
-def pid(written):
-    """Q-post: a post's id is the moment it was written, YYYYMMDD-HHMMSS (UTC)."""
-    return written[0:4] + written[5:7] + written[8:10] + "-" + written[11:13] + written[14:16] + written[17:19]
 
 
 def post_text(written, post_type="short", title=None, body="본문"):
@@ -21,26 +11,6 @@ def post_text(written, post_type="short", title=None, body="본문"):
     if title is not None:
         lines.append(f"title: {title}")
     return "\n".join(lines) + "\n\n" + body
-
-
-@contextmanager
-def temporary_site(posts):
-    with tempfile.TemporaryDirectory() as directory:
-        root = Path(directory)
-        content = root / "content"
-        (content / "posts").mkdir(parents=True)
-        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
-        for written, text in posts:
-            (content / "posts" / f"{pid(written)}.md").write_text(text, encoding="utf-8")
-        yield root
-
-
-def run_build(root):
-    return subprocess.run([sys.executable, str(BUILD)], cwd=root, capture_output=True, text=True)
-
-
-def read(root, relative):
-    return (root / "docs" / relative).read_text(encoding="utf-8")
 
 
 def feed_items(feed):

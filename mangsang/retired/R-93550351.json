@@ -1,0 +1,17 @@
+{
+  "id": "R-93550351",
+  "src": "build.py:parse_links",
+  "predicate": "realizes",
+  "dst": "concept:link",
+  "evidence": "\"\"\"The link table: a link is created by one row (from, to, anchor) and changed by later rows of the same `link`.\"\"\"",
+  "seen": {
+    "build.py:parse_links": "58f8fe3a5431",
+    "concept:link": "7fd16ce1dc5b"
+  },
+  "confirmed": {
+    "delegated": "The link and share readers moved to the tables (parse_links, parse_shares); the concepts did not; Claude (claude-opus-5-5); technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "리팩터링(run-20260924-111724-533a split-build-2): 함수가 이름 그대로 build.py에서 sitegen/ 모듈로 옮겨졌다; 개념은 그대로이고 새 위치로 다시 건다"
+  }
+}

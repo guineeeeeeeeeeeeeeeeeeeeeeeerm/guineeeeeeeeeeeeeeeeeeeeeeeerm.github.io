@@ -1,0 +1,17 @@
+{
+  "id": "R-fd923c73",
+  "src": "build.py:parse_tags",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "def parse_tags(content_root: Path, posts: list[\"Post\"]) -> dict[str, list[Tagging]]:",
+  "seen": {
+    "build.py:parse_tags": "b27736016de8",
+    "concept:tag": "7bfee5732100"
+  },
+  "confirmed": {
+    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "리팩터링(run-20260924-111724-533a split-build-2): 함수가 이름 그대로 build.py에서 sitegen/ 모듈로 옮겨졌다; 개념은 그대로이고 새 위치로 다시 건다"
+  }
+}

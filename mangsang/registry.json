@@ -37,5 +37,23 @@
   },
   {
     "path": "tests/test_tags.py"
+  },
+  {
+    "path": "sitegen/records.py"
+  },
+  {
+    "path": "sitegen/markdown.py"
+  },
+  {
+    "path": "sitegen/patches.py"
+  },
+  {
+    "path": "sitegen/pages.py"
+  },
+  {
+    "path": "sitegen/output.py"
+  },
+  {
+    "path": "tests/support.py"
   }
 ]

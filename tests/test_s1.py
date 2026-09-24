@@ -1,20 +1,11 @@
 import html
 import re
-import subprocess
-import sys
-import tempfile
 import unittest
-from contextlib import contextmanager
 from pathlib import Path
+from support import pid, run_build, temporary_site
 
 
-BUILD = Path(__file__).resolve().parents[1] / "build.py"
 WRITTEN = "2024-02-03T04:05:06Z"
-
-
-def pid(written=WRITTEN):
-    """Q-post: a post's id — its file name — is the moment it was written, YYYYMMDD-HHMMSS (UTC)."""
-    return written[0:4] + written[5:7] + written[8:10] + "-" + written[11:13] + written[14:16] + written[17:19]
 
 
 ID = pid()
@@ -34,45 +25,6 @@ def post_text(
     if tags is not None:
         lines.append(f"tags: {tags}")
     return "\n".join(lines) + "\n\n" + body
-
-
-@contextmanager
-def temporary_site(posts, images=None, old_docs=None, root_index=None):
-    with tempfile.TemporaryDirectory() as directory:
-        root = Path(directory)
-        content = root / "content"
-        content.mkdir()
-        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
-        for filename, text in posts.items():
-            path = content / filename
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(text, encoding="utf-8")
-
-        for filename, data in (images or {}).items():
-            path = content / "images" / filename
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(data)
-
-        if old_docs is not None:
-            docs = root / "docs"
-            for filename, data in old_docs.items():
-                path = docs / filename
-                path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_bytes(data)
-
-        if root_index is not None:
-            (root / "index.html").write_text(root_index, encoding="utf-8")
-
-        yield root
-
-
-def run_build(root):
-    return subprocess.run(
-        [sys.executable, str(BUILD)],
-        cwd=root,
-        capture_output=True,
-        text=True,
-    )
 
 
 def files_snapshot(directory):

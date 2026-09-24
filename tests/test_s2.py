@@ -1,20 +1,10 @@
-import json
 import re
-import subprocess
-import sys
-import tempfile
 import unittest
-from contextlib import contextmanager
 from pathlib import Path
+from support import page, pid, run_build, temporary_site
 
 
-BUILD = Path(__file__).resolve().parents[1] / "build.py"
 WRITTEN = "2024-02-03T04:05:06Z"
-
-
-def pid(written):
-    """Q-post: a post's id — its file name — is the moment it was written, YYYYMMDD-HHMMSS (UTC)."""
-    return written[0:4] + written[5:7] + written[8:10] + "-" + written[11:13] + written[14:16] + written[17:19]
 
 
 # the posts these tests name, each written at its own moment (seconds apart, one minute), and its id
@@ -29,40 +19,6 @@ def post_text(post_type="short", written=WRITTEN, title=None, body="본문"):
     return "\n".join(lines) + "\n\n" + body
 
 
-@contextmanager
-def temporary_site(posts, links):
-    with tempfile.TemporaryDirectory() as directory:
-        root = Path(directory)
-        content = root / "content"
-        content.mkdir()
-        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
-
-        for filename, text in posts.items():
-            path = content / filename
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(text, encoding="utf-8")
-
-        # the link table (Q-link): a link object becomes its rows — its creation, then its later events; a list is
-        # written as the rows it holds (str lines as they are)
-        lines = []
-        for data in links.values():
-            rows = data if isinstance(data, list) else link_rows(data)
-            lines += [row if isinstance(row, str) else json.dumps(row, ensure_ascii=False) for row in rows]
-        if lines:
-            (content / "links.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-        yield root
-
-
-def run_build(root):
-    return subprocess.run(
-        [sys.executable, str(BUILD)],
-        cwd=root,
-        capture_output=True,
-        text=True,
-    )
-
-
 def link_data(link_id, from_id, anchor, to_id, events):
     return {
         "id": link_id,
@@ -71,18 +27,6 @@ def link_data(link_id, from_id, anchor, to_id, events):
         "to": to_id,
         "events": events,
     }
-
-
-def link_rows(link):
-    """A link as table rows: `created` carries from, to and anchor; later events only the link, action, time and why."""
-    rows = []
-    for event in link.get("events", []):
-        row = {"link": link["id"], "action": event["action"], "at": event["at"], "why": event["why"]}
-        if event["action"] == "created":
-            row = {"link": link["id"], "from": link["from"], "to": link["to"], "anchor": link["anchor"], **row}
-            row = {key: row[key] for key in ("link", "from", "to", "anchor", "action", "at", "why")}
-        rows.append(row)
-    return rows
 
 
 def created(at, why):
@@ -95,10 +39,6 @@ def changed(at, why):
 
 def removed(at, why):
     return {"at": at, "action": "removed", "why": why}
-
-
-def page(root, post_id):
-    return (root / "docs" / "p" / post_id / "index.html").read_text(encoding="utf-8")
 
 
 class S2LinkContractTests(unittest.TestCase):
@@ -138,12 +78,12 @@ class S2LinkContractTests(unittest.TestCase):
             "descending-time": ([{**good, "at": "2024-02-03T04:05:07Z"}, {"link": "l", "action": "reason-changed", "at": "2024-02-03T04:05:06Z", "why": "second"}], 2),
         }
         for name, (rows, line) in invalid.items():
-            with self.subTest(case=name), temporary_site(posts, {name: rows}) as root:
+            with self.subTest(case=name), temporary_site(posts, links={name: rows}) as root:
                 result = run_build(root)
                 self.assertEqual(result.returncode, 1)
                 self.assertIn(f"links.jsonl:{line}", result.stderr)
 
-        with temporary_site(posts, {"valid": [good, {"link": "l", "action": "removed", "at": WRITTEN, "why": "gone"}]}) as root:
+        with temporary_site(posts, links={"valid": [good, {"link": "l", "action": "removed", "at": WRITTEN, "why": "gone"}]}) as root:
             self.assert_build_succeeds(root)
 
     def test_Q_link_current_reason_is_last_created_or_reason_changed_and_time_is_created_at(self):
@@ -165,7 +105,7 @@ class S2LinkContractTests(unittest.TestCase):
             )
         }
 
-        with temporary_site(posts, links) as root:
+        with temporary_site(posts, links=links) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['from'])
             self.assertIn("current reason", document)
@@ -193,7 +133,7 @@ class S2LinkContractTests(unittest.TestCase):
             )
         }
 
-        with temporary_site(posts, links) as root:
+        with temporary_site(posts, links=links) as root:
             self.assert_build_succeeds(root)
             table = (root / "content" / "links.jsonl").read_text(encoding="utf-8")
             self.assertIn('"action": "removed"', table)   # the record stays in the table; only the page drops the link
@@ -209,7 +149,7 @@ class S2LinkContractTests(unittest.TestCase):
         for body in ("no link text here", "anchor appears anchor"):
             with self.subTest(body=body), temporary_site(
                 {**posts, f"{I['from']}.md": post_text(body=body, written=W['from'])},
-                {
+                links={
                     "bad-anchor.json": link_data(
                         "bad-anchor", I['from'], "anchor", I['to'], [created(WRITTEN, "why")]
                     )
@@ -221,7 +161,7 @@ class S2LinkContractTests(unittest.TestCase):
 
         with temporary_site(
             {f"{I['from']}.md": post_text(body="anchor", written=W['from']), f"{I['to']}.md": post_text(body="target", written=W['to'])},
-            {
+            links={
                 "valid.json": link_data(
                     "valid", I['from'], "anchor", I['to'], [created(WRITTEN, "why")]
                 )
@@ -248,7 +188,7 @@ class S2LinkContractTests(unittest.TestCase):
             ),
         }
 
-        with temporary_site(posts, links) as root:
+        with temporary_site(posts, links=links) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['from'])
             self.assertIn(
@@ -272,7 +212,7 @@ class S2LinkContractTests(unittest.TestCase):
             )
         }
 
-        with temporary_site(posts, links) as root:
+        with temporary_site(posts, links=links) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['from'])
             self.assertIn("주석", document)
@@ -296,7 +236,7 @@ class S2LinkContractTests(unittest.TestCase):
             )
         }
 
-        with temporary_site(posts, links) as root:
+        with temporary_site(posts, links=links) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['from'])
             self.assertIn(first_paragraph[:80], document)
@@ -322,7 +262,7 @@ class S2LinkContractTests(unittest.TestCase):
             ),
         }
 
-        with temporary_site(posts, links) as root:
+        with temporary_site(posts, links=links) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['target'])
             self.assertIn("이 글을 가리키는 글", document)
@@ -373,7 +313,7 @@ class S2LinkContractTests(unittest.TestCase):
             ),
         }
 
-        with temporary_site(posts, links) as root:
+        with temporary_site(posts, links=links) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['target'])
             self.assertIn("A source stand-in", document)
@@ -399,7 +339,7 @@ class S2LinkContractTests(unittest.TestCase):
             )
         }
 
-        with temporary_site(posts, links) as root:
+        with temporary_site(posts, links=links) as root:
             self.assert_build_succeeds(root)
             self.assertNotIn("이 글을 가리키는 글", page(root, I['only']))
 
@@ -418,7 +358,7 @@ class S2LinkContractTests(unittest.TestCase):
                     f"{I['from']}.md": post_text(body="anchor", written=W['from']),
                     f"{I['to']}.md": post_text(body="target", written=W['to']),
                 },
-                {filename: link},
+                links={filename: link},
             ) as root:
                 result = run_build(root)
                 self.assertEqual(result.returncode, 1)
@@ -426,7 +366,7 @@ class S2LinkContractTests(unittest.TestCase):
 
         with temporary_site(
             {f"{I['from']}.md": post_text(body="anchor", written=W['from']), f"{I['to']}.md": post_text(body="target", written=W['to'])},
-            {
+            links={
                 "valid.json": link_data(
                     "valid", I['from'], "anchor", I['to'], [created(WRITTEN, "why")]
                 )

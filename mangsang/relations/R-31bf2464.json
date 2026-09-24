@@ -5,10 +5,10 @@
   "dst": "concept:site-build",
   "evidence": "`python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다.",
   "seen": {
-    "plan/PLAN.md#Q-build — 생성기와 출력": "942487b7fe8e",
+    "plan/PLAN.md#Q-build — 생성기와 출력": "a8a911d28eeb",
     "concept:site-build": "66de2d1eaeaa"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the folder-URL change (run-20260924-060910-91d7): every quoted sentence or symbol is still in its anchor, and the anchors changed only in output paths, link form (folders, no file names), the always-present 피드·소개 menu and the required content/about.md — none of which the related concept's meaning depends on. Technical, delegated (plan-07)"
+    "delegated": "Q-build에 코드 구조 결정(소유자 source:rf-03)을 더했을 뿐, 절은 여전히 site-build(content/를 읽어 docs/를 만드는 생성기)의 투영이다"
   }
 }

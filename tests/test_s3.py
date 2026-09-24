@@ -1,20 +1,9 @@
-import json
 import re
-import subprocess
-import sys
-import tempfile
 import unittest
-from contextlib import contextmanager
-from pathlib import Path
+from support import page, pid, run_build, temporary_site
 
 
-BUILD = Path(__file__).resolve().parents[1] / "build.py"
 WRITTEN = "2024-02-03T04:05:06Z"
-
-
-def pid(written):
-    """Q-post: a post's id — its file name — is the moment it was written, YYYYMMDD-HHMMSS (UTC)."""
-    return written[0:4] + written[5:7] + written[8:10] + "-" + written[11:13] + written[14:16] + written[17:19]
 
 
 # the posts these tests name, each written at its own moment (seconds apart, one minute), and its id
@@ -61,45 +50,6 @@ def link_data(link_id, from_id, anchor, to_id):
     }
 
 
-@contextmanager
-def temporary_site(posts, patches=None, links=None):
-    with tempfile.TemporaryDirectory() as directory:
-        root = Path(directory)
-        content = root / "content"
-        content.mkdir()
-        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
-
-        for filename, text in posts.items():
-            path = content / filename
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(text, encoding="utf-8")
-
-        # the patch table (Q-patch): one row per patch, in the order given (str lines as they are)
-        lines = [data if isinstance(data, str) else json.dumps(data, ensure_ascii=False) for data in (patches or {}).values()]
-        if lines:
-            (content / "patches.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
-        # the link table (Q-link): each link's creation row
-        rows = [{"link": d["id"], "from": d["from"], "to": d["to"], "anchor": d["anchor"], "action": "created",
-                 "at": d["events"][0]["at"], "why": d["events"][0]["why"]} for d in (links or {}).values()]
-        if rows:
-            (content / "links.jsonl").write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n", encoding="utf-8")
-
-        yield root
-
-
-def run_build(root):
-    return subprocess.run(
-        [sys.executable, str(BUILD)],
-        cwd=root,
-        capture_output=True,
-        text=True,
-    )
-
-
-def page(root, post_id):
-    return (root / "docs" / "p" / post_id / "index.html").read_text(encoding="utf-8")
-
-
 def patch_script_source(document):
     scripts = re.findall(
         r"<script\b[^>]*>(.*?)</script>", document, flags=re.IGNORECASE | re.DOTALL
@@ -129,7 +79,7 @@ class S3PatchContractTests(unittest.TestCase):
 
     def test_Q_patch_file_shape_and_validation_errors_name_the_patch_file(self):
         base = patch_data("valid", I['post'], "anchor", text="changed")
-        with temporary_site({f"{I['post']}.md": post_text(body="anchor", written=W['post'])}, {"valid.json": base}) as root:
+        with temporary_site({f"{I['post']}.md": post_text(body="anchor", written=W['post'])}, patches={"valid.json": base}) as root:
             self.assert_build_succeeds(root)
 
         invalid = {
@@ -150,7 +100,7 @@ class S3PatchContractTests(unittest.TestCase):
 
         # an id appears once in the table: the second row with it is the error
         with temporary_site({f"{I['post']}.md": post_text(body="anchor", written=W['post'])},
-                            {"one": base, "again": {**base, "anchor": "changed", "text": "twice"}}) as root:
+                            patches={"one": base, "again": {**base, "anchor": "changed", "text": "twice"}}) as root:
             result = run_build(root)
             self.assertEqual(result.returncode, 1)
             self.assertIn("patches.jsonl:2", result.stderr)
@@ -176,7 +126,7 @@ class S3PatchContractTests(unittest.TestCase):
         }
         before_target = posts[f"{I['target']}.md"].encode("utf-8")
 
-        with temporary_site(posts, patches) as root:
+        with temporary_site(posts, patches=patches) as root:
             self.assert_build_succeeds(root)
             self.assertEqual((root / "content" / f"{I['target']}.md").read_bytes(), before_target)
 
@@ -199,7 +149,7 @@ class S3PatchContractTests(unittest.TestCase):
                 "b-second", I['post'], "made", text="finished", at=WRITTEN
             ),
         }
-        with temporary_site(posts, patches) as root:
+        with temporary_site(posts, patches=patches) as root:
             self.assert_build_succeeds(root)
             self.assertIn("finished", page(root, I['post']))
             self.assertNotIn(">seed<", page(root, I['post']))
@@ -215,14 +165,14 @@ class S3PatchContractTests(unittest.TestCase):
                 "a-later", I['post'], "two", text="three", at="2024-02-04T04:05:06Z"
             ),
         }
-        with temporary_site(posts, patches) as root:
+        with temporary_site(posts, patches=patches) as root:
             self.assert_build_succeeds(root)
             self.assertIn("three", page(root, I['post']))
 
     def test_Q_patch_anchor_must_occur_exactly_once_in_the_current_post_body(self):
         with temporary_site(
             {f"{I['post']}.md": post_text(body="anchor", written=W['post'])},
-            {"valid.json": patch_data("valid", I['post'], "anchor", text="changed")},
+            patches={"valid.json": patch_data("valid", I['post'], "anchor", text="changed")},
         ) as root:
             # This control keeps a blanket "all patch files are unsupported"
             # failure from satisfying the invalid-anchor cases below.
@@ -248,7 +198,7 @@ class S3PatchContractTests(unittest.TestCase):
         }
         patches = {"new": patch_data("new-word", I['source'], "old", text="new")}
         links = {"across": link_data("across", I['source'], "new text", I['target'])}
-        with temporary_site(posts, patches, links) as root:
+        with temporary_site(posts, patches=patches, links=links) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['source'])
             self.assertRegex(document, r'<a href="\.\./%s/">[^<]*new[^<]*text</a>' % I['target'])
@@ -264,7 +214,7 @@ class S3PatchContractTests(unittest.TestCase):
                 "long", I['target'], "target-anchor", text=long_text
             )
         }
-        with temporary_site(posts, patches) as root:
+        with temporary_site(posts, patches=patches) as root:
             self.assert_build_succeeds(root)
             self.assertIn(long_text, page(root, I['target']))
             self.assertIn("other-anchor", page(root, I['other']))
@@ -282,7 +232,7 @@ class S3PatchContractTests(unittest.TestCase):
         links = {
             "after-patch.json": link_data("after-patch", I['source'], "new anchor", I['target'])
         }
-        with temporary_site(posts, patches, links) as root:
+        with temporary_site(posts, patches=patches, links=links) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['source'])
             self.assertIn("new anchor", document)
@@ -307,7 +257,7 @@ class S3PatchViewContractTests(unittest.TestCase):
         patches = {
             "one.json": patch_data("one", I['patched'], "old", text="new")
         }
-        with temporary_site(posts, patches) as root:
+        with temporary_site(posts, patches=patches) as root:
             self.assert_build_succeeds(root)
             patched = page(root, I['patched'])
             plain = page(root, I['plain'])
@@ -334,7 +284,7 @@ class S3PatchViewContractTests(unittest.TestCase):
                 "one", I['post'], "old", text="new", at="2024-02-04T05:06:07Z", why="정정 이유"
             )
         }
-        with temporary_site(posts, patches) as root:
+        with temporary_site(posts, patches=patches) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['post'])
             source = patch_script_source(document)
@@ -355,7 +305,7 @@ class S3PatchViewContractTests(unittest.TestCase):
                 "remove", I['post'], "gone", op="delete", at="2024-02-05T00:00:00Z", why="없앰"
             )
         }
-        with temporary_site(posts, patches) as root:
+        with temporary_site(posts, patches=patches) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['post'])
             source = patch_script_source(document)
@@ -378,7 +328,7 @@ class S3PatchViewContractTests(unittest.TestCase):
                 "two", I['post'], "text", text="changed", at="2024-02-05T00:00:00Z", why="부분 정정"
             ),
         }
-        with temporary_site(posts, patches) as root:
+        with temporary_site(posts, patches=patches) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['post'])
             source = patch_script_source(document)
@@ -397,7 +347,7 @@ class S3PatchViewContractTests(unittest.TestCase):
                 "insert", I['post'], "anchor", op="insert-before", text="new ", why="추가 이유"
             )
         }
-        with temporary_site(posts, patches) as root:
+        with temporary_site(posts, patches=patches) as root:
             self.assert_build_succeeds(root)
             document = page(root, I['post'])
             source = patch_script_source(document)

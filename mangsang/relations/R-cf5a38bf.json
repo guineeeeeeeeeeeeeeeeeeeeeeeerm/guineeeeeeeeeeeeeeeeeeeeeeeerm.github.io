@@ -5,10 +5,10 @@
   "dst": "concept:record-table",
   "evidence": "def test_Q_link_rows_and_event_rules_are_validated_and_errors_name_the_row(self):",
   "seen": {
-    "tests/test_s2.py:S2LinkContractTests": "467429d3c8a6",
+    "tests/test_s2.py:S2LinkContractTests": "38c932f01b20",
     "concept:record-table": "ce5af6e7c90f"
   },
   "confirmed": {
-    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
   }
 }

@@ -1,0 +1,17 @@
+{
+  "id": "R-9f2a1281",
+  "src": "build.py:parse_shares",
+  "predicate": "realizes",
+  "dst": "concept:share",
+  "evidence": "\"\"\"The share table -> post id -> its shares, in the order they were shared (then by line).\"\"\"",
+  "seen": {
+    "build.py:parse_shares": "c0c0ccecb6a2",
+    "concept:share": "ae8d0b44fd09"
+  },
+  "confirmed": {
+    "delegated": "The link and share readers moved to the tables (parse_links, parse_shares); the concepts did not; Claude (claude-opus-5-5); technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "리팩터링(run-20260924-111724-533a split-build-2): 함수가 이름 그대로 build.py에서 sitegen/ 모듈로 옮겨졌다; 개념은 그대로이고 새 위치로 다시 건다"
+  }
+}

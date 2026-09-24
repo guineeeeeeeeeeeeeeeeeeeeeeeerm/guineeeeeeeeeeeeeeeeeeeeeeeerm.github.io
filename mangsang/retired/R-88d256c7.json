@@ -1,0 +1,17 @@
+{
+  "id": "R-88d256c7",
+  "src": "build.py:time_id",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "def time_id(written: str) -> str:",
+  "seen": {
+    "build.py:time_id": "a8288f6c02bd",
+    "concept:post": "700e2db936c8"
+  },
+  "confirmed": {
+    "delegated": "The owner's id rule (id-01..03) grounded and projected in code and tests, proposed by Claude (claude-opus-5-5) after id-build passed its checks and the verifier; technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "리팩터링(run-20260924-111724-533a split-build-2): 함수가 이름 그대로 build.py에서 sitegen/ 모듈로 옮겨졌다; 개념은 그대로이고 새 위치로 다시 건다"
+  }
+}

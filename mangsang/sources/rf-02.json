@@ -1,0 +1,8 @@
+{
+  "id": "rf-02",
+  "text": "{\n \"questions\": [\n  {\n   \"question\": \"리팩터링 범위를 어디로 잡을까요? (build.py 1433줄 한 파일: CSS·JS 문자열, 파싱, 마크다운 렌더, 패치, 페이지 렌더, 출력이 섞여 있음 / 테스트 11개 파일마다 temporary_site·run_build·read 도우미가 중복)\",\n   \"header\": \"범위\",\n   \"multiSelect\": true,\n   \"options\": [\n    {\n     \"label\": \"build.py 모듈 분리 (추천)\",\n     \"description\": \"동작은 그대로, site/ 패키지로 나눔: records(기록 표 파싱), markdown(렌더), patches, pages(피드·글·태그·소개), assets(CSS·JS는 별도 파일로). build.py는 진입점만. 기존 테스트 전부가 그대로 체크.\"\n    },\n    {\n     \"label\": \"CSS·JS만 파일로 분리\",\n     \"description\": \"가장 작은 변화: 파이썬 문자열 안의 CSS/JS를 assets/site.css, time.js 등 실제 파일로 빼서 편집을 쉽게. 나머지 구조 유지.\"\n    },\n    {\n     \"label\": \"테스트 도우미 공통화\",\n     \"description\": \"tests/에 공통 helper 모듈을 두고 중복된 temporary_site/run_build/read를 정리. 테스트 계약 자체는 그대로.\"\n    },\n    {\n     \"label\": \"먼저 진단만\",\n     \"description\": \"코드를 바꾸지 말고 중복·복잡한 함수·죽은 코드 등 리팩터링 후보 목록을 먼저 보고 결정.\"\n    }\n   ]\n  },\n  {\n   \"question\": \"누가 작업할까요?\",\n   \"header\": \"작업자\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"닥돌(implementer) (추천)\",\n     \"description\": \"기존 역할 분담대로: 세션이 계획 섹션을 쓰고, chongdae add --check '전체 테스트'로 닥돌이 수행, 검증자가 확인.\"\n    },\n    {\n     \"label\": \"세션이 직접\",\n     \"description\": \"--role session --why로 이유를 기록하고 이 세션이 수행.\"\n    }\n   ]\n  }\n ]\n}",
+  "speaker": "Claude (claude-opus-5-5)",
+  "locator": "session d515e4e2-9bca-4949-9cd1-f22b8447a5ab, question 066e6dd0-4958-4726-98fc-3154ccdd53a0 at 2026-09-24T11:15:26.912Z",
+  "replies-to": "rf-01",
+  "verbatim-from": "host transcript"
+}

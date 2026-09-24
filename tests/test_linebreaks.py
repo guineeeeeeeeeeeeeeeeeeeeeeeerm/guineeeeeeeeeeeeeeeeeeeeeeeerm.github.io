@@ -1,13 +1,8 @@
 import re
-import subprocess
-import sys
-import tempfile
 import unittest
-from contextlib import contextmanager
-from pathlib import Path
+from support import read, run_build, temporary_site
 
 
-BUILD = Path(__file__).resolve().parents[1] / "build.py"
 WRITTEN = "2024-02-03T04:05:06Z"
 ID = "20240203-040506"   # Q-post: a post's id is the moment it was written (WRITTEN)
 
@@ -17,28 +12,6 @@ def post_text(body, post_type="short", title=None):
     if title is not None:
         lines.append(f"title: {title}")
     return "\n".join(lines) + "\n\n" + body
-
-
-@contextmanager
-def temporary_site(files):
-    with tempfile.TemporaryDirectory() as directory:
-        root = Path(directory)
-        content = root / "content"
-        content.mkdir()
-        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
-        for relative, text in files.items():
-            path = content / relative
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(text, encoding="utf-8")
-        yield root
-
-
-def run_build(root):
-    return subprocess.run([sys.executable, str(BUILD)], cwd=root, capture_output=True, text=True)
-
-
-def read(root, relative):
-    return (root / "docs" / relative).read_text(encoding="utf-8")
 
 
 def body_of(document):

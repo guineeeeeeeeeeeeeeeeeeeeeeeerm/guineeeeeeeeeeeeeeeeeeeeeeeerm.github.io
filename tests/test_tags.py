@@ -1,15 +1,9 @@
-import json
 import re
-import subprocess
-import sys
-import tempfile
 import unittest
-from contextlib import contextmanager
-from pathlib import Path
 from urllib.parse import quote
+from support import read, run_build, temporary_site
 
 
-BUILD = Path(__file__).resolve().parents[1] / "build.py"
 OLD_AT, NEW_AT = "2024-02-03T04:05:06Z", "2024-02-04T04:05:06Z"
 OLD, NEW = "20240203-040506", "20240204-040506"   # Q-post: a post's id is the moment it was written
 
@@ -23,27 +17,10 @@ def tag(post, name, action="added", at="2024-02-05T00:00:00Z", why="이유"):
     return {"post": post, "tag": name, "action": action, "at": at, "why": why}
 
 
-@contextmanager
-def temporary_site(rows=None):
-    with tempfile.TemporaryDirectory() as directory:
-        root = Path(directory)
-        content = root / "content"
-        (content / "posts").mkdir(parents=True)
-        (content / "about.md").write_text("소개\n", encoding="utf-8")   # Q-about: every site has its about page
-        (content / "posts" / f"{OLD}.md").write_text(post_text(OLD_AT, "오래된 글"), encoding="utf-8")
-        (content / "posts" / f"{NEW}.md").write_text(post_text(NEW_AT, "새 글"), encoding="utf-8")
-        if rows is not None:
-            lines = [row if isinstance(row, str) else json.dumps(row, ensure_ascii=False) for row in rows]
-            (content / "tags.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
-        yield root
-
-
-def run_build(root):
-    return subprocess.run([sys.executable, str(BUILD)], cwd=root, capture_output=True, text=True)
-
-
-def read(root, relative):
-    return (root / "docs" / relative).read_text(encoding="utf-8")
+TAG_POSTS = {
+    f"posts/{OLD}.md": post_text(OLD_AT, "오래된 글"),
+    f"posts/{NEW}.md": post_text(NEW_AT, "새 글"),
+}
 
 
 def cloud(feed):
@@ -65,13 +42,13 @@ class TagContractTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, msg=f"stderr={result.stderr!r}")
 
     def assert_fails_at(self, rows, line):
-        with temporary_site(rows) as root:
+        with temporary_site(posts=TAG_POSTS, tags=rows) as root:
             result = run_build(root)
             self.assertEqual(result.returncode, 1, msg=result.stderr)
             self.assertIn(f"tags.jsonl:{line}", result.stderr)
 
     def test_without_tags_there_is_no_cloud_and_no_tag_page(self):
-        with temporary_site() as root:
+        with temporary_site(posts=TAG_POSTS) as root:
             self.build(root)
             self.assertIsNone(cloud(read(root, "index.html")))
             self.assertFalse((root / "docs" / "tags").exists())
@@ -79,7 +56,7 @@ class TagContractTests(unittest.TestCase):
 
     def test_the_cloud_sits_beside_the_feed_and_counts_each_current_tag(self):
         rows = [tag(OLD, "기록"), tag(NEW, "기록"), tag(NEW, "AI")]
-        with temporary_site(rows) as root:
+        with temporary_site(posts=TAG_POSTS, tags=rows) as root:
             self.build(root)
             feed = read(root, "index.html")
             self.assertRegex(feed, r'(?s)<div class="feed-layout">\s*<main>.*</main>\s*<aside class="tag-cloud">')
@@ -95,7 +72,7 @@ class TagContractTests(unittest.TestCase):
 
     def test_a_tag_page_lists_its_posts_newest_first_with_why_the_tag_is_there(self):
         rows = [tag(OLD, "기록", why="처음 쓴 기록"), tag(NEW, "기록", at="2024-02-06T00:00:00Z", why="이어진 기록")]
-        with temporary_site(rows) as root:
+        with temporary_site(posts=TAG_POSTS, tags=rows) as root:
             self.build(root)
             page = read(root, "tags/기록/index.html")
             self.assertIn("<title>태그: 기록</title>", page)
@@ -107,7 +84,7 @@ class TagContractTests(unittest.TestCase):
 
     def test_the_post_page_links_its_current_tags(self):
         rows = [tag(NEW, "하네스"), tag(NEW, "AI")]
-        with temporary_site(rows) as root:
+        with temporary_site(posts=TAG_POSTS, tags=rows) as root:
             self.build(root)
             tags = re.search(r'(?s)<div class="tags">(.*?)</div>', read(root, f"p/{NEW}/index.html"))
             self.assertIsNotNone(tags)
@@ -117,13 +94,13 @@ class TagContractTests(unittest.TestCase):
 
     def test_a_removed_tag_is_gone_from_pages_and_the_cloud_but_can_be_added_again(self):
         removed = [tag(NEW, "AI"), tag(NEW, "AI", "removed", at="2024-02-06T00:00:00Z", why="주제가 아님")]
-        with temporary_site(removed) as root:
+        with temporary_site(posts=TAG_POSTS, tags=removed) as root:
             self.build(root)
             self.assertIsNone(cloud(read(root, "index.html")))
             self.assertFalse((root / "docs" / "tags" / "AI").exists())
             self.assertNotIn('class="tags"', read(root, f"p/{NEW}/index.html"))
         again = removed + [tag(NEW, "AI", at="2024-02-07T00:00:00Z", why="다시 보니 맞음")]
-        with temporary_site(again) as root:
+        with temporary_site(posts=TAG_POSTS, tags=again) as root:
             self.build(root)
             self.assertEqual([name for name, _, _ in cloud_entries(read(root, "index.html"))], ["AI"])
             self.assertIn("다시 보니 맞음", read(root, "tags/AI/index.html"))

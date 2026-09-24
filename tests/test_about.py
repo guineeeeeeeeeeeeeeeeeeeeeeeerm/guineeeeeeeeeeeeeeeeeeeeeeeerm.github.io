@@ -1,14 +1,8 @@
 import re
-import subprocess
-import sys
-import tempfile
 import unittest
-from contextlib import contextmanager
-from pathlib import Path
+from support import BUILD, ROOT, read, run_build, temporary_site
 
 
-ROOT = Path(__file__).resolve().parents[1]
-BUILD = ROOT / "build.py"
 README = ROOT / "README.md"
 WRITTEN = "2024-02-03T04:05:06Z"
 ID = "20240203-040506"   # Q-post: a post's id is the moment it was written (WRITTEN)
@@ -25,33 +19,6 @@ def post_text(body="본문", post_type="short", title=None):
     if title is not None:
         lines.append(f"title: {title}")
     return "\n".join(lines) + "\n\n" + body
-
-
-@contextmanager
-def temporary_site(files, images=None):
-    with tempfile.TemporaryDirectory() as directory:
-        root = Path(directory)
-        content = root / "content"
-        content.mkdir()
-        for relative, text in files.items():
-            path = content / relative
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(text, encoding="utf-8")
-        for name, data in (images or {}).items():
-            path = content / "images" / name
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(data)
-        yield root
-
-
-def run_build(root):
-    return subprocess.run(
-        [sys.executable, str(BUILD)], cwd=root, capture_output=True, text=True
-    )
-
-
-def read(root, relative):
-    return (root / "docs" / relative).read_text(encoding="utf-8")
 
 
 def menu(document):
@@ -138,7 +105,7 @@ class AboutPageContractTests(unittest.TestCase):
                     self.assertNotIn(".html", header)
 
     def test_a_missing_about_md_is_a_build_error(self):
-        with temporary_site({f"posts/{ID}.md": post_text("글 하나")}) as root:
+        with temporary_site({f"posts/{ID}.md": post_text("글 하나")}, about=None) as root:
             self.assert_fails_naming_about(root)
 
     def test_external_links_are_links_only_on_the_about_page(self):

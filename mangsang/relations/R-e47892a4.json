@@ -1,0 +1,14 @@
+{
+  "id": "R-e47892a4",
+  "src": "sitegen/markdown.py:image_width",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "def image_width(alt: str, post_path: Path) -> tuple[str, int | None]:",
+  "seen": {
+    "sitegen/markdown.py:image_width": "d82d777e15dc",
+    "concept:post": "700e2db936c8"
+  },
+  "confirmed": {
+    "delegated": "세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다"
+  }
+}

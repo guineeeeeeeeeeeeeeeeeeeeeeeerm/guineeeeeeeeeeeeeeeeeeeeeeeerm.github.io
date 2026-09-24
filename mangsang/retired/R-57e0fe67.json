@@ -1,0 +1,17 @@
+{
+  "id": "R-57e0fe67",
+  "src": "build.py:page_shell",
+  "predicate": "realizes",
+  "dst": "concept:ui-language",
+  "evidence": "lang=\"ko\"",
+  "seen": {
+    "build.py:page_shell": "2f13d9b2f92c",
+    "concept:ui-language": "e2a0a380d7e4"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised meaning (about-09: the post page's look): each quote still grounds or projects the about page — its existence, its file, the Korean org description and link, the required file, the Korean menu; none depended on the dark centered look (about-01's 'first page' wish is what about-09 revised). technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "리팩터링(run-20260924-111724-533a split-build-2): 함수가 이름 그대로 build.py에서 sitegen/ 모듈로 옮겨졌다; 개념은 그대로이고 새 위치로 다시 건다"
+  }
+}

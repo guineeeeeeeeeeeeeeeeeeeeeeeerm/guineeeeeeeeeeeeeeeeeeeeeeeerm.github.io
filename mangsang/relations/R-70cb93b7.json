@@ -1,0 +1,14 @@
+{
+  "id": "R-70cb93b7",
+  "src": "sitegen/pages.py:render_feed",
+  "predicate": "realizes",
+  "dst": "concept:feed",
+  "evidence": "def render_feed(",
+  "seen": {
+    "sitegen/pages.py:render_feed": "55e55df9178b",
+    "concept:feed": "033b1f6b1672"
+  },
+  "confirmed": {
+    "delegated": "리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로"
+  }
+}

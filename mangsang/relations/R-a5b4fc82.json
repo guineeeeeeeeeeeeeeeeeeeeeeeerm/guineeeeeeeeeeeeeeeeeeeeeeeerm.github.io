@@ -5,10 +5,10 @@
   "dst": "concept:tag",
   "evidence": "def test_the_cloud_sits_beside_the_feed_and_counts_each_current_tag(self):",
   "seen": {
-    "tests/test_tags.py:TagContractTests": "01b11d616ed3",
+    "tests/test_tags.py:TagContractTests": "0ad1df6184c5",
     "concept:tag": "7bfee5732100"
   },
   "confirmed": {
-    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
   }
 }

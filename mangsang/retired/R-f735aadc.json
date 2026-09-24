@@ -1,0 +1,17 @@
+{
+  "id": "R-f735aadc",
+  "src": "build.py:parse_post",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "def parse_post(path: Path, content_root: Path) -> Post:",
+  "seen": {
+    "build.py:parse_post": "780bf82083cb",
+    "concept:post": "700e2db936c8"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "리팩터링(run-20260924-111724-533a split-build-2): 함수가 이름 그대로 build.py에서 sitegen/ 모듈로 옮겨졌다; 개념은 그대로이고 새 위치로 다시 건다"
+  }
+}

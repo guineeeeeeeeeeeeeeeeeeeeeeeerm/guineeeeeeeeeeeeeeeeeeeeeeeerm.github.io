@@ -1,0 +1,17 @@
+{
+  "id": "R-8a728335",
+  "src": "build.py:patch_data_script",
+  "predicate": "realizes",
+  "dst": "concept:patch-view",
+  "evidence": "def patch_data_script(state: PatchState, regions: list[PatchRegion]) -> str:",
+  "seen": {
+    "build.py:patch_data_script": "9119bd94ff25",
+    "concept:patch-view": "6be15e820155"
+  },
+  "confirmed": {
+    "delegated": "Code and tests of S1–S3 related to the concepts they implement and check, proposed by Claude (claude-opus-5-5) after the slices passed their checks and the verifier; technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "리팩터링(run-20260924-111724-533a split-build-2): 함수가 이름 그대로 build.py에서 sitegen/ 모듈로 옮겨졌다; 개념은 그대로이고 새 위치로 다시 건다"
+  }
+}

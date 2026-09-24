@@ -1,0 +1,14 @@
+{
+  "id": "R-2bfa6e13",
+  "src": "sitegen/markdown.py:render_block",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "return inline(chr(10).join(value)).replace(chr(10), \"<br>\" + chr(10))",
+  "seen": {
+    "sitegen/markdown.py:render_block": "1919e3365ab2",
+    "concept:post": "700e2db936c8"
+  },
+  "confirmed": {
+    "delegated": "리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로"
+  }
+}

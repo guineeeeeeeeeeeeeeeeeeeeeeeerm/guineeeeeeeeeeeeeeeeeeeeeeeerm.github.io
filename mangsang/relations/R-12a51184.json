@@ -1,0 +1,14 @@
+{
+  "id": "R-12a51184",
+  "src": "sitegen/pages.py:item_footer",
+  "predicate": "realizes",
+  "dst": "concept:share",
+  "evidence": "f'<a class=\"share-badge\" href=\"{html.escape(item.url, quote=True)}\"",
+  "seen": {
+    "sitegen/pages.py:item_footer": "7b80101a7c24",
+    "concept:share": "ae8d0b44fd09"
+  },
+  "confirmed": {
+    "delegated": "세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다"
+  }
+}
