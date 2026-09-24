@@ -22,13 +22,27 @@
       "kind": "non-claim",
       "where": "settings.chongdae.outside-runs",
       "text": "content, docs: the project's own procedure, declared in hunsu.json",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 종류별 처리안을 승인했다(2026-09-24 '1번부터 배포하고 쭉 진행'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언: 글과 docs/는 소유자의 결정으로 run 밖의 절차를 따른다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-110157-f416",
       "text": "no check decides this task",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 종류별 처리안을 승인했다(2026-09-24 '1번부터 배포하고 쭉 진행'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언: 환경 반영 태스크는 체크가 아니라 hunsu check(오류·경고 0)와 lock으로 확인했다",
+        "by": null,
+        "finding_text": "no check decides this task",
+        "where": "run-20260924-110157-f416"
+      }
     },
     {
       "kind": "unchanged",
