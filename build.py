@@ -567,6 +567,16 @@ def image_source(content_root: Path, image_path: str, post_path: Path) -> Path:
     return candidate
 
 
+def image_width(alt: str, post_path: Path) -> tuple[str, int | None]:
+    """`설명|160` -> ("설명", 160): the display width in CSS pixels. A bar not followed by a whole number is part of the alt."""
+    match = re.fullmatch(r"(.*)\|(\d{1,4})", alt, re.S)
+    if not match:
+        return alt, None
+    if int(match.group(2)) == 0:
+        fail(post_path)
+    return match.group(1), int(match.group(2))
+
+
 def inline_markdown(
     text: str,
     content_root: Path,
@@ -587,11 +597,14 @@ def inline_markdown(
                 f'<a href="{html.escape(address, quote=True)}">{html.escape(label, quote=False)}</a>'
             )
         elif match.group(1) is not None:
-            alt, image_path = match.group(1), match.group(2)
+            alt, width = image_width(match.group(1), post_path)
+            image_path = match.group(2)
             image_source(content_root, image_path, post_path)
             pieces.append(
                 f'<img src="{html.escape(image_prefix + image_path[7:], quote=True)}" '
-                f'alt="{html.escape(alt, quote=True)}">'
+                f'alt="{html.escape(alt, quote=True)}"'
+                + (f' width="{width}"' if width else "")
+                + ">"
             )
         elif match.group(3) is not None:
             pieces.append(f"<strong>{html.escape(match.group(3), quote=False)}</strong>")

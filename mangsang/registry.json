@@ -19,5 +19,8 @@
   },
   {
     "path": "tests/test_about.py"
+  },
+  {
+    "path": "tests/test_images.py"
   }
 ]

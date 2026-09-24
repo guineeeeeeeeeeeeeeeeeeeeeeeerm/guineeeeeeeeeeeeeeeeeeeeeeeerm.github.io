@@ -5,10 +5,10 @@
   "dst": "concept:tag",
   "evidence": "`tags`: 쉼표로 구분한 태그 이름. 선택.",
   "seen": {
-    "plan/PLAN.md#Q-post — 글 하나": "03648e0ab90c",
+    "plan/PLAN.md#Q-post — 글 하나": "ebce07aebb02",
     "concept:tag": "da4fe3afc21d"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the folder-URL change (run-20260924-060910-91d7): every quoted sentence or symbol is still in its anchor, and the anchors changed only in output paths, link form (folders, no file names), the always-present 피드·소개 menu and the required content/about.md — none of which the related concept's meaning depends on. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the image-width addition (run-20260924-073550-4de1): the sections gained the width syntax only; each quoted sentence still stands and still projects its concept. Technical, delegated (plan-07)"
   }
 }

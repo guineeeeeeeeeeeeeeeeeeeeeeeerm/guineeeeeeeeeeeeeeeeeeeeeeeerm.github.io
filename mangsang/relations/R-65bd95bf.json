@@ -1,0 +1,14 @@
+{
+  "id": "R-65bd95bf",
+  "src": "source:img-01",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "이미지가 너무 큰데 어떻게 크기 줄여?",
+  "seen": {
+    "source:img-01": "a1727e242a9e",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "The image-width syntax grounded in the owner's request and approval (img-01, img-03) and projected in code and tests, proposed by Claude (claude-opus-5-5) after img-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

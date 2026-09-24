@@ -1,0 +1,14 @@
+{
+  "id": "R-36e86d46",
+  "src": "build.py:image_width",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "def image_width(alt: str, post_path: Path) -> tuple[str, int | None]:",
+  "seen": {
+    "build.py:image_width": "d82d777e15dc",
+    "concept:post": "2c2c514859cc"
+  },
+  "confirmed": {
+    "delegated": "The image-width syntax grounded in the owner's request and approval (img-01, img-03) and projected in code and tests, proposed by Claude (claude-opus-5-5) after img-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

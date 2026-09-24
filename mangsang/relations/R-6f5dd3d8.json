@@ -5,10 +5,10 @@
   "dst": "concept:post",
   "evidence": "새 글은 `content/posts/<id>.md`로 저장합니다. `<id>`는 파일 확장자를 뺀 이름이며, 영문",
   "seen": {
-    "README.md#새 글 쓰기": "5ea221858ada",
+    "README.md#새 글 쓰기": "81172ce851e8",
     "concept:post": "2c2c514859cc"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5): the author's guide as a projection of the concepts it teaches; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each after the image-width addition (run-20260924-073550-4de1): the sections gained the width syntax only; each quoted sentence still stands and still projects its concept. Technical, delegated (plan-07)"
   }
 }
