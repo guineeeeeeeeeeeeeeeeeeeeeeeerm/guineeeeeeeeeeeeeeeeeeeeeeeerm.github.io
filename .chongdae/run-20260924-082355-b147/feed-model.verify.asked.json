@@ -1,0 +1,52 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-082355-b147",
+  "task": "feed-model",
+  "role": "verifier",
+  "target": ".",
+  "goal": "피드 양식: 글마다 분리된 상자, 제목은 있을 때만, 하단에 현지 시각과 공유 배지; 공유 기록(content/shares)",
+  "brief": "mangsang: share 개념과 질문, feed 개념 뜻 갱신, 투영 연결과 재확인",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "check"
+    ]
+  ],
+  "tests": [],
+  "domain": "plan",
+  "response": "./.chongdae/run-20260924-082355-b147/feed-model.verify.response.json",
+  "touched": [
+    "mangsang/concepts/feed.json",
+    "mangsang/concepts/share.json",
+    "mangsang/cq/share-shown.json",
+    "mangsang/registry.json",
+    "mangsang/relations/R-0189beda.json",
+    "mangsang/relations/R-05c2f196.json",
+    "mangsang/relations/R-14d916a2.json",
+    "mangsang/relations/R-16a108f1.json",
+    "mangsang/relations/R-16ad7dac.json",
+    "mangsang/relations/R-238e911e.json",
+    "mangsang/relations/R-29a40373.json",
+    "mangsang/relations/R-36939b3f.json",
+    "mangsang/relations/R-4a8fcff7.json",
+    "mangsang/relations/R-4dd07452.json",
+    "mangsang/relations/R-5441a85c.json",
+    "mangsang/relations/R-60f360c9.json",
+    "mangsang/relations/R-654e9419.json",
+    "mangsang/relations/R-6a9cbb87.json",
+    "mangsang/relations/R-7849b5e6.json",
+    "mangsang/relations/R-8a6e09c9.json",
+    "mangsang/relations/R-8b66abbb.json",
+    "mangsang/relations/R-93e7262a.json",
+    "mangsang/relations/R-99d140ee.json",
+    "mangsang/relations/R-a3188744.json",
+    "mangsang/relations/R-bd007fe0.json",
+    "mangsang/relations/R-d2ea1a75.json"
+  ],
+  "built": null
+}

@@ -1,0 +1,42 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-082355-b147",
+  "task": "feed-build",
+  "role": "verifier",
+  "target": ".",
+  "goal": "피드 양식: 글마다 분리된 상자, 제목은 있을 때만, 하단에 현지 시각과 공유 배지; 공유 기록(content/shares)",
+  "brief": "build.py: 피드 항목 양식(제목은 있을 때만, 하단 footer에 유형·시각 링크·공유 배지, 본문 18px), 글 페이지도 같은 하단; content/shares 읽기·검증·배지(x, threads, linkedin 흑백 SVG); README에 공유 기록 남기기",
+  "closes": [
+    "Q-feed",
+    "Q-share",
+    "Q-readme"
+  ],
+  "contract": {
+    "Q-feed": "## Q-feed — 첫 화면\n\nConcept: `feed`.\n\n`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형별로 나누지 않는다 — 항목마다 유형 이름이 붙는 것은 Q-post대로다. 글의 `<id>`가\n작성 시각이라 두 글의 시각이 같을 수 없다). 짧은\n글은 본문 전체를 보여주고, 중간·긴 글은 제목과 시각을 보여준다. Decided (owner, `source:plan-11`): 제목이 없는 중간·긴\n글은 제목 자리에 본문 첫 문단의 앞 80자(잘렸으면 `…`)를 보여준다. Decided after quibble (s1-tests, technical, delegated): 80자는 적용된 본문의 첫 문단을 HTML로 만든 뒤의 화면 글자(서식\n기호와 태그를 뺀 글자)에서 유니코드 문자 단위로 센다. 이미지만 있는 첫 문단은 이미지 설명(alt)을 글자로 쓴다. 모든 항목은\n그 글의 페이지로 가는 링크를 가진다. 피드의 본문은 적용된 본문이다.\n\nDismissed after quibble (s1-tests): \"checks가 비어 있다\"는 다섯 건 — 트집 작업은 계약 테스트를 쓰는 작업이라 그 테스트가 검사이고,\n`s1-build`가 `python3 -m unittest discover -s tests`로 돌린다.\n\nDecided (owner, `source:fd-01`, `source:fd-02`, `source:fd-03`): 피드 항목의 양식 —\n- 항목마다 분리된 상자(`<article class=\"feed-item\">`)다.\n- 제목은 있을 때만 맨 위에 굵게 나오고 글 페이지로 가는 링크다. 짧은 글에는 제목 줄이 없다(제목 자리에 `<id>`를 쓰지 않는다).\n  제목이 없는 중간·긴 글은 위의 80자가 제목 자리에 온다.\n- 짧은 글은 요약 없이 본문 전체를 보여준다. 짧은 글이기 때문이다.\n- 항목 하단(`<footer class=\"item-footer\">`)에 유형 이름과 작성 시각(Q-time의 독자 현지 시각)이 나오고, 작성 시각이 그 글의\n  페이지로 가는 링크다(X, 스레드처럼). 그 뒤에 공유 배지가 붙는다(Q-share).\n- 본문 글씨는 읽기 좋게 키운다(18px, `1.125rem`).\nDecided (technical, session): 글 페이지도 같은 하단(유형, 작성 시각, 공유 배지)을 본문 아래에 둔다 — 디자인 일관성(`source:about-09`).",
+    "Q-share": "## Q-share — 공유 기록과 배지\n\nConcept: `share`.\n\nDecided (owner, `source:fd-01`, `source:fd-03`; 제안 `source:fd-00`): 글이 다른 곳(X, 스레드, 링크드인 등)에 공유되면 그 기록을\n남기고, 피드 항목과 글 페이지 하단에 곳마다 흑백 아이콘 배지를 단다. 배지는 그 공유 글로 가는 링크다. 아직 아무 곳에도 공유하지\n않았고, 공유할 때 기록 파일 하나를 더하면 되도록 간단해야 한다.\n\nDecided (technical, session): 공유는 글을 올린 뒤에 생기는 일이라 글 파일의 헤더가 아니라 링크·패치처럼 별도의 기록이다.\n공유 파일은 `content/shares/<id>.json`이고 파일 하나가 공유 하나다: `{\"id\", \"post\": <글 id>, \"where\": <곳>, \"url\": <주소>,\n\"at\": <UTC 시각>}`. `id`는 파일 이름(확장자 제외)과 같다. `where`는 빌드가 아는 곳 중 하나다 — 처음은 `x`, `threads`,\n`linkedin`이고, 곳을 늘리는 일은 빌드에 이름과 아이콘을 더하는 사이트 작업이다. `url`은 `https://`로 시작한다. JSON이 아니거나,\n키 집합이 위와 다르거나, `id`가 파일 이름과 다르거나, `post`가 없는 글이거나, `where`가 모르는 곳이거나, `url`·`at`의 형식이\n틀리면 빌드 오류이고 오류 줄은 그 공유 파일의 경로를 포함한다. 한 글에 공유가 여럿이면 `at` 순(같으면 `id` 순)으로 배지를\n단다. 배지는 사이트 안에 그린 흑백 아이콘(SVG)이고 외부에서 가져오지 않으며, 곳의 이름을 `aria-label`로 가진다. 공유가 없는\n글에는 배지 자리가 없다.",
+    "Q-readme": "## Q-readme — 글쓴이의 안내서\n\nConcept: `post`, `site-build`.\n\n저장소 루트의 `README.md`는 이 사이트에 글을 올리는 사람을 위한 한국어 안내서다. 새 글을 쓰는 법(파일 위치와 이름, 헤더의\n`written`·`type`·`title`·`tags` 각각의 규칙과 예시, 본문에 쓸 수 있는 문법, 이미지 넣는 법), 링크를 거는 법(링크 파일의 모양,\n사유를 바꾸거나 지우는 법), 패치를 붙이는 법(패치 파일의 모양, `op` 네 가지), 사이트를 만드는 명령(`python3 build.py`)과 결과가\n생기는 곳(`docs/`), 빌드 오류가 났을 때 무엇을 보면 되는지를 담는다. 안내서의 예시를 그대로 따라 한 글·링크·패치는 빌드 오류 없이\n만들어진다. 안내서에 적힌 규칙은 이 계획서의 규칙과 어긋나지 않는다.\n\nDecided after quibble (readme-tests, technical, delegated): 한국어 — 코드 블록 밖 본문 글자 중 한글이 절반 이상이다. 담는다 —\n새 글, 링크, 패치, 빌드 각각에 `##` 절이 있고, 새 글 절에 `written`·`type`·`title`·`tags`, 패치 절에 `op` 네 가지, 빌드 절에\n`python3 build.py`와 `docs/`, 그리고 빌드 오류가 stderr에 파일 경로를 담은 한 줄로 나온다는 설명이 있다. 예시는 정보 문자열에 종류와\n경로를 적은 코드 블록이다: ```` ```post content/posts/<id>.md ````, ```` ```link content/links/<id>.json ````,\n```` ```patch content/patches/<id>.json ````. 테스트는 그 블록들을 그대로 임시 사이트에 쓰고 빌드해, 글 페이지가 생기고, 링크의\n`[n]`이 붙고, 패치가 적용된 글자가 보이는지 본다. 계획서와 어긋나지 않는다 — 예시가 실제 `build.py`로 오류 없이 빌드되는 것이 그\n증거다(빌드가 이 계획서의 규칙을 강제한다); 그 밖의 문장 대 문장 일치는 기계로 관찰하지 않는다(non-claim).\n\nDecided by the builder (readme-3, technical, accepted as delegated): 안내서는 계획서의 어휘(절 id, 개념 이름)를 쓰지 않고, 제목은 글쓴이가\n하는 일로 붙인다. 빌드 절의 제목은 `사이트 만들기 — 빌드`다.\n\nDecided (technical, session): 안내서에는 소개 페이지를 쓰는 법(`content/about.md`, 헤더 없음, 바깥 링크)도 `##` 절로 담는다.\n예시는 ```` ```about content/about.md ```` 블록이며, 테스트는 다른 예시처럼 그대로 빌드해 `docs/about/index.html`이 생기는지 본다."
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "tests": [
+    "tests/test_feed_layout.py",
+    "tests/test_shares.py"
+  ],
+  "domain": "site",
+  "response": "./.chongdae/run-20260924-082355-b147/feed-build.verify.response.json",
+  "touched": [
+    "README.md",
+    "build.py"
+  ],
+  "built": null
+}
