@@ -1,0 +1,34 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-083701-d8bf",
+  "task": "click-readme",
+  "role": "verifier",
+  "target": ".",
+  "goal": "피드: 유형 표시 없음, 시각은 글자만, 글 상자 전체가 글 페이지 링크",
+  "brief": "README 방문자에게 보이는 모습: 글마다 상자, 제목은 있을 때만, 하단에 현지 시각과 공유 배지, 상자 전체가 글 페이지 링크, 유형 이름 없음",
+  "closes": [
+    "Q-readme"
+  ],
+  "contract": {
+    "Q-readme": "## Q-readme — 글쓴이의 안내서\n\nConcept: `post`, `site-build`.\n\n저장소 루트의 `README.md`는 이 사이트에 글을 올리는 사람을 위한 한국어 안내서다. 새 글을 쓰는 법(파일 위치와 이름, 헤더의\n`written`·`type`·`title`·`tags` 각각의 규칙과 예시, 본문에 쓸 수 있는 문법, 이미지 넣는 법), 링크를 거는 법(링크 파일의 모양,\n사유를 바꾸거나 지우는 법), 패치를 붙이는 법(패치 파일의 모양, `op` 네 가지), 사이트를 만드는 명령(`python3 build.py`)과 결과가\n생기는 곳(`docs/`), 빌드 오류가 났을 때 무엇을 보면 되는지를 담는다. 안내서의 예시를 그대로 따라 한 글·링크·패치는 빌드 오류 없이\n만들어진다. 안내서에 적힌 규칙은 이 계획서의 규칙과 어긋나지 않는다.\n\nDecided after quibble (readme-tests, technical, delegated): 한국어 — 코드 블록 밖 본문 글자 중 한글이 절반 이상이다. 담는다 —\n새 글, 링크, 패치, 빌드 각각에 `##` 절이 있고, 새 글 절에 `written`·`type`·`title`·`tags`, 패치 절에 `op` 네 가지, 빌드 절에\n`python3 build.py`와 `docs/`, 그리고 빌드 오류가 stderr에 파일 경로를 담은 한 줄로 나온다는 설명이 있다. 예시는 정보 문자열에 종류와\n경로를 적은 코드 블록이다: ```` ```post content/posts/<id>.md ````, ```` ```link content/links/<id>.json ````,\n```` ```patch content/patches/<id>.json ````. 테스트는 그 블록들을 그대로 임시 사이트에 쓰고 빌드해, 글 페이지가 생기고, 링크의\n`[n]`이 붙고, 패치가 적용된 글자가 보이는지 본다. 계획서와 어긋나지 않는다 — 예시가 실제 `build.py`로 오류 없이 빌드되는 것이 그\n증거다(빌드가 이 계획서의 규칙을 강제한다); 그 밖의 문장 대 문장 일치는 기계로 관찰하지 않는다(non-claim).\n\nDecided by the builder (readme-3, technical, accepted as delegated): 안내서는 계획서의 어휘(절 id, 개념 이름)를 쓰지 않고, 제목은 글쓴이가\n하는 일로 붙인다. 빌드 절의 제목은 `사이트 만들기 — 빌드`다.\n\nDecided (technical, session): 안내서에는 소개 페이지를 쓰는 법(`content/about.md`, 헤더 없음, 바깥 링크)도 `##` 절로 담는다.\n예시는 ```` ```about content/about.md ```` 블록이며, 테스트는 다른 예시처럼 그대로 빌드해 `docs/about/index.html`이 생기는지 본다."
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "tests": [],
+  "domain": "site",
+  "response": "./.chongdae/run-20260924-083701-d8bf/click-readme.verify.response.json",
+  "touched": [
+    "README.md"
+  ],
+  "built": null
+}

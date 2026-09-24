@@ -1,0 +1,42 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-083701-d8bf",
+  "task": "click-build-2",
+  "role": "verifier",
+  "target": ".",
+  "goal": "피드: 유형 표시 없음, 시각은 글자만, 글 상자 전체가 글 페이지 링크",
+  "brief": "build.py: 유형 이름 표시 제거, 시각은 글자만, 피드 항목에 상자를 덮는 링크(item-link), 배지는 그 위 (click-build를 대신)",
+  "closes": [
+    "Q-feed",
+    "Q-post",
+    "Q-ui"
+  ],
+  "contract": {
+    "Q-feed": "## Q-feed — 첫 화면\n\nConcept: `feed`.\n\n`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형별로 나누지 않는다. 글의 `<id>`가\n작성 시각이라 두 글의 시각이 같을 수 없다). 짧은\n글은 본문 전체를 보여주고, 중간·긴 글은 제목과 시각을 보여준다. Decided (owner, `source:plan-11`): 제목이 없는 중간·긴\n글은 제목 자리에 본문 첫 문단의 앞 80자(잘렸으면 `…`)를 보여준다. Decided after quibble (s1-tests, technical, delegated): 80자는 적용된 본문의 첫 문단을 HTML로 만든 뒤의 화면 글자(서식\n기호와 태그를 뺀 글자)에서 유니코드 문자 단위로 센다. 이미지만 있는 첫 문단은 이미지 설명(alt)을 글자로 쓴다. 모든 항목은\n그 글의 페이지로 가는 링크를 가진다. 피드의 본문은 적용된 본문이다.\n\nDismissed after quibble (s1-tests): \"checks가 비어 있다\"는 다섯 건 — 트집 작업은 계약 테스트를 쓰는 작업이라 그 테스트가 검사이고,\n`s1-build`가 `python3 -m unittest discover -s tests`로 돌린다.\n\nDecided (owner, `source:fd-01`, `source:fd-02`, `source:fd-03`): 피드 항목의 양식 —\n- 항목마다 분리된 상자(`<article class=\"feed-item\">`)다.\n- 제목은 있을 때만 맨 위에 굵게 나온다. 짧은 글에는 제목 줄이 없다(제목 자리에 `<id>`를 쓰지 않는다).\n  제목이 없는 중간·긴 글은 위의 80자가 제목 자리에 온다.\n- 짧은 글은 요약 없이 본문 전체를 보여준다. 짧은 글이기 때문이다.\n- 항목 하단(`<footer class=\"item-footer\">`)에 작성 시각(Q-time의 독자 현지 시각)이 나오고, 그 뒤에 공유 배지가 붙는다(Q-share).\nDecided (owner, `source:fd-04`; 위의 유형 이름과 \"시각이 링크\"를 바꿈): 시각은 링크가 아니다. 항목 상자 전체가 그 글의 페이지로 가는\n링크다 — 글을 누르면 이 글과 연결된 다른 글들과 각종 정보(주석, 이 글을 가리키는 글, 패치, 공유)로 들어간다. 상자 안의 공유\n배지는 따로 눌려 공유한 글로 간다. Decided (technical, session): 상자 링크는 상자를 덮는 투명한 링크(`<a class=\"item-link\">`)이고,\n배지는 그 위에 놓인다(링크 안에 링크를 넣지 않는다). 제목이 있으면 제목이 그 링크의 이름이 되고, 없으면 \"글 보기\"다.\n- 본문 글씨는 읽기 좋게 키운다(18px, `1.125rem`).\nDecided (technical, session): 글 페이지도 같은 하단(작성 시각, 공유 배지)을 본문 아래에 둔다 — 디자인 일관성(`source:about-09`).",
+    "Q-post": "## Q-post — 글 하나\n\nConcept: `post`, `post-type`, `tag`.\n\n글 파일은 헤더와 본문으로 이루어진다. 헤더는 파일 첫 줄부터 빈 줄 전까지의 `key: value` 줄들이다.\n\n- `written`: 작성 시각. `YYYY-MM-DDTHH:MM:SSZ` 형식의 UTC. 반드시 있고, 글의 `<id>`와 같은 시각이다.\n- `type`: `short`(짧은 글), `medium`(중간 글), `long`(긴 글) 중 하나. 반드시 있다. 유형은 쓰기 전에 고르는 것이며,\n  빌드는 분량으로 유형을 판단하지 않는다.\n- `title`: 제목. `short`에서는 있으면 빌드 오류, `medium`과 `long`에서는 선택.\n- `tags`: 쉼표로 구분한 태그 이름. 선택. 앞뒤 공백은 무시하고, 빈 이름은 버린다.\n\nDecided after quibble (s1-tests, technical, delegated): 키와 값의 앞뒤 공백은 무시하고, 키는 대소문자를 구분한다. 콜론이 없는\n헤더 줄과 같은 키가 두 번 나오는 헤더는 빌드 오류다.\n\n그 밖의 키, 형식이 틀린 `written`, 목록에 없는 `type`, 두 글이 같은 `<id>`(파일 이름)인 경우는 빌드 오류다.\n\nDecided (owner, `source:id-01`, `source:id-02`, `source:id-03`, `source:id-04`): 글의 `<id>`, 곧 글 파일의 이름은 작성 시각이다 —\n`YYYYMMDD-HHMMSS`(UTC, 예: `20260924-075921`). 제목은 늘 있는 것이 아니고 글에 붙은 메타데이터 중 하나일 뿐 정체성이 아니며, 글의\n정체성은 태그, 연결 관계, 수정 내역에 있어 파일 이름에 담을 수 없다. 관례가 아니라 빌드가 지킨다: `<id>`가 이 형식이 아니거나\n`written`과 다른 시각이면 빌드 오류이고, 오류 줄은 그 글 파일의 경로를 포함한다. 이미지만 있는\n글은 본문이 이미지 한 줄인 글이다.\n\nDecided (owner, `source:plan-11`): 본문이 빈 글은 빌드 오류다.\n\n본문은 Markdown의 부분집합이다: 빈 줄로 나뉜 문단, `#`/`##`/`###` 제목, `- ` 목록, `> ` 인용, `**굵게**`, `*기울임*`,\n`` `코드` ``, 이미지 `![설명](images/파일)`. 이미지 경로가 `content/images/`에 없으면 빌드 오류다. 본문의 HTML은 글자로\n보인다(태그로 해석되지 않는다).\n\nDecided (owner, `source:img-01`, `source:img-03`): 이미지의 표시 너비를 정할 수 있다 — `![설명|N](images/파일)`에서 `N`은 CSS\n픽셀 단위의 너비이고 높이는 비율대로 따른다. 원본 파일은 그대로다. `N`이 없으면 지금처럼 원본 크기(칸 너비를 넘지 않음)로 보인다.\nDecided (technical, session): `N`은 1부터 9999까지의 정수이고 `<img … width=\"N\">`이 된다. 설명 끝의 `|` 뒤가 정수가 아니면 설명의\n일부로 본다. `|0`은 빌드 오류다. 설명(`alt`)에는 `|N`이 들어가지 않는다 — 피드의 80자처럼 이미지 설명을 글자로 쓰는 곳도 같다.\n소개 페이지에서도 같다(Q-about).\n\nDecided (owner, `source:br-01`, `source:br-03`, 제안 `source:br-02`): 문단과 인용 안에서 줄을 바꾸면 화면에서도 줄이 바뀐다 —\n파일에 보이는 대로 보인다. 빈 줄은 지금처럼 문단을 나눈다. Decided (technical, session): 줄바꿈은 `<br>`이 된다. 피드의 짧은 글\n본문도 같다. 80자를 세는 화면 글자는 전과 같다(줄바꿈 한 글자).\n\n글 페이지 `docs/p/<id>/index.html`은 제목(있으면), 작성 시각, 태그, 본문을 보여준다.\n\nDecided (owner, `source:plan-11`): 태그는 글 페이지에 글자로만 표시하고, 태그별 목록 페이지는 아직 만들지 않는다.\nDecided (owner, `source:fd-04`; `source:plan-11`의 \"유형 이름을 작게 표시한다\"를 바꿈): 유형 이름(짧은 글/중간 글/긴 글)은 화면에\n표시하지 않는다. 유형은 쓰기 전에 고르는 것이고, 피드에서 무엇을 보여줄지(Q-feed)를 정할 뿐이다.",
+    "Q-ui": "## Q-ui — 화면 언어\n\nConcept: `ui-language`.\n\n메뉴, 버튼, 안내 문구 등 사이트가 만드는 글자는 한국어다. `<html lang=\"ko\">`."
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "tests": [
+    "tests/test_s1.py",
+    "tests/test_feed_layout.py",
+    "tests/test_shares.py"
+  ],
+  "domain": "site",
+  "response": "./.chongdae/run-20260924-083701-d8bf/click-build-2.verify.response.json",
+  "touched": [
+    "build.py"
+  ],
+  "built": null
+}

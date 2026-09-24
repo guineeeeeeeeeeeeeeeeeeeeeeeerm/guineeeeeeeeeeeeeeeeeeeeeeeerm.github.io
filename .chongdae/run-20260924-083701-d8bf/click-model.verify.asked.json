@@ -1,0 +1,53 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.6.0",
+  "stage": "verify",
+  "run": "run-20260924-083701-d8bf",
+  "task": "click-model",
+  "role": "verifier",
+  "target": ".",
+  "goal": "피드: 유형 표시 없음, 시각은 글자만, 글 상자 전체가 글 페이지 링크",
+  "brief": "mangsang: feed 개념 뜻을 fd-04대로(유형 없음, 상자 전체가 글 페이지 입구), 관계 재확인",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "{plugin:mangsang}/mangsang.py",
+      "check"
+    ]
+  ],
+  "tests": [],
+  "domain": "plan",
+  "response": "./.chongdae/run-20260924-083701-d8bf/click-model.verify.response.json",
+  "touched": [
+    "mangsang/concepts/feed.json",
+    "mangsang/relations/R-0189beda.json",
+    "mangsang/relations/R-05c2f196.json",
+    "mangsang/relations/R-14d916a2.json",
+    "mangsang/relations/R-16ad7dac.json",
+    "mangsang/relations/R-172c7b7c.json",
+    "mangsang/relations/R-195522d4.json",
+    "mangsang/relations/R-238e911e.json",
+    "mangsang/relations/R-2912ea7a.json",
+    "mangsang/relations/R-36939b3f.json",
+    "mangsang/relations/R-4a8fcff7.json",
+    "mangsang/relations/R-5441a85c.json",
+    "mangsang/relations/R-60f360c9.json",
+    "mangsang/relations/R-622acaf9.json",
+    "mangsang/relations/R-654e9419.json",
+    "mangsang/relations/R-6cd16b55.json",
+    "mangsang/relations/R-79a96c0a.json",
+    "mangsang/relations/R-8a6e09c9.json",
+    "mangsang/relations/R-99d140ee.json",
+    "mangsang/relations/R-a0409dab.json",
+    "mangsang/relations/R-a3188744.json",
+    "mangsang/relations/R-b577795a.json",
+    "mangsang/relations/R-bca01b82.json",
+    "mangsang/relations/R-d2ea1a75.json",
+    "mangsang/relations/R-d3f2cb80.json",
+    "mangsang/relations/R-ebb5f321.json",
+    "mangsang/relations/R-f0d8ae78.json"
+  ],
+  "built": null
+}
