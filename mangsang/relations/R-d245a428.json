@@ -3,12 +3,12 @@
   "src": "build.py:parse_about",
   "predicate": "realizes",
   "dst": "concept:about",
-  "evidence": "return page_shell(\"소개\", \"../\", f\"<main>\\n{rendered}\\n</main>\", \"about\", current=\"about\")",
+  "evidence": "return page_shell(\"소개\", \"../\", body, current=\"about\")",
   "seen": {
-    "build.py:parse_about": "a71f387e0e96",
-    "concept:about": "89fd6f1990c2"
+    "build.py:parse_about": "a7bc4eab5730",
+    "concept:about": "fda8469aebbf"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5): parse_about still renders content/about.md as the about page; the call moved to the folder layout (root ../, current=about). Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5): parse_about still renders content/about.md as the about page, now in the post page's frame. technical, delegated (plan-07)"
   }
 }

@@ -88,7 +88,8 @@ class AboutPageContractTests(unittest.TestCase):
             page = read(root, "about/index.html")
             self.assertIn('<html lang="ko">', page)
             self.assertIn("<title>소개</title>", page)
-            self.assertRegex(page, r'<body[^>]*class="about"')
+            self.assertIn('<article class="post">', page)
+            self.assertIn('<div class="body">', page)
             self.assertIn('src="../images/avatar.png"', page)
             self.assertIn('src="../images/org_logo.png"', page)
             self.assertIn("<strong>저</strong>", page)
@@ -96,15 +97,18 @@ class AboutPageContractTests(unittest.TestCase):
             self.assertIn(f'<a href="{ORG}">긴작업</a>', page)
             self.assertEqual((root / "docs" / "images" / "avatar.png").read_bytes(), b"avatar")
 
-    def test_the_about_page_looks_like_the_old_first_page(self):
-        with temporary_site({"about.md": "안녕하세요.\n"}) as root:
+    def test_the_about_page_looks_like_a_post_page(self):
+        with temporary_site({"about.md": "안녕하세요.\n", "posts/hello.md": post_text("글 하나")}) as root:
             self.assert_builds(root)
+            about, post = read(root, "about/index.html"), read(root, "p/hello/index.html")
+            for page in (about, post):
+                self.assertRegex(page, r"<body>")   # no page-specific class: one look for every page
+                self.assertIn('<article class="post">', page)
+                self.assertIn('<div class="body">', page)
             css = read(root, "assets/site.css").lower()
-            rule = re.search(r"(?s)body\.about\s*\{(.*?)\}", css)
-            self.assertIsNotNone(rule, msg="a rule for body.about")
-            self.assertIn("#0e0e10", rule.group(1))
-            self.assertIn("#ededf0", rule.group(1))
-            self.assertIn("text-align: center", css)
+            self.assertNotIn(".about", css, msg="no style of the about page's own")
+            self.assertNotIn("#0e0e10", css)
+            self.assertNotIn("text-align: center", css)
 
     def test_about_md_is_not_a_post(self):
         with temporary_site(

@@ -61,11 +61,6 @@ img { max-width: 100%; height: auto; }
 blockquote { border-left: .25rem solid #d1d5db; margin: 1rem 0; padding-left: 1rem; color: #4b5563; }
 code { background: #f3f4f6; padding: .1rem .25rem; }
 header a + a { margin-left: .75rem; }
-body.about { max-width: none; min-height: 100vh; box-sizing: border-box; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0e0e10; color: #ededf0; text-align: center; }
-body.about header { position: absolute; top: 1rem; left: 1.25rem; margin: 0; }
-body.about main { max-width: 36rem; line-height: 1.7; }
-body.about img { max-width: 10rem; }
-body.about code { background: #1f1f23; }
 """
 
 JS = """\
@@ -957,13 +952,12 @@ def patch_history_catalog(state: PatchState) -> str:
 
 
 def page_shell(
-    title: str, root_link: str, body: str, body_class: str = "", current: str = ""
+    title: str, root_link: str, body: str, current: str = ""
 ) -> str:
     """`root_link` leads from the page's folder to the site root ("", "../", "../../"); the menu links to folders, never to
     a file name, and a page links to itself as `./`."""
     feed_href = "./" if current == "feed" else root_link or "./"
     about_href = "./" if current == "about" else f"{root_link}about/"
-    body_open = f'<body class="{body_class}">' if body_class else "<body>"
     return f'''<!doctype html>
 <html lang="ko">
 <head>
@@ -973,7 +967,7 @@ def page_shell(
 <link rel="stylesheet" href="{root_link}assets/site.css">
 <script src="{root_link}assets/time.js" defer></script>
 </head>
-{body_open}
+<body>
 <header><a href="{feed_href}">피드</a><a href="{about_href}">소개</a></header>
 {body}
 </body>
@@ -1156,7 +1150,8 @@ def parse_about(content_root: Path) -> str:
     rendered = "\n".join(
         render_block(block, content_root, path, "../images/", external_links=True) for block in blocks
     )
-    return page_shell("소개", "../", f"<main>\n{rendered}\n</main>", "about", current="about")
+    body = f'<main>\n<article class="post">\n<div class="body">{rendered}</div>\n</article>\n</main>'   # the post page's frame: one look for every page
+    return page_shell("소개", "../", body, current="about")
 
 
 def copy_images(content_root: Path, output_root: Path) -> None:

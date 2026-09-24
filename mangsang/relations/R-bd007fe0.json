@@ -5,10 +5,10 @@
   "dst": "concept:about",
   "evidence": "사이트에 소개 페이지를 하나 둔다. 소개 글은 `content/about.md`에 쓰고",
   "seen": {
-    "plan/PLAN.md#Q-about — 소개 페이지": "ab33c22ecd7d",
-    "concept:about": "89fd6f1990c2"
+    "plan/PLAN.md#Q-about — 소개 페이지": "8622f7b68ee8",
+    "concept:about": "fda8469aebbf"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the folder-URL change (run-20260924-060910-91d7): every quoted sentence or symbol is still in its anchor, and the anchors changed only in output paths, link form (folders, no file names), the always-present 피드·소개 menu and the required content/about.md — none of which the related concept's meaning depends on. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised meaning (about-09: the post page's look): each quote still grounds or projects the about page — its existence, its file, the Korean org description and link, the required file, the Korean menu; none depended on the dark centered look (about-01's 'first page' wish is what about-09 revised). technical, delegated (plan-07)"
   }
 }

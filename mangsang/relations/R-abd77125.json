@@ -1,11 +1,11 @@
 {
-  "id": "R-52c631b6",
-  "src": "tests/test_about.py:AboutPageContractTests",
+  "id": "R-abd77125",
+  "src": "source:about-09",
   "predicate": "realizes",
   "dst": "concept:about",
-  "evidence": "def test_the_about_page_looks_like_a_post_page(self):",
+  "evidence": "디자인 일관성 필요. 하얀 배경. 그리고 피드에 표시되는 글과도 같은 식이었으면 좋겠음.",
   "seen": {
-    "tests/test_about.py:AboutPageContractTests": "99e3a69f6b1b",
+    "source:about-09": "ac9a321c8439",
     "concept:about": "fda8469aebbf"
   },
   "confirmed": {

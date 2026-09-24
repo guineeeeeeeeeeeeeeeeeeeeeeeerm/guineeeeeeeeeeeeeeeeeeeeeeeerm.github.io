@@ -186,18 +186,20 @@ Decided (technical, session): 안내서에는 소개 페이지를 쓰는 법(`co
 Concept: `about`.
 
 Decided (owner, `source:about-01`, `source:about-03`): 사이트에 소개 페이지를 하나 둔다. 소개 글은 `content/about.md`에 쓰고, 긴작업 org를 한국어로
-짧게 설명하고 그 org로 가는 링크를 건다. 모양은 저장소 루트의 옛 첫 화면(`index.html`)처럼 어두운 배경에 가운데 정렬이며,
-`avatar.png`와 `org_logo.png`를 쓴다. 소개 글은 주인이 쓰는 글이다 — 사이트를 만드는 일(이 절의 빌드)과 달리, 글을 쓰고 고치는
+짧게 설명하고 그 org로 가는 링크를 건다. 아바타와 org 로고 이미지를 쓴다. 소개 글은 주인이 쓰는 글이다 — 사이트를 만드는 일(이 절의 빌드)과 달리, 글을 쓰고 고치는
 일은 run 밖의 절차다.
+
+Decided (owner, `source:about-09`; 옛 첫 화면을 따른 어두운 가운데 정렬(`source:about-03`)을 바꿈): 디자인은 일관되어야 한다 — 소개
+페이지는 흰 배경에 글 페이지와 같은 모양이다.
 
 `content/about.md`는 헤더가 없고 파일 전체가 본문이다. 본문 문법은 Q-post와 같고, 여기에 바깥 링크 `[글자](주소)`가 더해진다.
 주소는 `http://` 또는 `https://`로 시작해야 한다. 바깥 링크는 소개 페이지에서만 링크가 된다(글 본문의 문법은 그대로다).
 `content/about.md`는 글이 아니다 — 글 목록, 피드, 링크와 패치의 대상에 들지 않는다.
 
-빌드는 `docs/about/index.html`을 만든다. 제목은 "소개"이고, 배경 `#0e0e10`에 글자 `#ededf0`, 본문은 화면 가운데에 가운데 정렬로 놓인다.
+빌드는 `docs/about/index.html`을 만든다. 제목은 "소개"이고, 글 페이지와 같은 스타일(흰 배경, 왼쪽 정렬)로 보인다.
 이미지는 글과 같이 `content/images/`에서 온다. 모든 페이지 위쪽 메뉴에 "피드"와 "소개" 링크가 붙는다(Q-build).
 Decided (owner, `source:about-06`): 소개 글은 반드시 있다 — `content/about.md`가 없으면 빌드 오류이고, 오류 줄은 `content/about.md`를 포함한다.
 본문이 비었거나 바깥 링크의 주소가 `http://`·`https://`로 시작하지 않으면 빌드 오류이고, 오류 줄은 `content/about.md`를 포함한다.
 
-Decided (technical, session): 바깥 링크는 `<a href="<주소>">글자</a>`이며 글자는 서식 없이 글자로 보인다. 소개 페이지의 `<body>`는
-`class="about"`을 가진다.
+Decided (technical, session): 바깥 링크는 `<a href="<주소>">글자</a>`이며 글자는 서식 없이 글자로 보인다. 소개 페이지의 본문은 글
+페이지처럼 `<article class="post">` 안의 `<div class="body">`에 놓이고, 소개 페이지만의 스타일은 없다.

@@ -1,14 +1,17 @@
 {
-  "id": "R-1496730a",
-  "src": "source:about-05",
+  "id": "R-738ae1b0",
+  "src": "source:about-03",
   "predicate": "realizes",
   "dst": "concept:about",
-  "evidence": "좋아 가자",
+  "evidence": "\"소개 페이지는 어떤 모양이 좋을까요?\"=\"예전 첫 화면처럼\"",
   "seen": {
-    "source:about-05": "2edd1dd99740",
+    "source:about-03": "5e7547bd9c7c",
     "concept:about": "89fd6f1990c2"
   },
   "confirmed": {
     "delegated": "The about concept's projections and grounding, proposed by Claude (claude-opus-5-5) after about-build-2 passed its checks and the verifier; the owner approved the concept and its question in source:about-05; technical, delegated (plan-07)"
+  },
+  "retired": {
+    "why": "the owner's choice of the old first page's dark centered look (about-03) was revised by about-09: one design for every page"
   }
 }

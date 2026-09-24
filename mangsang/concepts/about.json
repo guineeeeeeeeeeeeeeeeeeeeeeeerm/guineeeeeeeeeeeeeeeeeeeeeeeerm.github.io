@@ -1,8 +1,8 @@
 {
   "name": "about",
-  "means": "사이트에 하나뿐인 소개 페이지. 주인이 content/about.md에 직접 쓰는 글로, 옛 첫 화면처럼 어두운 배경에 가운데 정렬로 보이며, 긴작업 org를 한국어로 짧게 설명하고 그 org로 가는 링크를 건다. 글 목록과 피드에는 나오지 않고, 모든 페이지 메뉴에서 소개로 닿는다.",
+  "means": "사이트에 하나뿐인 소개 페이지. 주인이 content/about.md에 직접 쓰는 글로, 글 페이지와 같은 모양(흰 배경, 왼쪽 정렬)으로 보이며, 긴작업 org를 한국어로 짧게 설명하고 그 org로 가는 링크를 건다. 글 목록과 피드에는 나오지 않고, 모든 페이지 메뉴에서 소개로 닿는다.",
   "declared": {
     "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
-    "approved-in": "source:about-05"
+    "approved-in": "source:about-09"
   }
 }

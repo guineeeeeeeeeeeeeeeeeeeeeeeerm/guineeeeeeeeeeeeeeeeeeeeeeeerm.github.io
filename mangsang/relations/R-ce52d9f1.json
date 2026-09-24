@@ -6,9 +6,9 @@
   "evidence": "\"소개 글(content/about.md)이 없을 때는 어떻게 할까요?\"=\"소개 글을 필수로\"",
   "seen": {
     "source:about-06": "a9e259c96675",
-    "concept:about": "89fd6f1990c2"
+    "concept:about": "fda8469aebbf"
   },
   "confirmed": {
-    "delegated": "The owner's decisions of 2026-09-24 (feed as the first page with an always-present menu, a required about page, folder URLs as recommended and approved in about-08) grounded in their sources, proposed by Claude (claude-opus-5-5); technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised meaning (about-09: the post page's look): each quote still grounds or projects the about page — its existence, its file, the Korean org description and link, the required file, the Korean menu; none depended on the dark centered look (about-01's 'first page' wish is what about-09 revised). technical, delegated (plan-07)"
   }
 }
