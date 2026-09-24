@@ -1,0 +1,103 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.8.0",
+  "status": "done",
+  "def": {
+    "id": "icon-tests",
+    "role": "nitpick",
+    "brief": "Q-share의 새 결정(아이콘은 docs/assets/icons.svg에 <symbol id=\"share-<곳>\">으로 한 번만 정의하고, 배지의 <svg>는 <use href=\"<상대 경로>assets/icons.svg#share-<곳>\">로 가리킨다; 배지 안에 <path> 등 모양이 없다)을 tests/test_shares.py에 계약 테스트로 더한다. 기존 테스트 중 이 결정과 어긋나는 것이 있으면 결정에 맞게 고친다(배지가 사이트 안에서 그린 아이콘이고 외부에서 가져오지 않는다는 기존 계약은 유지: <svg> 존재, src=\"https://\" 없음). 확인할 것: icons.svg가 알려진 곳(x, threads, linkedin) 모두의 symbol을 가진다; 피드(root '')와 글 페이지(root '../../')에서 use의 href가 각각 assets/icons.svg#share-x, ../../assets/icons.svg#share-x처럼 페이지 기준 상대 경로다; 배지 마크업에 <path가 없다. 공통 도우미는 tests/support.py에 있다(수정하지 않고 가져다 쓴다). 지금의 build.py/sitegen은 이 테스트를 통과하지 못하는 것이 정상이다.",
+    "closes": [
+      "Q-share",
+      "Q-build"
+    ],
+    "needs": [],
+    "checks": [],
+    "tests": [
+      "tests/test_shares.py"
+    ],
+    "gate": null,
+    "domain": "code"
+  },
+  "seq": 2,
+  "added": "2026-09-24T12:49:25+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "response": {
+    "status": "done",
+    "summary": "아이콘 계약 테스트를 추가했고 현재 구현에서 의도대로 실패함을 확인했습니다.",
+    "tests": [
+      "tests/test_shares.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-share",
+        "tests": [
+          "test_Q_share_Q_build_icons_svg_defines_each_known_share_symbol_once",
+          "test_Q_share_badges_use_icon_paths_relative_to_each_page",
+          "test_Q_share_badge_markup_has_no_repeated_path_shape",
+          "test_Q_share_without_shares_there_are_no_badges",
+          "test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page",
+          "test_Q_share_the_first_places_are_x_threads_and_linkedin_in_share_time_order",
+          "test_Q_share_a_bad_share_row_is_a_build_error_naming_its_line"
+        ]
+      },
+      {
+        "section": "Q-build",
+        "tests": [
+          "test_Q_share_Q_build_icons_svg_defines_each_known_share_symbol_once"
+        ]
+      }
+    ],
+    "non-claims": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "tests/test_shares.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "teujip",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.3.0",
+        "chongdae": "1.8.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "update ./tests/test_shares.py"
+      ],
+      "commands-run": 9,
+      "commands-failed": 2
+    }
+  },
+  "checks": [],
+  "touched": [
+    "tests/test_shares.py"
+  ]
+}

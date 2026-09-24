@@ -1,0 +1,175 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.8.0",
+  "status": "done",
+  "def": {
+    "id": "icon-build",
+    "role": "implementer",
+    "brief": "Q-share의 새 결정대로: 빌드가 docs/assets/icons.svg를 쓴다 — SHARE_PLACES의 곳마다 <symbol id=\"share-<곳>\" viewBox=...>에 지금의 아이콘 모양을 그대로 담고(흑백, currentColor), 배지의 <svg>는 모양 대신 <use href=\"<root>assets/icons.svg#share-<곳>\"/>만 가진다(root는 피드 '', 글 페이지 '../../', 태그 페이지 '../../' 등 그 페이지 기준). 아이콘 파일은 SHARE_PLACES에서 만들어 곳을 더하는 일이 지금처럼 한 곳에서 끝나게 한다. 배지의 aria-label, title, 링크, 순서, CSS는 그대로. 같은 입력이면 출력이 바이트 단위로 같다. 표준 라이브러리만. 기존 주석과 docstring은 글자 그대로 둔다. 테스트와 plan/은 고치지 않는다. 체크는 적힌 명령 그대로 따로 돌린다.",
+    "closes": [
+      "Q-share",
+      "Q-build"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      [
+        "python3",
+        "build.py"
+      ]
+    ],
+    "tests": [
+      "tests/support.py tests/test_about.py tests/test_feed_layout.py tests/test_ids.py tests/test_images.py tests/test_linebreaks.py tests/test_readme.py tests/test_s1.py tests/test_s2.py tests/test_s3.py tests/test_shares.py tests/test_tags.py "
+    ],
+    "gate": null,
+    "domain": "code"
+  },
+  "seq": 3,
+  "added": "2026-09-24T12:53:18+00:00",
+  "response": {
+    "status": "done",
+    "summary": "공유 아이콘을 SHARE_PLACES 기반 docs/assets/icons.svg로 통합하고 피드·글·태그 배지를 상대 경로 <use>로 변경했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "python3 build.py",
+        "exit": 0
+      }
+    ],
+    "decisions": [],
+    "non-claims": [
+      "브라우저에서 외부 SVG 심볼이 실제 렌더링되는 것까지는 체크하지 않았습니다.",
+      "기존 tests/, plan/, mangsang 변경은 수정하지 않았습니다."
+    ],
+    "disputed-tests": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "dakdol",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "docs/assets/icons.svg",
+    "docs/index.html",
+    "docs/p/20260924-075921/index.html",
+    "sitegen/output.py",
+    "sitegen/pages.py",
+    "sitegen/records.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.3.0",
+        "chongdae": "1.8.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "update ./sitegen/records.py",
+        "update ./sitegen/pages.py",
+        "update ./sitegen/output.py"
+      ],
+      "commands-run": 13,
+      "commands-failed": 0
+    }
+  },
+  "non-claims": [
+    "(provider) 브라우저에서 외부 SVG 심볼이 실제 렌더링되는 것까지는 체크하지 않았습니다.",
+    "(provider) 기존 tests/, plan/, mangsang 변경은 수정하지 않았습니다."
+  ],
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.4.1",
+        "chongdae": "1.8.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 3,
+      "commands-failed": 0
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ]
+  ],
+  "touched": [
+    "docs/assets/icons.svg",
+    "docs/index.html",
+    "docs/p/20260924-075921/index.html",
+    "sitegen/output.py",
+    "sitegen/pages.py",
+    "sitegen/records.py"
+  ]
+}

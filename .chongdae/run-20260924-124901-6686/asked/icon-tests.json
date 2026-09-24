@@ -1,0 +1,25 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.8.0",
+  "stage": "build",
+  "run": "run-20260924-124901-6686",
+  "task": "icon-tests",
+  "role": "nitpick",
+  "target": ".",
+  "goal": "배지 아이콘을 한 번만 정의",
+  "brief": "Q-share의 새 결정(아이콘은 docs/assets/icons.svg에 <symbol id=\"share-<곳>\">으로 한 번만 정의하고, 배지의 <svg>는 <use href=\"<상대 경로>assets/icons.svg#share-<곳>\">로 가리킨다; 배지 안에 <path> 등 모양이 없다)을 tests/test_shares.py에 계약 테스트로 더한다. 기존 테스트 중 이 결정과 어긋나는 것이 있으면 결정에 맞게 고친다(배지가 사이트 안에서 그린 아이콘이고 외부에서 가져오지 않는다는 기존 계약은 유지: <svg> 존재, src=\"https://\" 없음). 확인할 것: icons.svg가 알려진 곳(x, threads, linkedin) 모두의 symbol을 가진다; 피드(root '')와 글 페이지(root '../../')에서 use의 href가 각각 assets/icons.svg#share-x, ../../assets/icons.svg#share-x처럼 페이지 기준 상대 경로다; 배지 마크업에 <path가 없다. 공통 도우미는 tests/support.py에 있다(수정하지 않고 가져다 쓴다). 지금의 build.py/sitegen은 이 테스트를 통과하지 못하는 것이 정상이다.",
+  "closes": [
+    "Q-share",
+    "Q-build"
+  ],
+  "contract": {
+    "Q-share": "contract/Q-share-b66196a3.md",
+    "Q-build": "contract/Q-build-d923b6be.md"
+  },
+  "checks": [],
+  "tests": [
+    "tests/test_shares.py"
+  ],
+  "domain": "code",
+  "response": "./.chongdae/run-20260924-124901-6686/local/icon-tests.response.json"
+}

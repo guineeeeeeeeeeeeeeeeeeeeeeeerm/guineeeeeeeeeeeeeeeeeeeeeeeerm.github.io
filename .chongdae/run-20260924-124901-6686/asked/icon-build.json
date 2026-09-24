@@ -1,0 +1,38 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.8.0",
+  "stage": "build",
+  "run": "run-20260924-124901-6686",
+  "task": "icon-build",
+  "role": "implementer",
+  "target": ".",
+  "goal": "배지 아이콘을 한 번만 정의",
+  "brief": "Q-share의 새 결정대로: 빌드가 docs/assets/icons.svg를 쓴다 — SHARE_PLACES의 곳마다 <symbol id=\"share-<곳>\" viewBox=...>에 지금의 아이콘 모양을 그대로 담고(흑백, currentColor), 배지의 <svg>는 모양 대신 <use href=\"<root>assets/icons.svg#share-<곳>\"/>만 가진다(root는 피드 '', 글 페이지 '../../', 태그 페이지 '../../' 등 그 페이지 기준). 아이콘 파일은 SHARE_PLACES에서 만들어 곳을 더하는 일이 지금처럼 한 곳에서 끝나게 한다. 배지의 aria-label, title, 링크, 순서, CSS는 그대로. 같은 입력이면 출력이 바이트 단위로 같다. 표준 라이브러리만. 기존 주석과 docstring은 글자 그대로 둔다. 테스트와 plan/은 고치지 않는다. 체크는 적힌 명령 그대로 따로 돌린다.",
+  "closes": [
+    "Q-share",
+    "Q-build"
+  ],
+  "contract": {
+    "Q-share": "contract/Q-share-b66196a3.md",
+    "Q-build": "contract/Q-build-d923b6be.md"
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ]
+  ],
+  "tests": [
+    "tests/support.py tests/test_about.py tests/test_feed_layout.py tests/test_ids.py tests/test_images.py tests/test_linebreaks.py tests/test_readme.py tests/test_s1.py tests/test_s2.py tests/test_s3.py tests/test_shares.py tests/test_tags.py "
+  ],
+  "domain": "code",
+  "response": "./.chongdae/run-20260924-124901-6686/local/icon-build.response.json"
+}
