@@ -16,21 +16,42 @@
       "where": "R-05c2f196 tests/test_shares.py:ShareContractTests",
       "text": "stale because concept:share changed since it was confirmed",
       "source": "mangsang",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ 억셉하고 푸시하자'); 개별 지적은 소유자가 읽지 않았다 — 지적이 맞았다: 트집이 테스트 메서드 이름을 바꿔 첫 재확인이 실패했다; 후속 run(run-20260924-125801-e877)에서 세션이 diff를 읽고 재확인했다(impact 문제 0건)",
+        "by": null,
+        "finding_text": "stale because concept:share changed since it was confirmed",
+        "where": "R-05c2f196 tests/test_shares.py:ShareContractTests"
+      }
     },
     {
       "kind": "stale",
       "where": "R-12a51184 sitegen/pages.py:item_footer",
       "text": "stale because concept:share changed since it was confirmed",
       "source": "mangsang",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ 억셉하고 푸시하자'); 개별 지적은 소유자가 읽지 않았다 — 지적이 맞았다: 트집이 테스트 메서드 이름을 바꿔 첫 재확인이 실패했다; 후속 run(run-20260924-125801-e877)에서 세션이 diff를 읽고 재확인했다(impact 문제 0건)",
+        "by": null,
+        "finding_text": "stale because concept:share changed since it was confirmed",
+        "where": "R-12a51184 sitegen/pages.py:item_footer"
+      }
     },
     {
       "kind": "stale",
       "where": "R-c04f0fd0 sitegen/pages.py:feed_item",
       "text": "stale because concept:feed changed since it was confirmed",
       "source": "mangsang",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ 억셉하고 푸시하자'); 개별 지적은 소유자가 읽지 않았다 — 지적이 맞았다: 트집이 테스트 메서드 이름을 바꿔 첫 재확인이 실패했다; 후속 run(run-20260924-125801-e877)에서 세션이 diff를 읽고 재확인했다(impact 문제 0건)",
+        "by": null,
+        "finding_text": "stale because concept:feed changed since it was confirmed",
+        "where": "R-c04f0fd0 sitegen/pages.py:feed_item"
+      }
     },
     {
       "kind": "delegated",
@@ -64,19 +85,40 @@
       "kind": "non-claim",
       "where": "run-20260924-122715-ff15, run-20260924-124901-6686",
       "text": "no check decides this task  [x2]",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ 억셉하고 푸시하자'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언: session 태스크는 자동 체크 없이 세션의 말로 남는다; 세션이 mangsang impact·check로 확인했다",
+        "by": null,
+        "finding_text": "no check decides this task  [x2]",
+        "where": "run-20260924-122715-ff15, run-20260924-124901-6686"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-124901-6686",
       "text": "(provider) 브라우저에서 외부 SVG 심볼이 실제 렌더링되는 것까지는 체크하지 않았습니다.",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ 억셉하고 푸시하자'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언: 닥돌은 브라우저로 확인하지 않았다; 세션이 로컬 서버와 Chrome으로 X·Threads 아이콘이 그려지는 것을 확인했다(독립 검증은 아니다)",
+        "by": null,
+        "finding_text": "(provider) 브라우저에서 외부 SVG 심볼이 실제 렌더링되는 것까지는 체크하지 않았습니다.",
+        "where": "run-20260924-124901-6686"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260924-124901-6686",
       "text": "(provider) 기존 tests/, plan/, mangsang 변경은 수정하지 않았습니다.",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ 억셉하고 푸시하자'); 개별 지적은 소유자가 읽지 않았다 — 사실 확인: 닥돌은 트리에 있던 다른 변경을 건드리지 않았다",
+        "by": null,
+        "finding_text": "(provider) 기존 tests/, plan/, mangsang 변경은 수정하지 않았습니다.",
+        "where": "run-20260924-124901-6686"
+      }
     },
     {
       "kind": "unchanged",
