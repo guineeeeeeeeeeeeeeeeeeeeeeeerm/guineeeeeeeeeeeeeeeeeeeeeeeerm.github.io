@@ -1,0 +1,11 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.7.1",
+  "goal": "리팩터링: build.py 모듈 분리, CSS·JS 파일 분리, 테스트 도우미 공통화",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
