@@ -1,0 +1,119 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.7.1",
+  "status": "dropped",
+  "def": {
+    "id": "tests-support",
+    "role": "nitpick",
+    "brief": "Q-build의 리팩터링 결정 중 테스트 부분만: 테스트 파일마다 되풀이되는 도우미(BUILD 경로, temporary_site류의 임시 사이트 만들기, run_build, read 등 출력 읽기)를 tests/support.py 한 곳으로 모으고 각 테스트 파일이 그것을 import해 쓰게 한다. 테스트가 확인하는 계약(assert, 픽스처 내용, 테스트 이름과 클래스 이름)은 바꾸지 않는다 — mangsang 관계가 클래스 이름(S1GeneratorContractTests 등)에 걸려 있다. 파일마다 픽스처가 조금씩 다르면(about.md 기본값, 표 파일 쓰기 등) 공통 도우미에 인자로 받게 하되, 억지로 합치지 않는다. build.py와 sitegen/은 건드리지 않는다. 판정: python3 -m unittest discover -s tests 가 지금처럼 전부 통과.",
+    "closes": [
+      "Q-build"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/support.py",
+      "tests/test_about.py",
+      "tests/test_feed_layout.py",
+      "tests/test_ids.py",
+      "tests/test_images.py",
+      "tests/test_linebreaks.py",
+      "tests/test_readme.py",
+      "tests/test_s1.py",
+      "tests/test_s2.py",
+      "tests/test_s3.py",
+      "tests/test_shares.py",
+      "tests/test_tags.py"
+    ],
+    "gate": null,
+    "domain": "code"
+  },
+  "seq": 2,
+  "added": "2026-09-24T11:18:29+00:00",
+  "response": {
+    "status": "done",
+    "summary": "Added failing Q-build structural tests requiring tests/support.py and shared-helper imports. Full discovery exits 1 with 12 expected failures.",
+    "tests": [
+      "tests/test_s1.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-build",
+        "tests": [
+          "test_Q_build_repeated_test_helpers_live_in_tests_support",
+          "test_Q_build_each_contract_test_imports_support_instead_of_defining_helpers"
+        ]
+      }
+    ],
+    "non-claims": [
+      "\"리팩터링의 판정은 두 가지다: 모든 테스트가 통과하고, 저장소의 content/로 빌드한 docs/가 리팩터링 전과 바이트 단위로 같다.\" — byte-for-byte output parity is not newly tested."
+    ],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "tests/test_s1.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "teujip",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.3.0",
+        "chongdae": "1.7.1"
+      }
+    },
+    "trace": {
+      "changed": [
+        "update ./tests/test_s1.py"
+      ],
+      "commands-run": 8,
+      "commands-failed": 2
+    }
+  },
+  "non-claims": [
+    "(provider) \"리팩터링의 판정은 두 가지다: 모든 테스트가 통과하고, 저장소의 content/로 빌드한 docs/가 리팩터링 전과 바이트 단위로 같다.\" — byte-for-byte output parity is not newly tested.",
+    "dropped, not done: 잘못 맡김: 도우미를 옮기는 리팩터링을 트집(계약 테스트를 쓰는 역할)에게 보냈다. 트집은 역할대로 구조 테스트(QBuildTestSupportContractTests)를 test_s1.py에 더했을 뿐 옮긴 이가 없어 체크가 실패했다. 그 구조 테스트는 동작이 아니라 코드 배치를 묶어 두므로 버린다(test_s1.py 되돌림). 옮기는 일은 구현자 태스크 tests-support-2로 다시 넣는다."
+  ],
+  "dropped": {
+    "why": "잘못 맡김: 도우미를 옮기는 리팩터링을 트집(계약 테스트를 쓰는 역할)에게 보냈다. 트집은 역할대로 구조 테스트(QBuildTestSupportContractTests)를 test_s1.py에 더했을 뿐 옮긴 이가 없어 체크가 실패했다. 그 구조 테스트는 동작이 아니라 코드 배치를 묶어 두므로 버린다(test_s1.py 되돌림). 옮기는 일은 구현자 태스크 tests-support-2로 다시 넣는다.",
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "at": "2026-09-24T11:23:01+00:00",
+    "chongdae": "chongdae 1.7.1"
+  },
+  "touched": [
+    "tests/test_s1.py"
+  ]
+}
