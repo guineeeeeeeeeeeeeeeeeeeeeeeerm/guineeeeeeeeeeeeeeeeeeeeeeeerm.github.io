@@ -8,3 +8,6 @@
 *.last.txt
 *.schema.json
 sessions/
+*.response.json
+*.response.*.json
+local/

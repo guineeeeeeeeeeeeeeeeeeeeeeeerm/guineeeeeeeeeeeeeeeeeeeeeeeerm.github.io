@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.6.0",
+  "goal": "chongdae 1.6.0, hunsu 1.4.0, dwitbuk 1.2.0 반영; outside-runs와 dev-settings 선언",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
