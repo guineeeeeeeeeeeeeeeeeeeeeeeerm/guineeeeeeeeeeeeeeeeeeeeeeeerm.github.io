@@ -169,6 +169,13 @@
       "impact",
       "--target",
       "."
+    ],
+    "reviewer": [
+      "python3",
+      "{plugin:dwitbuk}/dwitbuk.py",
+      "review",
+      "--target",
+      "."
     ]
   },
   "roles-declared": {
@@ -254,6 +261,13 @@
       "python3",
       "{plugin:mangsang}/mangsang.py",
       "impact",
+      "--target",
+      "."
+    ],
+    "reviewer": [
+      "python3",
+      "{plugin:dwitbuk}/dwitbuk.py",
+      "review",
       "--target",
       "."
     ]

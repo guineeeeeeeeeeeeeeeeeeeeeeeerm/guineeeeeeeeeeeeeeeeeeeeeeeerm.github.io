@@ -118,6 +118,13 @@
       "impact",
       "--target",
       "."
+    ],
+    "reviewer": [
+      "python3",
+      "{plugin:dwitbuk}/dwitbuk.py",
+      "review",
+      "--target",
+      "."
     ]
   },
   "reporters": {
