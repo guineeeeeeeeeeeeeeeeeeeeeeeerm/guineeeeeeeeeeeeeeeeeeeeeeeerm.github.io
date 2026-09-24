@@ -1,0 +1,44 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.8.0",
+  "status": "done",
+  "def": {
+    "id": "relate-icons-2",
+    "role": "session",
+    "brief": "R-05c2f196(증거 갱신), R-12a51184, R-c04f0fd0 재확인",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-24T12:58:01+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [
+    "mangsang/relations/R-05c2f196.json",
+    "mangsang/relations/R-12a51184.json",
+    "mangsang/relations/R-c04f0fd0.json"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-281_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.8.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 1,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-24T12:58:01+00:00"
+    }
+  }
+}
