@@ -1,0 +1,46 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "status": "dropped",
+  "def": {
+    "id": "about-build",
+    "role": "session",
+    "brief": "tests/test_about.py로 Q-about을 계약으로 쓰고 build.py가 docs/about.html과 메뉴의 소개 링크를 만든다; README에 소개 페이지 절과 about 예시",
+    "closes": [
+      "Q-about",
+      "Q-readme"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    ],
+    "tests": [
+      "tests/test_about.py"
+    ],
+    "gate": null,
+    "domain": "site"
+  },
+  "seq": 2,
+  "added": "2026-09-24T04:20:14+00:00",
+  "start": {
+    "avatar/avatar.png": "e5f32b6d09574d3acf3f2ee3a3498ab6a3403f27",
+    "avatar/avatar_paint.png": "1e2dd4b700ee056c107846b98dd0a4b7a87b0c0e",
+    "avatar/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "avatar/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498"
+  },
+  "dropped": {
+    "why": "Registered with --tests on the same task that writes them: the contract's tests must come from their own task before the build takes its snapshot. Re-added as about-tests then about-build-2; no work was done under it.",
+    "by": "unknown",
+    "at": "2026-09-24T04:20:23+00:00"
+  },
+  "touched": [],
+  "non-claims": [
+    "dropped, not done: Registered with --tests on the same task that writes them: the contract's tests must come from their own task before the build takes its snapshot. Re-added as about-tests then about-build-2; no work was done under it."
+  ]
+}
