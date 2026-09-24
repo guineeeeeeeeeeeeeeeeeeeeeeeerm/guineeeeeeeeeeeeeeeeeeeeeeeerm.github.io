@@ -6,9 +6,9 @@
   "evidence": "새 글을 쓰는 법(파일 위치와 이름, 헤더의",
   "seen": {
     "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "0a5832b8bc5f",
-    "concept:post": "2c2c514859cc"
+    "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the folder-URL change (run-20260924-060910-91d7): every quoted sentence or symbol is still in its anchor, and the anchors changed only in output paths, link form (folders, no file names), the always-present 피드·소개 menu and the required content/about.md — none of which the related concept's meaning depends on. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
   }
 }

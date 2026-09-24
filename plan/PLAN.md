@@ -5,7 +5,8 @@ Python 생성기가 정적 HTML을 `docs/`에 만든다. GitHub Pages가 `docs/`
 개념이다: 아래 각 절은 개념 하나 이상의 투영이며, 첫 줄에 그 개념을 적는다.
 
 용어: **글 파일**은 `content/posts/<id>.md`, **링크 파일**은 `content/links/<id>.json`, **패치 파일**은
-`content/patches/<id>.json`이다. `<id>`는 영문 소문자·숫자·하이픈(`[a-z0-9-]+`)이다. **빌드**는 `python3 build.py`이다.
+`content/patches/<id>.json`이다. 글의 `<id>`는 작성 시각 `YYYYMMDD-HHMMSS`(UTC)이고(Q-post), 링크와 패치의 `<id>`는
+영문 소문자·숫자·하이픈(`[a-z0-9-]+`)이다. **빌드**는 `python3 build.py`이다.
 **본문**은 글 파일의 헤더 다음 텍스트이고, **적용된 본문**은 그 글의 패치를 모두 적용한 뒤의 본문이다.
 
 ## Q-build — 생성기와 출력
@@ -39,7 +40,7 @@ Concept: `post`, `post-type`, `tag`.
 
 글 파일은 헤더와 본문으로 이루어진다. 헤더는 파일 첫 줄부터 빈 줄 전까지의 `key: value` 줄들이다.
 
-- `written`: 작성 시각. `YYYY-MM-DDTHH:MM:SSZ` 형식의 UTC. 반드시 있다.
+- `written`: 작성 시각. `YYYY-MM-DDTHH:MM:SSZ` 형식의 UTC. 반드시 있고, 글의 `<id>`와 같은 시각이다.
 - `type`: `short`(짧은 글), `medium`(중간 글), `long`(긴 글) 중 하나. 반드시 있다. 유형은 쓰기 전에 고르는 것이며,
   빌드는 분량으로 유형을 판단하지 않는다.
 - `title`: 제목. `short`에서는 있으면 빌드 오류, `medium`과 `long`에서는 선택.
@@ -48,7 +49,12 @@ Concept: `post`, `post-type`, `tag`.
 Decided after quibble (s1-tests, technical, delegated): 키와 값의 앞뒤 공백은 무시하고, 키는 대소문자를 구분한다. 콜론이 없는
 헤더 줄과 같은 키가 두 번 나오는 헤더는 빌드 오류다.
 
-그 밖의 키, 형식이 틀린 `written`, 목록에 없는 `type`, 두 글이 같은 `<id>`(파일 이름)인 경우는 빌드 오류다. 이미지만 있는
+그 밖의 키, 형식이 틀린 `written`, 목록에 없는 `type`, 두 글이 같은 `<id>`(파일 이름)인 경우는 빌드 오류다.
+
+Decided (owner, `source:id-01`, `source:id-02`, `source:id-03`, `source:id-04`): 글의 `<id>`, 곧 글 파일의 이름은 작성 시각이다 —
+`YYYYMMDD-HHMMSS`(UTC, 예: `20260924-075921`). 제목은 늘 있는 것이 아니고 글에 붙은 메타데이터 중 하나일 뿐 정체성이 아니며, 글의
+정체성은 태그, 연결 관계, 수정 내역에 있어 파일 이름에 담을 수 없다. 관례가 아니라 빌드가 지킨다: `<id>`가 이 형식이 아니거나
+`written`과 다른 시각이면 빌드 오류이고, 오류 줄은 그 글 파일의 경로를 포함한다. 이미지만 있는
 글은 본문이 이미지 한 줄인 글이다.
 
 Decided (owner, `source:plan-11`): 본문이 빈 글은 빌드 오류다.
@@ -76,8 +82,8 @@ Decided (owner, `source:plan-11`): 글 페이지와 피드 항목에 유형 이�
 
 Concept: `feed`.
 
-`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형별로 나누지 않는다 — 항목마다 유형 이름이 붙는 것은 Q-post대로다. 같은
-시각이면 `<id>` 순). 짧은
+`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다(유형별로 나누지 않는다 — 항목마다 유형 이름이 붙는 것은 Q-post대로다. 글의 `<id>`가
+작성 시각이라 두 글의 시각이 같을 수 없다). 짧은
 글은 본문 전체를 보여주고, 중간·긴 글은 제목과 시각을 보여준다. Decided (owner, `source:plan-11`): 제목이 없는 중간·긴
 글은 제목 자리에 본문 첫 문단의 앞 80자(잘렸으면 `…`)를 보여준다. Decided after quibble (s1-tests, technical, delegated): 80자는 적용된 본문의 첫 문단을 HTML로 만든 뒤의 화면 글자(서식
 기호와 태그를 뺀 글자)에서 유니코드 문자 단위로 센다. 이미지만 있는 첫 문단은 이미지 설명(alt)을 글자로 쓴다. 모든 항목은

@@ -7,8 +7,10 @@
 
 ## 새 글 쓰기
 
-새 글은 `content/posts/<id>.md`로 저장합니다. `<id>`는 파일 확장자를 뺀 이름이며, 영문
-소문자와 숫자와 하이픈만 써야 합니다. 헤더와 본문 사이에는 빈 줄을 하나 둡니다.
+새 글은 `content/posts/<id>.md`로 저장합니다. `<id>`는 글을 쓴 시각(UTC)을 `YYYYMMDD-HHMMSS` 모양으로 쓴
+이름입니다. 예를 들어 2026년 9월 23일 14시 00분 00초(UTC)에 쓴 글은 `20260923-140000.md`이고, 헤더의 `written`도 같은
+시각이어야 합니다. 이름이 이 모양이 아니거나 `written`과 다르면 빌드 오류가 납니다. 제목은 이름에 넣지 않습니다.
+헤더와 본문 사이에는 빈 줄을 하나 둡니다.
 
 헤더에는 다음 네 필드를 씁니다.
 
@@ -21,7 +23,7 @@
 
 다음은 제목과 태그를 갖춘 중간 글의 완전한 예입니다.
 
-```post content/posts/hello.md
+```post content/posts/20260923-140000.md
 written: 2026-09-23T14:00:00Z
 type: medium
 title: 첫 번째 기록
@@ -47,7 +49,7 @@ tags: 시작, 기록
 
 제목이 없는 짧은 글은 아래처럼 쓸 수 있습니다.
 
-```post content/posts/target.md
+```post content/posts/20260923-140100.md
 written: 2026-09-23T14:01:00Z
 type: short
 
@@ -70,12 +72,12 @@ type: short
 
 다음은 사유를 한 번 바꾼, 아직 살아 있는 링크의 완전한 예입니다.
 
-```link content/links/hello-target.json
+```link content/links/first-link.json
 {
-  "id": "hello-target",
-  "from": "hello",
+  "id": "first-link",
+  "from": "20260923-140000",
   "anchor": "다른 글",
-  "to": "target",
+  "to": "20260923-140100",
   "events": [
     {
       "at": "2026-09-23T14:02:00Z",
@@ -104,12 +106,12 @@ type: short
 `text`를 반드시 씁니다. 패치는 `at`이 이른 것부터, 같은 시간이면 `id`의 글자순으로
 적용되므로 뒤의 패치가 앞 패치가 만든 글자를 anchor로 삼을 수 있습니다.
 
-다음은 `hello` 글의 `출발점`을 `안내점`으로 바꾸는 완전한 패치 예입니다.
+다음은 `20260923-140000` 글의 `출발점`을 `안내점`으로 바꾸는 완전한 패치 예입니다.
 
-```patch content/patches/hello-wording.json
+```patch content/patches/first-wording.json
 {
-  "id": "hello-wording",
-  "post": "hello",
+  "id": "first-wording",
+  "post": "20260923-140000",
   "at": "2026-09-23T14:04:00Z",
   "why": "표현을 더 분명하게 고침",
   "op": "replace",
@@ -164,8 +166,7 @@ python3 build.py
 ## 방문자에게 보이는 모습
 
 방문자가 처음 보는 `docs/index.html`에는 모든 글이 유형별로 나뉘지
-않고 작성 시각의 최신순으로 한 줄씩 나옵니다. 각 항목에는 유형 이름과 시각이 붙으며, 같은
-시각이면 `<id>` 순입니다. 짧은 글은 적용된 본문 전체를 보여주고, 중간 글과 긴 글은 제목과
+않고 작성 시각의 최신순으로 한 줄씩 나옵니다. 각 항목에는 유형 이름과 시각이 붙습니다. 짧은 글은 적용된 본문 전체를 보여주고, 중간 글과 긴 글은 제목과
 시각을 보여줍니다. 모든 항목은 해당 글 페이지로 가는 링크입니다.
 
 제목이 없는 중간 글이나 긴 글은 제목 대신 적용된 본문의 첫 문단을 HTML로 만든 뒤 화면에

@@ -3,12 +3,12 @@
   "src": "README.md#새 글 쓰기",
   "predicate": "realizes",
   "dst": "concept:post",
-  "evidence": "새 글은 `content/posts/<id>.md`로 저장합니다. `<id>`는 파일 확장자를 뺀 이름이며, 영문",
+  "evidence": "새 글은 `content/posts/<id>.md`로 저장합니다.",
   "seen": {
-    "README.md#새 글 쓰기": "2976128a3597",
-    "concept:post": "2c2c514859cc"
+    "README.md#새 글 쓰기": "b48e3e4f0976",
+    "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the line-break addition (run-20260924-074512-d1f6): the sections gained one rule about line breaks; each quoted sentence still stands and still projects its concept. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5): the README's new-post section now names the file for the moment it was written; it still teaches writing a post. Technical, delegated (plan-07)"
   }
 }

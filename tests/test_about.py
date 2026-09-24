@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "build.py"
 README = ROOT / "README.md"
 WRITTEN = "2024-02-03T04:05:06Z"
+ID = "20240203-040506"   # Q-post: a post's id is the moment it was written (WRITTEN)
 ORG = "https://github.com/example-org"
 
 ABOUT_EXAMPLE = re.compile(
@@ -98,9 +99,9 @@ class AboutPageContractTests(unittest.TestCase):
             self.assertEqual((root / "docs" / "images" / "avatar.png").read_bytes(), b"avatar")
 
     def test_the_about_page_looks_like_a_post_page(self):
-        with temporary_site({"about.md": "안녕하세요.\n", "posts/hello.md": post_text("글 하나")}) as root:
+        with temporary_site({"about.md": "안녕하세요.\n", f"posts/{ID}.md": post_text("글 하나")}) as root:
             self.assert_builds(root)
-            about, post = read(root, "about/index.html"), read(root, "p/hello/index.html")
+            about, post = read(root, "about/index.html"), read(root, f"p/{ID}/index.html")
             for page in (about, post):
                 self.assertRegex(page, r"<body>")   # no page-specific class: one look for every page
                 self.assertIn('<article class="post">', page)
@@ -112,7 +113,7 @@ class AboutPageContractTests(unittest.TestCase):
 
     def test_about_md_is_not_a_post(self):
         with temporary_site(
-            {"about.md": "소개 글\n", "posts/hello.md": post_text("글 하나")}
+            {"about.md": "소개 글\n", f"posts/{ID}.md": post_text("글 하나")}
         ) as root:
             self.assert_builds(root)
             self.assertFalse((root / "docs" / "p" / "about").exists())
@@ -122,12 +123,12 @@ class AboutPageContractTests(unittest.TestCase):
 
     def test_every_page_has_the_feed_and_about_menu_as_folder_links(self):
         with temporary_site(
-            {"about.md": "소개 글\n", "posts/hello.md": post_text("글 하나")}
+            {"about.md": "소개 글\n", f"posts/{ID}.md": post_text("글 하나")}
         ) as root:
             self.assert_builds(root)
             for page, feed, about in (
                 ("index.html", "./", "about/"),
-                ("p/hello/index.html", "../../", "../../about/"),
+                (f"p/{ID}/index.html", "../../", "../../about/"),
                 ("about/index.html", "../", "./"),
             ):
                 with self.subTest(page=page):
@@ -137,14 +138,14 @@ class AboutPageContractTests(unittest.TestCase):
                     self.assertNotIn(".html", header)
 
     def test_a_missing_about_md_is_a_build_error(self):
-        with temporary_site({"posts/hello.md": post_text("글 하나")}) as root:
+        with temporary_site({f"posts/{ID}.md": post_text("글 하나")}) as root:
             self.assert_fails_naming_about(root)
 
     def test_external_links_are_links_only_on_the_about_page(self):
         body = f"여기로 [가기]({ORG})\n"
-        with temporary_site({"about.md": "소개\n", "posts/hello.md": post_text(body)}) as root:
+        with temporary_site({"about.md": "소개\n", f"posts/{ID}.md": post_text(body)}) as root:
             self.assert_builds(root)
-            page = read(root, "p/hello/index.html")
+            page = read(root, f"p/{ID}/index.html")
             self.assertNotIn(f'href="{ORG}"', page)
             self.assertIn(f"[가기]({ORG})", page)
 

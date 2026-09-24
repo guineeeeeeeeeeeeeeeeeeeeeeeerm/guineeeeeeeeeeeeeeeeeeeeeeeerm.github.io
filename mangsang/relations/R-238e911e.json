@@ -5,10 +5,10 @@
   "dst": "concept:feed",
   "evidence": "`docs/index.html`은 모든 글을 작성 시각의 최신순으로 한 줄에 보여준다",
   "seen": {
-    "plan/PLAN.md#Q-feed — 첫 화면": "5f7b727ae953",
+    "plan/PLAN.md#Q-feed — 첫 화면": "6acc7b274a87",
     "concept:feed": "c0480deb3518"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read Q-post and Q-feed after the s1-tests quibble decisions (header parsing, the 80-character count, 'not split by type'); each section still realizes its concepts"
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
   }
 }

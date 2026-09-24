@@ -5,10 +5,10 @@
   "dst": "concept:about",
   "evidence": "def test_the_about_page_looks_like_a_post_page(self):",
   "seen": {
-    "tests/test_about.py:AboutPageContractTests": "99e3a69f6b1b",
+    "tests/test_about.py:AboutPageContractTests": "e36d879de0d5",
     "concept:about": "fda8469aebbf"
   },
   "confirmed": {
-    "delegated": "The revised about concept grounded in the owner's decision (about-09) and its test re-related under the renamed test, proposed by Claude (claude-opus-5-5) after about-look-build passed its checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
   }
 }

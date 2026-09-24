@@ -23,7 +23,6 @@ TYPE_NAMES = {
 }
 
 WRITTEN_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
-ID_RE = re.compile(r"[a-z0-9-]+")
 HEADING_RE = re.compile(r"^(#{1,3})[ \t]+(.*)$")
 IMAGE_RE = re.compile(r"!\[([^\]]*)\]\(([^)]*)\)")
 INLINE_RE = re.compile(
@@ -372,9 +371,14 @@ def parse_post(path: Path, content_root: Path) -> Post:
         fail(path)
 
     post_id = path.stem
-    if not post_id or not ID_RE.fullmatch(post_id):
-        fail(path)
+    if post_id != time_id(fields["written"]):
+        fail(path)   # a post's id is the moment it was written: YYYYMMDD-HHMMSS, the same instant as `written`
     return Post(path, post_id, fields, body)
+
+
+def time_id(written: str) -> str:
+    """`2026-09-24T07:59:21Z` -> `20260924-075921`: the id a post written then carries."""
+    return written[0:4] + written[5:7] + written[8:10] + "-" + written[11:13] + written[14:16] + written[17:19]
 
 
 def post_files(content_root: Path) -> list[Path]:

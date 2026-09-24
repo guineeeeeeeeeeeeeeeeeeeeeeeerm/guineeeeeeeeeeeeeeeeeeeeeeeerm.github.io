@@ -9,6 +9,7 @@ from pathlib import Path
 
 BUILD = Path(__file__).resolve().parents[1] / "build.py"
 WRITTEN = "2024-02-03T04:05:06Z"
+ID = "20240203-040506"   # Q-post: a post's id is the moment it was written (WRITTEN)
 
 
 def post_text(body, post_type="short", title=None):
@@ -51,33 +52,33 @@ class LineBreakContractTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, msg=f"stderr={result.stderr!r}")
 
     def test_a_line_break_inside_a_paragraph_is_a_line_break_on_the_page(self):
-        with temporary_site({"posts/two.md": post_text("첫 줄\n둘째 줄")}) as root:
+        with temporary_site({f"posts/{ID}.md": post_text("첫 줄\n둘째 줄")}) as root:
             self.assert_builds(root)
-            body = body_of(read(root, "p/two/index.html"))
+            body = body_of(read(root, f"p/{ID}/index.html"))
             self.assertRegex(body, r"<p>첫 줄<br>\s*둘째 줄</p>")
 
     def test_a_blank_line_still_separates_paragraphs(self):
-        with temporary_site({"posts/two.md": post_text("첫 문단\n\n둘째 문단")}) as root:
+        with temporary_site({f"posts/{ID}.md": post_text("첫 문단\n\n둘째 문단")}) as root:
             self.assert_builds(root)
-            body = body_of(read(root, "p/two/index.html"))
+            body = body_of(read(root, f"p/{ID}/index.html"))
             self.assertIn("<p>첫 문단</p>", body)
             self.assertIn("<p>둘째 문단</p>", body)
             self.assertNotIn("<br>", body)
 
     def test_a_line_break_inside_a_quote_is_a_line_break(self):
-        with temporary_site({"posts/q.md": post_text("> 인용 첫 줄\n> 인용 둘째 줄")}) as root:
+        with temporary_site({f"posts/{ID}.md": post_text("> 인용 첫 줄\n> 인용 둘째 줄")}) as root:
             self.assert_builds(root)
-            body = body_of(read(root, "p/q/index.html"))
+            body = body_of(read(root, f"p/{ID}/index.html"))
             self.assertRegex(body, r"<blockquote>인용 첫 줄<br>\s*인용 둘째 줄</blockquote>")
 
     def test_formatting_on_each_line_keeps_working(self):
-        with temporary_site({"posts/f.md": post_text("**굵게** 첫 줄\n*기울임* 둘째 줄")}) as root:
+        with temporary_site({f"posts/{ID}.md": post_text("**굵게** 첫 줄\n*기울임* 둘째 줄")}) as root:
             self.assert_builds(root)
-            body = body_of(read(root, "p/f/index.html"))
+            body = body_of(read(root, f"p/{ID}/index.html"))
             self.assertRegex(body, r"<strong>굵게</strong> 첫 줄<br>\s*<em>기울임</em> 둘째 줄")
 
     def test_the_feed_shows_a_short_posts_line_breaks_too(self):
-        with temporary_site({"posts/two.md": post_text("첫 줄\n둘째 줄")}) as root:
+        with temporary_site({f"posts/{ID}.md": post_text("첫 줄\n둘째 줄")}) as root:
             self.assert_builds(root)
             self.assertRegex(read(root, "index.html"), r"첫 줄<br>\s*둘째 줄")
 

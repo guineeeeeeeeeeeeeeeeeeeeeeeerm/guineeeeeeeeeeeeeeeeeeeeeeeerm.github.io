@@ -6,9 +6,9 @@
   "evidence": "사이트에 올리는 글 하나. 주로 글이고 가끔 이미지가 들어가며, 이미지만 있어도 된다.",
   "seen": {
     "source:plan-04": "77feace69b2b",
-    "concept:post": "2c2c514859cc"
+    "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
   }
 }

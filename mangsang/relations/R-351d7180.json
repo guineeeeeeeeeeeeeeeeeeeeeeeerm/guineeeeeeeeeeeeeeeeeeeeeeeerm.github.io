@@ -1,0 +1,14 @@
+{
+  "id": "R-351d7180",
+  "src": "source:id-02",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "제목은 글에 붙은 메타 데이터 중 하나지 정체성이 아니야. 정체성은 오히려 글에 붙은 태그와 연결 관계, 수정 내역 등에 들어가는데, 이는 파일이름에 적용이 어려워.",
+  "seen": {
+    "source:id-02": "2457ee95ba13",
+    "concept:post": "700e2db936c8"
+  },
+  "confirmed": {
+    "delegated": "The owner's id rule (id-01..03) grounded and projected in code and tests, proposed by Claude (claude-opus-5-5) after id-build passed its checks and the verifier; technical, delegated (plan-07)"
+  }
+}

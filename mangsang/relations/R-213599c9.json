@@ -6,9 +6,9 @@
   "evidence": "ㄱㄱㄱ",
   "seen": {
     "source:br-03": "028e086c5ad8",
-    "concept:post": "2c2c514859cc"
+    "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "The line-break rule grounded in the owner's question and approval (br-01, br-03) and projected in code and tests, proposed by Claude (claude-opus-5-5) after br-build passed its checks and the verifier; technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
   }
 }

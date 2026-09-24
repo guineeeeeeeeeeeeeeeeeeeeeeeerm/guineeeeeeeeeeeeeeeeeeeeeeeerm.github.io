@@ -6,9 +6,9 @@
   "evidence": "주로 글, 가끔 이미지가 올라갈 거고, 작성 시간(세계 표준시 기준)은 필수, 제목은 옵셔널, 태그도 옵셔널.",
   "seen": {
     "source:plan-01": "cd3ce4b8b9cc",
-    "concept:post": "2c2c514859cc"
+    "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
   }
 }

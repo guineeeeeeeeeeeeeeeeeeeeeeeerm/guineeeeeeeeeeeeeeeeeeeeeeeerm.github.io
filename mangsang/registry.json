@@ -25,5 +25,8 @@
   },
   {
     "path": "tests/test_linebreaks.py"
+  },
+  {
+    "path": "tests/test_ids.py"
   }
 ]

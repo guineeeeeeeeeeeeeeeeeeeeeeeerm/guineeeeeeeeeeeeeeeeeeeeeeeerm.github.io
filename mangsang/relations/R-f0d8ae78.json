@@ -5,10 +5,10 @@
   "dst": "concept:post",
   "evidence": "글 파일은 헤더와 본문으로 이루어진다.",
   "seen": {
-    "plan/PLAN.md#Q-post — 글 하나": "b4eda0397cab",
-    "concept:post": "2c2c514859cc"
+    "plan/PLAN.md#Q-post — 글 하나": "03a9a96590aa",
+    "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the line-break addition (run-20260924-074512-d1f6): the sections gained one rule about line breaks; each quoted sentence still stands and still projects its concept. Technical, delegated (plan-07)"
+    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
   }
 }
