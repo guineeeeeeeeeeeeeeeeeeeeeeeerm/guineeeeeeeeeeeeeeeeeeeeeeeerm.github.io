@@ -108,13 +108,14 @@ class AboutPageContractTests(unittest.TestCase):
         with temporary_site({f"posts/{ID}.md": post_text("글 하나")}, about=None) as root:
             self.assert_fails_naming_about(root)
 
-    def test_external_links_are_links_only_on_the_about_page(self):
+    def test_Q_post_external_links_are_links_on_about_and_post_pages(self):
         body = f"여기로 [가기]({ORG})\n"
-        with temporary_site({"about.md": "소개\n", f"posts/{ID}.md": post_text(body)}) as root:
+        with temporary_site({"about.md": body, f"posts/{ID}.md": post_text(body)}) as root:
             self.assert_builds(root)
-            page = read(root, f"p/{ID}/index.html")
-            self.assertNotIn(f'href="{ORG}"', page)
-            self.assertIn(f"[가기]({ORG})", page)
+            about = read(root, "about/index.html")
+            post = read(root, f"p/{ID}/index.html")
+            self.assertIn(f'<a href="{ORG}">가기</a>', about)
+            self.assertIn(f'<a href="{ORG}">가기</a>', post)
 
     def test_an_external_link_must_be_http_or_https(self):
         for address in ("javascript:alert(1)", "p/hello.html", "mailto:me@example.com", ""):
