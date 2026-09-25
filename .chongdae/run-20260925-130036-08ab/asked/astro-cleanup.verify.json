@@ -1,0 +1,40 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.10.0",
+  "stage": "verify",
+  "run": "run-20260925-130036-08ab",
+  "task": "astro-cleanup",
+  "role": "verifier",
+  "target": ".",
+  "goal": "Astro로 옮기고 모든 페이지에 같은 폭의 상단 메뉴 띠",
+  "brief": "조각 3/3: build.py·sitegen/ 삭제, hunsu.json engines에 node >=22 (hunsu 엔진으로 다시 잠금), 망상 관계: 옛 코드에 걸린 관계를 은퇴시키고 새 Astro 파일에 다시 건다, stale 재확인",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260925-130036-08ab/local/astro-cleanup.verify.response.json",
+  "touched": [
+    "build.py",
+    "sitegen/__init__.py",
+    "sitegen/markdown.py",
+    "sitegen/output.py",
+    "sitegen/pages.py",
+    "sitegen/patches.py",
+    "sitegen/records.py"
+  ],
+  "built": null
+}

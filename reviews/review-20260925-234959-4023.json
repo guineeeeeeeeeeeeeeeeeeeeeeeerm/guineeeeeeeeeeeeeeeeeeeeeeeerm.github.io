@@ -1,0 +1,611 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260925-234959-4023",
+  "since": "902aa96744f18489daaa5fb779f87c167e0c2894",
+  "head": "e5eb0c6c07ff9d508e612303df22c0685a0d5f81",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "self-performed",
+      "where": "run-20260925-130036-08ab/astro-cleanup",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): 파일 삭제·엔진 선언·망상 관계 정리는 이 세션의 몫",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260925-130036-08ab/astro-frame-2",
+      "text": "provider decisions passed by delegation: 기술 결정(파일 이동 방식)은 위임 범위(source:plan-06); 계획서 Q-build에 적음",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-frame-2 attempt 1: src/pages/index.astro; src/pages/about/index.astro; src/pages/p/[id]/index.astro; src/lib/site.ts",
+      "text": "plan-vs-code: 페이지별 피드·글·소개·태그 마크업을 Astro 템플릿이나 컴포넌트가 만들지 않고 src/lib/site.ts가 HTML 문자열로 생성한 뒤 set:html로 주입한다. 이는 이번 결정의 Astro 템플릿 구현 요구와 직접 충돌한다. — record: “이번에는 페이지 HTML을 Astro가 src/pages/·src/layouts/ 템플릿으로 실제로 만들어야 한다.” — tree: “src/pages/index.astro: <div class=\"frame\" set:html={renderFeed(site)}></div>; src/lib/site.ts: return `<article class=\"feed-item\">\\n<a class=\"item-link\" href=\"${root}p/${post.id}/\" aria-label=\"${escapeHtml(title || \"글 보기\")}\"></a>\\n${top}\\n${why}${itemFooter(post, shares, root)}\\n</article>`;”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/layouts/BaseLayout.astro",
+      "text": "plan-vs-code: BaseLayout.astro에는 .frame 본문 틀이 없고, 각 페이지가 개별적으로 이를 감싼다. — record: “BaseLayout.astro(상단 띠 <header class=\"site-header\"><nav class=\"site-nav\">…</nav></header>, 본문 틀 .frame)” — tree: “<Header feedHref={feedHref} aboutHref={aboutHref} />\n    <slot />”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/lib/site.ts:imageInfo",
+      "text": "plan-vs-code: |10000처럼 정수지만 허용 범위를 벗어난 너비가 오류가 아니라 alt 문자열로 처리되어 빌드된다. — record: “N은 1부터 9999까지의 정수이고 ... 설명 끝의 | 뒤가 정수가 아니면 설명의 일부로 본다.” — tree: “const match = /^(.*)\\|(\\d{1,4})$/.exec(alt);\nif (!match) return { alt };”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:58-60; src/lib/site.ts:696-700, 821-825",
+      "text": "plan-vs-code: src/lib/site.ts still constructs patch-region spans and link/superscript markup strings, contrary to the template requirement that these fragments be produced by Astro components/pages. — record: “src/lib/는 글과 기록 표를 읽고 계산한 데이터와 본문 마크다운의 HTML만 돌려주며 ... 패치 보기 같은 마크업을 문자열로 짓지 않는다.” — tree: “tokens.set(patchStart(index), `<span${attributes}>`); ... `<a href=\"...\">...</a><sup><a href=\"#fn-...\">[...]</a></sup>`”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:260-264; public/assets/time.js:36-40",
+      "text": "plan-vs-code: Hover history is created dynamically as plain text with the raw UTC timestamp; it is not a time element and is never localized by the earlier time-element pass. — record: “각 항목의 시각은 Q-time의 `<time>` 표기와 같은 규칙으로 독자 현지 시각이 된다.” — tree: “item.textContent = `${patch.op} — ${patch.at} — ${patch.why} — 이전 글자: ${patch.previous_text}`;”",
+      "source": "chongdae",
+      "layer": "objection"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260925-130036-08ab/astro-tests attempt 1",
+      "text": "retry after failed passed by delegation: codex가 'Selected model is at capacity'로 첫 턴도 못 함 — 일시적 용량 문제라 그대로 다시 보냄",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-05c2f196 tests/test_shares.py:ShareContractTests realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-08081f17 src/lib/site.ts realizes concept:patch",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-13649af8 source:about-07 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 폴더 방식 주소는 새 빌드에서도 그대로(Q-build)라 이 원문과 그 승인은 여전히 site-build의 근거",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-172c7b7c plan/PLAN.md#Q-post — 글 하나 realizes concept:post-type",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-1e78dde8 tests/test_frame.py realizes concept:site-build",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-255f6e70 plan/PLAN.md#Q-readme — 글쓴이의 안내서 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: Q-readme의 빌드 명령이 바뀌어 인용을 새 문장으로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-31bf2464 plan/PLAN.md#Q-build — 생성기와 출력 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: Q-build가 새 결정으로 다시 쓰여 인용을 새 문장으로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-336ec2d1 src/lib/site.ts realizes concept:record-table",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-3bff092e README.md#사이트 만들기 — 빌드 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: README 빌드 절의 명령이 바뀌어 인용을 새 명령으로",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-53fbd1a4 src/components/FeedItem.astro realizes concept:feed",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-5702c5c3 src/pages/about/index.astro realizes concept:about",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-5cd66501 src/pages/index.astro realizes concept:feed",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-635694d1 public/assets/time.js realizes concept:local-time",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6a9cbb87 plan/PLAN.md#Q-share — 공유 기록과 배지 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6d9bd2ce src/components/Footnotes.astro realizes concept:link",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-76dd9c6e src/lib/site.ts realizes concept:tag",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-78215438 src/components/PatchView.astro realizes concept:patch-view",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-808b04e4 source:about-08 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 폴더 방식 주소는 새 빌드에서도 그대로(Q-build)라 이 원문과 그 승인은 여전히 site-build의 근거",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-84c9fb21 src/components/TagCloud.astro realizes concept:tag",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8b52435a src/lib/site.ts realizes concept:link",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8bbfec2a plan/PLAN.md#Q-readme — 글쓴이의 안내서 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8d71106e src/components/IncomingLinks.astro realizes concept:link",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-92d1fb6e src/layouts/BaseLayout.astro realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-aa7d41f5 src/lib/site.ts realizes concept:post",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-c640c7ce src/layouts/BaseLayout.astro realizes concept:site-build",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d3f2cb80 tests/test_s1.py:S1GeneratorContractTests realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d3f87769 src/components/ShareBadges.astro realizes concept:share",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d606064c scripts/build.mjs realizes concept:site-build",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-e0a01bf2 src/lib/site.ts realizes concept:share",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f08b2d38 src/lib/site.ts realizes concept:post-type",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f0d8ae78 plan/PLAN.md#Q-post — 글 하나 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f128ed15 src/pages/tags/[tag]/index.astro realizes concept:tag",
+      "text": "re-confirmed by delegation: Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "agent-proposed",
+      "where": "concept:site-build",
+      "text": "1 declaration(s) stand on a person's approval of the agent's own proposal (approval-of), not on the person's words",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-125521-eb0d, run-20260925-130036-08ab",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "dropped, not done: 결과를 받지 않음: Astro를 쓰지 않고 옛 Python 생성기를 불렀고, 네트워크 없이 잠금 파일을 손으로 만듦 — 작업 트리를 되돌렸고 astro-frame-2로 다시 냄",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) links.jsonl·patches.jsonl 고급 기능은 이번 체크 범위에서 옮기지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) 테스트 파일과 package.json/package-lock.json은 수정하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) links.jsonl·patches.jsonl의 고급 링크/패치 기능은 이번 조각에서 구현하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) 추가로 실행한 test_external_links.py와 test_image_zoom.py에서는 기존 패치 기능 관련 테스트가 실패했으며, 이번 지정 checks의 범위에는 포함되지 않습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) tests와 package.json/package-lock.json은 수정하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) Q-link and Q-patch behavior were not covered by the requested checks.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) Tests and package dependency files were not modified.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) test_readme의 npm run build README 요구는 조각 3 범위라 README를 수정하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) 브라우저에서 실제 클릭·hover 동작은 테스트하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) 실제 브라우저에서 hover/click 동작은 실행하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "review-debt",
+      "where": "review-20260925-215651-75eb",
+      "source": "dwitbuk",
+      "layer": "observation",
+      "text": "previous review review-20260925-215651-75eb still has 14 undisposed objection(s), carried here"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 73,
+      "text": "73 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 73)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-211351-2d8f",
+      "seen-in": "review-20260924-211351-2d8f",
+      "count": 7,
+      "text": "7 observation(s) written in review-20260924-211351-2d8f and unchanged since (delegated 7)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-183155-0726",
+      "seen-in": "review-20260925-183155-0726",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260925-183155-0726 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-202344-fc6a",
+      "seen-in": "review-20260925-202344-fc6a",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260925-202344-fc6a and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-215046-27ec",
+      "seen-in": "review-20260925-215046-27ec",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260925-215046-27ec and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-123911-322a, run-20260925-125521-eb0d",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-215651-75eb): no check decides this task  [x2]",
+      "first-seen": "review-20260925-215651-75eb",
+      "carries": [
+        "non-claim",
+        "run-20260925-123911-322a, run-20260925-125521-eb0d",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-123911-322a",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-215046-27ec): (provider) \"글 페이지와 소개 페이지 본문의 그림을 누르면, 페이지를 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게",
+      "first-seen": "review-20260925-215046-27ec",
+      "carries": [
+        "non-claim",
+        "run-20260925-123911-322a",
+        "(provider) \"글 페이지와 소개 페이지 본문의 그림을 누르면, 페이지를 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게 보인다. 배경을 누르거나 Esc를 누르면 닫힌다.\" — 요청대로 JavaScript 화면 동작은 테스트하지 않음."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-123911-322a",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-215046-27ec): (provider) 브라우저에서 실제 클릭·Esc 상호작용은 자동화 테스트하지 않았습니다.",
+      "first-seen": "review-20260925-215046-27ec",
+      "carries": [
+        "non-claim",
+        "run-20260925-123911-322a",
+        "(provider) 브라우저에서 실제 클릭·Esc 상호작용은 자동화 테스트하지 않았습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "plugin chongdae",
+      "layer": "objection",
+      "text": "drift (first seen review-20260925-202344-fc6a): plugin chongdae: manifest 1.9.0, host 1.10.0",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "drift",
+        "plugin chongdae",
+        "plugin chongdae: manifest 1.9.0, host 1.10.0"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "plugin dwitbuk",
+      "layer": "objection",
+      "text": "drift (first seen review-20260925-202344-fc6a): plugin dwitbuk: manifest 1.5.0, host 1.6.0",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "drift",
+        "plugin dwitbuk",
+        "plugin dwitbuk: manifest 1.5.0, host 1.6.0"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "plugin hacheong",
+      "layer": "objection",
+      "text": "drift (first seen review-20260925-202344-fc6a): plugin hacheong: manifest 1.5.0, host 1.6.0",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "drift",
+        "plugin hacheong",
+        "plugin hacheong: manifest 1.5.0, host 1.6.0"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
+      "layer": "objection",
+      "text": "drift (first seen review-20260925-202344-fc6a): 2 situation(s) were judged about other text of their members (building a slice; ",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "drift",
+        "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
+        "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-123911-322a",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-215046-27ec): no check decides this task",
+      "first-seen": "review-20260925-215046-27ec",
+      "carries": [
+        "non-claim",
+        "run-20260925-123911-322a",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e/extlink-build attempt 1: sitegen/patches.py:159-161, sitegen/markdown.py:243-250, sitegen/patches.py:340-349",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-202344-fc6a): plan-vs-code: A delete patch inside a still-valid URL (for example, deleting `/q",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "verifier-reject",
+        "run-20260925-105441-2c2e/extlink-build attempt 1: sitegen/patches.py:159-161, sitegen/markdown.py:243-250, sitegen/patches.py:340-349",
+        "plan-vs-code: A delete patch inside a still-valid URL (for example, deleting `/qwerty` from `[글](https://example.com/qwerty)`) is skipped by patch_ranges, so it is allowed, but its zero-width markers are inserted before Markdown rendering and later replaced with HTML spans inside the href attribute. The resulting link is malformed instead of rendering the fully applied external link. — record: “패치(Q-patch)는 적용된 본문을 바꾸는 것이므로 바깥 링크를 넣거나 고치거나 지울 수 있다 — 바깥 링크는 패치가 모두 적용된 본문에서 해석된다. 끄면 표시가 사라지고 적용된 본문만 보인다.” — tree: “if isinstance(unit, DeletedUnit): unit_index += 1; continue; body, regions = patch_state.regions_and_marked_body(); rendered_blocks = [render_block(block, content_root, post_path, image_prefix, external_links=True) for block in blocks]; rendered_blocks = render_patched_blocks(rendered_blocks, patch_tokens); tokens[start] = f\"<span{attributes}>\"”"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-213718-646e): no check decides this task",
+      "first-seen": "review-20260925-213718-646e",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 브라우저에서 실제 클릭까지는 검증하지 않고 계약 테스트와 생성 HTML/CSS로 확인했습니다.",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "(provider) 브라우저에서 실제 클릭까지는 검증하지 않고 계약 테스트와 생성 HTML/CSS로 확인했습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 빌드 실행으로 docs 생성물이 갱신되었습니다.",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "(provider) 빌드 실행으로 docs 생성물이 갱신되었습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 브라우저에서 실제 클릭 동작은 검증하지 않았습니다.",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "(provider) 브라우저에서 실제 클릭 동작은 검증하지 않았습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-093306-3b60, run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): no check decides this task  [x2]",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-093306-3b60, run-20260925-105441-2c2e",
+        "no check decides this task"
+      ]
+    }
+  ]
+}

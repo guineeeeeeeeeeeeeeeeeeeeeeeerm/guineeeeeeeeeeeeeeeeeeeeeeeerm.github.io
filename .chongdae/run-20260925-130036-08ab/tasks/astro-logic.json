@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.10.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "astro-logic",
     "role": "implementer",
@@ -33,26 +33,10 @@
   "seq": 6,
   "added": "2026-09-25T13:59:31+00:00",
   "touched_by_provider": [
-    "docs/about/index.html",
     "docs/assets/time.js",
-    "docs/index.html",
-    "docs/p/20260924-075921/index.html",
-    "docs/p/20260924-085456/index.html",
-    "docs/p/20260925-103715/index.html",
     "public/assets/time.js",
-    "src/components/FeedItem.astro",
-    "src/components/Footnotes.astro",
-    "src/components/IncomingLinks.astro",
-    "src/components/InlineContent.astro",
-    "src/components/InlineNode.astro",
-    "src/components/ItemFooter.astro",
-    "src/components/MarkdownBlock.astro",
-    "src/components/MarkdownBody.astro",
-    "src/components/MarkdownLine.astro",
-    "src/components/PatchView.astro",
-    "src/components/ShareBadges.astro",
+    "src/components/PostBody.astro",
     "src/lib/site.ts",
-    "src/pages/about/index.astro",
     "src/pages/p/[id]/index.astro"
   ],
   "performed_by": {
@@ -84,35 +68,20 @@
     },
     "trace": {
       "changed": [
-        "delete ./src/lib/site.ts",
-        "add ./src/lib/site.ts",
-        "update ./src/components/FeedItem.astro",
-        "add ./src/components/Footnotes.astro",
-        "add ./src/components/IncomingLinks.astro",
-        "update ./src/components/ItemFooter.astro",
-        "add ./src/components/PatchView.astro",
-        "add ./src/components/ShareBadges.astro",
-        "update ./src/layouts/BaseLayout.astro",
-        "update ./src/pages/about/index.astro",
-        "add ./public/assets/patch.js",
-        "update ./src/pages/p/[id]/index.astro",
-        "delete ./src/components/InlineContent.astro",
-        "delete ./src/components/InlineNode.astro",
-        "delete ./src/components/MarkdownBlock.astro",
-        "delete ./src/components/MarkdownBody.astro",
-        "delete ./src/components/MarkdownLine.astro",
-        "update ./src/components/PatchView.astro",
         "update ./src/lib/site.ts",
-        "delete ./public/assets/patch.js",
+        "add ./src/components/PostBody.astro",
+        "update ./src/components/PostBody.astro",
+        "update ./src/pages/p/[id]/index.astro",
         "update ./public/assets/time.js"
       ],
-      "commands-run": 39,
-      "commands-failed": 6
+      "commands-run": 18,
+      "commands-failed": 1
     }
   },
   "non-claims": [
     "(provider) test_readme의 npm run build README 요구는 조각 3 범위라 README를 수정하지 않았습니다.",
-    "(provider) 브라우저에서 실제 클릭·hover 동작은 테스트하지 않았습니다."
+    "(provider) 브라우저에서 실제 클릭·hover 동작은 테스트하지 않았습니다.",
+    "(provider) 실제 브라우저에서 hover/click 동작은 실행하지 않았습니다."
   ],
   "verified_by": {
     "provider": "command",
@@ -141,8 +110,8 @@
     },
     "trace": {
       "changed": [],
-      "commands-run": 17,
-      "commands-failed": 2
+      "commands-run": 14,
+      "commands-failed": 1
     }
   },
   "attempts": [
@@ -243,5 +212,80 @@
         "why": "2 finding(s)"
       }
     }
+  ],
+  "response": {
+    "status": "done",
+    "summary": "Astro 본문 컴포넌트로 글 링크·위첨자와 패치 영역 마크업 생성을 이동하고, 동적 패치 이력의 시간을 `<time>`으로 현지화했습니다. 전체 테스트 122개와 빌드가 통과했습니다.",
+    "verified": [
+      {
+        "check": "npm run build",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "git diff --check",
+        "exit": 0
+      }
+    ],
+    "decisions": [],
+    "non-claims": [
+      "실제 브라우저에서 hover/click 동작은 실행하지 않았습니다."
+    ],
+    "disputed-tests": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "dakdol",
+    "domain": "code"
+  },
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "touched": [
+    "README.md",
+    "docs/about/index.html",
+    "docs/assets/time.js",
+    "docs/index.html",
+    "docs/p/20260924-075921/index.html",
+    "docs/p/20260924-085456/index.html",
+    "docs/p/20260925-103715/index.html",
+    "public/assets/time.js",
+    "src/components/FeedItem.astro",
+    "src/components/Footnotes.astro",
+    "src/components/IncomingLinks.astro",
+    "src/components/InlineContent.astro",
+    "src/components/InlineNode.astro",
+    "src/components/ItemFooter.astro",
+    "src/components/MarkdownBlock.astro",
+    "src/components/MarkdownBody.astro",
+    "src/components/MarkdownLine.astro",
+    "src/components/PatchView.astro",
+    "src/components/PostBody.astro",
+    "src/components/ShareBadges.astro",
+    "src/lib/site.ts",
+    "src/pages/about/index.astro",
+    "src/pages/p/[id]/index.astro"
   ]
 }
