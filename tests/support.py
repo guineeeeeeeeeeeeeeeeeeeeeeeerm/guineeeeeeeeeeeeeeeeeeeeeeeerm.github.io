@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BUILD = ROOT / "build.py"
+BUILD = ROOT / "scripts" / "build.mjs"
 DEFAULT_WRITTEN = "2024-02-03T04:05:06Z"
 
 
@@ -18,7 +18,7 @@ def pid(written=DEFAULT_WRITTEN):
 
 def run_build(root):
     return subprocess.run(
-        [sys.executable, str(BUILD)], cwd=root, capture_output=True, text=True
+        ["node", str(BUILD)], cwd=root, capture_output=True, text=True
     )
 
 

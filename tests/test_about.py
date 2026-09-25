@@ -22,7 +22,10 @@ def post_text(body="본문", post_type="short", title=None):
 
 
 def menu(document):
-    match = re.search(r"(?s)<header>(.*?)</header>", document)
+    match = re.search(
+        r'(?s)<header class="site-header">\s*<nav class="site-nav">(.*?)</nav>\s*</header>',
+        document,
+    )
     return match.group(1) if match else ""
 
 

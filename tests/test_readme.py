@@ -93,7 +93,7 @@ class QReadmeContractTests(unittest.TestCase):
             with self.subTest(patch_operation=operation):
                 self.assertIn(operation, patch)
 
-        for required in ("python3 build.py", "docs/", "stderr", "파일 경로", "한 줄"):
+        for required in ("npm run build", "docs/", "stderr", "파일 경로", "한 줄"):
             with self.subTest(build_instruction=required):
                 self.assertIn(required, build)
 

@@ -104,7 +104,7 @@ class ImageZoomContractTests(unittest.TestCase):
     def test_Q_post_build_copies_zoom_asset_byte_for_byte(self):
         with temporary_site({f"posts/{ID}.md": post_text("본문")}) as root:
             self.assert_builds(root)
-            source = ROOT / "sitegen" / "assets" / "zoom.js"
+            source = ROOT / "public" / "assets" / "zoom.js"
             built = root / "docs" / "assets" / "zoom.js"
             self.assertTrue(source.is_file(), msg=f"missing source asset: {source}")
             self.assertTrue(built.is_file(), msg=f"missing built asset: {built}")

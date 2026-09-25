@@ -172,7 +172,7 @@ class ShareContractTests(unittest.TestCase):
     def test_Q_share_Q_build_icons_svg_defines_each_known_share_symbol_once(self):
         with temporary_site(posts=SHARE_POSTS, shares={"on-x": share()}) as root:
             self.assert_builds(root)
-            source_dir = Path(__file__).resolve().parents[1] / "sitegen" / "assets" / "brands"
+            source_dir = Path(__file__).resolve().parents[1] / "public" / "assets" / "brands"
             output_dir = root / "docs" / "assets" / "brands"
             for filename in BRAND_FILES.values():
                 source = source_dir / filename
