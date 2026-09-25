@@ -1,6 +1,6 @@
 {
   "artifact-type": "hunsu/judgments@1",
-  "skills-fingerprint": "7553781569c2",
+  "skills-fingerprint": "2f89da3e4dfe",
   "skills": [
     "chongdae:run",
     "dwitbuk:review",
@@ -26,36 +26,6 @@
       ],
       "members-fingerprint": "a8d9108184bb",
       "members-text-fingerprint": "df738c23ae78",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [],
-      "findings-fingerprint": "4f53cda18c2b"
-    },
-    {
-      "situation": "disputing a contract",
-      "members": [
-        "hacheong:quibble"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "8c8b50e2bdfc",
-      "members-text-fingerprint": "4f836a6e50ab",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [],
-      "findings-fingerprint": "4f53cda18c2b"
-    },
-    {
-      "situation": "trying the product as a newcomer",
-      "members": [
-        "hacheong:newbie"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "7f7908d9c75a",
-      "members-text-fingerprint": "ac2e8c28b04d",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"
@@ -95,16 +65,49 @@
       "findings-fingerprint": "6237d7d16752"
     },
     {
+      "situation": "disputing a contract",
+      "members": [
+        "hacheong:quibble"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:dwitbuk",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "af12523c134e",
+      "members-text-fingerprint": "7fea7e63f15b",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "trying the product as a newcomer",
+      "members": [
+        "hacheong:newbie"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:dwitbuk",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "058fd546370d",
+      "members-text-fingerprint": "1ade9debd1ba",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
       "situation": "writing tests for a slice",
       "members": [
         "hacheong:nitpick"
       ],
       "modes": [
         "plugin:chongdae",
+        "plugin:dwitbuk",
         "plugin:hunsu"
       ],
-      "members-fingerprint": "12e8666adb0d",
-      "members-text-fingerprint": "3b92ebe2c312",
+      "members-fingerprint": "e6e543ea2885",
+      "members-text-fingerprint": "6c9b8bc73ce6",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"
@@ -120,8 +123,8 @@
         "plugin:dwitbuk",
         "plugin:hunsu"
       ],
-      "members-fingerprint": "3f7648f5e7f4",
-      "members-text-fingerprint": "b87d7821135d",
+      "members-fingerprint": "00cf910d333b",
+      "members-text-fingerprint": "dbe10eeabd2d",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"
@@ -136,8 +139,8 @@
         "plugin:dwitbuk",
         "plugin:hunsu"
       ],
-      "members-fingerprint": "4bb9d0d39285",
-      "members-text-fingerprint": "d7fccedb833f",
+      "members-fingerprint": "356ad608668b",
+      "members-text-fingerprint": "999d7142393a",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"
@@ -152,8 +155,8 @@
         "plugin:dwitbuk",
         "plugin:hunsu"
       ],
-      "members-fingerprint": "2a6ffed16b8e",
-      "members-text-fingerprint": "e2577a2f0350",
+      "members-fingerprint": "12acb74bc782",
+      "members-text-fingerprint": "7f952bca042d",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"
@@ -168,8 +171,8 @@
         "plugin:dwitbuk",
         "plugin:hunsu"
       ],
-      "members-fingerprint": "33a8a91ef3aa",
-      "members-text-fingerprint": "0921c9d03554",
+      "members-fingerprint": "b131f22910c4",
+      "members-text-fingerprint": "fed1bdc37119",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"

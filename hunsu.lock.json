@@ -8,34 +8,34 @@
   },
   "plugins": {
     "hunsu": {
-      "version": "1.5.0",
+      "version": "1.6.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hunsu",
       "marketplace": "hunsu",
-      "fingerprint": "f3fea2d0a199"
+      "fingerprint": "136bef4a1035"
     },
     "chongdae": {
-      "version": "1.10.0",
+      "version": "1.11.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/chongdae",
       "marketplace": "chongdae",
-      "fingerprint": "f523f00461ac"
+      "fingerprint": "342fdc66ce65"
     },
     "mangsang": {
-      "version": "1.9.0",
+      "version": "1.10.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/mangsang",
       "marketplace": "mangsang",
-      "fingerprint": "ae72ee081d63"
+      "fingerprint": "af9fb5d42319"
     },
     "dwitbuk": {
-      "version": "1.6.0",
+      "version": "1.7.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/dwitbuk",
       "marketplace": "dwitbuk",
-      "fingerprint": "8169e1c83b73"
+      "fingerprint": "4cb493c9fc59"
     },
     "hacheong": {
-      "version": "1.6.0",
+      "version": "1.7.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hacheong",
       "marketplace": "hacheong",
-      "fingerprint": "f25d5d40a7b1"
+      "fingerprint": "abd1106700a5"
     }
   },
   "skills": [
@@ -46,7 +46,7 @@
     "mangsang:operate"
   ],
   "denied": [],
-  "skills-fingerprint": "7553781569c2",
+  "skills-fingerprint": "2f89da3e4dfe",
   "hooks": [
     {
       "event": "SessionStart",
