@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.10.0",
+  "goal": "그림을 누르면 원본을 크게",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
