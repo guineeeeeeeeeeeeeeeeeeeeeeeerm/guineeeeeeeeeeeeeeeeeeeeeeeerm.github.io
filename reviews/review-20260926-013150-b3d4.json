@@ -1,0 +1,450 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260926-013150-b3d4",
+  "since": "e5eb0c6c07ff9d508e612303df22c0685a0d5f81",
+  "head": "b9a8104a00f603ca6437da97cc17bb571fe61c27",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-frame-2 attempt 1: src/pages/index.astro; src/pages/about/index.astro; src/pages/p/[id]/index.astro; src/lib/site.ts",
+      "text": "plan-vs-code: 페이지별 피드·글·소개·태그 마크업을 Astro 템플릿이나 컴포넌트가 만들지 않고 src/lib/site.ts가 HTML 문자열로 생성한 뒤 set:html로 주입한다. 이는 이번 결정의 Astro 템플릿 구현 요구와 직접 충돌한다. — record: “이번에는 페이지 HTML을 Astro가 src/pages/·src/layouts/ 템플릿으로 실제로 만들어야 한다.” — tree: “src/pages/index.astro: <div class=\"frame\" set:html={renderFeed(site)}></div>; src/lib/site.ts: return `<article class=\"feed-item\">\\n<a class=\"item-link\" href=\"${root}p/${post.id}/\" aria-label=\"${escapeHtml(title || \"글 보기\")}\"></a>\\n${top}\\n${why}${itemFooter(post, shares, root)}\\n</article>`;” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/layouts/BaseLayout.astro",
+      "text": "plan-vs-code: BaseLayout.astro에는 .frame 본문 틀이 없고, 각 페이지가 개별적으로 이를 감싼다. — record: “BaseLayout.astro(상단 띠 <header class=\"site-header\"><nav class=\"site-nav\">…</nav></header>, 본문 틀 .frame)” — tree: “<Header feedHref={feedHref} aboutHref={aboutHref} />\n    <slot />” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/lib/site.ts:imageInfo",
+      "text": "plan-vs-code: |10000처럼 정수지만 허용 범위를 벗어난 너비가 오류가 아니라 alt 문자열로 처리되어 빌드된다. — record: “N은 1부터 9999까지의 정수이고 ... 설명 끝의 | 뒤가 정수가 아니면 설명의 일부로 본다.” — tree: “const match = /^(.*)\\|(\\d{1,4})$/.exec(alt);\nif (!match) return { alt };” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:58-60; src/lib/site.ts:696-700, 821-825",
+      "text": "plan-vs-code: src/lib/site.ts still constructs patch-region spans and link/superscript markup strings, contrary to the template requirement that these fragments be produced by Astro components/pages. — record: “src/lib/는 글과 기록 표를 읽고 계산한 데이터와 본문 마크다운의 HTML만 돌려주며 ... 패치 보기 같은 마크업을 문자열로 짓지 않는다.” — tree: “tokens.set(patchStart(index), `<span${attributes}>`); ... `<a href=\"...\">...</a><sup><a href=\"#fn-...\">[...]</a></sup>`” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:260-264; public/assets/time.js:36-40",
+      "text": "plan-vs-code: Hover history is created dynamically as plain text with the raw UTC timestamp; it is not a time element and is never localized by the earlier time-element pass. — record: “각 항목의 시각은 Q-time의 `<time>` 표기와 같은 규칙으로 독자 현지 시각이 된다.” — tree: “item.textContent = `${patch.op} — ${patch.at} — ${patch.why} — 이전 글자: ${patch.previous_text}`;” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab, run-20260925-162941-d917",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "dropped, not done: 결과를 받지 않음: Astro를 쓰지 않고 옛 Python 생성기를 불렀고, 네트워크 없이 잠금 파일을 손으로 만듦 — 작업 트리를 되돌렸고 astro-frame-2로 다시 냄",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) links.jsonl·patches.jsonl 고급 기능은 이번 체크 범위에서 옮기지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) 테스트 파일과 package.json/package-lock.json은 수정하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) links.jsonl·patches.jsonl의 고급 링크/패치 기능은 이번 조각에서 구현하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) 추가로 실행한 test_external_links.py와 test_image_zoom.py에서는 기존 패치 기능 관련 테스트가 실패했으며, 이번 지정 checks의 범위에는 포함되지 않습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) tests와 package.json/package-lock.json은 수정하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) Q-link and Q-patch behavior were not covered by the requested checks.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) Tests and package dependency files were not modified.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) test_readme의 npm run build README 요구는 조각 3 범위라 README를 수정하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) 브라우저에서 실제 클릭·hover 동작은 테스트하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-130036-08ab",
+      "text": "(provider) 실제 브라우저에서 hover/click 동작은 실행하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260925-234959-4023"
+    },
+    {
+      "kind": "review-debt",
+      "where": "review-20260925-234959-4023",
+      "source": "dwitbuk",
+      "layer": "observation",
+      "text": "previous review review-20260925-234959-4023 still has 31 undisposed objection(s), carried here"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 73,
+      "text": "73 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 73)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-211351-2d8f",
+      "seen-in": "review-20260924-211351-2d8f",
+      "count": 7,
+      "text": "7 observation(s) written in review-20260924-211351-2d8f and unchanged since (delegated 7)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-183155-0726",
+      "seen-in": "review-20260925-183155-0726",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260925-183155-0726 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-202344-fc6a",
+      "seen-in": "review-20260925-202344-fc6a",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260925-202344-fc6a and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-215046-27ec",
+      "seen-in": "review-20260925-215046-27ec",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260925-215046-27ec and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-234959-4023",
+      "seen-in": "review-20260925-234959-4023",
+      "count": 36,
+      "text": "36 observation(s) written in review-20260925-234959-4023 and unchanged since (agent-proposed 1, delegated 34, self-performed 1)"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-130036-08ab/astro-frame-2 attempt 1: src/pages/index.astro; src/pages/about/index.astro; src/pages/p/[id]/index.astro; src/lib/site.ts",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: 페이지별 피드·글·소개·태그 마크업을 Astro 템플릿이나 컴포넌트가 만들지 않고 src/lib/site.ts가 HTM",
+      "first-seen": "review-20260925-234959-4023",
+      "carries": [
+        "verifier-reject",
+        "run-20260925-130036-08ab/astro-frame-2 attempt 1: src/pages/index.astro; src/pages/about/index.astro; src/pages/p/[id]/index.astro; src/lib/site.ts",
+        "plan-vs-code: 페이지별 피드·글·소개·태그 마크업을 Astro 템플릿이나 컴포넌트가 만들지 않고 src/lib/site.ts가 HTML 문자열로 생성한 뒤 set:html로 주입한다. 이는 이번 결정의 Astro 템플릿 구현 요구와 직접 충돌한다. — record: “이번에는 페이지 HTML을 Astro가 src/pages/·src/layouts/ 템플릿으로 실제로 만들어야 한다.” — tree: “src/pages/index.astro: <div class=\"frame\" set:html={renderFeed(site)}></div>; src/lib/site.ts: return `<article class=\"feed-item\">\\n<a class=\"item-link\" href=\"${root}p/${post.id}/\" aria-label=\"${escapeHtml(title || \"글 보기\")}\"></a>\\n${top}\\n${why}${itemFooter(post, shares, root)}\\n</article>`;”"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/layouts/BaseLayout.astro",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: BaseLayout.astro에는 .frame 본문 틀이 없고, 각 페이지가 개별적으로 이를 감싼다. — record:",
+      "first-seen": "review-20260925-234959-4023",
+      "carries": [
+        "verifier-reject",
+        "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/layouts/BaseLayout.astro",
+        "plan-vs-code: BaseLayout.astro에는 .frame 본문 틀이 없고, 각 페이지가 개별적으로 이를 감싼다. — record: “BaseLayout.astro(상단 띠 <header class=\"site-header\"><nav class=\"site-nav\">…</nav></header>, 본문 틀 .frame)” — tree: “<Header feedHref={feedHref} aboutHref={aboutHref} />\n    <slot />”"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/lib/site.ts:imageInfo",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: |10000처럼 정수지만 허용 범위를 벗어난 너비가 오류가 아니라 alt 문자열로 처리되어 빌드된다. — record:",
+      "first-seen": "review-20260925-234959-4023",
+      "carries": [
+        "verifier-reject",
+        "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/lib/site.ts:imageInfo",
+        "plan-vs-code: |10000처럼 정수지만 허용 범위를 벗어난 너비가 오류가 아니라 alt 문자열로 처리되어 빌드된다. — record: “N은 1부터 9999까지의 정수이고 ... 설명 끝의 | 뒤가 정수가 아니면 설명의 일부로 본다.” — tree: “const match = /^(.*)\\|(\\d{1,4})$/.exec(alt);\nif (!match) return { alt };”"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:58-60; src/lib/site.ts:696-700, 821-825",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: src/lib/site.ts still constructs patch-region spans and link/super",
+      "first-seen": "review-20260925-234959-4023",
+      "carries": [
+        "verifier-reject",
+        "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:58-60; src/lib/site.ts:696-700, 821-825",
+        "plan-vs-code: src/lib/site.ts still constructs patch-region spans and link/superscript markup strings, contrary to the template requirement that these fragments be produced by Astro components/pages. — record: “src/lib/는 글과 기록 표를 읽고 계산한 데이터와 본문 마크다운의 HTML만 돌려주며 ... 패치 보기 같은 마크업을 문자열로 짓지 않는다.” — tree: “tokens.set(patchStart(index), `<span${attributes}>`); ... `<a href=\"...\">...</a><sup><a href=\"#fn-...\">[...]</a></sup>`”"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:260-264; public/assets/time.js:36-40",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: Hover history is created dynamically as plain text with the raw UT",
+      "first-seen": "review-20260925-234959-4023",
+      "carries": [
+        "verifier-reject",
+        "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:260-264; public/assets/time.js:36-40",
+        "plan-vs-code: Hover history is created dynamically as plain text with the raw UTC timestamp; it is not a time element and is never localized by the earlier time-element pass. — record: “각 항목의 시각은 Q-time의 `<time>` 표기와 같은 규칙으로 독자 현지 시각이 된다.” — tree: “item.textContent = `${patch.op} — ${patch.at} — ${patch.why} — 이전 글자: ${patch.previous_text}`;”"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-125521-eb0d, run-20260925-130036-08ab",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-234959-4023): no check decides this task  [x2]",
+      "first-seen": "review-20260925-234959-4023",
+      "carries": [
+        "non-claim",
+        "run-20260925-125521-eb0d, run-20260925-130036-08ab",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-123911-322a, run-20260925-125521-eb0d",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-215651-75eb): no check decides this task  [x2]",
+      "first-seen": "review-20260925-215651-75eb",
+      "carries": [
+        "non-claim",
+        "run-20260925-123911-322a, run-20260925-125521-eb0d",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-123911-322a",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-215046-27ec): (provider) \"글 페이지와 소개 페이지 본문의 그림을 누르면, 페이지를 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게",
+      "first-seen": "review-20260925-215046-27ec",
+      "carries": [
+        "non-claim",
+        "run-20260925-123911-322a",
+        "(provider) \"글 페이지와 소개 페이지 본문의 그림을 누르면, 페이지를 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게 보인다. 배경을 누르거나 Esc를 누르면 닫힌다.\" — 요청대로 JavaScript 화면 동작은 테스트하지 않음."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-123911-322a",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-215046-27ec): (provider) 브라우저에서 실제 클릭·Esc 상호작용은 자동화 테스트하지 않았습니다.",
+      "first-seen": "review-20260925-215046-27ec",
+      "carries": [
+        "non-claim",
+        "run-20260925-123911-322a",
+        "(provider) 브라우저에서 실제 클릭·Esc 상호작용은 자동화 테스트하지 않았습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "plugin chongdae",
+      "layer": "objection",
+      "text": "drift (first seen review-20260925-202344-fc6a): plugin chongdae: manifest 1.9.0, host 1.10.0",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "drift",
+        "plugin chongdae",
+        "plugin chongdae: manifest 1.9.0, host 1.10.0"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "plugin dwitbuk",
+      "layer": "objection",
+      "text": "drift (first seen review-20260925-202344-fc6a): plugin dwitbuk: manifest 1.5.0, host 1.6.0",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "drift",
+        "plugin dwitbuk",
+        "plugin dwitbuk: manifest 1.5.0, host 1.6.0"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "plugin hacheong",
+      "layer": "objection",
+      "text": "drift (first seen review-20260925-202344-fc6a): plugin hacheong: manifest 1.5.0, host 1.6.0",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "drift",
+        "plugin hacheong",
+        "plugin hacheong: manifest 1.5.0, host 1.6.0"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
+      "layer": "objection",
+      "text": "drift (first seen review-20260925-202344-fc6a): 2 situation(s) were judged about other text of their members (building a slice; ",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "drift",
+        "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
+        "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-123911-322a",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-215046-27ec): no check decides this task",
+      "first-seen": "review-20260925-215046-27ec",
+      "carries": [
+        "non-claim",
+        "run-20260925-123911-322a",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e/extlink-build attempt 1: sitegen/patches.py:159-161, sitegen/markdown.py:243-250, sitegen/patches.py:340-349",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-202344-fc6a): plan-vs-code: A delete patch inside a still-valid URL (for example, deleting `/q",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "verifier-reject",
+        "run-20260925-105441-2c2e/extlink-build attempt 1: sitegen/patches.py:159-161, sitegen/markdown.py:243-250, sitegen/patches.py:340-349",
+        "plan-vs-code: A delete patch inside a still-valid URL (for example, deleting `/qwerty` from `[글](https://example.com/qwerty)`) is skipped by patch_ranges, so it is allowed, but its zero-width markers are inserted before Markdown rendering and later replaced with HTML spans inside the href attribute. The resulting link is malformed instead of rendering the fully applied external link. — record: “패치(Q-patch)는 적용된 본문을 바꾸는 것이므로 바깥 링크를 넣거나 고치거나 지울 수 있다 — 바깥 링크는 패치가 모두 적용된 본문에서 해석된다. 끄면 표시가 사라지고 적용된 본문만 보인다.” — tree: “if isinstance(unit, DeletedUnit): unit_index += 1; continue; body, regions = patch_state.regions_and_marked_body(); rendered_blocks = [render_block(block, content_root, post_path, image_prefix, external_links=True) for block in blocks]; rendered_blocks = render_patched_blocks(rendered_blocks, patch_tokens); tokens[start] = f\"<span{attributes}>\"”"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-213718-646e): no check decides this task",
+      "first-seen": "review-20260925-213718-646e",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 브라우저에서 실제 클릭까지는 검증하지 않고 계약 테스트와 생성 HTML/CSS로 확인했습니다.",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "(provider) 브라우저에서 실제 클릭까지는 검증하지 않고 계약 테스트와 생성 HTML/CSS로 확인했습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 빌드 실행으로 docs 생성물이 갱신되었습니다.",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "(provider) 빌드 실행으로 docs 생성물이 갱신되었습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 브라우저에서 실제 클릭 동작은 검증하지 않았습니다.",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "(provider) 브라우저에서 실제 클릭 동작은 검증하지 않았습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-093306-3b60, run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): no check decides this task  [x2]",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-093306-3b60, run-20260925-105441-2c2e",
+        "no check decides this task"
+      ]
+    }
+  ]
+}
