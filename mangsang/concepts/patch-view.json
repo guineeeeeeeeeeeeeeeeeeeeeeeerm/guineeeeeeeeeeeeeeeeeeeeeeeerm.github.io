@@ -3,5 +3,6 @@
   "means": "글 화면의 show patches 토글을 켜면 패치된 영역에 아웃라인이 보이고, 그 영역에 마우스를 올리면 패치 히스토리가 보인다.",
   "declared": {
     "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
-  }
+  },
+  "written_by": "mangsang 1.9.0"
 }

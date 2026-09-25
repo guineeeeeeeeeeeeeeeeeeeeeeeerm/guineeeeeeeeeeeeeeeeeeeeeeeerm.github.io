@@ -13,5 +13,6 @@
   },
   "retired": {
     "why": "the test that quoted the old look was renamed and rewritten (test_the_about_page_looks_like_a_post_page); re-proposed under the new quote"
-  }
+  },
+  "written_by": "mangsang 1.9.0"
 }

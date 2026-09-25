@@ -13,5 +13,6 @@
   },
   "retired": {
     "why": "parse_share (one file per share) is gone: the share table is read by parse_shares; re-proposed there"
-  }
+  },
+  "written_by": "mangsang 1.9.0"
 }

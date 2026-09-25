@@ -13,5 +13,6 @@
   },
   "retired": {
     "why": "the header-tags test became 'a tags header is a build error' (source:tg-01); tags are projected in tests/test_tags.py now"
-  }
+  },
+  "written_by": "mangsang 1.9.0"
 }

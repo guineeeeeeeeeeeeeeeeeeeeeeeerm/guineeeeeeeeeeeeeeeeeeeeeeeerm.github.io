@@ -13,5 +13,6 @@
   },
   "retired": {
     "why": "parse_post no longer reads tags (the header key is an error now); parse_tags reads the tag table"
-  }
+  },
+  "written_by": "mangsang 1.9.0"
 }

@@ -13,5 +13,6 @@
   },
   "retired": {
     "why": "signed with the owner's name by mistake (Claude ran --by instead of --delegated); the owner did not review this relation — re-confirmed as a delegation"
-  }
+  },
+  "written_by": "mangsang 1.9.0"
 }

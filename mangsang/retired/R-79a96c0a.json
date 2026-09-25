@@ -13,5 +13,6 @@
   },
   "retired": {
     "why": "tags left the post header (source:tg-01); Q-tag carries them as events in the tag table"
-  }
+  },
+  "written_by": "mangsang 1.9.0"
 }
