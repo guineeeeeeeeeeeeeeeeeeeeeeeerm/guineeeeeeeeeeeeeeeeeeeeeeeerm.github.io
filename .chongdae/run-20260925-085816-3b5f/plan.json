@@ -1,0 +1,11 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.9.0",
+  "goal": "배지를 공식 로고 파일로",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
