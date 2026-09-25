@@ -211,22 +211,13 @@ def parse_posts(content_root: Path) -> list[Post]:
     return posts
 
 
-# Where a post can be shared: the name shown to a reader and a monochrome icon drawn here (nothing is fetched). Adding a
-# place is adding a line here.
+# Where a post can be shared: the name shown to a reader and its official logo file. Adding a place is adding a line here.
 SHARE_PLACES = {
-    "x": ("X", '<path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>'),
-    "threads": ("Threads", '<path d="M16.5 11.5c-.4-3-2.2-4.3-4.6-4.3-2.8 0-4.7 2-4.7 5s1.9 5 4.7 5c2.3 0 4.2-1.3 4.2-3.4 0-1.8-1.4-2.9-3.6-2.9-1.9 0-3 .9-3 2.1 0 1.1.9 1.9 2.4 1.9 2.7 0 4.1-2.3 3.4-6.4M20 12a8 8 0 1 1-8-8c3.7 0 6.3 2 7.3 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'),
-    "linkedin": ("LinkedIn", '<rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>'
-                 '<path d="M8 10.5V17M8 7.2v.1M11.5 17v-6.5M11.5 13.2c0-1.6 1-2.7 2.3-2.7s2.2.9 2.2 2.6V17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'),
+    "x": ("X", "x.svg"),
+    "threads": ("Threads", "threads.svg"),
+    "linkedin": ("LinkedIn", "linkedin.png"),
+    "substack": ("Substack", "substack.png"),
 }
-
-
-def share_icons_svg() -> str:
-    symbols = "".join(
-        f'<symbol id="share-{place}" viewBox="0 0 24 24">{icon}</symbol>'
-        for place, (_, icon) in SHARE_PLACES.items()
-    )
-    return f'<svg xmlns="http://www.w3.org/2000/svg">{symbols}</svg>\n'
 
 
 @dataclass(frozen=True)

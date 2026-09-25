@@ -5,11 +5,11 @@
   "dst": "concept:share",
   "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다",
   "seen": {
-    "plan/PLAN.md#Q-share — 공유 기록과 배지": "41a4bfd9a248",
+    "plan/PLAN.md#Q-share — 공유 기록과 배지": "589705a1b816",
     "concept:share": "ae8d0b44fd09"
   },
   "confirmed": {
-    "delegated": "Q-share에 공식 로고 파일 결정(소유자 source:bd-03)을 더해 흑백 SVG 방식을 대신하게 했고 Q-build에 brands/ 출력을 적었을 뿐, 두 절은 여전히 share·site-build 개념의 투영이다"
+    "delegated": "세션이 diff를 읽었다: 배지가 직접 그린 SVG에서 공식 로고 파일 <img>로 바뀌고 substack이 더해졌다(Q-share 결정, 소유자 source:bd-03); 테스트·item_footer·README 절·Q-share 절은 모두 여전히 share 개념(공유 기록과 그 배지)의 투영이다"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-share — 공유 기록과 배지": "6c6298714579",
+        "concept:share": "ae8d0b44fd09"
+      },
+      "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다"
+    },
+    {
+      "confirmed": {
+        "delegated": "Q-share에 공식 로고 파일 결정(소유자 source:bd-03)을 더해 흑백 SVG 방식을 대신하게 했고 Q-build에 brands/ 출력을 적었을 뿐, 두 절은 여전히 share·site-build 개념의 투영이다"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-share — 공유 기록과 배지": "41a4bfd9a248",
         "concept:share": "ae8d0b44fd09"
       },
       "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다"

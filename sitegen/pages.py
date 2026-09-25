@@ -181,7 +181,7 @@ def item_footer(post: Post, shares: list[Share], root: str = "") -> str:
     shared. No type name: the type is chosen before writing, not shown (source:fd-04)."""
     badges = "".join(
         f'<a class="share-badge" href="{html.escape(item.url, quote=True)}" aria-label="{SHARE_PLACES[item.where][0]}" '
-        f'title="{SHARE_PLACES[item.where][0]}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="{root}assets/icons.svg#share-{item.where}"/></svg></a>'
+        f'title="{SHARE_PLACES[item.where][0]}"><img src="{root}assets/brands/{SHARE_PLACES[item.where][1]}" alt=""></a>'
         for item in shares
     )
     return (f'<footer class="item-footer">{time_element(post.written)}'
