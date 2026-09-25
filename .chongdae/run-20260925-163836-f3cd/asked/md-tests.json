@@ -1,0 +1,20 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.11.0",
+  "stage": "build",
+  "run": "run-20260925-163836-f3cd",
+  "task": "md-tests",
+  "role": "nitpick",
+  "target": ".",
+  "goal": "본문 마크다운을 markdown-it으로: 표준 마크다운·표·취소선",
+  "brief": "plan/PLAN.md Q-post의 'Decided (owner, source:md-03 ...)' 문단을 계약 테스트로 쓴다. 새 파일 tests/test_markdown.py: (1) 번호 목록(<ol>), 중첩 목록, 인용 안의 목록('> - 가'가 <blockquote> 안의 <ul><li>), 펜스 코드 블록(<pre><code>, 안의 <b>는 &lt;b&gt;로 글자), 제목 #### ~ ######(<h4>~<h6>), 가로줄(<hr>), 표(<table> 안 <th>/<td>), 취소선(~~가~~ → <s>가</s>)이 글 페이지에서 렌더된다. (2) 본문의 HTML(<b>굵게</b>)은 글자로 보인다. (3) 자동 링크 없음: 맨 주소 글자 https://example.com 은 <a>가 되지 않는다; 각주 문법 [^1]은 글자로 남는다. (4) 참조 링크 [글자][r] + [r]: https://example.com/r 과 <https://example.com/a> 는 <a href=\"주소\">가 되고, 참조 링크나 <…> 링크의 주소가 http(s)가 아니면(mailto:, javascript:) 빌드 오류이고 오류 줄에 글 파일 경로. (5) 문단 안 줄바꿈은 <br>로 남는다. (6) 코드 안의 [글자](https://…)와 ![설명](images/none.png)는 해석되지 않는다(링크·그림이 아니고, 없는 그림이어도 빌드 오류가 아니다). (7) 글 사이 링크(links.jsonl)의 앵커가 인라인 코드 안에 있으면 빌드 오류이고 오류 줄에 links.jsonl:1. (8) 패치(patches.jsonl)가 적용된 본문에서 패치 영역이 인라인 코드의 일부만 덮으면 빌드 오류이고 오류 줄에 patches.jsonl:1. (9) 그림 규칙은 목록·표 안에서도 같다: 표 칸 안의 ![설명|120](images/a.png)가 글 페이지에서 image-zoom 링크로 감싸지고 width=\"120\". 기존 테스트 파일과 tests/support.py는 수정하지 않는다 — 다만 기존 테스트 중 새 결정과 모순되는 것이 있으면(예: '####'나 '1.'이 글자로 남는다고 확인하는 테스트) 보고의 non-claims에 그 파일과 메서드 이름을 적는다. 보고의 tests 목록에는 테스트 파일 경로만 적는다. 지금 코드는 새 테스트를 통과하지 못하는 것이 정상이다.",
+  "closes": [
+    "Q-post"
+  ],
+  "contract": {},
+  "checks": [],
+  "tests": [
+    "tests/test_markdown.py"
+  ],
+  "response": "./.chongdae/run-20260925-163836-f3cd/local/md-tests.response.json"
+}

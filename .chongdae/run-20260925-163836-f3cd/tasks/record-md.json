@@ -1,0 +1,42 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.11.0",
+  "status": "done",
+  "def": {
+    "id": "record-md",
+    "role": "session",
+    "brief": "소유자 결정(표준 마크다운 전부·표·취소선, HTML은 글자로)을 원문으로 남기고 Q-post 본문 문법을 고친다",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-25T16:38:36+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [
+    "plan/PLAN.md"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-282_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.11.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 1,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-25T16:38:36+00:00"
+    }
+  }
+}
