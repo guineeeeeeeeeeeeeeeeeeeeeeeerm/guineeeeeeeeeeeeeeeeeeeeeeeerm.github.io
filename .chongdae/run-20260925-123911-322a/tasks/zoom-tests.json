@@ -1,0 +1,97 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.10.0",
+  "status": "done",
+  "def": {
+    "id": "zoom-tests",
+    "role": "nitpick",
+    "brief": "plan/PLAN.md Q-post의 'Decided (owner, source:zm-03 ...)' 문단을 계약 테스트로 쓴다. 새 파일 tests/test_image_zoom.py: (1) 글 페이지 본문의 그림 ![설명](images/a.png)이 <a class=\"image-zoom\" href=\"../../images/a.png\"><img src=\"../../images/a.png\" alt=\"설명\"></a>로 감싸진다(|N 너비가 있어도 href는 같은 원본 주소, img의 width는 그대로). (2) 소개 페이지 본문의 그림도 같고 href는 ../images/a.png. (3) 글 페이지와 소개 페이지는 <script src=\"<root>assets/zoom.js\" defer>를 싣고, 피드와 태그 페이지는 싣지 않는다. (4) 피드에 나오는 짧은 글 본문의 그림은 image-zoom 링크로 감싸지지 않는다. (5) 빌드는 docs/assets/zoom.js를 sitegen/assets/zoom.js와 바이트 그대로 같게 만든다(sitegen/assets/zoom.js가 없는 지금은 실패가 정상). (6) 패치가 넣은 그림도 글 페이지에서 감싸진다. 자바스크립트의 화면 동작 자체는 테스트하지 않는다. 기존 테스트 파일과 tests/support.py는 수정하지 않는다. 보고의 tests 목록에는 테스트 파일 경로만 적는다. 지금 코드는 새 테스트를 통과하지 못하는 것이 정상이다.",
+    "closes": [
+      "Q-post"
+    ],
+    "needs": [],
+    "checks": [],
+    "tests": [
+      "tests/test_image_zoom.py"
+    ],
+    "gate": null
+  },
+  "seq": 2,
+  "added": "2026-09-25T12:39:29+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so",
+    "(provider) \"글 페이지와 소개 페이지 본문의 그림을 누르면, 페이지를 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게 보인다. 배경을 누르거나 Esc를 누르면 닫힌다.\" — 요청대로 JavaScript 화면 동작은 테스트하지 않음."
+  ],
+  "response": {
+    "status": "done",
+    "summary": "`tests/test_image_zoom.py`만 작성했습니다. 실행 결과 현재 기능 부재로 5개 테스트가 실패하고, 피드의 비-zoom 검사는 통과했습니다.",
+    "tests": [
+      "tests/test_image_zoom.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-post",
+        "tests": [
+          "test_Q_post_image_on_a_post_page_is_wrapped_and_keeps_the_original_and_width",
+          "test_Q_post_image_on_the_about_page_uses_the_about_page_original",
+          "test_Q_post_zoom_script_is_on_post_and_about_pages_but_not_feed_or_tag_pages",
+          "test_Q_post_short_post_image_in_the_feed_is_not_an_image_zoom_link",
+          "test_Q_post_build_copies_zoom_asset_byte_for_byte",
+          "test_Q_post_a_patch_added_image_is_wrapped_on_the_post_page"
+        ]
+      }
+    ],
+    "non-claims": [
+      "\"글 페이지와 소개 페이지 본문의 그림을 누르면, 페이지를 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게 보인다. 배경을 누르거나 Esc를 누르면 닫힌다.\" — 요청대로 JavaScript 화면 동작은 테스트하지 않음."
+    ],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "tests/test_image_zoom.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "teujip",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.6.0",
+        "chongdae": "1.10.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "add ./tests/test_image_zoom.py"
+      ],
+      "commands-run": 9,
+      "commands-failed": 1
+    }
+  },
+  "checks": [],
+  "touched": [
+    "tests/test_image_zoom.py"
+  ]
+}

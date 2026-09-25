@@ -1,0 +1,20 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.10.0",
+  "stage": "build",
+  "run": "run-20260925-123911-322a",
+  "task": "zoom-tests",
+  "role": "nitpick",
+  "target": ".",
+  "goal": "그림을 누르면 원본을 크게",
+  "brief": "plan/PLAN.md Q-post의 'Decided (owner, source:zm-03 ...)' 문단을 계약 테스트로 쓴다. 새 파일 tests/test_image_zoom.py: (1) 글 페이지 본문의 그림 ![설명](images/a.png)이 <a class=\"image-zoom\" href=\"../../images/a.png\"><img src=\"../../images/a.png\" alt=\"설명\"></a>로 감싸진다(|N 너비가 있어도 href는 같은 원본 주소, img의 width는 그대로). (2) 소개 페이지 본문의 그림도 같고 href는 ../images/a.png. (3) 글 페이지와 소개 페이지는 <script src=\"<root>assets/zoom.js\" defer>를 싣고, 피드와 태그 페이지는 싣지 않는다. (4) 피드에 나오는 짧은 글 본문의 그림은 image-zoom 링크로 감싸지지 않는다. (5) 빌드는 docs/assets/zoom.js를 sitegen/assets/zoom.js와 바이트 그대로 같게 만든다(sitegen/assets/zoom.js가 없는 지금은 실패가 정상). (6) 패치가 넣은 그림도 글 페이지에서 감싸진다. 자바스크립트의 화면 동작 자체는 테스트하지 않는다. 기존 테스트 파일과 tests/support.py는 수정하지 않는다. 보고의 tests 목록에는 테스트 파일 경로만 적는다. 지금 코드는 새 테스트를 통과하지 못하는 것이 정상이다.",
+  "closes": [
+    "Q-post"
+  ],
+  "contract": {},
+  "checks": [],
+  "tests": [
+    "tests/test_image_zoom.py"
+  ],
+  "response": "./.chongdae/run-20260925-123911-322a/local/zoom-tests.response.json"
+}

@@ -1,0 +1,44 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.10.0",
+  "status": "done",
+  "def": {
+    "id": "record-zoom",
+    "role": "session",
+    "brief": "소유자 결정(그림을 누르면 원본을 화면 위에 크게, 글과 소개 본문)을 원문으로 남기고 Q-post에 적는다",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-25T12:39:11+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [
+    "plan/PLAN.md"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-282_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.10.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "edit ./plan/PLAN.md"
+      ],
+      "commands-run": 2,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-25T12:39:11+00:00"
+    }
+  }
+}

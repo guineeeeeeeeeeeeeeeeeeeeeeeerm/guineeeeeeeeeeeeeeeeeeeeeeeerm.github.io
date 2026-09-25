@@ -1,0 +1,128 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.10.0",
+  "status": "todo",
+  "def": {
+    "id": "zoom-build",
+    "role": "implementer",
+    "brief": "plan/PLAN.md Q-post의 'Decided (owner, source:zm-03 ...)' 문단을 구현한다: 글 페이지와 소개 페이지 본문의 그림을 <a class=\"image-zoom\" href=\"<src와 같은 주소>\">로 감싸고(피드의 짧은 글 본문은 감싸지 않음), sitegen/assets/zoom.js를 새로 만들어 빌드가 docs/assets/zoom.js로 바이트 그대로 복사하게 하고, 글·소개 페이지에만 <script src=\"<root>assets/zoom.js\" defer></script>를 싣는다. zoom.js: .image-zoom 클릭의 기본 동작을 막고 원본 그림 하나를 담은 .zoom-overlay(position: fixed; inset: 0; 어두운 반투명 배경; 그림은 max-width: 100vw, max-height: 100vh 안에서 비율 유지, 가운데)를 띄우며, 겹침 층 어디를 눌러도, Esc를 눌러도 닫힌다. 겹침 층의 CSS는 sitegen/assets/site.css에 둔다(cursor: zoom-in / zoom-out). 외부 라이브러리 없이 순수 자바스크립트. README.md 이미지 절에 '본문의 그림을 누르면 원본이 크게 보인다'는 한 줄을 더한다. 계약 테스트는 커밋되어 있다(HEAD의 tests/*.py가 계약이다) — 테스트 파일은 건드리지 않는다. 기존 주석과 docstring은 글자 그대로. 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
+    "closes": [
+      "Q-post"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      [
+        "python3",
+        "build.py"
+      ]
+    ],
+    "tests": [
+      "tests/support.py tests/test_about.py tests/test_external_links.py tests/test_feed_layout.py tests/test_ids.py tests/test_image_zoom.py tests/test_images.py tests/test_linebreaks.py tests/test_readme.py tests/test_s1.py tests/test_s2.py tests/test_s3.py tests/test_shares.py tests/test_tags.py "
+    ],
+    "gate": null
+  },
+  "seq": 3,
+  "added": "2026-09-25T12:42:38+00:00",
+  "response": {
+    "status": "done",
+    "summary": "글·소개 본문 이미지 확대 링크와 오버레이, 페이지별 zoom.js 로드·자산 복사, CSS, README 안내를 구현했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "python3 build.py",
+        "exit": 0
+      }
+    ],
+    "decisions": [
+      {
+        "what": "겹침 층의 어두운 반투명 배경 농도",
+        "chosen": "rgba(0, 0, 0, 0.7)",
+        "alternatives": [
+          "다른 반투명 농도"
+        ]
+      }
+    ],
+    "non-claims": [
+      "브라우저에서 실제 클릭·Esc 상호작용은 자동화 테스트하지 않았습니다."
+    ],
+    "disputed-tests": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "dakdol",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "README.md",
+    "docs/about/index.html",
+    "docs/assets/site.css",
+    "docs/assets/zoom.js",
+    "docs/index.html",
+    "docs/p/20260924-075921/index.html",
+    "docs/p/20260924-085456/index.html",
+    "docs/p/20260925-103715/index.html",
+    "sitegen/assets/site.css",
+    "sitegen/assets/zoom.js",
+    "sitegen/markdown.py",
+    "sitegen/output.py",
+    "sitegen/pages.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.6.0",
+        "chongdae": "1.10.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "update ./README.md",
+        "update ./sitegen/assets/site.css",
+        "add ./sitegen/assets/zoom.js",
+        "update ./sitegen/markdown.py",
+        "update ./sitegen/output.py",
+        "update ./sitegen/pages.py"
+      ],
+      "commands-run": 30,
+      "commands-failed": 1
+    }
+  },
+  "accepted": {
+    "delegated": "기술 결정(배경 농도)은 위임 범위(source:plan-06의 '기술 결정은 위임'); 계획서 Q-post에 적음",
+    "at": "2026-09-25T12:47:25+00:00",
+    "chongdae": "chongdae 1.10.0"
+  }
+}
