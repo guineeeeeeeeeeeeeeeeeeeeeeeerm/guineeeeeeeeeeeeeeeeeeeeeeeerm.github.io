@@ -1,0 +1,20 @@
+{
+  "artifact-type": "chongdae/run@1",
+  "written_by": "chongdae 1.11.0",
+  "status": "running",
+  "non-claims": [],
+  "created": {
+    "at": "2026-09-25T16:29:41+00:00",
+    "chongdae": "chongdae 1.11.0",
+    "based_on": "2b5d420fcea059453b4d916e4552ebb87834c0d0"
+  },
+  "environment": {
+    "locked": {
+      "chongdae": "1.10.0#f523f00461ac",
+      "dwitbuk": "1.6.0#8169e1c83b73",
+      "hacheong": "1.6.0#f25d5d40a7b1",
+      "hunsu": "1.5.0#f3fea2d0a199",
+      "mangsang": "1.9.0#ae72ee081d63"
+    }
+  }
+}

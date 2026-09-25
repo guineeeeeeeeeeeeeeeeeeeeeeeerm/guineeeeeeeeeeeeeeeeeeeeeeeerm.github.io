@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.11.0",
+  "goal": "플러그인 업데이트: hunsu.json과 잠금을 설치된 버전에 맞춤",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
