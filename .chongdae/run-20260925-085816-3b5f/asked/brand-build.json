@@ -150,6 +150,54 @@
       },
       "disputed-tests": [],
       "reopened": null
+    },
+    {
+      "status": "blocked",
+      "summary": "새 구현은 빌드되지만 보호된 기존 공유 테스트 101개 중 4개가 실패합니다. 모두 계약이 폐기한 `icons.svg`/`<svg><use>` 방식을 기대합니다.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 1
+        },
+        {
+          "check": "python3 build.py",
+          "exit": 0
+        }
+      ],
+      "decisions": [],
+      "non-claims": [
+        "보호 테스트는 수정하지 않았습니다.",
+        "브라우저 렌더링 크기와 외부 배포 상태는 확인하지 않았습니다."
+      ],
+      "retried": {
+        "delegated": "보호 테스트가 트집 이전(HEAD) 판으로 되돌아가 있었다: 첫 시도가 검증자 거부로 자동 재시도될 때 트리가 되돌려지며 커밋되지 않은 brand-tests의 결과까지 되돌아간 것으로 보인다(워커의 명령에는 되돌리는 것이 없다). 세션이 첫 시도 기록(git diff 출력)에서 brand-tests의 tests/test_shares.py 변경을 그대로 다시 적용했다(+83/−38, 이전과 같은 통계). 지금 트리에서 테스트 전부 통과. 계약은 그대로: 공식 로고 파일 배지.",
+        "at": "2026-09-25T09:20:12+00:00",
+        "chongdae": "chongdae 1.9.0"
+      },
+      "review": null,
+      "disputed-tests": [
+        {
+          "test": "tests/test_shares.py::ShareContractTests.test_Q_share_Q_build_icons_svg_defines_each_known_share_symbol_once",
+          "contract_quote": "이 결정은 위의 흑백 SVG 배지와 `icons.svg` 방식을 대신한다.",
+          "why": "테스트는 icons.svg와 심볼 생성을 요구하지만 계약은 해당 방식을 폐기합니다."
+        },
+        {
+          "test": "tests/test_shares.py::ShareContractTests.test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page",
+          "contract_quote": "배지는 그 파일을 가리키는 `<img>`이고(`src`는 페이지 기준 상대 경로 `<root>assets/brands/<곳>.<확장자>`...",
+          "why": "테스트는 배지에 svg를 요구하지만 계약은 공식 로고 파일을 가리키는 img를 요구합니다."
+        },
+        {
+          "test": "tests/test_shares.py::ShareContractTests.test_Q_share_badge_markup_has_no_repeated_path_shape",
+          "contract_quote": "배지는 그 파일을 가리키는 `<img>`이고...",
+          "why": "테스트는 svg/use를 요구하지만 계약은 img 방식과 icons.svg 폐기를 요구합니다."
+        },
+        {
+          "test": "tests/test_shares.py::ShareContractTests.test_Q_share_badges_use_icon_paths_relative_to_each_page",
+          "contract_quote": "이 결정은 위의 흑백 SVG 배지와 `icons.svg` 방식을 대신한다.",
+          "why": "테스트는 icons.svg 심볼에 대한 use를 요구하지만 계약은 공식 브랜드 파일의 상대 경로 img를 요구합니다."
+        }
+      ],
+      "reopened": null
     }
   ],
   "touched": [
