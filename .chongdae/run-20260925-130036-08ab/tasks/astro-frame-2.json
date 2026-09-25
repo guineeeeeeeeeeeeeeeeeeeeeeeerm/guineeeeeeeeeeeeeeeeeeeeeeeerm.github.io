@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.10.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "astro-frame-2",
     "role": "implementer",
@@ -90,20 +90,12 @@
   "seq": 5,
   "added": "2026-09-25T13:16:32+00:00",
   "touched_by_provider": [
-    "astro.config.mjs",
     "docs/about/index.html",
     "docs/index.html",
     "docs/p/20260924-075921/index.html",
     "docs/p/20260924-085456/index.html",
     "docs/p/20260925-103715/index.html",
-    "src/components/FeedItem.astro",
-    "src/components/InlineContent.astro",
-    "src/components/InlineNode.astro",
-    "src/components/ItemFooter.astro",
-    "src/components/MarkdownBlock.astro",
-    "src/components/MarkdownBody.astro",
-    "src/components/MarkdownLine.astro",
-    "src/components/TagCloud.astro",
+    "src/layouts/BaseLayout.astro",
     "src/lib/site.ts",
     "src/pages/about/index.astro",
     "src/pages/index.astro",
@@ -139,30 +131,15 @@
     },
     "trace": {
       "changed": [
-        "delete ./src/lib/site.ts",
-        "add ./src/lib/site.ts",
-        "add ./src/components/FeedItem.astro",
-        "add ./src/components/InlineContent.astro",
-        "add ./src/components/InlineNode.astro",
-        "add ./src/components/ItemFooter.astro",
-        "add ./src/components/MarkdownBlock.astro",
-        "add ./src/components/MarkdownBody.astro",
-        "add ./src/components/MarkdownLine.astro",
-        "add ./src/components/TagCloud.astro",
+        "update ./src/layouts/BaseLayout.astro",
         "update ./src/lib/site.ts",
         "update ./src/pages/about/index.astro",
         "update ./src/pages/index.astro",
         "update ./src/pages/p/[id]/index.astro",
-        "update ./src/pages/tags/[tag]/index.astro",
-        "update ./astro.config.mjs",
-        "update ./src/components/InlineContent.astro",
-        "update ./src/components/InlineNode.astro",
-        "update ./src/components/MarkdownBlock.astro",
-        "update ./src/components/MarkdownBody.astro",
-        "update ./src/components/MarkdownLine.astro"
+        "update ./src/pages/tags/[tag]/index.astro"
       ],
-      "commands-run": 40,
-      "commands-failed": 7
+      "commands-run": 27,
+      "commands-failed": 2
     }
   },
   "accepted": {
@@ -175,7 +152,9 @@
     "(provider) 테스트 파일과 package.json/package-lock.json은 수정하지 않았습니다.",
     "(provider) links.jsonl·patches.jsonl의 고급 링크/패치 기능은 이번 조각에서 구현하지 않았습니다.",
     "(provider) 추가로 실행한 test_external_links.py와 test_image_zoom.py에서는 기존 패치 기능 관련 테스트가 실패했으며, 이번 지정 checks의 범위에는 포함되지 않습니다.",
-    "(provider) tests와 package.json/package-lock.json은 수정하지 않았습니다."
+    "(provider) tests와 package.json/package-lock.json은 수정하지 않았습니다.",
+    "(provider) Q-link and Q-patch behavior were not covered by the requested checks.",
+    "(provider) Tests and package dependency files were not modified."
   ],
   "verified_by": {
     "provider": "command",
@@ -204,8 +183,8 @@
     },
     "trace": {
       "changed": [],
-      "commands-run": 41,
-      "commands-failed": 2
+      "commands-run": 15,
+      "commands-failed": 7
     }
   },
   "attempts": [
@@ -443,5 +422,180 @@
         "why": "2 finding(s)"
       }
     }
+  ],
+  "response": {
+    "status": "done",
+    "summary": "Moved the shared .frame into BaseLayout.astro and enforced image widths from 1 to 9999. All requested checks pass.",
+    "verified": [
+      {
+        "check": "node scripts/build.mjs",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_s1.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_about.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_feed_layout.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_ids.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_images.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_linebreaks.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_frame.py",
+        "exit": 0
+      }
+    ],
+    "decisions": [],
+    "non-claims": [
+      "Q-link and Q-patch behavior were not covered by the requested checks.",
+      "Tests and package dependency files were not modified."
+    ],
+    "disputed-tests": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "dakdol",
+    "domain": "code"
+  },
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s1.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_about.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_feed_layout.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_ids.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_images.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_linebreaks.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_frame.py"
+    ]
+  ],
+  "touched": [
+    "astro.config.mjs",
+    "docs/about/index.html",
+    "docs/assets/site.css",
+    "docs/index.html",
+    "docs/p/20260924-075921/index.html",
+    "docs/p/20260924-085456/index.html",
+    "docs/p/20260925-103715/index.html",
+    "plan/PLAN.md",
+    "public/assets/brands/bluesky.svg",
+    "public/assets/brands/linkedin.png",
+    "public/assets/brands/substack.png",
+    "public/assets/brands/threads.svg",
+    "public/assets/brands/x.svg",
+    "public/assets/site.css",
+    "public/assets/time.js",
+    "public/assets/zoom.js",
+    "scripts/build.mjs",
+    "sitegen/assets/brands/bluesky.svg",
+    "sitegen/assets/brands/linkedin.png",
+    "sitegen/assets/brands/substack.png",
+    "sitegen/assets/brands/threads.svg",
+    "sitegen/assets/brands/x.svg",
+    "sitegen/assets/site.css",
+    "sitegen/assets/time.js",
+    "sitegen/assets/zoom.js",
+    "src/components/FeedItem.astro",
+    "src/components/Header.astro",
+    "src/components/InlineContent.astro",
+    "src/components/InlineNode.astro",
+    "src/components/ItemFooter.astro",
+    "src/components/MarkdownBlock.astro",
+    "src/components/MarkdownBody.astro",
+    "src/components/MarkdownLine.astro",
+    "src/components/TagCloud.astro",
+    "src/layouts/BaseLayout.astro",
+    "src/lib/site.ts",
+    "src/pages/about/index.astro",
+    "src/pages/index.astro",
+    "src/pages/p/[id]/index.astro",
+    "src/pages/tags/[tag]/index.astro"
   ]
 }

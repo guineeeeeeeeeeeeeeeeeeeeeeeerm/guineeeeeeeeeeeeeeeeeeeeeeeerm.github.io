@@ -1,0 +1,34 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.10.0",
+  "stage": "build",
+  "run": "run-20260925-130036-08ab",
+  "task": "astro-logic",
+  "role": "implementer",
+  "target": ".",
+  "goal": "Astro로 옮기고 모든 페이지에 같은 폭의 상단 메뉴 띠",
+  "brief": "조각 2/3 (plan/PLAN.md Q-build의 '옮기는 순서' (2)와 '템플릿' 항목). (a) 고유 로직을 src/lib/의 TypeScript로 옮긴다: 링크 표(Q-link: 앵커, 위첨자 [n], 주석, 이 글을 가리키는 글, 바깥 링크와의 겹침 오류), 패치(Q-patch: at·id 순 적용, 표 검증 오류), 패치 보기(Q-patch-view: 영역·이력·삭제 표시·토글, 바깥 링크 일부만 덮는 영역 오류), 그리고 공유·태그 중 아직 빠진 규칙. 규칙은 sitegen/records.py·patches.py·markdown.py와 계획서 그대로다(옛 Python 코드는 참고용이고 새 빌드가 부르지 않는다). (b) '템플릿' 항목을 지킨다: 지금 src/lib/site.ts의 renderFeed·renderPost·renderAbout·renderTag·feedItem·itemFooter·tagCloud처럼 마크업을 문자열로 짓는 함수를 없애고, 같은 마크업을 src/components/의 Astro 컴포넌트(예: FeedItem, ItemFooter, ShareBadges, TagCloud, Footnotes, IncomingLinks, PatchView)와 src/pages/의 템플릿이 짓게 한다. src/lib/는 데이터와 본문 마크다운 HTML만 돌려준다(본문은 set:html). 출력 HTML은 계약 테스트가 보는 마크업과 같아야 한다. 체크는 테스트 전부다(python3 -m unittest discover -s tests; test_readme는 README가 조각 3이라 실패해도 되지만, 그 밖은 모두 통과). build.py와 sitegen/*.py는 지우지 않는다(조각 3). package.json·잠금 파일은 고치지 않는다(더 필요하면 blocked). 테스트 파일은 건드리지 않는다(HEAD의 tests/*.py가 계약이다). 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
+  "closes": [
+    "Q-build",
+    "Q-link",
+    "Q-patch",
+    "Q-patch-view",
+    "Q-share",
+    "Q-tag"
+  ],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ]
+  ],
+  "tests": [
+    "tests/support.py tests/test_about.py tests/test_external_links.py tests/test_feed_layout.py tests/test_frame.py tests/test_ids.py tests/test_image_zoom.py tests/test_images.py tests/test_linebreaks.py tests/test_readme.py tests/test_s1.py tests/test_s2.py tests/test_s3.py tests/test_shares.py tests/test_tags.py "
+  ],
+  "response": "./.chongdae/run-20260925-130036-08ab/local/astro-logic.response.json"
+}

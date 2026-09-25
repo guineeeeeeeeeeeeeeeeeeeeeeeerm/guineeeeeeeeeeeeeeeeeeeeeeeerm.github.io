@@ -1,10 +1,10 @@
 {
   "artifact-type": "chongdae/request@1",
   "written_by": "chongdae 1.10.0",
-  "stage": "build",
+  "stage": "verify",
   "run": "run-20260925-130036-08ab",
   "task": "astro-frame-2",
-  "role": "implementer",
+  "role": "verifier",
   "target": ".",
   "goal": "Astro로 옮기고 모든 페이지에 같은 폭의 상단 메뉴 띠",
   "brief": "조각 1/3 (plan/PLAN.md Q-build의 새 결정들, '의존성' 항목, '옮기는 순서' (1)). 먼저 알 것: 첫 시도(astro-frame)는 scripts/build.mjs가 옛 Python 생성기를 부르고 잠금 파일을 손으로 만들어 되돌려졌다. 이번에는 페이지 HTML을 Astro가 src/pages/·src/layouts/ 템플릿으로 실제로 만들어야 한다. astro 7.3.5와 markdown-it은 이미 설치되어 node_modules/에 있고 package.json·package-lock.json은 커밋되어 있다 — 네트워크는 필요 없고 package.json의 dependencies와 잠금 파일은 고치지 않는다(더 필요하면 blocked로 보고). 만들 것: astro.config.mjs(output static, build.format directory, 번들링·범위 스타일·인라인 스크립트 없음, _astro/ 출력 없음), scripts/build.mjs(Astro의 build API로 빌드; 현재 작업 디렉터리의 content/를 읽고 같은 디렉터리의 docs/를 만듦 — 경로는 환경 변수 등으로 Astro에 넘김; 임시 디렉터리에 만든 뒤 교체; 입력 오류면 stderr에 그 파일 경로가 든 줄 + 종료 코드 1 + 기존 docs/ 유지; content/images/→docs/images/, public/assets/→docs/assets/ 바이트 그대로; 빈 docs/.nojekyll; 같은 입력이면 바이트 단위로 같은 출력), src/layouts/BaseLayout.astro(상단 띠 <header class=\"site-header\"><nav class=\"site-nav\">…</nav></header>, 본문 틀 .frame), src/pages/(피드 index.astro, p/[id]/index.astro, about/index.astro), src/components/, src/lib/*.ts(글 파일·헤더 파싱, 마크다운 부분집합 렌더, id 규칙 — sitegen/*.py의 규칙을 그대로 TypeScript로 옮김). sitegen/assets/는 git mv로 public/assets/로 옮기고 site.css에 상단 띠·틀 규칙(html { scrollbar-gutter: stable }, .site-nav/.frame max-width 70rem, body:has(.feed-layout) 같은 페이지별 폭 규칙 제거)을 반영한다. 모든 링크는 페이지 위치 기준 상대 경로. 체크는 적힌 테스트 파일들이다 — 링크·패치·공유·태그를 이번에 옮겨도 되지만 필수는 아니다. build.py와 sitegen/*.py는 지우지 않는다(조각 3; 새 빌드가 그것을 부르지 않을 뿐). README는 조각 3. 테스트 파일은 건드리지 않는다(HEAD의 tests/*.py가 계약이다). 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
@@ -87,7 +87,7 @@
   "tests": [
     "tests/support.py tests/test_about.py tests/test_external_links.py tests/test_feed_layout.py tests/test_frame.py tests/test_ids.py tests/test_image_zoom.py tests/test_images.py tests/test_linebreaks.py tests/test_readme.py tests/test_s1.py tests/test_s2.py tests/test_s3.py tests/test_shares.py tests/test_tags.py "
   ],
-  "response": "./.chongdae/run-20260925-130036-08ab/local/astro-frame-2.response.json",
+  "response": "./.chongdae/run-20260925-130036-08ab/local/astro-frame-2.verify.3.response.json",
   "attempts": [
     {
       "status": "done",
@@ -264,13 +264,62 @@
     }
   ],
   "touched": [
-    "astro.config.mjs",
     "docs/about/index.html",
-    "docs/assets/site.css",
     "docs/index.html",
     "docs/p/20260924-075921/index.html",
     "docs/p/20260924-085456/index.html",
     "docs/p/20260925-103715/index.html",
+    "src/layouts/BaseLayout.astro",
+    "src/lib/site.ts",
+    "src/pages/about/index.astro",
+    "src/pages/index.astro",
+    "src/pages/p/[id]/index.astro",
+    "src/pages/tags/[tag]/index.astro"
+  ],
+  "built": {
+    "summary": "Moved the shared .frame into BaseLayout.astro and enforced image widths from 1 to 9999. All requested checks pass.",
+    "verified": [
+      {
+        "check": "node scripts/build.mjs",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_s1.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_about.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_feed_layout.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_ids.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_images.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_linebreaks.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_frame.py",
+        "exit": 0
+      }
+    ],
+    "non-claims": [
+      "Q-link and Q-patch behavior were not covered by the requested checks.",
+      "Tests and package dependency files were not modified."
+    ]
+  },
+  "touched_since": [
+    "astro.config.mjs",
+    "docs/assets/site.css",
     "plan/PLAN.md",
     "public/assets/brands/bluesky.svg",
     "public/assets/brands/linkedin.png",
@@ -297,12 +346,6 @@
     "src/components/MarkdownBlock.astro",
     "src/components/MarkdownBody.astro",
     "src/components/MarkdownLine.astro",
-    "src/components/TagCloud.astro",
-    "src/layouts/BaseLayout.astro",
-    "src/lib/site.ts",
-    "src/pages/about/index.astro",
-    "src/pages/index.astro",
-    "src/pages/p/[id]/index.astro",
-    "src/pages/tags/[tag]/index.astro"
+    "src/components/TagCloud.astro"
   ]
 }
