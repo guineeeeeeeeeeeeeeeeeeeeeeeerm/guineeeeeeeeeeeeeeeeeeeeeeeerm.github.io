@@ -278,12 +278,12 @@ Decided (owner, `source:ic-01`, `source:ic-03`; 제안 `source:ic-02`): 아이�
 
 Decided (owner, `source:bd-01`, `source:bd-03`; 제안 `source:bd-02`): 배지의 아이콘은 직접 그린 모양이 아니라 각 곳이 브랜드
 자료로 배포하는 공식 로고 파일이다. 소유자가 받은 공식 파일을 `sitegen/assets/brands/<곳>.<svg|png>`에 두고 — X `x.svg`,
-Threads `threads.svg`, LinkedIn `linkedin.png`(공식 묶음에 벡터 파일이 없다), Substack `substack.png` — 빌드는 그 파일을 바이트
+Threads `threads.svg`, LinkedIn `linkedin.png`(공식 묶음에 벡터 파일이 없다), Substack `substack.png`, Bluesky `bluesky.svg`(공식 미디어 키트의 검정 나비) — 빌드는 그 파일을 바이트
 그대로 `docs/assets/brands/`에 복사한다. 배지는 그 파일을 가리키는 `<img>`이고(`src`는 페이지 기준 상대 경로
 `<root>assets/brands/<곳>.<확장자>`, `alt=""`, 곳의 이름은 전처럼 링크의 `aria-label`), 모양·비율을 바꾸지 않는다. 각 곳의
-브랜드 규칙을 따른다: X·Threads·LinkedIn은 공식 검정 변형이고(X의 공식 SVG는 흰색으로 배포되어 채움 색만 공식 변형인 검정
+브랜드 규칙을 따른다: X·Threads·LinkedIn·Bluesky는 공식 검정 변형이고(X의 공식 SVG는 흰색으로 배포되어 채움 색만 공식 변형인 검정
 `#000`으로 바꿔 두었다), Substack은 색을 바꾸지 말라는 규칙에 따라 주황색 원본이다. 배지 사이에는 로고 주변 여백을 둔다.
-곳은 이제 `x`, `threads`, `linkedin`, `substack`이다. 이 결정은 위의 흑백 SVG 배지와 `icons.svg` 방식을 대신한다.
+곳은 이제 `x`, `threads`, `linkedin`, `substack`, `bluesky`이다(Bluesky는 소유자가 공식 파일을 준 뒤 더함). 이 결정은 위의 흑백 SVG 배지와 `icons.svg` 방식을 대신한다.
 
 Decided (technical, delegated — 구현자 brand-build의 결정, 세션이 브라우저에서 네 배지를 나란히 보고 받아들임): 배지 이미지의
 높이는 1.1rem이고, `substack.png`는 공식 파일 가장자리의 여백이 넓어 파일을 고치지 않고 표시 높이를 1.8rem으로 키워 로고

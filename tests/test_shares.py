@@ -28,6 +28,7 @@ BRAND_FILES = {
     "threads": "threads.svg",
     "linkedin": "linkedin.png",
     "substack": "substack.png",
+    "bluesky": "bluesky.svg",
 }
 
 
@@ -124,6 +125,27 @@ class ShareContractTests(unittest.TestCase):
                 found = badges(page)
                 self.assertEqual(len(found), 1, msg=page)
                 self.assertIn('aria-label="Substack"', found[0])
+                self.assertRegex(found[0], rf'<img\b[^>]*\bsrc="{re.escape(expected_src)}"')
+                self.assertRegex(found[0], r'<img\b[^>]*\balt=""')
+
+    def test_Q_share_bluesky_is_known_and_uses_its_brand_badge(self):
+        with temporary_site(
+            posts=SHARE_POSTS,
+            shares={
+                "bluesky": share(
+                    where="bluesky",
+                    url="https://bsky.app/profile/someone/post/1",
+                )
+            },
+        ) as root:
+            self.assert_builds(root)
+            for page, expected_src in (
+                (item_of(read(root, "index.html"), ID), "assets/brands/bluesky.svg"),
+                (read(root, f"p/{ID}/index.html"), "../../assets/brands/bluesky.svg"),
+            ):
+                found = badges(page)
+                self.assertEqual(len(found), 1, msg=page)
+                self.assertIn('aria-label="Bluesky"', found[0])
                 self.assertRegex(found[0], rf'<img\b[^>]*\bsrc="{re.escape(expected_src)}"')
                 self.assertRegex(found[0], r'<img\b[^>]*\balt=""')
 
