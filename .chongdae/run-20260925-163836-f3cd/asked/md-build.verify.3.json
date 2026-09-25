@@ -1,10 +1,10 @@
 {
   "artifact-type": "chongdae/request@1",
   "written_by": "chongdae 1.11.0",
-  "stage": "build",
+  "stage": "verify",
   "run": "run-20260925-163836-f3cd",
   "task": "md-build",
-  "role": "implementer",
+  "role": "verifier",
   "target": ".",
   "goal": "본문 마크다운을 markdown-it으로: 표준 마크다운·표·취소선",
   "brief": "plan/PLAN.md Q-post의 'Decided (owner, source:md-03 ...)' 문단을 구현한다: src/lib/site.ts의 직접 짠 마크다운 부분집합 렌더(markdownBlocks·renderBlock·renderInline 등)를 이미 설치된 markdown-it(node_modules에 있음, package.json dependencies에 있음)으로 바꾼다 — commonmark 설정 + table·strikethrough 규칙 활성, html: false, linkify: false, breaks: true. 기존 규칙은 markdown-it의 규칙/렌더러 재정의로 지킨다: 그림(images/ 경로만, 파일 존재, |N 너비, |0 오류, 글·소개 페이지의 image-zoom 감싸기), 모든 링크 모양(인라인, 참조, <…>)의 http(s) 검사와 <a href=\"주소\">글자</a> 마크업, 코드 안은 해석 안 함, Q-link 앵커가 코드 안/겹침이면 created 줄 오류, 패치 보기 영역이 코드 일부만 덮으면 패치 줄 오류, 바깥 링크 일부만 덮는 패치 영역 오류, 글 사이 링크 앵커의 <a>와 위첨자 [n], 패치 보기 마커, 피드 80자와 제목 자리는 첫 <p>의 화면 글자. 출력 마크업은 기존 계약 테스트가 보는 그대로다. 새 패키지는 설치하지 않는다(더 필요하면 blocked). README.md 새 글 쓰기 절의 본문 문법 설명을 새 문법(번호 목록, 중첩 목록, 코드 블록, 제목 여섯 단계, 가로줄, 표, 취소선; HTML은 글자; 각주·자동 링크 없음)으로 고친다. 테스트 파일은 건드리지 않는다(HEAD의 tests/*.py가 계약이다). 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
@@ -45,7 +45,7 @@
     "tests/test_shares.py",
     "tests/test_tags.py"
   ],
-  "response": "./.chongdae/run-20260925-163836-f3cd/local/md-build.response.json",
+  "response": "./.chongdae/run-20260925-163836-f3cd/local/md-build.verify.3.response.json",
   "attempts": [
     {
       "status": "done",
@@ -190,9 +190,35 @@
     }
   ],
   "touched": [
+    "src/lib/site.ts"
+  ],
+  "built": {
+    "summary": "markdown-it CommonMark/GFM 렌더링과 링크·이미지·코드·Q-link·패치 마커 규칙을 보완하고 README를 갱신했습니다. 131개 테스트와 빌드가 통과했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "npm run build",
+        "exit": 0
+      },
+      {
+        "check": "git diff --check",
+        "exit": 0
+      },
+      {
+        "check": "git diff -- tests",
+        "exit": 0
+      }
+    ],
+    "non-claims": [
+      "실제 브라우저 런타임 동작은 검증하지 않았습니다."
+    ]
+  },
+  "touched_since": [
     "README.md",
     "docs/about/index.html",
-    "docs/p/20260925-103715/index.html",
-    "src/lib/site.ts"
+    "docs/p/20260925-103715/index.html"
   ]
 }
