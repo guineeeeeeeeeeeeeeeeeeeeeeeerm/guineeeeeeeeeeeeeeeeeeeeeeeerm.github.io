@@ -1,15 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import MarkdownBody from "../../components/MarkdownBody.astro";
-import { loadSite } from "../../lib/site";
+import { loadSite, renderAboutBody } from "../../lib/site";
 
 const site = loadSite();
+const body = renderAboutBody(site, "../");
 ---
 
 <BaseLayout title="소개" rootLink="../" current="about" includeZoom={true}>
   <main>
     <article class="post">
-      <div class="body"><MarkdownBody blocks={site.about} imagePrefix="../images/" zoom={true} /></div>
+      <div class="body" set:html={body}></div>
     </article>
   </main>
 </BaseLayout>

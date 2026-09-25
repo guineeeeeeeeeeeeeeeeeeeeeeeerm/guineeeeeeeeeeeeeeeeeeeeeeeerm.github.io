@@ -1,0 +1,19 @@
+---
+import { feedTitle, type Link, type SiteData, type Post } from "../lib/site";
+
+interface Props { site: SiteData; post: Post; links: Link[]; }
+const { site, post, links } = Astro.props;
+const ordered = [...links].sort((a, b) => b.createdAt.localeCompare(a.createdAt) || a.id.localeCompare(b.id));
+---
+
+{ordered.length > 0 && (
+  <section class="incoming-links">
+    <h2>이 글을 가리키는 글</h2>
+    <ul>
+      {ordered.map((link) => {
+        const source = site.posts.find((candidate) => candidate.id === link.fromId)!;
+        return <li><a href={`../${source.id}/`}>{feedTitle(source)}</a> — {link.currentReason}</li>;
+      })}
+    </ul>
+  </section>
+)}

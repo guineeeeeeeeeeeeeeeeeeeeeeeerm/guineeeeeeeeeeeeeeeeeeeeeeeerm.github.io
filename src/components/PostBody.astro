@@ -1,0 +1,56 @@
+---
+import type { BodyLinkMarkup, PostBodyMarkup } from "../lib/site";
+
+interface Props { body?: PostBodyMarkup; nodes?: Node[]; }
+
+type HtmlNode = { kind: "html"; value: string };
+type LinkNode = { kind: "link"; link: BodyLinkMarkup };
+type PatchNode = { kind: "patch"; id: string; deleted: boolean; children: Node[] };
+type Node = HtmlNode | LinkNode | PatchNode;
+
+const { body, nodes: childNodes } = Astro.props;
+const links = new Map((body?.links || []).map((link) => [link.token, link]));
+const regions = new Map((body?.regions || []).map((region) => [region.id, region]));
+const tokenPattern = /\u0000(?:guin-link-\d+|guin-patch-(?:start|end)-\d+)\u0000/g;
+
+function parseNodes(value: string): Node[] {
+  const root: Node[] = [];
+  let current = root;
+  const stack: Array<{ parent: Node[]; node: PatchNode }> = [];
+  let cursor = 0;
+  for (const match of value.matchAll(tokenPattern)) {
+    const token = match[0];
+    const start = match.index || 0;
+    if (start > cursor) current.push({ kind: "html", value: value.slice(cursor, start) });
+    const link = links.get(token);
+    if (link) {
+      current.push({ kind: "link", link });
+    } else if (token.includes("-start-")) {
+      const index = token.match(/-(\d+)\u0000$/)?.[1] || "0";
+      const region = regions.get(`patch-region-${index}`);
+      const node: PatchNode = { kind: "patch", id: region?.id || `patch-region-${index}`, deleted: region?.deleted || false, children: [] };
+      current.push(node);
+      stack.push({ parent: current, node });
+      current = node.children;
+    } else {
+      const open = stack.pop();
+      if (open) current = open.parent;
+    }
+    cursor = start + token.length;
+  }
+  if (cursor < value.length) current.push({ kind: "html", value: value.slice(cursor) });
+  return root;
+}
+
+const nodes = childNodes || parseNodes(body?.html || "");
+---
+
+{nodes.map((node) => node.kind === "html" ? (
+  <Fragment set:html={node.value} />
+) : node.kind === "link" ? (
+  <><a href={node.link.href}>{node.link.label}</a><sup><a href={`#fn-${node.link.number}`}>[{node.link.number}]</a></sup></>
+) : (
+  <span class="patch-region" data-patch-region={node.id} data-patch-deleted={node.deleted ? "true" : undefined}>
+    <Astro.self nodes={node.children} />
+  </span>
+))}

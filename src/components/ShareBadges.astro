@@ -1,0 +1,15 @@
+---
+import { SHARE_PLACES, type Share } from "../lib/site";
+
+interface Props { shares: Share[]; root: string; }
+const { shares, root } = Astro.props;
+---
+
+{shares.length > 0 && (
+  <span class="shares">
+    {shares.map((share) => {
+      const [label, file] = SHARE_PLACES[share.where];
+      return <a class="share-badge" href={share.url} aria-label={label} title={label}><img src={`${root}assets/brands/${file}`} alt="" /></a>;
+    })}
+  </span>
+)}

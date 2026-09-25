@@ -1,0 +1,18 @@
+---
+import { feedTitle, formatUtc, type Link, type SiteData, type Post } from "../lib/site";
+
+interface Props { site: SiteData; post: Post; links: Link[]; }
+const { site, post, links } = Astro.props;
+---
+
+{links.length > 0 && (
+  <section class="footnotes">
+    <h2>주석</h2>
+    <ol>
+      {links.map((link, index) => {
+        const target = site.posts.find((candidate) => candidate.id === link.toId)!;
+        return <li id={`fn-${index + 1}`}><a href={`../${target.id}/`}>{feedTitle(target)}</a> — {link.currentReason} — <time datetime={link.createdAt} title={formatUtc(link.createdAt)}>{formatUtc(link.createdAt)}</time></li>;
+      })}
+    </ol>
+  </section>
+)}

@@ -1,8 +1,11 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ItemFooter from "../../../components/ItemFooter.astro";
-import MarkdownBody from "../../../components/MarkdownBody.astro";
-import { loadSite, type SiteData } from "../../../lib/site";
+import Footnotes from "../../../components/Footnotes.astro";
+import IncomingLinks from "../../../components/IncomingLinks.astro";
+import PatchView from "../../../components/PatchView.astro";
+import PostBody from "../../../components/PostBody.astro";
+import { loadSite, postTags, renderPostBody, type SiteData } from "../../../lib/site";
 
 export function getStaticPaths() {
   const site = loadSite();
@@ -13,7 +16,11 @@ const { site } = Astro.props as { site: SiteData };
 const postId = Astro.params.id ?? "";
 const post = site.posts.find((candidate) => candidate.id === postId);
 if (!post) throw new Error(`content/posts/${postId}.md`);
-const tags = site.taggings.get(post.id) || [];
+const state = site.patchStates.get(post.id)!;
+const tags = postTags(site, post);
+const outgoing = site.links.filter((link) => link.active && link.fromId === post.id).sort((a, b) => site.patchStates.get(post.id)!.body.indexOf(a.anchor) - site.patchStates.get(post.id)!.body.indexOf(b.anchor) || a.id.localeCompare(b.id));
+const incoming = site.links.filter((link) => link.active && link.toId === post.id);
+const body = renderPostBody(site, post, "../../");
 ---
 
 <BaseLayout title={post.title || "글"} rootLink="../../" includeZoom={true}>
@@ -25,8 +32,11 @@ const tags = site.taggings.get(post.id) || [];
           태그: {tags.map((item, index) => <><a class="tag" href={`../../tags/${encodeURIComponent(item.tag)}/`}>{item.tag}</a>{index < tags.length - 1 && ", "}</>)}
         </div>
       )}
-      <div class="body"><MarkdownBody blocks={post.blocks} imagePrefix="../../images/" zoom={true} /></div>
+      {state.hasPatches && <PatchView state={state} />}
+      <div class="body"><PostBody body={body} /></div>
       <ItemFooter post={post} shares={site.shares.get(post.id) || []} root="../../" />
+      <Footnotes site={site} post={post} links={outgoing} />
+      <IncomingLinks site={site} post={post} links={incoming} />
     </article>
   </main>
 </BaseLayout>

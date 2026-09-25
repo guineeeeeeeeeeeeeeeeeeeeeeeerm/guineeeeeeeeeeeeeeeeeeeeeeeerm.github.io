@@ -1,5 +1,6 @@
 ---
-import { formatUtc, SHARE_PLACES, type Post, type Share } from "../lib/site";
+import ShareBadges from "./ShareBadges.astro";
+import { formatUtc, type Post, type Share } from "../lib/site";
 
 interface Props {
   post: Post;
@@ -12,12 +13,5 @@ const { post, shares, root } = Astro.props;
 
 <footer class="item-footer">
   <time datetime={post.written} title={formatUtc(post.written)}>{formatUtc(post.written)}</time>
-  {shares.length > 0 && (
-    <span class="shares">
-      {shares.map((share) => {
-        const [label, file] = SHARE_PLACES[share.where];
-        return <a class="share-badge" href={share.url} aria-label={label} title={label}><img src={`${root}assets/brands/${file}`} alt="" /></a>;
-      })}
-    </span>
-  )}
+  <ShareBadges shares={shares} root={root} />
 </footer>

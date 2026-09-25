@@ -1,7 +1,6 @@
 ---
 import ItemFooter from "./ItemFooter.astro";
-import MarkdownBody from "./MarkdownBody.astro";
-import { feedTitle, formatUtc, type Post, type SiteData, type Tagging } from "../lib/site";
+import { feedTitle, formatUtc, renderFeedBody, type Post, type SiteData, type Tagging } from "../lib/site";
 
 interface Props {
   site: SiteData;
@@ -12,12 +11,13 @@ interface Props {
 
 const { site, post, root, reason } = Astro.props;
 const title = feedTitle(post);
+const body = renderFeedBody(site, post, root);
 ---
 
 <article class="feed-item">
   <a class="item-link" href={`${root}p/${post.id}/`} aria-label={post.type === "short" ? "글 보기" : title}></a>
   {post.type === "short" ? (
-    <div class="body"><MarkdownBody blocks={post.blocks} imagePrefix={`${root}images/`} /></div>
+    <div class="body" set:html={body}></div>
   ) : (
     <h2 class="feed-title">{title}</h2>
   )}
