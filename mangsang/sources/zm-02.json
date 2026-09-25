@@ -1,0 +1,9 @@
+{
+  "id": "zm-02",
+  "text": "{\n \"questions\": [\n  {\n   \"question\": \"그림을 누르면 원본을 어떻게 보여줄까요?\",\n   \"header\": \"원본 보기\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"화면 위에 크게 (추천)\",\n     \"description\": \"페이지를 떠나지 않고 어두운 배경 위에 원본을 화면 크기에 맞춰 띄웁니다. 배경을 누르거나 Esc를 누르면 닫힙니다. 작은 자바스크립트가 들어가고, 스크립트가 없으면 아래 방식으로 동작합니다.\"\n    },\n    {\n     \"label\": \"원본 파일을 새 탭으로\",\n     \"description\": \"그림이 원본 파일로 가는 링크가 되어 새 탭에서 열립니다. 자바스크립트가 필요 없고 가장 단순합니다. 확대와 축소는 브라우저 기능을 씁니다.\"\n    },\n    {\n     \"label\": \"원본 파일로 이동\",\n     \"description\": \"같은 탭에서 원본 파일로 갑니다. 돌아올 때는 뒤로 가기를 씁니다.\"\n    }\n   ]\n  },\n  {\n   \"question\": \"어디의 그림에 적용할까요?\",\n   \"header\": \"적용 범위\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"글과 소개 페이지 본문 (추천)\",\n     \"description\": \"글 페이지와 소개 페이지 본문의 그림에 적용합니다. 피드에서는 지금처럼 상자를 누르면 글로 갑니다.\"\n    },\n    {\n     \"label\": \"피드까지 포함\",\n     \"description\": \"피드에 나오는 짧은 글의 그림도 누르면 크게 보이고, 그림 밖을 눌러야 글로 갑니다.\"\n    }\n   ]\n  }\n ]\n}",
+  "speaker": "Claude (claude-opus-5-5)",
+  "locator": "session 917a4cc5-c9e3-4c56-919b-d30286207f34, question 49ca65a2-e830-4246-96ea-f6b3ca4b76dd at 2026-09-25T12:38:44.149Z",
+  "replies-to": "zm-01",
+  "verbatim-from": "host transcript",
+  "written_by": "mangsang 1.9.0"
+}
