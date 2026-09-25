@@ -4,3 +4,4 @@ hunsu-conflicts.md
 .mangsang/
 __pycache__/
 .claude/settings.local.json
+.orca/
