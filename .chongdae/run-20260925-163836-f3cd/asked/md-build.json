@@ -187,6 +187,80 @@
       },
       "disputed-tests": [],
       "reopened": null
+    },
+    {
+      "status": "done",
+      "summary": "markdown-it CommonMark/GFM 렌더링과 링크·이미지·코드·Q-link·패치 마커 규칙을 보완하고 README를 갱신했습니다. 131개 테스트와 빌드가 통과했습니다.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 0
+        },
+        {
+          "check": "npm run build",
+          "exit": 0
+        },
+        {
+          "check": "git diff --check",
+          "exit": 0
+        },
+        {
+          "check": "git diff -- tests",
+          "exit": 0
+        }
+      ],
+      "decisions": [],
+      "non-claims": [
+        "실제 브라우저 런타임 동작은 검증하지 않았습니다."
+      ],
+      "retried": {
+        "delegated": "검증자 세 번째 반려 4건: 두 건(그림 위 패치, 표 정렬)은 계획서에 기술 결정으로 정했고, 두 건(빈 참조 링크, 내부 표식 충돌)은 구현 결함 — 계획서 Q-post에 적고 다시 보냄",
+        "at": "2026-09-25T18:12:52+00:00",
+        "chongdae": "chongdae 1.11.0"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:588-605, 911-933",
+            "record_quote": "본문은 표준 마크다운(CommonMark) 전부에 ... 링크는 모든 모양([글자](주소), 참조 링크 [글자][이름], <https://…>)이 바깥 링크 규칙을 따른다.",
+            "tree_quote": "if (value[end] === \"[\") { ... const reference = value.slice(end + 1, referenceEnd); if (!references.has(referenceKey(reference))) { index = referenceEnd; continue; } ... }",
+            "why": "CommonMark의 collapsed reference link인 [글자][]는 이름을 글자 자체로 찾아야 하지만 빈 참조 이름을 조회해 후보에서 누락한다. markdown-it은 링크 토큰을 만들고 literalizeLinkChildren은 자식 글자를 제거하므로 결과가 빈 <a>가 되며 Q-link·패치 겹침 검사도 누락된다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:976-987",
+            "record_quote": "본문은 표준 마크다운(CommonMark) 전부에 GFM의 표와 취소선(~~글자~~)을 더한 문법이다.",
+            "tree_quote": "markdown.renderer.rules.th_open = compactOpen(\"th\"); ... markdown.renderer.rules.td_open = compactOpen(\"td\");",
+            "why": "GFM 표의 정렬 구분자(:--, :-:, --:)가 markdown-it 토큰의 style 속성으로 전달되지만 th_open·td_open 재정의가 모든 속성을 버린다. 따라서 표는 렌더링되어도 GFM 정렬 문법이 반영되지 않는다."
+          },
+          {
+            "kind": "anomaly",
+            "where": "src/lib/site.ts:855-875, 905, 1011-1015",
+            "record_quote": "",
+            "tree_quote": "const IMAGE_BAR_TOKEN = \"GUINIMAGEBAR\"; ... (token.attrGet(\"alt\") || token.content).replaceAll(IMAGE_BAR_TOKEN, \"|\")",
+            "why": "사용자가 유효한 이미지 대체 글자로 GUINIMAGEBAR를 쓰면 너비 표식이 없어도 alt가 |로 바뀐다. 내부 보호 토큰이 사용자 입력과 충돌해 이미지 설명을 임의로 손상시킨다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:1007-1015, 1029-1033; src/components/PostBody.astro:15-39",
+            "record_quote": "패치가 바꾸거나 넣은 영역에 테두리(아웃라인)가 표시되고",
+            "tree_quote": "const imageMarkup = `<img ... alt=\"${htmlEscape(image.alt, true)}\"...>`; ... restoreRenderSentinels(...patchStart...); ... const tokenPattern = /\\u0000(?:guin-link-\\d+|guin-patch-(?:start|end)-\\d+)\\u0000/g",
+            "why": "이미지 alt만 패치하는 정상 입력에서는 패치 마커가 생성된 img의 alt 속성 안에 복원된다. PostBody는 HTML 속성 안의 NUL 마커도 구조 토큰으로 잘라내므로 patch-region이 이미지 alt를 감싸지 못하고 HTML 속성을 깨뜨린다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh",
+          "session": "01a0d9b8-2195-7413-b11c-48031597bbf2",
+          "transcript": "md-build.verify.3.response.transcript.jsonl"
+        }
+      },
+      "disputed-tests": [],
+      "reopened": null
     }
   ],
   "touched": [
