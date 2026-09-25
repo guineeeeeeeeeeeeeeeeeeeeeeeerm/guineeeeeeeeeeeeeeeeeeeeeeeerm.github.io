@@ -5,10 +5,23 @@
   "dst": "concept:about",
   "evidence": "소개 페이지는 사이트에 하나만 있는 글로, `content/about.md`에 씁니다.",
   "seen": {
-    "README.md#소개 페이지 쓰기": "eb4d63a128f0",
+    "README.md#소개 페이지 쓰기": "a77b8b5da1b8",
     "concept:about": "fda8469aebbf"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each against the revised meaning (about-09: the post page's look): each quote still grounds or projects the about page — its existence, its file, the Korean org description and link, the required file, the Korean menu; none depended on the dark centered look (about-01's 'first page' wish is what about-09 revised). technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 바깥 링크 변경(source:el-02) 뒤 근거 문장을 다시 읽음: 8개 모두 글자 그대로 남아 있고, 개념 설명에 '소개 페이지에서만'을 담은 것이 없음"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Claude (claude-opus-5-5) re-read each against the revised meaning (about-09: the post page's look): each quote still grounds or projects the about page — its existence, its file, the Korean org description and link, the required file, the Korean menu; none depended on the dark centered look (about-01's 'first page' wish is what about-09 revised). technical, delegated (plan-07)"
+      },
+      "seen": {
+        "README.md#소개 페이지 쓰기": "eb4d63a128f0",
+        "concept:about": "fda8469aebbf"
+      },
+      "evidence": "소개 페이지는 사이트에 하나만 있는 글로, `content/about.md`에 씁니다."
+    }
+  ],
+  "written_by": "mangsang 1.9.0"
 }

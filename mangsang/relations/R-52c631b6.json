@@ -5,10 +5,23 @@
   "dst": "concept:about",
   "evidence": "def test_the_about_page_looks_like_a_post_page(self):",
   "seen": {
-    "tests/test_about.py:AboutPageContractTests": "1f9d35cfa66d",
+    "tests/test_about.py:AboutPageContractTests": "a3041ee3f1fa",
     "concept:about": "fda8469aebbf"
   },
   "confirmed": {
-    "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
-  }
+    "delegated": "Claude가 바깥 링크 변경(source:el-02) 뒤 근거 문장을 다시 읽음: 8개 모두 글자 그대로 남아 있고, 개념 설명에 '소개 페이지에서만'을 담은 것이 없음"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
+      },
+      "seen": {
+        "tests/test_about.py:AboutPageContractTests": "1f9d35cfa66d",
+        "concept:about": "fda8469aebbf"
+      },
+      "evidence": "def test_the_about_page_looks_like_a_post_page(self):"
+    }
+  ],
+  "written_by": "mangsang 1.9.0"
 }

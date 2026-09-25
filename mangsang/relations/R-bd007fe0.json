@@ -5,10 +5,23 @@
   "dst": "concept:about",
   "evidence": "사이트에 소개 페이지를 하나 둔다. 소개 글은 `content/about.md`에 쓰고",
   "seen": {
-    "plan/PLAN.md#Q-about — 소개 페이지": "b3675e268331",
+    "plan/PLAN.md#Q-about — 소개 페이지": "0ae17798cd97",
     "concept:about": "fda8469aebbf"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the feed layout and share records (run-20260924-082355-b147): the feed's order, what a short or titled post shows and the menu are unchanged by the new box, footer and badges; Q-about's text is unchanged (Q-share now follows it). Technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 바깥 링크 변경(source:el-02) 뒤 근거 문장을 다시 읽음: 8개 모두 글자 그대로 남아 있고, 개념 설명에 '소개 페이지에서만'을 담은 것이 없음"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Claude (claude-opus-5-5) re-read each after the feed layout and share records (run-20260924-082355-b147): the feed's order, what a short or titled post shows and the menu are unchanged by the new box, footer and badges; Q-about's text is unchanged (Q-share now follows it). Technical, delegated (plan-07)"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-about — 소개 페이지": "b3675e268331",
+        "concept:about": "fda8469aebbf"
+      },
+      "evidence": "사이트에 소개 페이지를 하나 둔다. 소개 글은 `content/about.md`에 쓰고"
+    }
+  ],
+  "written_by": "mangsang 1.9.0"
 }
