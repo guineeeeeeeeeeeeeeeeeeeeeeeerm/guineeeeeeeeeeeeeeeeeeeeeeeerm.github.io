@@ -1,0 +1,21 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.9.0",
+  "stage": "build",
+  "run": "run-20260925-105441-2c2e",
+  "task": "extlink-tests",
+  "role": "nitpick",
+  "target": ".",
+  "goal": "글 본문의 바깥 링크",
+  "brief": "plan/PLAN.md Q-post의 새 결정(source:el-02, 'Decided (owner, source:el-02 ...)' 문단)을 계약 테스트로 쓴다. 새 파일 tests/test_external_links.py: (1) 모든 유형(short/medium/long)의 글 본문에서 [글자](https://…)와 [글자](http://…)가 글 페이지에 <a href=\"주소\">글자</a>로 나온다. (2) 주소가 http(s)가 아니면(javascript:alert(1), p/hello.html, mailto:me@example.com, 빈 주소) 빌드 오류이고 오류 줄에 그 글 파일 경로가 있다. (3) 제목 없는 중간·긴 글의 첫 문단에 바깥 링크가 있으면 피드 제목 자리 글자에는 '글자'만 있고 주소는 없다. (4) 짧은 글의 피드 본문에서 바깥 링크가 <a href=\"주소\">로 나오고, 상자 링크(a.item-link) 안에 들어가지 않는다. (5) links.jsonl 링크의 앵커가 바깥 링크 [글자](주소)의 일부와 겹치거나 그 안에 들면 빌드 오류이고 오류 줄은 그 링크의 created 줄을 가리킨다. (6) 패치가 바깥 링크를 넣으면(insert-after 등) 적용된 본문에서 링크가 된다. (7) 패치 영역이 적용된 본문의 바깥 링크 일부만 덮으면 빌드 오류이고 오류 줄은 그 패치 줄을 가리킨다. tests/test_about.py의 test_external_links_are_links_only_on_the_about_page는 새 계약과 모순이므로 글 본문에서도 링크가 된다는 내용으로 바꾸고 이름도 맞게 고친다(다른 메서드는 그대로). 공통 도우미 tests/support.py는 수정하지 않는다. 지금 코드는 새 테스트를 통과하지 못하는 것이 정상이다.",
+  "closes": [
+    "Q-post"
+  ],
+  "contract": {},
+  "checks": [],
+  "tests": [
+    "tests/test_external_links.py",
+    "tests/test_about.py"
+  ],
+  "response": "./.chongdae/run-20260925-105441-2c2e/local/extlink-tests.response.json"
+}
