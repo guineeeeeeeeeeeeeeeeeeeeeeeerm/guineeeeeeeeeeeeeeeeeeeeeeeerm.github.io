@@ -1,0 +1,102 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260925-170739-68de",
+  "since": "932939ffacfd01c75ea22ef086224e8af7d19fb9",
+  "head": "7afbdf781868de85142c52816010ef37bf903332",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "cq-open",
+      "where": "erasure-when",
+      "text": "asked and not yet answered — a declared gap, not a failure",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "cq-open",
+      "where": "length-feel",
+      "text": "asked and not yet answered — a declared gap, not a failure",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "cq-open",
+      "where": "link-history-view",
+      "text": "asked and not yet answered — a declared gap, not a failure",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "cq-open",
+      "where": "patch-on-patch",
+      "text": "asked and not yet answered — a declared gap, not a failure",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "cq-open",
+      "where": "patch-view-edges",
+      "text": "asked and not yet answered — a declared gap, not a failure",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260924-125801-e877, run-20260925-080636-9882",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 88,
+      "text": "88 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 88)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-211351-2d8f",
+      "seen-in": "review-20260924-211351-2d8f",
+      "count": 27,
+      "text": "27 observation(s) written in review-20260924-211351-2d8f and unchanged since (delegated 27)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-215751-58e2",
+      "seen-in": "review-20260924-215751-58e2",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260924-215751-58e2 and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-215808-340b",
+      "seen-in": "review-20260924-215808-340b",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260924-215808-340b and unchanged since (delegated 3)"
+    }
+  ]
+}

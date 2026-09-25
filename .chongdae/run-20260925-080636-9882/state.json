@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/run@1",
-  "written_by": "chongdae 1.8.0",
-  "status": "running",
+  "written_by": "chongdae 1.9.0",
+  "status": "complete",
   "non-claims": [],
   "created": {
     "at": "2026-09-25T08:06:36+00:00",
@@ -16,5 +16,24 @@
       "hunsu": "1.4.1#9d1b44a52d8d",
       "mangsang": "1.5.0#64a8b2aa7c00"
     }
+  },
+  "open": [],
+  "reviewed": {
+    "by": {
+      "provider": "command",
+      "argv": [
+        "python3",
+        "{plugin:dwitbuk}/dwitbuk.py",
+        "review",
+        "--target",
+        "."
+      ]
+    },
+    "said": "review-20260925-170739-68de: 2 objection(s) (non-claim 2), 9 observation(s) since 932939ffacfd01c75ea22ef086224e8af7d19fb9",
+    "wrote": [
+      "reviews/review-20260925-170739-68de.json"
+    ],
+    "at": "2026-09-25T08:07:39+00:00",
+    "chongdae": "chongdae 1.9.0"
   }
 }
