@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.9.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "extlink-build",
     "role": "implementer",
@@ -32,21 +32,7 @@
   "seq": 3,
   "added": "2026-09-25T11:01:44+00:00",
   "touched_by_provider": [
-    "README.md",
-    "docs/assets/site.css",
-    "docs/images/bathroom-from-door.jpg",
-    "docs/images/bathroom-gpt-weird.png",
-    "docs/images/bathroom-gpt.png",
-    "docs/images/bathroom-model.png",
-    "docs/images/bathroom-shower-holder.jpg",
-    "docs/images/bathroom-towel-bar.jpg",
-    "docs/index.html",
-    "docs/p/20260925-103715/index.html",
-    "sitegen/assets/site.css",
-    "sitegen/markdown.py",
-    "sitegen/output.py",
-    "sitegen/patches.py",
-    "sitegen/records.py"
+    "sitegen/markdown.py"
   ],
   "performed_by": {
     "provider": "command",
@@ -77,20 +63,16 @@
     },
     "trace": {
       "changed": [
-        "update ./README.md",
-        "update ./sitegen/assets/site.css",
-        "update ./sitegen/markdown.py",
-        "update ./sitegen/output.py",
-        "update ./sitegen/patches.py",
-        "update ./sitegen/records.py"
+        "update ./sitegen/markdown.py"
       ],
-      "commands-run": 18,
-      "commands-failed": 2
+      "commands-run": 10,
+      "commands-failed": 1
     }
   },
   "non-claims": [
     "(provider) 브라우저에서 실제 클릭까지는 검증하지 않고 계약 테스트와 생성 HTML/CSS로 확인했습니다.",
-    "(provider) 빌드 실행으로 docs 생성물이 갱신되었습니다."
+    "(provider) 빌드 실행으로 docs 생성물이 갱신되었습니다.",
+    "(provider) 브라우저에서 실제 클릭 동작은 검증하지 않았습니다."
   ],
   "verified_by": {
     "provider": "command",
@@ -119,8 +101,8 @@
     },
     "trace": {
       "changed": [],
-      "commands-run": 17,
-      "commands-failed": 1
+      "commands-run": 20,
+      "commands-failed": 3
     }
   },
   "attempts": [
@@ -191,5 +173,72 @@
         "why": "1 finding(s)"
       }
     }
+  ],
+  "response": {
+    "status": "done",
+    "summary": "삭제 패치가 외부 링크 주소 안에 남기는 마커를 주소에서 제거하고 앵커 바깥에 보존해 유효한 HTML을 생성하도록 수정했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "python3 build.py",
+        "exit": 0
+      }
+    ],
+    "decisions": [],
+    "non-claims": [
+      "브라우저에서 실제 클릭 동작은 검증하지 않았습니다."
+    ],
+    "disputed-tests": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "dakdol",
+    "domain": "code"
+  },
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ]
+  ],
+  "touched": [
+    "README.md",
+    "docs/assets/site.css",
+    "docs/images/bathroom-from-door.jpg",
+    "docs/images/bathroom-gpt-weird.png",
+    "docs/images/bathroom-gpt.png",
+    "docs/images/bathroom-model.png",
+    "docs/images/bathroom-shower-holder.jpg",
+    "docs/images/bathroom-towel-bar.jpg",
+    "docs/index.html",
+    "docs/p/20260925-103715/index.html",
+    "sitegen/assets/site.css",
+    "sitegen/markdown.py",
+    "sitegen/output.py",
+    "sitegen/patches.py",
+    "sitegen/records.py"
   ]
 }
