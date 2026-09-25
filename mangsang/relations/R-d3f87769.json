@@ -1,0 +1,15 @@
+{
+  "id": "R-d3f87769",
+  "src": "src/components/ShareBadges.astro",
+  "predicate": "realizes",
+  "dst": "concept:share",
+  "evidence": "<a class=\"share-badge\" href={share.url} aria-label={label} title={label}>",
+  "seen": {
+    "src/components/ShareBadges.astro": "895c2b815324",
+    "concept:share": "ae8d0b44fd09"
+  },
+  "confirmed": {
+    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+  },
+  "written_by": "mangsang 1.9.0"
+}

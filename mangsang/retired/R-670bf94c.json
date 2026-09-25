@@ -1,0 +1,18 @@
+{
+  "id": "R-670bf94c",
+  "src": "source:plan-07t",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "Python 생성기 → docs/ (추천)",
+  "seen": {
+    "source:plan-07t": "5cdcc0c7bbaf",
+    "concept:site-build": "66de2d1eaeaa"
+  },
+  "confirmed": {
+    "delegated": "Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)"
+  },
+  "retired": {
+    "why": "site-build의 뜻이 Astro 생성기로 바뀜(source:as-03, 승인 source:as-05): 이 원문은 옛 뜻(표준 라이브러리 Python 생성기)의 근거였다"
+  },
+  "written_by": "mangsang 1.9.0"
+}

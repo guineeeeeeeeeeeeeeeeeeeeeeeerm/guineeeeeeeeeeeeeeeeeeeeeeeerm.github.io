@@ -1,0 +1,17 @@
+{
+  "id": "R-2050c498",
+  "src": "source:as-03",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "Astro (Node)",
+  "seen": {
+    "source:as-03": "e636c5e1abbc",
+    "concept:site-build": "dc5fb39ad68a"
+  },
+  "confirmed": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:as-05",
+    "approval-of": "source:as-04"
+  },
+  "written_by": "mangsang 1.9.0"
+}

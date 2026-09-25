@@ -3,6 +3,7 @@
   "host": "claude-code",
   "engines": {
     "claude-code": "2.1.282",
+    "node": "26.8.1",
     "python": "3.12.14"
   },
   "plugins": {

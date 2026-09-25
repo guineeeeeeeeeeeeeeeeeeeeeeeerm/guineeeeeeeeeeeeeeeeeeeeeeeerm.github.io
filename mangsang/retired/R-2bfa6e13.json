@@ -1,0 +1,30 @@
+{
+  "id": "R-2bfa6e13",
+  "src": "sitegen/markdown.py:render_block",
+  "predicate": "realizes",
+  "dst": "concept:post",
+  "evidence": "return inline(chr(10).join(value)).replace(chr(10), \"<br>\" + chr(10))",
+  "seen": {
+    "sitegen/markdown.py:render_block": "a240eb116cfa",
+    "concept:post": "700e2db936c8"
+  },
+  "confirmed": {
+    "delegated": "Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 함수 본문은 동작 불변(테스트 98개 통과, docs/ 바이트 동일), 증거는 이전 관계의 인용 그대로"
+      },
+      "seen": {
+        "sitegen/markdown.py:render_block": "1919e3365ab2",
+        "concept:post": "700e2db936c8"
+      },
+      "evidence": "return inline(chr(10).join(value)).replace(chr(10), \"<br>\" + chr(10))"
+    }
+  ],
+  "retired": {
+    "why": "Astro 이전(run-20260925-130036-08ab, source:as-05): sitegen/이 지워지고 같은 규칙이 src/·scripts/·public/assets/로 옮겨졌다; 개념은 그대로이고 새 파일에 다시 건다"
+  },
+  "written_by": "mangsang 1.9.0"
+}

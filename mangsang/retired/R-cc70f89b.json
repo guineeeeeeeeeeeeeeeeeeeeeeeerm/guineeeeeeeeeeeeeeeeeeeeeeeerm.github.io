@@ -1,0 +1,30 @@
+{
+  "id": "R-cc70f89b",
+  "src": "sitegen/pages.py:page_shell",
+  "predicate": "realizes",
+  "dst": "concept:ui-language",
+  "evidence": "lang=\"ko\"",
+  "seen": {
+    "sitegen/pages.py:page_shell": "9dac8c6e69ae",
+    "concept:ui-language": "e2a0a380d7e4"
+  },
+  "confirmed": {
+    "delegated": "Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다"
+      },
+      "seen": {
+        "sitegen/pages.py:page_shell": "2f13d9b2f92c",
+        "concept:ui-language": "e2a0a380d7e4"
+      },
+      "evidence": "lang=\"ko\""
+    }
+  ],
+  "retired": {
+    "why": "Astro 이전(run-20260925-130036-08ab, source:as-05): sitegen/이 지워지고 같은 규칙이 src/·scripts/·public/assets/로 옮겨졌다; 개념은 그대로이고 새 파일에 다시 건다"
+  },
+  "written_by": "mangsang 1.9.0"
+}

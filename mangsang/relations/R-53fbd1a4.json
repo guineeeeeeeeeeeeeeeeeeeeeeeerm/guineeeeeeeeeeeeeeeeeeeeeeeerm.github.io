@@ -1,0 +1,15 @@
+{
+  "id": "R-53fbd1a4",
+  "src": "src/components/FeedItem.astro",
+  "predicate": "realizes",
+  "dst": "concept:feed",
+  "evidence": "<article class=\"feed-item\">",
+  "seen": {
+    "src/components/FeedItem.astro": "5f0c7b491922",
+    "concept:feed": "033b1f6b1672"
+  },
+  "confirmed": {
+    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+  },
+  "written_by": "mangsang 1.9.0"
+}

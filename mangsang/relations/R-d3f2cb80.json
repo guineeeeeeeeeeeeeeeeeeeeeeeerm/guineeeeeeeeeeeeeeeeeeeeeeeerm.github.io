@@ -6,9 +6,22 @@
   "evidence": "def test_Q_build_same_input_is_byte_identical_on_second_build(self):",
   "seen": {
     "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
-    "concept:site-build": "66de2d1eaeaa"
+    "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
+      },
+      "seen": {
+        "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
+        "concept:site-build": "66de2d1eaeaa"
+      },
+      "evidence": "def test_Q_build_same_input_is_byte_identical_on_second_build(self):"
+    }
+  ],
+  "written_by": "mangsang 1.9.0"
 }

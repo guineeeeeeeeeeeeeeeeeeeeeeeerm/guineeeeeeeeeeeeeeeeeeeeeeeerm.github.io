@@ -1,0 +1,17 @@
+{
+  "id": "R-a274ede1",
+  "src": "source:as-04",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "**망상 개념 `site-build`**: 뜻 문장에서 \"표준 라이브러리만 쓰는 Python 생성기\"를 \"Astro 생성기\"로 고칩니다.",
+  "seen": {
+    "source:as-04": "189e7a017b46",
+    "concept:site-build": "dc5fb39ad68a"
+  },
+  "confirmed": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:as-05",
+    "approval-of": "source:as-04"
+  },
+  "written_by": "mangsang 1.9.0"
+}

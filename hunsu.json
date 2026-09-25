@@ -4,6 +4,7 @@
   ],
   "engines": {
     "claude-code": ">=2.1",
+    "node": ">=22",
     "python": ">=3.9"
   },
   "plugins": {

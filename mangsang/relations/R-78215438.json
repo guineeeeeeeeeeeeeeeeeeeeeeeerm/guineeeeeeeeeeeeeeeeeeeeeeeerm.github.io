@@ -1,0 +1,15 @@
+{
+  "id": "R-78215438",
+  "src": "src/components/PatchView.astro",
+  "predicate": "realizes",
+  "dst": "concept:patch-view",
+  "evidence": "<button type=\"button\" class=\"patch-view-toggle\" aria-pressed=\"false\">패치 보기</button>",
+  "seen": {
+    "src/components/PatchView.astro": "b30c94b710a9",
+    "concept:patch-view": "6be15e820155"
+  },
+  "confirmed": {
+    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+  },
+  "written_by": "mangsang 1.9.0"
+}

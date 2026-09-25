@@ -5,11 +5,11 @@
   "dst": "concept:share",
   "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다",
   "seen": {
-    "plan/PLAN.md#Q-share — 공유 기록과 배지": "a18dab829c5f",
+    "plan/PLAN.md#Q-share — 공유 기록과 배지": "e22fc5017ab8",
     "concept:share": "ae8d0b44fd09"
   },
   "confirmed": {
-    "delegated": "Q-share의 곳 목록에 bluesky(소유자가 준 공식 검정 로고)를 더했을 뿐, 절은 여전히 share 개념의 투영이다"
+    "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)"
   },
   "history": [
     {
@@ -38,6 +38,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-share — 공유 기록과 배지": "589705a1b816",
+        "concept:share": "ae8d0b44fd09"
+      },
+      "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다"
+    },
+    {
+      "confirmed": {
+        "delegated": "Q-share의 곳 목록에 bluesky(소유자가 준 공식 검정 로고)를 더했을 뿐, 절은 여전히 share 개념의 투영이다"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-share — 공유 기록과 배지": "a18dab829c5f",
         "concept:share": "ae8d0b44fd09"
       },
       "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다"

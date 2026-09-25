@@ -55,5 +55,50 @@
   },
   {
     "path": "tests/support.py"
+  },
+  {
+    "path": "scripts/build.mjs"
+  },
+  {
+    "path": "src/lib/site.ts"
+  },
+  {
+    "path": "src/layouts/BaseLayout.astro"
+  },
+  {
+    "path": "src/pages/index.astro"
+  },
+  {
+    "path": "src/pages/about/index.astro"
+  },
+  {
+    "path": "src/pages/tags/[tag]/index.astro"
+  },
+  {
+    "path": "src/components/FeedItem.astro"
+  },
+  {
+    "path": "src/components/ItemFooter.astro"
+  },
+  {
+    "path": "src/components/ShareBadges.astro"
+  },
+  {
+    "path": "src/components/Footnotes.astro"
+  },
+  {
+    "path": "src/components/IncomingLinks.astro"
+  },
+  {
+    "path": "src/components/PatchView.astro"
+  },
+  {
+    "path": "src/components/TagCloud.astro"
+  },
+  {
+    "path": "public/assets/time.js"
+  },
+  {
+    "path": "tests/test_frame.py"
   }
 ]

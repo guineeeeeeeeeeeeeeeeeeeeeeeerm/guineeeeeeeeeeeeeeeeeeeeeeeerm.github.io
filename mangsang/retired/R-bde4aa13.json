@@ -1,0 +1,30 @@
+{
+  "id": "R-bde4aa13",
+  "src": "sitegen/records.py:parse_links",
+  "predicate": "realizes",
+  "dst": "concept:link",
+  "evidence": "\"\"\"The link table: a link is created by one row (from, to, anchor) and changed by later rows of the same `link`.\"\"\"",
+  "seen": {
+    "sitegen/records.py:parse_links": "affe33d9c598",
+    "concept:link": "7fd16ce1dc5b"
+  },
+  "confirmed": {
+    "delegated": "Claude가 바깥 링크 변경(source:el-02) 뒤 근거 문장을 다시 읽음: 8개 모두 글자 그대로 남아 있고, 개념 설명에 '소개 페이지에서만'을 담은 것이 없음"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "리팩터링으로 이름 그대로 옮겨진 함수의 관계를 새 위치로 다시 건다: 증거는 이전 관계의 인용 그대로(parse_tags는 시그니처의 \"Post\" 따옴표가 빠진 것만 다르다)"
+      },
+      "seen": {
+        "sitegen/records.py:parse_links": "58f8fe3a5431",
+        "concept:link": "7fd16ce1dc5b"
+      },
+      "evidence": "\"\"\"The link table: a link is created by one row (from, to, anchor) and changed by later rows of the same `link`.\"\"\""
+    }
+  ],
+  "retired": {
+    "why": "Astro 이전(run-20260925-130036-08ab, source:as-05): sitegen/이 지워지고 같은 규칙이 src/·scripts/·public/assets/로 옮겨졌다; 개념은 그대로이고 새 파일에 다시 건다"
+  },
+  "written_by": "mangsang 1.9.0"
+}

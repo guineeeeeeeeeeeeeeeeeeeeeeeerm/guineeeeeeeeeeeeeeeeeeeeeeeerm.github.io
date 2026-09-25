@@ -6,9 +6,22 @@
   "evidence": "`/index.html`, `/p/hello.html` 대신 `/`, `/p/hello/`, `/about/` 같은 폴더 방식입니다.",
   "seen": {
     "source:about-07": "cce713be4246",
-    "concept:site-build": "66de2d1eaeaa"
+    "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "The owner's decisions of 2026-09-24 (feed as the first page with an always-present menu, a required about page, folder URLs as recommended and approved in about-08) grounded in their sources, proposed by Claude (claude-opus-5-5); technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 폴더 방식 주소는 새 빌드에서도 그대로(Q-build)라 이 원문과 그 승인은 여전히 site-build의 근거"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "The owner's decisions of 2026-09-24 (feed as the first page with an always-present menu, a required about page, folder URLs as recommended and approved in about-08) grounded in their sources, proposed by Claude (claude-opus-5-5); technical, delegated (plan-07)"
+      },
+      "seen": {
+        "source:about-07": "cce713be4246",
+        "concept:site-build": "66de2d1eaeaa"
+      },
+      "evidence": "`/index.html`, `/p/hello.html` 대신 `/`, `/p/hello/`, `/about/` 같은 폴더 방식입니다."
+    }
+  ],
+  "written_by": "mangsang 1.9.0"
 }

@@ -1,0 +1,18 @@
+{
+  "id": "R-7d96af0b",
+  "src": "sitegen/pages.py:tag_cloud",
+  "predicate": "realizes",
+  "dst": "concept:tag",
+  "evidence": "def tag_cloud(taggings: dict[str, list[Tagging]], root: str = \"\") -> str:",
+  "seen": {
+    "sitegen/pages.py:tag_cloud": "a22f0d66b6ba",
+    "concept:tag": "7bfee5732100"
+  },
+  "confirmed": {
+    "delegated": "세션이 확인한 바 여섯 함수의 소스가 이전 build.py와 글자 그대로 같다(docstring 포함): restore-comments가 되살린 docstring 말고는 바뀐 것이 없다"
+  },
+  "retired": {
+    "why": "Astro 이전(run-20260925-130036-08ab, source:as-05): sitegen/이 지워지고 같은 규칙이 src/·scripts/·public/assets/로 옮겨졌다; 개념은 그대로이고 새 파일에 다시 건다"
+  },
+  "written_by": "mangsang 1.9.0"
+}

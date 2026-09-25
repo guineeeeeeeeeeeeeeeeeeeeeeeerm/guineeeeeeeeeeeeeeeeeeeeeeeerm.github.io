@@ -3,13 +3,13 @@
   "src": "plan/PLAN.md#Q-build — 생성기와 출력",
   "predicate": "realizes",
   "dst": "concept:site-build",
-  "evidence": "`python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다.",
+  "evidence": "생성기는 Astro 프로젝트다.",
   "seen": {
-    "plan/PLAN.md#Q-build — 생성기와 출력": "ee857952331c",
-    "concept:site-build": "66de2d1eaeaa"
+    "plan/PLAN.md#Q-build — 생성기와 출력": "44fc727eee28",
+    "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "Q-share에 공식 로고 파일 결정(소유자 source:bd-03)을 더해 흑백 SVG 방식을 대신하게 했고 Q-build에 brands/ 출력을 적었을 뿐, 두 절은 여전히 share·site-build 개념의 투영이다"
+    "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: Q-build가 새 결정으로 다시 쓰여 인용을 새 문장으로"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-build — 생성기와 출력": "ce9fc1f4f761",
+        "concept:site-build": "66de2d1eaeaa"
+      },
+      "evidence": "`python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다."
+    },
+    {
+      "confirmed": {
+        "delegated": "Q-share에 공식 로고 파일 결정(소유자 source:bd-03)을 더해 흑백 SVG 방식을 대신하게 했고 Q-build에 brands/ 출력을 적었을 뿐, 두 절은 여전히 share·site-build 개념의 투영이다"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-build — 생성기와 출력": "ee857952331c",
         "concept:site-build": "66de2d1eaeaa"
       },
       "evidence": "`python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다."
