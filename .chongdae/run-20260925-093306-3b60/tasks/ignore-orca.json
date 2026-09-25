@@ -1,0 +1,40 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.9.0",
+  "status": "done",
+  "def": {
+    "id": "ignore-orca",
+    "role": "session",
+    "brief": ".gitignore에 .orca/를 더한다(소유자 승인 2026-09-25 'ㄱㄱ 억셉하고 푸시하자')",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-25T09:33:07+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-281_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.9.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 0,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-25T09:33:07+00:00"
+    }
+  }
+}

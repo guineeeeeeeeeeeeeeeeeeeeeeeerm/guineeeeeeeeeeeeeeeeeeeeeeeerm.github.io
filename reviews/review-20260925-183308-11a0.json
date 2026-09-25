@@ -1,0 +1,167 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260925-183308-11a0",
+  "since": "5cab68ce4d4ef11d4b9b0c8d718c3ffac8c24822",
+  "head": "ef7f1f0ad86f6700a06e6455e0af3d0892fec2a5",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-092801-6f55, run-20260925-093306-3b60",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "review-debt",
+      "where": "review-20260925-183155-0726",
+      "source": "dwitbuk",
+      "layer": "objection",
+      "text": "previous review review-20260925-183155-0726 still has 12 undisposed objection(s)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 87,
+      "text": "87 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 87)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-211351-2d8f",
+      "seen-in": "review-20260924-211351-2d8f",
+      "count": 27,
+      "text": "27 observation(s) written in review-20260924-211351-2d8f and unchanged since (delegated 27)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-215808-340b",
+      "seen-in": "review-20260924-215808-340b",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260924-215808-340b and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-182726-d3ab",
+      "seen-in": "review-20260925-182726-d3ab",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260925-182726-d3ab and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-183155-0726",
+      "seen-in": "review-20260925-183155-0726",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260925-183155-0726 and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-085816-3b5f/brand-build attempt 1: built.verified[2]",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-182726-d3ab): claim-unverified: 보고서에 반복 빌드 비교 명령의 실행 기록이 없고, 트리에는 단일 빌드·설치만 보이므로 해당 검증 주장을 확인할",
+      "first-seen": "review-20260925-182726-d3ab"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-085816-3b5f/brand-build attempt 2: built.verified[2]",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-182726-d3ab): claim-unverified: 반복 빌드·diff·4개 cmp의 실행 argv와 결과 기록이 없어 이 검증 주장을 확인할 수 없다. — rec",
+      "first-seen": "review-20260925-182726-d3ab"
+    },
+    {
+      "kind": "undisposed",
+      "where": ".orca/.gitignore",
+      "layer": "objection",
+      "text": "outside-run (first seen review-20260925-182726-d3ab): 1 file(s) changed since 901ac2274fbf42235df8ab4ad9fbc6303ddd1a35; no completed r",
+      "first-seen": "review-20260925-182726-d3ab"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-085816-3b5f, run-20260925-092801-6f55",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-183155-0726): no check decides this task  [x2]",
+      "first-seen": "review-20260925-183155-0726"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-085816-3b5f",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-182726-d3ab): brand-build: the validator refused the report for naming a check it did not see ",
+      "first-seen": "review-20260925-182726-d3ab"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-085816-3b5f",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-182726-d3ab): (provider) 브라우저별 실제 렌더링 픽셀 크기는 확인하지 않았습니다.",
+      "first-seen": "review-20260925-182726-d3ab"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-085816-3b5f",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-182726-d3ab): (provider) 외부 배포·호스팅 상태는 확인하지 않았습니다.",
+      "first-seen": "review-20260925-182726-d3ab"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-085816-3b5f",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-182726-d3ab): (provider) checks-ran: `동일 입력 연속 빌드 출력 비교 및 브랜드 파일 cmp` is claimed verified but ",
+      "first-seen": "review-20260925-182726-d3ab"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-085816-3b5f",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-182726-d3ab): (provider) 브라우저별 실제 렌더링 크기와 외부 배포 상태는 확인하지 않았습니다. — 2 task(s): brand-build, bran",
+      "first-seen": "review-20260925-182726-d3ab"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-085816-3b5f",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-182726-d3ab): (provider) checks-ran: `반복 빌드 후 diff -rq 및 4개 브랜드 파일 cmp` is claimed verified bu",
+      "first-seen": "review-20260925-182726-d3ab"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-080636-9882, run-20260925-085816-3b5f",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-182726-d3ab): no check decides this task  [x2]",
+      "first-seen": "review-20260925-182726-d3ab"
+    }
+  ]
+}
