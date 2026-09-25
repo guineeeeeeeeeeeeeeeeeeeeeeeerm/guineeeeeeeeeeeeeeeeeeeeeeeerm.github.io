@@ -1,6 +1,6 @@
 {
   "artifact-type": "hunsu/judgments@1",
-  "skills-fingerprint": "1ffe1f4aa8c1",
+  "skills-fingerprint": "4d3c7e06c20d",
   "skills": [
     "chongdae:run",
     "dwitbuk:review",
@@ -125,21 +125,6 @@
       "findings-fingerprint": "4f53cda18c2b"
     },
     {
-      "situation": "maintaining project concepts and relations",
-      "members": [
-        "mangsang:operate"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "5f9c04e43f59",
-      "members-text-fingerprint": "ec4fd3a696de",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [],
-      "findings-fingerprint": "4f53cda18c2b"
-    },
-    {
       "situation": "orchestrating a project run",
       "members": [
         "chongdae:run"
@@ -168,6 +153,22 @@
       ],
       "members-fingerprint": "3f7648f5e7f4",
       "members-text-fingerprint": "b87d7821135d",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "maintaining project concepts and relations",
+      "members": [
+        "mangsang:operate"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:dwitbuk",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "4bb9d0d39285",
+      "members-text-fingerprint": "d7fccedb833f",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"

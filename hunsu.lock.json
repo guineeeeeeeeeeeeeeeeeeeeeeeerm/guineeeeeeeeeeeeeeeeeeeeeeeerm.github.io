@@ -2,39 +2,39 @@
   "artifact-type": "hunsu/lock@1",
   "host": "claude-code",
   "engines": {
-    "claude-code": "2.1.281",
+    "claude-code": "2.1.282",
     "python": "3.12.14"
   },
   "plugins": {
     "hunsu": {
-      "version": "1.4.1",
+      "version": "1.5.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hunsu",
       "marketplace": "hunsu",
-      "fingerprint": "9d1b44a52d8d"
+      "fingerprint": "f3fea2d0a199"
     },
     "chongdae": {
-      "version": "1.8.0",
+      "version": "1.9.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/chongdae",
       "marketplace": "chongdae",
-      "fingerprint": "a7d06a58b898"
+      "fingerprint": "0114c810c90d"
     },
     "mangsang": {
-      "version": "1.5.0",
+      "version": "1.9.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/mangsang",
       "marketplace": "mangsang",
-      "fingerprint": "64a8b2aa7c00"
+      "fingerprint": "ae72ee081d63"
     },
     "dwitbuk": {
-      "version": "1.4.1",
+      "version": "1.5.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/dwitbuk",
       "marketplace": "dwitbuk",
-      "fingerprint": "48c339ce94a7"
+      "fingerprint": "91f8bd29297f"
     },
     "hacheong": {
-      "version": "1.3.0",
+      "version": "1.5.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hacheong",
       "marketplace": "hacheong",
-      "fingerprint": "eb6ef501bc62"
+      "fingerprint": "8a17dbbf6659"
     }
   },
   "skills": [
@@ -45,7 +45,7 @@
     "mangsang:operate"
   ],
   "denied": [],
-  "skills-fingerprint": "fec08792d064",
+  "skills-fingerprint": "4d3c7e06c20d",
   "hooks": [
     {
       "event": "SessionStart",
@@ -354,6 +354,27 @@
         "delegated": "judge codex gpt-5.6-luna: The run is already in progress, so chongdae can govern the writes before mangsang:operate maintains concepts and relations."
       }
     }
+  },
+  "record-paths": {
+    "hunsu": [
+      "hunsu-conflicts.md",
+      "hunsu-judgments.json",
+      "hunsu.json",
+      "hunsu.local.json",
+      "hunsu.lock.json"
+    ],
+    "chongdae": [
+      ".chongdae/"
+    ],
+    "mangsang": [
+      ".mangsang/",
+      "mangsang/"
+    ],
+    "dwitbuk": [
+      ".dwitbuk/",
+      "reviews/"
+    ],
+    "hacheong": []
   },
   "judge": "judged",
   "warnings": []
