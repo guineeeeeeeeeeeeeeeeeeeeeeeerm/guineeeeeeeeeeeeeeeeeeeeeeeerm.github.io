@@ -1,0 +1,8 @@
+{
+  "id": "as-01",
+  "text": "지금 피드랑 글이랑 소개 누를때 상단 메뉴 위치가 바뀌는 것이 어색해.\n- 페이지글 구조화하고 템플릿을 만들어서 사용하는 것이 좋아보여. \n- 지금 외부 패키지를 최대한 안 사용하는 식으로 구현하고 있는 것으로 보이는데, 그럴 필요 없어. 언어도 파이썬 강제할 필요 없어.",
+  "speaker": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+  "locator": "session 917a4cc5-c9e3-4c56-919b-d30286207f34, person e4b2b8e3-1818-4e55-8b1d-3914eb82f734 at 2026-09-25T12:52:58.504Z",
+  "verbatim-from": "host transcript",
+  "written_by": "mangsang 1.9.0"
+}

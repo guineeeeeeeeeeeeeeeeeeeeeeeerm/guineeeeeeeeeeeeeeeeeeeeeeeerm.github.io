@@ -1,0 +1,9 @@
+{
+  "id": "as-02",
+  "text": "{\n \"questions\": [\n  {\n   \"question\": \"사이트 생성기를 무엇으로 다시 지을까요? 패치·링크 표·태그 표처럼 이 사이트에만 있는 로직은 어느 도구를 쓰든 직접 짠 코드로 남습니다.\",\n   \"header\": \"생성기\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"Python + Jinja2 (추천)\",\n     \"description\": \"지금 로직과 테스트 111개를 살리고, HTML은 Jinja2 템플릿(공통 틀 base.html을 모든 페이지가 이어받음)으로, 마크다운은 markdown-it-py로 바꿉니다. 가장 안전하고 빠릅니다.\"\n    },\n    {\n     \"label\": \"Eleventy (Node)\",\n     \"description\": \"널리 쓰는 정적 사이트 생성기. Nunjucks 템플릿과 레이아웃을 기본으로 줍니다. 패치·링크 로직과 테스트를 자바스크립트로 옮겨야 해서 일이 큽니다.\"\n    },\n    {\n     \"label\": \"Astro (Node)\",\n     \"description\": \"컴포넌트 단위로 페이지를 짜는 최신 도구. 나중에 인터랙션(패치 보기, 확대 등)을 늘리기 좋지만, 옮기는 일은 가장 큽니다.\"\n    }\n   ]\n  },\n  {\n   \"question\": \"메뉴는 어디에 고정할까요?\",\n   \"header\": \"메뉴 위치\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"모든 페이지 같은 폭의 상단 띠 (추천)\",\n     \"description\": \"메뉴를 페이지 넓이와 상관없는 한 폭의 상단 띠에 둡니다. 피드의 태그 클라우드는 띠 아래 본문 영역에만 달립니다. 스크롤바 때문에 밀리지 않게 합니다.\"\n    },\n    {\n     \"label\": \"본문 왼쪽 끝에 맞춤\",\n     \"description\": \"모든 페이지의 본문 칸을 48rem으로 같게 두고, 피드의 태그 클라우드는 그 칸 바깥 오른쪽에 붙입니다. 메뉴는 본문과 같은 자리에 머물러요.\"\n    }\n   ]\n  }\n ]\n}",
+  "speaker": "Claude (claude-opus-5-5)",
+  "locator": "session 917a4cc5-c9e3-4c56-919b-d30286207f34, question 7f0e3b23-415a-441a-97e0-54bac6e7e9ee at 2026-09-25T12:53:49.020Z",
+  "replies-to": "as-01",
+  "verbatim-from": "host transcript",
+  "written_by": "mangsang 1.9.0"
+}

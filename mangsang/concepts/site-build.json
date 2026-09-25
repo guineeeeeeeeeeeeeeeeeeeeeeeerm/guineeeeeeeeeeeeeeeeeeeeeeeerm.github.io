@@ -1,7 +1,18 @@
 {
   "name": "site-build",
-  "means": "글·링크·패치 파일에서 표준 라이브러리만 쓰는 Python 생성기가 정적 HTML을 docs/에 만들고, Pages가 그것을 서비스한다.",
+  "means": "글과 기록 표에서 Astro 생성기가 공통 틀을 이어받는 템플릿으로 정적 HTML을 docs/에 만들고, Pages가 그것을 서비스한다.",
   "declared": {
-    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
-  }
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:as-05",
+    "approval-of": "source:as-04"
+  },
+  "history": [
+    {
+      "means": "글·링크·패치 파일에서 표준 라이브러리만 쓰는 Python 생성기가 정적 HTML을 docs/에 만들고, Pages가 그것을 서비스한다.",
+      "declared": {
+        "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+      }
+    }
+  ],
+  "written_by": "mangsang 1.9.0"
 }

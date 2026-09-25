@@ -1,13 +1,13 @@
 # guin-site — plan
 
-목표: 소유자가 평소에 생각하는 것을 마구잡이로 올리는 개인 사이트. 글(가끔 이미지)을 파일로 쓰고, 표준 라이브러리만 쓰는
-Python 생성기가 정적 HTML을 `docs/`에 만든다. GitHub Pages가 `docs/`를 서비스한다. 기획의 근거는 `mangsang/`의 원문과
+목표: 소유자가 평소에 생각하는 것을 마구잡이로 올리는 개인 사이트. 글(가끔 이미지)을 파일로 쓰고, Astro로 만든
+생성기가 정적 HTML을 `docs/`에 만든다(도구와 패키지는 필요한 대로 쓴다, `source:as-01`). GitHub Pages가 `docs/`를 서비스한다. 기획의 근거는 `mangsang/`의 원문과
 개념이다: 아래 각 절은 개념 하나 이상의 투영이며, 첫 줄에 그 개념을 적는다.
 
 용어: **글 파일**은 `content/posts/<id>.md`이고, 글의 `<id>`는 작성 시각 `YYYYMMDD-HHMMSS`(UTC)다(Q-post). **기록 표**는 글에
 붙는 기록을 종류마다 모은 파일이다: `content/links.jsonl`(Q-link), `content/patches.jsonl`(Q-patch), `content/shares.jsonl`
 (Q-share), `content/tags.jsonl`(Q-tag). 링크와 패치의 id는 영문 소문자·숫자·하이픈(`[a-z0-9-]+`)이다. **빌드**는
-`python3 build.py`이다.
+저장소에서 `npm run build`이다(Q-build).
 
 Decided (owner, `source:tb-01`, `source:tb-02`, `source:tb-04`; 제안 `source:tb-03`): 글에 붙는 기록은 관계형 DB의 표처럼 다룬다.
 기록 종류마다 JSONL 파일 하나가 표이고, 한 줄이 JSON 객체 하나(행 하나, 사건 하나)다. 표에는 줄을 덧붙이기만 하고 지난 줄을
@@ -20,29 +20,52 @@ Decided (owner, `source:tb-01`, `source:tb-02`, `source:tb-04`; 제안 `source:t
 
 Concept: `site-build`.
 
-`python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다. 결과는 `docs/index.html`(피드), 글마다
-`docs/p/<id>/index.html`, `docs/about/index.html`(소개, Q-about), `docs/assets/`(CSS, 자바스크립트, 공유 곳의 로고 `brands/`), `docs/images/`(`content/images/`의 복사본), 빈 파일
-`docs/.nojekyll`이다. 같은 입력이면 출력이 바이트 단위로 같다(빌드 시각 같은 값은 넣지 않는다). 표준 라이브러리만 쓴다.
-외부에서 가져오는 스크립트·글꼴·스타일은 없다.
+Decided (owner, `source:as-01`, `source:as-03`, `source:as-05`; 제안 `source:as-02`, `source:as-04`; 아래의 옛 결정 "표준 라이브러리만
+쓰는 Python 생성기"와 `source:rf-01`의 `build.py`·`sitegen/` 구조를 바꿈): 생성기는 Astro 프로젝트다. 외부 패키지를 쓸 수 있고
+언어도 Python에 묶이지 않는다. 페이지는 템플릿으로 짓는다 — 공통 틀 하나를 모든 페이지가 이어받고, 되풀이되는 조각은 컴포넌트다.
 
-입력이 잘못되면 빌드는 stderr에 잘못된 파일의 경로를 포함한 한 줄을 쓰고 종료 코드 1로 끝나며, `docs/`는 빌드 전 그대로
-남는다(새 출력은 임시 디렉터리에 만든 뒤 교체한다). 잘못된 입력은 이 문서의 각 절이 "빌드 오류"라고 적은 경우다.
+- **실행:** 저장소에서 처음 한 번 `npm install`, 그 뒤 `npm run build`. `npm run build`는 `node scripts/build.mjs`이고, 이 스크립트는
+  실행한 현재 작업 디렉터리의 `content/`를 읽어 같은 디렉터리의 `docs/`를 통째로 다시 만든다(Astro 프로젝트 자체는 스크립트가 있는
+  저장소다). `package.json`과 잠금 파일(`package-lock.json`)은 커밋하고 `node_modules/`는 무시한다.
+- **구조:** `src/layouts/BaseLayout.astro`(문서 머리, 상단 메뉴 띠, 본문 자리)를 피드·글·소개·태그 페이지(`src/pages/`)가 모두
+  이어받는다. 피드 상자, 공유 배지, 주석, 이 글을 가리키는 글, 태그 클라우드, 패치 보기 같은 조각은 `src/components/`의
+  컴포넌트다. 기록 표와 글 파싱, 마크다운 렌더, 패치 적용, 링크 앵커 같은 이 사이트만의 규칙은 TypeScript 모듈 `src/lib/`에 있다.
+  규칙 자체(이 문서의 각 절)는 바뀌지 않는다.
+- **정적 파일:** CSS와 자바스크립트(`site.css`, `time.js`, `zoom.js`)와 공유 곳의 로고(`brands/`)는 `public/assets/`에 있고
+  `docs/assets/`로 바이트 그대로 복사된다. Astro의 번들링·범위 지정 스타일·인라인 스크립트는 쓰지 않는다 — 페이지가 싣는 파일은 이
+  정적 파일뿐이고, 모든 링크는 지금처럼 각 페이지 위치 기준의 상대 경로다. 외부에서 가져오는 스크립트·글꼴·스타일은 없다(패키지는
+  빌드할 때만 쓴다).
+- **출력:** `docs/index.html`(피드), 글마다 `docs/p/<id>/index.html`, `docs/about/index.html`(소개, Q-about),
+  `docs/tags/<태그>/index.html`(Q-tag), `docs/assets/`, `docs/images/`(`content/images/`의 복사본), 빈 파일 `docs/.nojekyll`. 그 밖의
+  파일(예: Astro의 `_astro/`)은 만들지 않는다. 같은 입력이면 출력이 바이트 단위로 같다(빌드 시각 같은 값은 넣지 않는다).
+- **오류:** 입력이 잘못되면 빌드는 stderr에 잘못된 파일의 경로를 포함한 줄을 쓰고 종료 코드 1로 끝나며, `docs/`는 빌드 전 그대로
+  남는다 — Astro는 출력 폴더를 먼저 비우므로, 빌드 스크립트가 새 출력을 임시 디렉터리에 만든 뒤 교체한다. 잘못된 입력은 이 문서의
+  각 절이 "빌드 오류"라고 적은 경우다.
+- **본문 문법:** Q-post의 부분집합 그대로다(`source:as-04`의 권고 — 옮긴 뒤 필요할 때 넓힌다). 검증된 마크다운 라이브러리를 써도
+  되지만, 부분집합 밖의 문법은 지금처럼 글자로 보인다.
+- **배포:** 옮기는 동안에는 지금처럼 로컬에서 빌드한 `docs/`를 커밋하고 Pages가 main의 `/docs`를 서비스한다(`source:as-04`의
+  권고). GitHub Actions 배포는 나중에 따로 정한다.
+- **테스트:** 계약 테스트는 `tests/`의 Python unittest로 남고 `python3 -m unittest discover -s tests`로 돈다(`source:as-04`의
+  권고). 테스트는 빌드를 밖에서 실행하고 결과만 본다 — `tests/support.py`가 새 임시 디렉터리를 작업 디렉터리로 두고
+  `node <저장소>/scripts/build.mjs`를 실행한다. 정적 파일을 바이트 그대로 비교하는 테스트의 원본은 `public/assets/`다.
+- **엔진:** Node `>=22`(hunsu.json `engines`), 테스트용 Python `>=3.9`.
 
-Decided (technical, delegated): `build.py`는 저장소 루트에 있고, 실행한 현재 작업 디렉터리의 `content/`를 읽어 같은 디렉터리의
-`docs/`에 쓴다. 테스트는 `build.py`를 테스트 파일 위치 기준의 경로로 찾아 `sys.executable`로 실행하며, 작업 디렉터리를 새 임시
-디렉터리로 두어 테스트마다 자기 `content/`와 `docs/`를 갖는다. 테스트는 `tests/`에 있고 `python3 -m unittest discover -s tests`로
-돈다.
+Decided (owner, `source:as-03`, 제안 `source:as-02`): 모든 페이지 맨 위에 같은 폭의 메뉴 띠가 있고, "피드"와 "소개"는 어느 페이지에서나
+화면의 같은 자리에 있다. Decided (technical, session): 띠는 `<header class="site-header"><nav class="site-nav"><a …>피드</a><a …>소개</a></nav></header>`이고
+화면 폭 전체에 걸친다. 띠 안쪽(`.site-nav`)과 그 아래 본문 틀(`.frame`)은 모든 페이지에서 같은 최대 폭 `70rem`, 가운데 정렬, 좌우
+여백 `1.25rem`이다. 본문 칸은 틀의 왼쪽에 붙은 `48rem`이고, 피드는 넓은 화면(`64rem` 이상)에서 그 오른쪽에 태그 클라우드 칸을
+둔다 — 페이지마다 틀의 폭은 바뀌지 않는다. 스크롤바가 생겨도 자리가 밀리지 않도록 `html { scrollbar-gutter: stable; }`이다.
 
-Decided (owner, `source:rf-01`, `source:rf-03`; 제안 `source:rf-02`): 생성기는 동작을 바꾸지 않고 역할별 모듈로 나눈다. `build.py`는
-진입점으로만 남고(실행 명령은 그대로 `python3 build.py`), 나머지는 저장소 루트의 패키지 `sitegen/`에 있다 — 기록 표와 글
-파싱(`records`), 마크다운 렌더(`markdown`), 패치 적용과 패치 보기(`patches`), 페이지 렌더(`pages`: 피드·글·태그·소개와 공통 틀),
-출력 쓰기와 빌드 순서(`output`). CSS와 자바스크립트는 파이썬 문자열이 아니라 `sitegen/assets/`의 실제 파일이고, 빌드가 그대로
-`docs/assets/`로 복사한다. 테스트가 되풀이하던 도우미(임시 사이트 만들기, 빌드 실행, 출력 읽기)는 `tests/support.py` 한 곳에
-있고 각 테스트 파일은 그것을 가져다 쓴다; 테스트가 확인하는 계약은 바뀌지 않는다. 리팩터링의 판정은 두 가지다: 모든 테스트가
-통과하고, 저장소의 `content/`로 빌드한 `docs/`가 리팩터링 전과 바이트 단위로 같다.
+Decided (owner, `source:as-04`, `source:as-05`): 옮기는 순서는 셋이다 — (1) 틀: Astro 뼈대, 빌드 스크립트, `BaseLayout`과 상단 띠,
+글·피드·소개 페이지; (2) 고유 로직: 기록 표, 링크, 패치와 패치 보기, 공유, 태그; (3) 정리: `build.py`·`sitegen/` 삭제, README,
+hunsu.json 엔진, 망상 관계. 조각마다 계약 테스트가 먼저 있고, 모든 조각이 끝나면 테스트 전부가 새 빌드로 통과한다. 옮기기 전과
+후의 `docs/`는 상단 띠와 페이지 틀의 마크업·CSS만큼만 다르다.
 
-Decided (technical, delegated): 패키지 이름은 제안의 `site/`가 아니라 `sitegen/`이다 — `site`는 파이썬 표준 라이브러리 모듈
-이름이라 가려질 수 있다.
+(옛 결정, 위의 결정으로 바뀜) `python3 build.py`는 `content/`를 읽고 `docs/`를 통째로 다시 만든다. 표준 라이브러리만 쓴다.
+`build.py`는 진입점이고 나머지는 패키지 `sitegen/`(`records`, `markdown`, `patches`, `pages`, `output`)에 있으며 CSS와
+자바스크립트는 `sitegen/assets/`의 파일이다(`source:rf-01`, `source:rf-03`). 테스트는 `build.py`를 `sys.executable`로 실행하고,
+도우미는 `tests/support.py`에 있다. 패키지 이름이 `site/`가 아니라 `sitegen/`인 것은 표준 라이브러리 모듈 `site`를 가리지 않기
+위해서였다.
 
 Decided (owner, `source:about-06`, `source:about-08`): 주소는 폴더 방식이다 — 첫 화면 `/`, 글 `/p/<id>/`, 소개 `/about/`.
 사이트가 만드는 링크는 파일 이름(`index.html`, `.html`)을 쓰지 않고 폴더로 건다: 피드로는 `./`(글 페이지에서 `../../`,
@@ -101,7 +124,7 @@ Decided (owner, `source:zm-03`, 요청 `source:zm-01`, 제안 `source:zm-02`): �
 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게 보인다. 배경을 누르거나 Esc를 누르면 닫힌다. 피드에서는 지금처럼
 상자를 누르면 글로 간다(피드의 그림에는 이 동작이 없다). Decided (technical, session): 본문의 그림은 원본 파일로 가는 링크
 `<a class="image-zoom" href="<그림의 src와 같은 주소>"><img …></a>`로 감싸진다 — 스크립트가 없으면 이 링크가 원본 파일을 같은 탭에서
-연다. 스크립트 `assets/zoom.js`(`sitegen/assets/zoom.js`를 바이트 그대로 복사)가 글 페이지와 소개 페이지에만 `defer`로 실린다. 이
+연다. 스크립트 `assets/zoom.js`(`public/assets/zoom.js`를 바이트 그대로 복사)가 글 페이지와 소개 페이지에만 `defer`로 실린다. 이
 스크립트는 `.image-zoom` 링크의 기본 동작을 막고, 원본 그림 하나를 담은 겹침 층(`.zoom-overlay`, 화면 전체, 어두운 반투명 배경,
 그림은 `max-width: 100vw; max-height: 100vh` 안에서 비율 유지)을 띄운다. 겹침 층 어디를 눌러도, Esc를 눌러도 닫힌다. 그림의 표시
 너비 `|N`은 본문에서의 크기만 정하고, 겹침 층에서는 원본이 화면에 맞춰진다. 그림이 바깥 링크 안에 있는 경우는 없다(바깥 링크의
@@ -240,17 +263,17 @@ Concept: `post`, `site-build`.
 
 저장소 루트의 `README.md`는 이 사이트에 글을 올리는 사람을 위한 한국어 안내서다. 새 글을 쓰는 법(파일 위치와 이름, 헤더의
 `written`·`type`·`title` 각각의 규칙과 예시, 본문에 쓸 수 있는 문법, 이미지 넣는 법), 링크를 거는 법(링크 파일의 모양,
-사유를 바꾸거나 지우는 법), 패치를 붙이는 법(패치 파일의 모양, `op` 네 가지), 사이트를 만드는 명령(`python3 build.py`)과 결과가
+사유를 바꾸거나 지우는 법), 패치를 붙이는 법(패치 파일의 모양, `op` 네 가지), 사이트를 만드는 명령(처음 한 번 `npm install`, 그 뒤 `npm run build`)과 결과가
 생기는 곳(`docs/`), 빌드 오류가 났을 때 무엇을 보면 되는지를 담는다. 안내서의 예시를 그대로 따라 한 글·링크·패치는 빌드 오류 없이
 만들어진다. 안내서에 적힌 규칙은 이 계획서의 규칙과 어긋나지 않는다.
 
 Decided after quibble (readme-tests, technical, delegated): 한국어 — 코드 블록 밖 본문 글자 중 한글이 절반 이상이다. 담는다 —
 새 글, 링크, 패치, 빌드 각각에 `##` 절이 있고, 새 글 절에 `written`·`type`·`title`, 패치 절에 `op` 네 가지, 빌드 절에
-`python3 build.py`와 `docs/`, 그리고 빌드 오류가 stderr에 파일 경로를 담은 한 줄로 나온다는 설명이 있다. 예시는 정보 문자열에 종류와
+`npm run build`와 `docs/`, 그리고 빌드 오류가 stderr에 파일 경로를 담은 한 줄로 나온다는 설명이 있다. 예시는 정보 문자열에 종류와
 경로를 적은 코드 블록이다: ```` ```post content/posts/<id>.md ````, ```` ```link content/links.jsonl ````,
 ```` ```patch content/patches.jsonl ````(표로 옮김 `source:tb-04` — 블록의 줄들이 그 표의 줄들이다). 안내서에는 태그를 달고 떼는 절과
 ```` ```tag content/tags.jsonl ```` 예시도 있다. 테스트는 그 블록들을 그대로 임시 사이트에 쓰고 빌드해, 글 페이지가 생기고, 링크의
-`[n]`이 붙고, 패치가 적용된 글자가 보이는지 본다. 계획서와 어긋나지 않는다 — 예시가 실제 `build.py`로 오류 없이 빌드되는 것이 그
+`[n]`이 붙고, 패치가 적용된 글자가 보이는지 본다. 계획서와 어긋나지 않는다 — 예시가 실제 빌드로 오류 없이 빌드되는 것이 그
 증거다(빌드가 이 계획서의 규칙을 강제한다); 그 밖의 문장 대 문장 일치는 기계로 관찰하지 않는다(non-claim).
 
 Decided by the builder (readme-3, technical, accepted as delegated): 안내서는 계획서의 어휘(절 id, 개념 이름)를 쓰지 않고, 제목은 글쓴이가
@@ -302,7 +325,7 @@ Decided (owner, `source:ic-01`, `source:ic-03`; 제안 `source:ic-02`): 아이�
 배지가 몇 개든 페이지에 아이콘 모양(`<path>` 등)이 되풀이되지 않는다.
 
 Decided (owner, `source:bd-01`, `source:bd-03`; 제안 `source:bd-02`): 배지의 아이콘은 직접 그린 모양이 아니라 각 곳이 브랜드
-자료로 배포하는 공식 로고 파일이다. 소유자가 받은 공식 파일을 `sitegen/assets/brands/<곳>.<svg|png>`에 두고 — X `x.svg`,
+자료로 배포하는 공식 로고 파일이다. 소유자가 받은 공식 파일을 `public/assets/brands/<곳>.<svg|png>`에 두고 — X `x.svg`,
 Threads `threads.svg`, LinkedIn `linkedin.png`(공식 묶음에 벡터 파일이 없다), Substack `substack.png`, Bluesky `bluesky.svg`(공식 미디어 키트의 검정 나비) — 빌드는 그 파일을 바이트
 그대로 `docs/assets/brands/`에 복사한다. 배지는 그 파일을 가리키는 `<img>`이고(`src`는 페이지 기준 상대 경로
 `<root>assets/brands/<곳>.<확장자>`, `alt=""`, 곳의 이름은 전처럼 링크의 `aria-label`), 모양·비율을 바꾸지 않는다. 각 곳의
