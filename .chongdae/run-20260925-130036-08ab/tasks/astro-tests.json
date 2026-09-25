@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.10.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "astro-tests",
     "role": "nitpick",
@@ -26,7 +26,14 @@
   "non-claims": [
     "no check decides this task; done means the agent said so"
   ],
-  "touched_by_provider": [],
+  "touched_by_provider": [
+    "tests/support.py",
+    "tests/test_about.py",
+    "tests/test_frame.py",
+    "tests/test_image_zoom.py",
+    "tests/test_readme.py",
+    "tests/test_shares.py"
+  ],
   "performed_by": {
     "provider": "command",
     "argv": [
@@ -55,9 +62,17 @@
       }
     },
     "trace": {
-      "changed": [],
-      "commands-run": 0,
-      "commands-failed": 0
+      "changed": [
+        "update ./tests/support.py",
+        "update ./tests/test_about.py",
+        "add ./tests/test_frame.py",
+        "update ./tests/test_image_zoom.py",
+        "update ./tests/test_readme.py",
+        "update ./tests/test_shares.py",
+        "update ./tests/test_frame.py"
+      ],
+      "commands-run": 13,
+      "commands-failed": 7
     }
   },
   "attempts": [
@@ -85,5 +100,46 @@
         "commands-failed": 0
       }
     }
+  ],
+  "response": {
+    "status": "done",
+    "summary": "Added Q-build frame/output contract tests and updated the requested test helpers and legacy paths. Targeted tests fail as intended because scripts/build.mjs is absent.",
+    "tests": [
+      "tests/support.py",
+      "tests/test_frame.py",
+      "tests/test_about.py",
+      "tests/test_image_zoom.py",
+      "tests/test_shares.py",
+      "tests/test_readme.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-build",
+        "tests": [
+          "test_Q_build_every_page_has_the_same_frame_and_ordered_feed_about_nav",
+          "test_Q_build_site_css_uses_stable_gutter_and_shared_seventy_rem_widths",
+          "test_Q_build_docs_root_has_only_the_declared_top_level_entries",
+          "test_Q_build_same_content_twice_produces_byte_identical_docs",
+          "test_Q_build_invalid_input_exits_one_names_the_file_and_preserves_existing_docs"
+        ]
+      }
+    ],
+    "non-claims": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  },
+  "checks": [],
+  "touched": [
+    "tests/support.py",
+    "tests/test_about.py",
+    "tests/test_frame.py",
+    "tests/test_image_zoom.py",
+    "tests/test_readme.py",
+    "tests/test_shares.py"
   ]
 }

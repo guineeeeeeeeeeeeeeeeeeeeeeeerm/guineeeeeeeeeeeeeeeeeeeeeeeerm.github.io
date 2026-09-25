@@ -21,5 +21,25 @@
     "tests/test_shares.py",
     "tests/test_readme.py"
   ],
-  "response": "./.chongdae/run-20260925-130036-08ab/local/astro-tests.response.json"
+  "response": "./.chongdae/run-20260925-130036-08ab/local/astro-tests.response.json",
+  "attempts": [
+    {
+      "status": "failed",
+      "summary": "codex exited 1 without a JSON answer",
+      "verified": null,
+      "decisions": null,
+      "non-claims": [
+        "the host session did not finish; nothing it did is verified"
+      ],
+      "retried": {
+        "delegated": "codex가 'Selected model is at capacity'로 첫 턴도 못 함 — 일시적 용량 문제라 그대로 다시 보냄",
+        "at": "2026-09-25T13:02:21+00:00",
+        "chongdae": "chongdae 1.10.0"
+      },
+      "review": null,
+      "disputed-tests": null,
+      "reopened": null
+    }
+  ],
+  "touched": []
 }
