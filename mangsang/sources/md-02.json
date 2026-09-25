@@ -1,0 +1,9 @@
+{
+  "id": "md-02",
+  "text": "{\n \"questions\": [\n  {\n   \"question\": \"본문에서 새로 쓸 수 있게 할 마크다운 기능을 골라 주세요.\",\n   \"header\": \"열 문법\",\n   \"multiSelect\": true,\n   \"options\": [\n    {\n     \"label\": \"표준 마크다운 전부 (추천)\",\n     \"description\": \"번호 목록, 중첩 목록, 코드 블록(```), 제목 ####~######, 가로줄(---), 인용 안의 목록이나 문단 등 CommonMark 문법 전체. 지금은 인용 안의 '- '가 목록이 아니라 글자로 보이는데, 이것도 목록이 됩니다.\"\n    },\n    {\n     \"label\": \"표 (GFM) (추천)\",\n     \"description\": \"| 칸 | 칸 | 모양의 표.\"\n    },\n    {\n     \"label\": \"취소선 (GFM) (추천)\",\n     \"description\": \"~~지운 글자~~.\"\n    },\n    {\n     \"label\": \"각주\",\n     \"description\": \"본문의 [^1]과 글 아래 각주. 지금 글 사이 링크가 [n] 주석을 쓰고 있어서, 번호가 섞이지 않게 규칙을 따로 정해야 합니다. 패키지를 하나 더 설치합니다.\"\n    }\n   ]\n  },\n  {\n   \"question\": \"본문에 쓴 HTML 태그(<img>, <br> 등)는 어떻게 할까요?\",\n   \"header\": \"HTML\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"지금처럼 글자로 (추천)\",\n     \"description\": \"태그로 해석하지 않고 글자 그대로 보여줍니다. 이미지 경로 검사나 패치 영역 같은 규칙을 우회하지 못하고, 안전합니다.\"\n    },\n    {\n     \"label\": \"HTML 허용\",\n     \"description\": \"본문에 쓴 HTML이 그대로 태그가 됩니다. 표현은 자유롭지만, 그림 확대나 패치 보기가 그 부분에서는 동작을 보장하지 않습니다.\"\n    }\n   ]\n  },\n  {\n   \"question\": \"이번에 브라우저 자동 테스트도 넣을까요? (이의 5번 묶음: 클릭, Esc, hover 미검증)\",\n   \"header\": \"브라우저\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"넣기 (추천)\",\n     \"description\": \"Playwright로 그림 확대(클릭·Esc), 패치 보기 토글과 hover, 메뉴 위치가 페이지마다 같은지를 실제 브라우저에서 확인합니다. 브라우저 설치가 필요하고 테스트 시간이 늘어납니다.\"\n    },\n    {\n     \"label\": \"이번엔 빼기\",\n     \"description\": \"마크다운만 하고, 브라우저 동작은 직접 눌러 보고 이의를 처리합니다.\"\n    }\n   ]\n  }\n ]\n}",
+  "speaker": "Claude (claude-opus-5-5)",
+  "locator": "session 917a4cc5-c9e3-4c56-919b-d30286207f34, question b53b341f-7996-4611-8097-e71a4e4947d2 at 2026-09-25T16:36:21.890Z",
+  "replies-to": "md-01",
+  "verbatim-from": "host transcript",
+  "written_by": "mangsang 1.10.0"
+}

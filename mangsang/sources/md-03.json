@@ -1,0 +1,9 @@
+{
+  "id": "md-03",
+  "text": "Your questions have been answered: \"본문에서 새로 쓸 수 있게 할 마크다운 기능을 골라 주세요.\"=\"표준 마크다운 전부 (추천), 표 (GFM) (추천), 취소선 (GFM) (추천)\", \"본문에 쓴 HTML 태그(<img>, <br> 등)는 어떻게 할까요?\"=\"지금처럼 글자로 (추천)\", \"이번에 브라우저 자동 테스트도 넣을까요? (이의 5번 묶음: 클릭, Esc, hover 미검증)\"=\"이번엔 빼기\". You can now continue with these answers in mind.",
+  "speaker": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+  "locator": "session 917a4cc5-c9e3-4c56-919b-d30286207f34, answer 8d10b12f-fbc5-4b57-bedc-286aab3f83d5 at 2026-09-25T16:38:16.306Z",
+  "replies-to": "md-02",
+  "verbatim-from": "host transcript",
+  "written_by": "mangsang 1.10.0"
+}
