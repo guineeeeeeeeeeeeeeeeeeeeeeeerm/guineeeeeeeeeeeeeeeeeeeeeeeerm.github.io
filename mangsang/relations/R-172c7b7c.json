@@ -5,11 +5,11 @@
   "dst": "concept:post-type",
   "evidence": "유형은 쓰기 전에 고르는 것이며,\n  빌드는 분량으로 유형을 판단하지 않는다.",
   "seen": {
-    "plan/PLAN.md#Q-post — 글 하나": "34a7c369abd8",
+    "plan/PLAN.md#Q-post — 글 하나": "0043906c5fe5",
     "concept:post-type": "dce6f00332ed"
   },
   "confirmed": {
-    "delegated": "Claude가 링크 색 결정(source:el-03)을 Q-post에 더한 뒤 다시 읽음: 두 근거 문장이 글자 그대로 남아 있음"
+    "delegated": "Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음"
   },
   "history": [
     {
@@ -28,6 +28,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-post — 글 하나": "4766badb7126",
+        "concept:post-type": "dce6f00332ed"
+      },
+      "evidence": "유형은 쓰기 전에 고르는 것이며,\n  빌드는 분량으로 유형을 판단하지 않는다."
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 링크 색 결정(source:el-03)을 Q-post에 더한 뒤 다시 읽음: 두 근거 문장이 글자 그대로 남아 있음"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-post — 글 하나": "34a7c369abd8",
         "concept:post-type": "dce6f00332ed"
       },
       "evidence": "유형은 쓰기 전에 고르는 것이며,\n  빌드는 분량으로 유형을 판단하지 않는다."
