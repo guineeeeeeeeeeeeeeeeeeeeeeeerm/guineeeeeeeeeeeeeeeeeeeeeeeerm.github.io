@@ -1,0 +1,11 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.9.0",
+  "goal": "Bluesky 배지 추가",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  },
+  "from": "plan/PLAN.md"
+}
