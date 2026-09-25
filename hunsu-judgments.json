@@ -1,6 +1,6 @@
 {
   "artifact-type": "hunsu/judgments@1",
-  "skills-fingerprint": "4d3c7e06c20d",
+  "skills-fingerprint": "7553781569c2",
   "skills": [
     "chongdae:run",
     "dwitbuk:review",
@@ -95,21 +95,6 @@
       "findings-fingerprint": "6237d7d16752"
     },
     {
-      "situation": "building a slice",
-      "members": [
-        "hacheong:build"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "f80598e2c7d4",
-      "members-text-fingerprint": "b803646caff9",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [],
-      "findings-fingerprint": "4f53cda18c2b"
-    },
-    {
       "situation": "writing tests for a slice",
       "members": [
         "hacheong:nitpick"
@@ -120,22 +105,6 @@
       ],
       "members-fingerprint": "12e8666adb0d",
       "members-text-fingerprint": "3b92ebe2c312",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [],
-      "findings-fingerprint": "4f53cda18c2b"
-    },
-    {
-      "situation": "orchestrating a project run",
-      "members": [
-        "chongdae:run"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:dwitbuk",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "d1ffbb6a845d",
-      "members-text-fingerprint": "ed0ae57a360d",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"
@@ -169,6 +138,38 @@
       ],
       "members-fingerprint": "4bb9d0d39285",
       "members-text-fingerprint": "d7fccedb833f",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "building a slice",
+      "members": [
+        "hacheong:build"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:dwitbuk",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "2a6ffed16b8e",
+      "members-text-fingerprint": "e2577a2f0350",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "orchestrating a project run",
+      "members": [
+        "chongdae:run"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:dwitbuk",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "33a8a91ef3aa",
+      "members-text-fingerprint": "0921c9d03554",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"

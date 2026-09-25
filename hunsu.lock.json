@@ -13,10 +13,10 @@
       "fingerprint": "f3fea2d0a199"
     },
     "chongdae": {
-      "version": "1.9.0",
+      "version": "1.10.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/chongdae",
       "marketplace": "chongdae",
-      "fingerprint": "0114c810c90d"
+      "fingerprint": "f523f00461ac"
     },
     "mangsang": {
       "version": "1.9.0",
@@ -25,16 +25,16 @@
       "fingerprint": "ae72ee081d63"
     },
     "dwitbuk": {
-      "version": "1.5.0",
+      "version": "1.6.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/dwitbuk",
       "marketplace": "dwitbuk",
-      "fingerprint": "91f8bd29297f"
+      "fingerprint": "8169e1c83b73"
     },
     "hacheong": {
-      "version": "1.5.0",
+      "version": "1.6.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hacheong",
       "marketplace": "hacheong",
-      "fingerprint": "8a17dbbf6659"
+      "fingerprint": "f25d5d40a7b1"
     }
   },
   "skills": [
@@ -45,7 +45,7 @@
     "mangsang:operate"
   ],
   "denied": [],
-  "skills-fingerprint": "4d3c7e06c20d",
+  "skills-fingerprint": "7553781569c2",
   "hooks": [
     {
       "event": "SessionStart",
