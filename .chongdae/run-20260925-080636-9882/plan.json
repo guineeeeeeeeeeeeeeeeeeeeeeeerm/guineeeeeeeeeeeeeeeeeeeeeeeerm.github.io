@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.8.0",
+  "goal": "플러그인 업데이트: hunsu 1.5.0, chongdae 1.9.0, mangsang 1.9.0, dwitbuk 1.5.0, hacheong 1.5.0",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
