@@ -73,6 +73,7 @@ def write_output(
     (output_root / "p").mkdir(parents=True, exist_ok=True)
     (output_root / "assets" / "site.css").write_bytes((ASSETS / "site.css").read_bytes())
     (output_root / "assets" / "time.js").write_bytes((ASSETS / "time.js").read_bytes())
+    (output_root / "assets" / "zoom.js").write_bytes((ASSETS / "zoom.js").read_bytes())
     copy_brands(output_root)
     (output_root / ".nojekyll").write_bytes(b"")
     copy_images(content_root, output_root)

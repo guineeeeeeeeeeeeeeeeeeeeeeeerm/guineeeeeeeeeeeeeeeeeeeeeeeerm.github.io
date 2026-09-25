@@ -105,7 +105,7 @@ Decided (owner, `source:zm-03`, 요청 `source:zm-01`, 제안 `source:zm-02`): �
 스크립트는 `.image-zoom` 링크의 기본 동작을 막고, 원본 그림 하나를 담은 겹침 층(`.zoom-overlay`, 화면 전체, 어두운 반투명 배경,
 그림은 `max-width: 100vw; max-height: 100vh` 안에서 비율 유지)을 띄운다. 겹침 층 어디를 눌러도, Esc를 눌러도 닫힌다. 그림의 표시
 너비 `|N`은 본문에서의 크기만 정하고, 겹침 층에서는 원본이 화면에 맞춰진다. 그림이 바깥 링크 안에 있는 경우는 없다(바깥 링크의
-글자에는 서식을 해석하지 않는다).
+글자에는 서식을 해석하지 않는다). Decided after build (zoom-build, technical, delegated): 겹침 층의 배경은 `rgba(0, 0, 0, 0.7)`이다. Decided (technical, session): 겹침 층은 `z-index: 10`으로 본문의 다른 층(패치 이력 상자, 공유 배지) 위에 놓인다.
 
 Decided (owner, `source:img-01`, `source:img-03`): 이미지의 표시 너비를 정할 수 있다 — `![설명|N](images/파일)`에서 `N`은 CSS
 픽셀 단위의 너비이고 높이는 비율대로 따른다. 원본 파일은 그대로다. `N`이 없으면 지금처럼 원본 크기(칸 너비를 넘지 않음)로 보인다.

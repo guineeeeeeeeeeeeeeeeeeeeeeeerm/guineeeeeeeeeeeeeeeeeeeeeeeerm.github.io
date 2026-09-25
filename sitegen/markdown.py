@@ -76,6 +76,7 @@ def inline_markdown(
     post_path: Path,
     image_prefix: str,
     external_links: bool = False,
+    wrap_images: bool = False,
 ) -> str:
     pieces: list[str] = []
     cursor = 0
@@ -97,12 +98,19 @@ def inline_markdown(
             alt, width = image_width(match.group(1), post_path)
             image_path = match.group(2)
             image_source(content_root, image_path, post_path)
-            pieces.append(
-                f'<img src="{html.escape(image_prefix + image_path[7:], quote=True)}" '
+            image_url = image_prefix + image_path[7:]
+            image = (
+                f'<img src="{html.escape(image_url, quote=True)}" '
                 f'alt="{html.escape(alt, quote=True)}"'
                 + (f' width="{width}"' if width else "")
                 + ">"
             )
+            if wrap_images:
+                pieces.append(
+                    f'<a class="image-zoom" href="{html.escape(image_url, quote=True)}">{image}</a>'
+                )
+            else:
+                pieces.append(image)
         elif match.group(3) is not None:
             pieces.append(f"<strong>{html.escape(match.group(3), quote=False)}</strong>")
         elif match.group(4) is not None:
@@ -192,11 +200,14 @@ def render_block(
     post_path: Path,
     image_prefix: str,
     external_links: bool = False,
+    wrap_images: bool = False,
 ) -> str:
     kind, value = block
 
     def inline(text: str) -> str:
-        return inline_markdown(text, content_root, post_path, image_prefix, external_links)
+        return inline_markdown(
+            text, content_root, post_path, image_prefix, external_links, wrap_images
+        )
 
     def lines(value: list[str]) -> str:
         # a line break in the file is a line break on the page: what the author sees is what the reader sees
@@ -241,6 +252,7 @@ def render_body(
     image_prefix: str,
     replacements: list[tuple[str, str]] | None = None,
     patch_state: PatchState | None = None,
+    wrap_images: bool = False,
 ) -> tuple[str, str]:
     tokens: dict[str, str] = {}
     patch_tokens: dict[str, str] = {}
@@ -250,7 +262,17 @@ def render_body(
     if replacements:
         body, tokens = apply_anchor_replacements(body, replacements, post_path)
     blocks = markdown_blocks(body)
-    rendered_blocks = [render_block(block, content_root, post_path, image_prefix, external_links=True) for block in blocks]
+    rendered_blocks = [
+        render_block(
+            block,
+            content_root,
+            post_path,
+            image_prefix,
+            external_links=True,
+            wrap_images=wrap_images,
+        )
+        for block in blocks
+    ]
     rendered_blocks = render_patched_blocks(rendered_blocks, patch_tokens)
     rendered = "\n".join(rendered_blocks)
     for token, replacement in tokens.items():

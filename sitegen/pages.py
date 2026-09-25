@@ -21,12 +21,13 @@ from .records import (
 
 
 def page_shell(
-    title: str, root_link: str, body: str, current: str = ""
+    title: str, root_link: str, body: str, current: str = "", include_zoom: bool = False
 ) -> str:
     """`root_link` leads from the page's folder to the site root ("", "../", "../../"); the menu links to folders, never to
     a file name, and a page links to itself as `./`."""
     feed_href = "./" if current == "feed" else root_link or "./"
     about_href = "./" if current == "about" else f"{root_link}about/"
+    zoom_script = f'<script src="{root_link}assets/zoom.js" defer></script>' if include_zoom else ""
     return f'''<!doctype html>
 <html lang="ko">
 <head>
@@ -35,6 +36,7 @@ def page_shell(
 <title>{html.escape(title, quote=False)}</title>
 <link rel="stylesheet" href="{root_link}assets/site.css">
 <script src="{root_link}assets/time.js" defer></script>
+{zoom_script}
 </head>
 <body>
 <header><a href="{feed_href}">피드</a><a href="{about_href}">소개</a></header>
@@ -140,6 +142,7 @@ def render_post_page(
         "../../images/",
         replacements,
         patch_state,
+        wrap_images=True,
     )
     patch_controls = ""
     patch_script = ""
@@ -173,7 +176,7 @@ def render_post_page(
 </article>
 </main>
 {patch_script}'''
-    return page_shell(title, "../../", article)
+    return page_shell(title, "../../", article, include_zoom=True)
 
 
 def item_footer(post: Post, shares: list[Share], root: str = "") -> str:
@@ -280,7 +283,15 @@ def parse_about(content_root: Path) -> str:
         fail(path)
     blocks = markdown_blocks(body)
     rendered = "\n".join(
-        render_block(block, content_root, path, "../images/", external_links=True) for block in blocks
+        render_block(
+            block,
+            content_root,
+            path,
+            "../images/",
+            external_links=True,
+            wrap_images=True,
+        )
+        for block in blocks
     )
     body = f'<main>\n<article class="post">\n<div class="body">{rendered}</div>\n</article>\n</main>'   # the post page's frame: one look for every page
-    return page_shell("소개", "../", body, current="about")
+    return page_shell("소개", "../", body, current="about", include_zoom=True)

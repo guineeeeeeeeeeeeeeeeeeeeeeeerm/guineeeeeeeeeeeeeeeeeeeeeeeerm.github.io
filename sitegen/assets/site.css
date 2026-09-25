@@ -41,6 +41,9 @@ header a { font-weight: 700; text-decoration: none; }
 .patch-history ul { margin: .35rem 0 0; padding-left: 1.2rem; }
 .patch-history li + li { margin-top: .35rem; }
 img { max-width: 100%; height: auto; }
+.image-zoom { cursor: zoom-in; }
+.zoom-overlay { position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.7); cursor: zoom-out; }
+.zoom-overlay img { max-width: 100vw; max-height: 100vh; width: auto; height: auto; }
 blockquote { border-left: .25rem solid #d1d5db; margin: 1rem 0; padding-left: 1rem; color: #4b5563; }
 code { background: #f3f4f6; padding: .1rem .25rem; }
 header a + a { margin-left: .75rem; }
