@@ -1,0 +1,36 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.10.0",
+  "stage": "verify",
+  "run": "run-20260925-123505-34cc",
+  "task": "link-color",
+  "role": "verifier",
+  "target": ".",
+  "goal": "본문 링크를 파란색으로",
+  "brief": "소유자 결정(본문 링크를 더 파란색으로)을 원문으로 남기고, Q-post에 적고, 글·소개 본문(.body)의 링크 색을 파란색으로",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260925-123505-34cc/local/link-color.verify.response.json",
+  "touched": [
+    "docs/assets/site.css",
+    "docs/p/20260925-103715/index.html",
+    "plan/PLAN.md",
+    "sitegen/assets/site.css"
+  ],
+  "built": null
+}
