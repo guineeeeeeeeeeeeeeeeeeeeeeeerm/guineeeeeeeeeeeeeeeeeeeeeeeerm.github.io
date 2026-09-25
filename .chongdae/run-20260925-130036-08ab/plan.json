@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.10.0",
+  "goal": "Astro로 옮기고 모든 페이지에 같은 폭의 상단 메뉴 띠",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
