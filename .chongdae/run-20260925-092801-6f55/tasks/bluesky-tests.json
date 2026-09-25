@@ -1,0 +1,91 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.9.0",
+  "status": "done",
+  "def": {
+    "id": "bluesky-tests",
+    "role": "nitpick",
+    "brief": "Q-share의 곳 목록에 bluesky가 더해졌다(공식 로고 sitegen/assets/brands/bluesky.svg, 표시 이름 'Bluesky'). tests/test_shares.py에 반영한다: BRAND_FILES에 bluesky.svg를 더하고(바이트 그대로 복사 확인), where=bluesky 행이 aria-label \"Bluesky\" 배지와 <img src=\"<root>assets/brands/bluesky.svg\" alt=\"\">를 만든다는 테스트를 더한다(피드 root '', 글 페이지 '../../'). 기존 테스트 메서드 이름과 다른 계약은 바꾸지 않는다. 공통 도우미 tests/support.py는 수정하지 않는다. 지금 코드는 새 테스트를 통과하지 못하는 것이 정상이다.",
+    "closes": [
+      "Q-share"
+    ],
+    "needs": [],
+    "checks": [],
+    "tests": [
+      "tests/test_shares.py"
+    ],
+    "gate": null,
+    "domain": "code"
+  },
+  "seq": 2,
+  "added": "2026-09-25T09:28:09+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "response": {
+    "status": "done",
+    "summary": "Added Bluesky asset-copy coverage and feed/post-page badge assertions. Tests fail as expected because Bluesky is not implemented.",
+    "tests": [
+      "tests/test_shares.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-share",
+        "tests": [
+          "test_Q_share_bluesky_is_known_and_uses_its_brand_badge",
+          "test_Q_share_Q_build_icons_svg_defines_each_known_share_symbol_once"
+        ]
+      }
+    ],
+    "non-claims": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "tests/test_shares.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "teujip",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.5.0",
+        "chongdae": "1.9.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "update ./tests/test_shares.py"
+      ],
+      "commands-run": 3,
+      "commands-failed": 1
+    }
+  },
+  "checks": [],
+  "touched": [
+    "tests/test_shares.py"
+  ]
+}

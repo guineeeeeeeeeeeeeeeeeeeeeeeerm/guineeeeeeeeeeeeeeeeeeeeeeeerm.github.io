@@ -1,0 +1,23 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.9.0",
+  "stage": "build",
+  "run": "run-20260925-092801-6f55",
+  "task": "bluesky-tests",
+  "role": "nitpick",
+  "target": ".",
+  "goal": "Bluesky 배지 추가",
+  "brief": "Q-share의 곳 목록에 bluesky가 더해졌다(공식 로고 sitegen/assets/brands/bluesky.svg, 표시 이름 'Bluesky'). tests/test_shares.py에 반영한다: BRAND_FILES에 bluesky.svg를 더하고(바이트 그대로 복사 확인), where=bluesky 행이 aria-label \"Bluesky\" 배지와 <img src=\"<root>assets/brands/bluesky.svg\" alt=\"\">를 만든다는 테스트를 더한다(피드 root '', 글 페이지 '../../'). 기존 테스트 메서드 이름과 다른 계약은 바꾸지 않는다. 공통 도우미 tests/support.py는 수정하지 않는다. 지금 코드는 새 테스트를 통과하지 못하는 것이 정상이다.",
+  "closes": [
+    "Q-share"
+  ],
+  "contract": {
+    "Q-share": "contract/Q-share-c03dfeaa.md"
+  },
+  "checks": [],
+  "tests": [
+    "tests/test_shares.py"
+  ],
+  "domain": "code",
+  "response": "./.chongdae/run-20260925-092801-6f55/local/bluesky-tests.response.json"
+}

@@ -1,0 +1,56 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.9.0",
+  "stage": "verify",
+  "run": "run-20260925-092801-6f55",
+  "task": "bluesky-build",
+  "role": "verifier",
+  "target": ".",
+  "goal": "Bluesky 배지 추가",
+  "brief": "Q-share의 곳 목록에 bluesky를 더한다: SHARE_PLACES에 \"bluesky\": (\"Bluesky\", \"bluesky.svg\")를 더한다(공식 파일 sitegen/assets/brands/bluesky.svg는 이미 있고 고치지 않는다). README.md 공유 기록 절의 where 목록에 bluesky를 더한다. 계약 테스트는 커밋되어 있다(HEAD의 tests/*.py가 계약이다) — 테스트 파일은 건드리지 않는다. 기존 주석과 docstring은 글자 그대로. 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
+  "closes": [
+    "Q-share"
+  ],
+  "contract": {
+    "Q-share": "contract/Q-share-c03dfeaa.md"
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ]
+  ],
+  "tests": [
+    "tests/support.py tests/test_about.py tests/test_feed_layout.py tests/test_ids.py tests/test_images.py tests/test_linebreaks.py tests/test_readme.py tests/test_s1.py tests/test_s2.py tests/test_s3.py tests/test_shares.py tests/test_tags.py "
+  ],
+  "domain": "code",
+  "response": "./.chongdae/run-20260925-092801-6f55/local/bluesky-build.verify.response.json",
+  "touched": [
+    "README.md",
+    "docs/assets/brands/bluesky.svg",
+    "sitegen/records.py"
+  ],
+  "built": {
+    "summary": "`SHARE_PLACES`와 README 공유 기록의 `where` 목록에 Bluesky를 추가했습니다. 공식 SVG는 변경하지 않았습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "python3 build.py",
+        "exit": 0
+      }
+    ],
+    "non-claims": []
+  },
+  "touched_since": []
+}
