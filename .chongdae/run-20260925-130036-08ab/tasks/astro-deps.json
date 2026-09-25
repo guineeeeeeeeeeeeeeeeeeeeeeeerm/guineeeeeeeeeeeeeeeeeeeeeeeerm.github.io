@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.10.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "astro-deps",
     "role": "session",
@@ -16,5 +16,30 @@
   "added": "2026-09-25T13:15:31+00:00",
   "non-claims": [
     "no check decides this task; done means the agent said so"
-  ]
+  ],
+  "checks": [],
+  "touched": [
+    ".gitignore",
+    "package-lock.json",
+    "package.json",
+    "plan/PLAN.md"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-282_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.10.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 5,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-25T13:15:31+00:00"
+    }
+  }
 }
