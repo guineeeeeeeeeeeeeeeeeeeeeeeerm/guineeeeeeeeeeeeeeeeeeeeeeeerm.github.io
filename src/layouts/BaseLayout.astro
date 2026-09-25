@@ -1,0 +1,35 @@
+---
+import Header from "../components/Header.astro";
+
+interface Props {
+  title: string;
+  rootLink: string;
+  current?: "feed" | "about" | "";
+  includeZoom?: boolean;
+}
+
+const { title, rootLink, current = "", includeZoom = false } = Astro.props;
+const feedHref = current === "feed" ? "./" : rootLink || "./";
+const aboutHref = current === "about" ? "./" : `${rootLink}about/`;
+const stylesheetHref = `${rootLink}assets/site.css`;
+const timeHref = `${rootLink}assets/time.js`;
+const zoomHref = `${rootLink}assets/zoom.js`;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="stylesheet" href={stylesheetHref} />
+    <script src={timeHref} defer></script>
+    {includeZoom && <script src={zoomHref} defer></script>}
+  </head>
+  <body>
+    <Header feedHref={feedHref} aboutHref={aboutHref} />
+    <div class="frame">
+      <slot />
+    </div>
+  </body>
+</html>

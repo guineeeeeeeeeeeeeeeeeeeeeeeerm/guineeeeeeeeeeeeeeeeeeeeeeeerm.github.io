@@ -1,0 +1,19 @@
+---
+import { tagCounts, type SiteData } from "../lib/site";
+
+interface Props {
+  site: SiteData;
+}
+
+const { site } = Astro.props;
+const counts = tagCounts(site);
+---
+
+{counts.length > 0 && (
+  <aside class="tag-cloud">
+    <h2>태그</h2>
+    <ul>
+      {counts.map((entry) => <li><a class="tag" href={`tags/${encodeURIComponent(entry.tag)}/`} style={`font-size: ${entry.size.toFixed(2)}rem`}>{entry.tag}</a><span class="count">{entry.count}</span></li>)}
+    </ul>
+  </aside>
+)}

@@ -53,7 +53,11 @@ Decided (owner, `source:as-01`, `source:as-03`, `source:as-05`; 제안 `source:a
   템플릿으로 실제로 만든다. `scripts/build.mjs`가 옛 Python 생성기(`build.py`·`sitegen/`)를 부르거나 HTML을 Astro 밖에서 문자열로
   짓는 것은 이 결정을 따르지 않은 것이다. 패키지(`astro`, `markdown-it`)는 세션이 네트워크로 설치해 `package.json`과
   `package-lock.json`에 커밋해 두었고 `node_modules/`에 있다 — 작업자는 네트워크 없이 이것으로 빌드한다. 새 패키지가 더 필요하면
-  손으로 잠금 파일을 만들지 말고 보고의 blocked로 알린다.
+  손으로 잠금 파일을 만들지 말고 보고의 blocked로 알린다. Decided after build (astro-frame-2, technical, delegated): `sitegen/assets/`는
+  파일 시스템 이동으로 `public/assets/`에 옮긴다(작업자 샌드박스에서 `git mv`가 막힘 — git은 커밋 때 이름 바꾸기로 본다).
+- **템플릿 (technical, session — astro-frame-2를 받은 뒤):** 페이지의 마크업은 `.astro` 템플릿과 컴포넌트가 짓는다. `src/lib/`는 글과
+  기록 표를 읽고 계산한 데이터(글 목록, 링크, 패치 영역, 공유, 태그)와 본문 마크다운의 HTML만 돌려주며, 피드 상자·항목 바닥글·공유
+  배지·태그 클라우드·주석·이 글을 가리키는 글·패치 보기 같은 마크업을 문자열로 짓지 않는다. 본문 HTML은 `set:html`로 넣는다.
 
 Decided (owner, `source:as-03`, 제안 `source:as-02`): 모든 페이지 맨 위에 같은 폭의 메뉴 띠가 있고, "피드"와 "소개"는 어느 페이지에서나
 화면의 같은 자리에 있다. Decided (technical, session): 띠는 `<header class="site-header"><nav class="site-nav"><a …>피드</a><a …>소개</a></nav></header>`이고

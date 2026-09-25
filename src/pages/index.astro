@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FeedItem from "../components/FeedItem.astro";
+import TagCloud from "../components/TagCloud.astro";
+import { feedPosts, loadSite } from "../lib/site";
+
+const site = loadSite();
+const posts = feedPosts(site);
+---
+
+<BaseLayout title="피드" rootLink="" current="feed">
+  <div class="feed-layout">
+    <main>
+      <h1>피드</h1>
+      <section class="feed">
+        {posts.map((post) => <FeedItem site={site} post={post} root="" />)}
+      </section>
+    </main>
+    <TagCloud site={site} />
+  </div>
+</BaseLayout>

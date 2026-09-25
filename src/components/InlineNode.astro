@@ -1,0 +1,14 @@
+---
+import type { InlineNode as Node } from "../lib/site";
+
+interface Props {
+  node: Node;
+  imagePrefix: string;
+  zoom?: boolean;
+}
+
+const { node, imagePrefix, zoom = false } = Astro.props;
+const imageHref = node.kind === "image" ? `${imagePrefix}${node.src.slice("images/".length)}` : "";
+---
+
+{node.kind === "text" && node.value}{node.kind === "strong" && <strong>{node.value}</strong>}{node.kind === "emphasis" && <em>{node.value}</em>}{node.kind === "code" && <code>{node.value}</code>}{node.kind === "link" && <a href={node.href}>{node.label}</a>}{node.kind === "image" && (zoom ? <a class="image-zoom" href={imageHref}><img src={imageHref} alt={node.alt} width={node.width} /></a> : <img src={imageHref} alt={node.alt} width={node.width} />)}

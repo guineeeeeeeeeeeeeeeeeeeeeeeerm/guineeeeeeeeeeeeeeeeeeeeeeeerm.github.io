@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ItemFooter from "../../../components/ItemFooter.astro";
+import MarkdownBody from "../../../components/MarkdownBody.astro";
+import { loadSite, type SiteData } from "../../../lib/site";
+
+export function getStaticPaths() {
+  const site = loadSite();
+  return site.posts.map((post) => ({ params: { id: post.id }, props: { site } }));
+}
+
+const { site } = Astro.props as { site: SiteData };
+const postId = Astro.params.id ?? "";
+const post = site.posts.find((candidate) => candidate.id === postId);
+if (!post) throw new Error(`content/posts/${postId}.md`);
+const tags = site.taggings.get(post.id) || [];
+---
+
+<BaseLayout title={post.title || "글"} rootLink="../../" includeZoom={true}>
+  <main>
+    <article class="post">
+      {post.title && <h1 class="post-title">{post.title}</h1>}
+      {tags.length > 0 && (
+        <div class="tags">
+          태그: {tags.map((item, index) => <><a class="tag" href={`../../tags/${encodeURIComponent(item.tag)}/`}>{item.tag}</a>{index < tags.length - 1 && ", "}</>)}
+        </div>
+      )}
+      <div class="body"><MarkdownBody blocks={post.blocks} imagePrefix="../../images/" zoom={true} /></div>
+      <ItemFooter post={post} shares={site.shares.get(post.id) || []} root="../../" />
+    </article>
+  </main>
+</BaseLayout>

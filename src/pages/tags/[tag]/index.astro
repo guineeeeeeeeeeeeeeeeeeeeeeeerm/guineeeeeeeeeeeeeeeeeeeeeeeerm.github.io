@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import FeedItem from "../../../components/FeedItem.astro";
+import { loadSite, taggedPosts, type SiteData } from "../../../lib/site";
+
+export function getStaticPaths() {
+  const site = loadSite();
+  return [...site.taggings.values()].flatMap((items) => items.map((item) => item.tag))
+    .filter((tag, index, all) => all.indexOf(tag) === index)
+    .sort()
+    .map((tag) => ({ params: { tag }, props: { site } }));
+}
+
+const { site } = Astro.props as { site: SiteData };
+const tag = Astro.params.tag ?? "";
+const posts = taggedPosts(site, tag);
+---
+
+<BaseLayout title={`태그: ${tag}`} rootLink="../../">
+  <main>
+    <h1>태그: {tag}</h1>
+    <section class="feed">
+      {posts.map((post) => <FeedItem site={site} post={post} root="../../" reason={(site.taggings.get(post.id) || []).find((item) => item.tag === tag)} />)}
+    </section>
+  </main>
+</BaseLayout>
