@@ -1,0 +1,15 @@
+{
+  "name": "guin-site",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.3.5",
+    "markdown-it": "^15.0.2"
+  }
+}

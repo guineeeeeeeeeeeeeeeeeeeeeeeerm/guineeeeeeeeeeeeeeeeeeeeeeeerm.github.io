@@ -5,3 +5,5 @@ hunsu-conflicts.md
 __pycache__/
 .claude/settings.local.json
 .orca/
+node_modules/
+.astro/

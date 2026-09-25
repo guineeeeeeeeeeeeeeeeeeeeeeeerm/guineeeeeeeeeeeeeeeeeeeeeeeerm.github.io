@@ -49,6 +49,11 @@ Decided (owner, `source:as-01`, `source:as-03`, `source:as-05`; 제안 `source:a
   권고). 테스트는 빌드를 밖에서 실행하고 결과만 본다 — `tests/support.py`가 새 임시 디렉터리를 작업 디렉터리로 두고
   `node <저장소>/scripts/build.mjs`를 실행한다. 정적 파일을 바이트 그대로 비교하는 테스트의 원본은 `public/assets/`다.
 - **엔진:** Node `>=22`(hunsu.json `engines`), 테스트용 Python `>=3.9`.
+- **의존성 (technical, session — astro-frame 첫 시도를 되돌린 뒤):** 페이지 HTML은 Astro가 `src/pages/`와 `src/layouts/`의
+  템플릿으로 실제로 만든다. `scripts/build.mjs`가 옛 Python 생성기(`build.py`·`sitegen/`)를 부르거나 HTML을 Astro 밖에서 문자열로
+  짓는 것은 이 결정을 따르지 않은 것이다. 패키지(`astro`, `markdown-it`)는 세션이 네트워크로 설치해 `package.json`과
+  `package-lock.json`에 커밋해 두었고 `node_modules/`에 있다 — 작업자는 네트워크 없이 이것으로 빌드한다. 새 패키지가 더 필요하면
+  손으로 잠금 파일을 만들지 말고 보고의 blocked로 알린다.
 
 Decided (owner, `source:as-03`, 제안 `source:as-02`): 모든 페이지 맨 위에 같은 폭의 메뉴 띠가 있고, "피드"와 "소개"는 어느 페이지에서나
 화면의 같은 자리에 있다. Decided (technical, session): 띠는 `<header class="site-header"><nav class="site-nav"><a …>피드</a><a …>소개</a></nav></header>`이고
