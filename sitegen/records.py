@@ -217,6 +217,7 @@ SHARE_PLACES = {
     "threads": ("Threads", "threads.svg"),
     "linkedin": ("LinkedIn", "linkedin.png"),
     "substack": ("Substack", "substack.png"),
+    "bluesky": ("Bluesky", "bluesky.svg"),
 }
 
 

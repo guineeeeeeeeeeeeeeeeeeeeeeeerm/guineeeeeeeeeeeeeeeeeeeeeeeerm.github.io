@@ -5,11 +5,11 @@
   "dst": "concept:share",
   "evidence": "def test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):",
   "seen": {
-    "tests/test_shares.py:ShareContractTests": "cdcfdc4d4d00",
+    "tests/test_shares.py:ShareContractTests": "b5401d1b6543",
     "concept:share": "ae8d0b44fd09"
   },
   "confirmed": {
-    "delegated": "세션이 diff를 읽었다: 배지가 직접 그린 SVG에서 공식 로고 파일 <img>로 바뀌고 substack이 더해졌다(Q-share 결정, 소유자 source:bd-03); 테스트·item_footer·README 절·Q-share 절은 모두 여전히 share 개념(공유 기록과 그 배지)의 투영이다"
+    "delegated": "세션이 diff를 읽었다: 테스트는 bluesky 배지 계약을 더했고 README 절은 where 목록에 bluesky를 더했을 뿐, 둘 다 여전히 share 개념의 투영이다"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "tests/test_shares.py:ShareContractTests": "9b45b08e8845",
+        "concept:share": "ae8d0b44fd09"
+      },
+      "evidence": "def test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "세션이 diff를 읽었다: 배지가 직접 그린 SVG에서 공식 로고 파일 <img>로 바뀌고 substack이 더해졌다(Q-share 결정, 소유자 source:bd-03); 테스트·item_footer·README 절·Q-share 절은 모두 여전히 share 개념(공유 기록과 그 배지)의 투영이다"
+      },
+      "seen": {
+        "tests/test_shares.py:ShareContractTests": "cdcfdc4d4d00",
         "concept:share": "ae8d0b44fd09"
       },
       "evidence": "def test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):"
