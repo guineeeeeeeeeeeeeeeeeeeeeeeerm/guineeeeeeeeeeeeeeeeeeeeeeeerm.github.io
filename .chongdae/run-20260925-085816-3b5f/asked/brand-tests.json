@@ -1,0 +1,25 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.9.0",
+  "stage": "build",
+  "run": "run-20260925-085816-3b5f",
+  "task": "brand-tests",
+  "role": "nitpick",
+  "target": ".",
+  "goal": "배지를 공식 로고 파일로",
+  "brief": "Q-share의 새 결정(공식 로고 파일 배지)에 맞게 tests/test_shares.py를 고친다. 이 결정은 흑백 SVG 배지와 icons.svg/<use> 방식을 대신하므로, 그 방식을 요구하는 테스트(icons.svg의 symbol, <use href>, 배지 안 <svg> 존재)는 새 계약으로 바꾼다. 새 계약: sitegen/assets/brands/의 x.svg·threads.svg·linkedin.png·substack.png가 docs/assets/brands/에 바이트 그대로 복사된다(원본 파일과 바이트 비교); 배지는 <a class=\"share-badge\" ... aria-label=\"<곳 이름>\">가 <img src=\"<root>assets/brands/<곳>.<확장자>\" alt=\"\">를 담는다(피드 root '', 글 페이지 '../../'); 배지 안에 <svg>·<path>가 없다(모양이 페이지에 되풀이되지 않음); 외부 주소 src(https://)가 없다; substack이 알려진 곳이 되어 where=substack 행이 배지(aria-label \"Substack\")를 만든다; 모르는 곳은 여전히 빌드 오류. 기존의 순서(at 순), 행 검증, 줄 번호 오류 계약은 유지. 테스트 메서드 이름은 바꾸지 않는다(새 테스트만 더하고, 방식이 바뀐 테스트는 이름을 유지한 채 내용만 고치거나 새 이름으로 대체). 공통 도우미는 tests/support.py(수정하지 않음). 지금 코드가 새 테스트를 통과하지 못하는 것이 정상이다.",
+  "closes": [
+    "Q-share",
+    "Q-build"
+  ],
+  "contract": {
+    "Q-share": "contract/Q-share-75282dae.md",
+    "Q-build": "contract/Q-build-6cc03018.md"
+  },
+  "checks": [],
+  "tests": [
+    "tests/test_shares.py"
+  ],
+  "domain": "code",
+  "response": "./.chongdae/run-20260925-085816-3b5f/local/brand-tests.response.json"
+}

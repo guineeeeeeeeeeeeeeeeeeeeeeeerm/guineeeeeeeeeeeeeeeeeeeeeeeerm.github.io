@@ -1,0 +1,106 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.9.0",
+  "status": "done",
+  "def": {
+    "id": "brand-tests",
+    "role": "nitpick",
+    "brief": "Q-share의 새 결정(공식 로고 파일 배지)에 맞게 tests/test_shares.py를 고친다. 이 결정은 흑백 SVG 배지와 icons.svg/<use> 방식을 대신하므로, 그 방식을 요구하는 테스트(icons.svg의 symbol, <use href>, 배지 안 <svg> 존재)는 새 계약으로 바꾼다. 새 계약: sitegen/assets/brands/의 x.svg·threads.svg·linkedin.png·substack.png가 docs/assets/brands/에 바이트 그대로 복사된다(원본 파일과 바이트 비교); 배지는 <a class=\"share-badge\" ... aria-label=\"<곳 이름>\">가 <img src=\"<root>assets/brands/<곳>.<확장자>\" alt=\"\">를 담는다(피드 root '', 글 페이지 '../../'); 배지 안에 <svg>·<path>가 없다(모양이 페이지에 되풀이되지 않음); 외부 주소 src(https://)가 없다; substack이 알려진 곳이 되어 where=substack 행이 배지(aria-label \"Substack\")를 만든다; 모르는 곳은 여전히 빌드 오류. 기존의 순서(at 순), 행 검증, 줄 번호 오류 계약은 유지. 테스트 메서드 이름은 바꾸지 않는다(새 테스트만 더하고, 방식이 바뀐 테스트는 이름을 유지한 채 내용만 고치거나 새 이름으로 대체). 공통 도우미는 tests/support.py(수정하지 않음). 지금 코드가 새 테스트를 통과하지 못하는 것이 정상이다.",
+    "closes": [
+      "Q-share",
+      "Q-build"
+    ],
+    "needs": [],
+    "checks": [],
+    "tests": [
+      "tests/test_shares.py"
+    ],
+    "gate": null,
+    "domain": "code"
+  },
+  "seq": 2,
+  "added": "2026-09-25T08:59:26+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "response": {
+    "status": "done",
+    "summary": "`tests/test_shares.py`만 수정했습니다. 공식 브랜드 파일 바이트 복사, 상대 `<img>` 배지, Substack, 순서·행 오류·구식 SVG 방식 제거를 검증합니다. 테스트는 현재 구현에서 9개 중 5개가 예상대로 실패했습니다.",
+    "tests": [
+      "tests/test_shares.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-share",
+        "tests": [
+          "test_Q_share_without_shares_there_are_no_badges",
+          "test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page",
+          "test_Q_share_the_first_places_are_x_threads_and_linkedin_in_share_time_order",
+          "test_Q_share_equal_share_times_keep_share_file_line_order",
+          "test_Q_share_substack_is_known_and_uses_its_brand_badge",
+          "test_Q_share_a_bad_share_row_is_a_build_error_naming_its_line",
+          "test_Q_share_Q_build_icons_svg_defines_each_known_share_symbol_once",
+          "test_Q_share_badges_use_icon_paths_relative_to_each_page",
+          "test_Q_share_badge_markup_has_no_repeated_path_shape"
+        ]
+      },
+      {
+        "section": "Q-build",
+        "tests": [
+          "test_Q_share_Q_build_icons_svg_defines_each_known_share_symbol_once",
+          "test_Q_share_badges_use_icon_paths_relative_to_each_page"
+        ]
+      }
+    ],
+    "non-claims": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "tests/test_shares.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "teujip",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.5.0",
+        "chongdae": "1.9.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "update ./tests/test_shares.py"
+      ],
+      "commands-run": 8,
+      "commands-failed": 3
+    }
+  },
+  "checks": [],
+  "touched": [
+    "tests/test_shares.py"
+  ]
+}
