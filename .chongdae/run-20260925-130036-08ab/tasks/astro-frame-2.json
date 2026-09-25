@@ -92,30 +92,18 @@
   "touched_by_provider": [
     "astro.config.mjs",
     "docs/about/index.html",
-    "docs/assets/site.css",
     "docs/index.html",
     "docs/p/20260924-075921/index.html",
     "docs/p/20260924-085456/index.html",
     "docs/p/20260925-103715/index.html",
-    "public/assets/brands/bluesky.svg",
-    "public/assets/brands/linkedin.png",
-    "public/assets/brands/substack.png",
-    "public/assets/brands/threads.svg",
-    "public/assets/brands/x.svg",
-    "public/assets/site.css",
-    "public/assets/time.js",
-    "public/assets/zoom.js",
-    "scripts/build.mjs",
-    "sitegen/assets/brands/bluesky.svg",
-    "sitegen/assets/brands/linkedin.png",
-    "sitegen/assets/brands/substack.png",
-    "sitegen/assets/brands/threads.svg",
-    "sitegen/assets/brands/x.svg",
-    "sitegen/assets/site.css",
-    "sitegen/assets/time.js",
-    "sitegen/assets/zoom.js",
-    "src/components/Header.astro",
-    "src/layouts/BaseLayout.astro",
+    "src/components/FeedItem.astro",
+    "src/components/InlineContent.astro",
+    "src/components/InlineNode.astro",
+    "src/components/ItemFooter.astro",
+    "src/components/MarkdownBlock.astro",
+    "src/components/MarkdownBody.astro",
+    "src/components/MarkdownLine.astro",
+    "src/components/TagCloud.astro",
     "src/lib/site.ts",
     "src/pages/about/index.astro",
     "src/pages/index.astro",
@@ -151,21 +139,30 @@
     },
     "trace": {
       "changed": [
-        "update ./public/assets/site.css",
-        "add ./astro.config.mjs",
-        "add ./scripts/build.mjs",
-        "add ./src/components/Header.astro",
-        "add ./src/layouts/BaseLayout.astro",
-        "add ./src/pages/about/index.astro",
-        "add ./src/pages/index.astro",
-        "add ./src/pages/p/[id]/index.astro",
-        "add ./src/pages/tags/[tag]/index.astro",
+        "delete ./src/lib/site.ts",
         "add ./src/lib/site.ts",
-        "update ./scripts/build.mjs",
-        "update ./src/lib/site.ts"
+        "add ./src/components/FeedItem.astro",
+        "add ./src/components/InlineContent.astro",
+        "add ./src/components/InlineNode.astro",
+        "add ./src/components/ItemFooter.astro",
+        "add ./src/components/MarkdownBlock.astro",
+        "add ./src/components/MarkdownBody.astro",
+        "add ./src/components/MarkdownLine.astro",
+        "add ./src/components/TagCloud.astro",
+        "update ./src/lib/site.ts",
+        "update ./src/pages/about/index.astro",
+        "update ./src/pages/index.astro",
+        "update ./src/pages/p/[id]/index.astro",
+        "update ./src/pages/tags/[tag]/index.astro",
+        "update ./astro.config.mjs",
+        "update ./src/components/InlineContent.astro",
+        "update ./src/components/InlineNode.astro",
+        "update ./src/components/MarkdownBlock.astro",
+        "update ./src/components/MarkdownBody.astro",
+        "update ./src/components/MarkdownLine.astro"
       ],
-      "commands-run": 65,
-      "commands-failed": 13
+      "commands-run": 40,
+      "commands-failed": 7
     }
   },
   "accepted": {
@@ -175,7 +172,10 @@
   },
   "non-claims": [
     "(provider) links.jsonl·patches.jsonl 고급 기능은 이번 체크 범위에서 옮기지 않았습니다.",
-    "(provider) 테스트 파일과 package.json/package-lock.json은 수정하지 않았습니다."
+    "(provider) 테스트 파일과 package.json/package-lock.json은 수정하지 않았습니다.",
+    "(provider) links.jsonl·patches.jsonl의 고급 링크/패치 기능은 이번 조각에서 구현하지 않았습니다.",
+    "(provider) 추가로 실행한 test_external_links.py와 test_image_zoom.py에서는 기존 패치 기능 관련 테스트가 실패했으며, 이번 지정 checks의 범위에는 포함되지 않습니다.",
+    "(provider) tests와 package.json/package-lock.json은 수정하지 않았습니다."
   ],
   "verified_by": {
     "provider": "command",
@@ -204,8 +204,8 @@
     },
     "trace": {
       "changed": [],
-      "commands-run": 12,
-      "commands-failed": 0
+      "commands-run": 41,
+      "commands-failed": 2
     }
   },
   "attempts": [
@@ -312,6 +312,135 @@
       "rejected": {
         "by": "verifier",
         "why": "1 finding(s)"
+      }
+    },
+    {
+      "status": "done",
+      "summary": "Astro 페이지·컴포넌트가 피드, 글, 소개, 태그 마크업을 직접 렌더링하도록 전환했고 지정된 7개 체크를 모두 통과했습니다.",
+      "verified": [
+        {
+          "check": "node scripts/build.mjs",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_s1.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_about.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_feed_layout.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_ids.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_images.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_linebreaks.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_frame.py",
+          "exit": 0
+        }
+      ],
+      "decisions": [
+        {
+          "what": "sitegen/assets를 public/assets로 이동하는 방법",
+          "chosen": "파일 시스템 이동을 유지했습니다.",
+          "alternatives": [
+            "git mv는 이전 시도에서 .git/index.lock 권한 거부로 실행할 수 없었습니다."
+          ]
+        },
+        {
+          "what": "Astro 컴포넌트 출력의 불필요한 공백 처리",
+          "chosen": "astro.config.mjs에서 compressHTML을 활성화했습니다.",
+          "alternatives": [
+            "각 컴포넌트의 출력 공백을 수동으로 더 세밀하게 제어하는 방법"
+          ]
+        }
+      ],
+      "non-claims": [
+        "links.jsonl·patches.jsonl의 고급 링크/패치 기능은 이번 조각에서 구현하지 않았습니다.",
+        "추가로 실행한 test_external_links.py와 test_image_zoom.py에서는 기존 패치 기능 관련 테스트가 실패했으며, 이번 지정 checks의 범위에는 포함되지 않습니다.",
+        "tests와 package.json/package-lock.json은 수정하지 않았습니다."
+      ],
+      "disputed-tests": [],
+      "worker": {
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "effort": "xhigh"
+      },
+      "member": "dakdol",
+      "domain": "code",
+      "retried": {
+        "by": "chongdae",
+        "auto": "the verifier rejected: 2 finding(s)",
+        "at": "2026-09-25T13:48:54+00:00",
+        "chongdae": "chongdae 1.10.0"
+      },
+      "trace": {
+        "changed": [
+          "delete ./src/lib/site.ts",
+          "add ./src/lib/site.ts",
+          "add ./src/components/FeedItem.astro",
+          "add ./src/components/InlineContent.astro",
+          "add ./src/components/InlineNode.astro",
+          "add ./src/components/ItemFooter.astro",
+          "add ./src/components/MarkdownBlock.astro",
+          "add ./src/components/MarkdownBody.astro",
+          "add ./src/components/MarkdownLine.astro",
+          "add ./src/components/TagCloud.astro",
+          "update ./src/lib/site.ts",
+          "update ./src/pages/about/index.astro",
+          "update ./src/pages/index.astro",
+          "update ./src/pages/p/[id]/index.astro",
+          "update ./src/pages/tags/[tag]/index.astro",
+          "update ./astro.config.mjs",
+          "update ./src/components/InlineContent.astro",
+          "update ./src/components/InlineNode.astro",
+          "update ./src/components/MarkdownBlock.astro",
+          "update ./src/components/MarkdownBody.astro",
+          "update ./src/components/MarkdownLine.astro"
+        ],
+        "commands-run": 40,
+        "commands-failed": 7
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "src/layouts/BaseLayout.astro",
+            "record_quote": "BaseLayout.astro(상단 띠 <header class=\"site-header\"><nav class=\"site-nav\">…</nav></header>, 본문 틀 .frame)",
+            "tree_quote": "<Header feedHref={feedHref} aboutHref={aboutHref} />\n    <slot />",
+            "why": "BaseLayout.astro에는 .frame 본문 틀이 없고, 각 페이지가 개별적으로 이를 감싼다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:imageInfo",
+            "record_quote": "N은 1부터 9999까지의 정수이고 ... 설명 끝의 | 뒤가 정수가 아니면 설명의 일부로 본다.",
+            "tree_quote": "const match = /^(.*)\\|(\\d{1,4})$/.exec(alt);\nif (!match) return { alt };",
+            "why": "|10000처럼 정수지만 허용 범위를 벗어난 너비가 오류가 아니라 alt 문자열로 처리되어 빌드된다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "2 finding(s)"
       }
     }
   ]
