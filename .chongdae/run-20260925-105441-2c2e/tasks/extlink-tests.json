@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.9.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "extlink-tests",
     "role": "nitpick",
@@ -22,10 +22,7 @@
   "non-claims": [
     "no check decides this task; done means the agent said so"
   ],
-  "touched_by_provider": [
-    "tests/test_about.py",
-    "tests/test_external_links.py"
-  ],
+  "touched_by_provider": [],
   "performed_by": {
     "provider": "command",
     "argv": [
@@ -54,12 +51,9 @@
       }
     },
     "trace": {
-      "changed": [
-        "update ./tests/test_about.py",
-        "add ./tests/test_external_links.py"
-      ],
-      "commands-run": 24,
-      "commands-failed": 4
+      "changed": [],
+      "commands-run": 9,
+      "commands-failed": 2
     }
   },
   "attempts": [
@@ -118,5 +112,41 @@
         "commands-failed": 4
       }
     }
+  ],
+  "response": {
+    "status": "done",
+    "summary": "Q-post 외부 링크 계약 테스트를 준비하고 about 테스트를 새 계약에 맞게 수정했습니다. 현재 구현에서 외부 링크 테스트 14건과 about 테스트 1건이 기능 부재로 실패함을 확인했습니다.",
+    "tests": [
+      "tests/test_external_links.py",
+      "tests/test_about.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-post",
+        "tests": [
+          "test_Q_post_http_and_https_links_render_in_every_post_type",
+          "test_Q_post_non_http_external_address_is_an_error_naming_the_post_file",
+          "test_Q_post_untitled_medium_and_long_feed_titles_contain_only_the_link_text",
+          "test_Q_post_short_feed_external_link_is_outside_the_item_link",
+          "test_Q_post_link_anchor_overlapping_an_external_link_is_an_error_on_created_row",
+          "test_Q_post_patch_insert_after_can_add_an_external_link_to_the_applied_body",
+          "test_Q_post_patch_view_partial_external_link_region_is_an_error_on_the_patch_row",
+          "test_Q_post_external_links_are_links_on_about_and_post_pages"
+        ]
+      }
+    ],
+    "non-claims": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  },
+  "checks": [],
+  "touched": [
+    "tests/test_about.py",
+    "tests/test_external_links.py"
   ]
 }

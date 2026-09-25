@@ -17,5 +17,37 @@
     "tests/test_external_links.py",
     "tests/test_about.py"
   ],
-  "response": "./.chongdae/run-20260925-105441-2c2e/local/extlink-tests.response.json"
+  "response": "./.chongdae/run-20260925-105441-2c2e/local/extlink-tests.response.json",
+  "attempts": [
+    {
+      "status": "failed",
+      "summary": "외부 링크 계약 테스트를 추가하고 about 테스트를 새 계약에 맞게 수정했습니다. 현재 구현에서 미지원 기능으로 실패함을 확인했습니다.",
+      "verified": null,
+      "decisions": null,
+      "non-claims": [
+        "red-before-build: python3 -B -m unittest discover -s tests -p 'test_external_links.py' (실패 14건, 예상됨) does not exist",
+        "red-before-build: python3 -B -m unittest discover -s tests -p 'test_about.py' (실패 1건, 예상됨) does not exist"
+      ],
+      "retried": {
+        "delegated": "테스트는 다 썼고 보고의 tests 목록에 실행 명령을 적어 형식 검사만 실패함 — 파일 목록으로 다시 보고하게 함",
+        "at": "2026-09-25T11:00:02+00:00",
+        "chongdae": "chongdae 1.9.0"
+      },
+      "review": null,
+      "disputed-tests": null,
+      "reopened": null
+    }
+  ],
+  "touched": [
+    "content/images/bathroom-from-door.jpg",
+    "content/images/bathroom-gpt-weird.png",
+    "content/images/bathroom-gpt.png",
+    "content/images/bathroom-model.png",
+    "content/images/bathroom-shower-holder.jpg",
+    "content/images/bathroom-towel-bar.jpg",
+    "content/posts/20260925-103715.md",
+    "plan/PLAN.md",
+    "tests/test_about.py",
+    "tests/test_external_links.py"
+  ]
 }

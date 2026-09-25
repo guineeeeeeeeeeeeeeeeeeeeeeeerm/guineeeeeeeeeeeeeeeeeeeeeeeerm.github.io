@@ -1,0 +1,33 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.9.0",
+  "stage": "build",
+  "run": "run-20260925-105441-2c2e",
+  "task": "extlink-build",
+  "role": "implementer",
+  "target": ".",
+  "goal": "글 본문의 바깥 링크",
+  "brief": "plan/PLAN.md Q-post의 'Decided (owner, source:el-02 ...)' 문단을 구현한다: 글 본문에서도 바깥 링크 [글자](주소)가 소개 페이지와 같은 <a href=\"주소\">글자</a>가 된다(sitegen/markdown.py에 이미 소개 페이지용 external_links 경로가 있다). http(s)가 아니면 그 글 파일 경로를 담은 빌드 오류. 피드의 짧은 글 본문에서 바깥 링크는 공유 배지처럼 상자 링크 위에 놓여 따로 눌린다(CSS: position: relative; z-index). Q-link 앵커가 바깥 링크 표시와 겹치거나 그 안에 들면 그 링크의 created 줄을 가리키는 빌드 오류. 패치가 넣은 바깥 링크는 적용된 본문에서 링크가 되고, 패치 보기 영역이 바깥 링크 일부만 덮으면 그 패치 줄을 가리키는 빌드 오류. README.md의 본문 문법 설명에 바깥 링크 [글자](주소)를 더하고 소개 절의 '소개 페이지에서만' 문구를 고친다(README 테스트가 예시 블록을 빌드한다). 계약 테스트는 커밋되어 있다(HEAD의 tests/*.py가 계약이다) — 테스트 파일은 건드리지 않는다. 기존 주석과 docstring은 글자 그대로. 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
+  "closes": [
+    "Q-post"
+  ],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ]
+  ],
+  "tests": [
+    "tests/support.py tests/test_about.py tests/test_external_links.py tests/test_feed_layout.py tests/test_ids.py tests/test_images.py tests/test_linebreaks.py tests/test_readme.py tests/test_s1.py tests/test_s2.py tests/test_s3.py tests/test_shares.py tests/test_tags.py "
+  ],
+  "response": "./.chongdae/run-20260925-105441-2c2e/local/extlink-build.response.json"
+}
