@@ -7,6 +7,7 @@ header a { font-weight: 700; text-decoration: none; }
 .feed-item { position: relative; border: 1px solid #e5e7eb; border-radius: .75rem; padding: 1rem 1.25rem; }
 .feed-item:hover { border-color: #9ca3af; }
 .item-link::after { content: ""; position: absolute; inset: 0; border-radius: .75rem; }
+.feed-item .body a { position: relative; z-index: 1; }
 .post { padding-bottom: 1.25rem; }
 .post-title, .feed-title { margin: 0 0 .5rem; }
 .item-footer { color: #6b7280; font-size: .875rem; display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-top: .75rem; }

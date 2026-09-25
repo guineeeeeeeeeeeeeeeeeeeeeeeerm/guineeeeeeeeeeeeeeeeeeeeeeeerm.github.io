@@ -346,6 +346,9 @@ def parse_links(
     links = list(by_id.values())
     for link in links:
         source_body = patch_states[link.from_id].body
+        from .markdown import external_link_spans
+
+        external_ranges = external_link_spans(source_body)
         positions = []
         start = 0
         while True:
@@ -355,6 +358,13 @@ def parse_links(
             positions.append(position)
             start = position + 1
         if len(positions) != 1:
+            fail(link.source)
+        anchor_start = positions[0]
+        anchor_end = anchor_start + len(link.anchor)
+        if any(
+            anchor_start < external_end and external_start < anchor_end
+            for external_start, external_end in external_ranges
+        ):
             fail(link.source)
     return links
 

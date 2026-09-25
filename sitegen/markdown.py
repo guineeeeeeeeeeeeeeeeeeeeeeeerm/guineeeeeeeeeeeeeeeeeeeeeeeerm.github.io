@@ -31,6 +31,14 @@ INLINE_RE = re.compile(
 INLINE_WITH_LINKS_RE = re.compile(INLINE_RE.pattern + r"|\[([^\]]*)\]\(([^)]*)\)")
 
 
+def external_link_spans(text: str) -> list[tuple[int, int]]:
+    return [
+        (match.start(), match.end())
+        for match in INLINE_WITH_LINKS_RE.finditer(text)
+        if match.group(6) is not None
+    ]
+
+
 def image_source(content_root: Path, image_path: str, post_path: Path) -> Path:
     try:
         relative = PurePosixPath(image_path)
@@ -75,9 +83,13 @@ def inline_markdown(
     for match in pattern.finditer(text):
         pieces.append(html.escape(text[cursor : match.start()], quote=False))
         if external_links and match.group(6) is not None:
-            label, address = match.group(6), match.group(7).strip()
+            label = match.group(6)
+            address_with_markers = match.group(7).strip()
+            address = PATCH_MARKER_RE.sub("", address_with_markers)
             if not re.match(r"https?://\S+$", address):
                 fail(post_path)
+            address_markers = PATCH_MARKER_RE.findall(address_with_markers)
+            pieces.extend(address_markers)
             pieces.append(
                 f'<a href="{html.escape(address, quote=True)}">{html.escape(label, quote=False)}</a>'
             )
@@ -238,7 +250,7 @@ def render_body(
     if replacements:
         body, tokens = apply_anchor_replacements(body, replacements, post_path)
     blocks = markdown_blocks(body)
-    rendered_blocks = [render_block(block, content_root, post_path, image_prefix) for block in blocks]
+    rendered_blocks = [render_block(block, content_root, post_path, image_prefix, external_links=True) for block in blocks]
     rendered_blocks = render_patched_blocks(rendered_blocks, patch_tokens)
     rendered = "\n".join(rendered_blocks)
     for token, replacement in tokens.items():

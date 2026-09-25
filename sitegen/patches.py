@@ -150,6 +150,31 @@ class PatchState:
     def has_patches(self) -> bool:
         return bool(self.patches)
 
+    def patch_ranges(self) -> list[tuple[int, int, Patch]]:
+        ranges: list[tuple[int, int, Patch]] = []
+        visible_index = 0
+        unit_index = 0
+        while unit_index < len(self.units):
+            unit = self.units[unit_index]
+            if isinstance(unit, DeletedUnit):
+                unit_index += 1
+                continue
+            if unit.owner is None:
+                visible_index += 1
+                unit_index += 1
+                continue
+            owner = unit.owner
+            start = visible_index
+            while (
+                unit_index < len(self.units)
+                and isinstance(self.units[unit_index], BodyUnit)
+                and self.units[unit_index].owner is owner
+            ):
+                visible_index += 1
+                unit_index += 1
+            ranges.append((start, visible_index, owner))
+        return ranges
+
 
 def apply_patches(posts: list[Post], patches: list[Patch]) -> dict[str, PatchState]:
     states = {post.post_id: PatchState(post) for post in posts}

@@ -8,6 +8,7 @@ import sys
 import tempfile
 from pathlib import Path
 
+from .markdown import external_link_spans
 from .pages import parse_about, render_feed, render_post_page, render_tag_page
 from .patches import PatchState, apply_patches
 from .records import (
@@ -21,6 +22,7 @@ from .records import (
     parse_posts,
     parse_shares,
     parse_tags,
+    fail,
 )
 
 
@@ -118,6 +120,13 @@ def build() -> None:
     posts = parse_posts(content_root)
     patches = parse_patches(content_root, posts)
     patch_states = apply_patches(posts, patches)
+    for patch_state in patch_states.values():
+        for link_start, link_end in external_link_spans(patch_state.body):
+            for region_start, region_end, patch in patch_state.patch_ranges():
+                overlaps = link_start < region_end and region_start < link_end
+                covers_link = region_start <= link_start and link_end <= region_end
+                if overlaps and not covers_link:
+                    fail(patch.source)
     links = parse_links(content_root, posts, patch_states)
     about_page = parse_about(content_root)
     shares = parse_shares(content_root, posts)
