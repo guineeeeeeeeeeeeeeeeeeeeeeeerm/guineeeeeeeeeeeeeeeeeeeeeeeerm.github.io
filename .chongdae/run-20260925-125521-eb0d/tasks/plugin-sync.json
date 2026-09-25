@@ -1,0 +1,47 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.10.0",
+  "status": "done",
+  "def": {
+    "id": "plugin-sync",
+    "role": "session",
+    "brief": "chongdae 1.10.0, dwitbuk 1.6.0, hacheong 1.6.0을 hunsu.json에 기록, stale 판정 다시 받기, 잠금",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-25T12:55:21+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-282_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.10.0"
+      },
+      "locked": {
+        "chongdae": "1.10.0#f523f00461ac",
+        "dwitbuk": "1.6.0#8169e1c83b73",
+        "hacheong": "1.6.0#f25d5d40a7b1",
+        "hunsu": "1.5.0#f3fea2d0a199",
+        "mangsang": "1.9.0#ae72ee081d63"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 11,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-25T12:55:21+00:00"
+    }
+  }
+}
