@@ -1,0 +1,25 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.10.0",
+  "stage": "build",
+  "run": "run-20260925-130036-08ab",
+  "task": "astro-tests",
+  "role": "nitpick",
+  "target": ".",
+  "goal": "Astro로 옮기고 모든 페이지에 같은 폭의 상단 메뉴 띠",
+  "brief": "plan/PLAN.md Q-build의 새 결정(source:as-01..as-05, 'Decided (owner, source:as-01 ...' 이하 세 문단)을 계약 테스트로 옮긴다. 이번에는 공통 도우미 tests/support.py를 고치는 것이 작업에 포함된다. (1) tests/support.py: run_build가 새 임시 디렉터리를 cwd로 두고 [\"node\", str(ROOT/'scripts'/'build.mjs')]를 실행한다(BUILD 상수도 그 경로로). 나머지 도우미는 그대로. (2) 새 파일 tests/test_frame.py: 피드·글·소개·태그 페이지 모두 <header class=\"site-header\"><nav class=\"site-nav\">가 있고 그 안에 '피드'와 '소개' 링크가 이 순서로 있으며(주소는 Q-build의 폴더 방식 상대 경로 그대로), 네 페이지의 nav 안 글자와 구조가 링크 주소만 빼고 같다; 본문은 .frame 안에 있다; docs/assets/site.css에 scrollbar-gutter: stable, .site-nav와 .frame의 max-width: 70rem이 있고 body에는 max-width가 페이지마다 달라지는 규칙(예: body:has(.feed-layout))이 없다; 빌드 결과 docs/ 최상위에는 index.html, p/, about/, tags/(태그가 있을 때), assets/, images/(이미지가 있을 때), .nojekyll 밖의 항목(예: _astro/)이 없다; 같은 content로 두 번 빌드하면 docs/가 바이트 단위로 같다; 잘못된 입력이면 종료 코드 1, stderr에 그 파일 경로, 기존 docs/가 그대로. (3) 기존 테스트에서 옛 구조를 가리키는 곳만 고친다: tests/test_about.py의 <header>(.*?)</header> 정규식을 새 상단 띠 마크업에 맞게; tests/test_image_zoom.py와 tests/test_shares.py의 원본 경로 sitegen/assets → public/assets; tests/test_readme.py의 필수 문구 'python3 build.py' → 'npm run build'. 그 밖의 계약과 테스트 메서드 이름은 바꾸지 않는다. 지금은 scripts/build.mjs가 없으므로 모든 테스트가 실패하는 것이 정상이다. 보고의 tests 목록에는 테스트 파일 경로만 적는다.",
+  "closes": [
+    "Q-build"
+  ],
+  "contract": {},
+  "checks": [],
+  "tests": [
+    "tests/support.py",
+    "tests/test_frame.py",
+    "tests/test_about.py",
+    "tests/test_image_zoom.py",
+    "tests/test_shares.py",
+    "tests/test_readme.py"
+  ],
+  "response": "./.chongdae/run-20260925-130036-08ab/local/astro-tests.response.json"
+}
