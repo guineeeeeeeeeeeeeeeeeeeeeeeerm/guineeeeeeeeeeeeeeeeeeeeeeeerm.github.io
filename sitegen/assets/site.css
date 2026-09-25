@@ -1,6 +1,7 @@
 :root { color-scheme: light; font-family: system-ui, sans-serif; }
 body { margin: 0 auto; max-width: 48rem; padding: 2rem 1.25rem; color: #202124; background: #fff; font-size: 1.125rem; line-height: 1.7; }
 a { color: inherit; }
+.body a { color: #1d4ed8; }
 header { margin-bottom: 2rem; }
 header a { font-weight: 700; text-decoration: none; }
 .feed { display: grid; gap: 1.25rem; }
