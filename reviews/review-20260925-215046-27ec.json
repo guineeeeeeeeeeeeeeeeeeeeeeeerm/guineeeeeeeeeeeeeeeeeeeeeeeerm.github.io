@@ -1,0 +1,278 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260925-215046-27ec",
+  "since": "361d7d5127724db367418e09cd14b13234e67a75",
+  "head": "123af82439d8b86ca2f50ade271d0a53c19fd45e",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "delegated",
+      "where": "run-20260925-123911-322a/zoom-build",
+      "text": "provider decisions (1) passed by delegation: 기술 결정(배경 농도)은 위임 범위(source:plan-06의 '기술 결정은 위임'); 계획서 Q-post에 적음",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "self-performed",
+      "where": "run-20260925-123911-322a/zoom-polish",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): 구현 뒤 한 줄짜리 다듬기 두 개",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-172c7b7c plan/PLAN.md#Q-post — 글 하나 realizes concept:post-type",
+      "text": "re-confirmed by delegation: Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-2bfa6e13 sitegen/markdown.py:render_block realizes concept:post",
+      "text": "re-confirmed by delegation: Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-30693c0f sitegen/pages.py:parse_about realizes concept:about",
+      "text": "re-confirmed by delegation: Claude가 다시 읽음: parse_about은 여전히 소개 페이지를 만들고, 인용 줄에 include_zoom=True만 더해짐(source:zm-03) — 근거를 새 줄로 갱신",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6f5dd3d8 README.md#새 글 쓰기 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-cc70f89b sitegen/pages.py:page_shell realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f0d8ae78 plan/PLAN.md#Q-post — 글 하나 realizes concept:post",
+      "text": "re-confirmed by delegation: Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음",
+      "source": "mangsang",
+      "layer": "observation"
+    },
+    {
+      "kind": "drift",
+      "where": "plugin chongdae",
+      "text": "plugin chongdae: manifest 1.9.0, host 1.10.0",
+      "source": "hunsu",
+      "layer": "objection",
+      "first-seen": "review-20260925-202344-fc6a"
+    },
+    {
+      "kind": "drift",
+      "where": "plugin dwitbuk",
+      "text": "plugin dwitbuk: manifest 1.5.0, host 1.6.0",
+      "source": "hunsu",
+      "layer": "objection",
+      "first-seen": "review-20260925-202344-fc6a"
+    },
+    {
+      "kind": "drift",
+      "where": "plugin hacheong",
+      "text": "plugin hacheong: manifest 1.5.0, host 1.6.0",
+      "source": "hunsu",
+      "layer": "objection",
+      "first-seen": "review-20260925-202344-fc6a"
+    },
+    {
+      "kind": "drift",
+      "where": "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
+      "text": "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
+      "source": "hunsu",
+      "layer": "objection",
+      "first-seen": "review-20260925-202344-fc6a"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-123911-322a",
+      "text": "no check decides this task",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-123911-322a",
+      "text": "(provider) \"글 페이지와 소개 페이지 본문의 그림을 누르면, 페이지를 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게 보인다. 배경을 누르거나 Esc를 누르면 닫힌다.\" — 요청대로 JavaScript 화면 동작은 테스트하지 않음.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260925-123911-322a",
+      "text": "(provider) 브라우저에서 실제 클릭·Esc 상호작용은 자동화 테스트하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "review-debt",
+      "where": "review-20260925-213718-646e",
+      "source": "dwitbuk",
+      "layer": "observation",
+      "text": "previous review review-20260925-213718-646e still has 10 undisposed objection(s), carried here"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 82,
+      "text": "82 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 82)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-211351-2d8f",
+      "seen-in": "review-20260924-211351-2d8f",
+      "count": 21,
+      "text": "21 observation(s) written in review-20260924-211351-2d8f and unchanged since (delegated 21)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-215808-340b",
+      "seen-in": "review-20260924-215808-340b",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260924-215808-340b and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-182726-d3ab",
+      "seen-in": "review-20260925-182726-d3ab",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260925-182726-d3ab and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-183155-0726",
+      "seen-in": "review-20260925-183155-0726",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260925-183155-0726 and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-202344-fc6a",
+      "seen-in": "review-20260925-202344-fc6a",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-202344-fc6a and unchanged since (delegated 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-213718-646e",
+      "seen-in": "review-20260925-213718-646e",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260925-213718-646e and unchanged since (self-performed 1)"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e/extlink-build attempt 1: sitegen/patches.py:159-161, sitegen/markdown.py:243-250, sitegen/patches.py:340-349",
+      "layer": "objection",
+      "text": "verifier-reject (first seen review-20260925-202344-fc6a): plan-vs-code: A delete patch inside a still-valid URL (for example, deleting `/q",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "verifier-reject",
+        "run-20260925-105441-2c2e/extlink-build attempt 1: sitegen/patches.py:159-161, sitegen/markdown.py:243-250, sitegen/patches.py:340-349",
+        "plan-vs-code: A delete patch inside a still-valid URL (for example, deleting `/qwerty` from `[글](https://example.com/qwerty)`) is skipped by patch_ranges, so it is allowed, but its zero-width markers are inserted before Markdown rendering and later replaced with HTML spans inside the href attribute. The resulting link is malformed instead of rendering the fully applied external link. — record: “패치(Q-patch)는 적용된 본문을 바꾸는 것이므로 바깥 링크를 넣거나 고치거나 지울 수 있다 — 바깥 링크는 패치가 모두 적용된 본문에서 해석된다. 끄면 표시가 사라지고 적용된 본문만 보인다.” — tree: “if isinstance(unit, DeletedUnit): unit_index += 1; continue; body, regions = patch_state.regions_and_marked_body(); rendered_blocks = [render_block(block, content_root, post_path, image_prefix, external_links=True) for block in blocks]; rendered_blocks = render_patched_blocks(rendered_blocks, patch_tokens); tokens[start] = f\"<span{attributes}>\"”"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-213718-646e): no check decides this task",
+      "first-seen": "review-20260925-213718-646e",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 브라우저에서 실제 클릭까지는 검증하지 않고 계약 테스트와 생성 HTML/CSS로 확인했습니다.",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "(provider) 브라우저에서 실제 클릭까지는 검증하지 않고 계약 테스트와 생성 HTML/CSS로 확인했습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 빌드 실행으로 docs 생성물이 갱신되었습니다.",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "(provider) 빌드 실행으로 docs 생성물이 갱신되었습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 브라우저에서 실제 클릭 동작은 검증하지 않았습니다.",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-105441-2c2e",
+        "(provider) 브라우저에서 실제 클릭 동작은 검증하지 않았습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260925-093306-3b60, run-20260925-105441-2c2e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260925-202344-fc6a): no check decides this task  [x2]",
+      "first-seen": "review-20260925-202344-fc6a",
+      "carries": [
+        "non-claim",
+        "run-20260925-093306-3b60, run-20260925-105441-2c2e",
+        "no check decides this task"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.10.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "zoom-build",
     "role": "implementer",
@@ -124,5 +124,79 @@
     "delegated": "기술 결정(배경 농도)은 위임 범위(source:plan-06의 '기술 결정은 위임'); 계획서 Q-post에 적음",
     "at": "2026-09-25T12:47:25+00:00",
     "chongdae": "chongdae 1.10.0"
-  }
+  },
+  "non-claims": [
+    "(provider) 브라우저에서 실제 클릭·Esc 상호작용은 자동화 테스트하지 않았습니다."
+  ],
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.6.0",
+        "chongdae": "1.10.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 6,
+      "commands-failed": 0
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ]
+  ],
+  "touched": [
+    "README.md",
+    "docs/about/index.html",
+    "docs/assets/site.css",
+    "docs/assets/zoom.js",
+    "docs/index.html",
+    "docs/p/20260924-075921/index.html",
+    "docs/p/20260924-085456/index.html",
+    "docs/p/20260925-103715/index.html",
+    "plan/PLAN.md",
+    "sitegen/assets/site.css",
+    "sitegen/assets/zoom.js",
+    "sitegen/markdown.py",
+    "sitegen/output.py",
+    "sitegen/pages.py"
+  ]
 }

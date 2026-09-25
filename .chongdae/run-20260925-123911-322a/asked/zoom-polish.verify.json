@@ -1,0 +1,36 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.10.0",
+  "stage": "verify",
+  "run": "run-20260925-123911-322a",
+  "task": "zoom-polish",
+  "role": "verifier",
+  "target": ".",
+  "goal": "그림을 누르면 원본을 크게",
+  "brief": "README 새 줄을 안내서 말투(합니다체)로, .zoom-overlay에 z-index: 10을 더해 패치 이력 상자 등 위에 놓이게",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260925-123911-322a/local/zoom-polish.verify.response.json",
+  "touched": [
+    "README.md",
+    "docs/assets/site.css",
+    "plan/PLAN.md",
+    "sitegen/assets/site.css"
+  ],
+  "built": null
+}

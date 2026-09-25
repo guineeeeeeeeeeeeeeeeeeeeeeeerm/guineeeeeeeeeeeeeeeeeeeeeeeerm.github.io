@@ -1,0 +1,116 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.10.0",
+  "status": "done",
+  "def": {
+    "id": "zoom-polish",
+    "role": "session",
+    "brief": "README 새 줄을 안내서 말투(합니다체)로, .zoom-overlay에 z-index: 10을 더해 패치 이력 상자 등 위에 놓이게",
+    "closes": [],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      [
+        "python3",
+        "build.py"
+      ]
+    ],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 4,
+  "added": "2026-09-25T12:49:36+00:00",
+  "self-performed": {
+    "instead-of": "implementer",
+    "why": "구현 뒤 한 줄짜리 다듬기 두 개",
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "at": "2026-09-25T12:49:36+00:00",
+    "chongdae": "chongdae 1.10.0"
+  },
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.6.0",
+        "chongdae": "1.10.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 2,
+      "commands-failed": 0
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "python3",
+      "build.py"
+    ]
+  ],
+  "touched": [
+    "README.md",
+    "docs/assets/site.css",
+    "plan/PLAN.md",
+    "sitegen/assets/site.css"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-282_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.10.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 1,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-25T12:49:36+00:00"
+    }
+  }
+}
