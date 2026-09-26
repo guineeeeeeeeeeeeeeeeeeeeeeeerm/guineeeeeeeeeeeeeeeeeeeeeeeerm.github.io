@@ -1,0 +1,14 @@
+{
+  "id": "en-shows",
+  "text": "영어판에는 무엇이 나오고, 번역이 없는 것은 어떻게 되나?",
+  "verify": {
+    "kind": "answered-by",
+    "concepts": [
+      "translation"
+    ]
+  },
+  "declared": {
+    "delegated": "소유자 결정(source:loc-03)이 답하는 질문"
+  },
+  "written_by": "mangsang 1.10.0"
+}

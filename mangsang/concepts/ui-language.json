@@ -1,8 +1,16 @@
 {
   "name": "ui-language",
-  "means": "사이트가 만드는 메뉴·버튼·안내 글자는 한국어다.",
+  "means": "사이트가 만드는 메뉴·버튼·안내 글자는 원본인 한국어판에서 한국어이고, 영어판(/en/)에서 영어다.",
   "declared": {
-    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+    "delegated": "소유자가 영어판을 더하기로 함(source:loc-01, loc-03, loc-04); 뜻 문장은 Claude가 그 결정에 맞춰 씀"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "means": "사이트가 만드는 메뉴·버튼·안내 글자는 한국어다.",
+      "declared": {
+        "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+      }
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }
