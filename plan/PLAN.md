@@ -46,7 +46,7 @@ Decided (owner, `source:as-01`, `source:as-03`, `source:as-05`; 제안 `source:a
   빌드 결과는 저장소에 커밋하지 않는다 — `docs/`는 `.gitignore`에 있다. main에 push하면 GitHub Actions 워크플로
   `.github/workflows/pages.yml`이 `npm ci`와 `npm run build`로 `docs/`를 만들어 GitHub Pages로 배포한다(Pages 설정의 출처는
   "GitHub Actions"). 빌드가 실패하면 배포하지 않고 이전 사이트가 그대로 남는다. 커밋에는 실제로 바꾼 원본(`content/`, `src/` 등)만
-  보인다. 로컬 미리보기는 지금처럼 `npm run build`로 만든 `docs/`다. Decided (technical, session): 워크플로는 Node 24로 돌고,
+  보인다. 로컬 미리보기는 지금처럼 `npm run build`로 만든 `docs/`다. Decided (technical, session): 워크플로는 Ubuntu 24.04 러너(`ubuntu-24.04`로 고정 — `ubuntu-latest`가 2026-10-19부터 Ubuntu 26으로 바뀌므로)와 Node 24로 돌고,
   계약 테스트는 워크플로에서 돌리지 않는다(테스트는 run 안의 체크가 맡는다).
 - **테스트:** 계약 테스트는 `tests/`의 Python unittest로 남고 `python3 -m unittest discover -s tests`로 돈다(`source:as-04`의
   권고). 테스트는 빌드를 밖에서 실행하고 결과만 본다 — `tests/support.py`가 새 임시 디렉터리를 작업 디렉터리로 두고
