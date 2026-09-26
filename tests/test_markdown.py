@@ -195,6 +195,48 @@ class MarkdownContractTests(unittest.TestCase):
             self.assertRegex(document, r"인용 첫 줄<br>\s*인용 둘째 줄")
             self.assertIn("<li>인용 목록</li>", document)
 
+    def test_Q_post_quote_with_two_paragraphs_keeps_both_paragraphs_inside_blockquote(self):
+        body = "> 가\n>\n> 나"
+        with temporary_site({f"posts/{POST_ID}.md": post_text(body)}) as root:
+            self.assert_builds(root)
+            document = page(root, POST_ID)
+            self.assertRegex(
+                document,
+                r"<blockquote\b[^>]*>\s*<p>가</p>\s*<p>나</p>\s*</blockquote>",
+            )
+
+    def test_Q_post_patch_region_covering_markdown_syntax_is_a_patch_file_error(self):
+        cases = (
+            ("# 제목\n본문", "# 제목", "새 제목"),
+            ("제목\n---\n본문", "---", "==="),
+            ("- 항목\n본문", "- ", "+ "),
+            ("| 가 | 나 |\n| --- | --- |", "| 가 |", "가"),
+        )
+        for body, anchor, text in cases:
+            with self.subTest(anchor=anchor):
+                with temporary_site(
+                    {f"posts/{POST_ID}.md": post_text(body)},
+                    patches={"syntax-boundary": patch_row(anchor, text)},
+                ) as root:
+                    result = run_build(root)
+                    self.assertEqual(result.returncode, 1, msg=result.stderr)
+                    self.assertIn("patches.jsonl:1", result.stderr)
+
+    def test_Q_post_patch_changes_inside_heading_list_and_table_cells_are_applied(self):
+        cases = (
+            ("# 오래된 제목", "오래된 제목", "새 제목"),
+            ("- 오래된 항목", "오래된 항목", "새 항목"),
+            ("| 오래된 칸 |\n| --- |", "오래된 칸", "새 칸"),
+        )
+        for body, anchor, text in cases:
+            with self.subTest(anchor=anchor):
+                with temporary_site(
+                    {f"posts/{POST_ID}.md": post_text(body)},
+                    patches={"content-only": patch_row(anchor, text)},
+                ) as root:
+                    self.assert_builds(root)
+                    self.assertIn(text, page(root, POST_ID))
+
     def test_Q_post_links_and_images_inside_inline_or_fenced_code_stay_literal(self):
         body = (
             "`[글자](https://example.com)` `![설명](images/none.png)`\n\n"

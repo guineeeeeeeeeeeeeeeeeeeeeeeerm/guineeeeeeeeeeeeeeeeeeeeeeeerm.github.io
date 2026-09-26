@@ -42,7 +42,10 @@ class LineBreakContractTests(unittest.TestCase):
         with temporary_site({f"posts/{ID}.md": post_text("> 인용 첫 줄\n> 인용 둘째 줄")}) as root:
             self.assert_builds(root)
             body = body_of(read(root, f"p/{ID}/index.html"))
-            self.assertRegex(body, r"<blockquote>인용 첫 줄<br>\s*인용 둘째 줄</blockquote>")
+            self.assertRegex(
+                body,
+                r"<blockquote>\s*<p>인용 첫 줄<br>\s*인용 둘째 줄</p>\s*</blockquote>",
+            )
 
     def test_formatting_on_each_line_keeps_working(self):
         with temporary_site({f"posts/{ID}.md": post_text("**굵게** 첫 줄\n*기울임* 둘째 줄")}) as root:
