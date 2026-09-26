@@ -5,11 +5,11 @@
   "dst": "concept:site-build",
   "evidence": "npm run build",
   "seen": {
-    "README.md#사이트 만들기 — 빌드": "352560ff446c",
+    "README.md#사이트 만들기 — 빌드": "b3a5f7101375",
     "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: README 빌드 절의 명령이 바뀌어 인용을 새 명령으로"
+    "delegated": "Claude가 배포 변경(source:dp-03) 뒤 다시 읽음: 인용('생성기는 Astro 프로젝트다.', 'npm run build')이 그대로이고 site-build의 뜻(docs/에 만들고 Pages가 서비스)과 맞음"
   },
   "history": [
     {
@@ -21,7 +21,17 @@
         "concept:site-build": "66de2d1eaeaa"
       },
       "evidence": "python3 build.py"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: README 빌드 절의 명령이 바뀌어 인용을 새 명령으로"
+      },
+      "seen": {
+        "README.md#사이트 만들기 — 빌드": "352560ff446c",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "npm run build"
     }
   ],
-  "written_by": "mangsang 1.9.0"
+  "written_by": "mangsang 1.10.0"
 }
