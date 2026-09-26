@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.12.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "i18n-tests",
     "role": "nitpick",
@@ -24,8 +24,8 @@
     "no check decides this task; done means the agent said so"
   ],
   "touched_by_provider": [
-    "tests/test_i18n.py",
-    "tests/test_readme.py"
+    "tests/test_frame.py",
+    "tests/test_i18n.py"
   ],
   "performed_by": {
     "provider": "command",
@@ -56,10 +56,10 @@
     },
     "trace": {
       "changed": [
-        "update ./tests/test_i18n.py",
-        "update ./tests/test_readme.py"
+        "update ./tests/test_frame.py",
+        "update ./tests/test_i18n.py"
       ],
-      "commands-run": 10,
+      "commands-run": 19,
       "commands-failed": 1
     }
   },
@@ -71,6 +71,7 @@
     "content/posts/20260924-085456.en.md",
     "content/posts/20260925-103715.en.md",
     "content/posts/20260926-044433.en.md",
+    "plan/PLAN.md",
     "scripts/build.mjs",
     "src/components/FeedItem.astro",
     "src/components/Footnotes.astro",
@@ -88,6 +89,7 @@
     "src/pages/index.astro",
     "src/pages/p/[id]/index.astro",
     "src/pages/tags/[tag]/index.astro",
+    "tests/test_frame.py",
     "tests/test_i18n.py",
     "tests/test_readme.py"
   ],
@@ -232,5 +234,51 @@
       "contract_quote": "그 앵커가 번역 본문에 정확히 한 번 나오지 않으면 빌드 오류이고 오류 줄은 그 사건의 줄이다.",
       "why": "fixture의 translated 앵커를 lang: en 패치가 제거한 뒤에도 테스트는 빌드 성공을 요구합니다. 최종 영어 본문 검증은 계약상 links.jsonl:2에서 오류여야 합니다."
     }
-  ]
+  ],
+  "response": {
+    "status": "done",
+    "summary": "Corrected the two disputed fixtures/assertions. Both requested unittest checks pass.",
+    "tests": [
+      "tests/test_i18n.py",
+      "tests/support.py",
+      "tests/test_frame.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-i18n",
+        "tests": [
+          "test_Q_i18n_addresses_create_the_feed_post_about_and_tag_outputs",
+          "test_Q_i18n_translation_allows_only_title_and_uses_the_original_written_and_type",
+          "test_Q_i18n_translation_body_uses_post_markdown_and_image_rules",
+          "test_Q_i18n_bad_translation_files_are_errors_naming_the_translation_or_about_file",
+          "test_Q_i18n_posts_without_translations_are_absent_from_english_feed_tags_and_cloud",
+          "test_Q_i18n_english_pages_use_the_declared_english_screen_text",
+          "test_Q_i18n_language_switch_is_last_in_nav_and_points_to_the_pair_or_english_feed",
+          "test_Q_i18n_translated_link_uses_the_last_translated_anchor_and_reason",
+          "test_Q_i18n_english_links_and_linked_from_filter_to_live_fully_translated_links_with_events",
+          "test_Q_i18n_translated_anchor_missing_or_repeated_names_the_translated_event_line",
+          "test_Q_i18n_language_patches_apply_only_to_the_matching_body_and_english_patch_view",
+          "test_Q_i18n_english_patch_on_an_untranslated_post_is_a_build_error_naming_the_patch_row",
+          "test_Q_i18n_english_patch_anchor_rules_are_checked_against_the_translated_body",
+          "test_Q_i18n_english_tags_count_only_translated_posts_and_show_no_tag_reason",
+          "test_Q_i18n_about_en_is_the_english_about_page_and_keeps_external_link_rules",
+          "test_Q_i18n_share_badges_are_present_on_english_feed_and_post_pages"
+        ]
+      },
+      {
+        "section": "Q-ui source:loc-03",
+        "tests": [
+          "test_Q_ui_source_loc_03_keeps_korean_source_and_puts_english_under_a_separate_tree"
+        ]
+      }
+    ],
+    "non-claims": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  }
 }
