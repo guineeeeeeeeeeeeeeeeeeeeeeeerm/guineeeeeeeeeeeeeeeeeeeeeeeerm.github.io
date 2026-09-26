@@ -1,0 +1,111 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-120419-6a91",
+  "task": "meta-build",
+  "role": "verifier",
+  "target": ".",
+  "goal": "favicon과 OG 미리보기",
+  "brief": "plan/PLAN.md의 새 절 Q-meta를 구현한다: src/lib/에 사이트 이름·사이트 주소·언어별 사이트 설명 상수와 페이지별 제목·설명·절대 주소를 계산하는 함수(규칙은 한 곳), src/layouts/BaseLayout.astro의 머리에 favicon 두 링크·canonical·description·OG·twitter:card 메타를 넣고, 각 페이지(한국어·영어의 피드·글·소개·태그)가 제목·설명·og:type·절대 주소·짝 언어를 넘긴다. 이미지 세 개(public/assets/favicon-32.png, apple-touch-icon.png, og-default.png)는 이미 커밋되어 있고 고치거나 다시 만들지 않는다. content/는 건드리지 않는다. 새 패키지는 설치하지 않는다(더 필요하면 blocked). 테스트 파일은 건드리지 않는다(HEAD의 tests/*.py가 계약이다; 틀린 기대가 있으면 dispute). 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
+  "closes": [
+    "Q-meta"
+  ],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_meta.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_about.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_tags.py"
+    ]
+  ],
+  "tests": [
+    "tests/support.py",
+    "tests/test_about.py",
+    "tests/test_external_links.py",
+    "tests/test_feed_layout.py",
+    "tests/test_frame.py",
+    "tests/test_i18n.py",
+    "tests/test_ids.py",
+    "tests/test_image_zoom.py",
+    "tests/test_images.py",
+    "tests/test_linebreaks.py",
+    "tests/test_markdown.py",
+    "tests/test_meta.py",
+    "tests/test_readme.py",
+    "tests/test_s1.py",
+    "tests/test_s2.py",
+    "tests/test_s3.py",
+    "tests/test_shares.py",
+    "tests/test_tags.py"
+  ],
+  "response": "./.chongdae/run-20260926-120419-6a91/local/meta-build.verify.response.json",
+  "touched": [
+    "src/layouts/BaseLayout.astro",
+    "src/lib/site.ts",
+    "src/pages/about/index.astro",
+    "src/pages/en/about/index.astro",
+    "src/pages/en/index.astro",
+    "src/pages/en/p/[id]/index.astro",
+    "src/pages/en/tags/[tag]/index.astro",
+    "src/pages/index.astro",
+    "src/pages/p/[id]/index.astro",
+    "src/pages/tags/[tag]/index.astro"
+  ],
+  "built": {
+    "summary": "Q-meta 구현 완료. 사이트 상수·페이지 메타 계산 함수를 추가하고, 공통 head에 favicon/canonical/description/OG/Twitter 메타를 적용했으며 한국어·영어 전체 페이지가 메타를 전달하도록 변경했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests -p test_meta.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_about.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_tags.py",
+        "exit": 0
+      },
+      {
+        "check": "git diff --check",
+        "exit": 0
+      },
+      {
+        "check": "git diff --name-only -- tests content public/assets",
+        "exit": 0
+      }
+    ],
+    "non-claims": [
+      "지정된 세 체크 외 전체 테스트 스위트는 실행하지 않았습니다."
+    ]
+  },
+  "touched_since": [
+    "plan/PLAN.md"
+  ]
+}

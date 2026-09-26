@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.12.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "meta-build",
     "role": "implementer",
@@ -181,5 +181,107 @@
     "delegated": "기술 결정 두 개(메타 계산 위치, 글 메타의 원문)는 위임 범위(source:plan-06)이고 계약과 맞음; 계획서 Q-meta에 적음",
     "at": "2026-09-26T12:15:48+00:00",
     "chongdae": "chongdae 1.12.0"
-  }
+  },
+  "non-claims": [
+    "(provider) 지정된 세 체크 외 전체 테스트 스위트는 실행하지 않았습니다."
+  ],
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "reviewed_tree": {
+    "plan/PLAN.md": "fe5c3576fb5c4751b86b85f9119ae3e7cd3ab407",
+    "src/layouts/BaseLayout.astro": "25849f0cb6e3a298e222ad01d8c25e98a669b118",
+    "src/lib/site.ts": "6e34dcb82392513b2fdfbf1a3bcf083d74482351",
+    "src/pages/about/index.astro": "f07fe9852d2a2c3f7e16f4eb9d1fa133dbe50fd8",
+    "src/pages/en/about/index.astro": "bb6131855cde6cfc250f632856e31bfca3ccffd9",
+    "src/pages/en/index.astro": "440e532f2c210ef67f49b7ca2191ef533f3ff7b2",
+    "src/pages/en/p/[id]/index.astro": "72688328535a9cc7bcc7add387fb1d2aa40fa972",
+    "src/pages/en/tags/[tag]/index.astro": "375525fe9e669009f915dfa0c3dc6b263f5397ac",
+    "src/pages/index.astro": "d3c86dfa560136273d59db8890e6acc22f3129b3",
+    "src/pages/p/[id]/index.astro": "5b698b1edb1eeee24e1de0bf81be8bfdf52b56c4",
+    "src/pages/tags/[tag]/index.astro": "aefe7da54f040e344bcdaad640cfee25af279b13"
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.8.0",
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 5,
+      "commands-failed": 0
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_meta.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_about.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_tags.py"
+    ]
+  ],
+  "touched": [
+    "plan/PLAN.md",
+    "src/layouts/BaseLayout.astro",
+    "src/lib/site.ts",
+    "src/pages/about/index.astro",
+    "src/pages/en/about/index.astro",
+    "src/pages/en/index.astro",
+    "src/pages/en/p/[id]/index.astro",
+    "src/pages/en/tags/[tag]/index.astro",
+    "src/pages/index.astro",
+    "src/pages/p/[id]/index.astro",
+    "src/pages/tags/[tag]/index.astro"
+  ]
 }
