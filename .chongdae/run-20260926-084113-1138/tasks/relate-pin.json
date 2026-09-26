@@ -1,0 +1,40 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.12.0",
+  "status": "done",
+  "def": {
+    "id": "relate-pin",
+    "role": "session",
+    "brief": "러너 고정으로 stale이 된 관계 재확인",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-26T08:41:13+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-283_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 0,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-26T08:41:13+00:00"
+    }
+  }
+}
