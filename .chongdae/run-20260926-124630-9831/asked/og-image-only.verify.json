@@ -1,0 +1,37 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-124630-9831",
+  "task": "og-image-only",
+  "role": "verifier",
+  "target": ".",
+  "goal": "OG 이미지에서 글자를 뺌",
+  "brief": "OG 기본 이미지를 아바타만 있는 것으로 다시 만든다(source:og-06)",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_meta.py"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260926-124630-9831/local/og-image-only.verify.response.json",
+  "touched": [
+    "plan/PLAN.md",
+    "public/assets/og-default.png"
+  ],
+  "built": null
+}

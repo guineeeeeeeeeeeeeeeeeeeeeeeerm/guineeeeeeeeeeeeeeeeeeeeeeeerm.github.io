@@ -1,0 +1,266 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260926-214749-830c",
+  "since": "260d75117915c7c6ed912dceef4f61ea577be54a",
+  "head": "302b3e83088aadbb7d5a6c6d2d4b2bf00e7aacd3",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "self-performed",
+      "where": "run-20260926-124630-9831/og-image-only",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): 소유자가 요청한 이미지 파일 교체와 계획서 한 줄",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-c0b35146 plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG) realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 OG 이미지 변경(source:og-06) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-120419-6a91",
+      "text": "no check decides this task",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-120419-6a91",
+      "text": "(provider) \"favicon은 아바타(content/images/avatar_paint_primary.png)의 가운데 육각형을 잘라 만든 것이고\" — output tests cannot verify the asset’s visual provenance.",
+      "layer": "objection",
+      "first-seen": "review-20260926-212327-cbe8"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-120419-6a91",
+      "text": "(provider) \"사이트 주소는 ... (src/lib/의 상수 하나)\" — output tests verify emitted URLs, not the internal single-constant implementation.",
+      "layer": "objection",
+      "first-seen": "review-20260926-212327-cbe8"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-120419-6a91",
+      "text": "(provider) \"빌드할 때 이미지를 만들지 않는다\" — byte equality cannot distinguish copying from generating identical bytes.",
+      "layer": "objection",
+      "first-seen": "review-20260926-212327-cbe8"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-120419-6a91",
+      "text": "(provider) 지정된 세 체크 외 전체 테스트 스위트는 실행하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260926-212327-cbe8"
+    },
+    {
+      "kind": "review-debt",
+      "where": "review-20260926-212327-cbe8",
+      "source": "dwitbuk",
+      "layer": "observation",
+      "text": "previous review review-20260926-212327-cbe8 still has 11 undisposed objection(s), carried here"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 62,
+      "text": "62 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 62)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-202344-fc6a",
+      "seen-in": "review-20260925-202344-fc6a",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260925-202344-fc6a and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-234959-4023",
+      "seen-in": "review-20260925-234959-4023",
+      "count": 7,
+      "text": "7 observation(s) written in review-20260925-234959-4023 and unchanged since (agent-proposed 1, delegated 6)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-120908-3415",
+      "seen-in": "review-20260926-120908-3415",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260926-120908-3415 and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-132632-e2df",
+      "seen-in": "review-20260926-132632-e2df",
+      "count": 9,
+      "text": "9 observation(s) written in review-20260926-132632-e2df and unchanged since (delegated 9)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-173922-be51",
+      "seen-in": "review-20260926-173922-be51",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-173922-be51 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-174115-4090",
+      "seen-in": "review-20260926-174115-4090",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-174115-4090 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-192156-203a",
+      "seen-in": "review-20260926-192156-203a",
+      "count": 14,
+      "text": "14 observation(s) written in review-20260926-192156-203a and unchanged since (delegated 14)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-193138-870b",
+      "seen-in": "review-20260926-193138-870b",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260926-193138-870b and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-201143-e45b",
+      "seen-in": "review-20260926-201143-e45b",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260926-201143-e45b and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-212327-cbe8",
+      "seen-in": "review-20260926-212327-cbe8",
+      "count": 25,
+      "text": "25 observation(s) written in review-20260926-212327-cbe8 and unchanged since (delegated 24, self-performed 1)"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-110304-ee8e, run-20260926-120419-6a91",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-212327-cbe8): no check decides this task  [x2]",
+      "first-seen": "review-20260926-212327-cbe8",
+      "carries": [
+        "non-claim",
+        "run-20260926-110304-ee8e, run-20260926-120419-6a91",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-102716-20c9, run-20260926-110304-ee8e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-201143-e45b): no check decides this task  [x2]",
+      "first-seen": "review-20260926-201143-e45b",
+      "carries": [
+        "non-claim",
+        "run-20260926-102716-20c9, run-20260926-110304-ee8e",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-085100-e125, run-20260926-102716-20c9",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-193138-870b): no check decides this task  [x2]",
+      "first-seen": "review-20260926-193138-870b",
+      "carries": [
+        "non-claim",
+        "run-20260926-085100-e125, run-20260926-102716-20c9",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): (provider) 이번 검증에서 보호 테스트 파일은 수정하지 않았습니다.",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-085100-e125",
+        "(provider) 이번 검증에서 보호 테스트 파일은 수정하지 않았습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): (provider) 모든 가능한 외부 fixture 조합이 아니라 현재 저장소와 보호 테스트 fixture를 검증했습니다.",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-085100-e125",
+        "(provider) 모든 가능한 외부 fixture 조합이 아니라 현재 저장소와 보호 테스트 fixture를 검증했습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-084254-d8ee, run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): no check decides this task  [x2]",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-084254-d8ee, run-20260926-085100-e125",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-084113-1138, run-20260926-084254-d8ee",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-174314-a452): no check decides this task  [x2]",
+      "first-seen": "review-20260926-174314-a452",
+      "carries": [
+        "non-claim",
+        "run-20260926-084113-1138, run-20260926-084254-d8ee",
+        "no check decides this task"
+      ]
+    }
+  ]
+}
