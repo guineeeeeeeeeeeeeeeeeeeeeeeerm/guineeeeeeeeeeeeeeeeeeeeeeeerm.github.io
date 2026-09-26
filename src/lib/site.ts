@@ -1,5 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
+import MarkdownIt from "markdown-it";
+import type { Token } from "markdown-it";
 
 export class BuildError extends Error {}
 
@@ -125,6 +127,7 @@ export class PatchState {
     if (positions.length !== 1 || !patch.anchor) throw new BuildError(patch.source);
     const anchorStart = codePointOffset(this.body, positions[0]);
     const anchorEnd = anchorStart + Array.from(patch.anchor).length;
+    if (patch.op === "replace" || patch.op === "delete") validatePatchSourceOverlaps(this.body, anchorStart, anchorEnd, patch);
     const nodeStart = visibleIndices[anchorStart];
     const nodeEnd = visibleIndices[anchorEnd - 1] + 1;
     const replaced = this.units.slice(nodeStart, nodeEnd);
@@ -232,10 +235,10 @@ export const SHARE_PLACES: Record<string, [string, string]> = {
 const TABLES = new Set(["links.jsonl", "patches.jsonl", "shares.jsonl", "tags.jsonl"]);
 const WRITTEN_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
 const RECORD_ID_RE = /^[a-z0-9-]+$/;
-const INLINE_RE = /!\[([^\]]*)\]\(([^)]*)\)|\*\*(.+?)\*\*|`([^`]+)`|\*(?!\s)(.+?)(?<!\s)\*/g;
-const INLINE_WITH_LINKS_RE = new RegExp(`${INLINE_RE.source}|\\[([^\\]]*)\\]\\(([^)]*)\\)`, "g");
-const HEADING_RE = /^(#{1,3})[ \t]+(.*)$/;
 const PATCH_MARKER_RE = /\u0000guin-patch-(?:start|end)-\d+\u0000/g;
+
+const markdown = new MarkdownIt("commonmark", { html: false, linkify: false, breaks: true });
+markdown.enable(["table", "strikethrough"]);
 
 function rootPath(): string {
   return path.resolve(process.env.GUIN_CONTENT_ROOT || path.join(process.cwd(), "content"));
@@ -289,7 +292,7 @@ function allFiles(directory: string): string[] {
 }
 
 function imageWidth(alt: string, file: string): { alt: string; width?: number } {
-  const match = /^(.*)\|(\d{1,4})$/s.exec(alt);
+  const match = /^(.*)\|(\d+)$/s.exec(alt);
   if (!match) return { alt };
   const width = Number(match[2]);
   if (width < 1 || width > 9999) fail(file);
@@ -359,6 +362,10 @@ function stringValue(value: unknown, file: string): string {
   return value;
 }
 
+function validateBodyCharacters(value: string, file: string): void {
+  if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/.test(value)) fail(file);
+}
+
 function parsePost(file: string, root: string): Post {
   const lines = readUtf8(file).split(/\r\n?|\n/);
   const separator = lines.findIndex((line) => line.trim() === "");
@@ -378,6 +385,7 @@ function parsePost(file: string, root: string): Post {
   if (fields.type === "short" && "title" in fields) fail(file);
   const body = lines.slice(separator + 1).join("\n");
   if (!body.trim()) fail(file);
+  validateBodyCharacters(body, file);
   const id = path.basename(file, path.extname(file));
   if (id !== timeId(fields.written)) fail(file);
   return { id, source: file, fields, body, firstText: "", type: fields.type as Post["type"], written: fields.written, title: fields.title || "" };
@@ -418,6 +426,7 @@ function parsePatches(root: string, posts: Post[]): Patch[] {
     ids.add(id);
     parseWritten(at, row.file);
     const text = op === "delete" ? undefined : stringValue(row.value.text, row.file);
+    if (text !== undefined) validateBodyCharacters(text, row.file);
     patches.push({ source: row.file, line: row.line, id, postId, at, why, op: op as PatchOp, anchor, ...(text === undefined ? {} : { text }) });
   }
   return patches;
@@ -429,14 +438,361 @@ function applyPatches(posts: Post[], patches: Patch[]): Map<string, PatchState> 
   return states;
 }
 
+type MarkdownEnvironment = {
+  root: string;
+  file: string;
+  imagePrefix: string;
+  wrapImages: boolean;
+  sentinelPrefix?: string;
+  imageBarToken?: string;
+};
+
+type Span = [number, number];
+
+type LinkCandidate = {
+  start: number;
+  end: number;
+  label: string;
+  address?: string;
+};
+
+type MarkdownSyntaxSpan = {
+  start: number;
+  end: number;
+};
+
+function escapedAt(value: string, index: number): boolean {
+  let slashes = 0;
+  for (let cursor = index - 1; cursor >= 0 && value[cursor] === "\\"; cursor -= 1) slashes += 1;
+  return slashes % 2 === 1;
+}
+
+function lineStarts(value: string): number[] {
+  const starts = [0];
+  for (let index = 0; index < value.length; index += 1) if (value[index] === "\n") starts.push(index + 1);
+  return starts;
+}
+
+function blockSourceSpan(value: string, map: [number, number]): Span {
+  const starts = lineStarts(value);
+  const lines = value.split("\n");
+  const start = starts[map[0]] ?? value.length;
+  const lastLine = Math.max(map[0], map[1] - 1);
+  const end = (starts[lastLine] ?? value.length) + (lines[lastLine] || "").length;
+  return [codePointOffset(value, start), codePointOffset(value, end)];
+}
+
+function markdownCodeSpans(value: string): Span[] {
+  const spans: Span[] = [];
+  const blockSpans: Span[] = [];
+  for (const token of markdown.parse(value, {})) {
+    if ((token.type === "fence" || token.type === "code_block") && token.map) {
+      const span = blockSourceSpan(value, token.map as [number, number]);
+      blockSpans.push(span);
+      spans.push(span);
+    }
+  }
+
+  const isInBlock = (start: number, end: number) => blockSpans.some(([blockStart, blockEnd]) => start < blockEnd && blockStart < end);
+  let index = 0;
+  while (index < value.length) {
+    if (value[index] !== "`" || escapedAt(value, index) || isInBlock(codePointOffset(value, index), codePointOffset(value, index + 1))) {
+      index += 1;
+      continue;
+    }
+    let run = 1;
+    while (value[index + run] === "`") run += 1;
+    let close = index + run;
+    while (close < value.length) {
+      // Backslashes have no escape meaning inside a CommonMark code span.
+      if (value[close] !== "`") {
+        close += 1;
+        continue;
+      }
+      let closeRun = 1;
+      while (value[close + closeRun] === "`") closeRun += 1;
+      if (closeRun === run) {
+        const start = codePointOffset(value, index);
+        const end = codePointOffset(value, close + closeRun);
+        if (!isInBlock(start, end)) spans.push([start, end]);
+        index = close + closeRun;
+        break;
+      }
+      close += closeRun;
+    }
+    if (close >= value.length) index += run;
+  }
+  return spans.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+}
+
+function findBracketClose(value: string, start: number): number {
+  let depth = 0;
+  for (let index = start; index < value.length; index += 1) {
+    if (escapedAt(value, index)) continue;
+    if (value[index] === "[") depth += 1;
+    if (value[index] !== "]") continue;
+    depth -= 1;
+    if (depth === 0) return index;
+  }
+  return -1;
+}
+
+function findParenClose(value: string, start: number): number {
+  let depth = 0;
+  for (let index = start; index < value.length; index += 1) {
+    if (escapedAt(value, index)) continue;
+    if (value[index] === "(") depth += 1;
+    if (value[index] !== ")") continue;
+    depth -= 1;
+    if (depth === 0) return index;
+  }
+  return -1;
+}
+
+function referenceKey(value: string): string {
+  return value.trim().replace(/[ \t\n]+/g, " ").toLowerCase();
+}
+
+function markdownImageEnd(value: string, index: number, references: Map<string, string>): number | undefined {
+  if (value[index] !== "!" || value[index + 1] !== "[") return undefined;
+  const labelEnd = findBracketClose(value, index + 1);
+  if (labelEnd < 0) return undefined;
+  let end = labelEnd + 1;
+  if (value[end] === "(") {
+    const destinationEnd = findParenClose(value, end);
+    return destinationEnd < 0 ? undefined : destinationEnd + 1;
+  }
+  if (value[end] === "[") {
+    const referenceEnd = findBracketClose(value, end);
+    if (referenceEnd < 0) return undefined;
+    const reference = value.slice(end + 1, referenceEnd) || value.slice(index + 2, labelEnd);
+    return references.has(referenceKey(reference)) ? referenceEnd + 1 : undefined;
+  }
+  return references.has(referenceKey(value.slice(index + 2, labelEnd))) ? end : undefined;
+}
+
+function markdownLinkCandidates(value: string, codeSpans = markdownCodeSpans(value)): LinkCandidate[] {
+  const candidates: LinkCandidate[] = [];
+  const references = new Map<string, string>();
+  const definitionRanges: Array<[number, number]> = [];
+  const addCandidate = (start: number, end: number, label: string, address?: string) => {
+    candidates.push({ start: codePointOffset(value, start), end: codePointOffset(value, end), label, ...(address === undefined ? {} : { address }) });
+  };
+  const addReferences = (pattern: RegExp) => {
+    for (const match of value.matchAll(pattern)) {
+      const start = match.index || 0;
+      const lineEnd = value.indexOf("\n", start + match[0].length);
+      const end = lineEnd < 0 ? value.length : lineEnd;
+      const pointStart = codePointOffset(value, start);
+      const pointEnd = codePointOffset(value, end);
+      if (codeSpans.some(([codeStart, codeEnd]) => pointStart < codeEnd && codeStart < pointEnd)) continue;
+      definitionRanges.push([start, end]);
+      references.set(referenceKey(match[1]), match[2] || match[3] || "");
+    }
+  };
+  addReferences(/^ {0,3}\[([^\]\n]+)\]:[ \t]*(?:<([^>\n]+)>|(\S+))/gm);
+  addReferences(/^(?: {0,3}>[ \t]?)+[ \t]*\[([^\]\n]+)\]:[ \t]*(?:<([^>\n]+)>|(\S+))/gm);
+  const inCode = (start: number, end: number) => {
+    const startPoint = codePointOffset(value, start);
+    const endPoint = codePointOffset(value, end);
+    return codeSpans.some(([codeStart, codeEnd]) => codeStart <= startPoint && endPoint <= codeEnd);
+  };
+  for (let index = 0; index < value.length; index += 1) {
+    if (escapedAt(value, index)) continue;
+    const definition = definitionRanges.find(([start, end]) => start <= index && index < end);
+    if (definition) {
+      index = definition[1] - 1;
+      continue;
+    }
+    const imageEnd = markdownImageEnd(value, index, references);
+    if (imageEnd !== undefined) {
+      index = imageEnd - 1;
+      continue;
+    }
+    if (value[index] === "<") {
+      const close = value.indexOf(">", index + 1);
+      if (close >= 0 && /^[A-Za-z][A-Za-z0-9+.-]*:[^<>\s]+$/.test(value.slice(index + 1, close))) {
+        if (!inCode(index, close + 1)) addCandidate(index, close + 1, value.slice(index + 1, close), value.slice(index + 1, close));
+        index = close;
+      }
+      continue;
+    }
+    if (value[index] !== "[" || value[index - 1] === "!") continue;
+    const labelEnd = findBracketClose(value, index);
+    if (labelEnd < 0) continue;
+    let end = labelEnd + 1;
+    let address: string | undefined;
+    if (value[end] === "(") {
+      const destinationEnd = findParenClose(value, end);
+      if (destinationEnd < 0) continue;
+      const destination = value.slice(end + 1, destinationEnd).trim();
+      const firstDestination = destination.split(/[ \t]+/, 1)[0] || "";
+      address = firstDestination.startsWith("<") && firstDestination.endsWith(">") ? firstDestination.slice(1, -1) : firstDestination;
+      end = destinationEnd + 1;
+    } else if (value[end] === "[") {
+      const referenceEnd = findBracketClose(value, end);
+      if (referenceEnd < 0) continue;
+      const reference = value.slice(end + 1, referenceEnd);
+      const referenceName = reference || value.slice(index + 1, labelEnd);
+      address = references.get(referenceKey(referenceName));
+      if (address === undefined) {
+        index = referenceEnd;
+        continue;
+      }
+      end = referenceEnd + 1;
+    } else {
+      if (value[end] === ":") continue;
+      const address = references.get(referenceKey(value.slice(index + 1, labelEnd)));
+      if (address === undefined) continue;
+      if (!inCode(index, end)) addCandidate(index, end, value.slice(index + 1, labelEnd), address);
+      index = end - 1;
+      continue;
+    }
+    if (!inCode(index, end)) addCandidate(index, end, value.slice(index + 1, labelEnd), address);
+    index = end - 1;
+  }
+  return candidates;
+}
+
 export function externalLinkSpans(text: string): Array<[number, number]> {
-  const spans: Array<[number, number]> = [];
-  for (const match of text.matchAll(INLINE_WITH_LINKS_RE)) {
-    if (match[6] === undefined) continue;
-    const start = codePointOffset(text, match.index || 0);
-    spans.push([start, start + Array.from(match[0]).length]);
+  return markdownLinkCandidates(text).map(({ start, end }) => [start, end]);
+}
+
+function markdownImageSpans(value: string, codeSpans = markdownCodeSpans(value)): Span[] {
+  const spans: Span[] = [];
+  const references = new Map<string, string>();
+  const addReferences = (pattern: RegExp) => {
+    for (const match of value.matchAll(pattern)) {
+      const start = match.index || 0;
+      const lineEnd = value.indexOf("\n", start + match[0].length);
+      const end = lineEnd < 0 ? value.length : lineEnd;
+      const pointStart = codePointOffset(value, start);
+      const pointEnd = codePointOffset(value, end);
+      if (codeSpans.some(([codeStart, codeEnd]) => pointStart < codeEnd && codeStart < pointEnd)) continue;
+      references.set(referenceKey(match[1]), match[2] || match[3] || "");
+    }
+  };
+  addReferences(/^ {0,3}\[([^\]\n]+)\]:[ \t]*(?:<([^>\n]+)>|(\S+))/gm);
+  addReferences(/^(?: {0,3}>[ \t]?)+[ \t]*\[([^\]\n]+)\]:[ \t]*(?:<([^>\n]+)>|(\S+))/gm);
+  const inCode = (start: number, end: number) => {
+    const startPoint = codePointOffset(value, start);
+    const endPoint = codePointOffset(value, end);
+    return codeSpans.some(([codeStart, codeEnd]) => codeStart < endPoint && startPoint < codeEnd);
+  };
+  for (let index = 0; index < value.length; index += 1) {
+    if (value[index] !== "!" || escapedAt(value, index) || value[index + 1] !== "[") continue;
+    const end = markdownImageEnd(value, index, references);
+    if (end === undefined) continue;
+    if (!inCode(index, end)) spans.push([codePointOffset(value, index), codePointOffset(value, end)]);
+    index = end - 1;
+  }
+  const linkSpans = markdownLinkCandidates(value, codeSpans).map(({ start, end }) => [start, end] as Span);
+  return spans.filter(([start, end]) => !linkSpans.some(([linkStart, linkEnd]) => linkStart <= start && end <= linkEnd));
+}
+
+function markdownSyntaxSpans(value: string): MarkdownSyntaxSpan[] {
+  const spans: MarkdownSyntaxSpan[] = [];
+  const lines = value.split("\n");
+  const starts = lineStarts(value);
+  const codeLines = new Set<number>();
+  const tableLines = new Set<number>();
+  const setextLines = new Set<number>();
+  for (const token of markdown.parse(value, {})) {
+    if (!token.map) continue;
+    if (token.type === "fence" || token.type === "code_block") {
+      for (let line = token.map[0]; line < token.map[1]; line += 1) codeLines.add(line);
+    }
+    if (token.type === "table_open") {
+      for (let line = token.map[0]; line < token.map[1]; line += 1) tableLines.add(line);
+    }
+    if (token.type === "heading_open" && token.map[1] - token.map[0] > 1) setextLines.add(token.map[1] - 1);
+  }
+  const add = (line: number, start: number, end: number) => {
+    if (end <= start) return;
+    spans.push({ start: codePointOffset(value, starts[line] + start), end: codePointOffset(value, starts[line] + end) });
+  };
+  const linePrefix = (line: string, lineNumber: number): number => {
+    let position = 0;
+    let spaces = 0;
+    while (position < line.length && spaces < 4 && line[position] === " ") {
+      position += 1;
+      spaces += 1;
+    }
+    while (line[position] === ">") {
+      add(lineNumber, position, position + 1);
+      position += 1;
+      if (line[position] === " ") position += 1;
+      spaces = 0;
+      while (position < line.length && spaces < 4 && line[position] === " ") {
+        position += 1;
+        spaces += 1;
+      }
+    }
+    return position;
+  };
+  const inCode = (start: number, end: number, codeSpans: Span[]) => codeSpans.some(([codeStart, codeEnd]) => start < codeEnd && codeStart < end);
+  const codeSpans = markdownCodeSpans(value);
+  for (let lineNumber = 0; lineNumber < lines.length; lineNumber += 1) {
+    if (codeLines.has(lineNumber)) continue;
+    const line = lines[lineNumber];
+    const contentStart = linePrefix(line, lineNumber);
+    const content = line.slice(contentStart);
+    const absolute = (offset: number) => starts[lineNumber] + offset;
+    const definition = /^\[[^\]\n]+\]:[ \t]*(?:<[^>\n]+>|\S+)/.exec(content);
+    if (definition) {
+      add(lineNumber, 0, line.length);
+      continue;
+    }
+    const heading = /^(#{1,6})(?=[ \t]|$)/.exec(content);
+    if (heading) {
+      let end = contentStart + heading[1].length;
+      while (end < line.length && (line[end] === " " || line[end] === "\t")) end += 1;
+      add(lineNumber, contentStart, end);
+    }
+    const list = /^(?:[*+-]|\d{1,9}[.)])(?=[ \t]|$)/.exec(content);
+    if (list) {
+      let end = contentStart + list[0].length;
+      while (end < line.length && (line[end] === " " || line[end] === "\t")) end += 1;
+      add(lineNumber, contentStart, end);
+    }
+    if (/^(?:[ \t]*[*_-]){3,}[ \t]*$/.test(content)) add(lineNumber, contentStart, line.length);
+    if (setextLines.has(lineNumber)) add(lineNumber, contentStart, line.length);
+    if (!tableLines.has(lineNumber)) continue;
+    const separatorCells = content.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((cell) => cell.trim());
+    if (separatorCells.length > 1 && separatorCells.every((cell) => /^:?-+:?$/.test(cell))) add(lineNumber, contentStart, line.length);
+    for (let column = contentStart; column < line.length; column += 1) {
+      if (line[column] !== "|" || escapedAt(line, column)) continue;
+      const point = codePointOffset(value, absolute(column));
+      if (inCode(point, point + 1, codeSpans)) continue;
+      const before = line.slice(0, column);
+      const imageWidthBar = /!\[[^\]\n]*$/.test(before) && /^\d+\](?:\(|\[)/.test(line.slice(column + 1));
+      if (!imageWidthBar) add(lineNumber, column, column + 1);
+    }
   }
   return spans;
+}
+
+function overlaps(start: number, end: number, spanStart: number, spanEnd: number): boolean {
+  return start < spanEnd && spanStart < end;
+}
+
+function covers(start: number, end: number, spanStart: number, spanEnd: number): boolean {
+  return start <= spanStart && spanEnd <= end;
+}
+
+function validatePatchSourceOverlaps(body: string, start: number, end: number, patch: Patch): void {
+  for (const [spanStart, spanEnd] of markdownCodeSpans(body)) {
+    if (overlaps(start, end, spanStart, spanEnd) && !covers(start, end, spanStart, spanEnd)) fail(patch.source);
+  }
+  for (const [spanStart, spanEnd] of markdownImageSpans(body)) {
+    if (overlaps(start, end, spanStart, spanEnd) && !covers(start, end, spanStart, spanEnd)) fail(patch.source);
+  }
+  for (const { start: spanStart, end: spanEnd } of markdownLinkCandidates(body)) {
+    if (overlaps(start, end, spanStart, spanEnd) && !covers(start, end, spanStart, spanEnd)) fail(patch.source);
+  }
+  for (const { start: spanStart, end: spanEnd } of markdownSyntaxSpans(body)) {
+    if (overlaps(start, end, spanStart, spanEnd)) fail(patch.source);
+  }
 }
 
 function validatePatchExternalOverlaps(states: Map<string, PatchState>): void {
@@ -446,6 +802,40 @@ function validatePatchExternalOverlaps(states: Map<string, PatchState>): void {
         const overlaps = linkStart < regionEnd && regionStart < linkEnd;
         const coversLink = regionStart <= linkStart && linkEnd <= regionEnd;
         if (overlaps && !coversLink) fail(patch.source);
+      }
+    }
+  }
+}
+
+function validatePatchCodeOverlaps(states: Map<string, PatchState>): void {
+  for (const state of states.values()) {
+    for (const codeSpan of markdownCodeSpans(state.body)) {
+      for (const [regionStart, regionEnd, patch] of state.patchRanges()) {
+        const overlaps = codeSpan[0] < regionEnd && regionStart < codeSpan[1];
+        const coversCode = regionStart <= codeSpan[0] && codeSpan[1] <= regionEnd;
+        if (overlaps && !coversCode) fail(patch.source);
+      }
+    }
+  }
+}
+
+function validatePatchImageOverlaps(states: Map<string, PatchState>): void {
+  for (const state of states.values()) {
+    for (const imageSpan of markdownImageSpans(state.body)) {
+      for (const [regionStart, regionEnd, patch] of state.patchRanges()) {
+        const overlaps = imageSpan[0] < regionEnd && regionStart < imageSpan[1];
+        const coversImage = regionStart <= imageSpan[0] && imageSpan[1] <= regionEnd;
+        if (overlaps && !coversImage) fail(patch.source);
+      }
+    }
+  }
+}
+
+function validatePatchSyntaxOverlaps(states: Map<string, PatchState>): void {
+  for (const state of states.values()) {
+    for (const { start: syntaxStart, end: syntaxEnd } of markdownSyntaxSpans(state.body)) {
+      for (const [regionStart, regionEnd, patch] of state.patchRanges()) {
+        if (overlaps(syntaxStart, syntaxEnd, regionStart, regionEnd)) fail(patch.source);
       }
     }
   }
@@ -488,6 +878,7 @@ function parseLinks(root: string, posts: Post[], states: Map<string, PatchState>
     if (occurrences(body, link.anchor).length !== 1) fail(link.source);
     const start = codePointOffset(body, body.indexOf(link.anchor));
     const end = start + Array.from(link.anchor).length;
+    if (markdownCodeSpans(body).some(([codeStart, codeEnd]) => start < codeEnd && codeStart < end)) fail(link.source);
     if (externalLinkSpans(body).some(([linkStart, linkEnd]) => start < linkEnd && linkStart < end)) fail(link.source);
   }
   return links;
@@ -548,6 +939,7 @@ function parseAbout(root: string): { path: string; body: string } {
   if (!fs.existsSync(file)) fail(file);
   const body = readUtf8(file);
   if (!body.trim()) fail(file);
+  validateBodyCharacters(body, file);
   return { path: file, body };
 }
 
@@ -555,107 +947,325 @@ function stripPatchMarkers(value: string): string {
   return value.replace(PATCH_MARKER_RE, "");
 }
 
-function removeVisiblePrefix(value: string, count: number): string {
-  let consumed = 0;
-  let index = 0;
-  let result = "";
-  while (index < value.length && consumed < count) {
-    PATCH_MARKER_RE.lastIndex = index;
-    const marker = PATCH_MARKER_RE.exec(value);
-    if (marker && marker.index === index) {
-      result += marker[0];
-      index = marker.index + marker[0].length;
-      continue;
-    }
-    consumed += 1;
-    index += 1;
-  }
-  return result + value.slice(index);
-}
-
-type MarkdownBlock = { kind: "heading"; level: number; text: string } | { kind: "list"; items: string[] } | { kind: "quote"; lines: string[] } | { kind: "paragraph"; lines: string[] };
-
-function markdownBlocks(body: string): MarkdownBlock[] {
-  const lines = body.replace(/^\n+|\n+$/g, "").split("\n");
-  const blocks: MarkdownBlock[] = [];
-  let index = 0;
-  while (index < lines.length) {
-    const clean = stripPatchMarkers(lines[index]);
-    if (!clean.trim()) {
-      if (lines[index] !== clean) blocks.push({ kind: "paragraph", lines: [lines[index++]] });
-      else index += 1;
-      continue;
-    }
-    const heading = HEADING_RE.exec(clean);
-    if (heading) {
-      let prefix = heading[1].length;
-      while (prefix < clean.length && " \t".includes(clean[prefix])) prefix += 1;
-      blocks.push({ kind: "heading", level: heading[1].length, text: removeVisiblePrefix(lines[index++], prefix) });
-      continue;
-    }
-    if (clean.startsWith("- ")) {
-      const items: string[] = [];
-      while (index < lines.length && stripPatchMarkers(lines[index]).startsWith("- ")) items.push(removeVisiblePrefix(lines[index++], 2));
-      blocks.push({ kind: "list", items });
-      continue;
-    }
-    if (clean.startsWith("> ")) {
-      const quote: string[] = [];
-      while (index < lines.length && stripPatchMarkers(lines[index]).startsWith("> ")) quote.push(removeVisiblePrefix(lines[index++], 2));
-      blocks.push({ kind: "quote", lines: quote });
-      continue;
-    }
-    const paragraph: string[] = [];
-    while (index < lines.length && stripPatchMarkers(lines[index]).trim()) paragraph.push(lines[index++]);
-    blocks.push({ kind: "paragraph", lines: paragraph });
-  }
-  return blocks;
-}
-
-function inlineMarkdown(text: string, root: string, file: string, imagePrefix: string, wrapImages: boolean): string {
-  const pieces: string[] = [];
-  let cursor = 0;
-  for (const match of text.matchAll(INLINE_WITH_LINKS_RE)) {
-    const start = match.index || 0;
-    pieces.push(htmlEscape(text.slice(cursor, start)));
-    if (match[6] !== undefined) {
-      const addressWithMarkers = match[7].trim();
-      const address = addressWithMarkers.replace(PATCH_MARKER_RE, "");
-      if (!/^https?:\/\/\S+$/.test(address)) fail(file);
-      pieces.push(...(addressWithMarkers.match(PATCH_MARKER_RE) || []));
-      pieces.push(`<a href="${htmlEscape(address, true)}">${htmlEscape(match[6])}</a>`);
-    } else if (match[1] !== undefined) {
-      const image = imageWidth(match[1], file);
-      const source = match[2];
-      imageSource(root, source, file);
-      const imageUrl = imagePrefix + source.slice("images/".length);
-      const imageMarkup = `<img src="${htmlEscape(imageUrl, true)}" alt="${htmlEscape(image.alt, true)}"${image.width ? ` width="${image.width}"` : ""}>`;
-      pieces.push(wrapImages ? `<a class="image-zoom" href="${htmlEscape(imageUrl, true)}">${imageMarkup}</a>` : imageMarkup);
-    } else if (match[3] !== undefined) {
-      pieces.push(`<strong>${htmlEscape(match[3])}</strong>`);
-    } else if (match[4] !== undefined) {
-      pieces.push(`<code>${htmlEscape(match[4])}</code>`);
-    } else {
-      pieces.push(`<em>${htmlEscape(match[5] || "")}</em>`);
-    }
-    cursor = start + match[0].length;
-  }
-  pieces.push(htmlEscape(text.slice(cursor)));
-  return pieces.join("");
-}
-
-function renderBlock(block: MarkdownBlock, root: string, file: string, imagePrefix: string, wrapImages: boolean): string {
-  const inline = (text: string) => inlineMarkdown(text, root, file, imagePrefix, wrapImages);
-  const lines = (values: string[]) => inline(values.join("\n")).replace(/\n/g, "<br>\n");
-  if (block.kind === "heading") return `<h${block.level}>${inline(block.text)}</h${block.level}>`;
-  if (block.kind === "list") return `<ul>${block.items.map((item) => `<li>${inline(item)}</li>`).join("")}</ul>`;
-  if (block.kind === "quote") return `<blockquote>${lines(block.lines)}</blockquote>`;
-  return `<p>${lines(block.lines)}</p>`;
-}
-
 function visibleText(value: string): string {
   const withAlt = value.replace(/<img\b[^>]*\balt="([^"]*)"[^>]*>/gi, "$1");
-  return withAlt.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
+  return withAlt
+    .replace(/<[^>]+>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(parseInt(code, 16)));
+}
+
+function markdownPrefixLength(line: string): number | "next-line" {
+  let index = 0;
+  while (index < line.length && index < 3 && line[index] === " ") index += 1;
+  while (line[index] === ">") {
+    index += 1;
+    if (line[index] === " ") index += 1;
+    while (line[index] === " ") index += 1;
+  }
+  const heading = /#{1,6}[ \t]+/.exec(line.slice(index));
+  if (heading?.index === 0) return index + heading[0].length;
+  const list = /(?:[*+-]|\d{1,9}[.)])[ \t]+/.exec(line.slice(index));
+  if (list?.index === 0) return index + list[0].length;
+  if (/^(?:`{3,}|~{3,})/.test(line.slice(index)) || /^(?:\*\s*){3,}$|^(?:-\s*){3,}$|^(?:_\s*){3,}$/.test(line.slice(index))) return "next-line";
+  return index;
+}
+
+function normalizePatchMarkers(value: string): string {
+  const lines = value.split("\n");
+  const protectedLines = new Set<number>();
+  for (const token of markdown.parse(stripPatchMarkers(value), {})) {
+    if ((token.type !== "fence" && token.type !== "code_block") || !token.map) continue;
+    const openingLine = token.map[0];
+    const closingLine = token.map[1] - 1;
+    const lineMarkers = (line: string) => {
+      return [...line.matchAll(new RegExp(PATCH_MARKER_RE.source, "g"))].map((match) => match[0]);
+    };
+    const openingMarkers = lineMarkers(lines[openingLine] || "").filter((marker) => marker.includes("-start-"));
+    let closingMarkers = lineMarkers(lines[closingLine] || "").filter((marker) => marker.includes("-end-"));
+    let closingMarkerLine = closingLine;
+    const trailingLine = closingLine + 1;
+    if (!closingMarkers.length && stripPatchMarkers(lines[trailingLine] || "").trim() === "") {
+      const trailingMarkers = lineMarkers(lines[trailingLine] || "").filter((marker) => marker.includes("-end-"));
+      if (trailingMarkers.length) {
+        closingMarkers = trailingMarkers;
+        closingMarkerLine = trailingLine;
+      }
+    }
+    if (!openingMarkers.length && !closingMarkers.length) continue;
+    lines[openingLine] = stripPatchMarkers(lines[openingLine]);
+    lines[closingMarkerLine] = stripPatchMarkers(lines[closingMarkerLine]);
+    for (let index = openingLine; index <= closingMarkerLine; index += 1) protectedLines.add(index);
+    if (token.type === "fence") {
+      if (closingLine > openingLine + 1) {
+        if (openingMarkers.length) lines[openingLine + 1] = openingMarkers.join("") + lines[openingLine + 1];
+        if (closingMarkers.length) lines[closingLine - 1] += closingMarkers.join("");
+      } else {
+        lines.splice(closingLine, 0, [...openingMarkers, ...closingMarkers].join(""));
+      }
+    } else {
+      const clean = lines[openingLine];
+      const indent = clean.match(/^(?: {4}|\t)/)?.[0] || "";
+      lines[openingLine] = indent + openingMarkers.join("") + clean.slice(indent.length);
+      if (closingLine === openingLine) lines[openingLine] += closingMarkers.join("");
+      else if (closingMarkers.length) lines[closingLine] += closingMarkers.join("");
+    }
+  }
+  for (let index = 0; index < lines.length; index += 1) {
+    if (protectedLines.has(index)) continue;
+    const matches = [...lines[index].matchAll(new RegExp(PATCH_MARKER_RE.source, "g"))];
+    if (!matches.length) continue;
+    const clean = stripPatchMarkers(lines[index]);
+    const prefix = markdownPrefixLength(clean);
+    if (prefix === "next-line") {
+      const before: string[] = [];
+      const after: string[] = [];
+      const inline: Array<{ position: number; marker: string }> = [];
+      for (const match of matches) {
+        const position = Array.from(stripPatchMarkers(lines[index].slice(0, match.index))).length;
+        if (position === 0) before.push(match[0]);
+        else if (position >= Array.from(clean).length) after.push(match[0]);
+        else inline.push({ position, marker: match[0] });
+      }
+      lines[index] = clean;
+      if (before.length) {
+        lines.splice(index, 0, before.join(""));
+        index += 1;
+      }
+      for (let inlineIndex = inline.length - 1; inlineIndex >= 0; inlineIndex -= 1) {
+        const item = inline[inlineIndex];
+        lines[index] = lines[index].slice(0, item.position) + item.marker + lines[index].slice(item.position);
+      }
+      if (after.length) lines.splice(index + 1, 0, after.join(""));
+    } else {
+      const insertions = new Map<number, string[]>();
+      for (const match of matches) {
+        let position = Array.from(stripPatchMarkers(lines[index].slice(0, match.index))).length;
+        if (position === 0 && prefix > 0) position = prefix;
+        if (!insertions.has(position)) insertions.set(position, []);
+        insertions.get(position)!.push(match[0]);
+      }
+      lines[index] = clean;
+      for (const position of [...insertions.keys()].sort((a, b) => b - a)) {
+        lines[index] = lines[index].slice(0, position) + insertions.get(position)!.join("") + lines[index].slice(position);
+      }
+    }
+  }
+  return lines.join("\n");
+}
+
+function protectImageWidthBars(value: string): { source: string; token: string } {
+  let token = "GUIN_IMAGE_BAR_";
+  while (value.includes(token)) token += "_";
+  const codeSpans = markdownCodeSpans(value);
+  const inCode = (start: number, end: number) => {
+    const startPoint = codePointOffset(value, start);
+    const endPoint = codePointOffset(value, end);
+    return codeSpans.some(([codeStart, codeEnd]) => startPoint < codeEnd && codeStart < endPoint);
+  };
+  let result = "";
+  let cursor = 0;
+  for (const match of value.matchAll(/!\[[^\]\n]*\|(\d+)\](?=\(|\[)/g)) {
+    const bar = (match.index || 0) + match[0].lastIndexOf("|", match[0].length - 1);
+    if (inCode(match.index || 0, bar + 1)) continue;
+    result += value.slice(cursor, bar) + token;
+    cursor = bar + 1;
+  }
+  return { source: result + value.slice(cursor), token };
+}
+
+function walkTokens(tokens: Token[], visit: (token: Token) => void, insideLink = false): void {
+  let linkDepth = insideLink ? 1 : 0;
+  for (const token of tokens) {
+    if (!(linkDepth > 0 && token.type === "image")) visit(token);
+    if (token.children) walkTokens(token.children, visit, linkDepth > 0 || token.type === "link_open");
+    if (token.type === "link_open") linkDepth += 1;
+    if (token.type === "link_close") linkDepth = Math.max(0, linkDepth - 1);
+  }
+}
+
+function validateHttpAddress(address: string, file: string): void {
+  if (!/^https?:\/\/\S+$/.test(address)) fail(file);
+}
+
+function validateMarkdown(value: string, root: string, file: string): Token[] {
+  const codeSpans = markdownCodeSpans(value);
+  for (const candidate of markdownLinkCandidates(value, codeSpans)) if (candidate.address !== undefined) validateHttpAddress(candidate.address, file);
+  const protectedMarkdown = protectImageWidthBars(value);
+  const tokens = markdown.parse(protectedMarkdown.source, {});
+  walkTokens(tokens, (token) => {
+    if (token.type === "link_open") validateHttpAddress(token.attrGet("href") || "", file);
+    if (token.type === "image") {
+      const source = token.attrGet("src") || "";
+      imageSource(root, source, file);
+      imageWidth((token.attrGet("alt") || token.content).replaceAll(protectedMarkdown.token, "|"), file);
+    }
+  });
+  return tokens;
+}
+
+function literalizeLinkChildren(tokens: Token[], candidates: LinkCandidate[]): void {
+  let candidateIndex = 0;
+  const rewrite = (children: Token[]): Token[] => {
+    const result: Token[] = [];
+    for (let index = 0; index < children.length; index += 1) {
+      const token = children[index];
+      if (token.type !== "link_open") {
+        if (token.children) token.children = rewrite(token.children);
+        result.push(token);
+        continue;
+      }
+      let depth = 1;
+      let close = index + 1;
+      while (close < children.length && depth > 0) {
+        if (children[close].type === "link_open") depth += 1;
+        if (children[close].type === "link_close") depth -= 1;
+        close += 1;
+      }
+      const candidate = candidates[candidateIndex++];
+      if (candidate && close > index + 1) token.meta = { ...(token.meta || {}), literalLabel: candidate.label };
+      result.push(token);
+      if (close <= children.length) result.push(children[close - 1]);
+      index = close - 1;
+    }
+    return result;
+  };
+  for (const token of tokens) if (token.children) token.children = rewrite(token.children);
+}
+
+function renderMarkdown(value: string, environment: MarkdownEnvironment): string {
+  const protectedMarkdown = protectImageWidthBars(value);
+  environment.imageBarToken = protectedMarkdown.token;
+  const tokens = markdown.parse(protectedMarkdown.source, environment);
+  literalizeLinkChildren(tokens, markdownLinkCandidates(stripPatchMarkers(value)));
+  return markdown.renderer.render(tokens, markdown.options, environment);
+}
+
+function compactOpen(tag: string): (_tokens: Token[], _index: number) => string {
+  return () => `<${tag}>`;
+}
+
+function compactClose(tag: string): (_tokens: Token[], _index: number) => string {
+  return () => `</${tag}>`;
+}
+
+function renderedAttrs(token: Token): string {
+  return (token.attrs || []).map(([name, value]) => {
+    const style = /^text-align:(left|center|right)$/.exec(value);
+    const renderedValue = name === "style" && style ? `text-align: ${style[1]}` : value;
+    return ` ${name}="${htmlEscape(renderedValue, true)}"`;
+  }).join("");
+}
+
+function renderSentinelPattern(prefix: string): RegExp {
+  const escaped = prefix.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`${escaped}(?:PATCHSTART|PATCHEND)\\d+X`, "g");
+}
+
+function stripRenderSentinels(value: string, prefix?: string): string {
+  return prefix ? value.replace(renderSentinelPattern(prefix), "") : value;
+}
+
+function wrapWithRenderSentinels(value: string, markup: string, prefix?: string): string {
+  if (!prefix) return markup;
+  const markers = [...value.matchAll(renderSentinelPattern(prefix))].map((match) => match[0]);
+  if (!markers.length) return markup;
+  return markers.filter((marker) => marker.includes("PATCHSTART")).join("")
+    + markup
+    + markers.filter((marker) => marker.includes("PATCHEND")).join("");
+}
+
+function renderedImageAlt(token: Token, environment: MarkdownEnvironment): string {
+  return stripRenderSentinels(token.attrGet("alt") || token.content, environment.sentinelPrefix)
+    .replaceAll(environment.imageBarToken || "\u0000never-image-bar-token\u0000", "|");
+}
+
+function markerOnlyParagraph(tokens: Token[], index: number, environment: MarkdownEnvironment | undefined, inlineIndex: number): boolean {
+  const prefix = environment?.sentinelPrefix;
+  if (!prefix || !tokens[inlineIndex] || tokens[inlineIndex].type !== "inline") return false;
+  const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`^(?:${escapedPrefix}(?:PATCHSTART|PATCHEND)\\d+X\\s*)+$`).test(tokens[inlineIndex].content.trim());
+}
+
+markdown.renderer.rules.blockquote_open = () => "<blockquote>";
+markdown.renderer.rules.blockquote_close = () => "</blockquote>";
+markdown.renderer.rules.paragraph_open = (tokens, index, _options, environment) => tokens[index].hidden || markerOnlyParagraph(tokens, index, environment as MarkdownEnvironment | undefined, index + 1) ? "" : "<p>";
+markdown.renderer.rules.paragraph_close = (tokens, index, _options, environment) => tokens[index].hidden || markerOnlyParagraph(tokens, index, environment as MarkdownEnvironment | undefined, index - 1) ? "" : "</p>";
+markdown.renderer.rules.heading_open = (tokens, index) => `<h${tokens[index].tag.slice(1)}>`;
+markdown.renderer.rules.heading_close = (tokens, index) => `</h${tokens[index].tag.slice(1)}>`;
+markdown.renderer.rules.bullet_list_open = compactOpen("ul");
+markdown.renderer.rules.bullet_list_close = compactClose("ul");
+markdown.renderer.rules.ordered_list_open = (tokens, index) => {
+  const start = tokens[index].attrGet("start");
+  return start && String(start) !== "1" ? `<ol start="${htmlEscape(String(start), true)}">` : "<ol>";
+};
+markdown.renderer.rules.ordered_list_close = compactClose("ol");
+markdown.renderer.rules.list_item_open = compactOpen("li");
+markdown.renderer.rules.list_item_close = compactClose("li");
+markdown.renderer.rules.table_open = compactOpen("table");
+markdown.renderer.rules.table_close = compactClose("table");
+markdown.renderer.rules.thead_open = compactOpen("thead");
+markdown.renderer.rules.thead_close = compactClose("thead");
+markdown.renderer.rules.tbody_open = compactOpen("tbody");
+markdown.renderer.rules.tbody_close = compactClose("tbody");
+markdown.renderer.rules.tr_open = compactOpen("tr");
+markdown.renderer.rules.tr_close = compactClose("tr");
+markdown.renderer.rules.th_open = (tokens, index) => `<th${renderedAttrs(tokens[index])}>`;
+markdown.renderer.rules.th_close = compactClose("th");
+markdown.renderer.rules.td_open = (tokens, index) => `<td${renderedAttrs(tokens[index])}>`;
+markdown.renderer.rules.td_close = compactClose("td");
+markdown.renderer.rules.text = (tokens, index) => htmlEscape(tokens[index].content);
+markdown.renderer.rules.code_inline = (tokens, index) => `<code>${htmlEscape(tokens[index].content)}</code>`;
+markdown.renderer.rules.hr = () => "<hr>";
+markdown.renderer.rules.softbreak = () => "<br>\n";
+markdown.renderer.rules.fence = (tokens, index) => {
+  const token = tokens[index];
+  const info = token.info.trim().split(/\s+/, 1)[0];
+  const language = info ? ` class="language-${htmlEscape(info, true)}"` : "";
+  return `<pre><code${language}>${htmlEscape(token.content)}</code></pre>`;
+};
+markdown.renderer.rules.code_block = (tokens, index) => `<pre><code>${htmlEscape(tokens[index].content)}</code></pre>`;
+markdown.renderer.rules.link_open = (tokens, index, _options, environment) => {
+  const token = tokens[index];
+  const href = token.attrGet("href") || "";
+  validateHttpAddress(href, (environment as MarkdownEnvironment).file);
+  const label = token.meta?.literalLabel;
+  return `<a href="${htmlEscape(href, true)}">${label === undefined ? "" : htmlEscape(label)}`;
+};
+markdown.renderer.rules.link_close = () => "</a>";
+markdown.renderer.rules.image = (tokens, index, _options, environment) => {
+  const token = tokens[index];
+  const context = environment as MarkdownEnvironment;
+  const rawSource = token.attrGet("src") || "";
+  const source = stripRenderSentinels(rawSource, context.sentinelPrefix);
+  const image = imageWidth(renderedImageAlt(token, context), context.file);
+  imageSource(context.root, source, context.file);
+  const imageUrl = context.imagePrefix + source.slice("images/".length);
+  const imageMarkup = `<img src="${htmlEscape(imageUrl, true)}" alt="${htmlEscape(image.alt, true)}"${image.width ? ` width="${image.width}"` : ""}>`;
+  const wrappedImage = context.wrapImages ? `<a class="image-zoom" href="${htmlEscape(imageUrl, true)}">${imageMarkup}</a>` : imageMarkup;
+  return wrapWithRenderSentinels(`${token.content} ${rawSource}`, wrappedImage, context.sentinelPrefix);
+};
+
+function renderSentinelSource(value: string): { source: string; prefix: string } {
+  let prefix = "GUIN_SENTINEL_";
+  while (value.includes(prefix)) prefix += "_";
+  return { source: value
+    .replace(PATCH_MARKER_RE, (marker) => {
+      const index = marker.match(/-(?:start|end)-(\d+)\u0000$/)?.[1] || "0";
+      return marker.includes("-start-") ? `${prefix}PATCHSTART${index}X` : `${prefix}PATCHEND${index}X`;
+    })
+    .replace(/\u0000guin-link-(\d+)\u0000/g, (_marker, index) => `${prefix}LINK${index}X`), prefix };
+}
+
+function restoreRenderSentinels(value: string, prefix: string): string {
+  return value
+    .replace(new RegExp(`${prefix}PATCHSTART(\\d+)X`, "g"), (_marker, index) => patchStart(Number(index)))
+    .replace(new RegExp(`${prefix}PATCHEND(\\d+)X`, "g"), (_marker, index) => patchEnd(Number(index)))
+    .replace(new RegExp(`${prefix}LINK(\\d+)X`, "g"), (_marker, index) => `\u0000guin-link-${index}\u0000`);
 }
 
 function applyAnchorReplacements(body: string, replacements: Array<[string, string]>, file: string): string {
@@ -693,48 +1303,6 @@ function applyAnchorReplacements(body: string, replacements: Array<[string, stri
   return pieces.join("");
 }
 
-function blockContentBounds(rendered: string): [number, number] {
-  const openingEnd = rendered.indexOf(">");
-  const closingStart = rendered.lastIndexOf("</");
-  return openingEnd < 0 || closingStart <= openingEnd ? [0, rendered.length] : [openingEnd + 1, closingStart];
-}
-
-function markBlockContent(rendered: string, opening: string, closing: string): string {
-  const [start, end] = blockContentBounds(rendered);
-  return rendered.slice(0, start) + opening + rendered.slice(start, end) + closing + rendered.slice(end);
-}
-
-function renderPatchedBlocks(renderedBlocks: string[]): string[] {
-  const markerPattern = /\u0000guin-patch-(?:start|end)-(\d+)\u0000/g;
-  let active: number | undefined;
-  return renderedBlocks.map((original) => {
-    let rendered = original;
-    const markers = [...rendered.matchAll(markerPattern)];
-    if (active !== undefined) {
-      const endToken = patchEnd(active);
-      if (rendered.includes(endToken)) {
-        const [start] = blockContentBounds(rendered);
-        rendered = rendered.slice(0, start) + patchStart(active) + rendered.slice(start);
-        active = undefined;
-      } else {
-        rendered = markBlockContent(rendered, patchStart(active), patchEnd(active));
-        return rendered;
-      }
-    }
-    for (const marker of markers) {
-      if (!marker[0].includes("-start-")) continue;
-      const index = Number(marker[1]);
-      if (!rendered.includes(patchEnd(index))) {
-        const [, end] = blockContentBounds(rendered);
-        rendered = rendered.slice(0, end) + patchEnd(index) + rendered.slice(end);
-        active = index;
-      }
-      break;
-    }
-    return rendered;
-  });
-}
-
 function renderBodyHtml(body: string, root: string, file: string, imagePrefix: string, wrapImages: boolean, state?: PatchState, replacements: Array<[string, string]> = []): string {
   let sourceBody = body;
   if (state?.hasPatches) {
@@ -743,13 +1311,23 @@ function renderBodyHtml(body: string, root: string, file: string, imagePrefix: s
   if (replacements.length) {
     sourceBody = applyAnchorReplacements(sourceBody, replacements, file);
   }
-  return renderPatchedBlocks(markdownBlocks(sourceBody).map((block) => renderBlock(block, root, file, imagePrefix, wrapImages))).join("\n");
+  const cleanBody = stripPatchMarkers(sourceBody);
+  validateMarkdown(cleanBody, root, file);
+  const sentinels = renderSentinelSource(normalizePatchMarkers(sourceBody));
+  const rendered = restoreRenderSentinels(renderMarkdown(sentinels.source, { root, file, imagePrefix, wrapImages, sentinelPrefix: sentinels.prefix }), sentinels.prefix);
+  return rendered || (sourceBody.includes("\u0000guin-patch-") ? sourceBody : "");
 }
 
 function firstParagraphText(body: string, root: string, file: string): string {
-  const blocks = markdownBlocks(body);
-  const first = blocks.find((block) => block.kind === "paragraph") || blocks[0];
-  return first ? visibleText(renderBlock(first, root, file, "", false)) : "";
+  const cleanBody = stripPatchMarkers(body);
+  const tokens = validateMarkdown(cleanBody, root, file);
+  literalizeLinkChildren(tokens, markdownLinkCandidates(cleanBody));
+  const environment = { root, file, imagePrefix: "", wrapImages: false, imageBarToken: protectImageWidthBars(cleanBody).token };
+  for (let index = 0; index + 1 < tokens.length; index += 1) {
+    if (tokens[index].type !== "paragraph_open" || tokens[index].hidden || tokens[index + 1].type !== "inline") continue;
+    return visibleText(markdown.renderer.renderInline(tokens[index + 1].children || [], markdown.options, environment));
+  }
+  return "";
 }
 
 export function formatUtc(written: string): string {
@@ -847,7 +1425,10 @@ export function loadSite(): SiteData {
   const about = parseAbout(root);
   const posts = parsePosts(root);
   const patchStates = applyPatches(posts, parsePatches(root, posts));
+  validatePatchCodeOverlaps(patchStates);
+  validatePatchImageOverlaps(patchStates);
   validatePatchExternalOverlaps(patchStates);
+  validatePatchSyntaxOverlaps(patchStates);
   const links = parseLinks(root, posts, patchStates);
   const site: SiteData = { contentRoot: root, aboutPath: path.join(root, "about.md"), aboutBody: about.body, posts, links, patchStates, shares: parseShares(root, posts), taggings: parseTags(root, posts) };
   for (const post of posts) post.firstText = firstParagraphText(patchStates.get(post.id)!.body, root, post.source);
