@@ -1,0 +1,112 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.12.0",
+  "status": "done",
+  "def": {
+    "id": "meta-tests",
+    "role": "nitpick",
+    "brief": "plan/PLAN.md의 새 절 Q-meta를 계약 테스트로 쓴다. 새 파일 tests/test_meta.py: 모든 페이지(한국어·영어의 피드, 글, 소개, 태그)의 머리에 favicon 두 링크(<root>assets/favicon-32.png, <root>assets/apple-touch-icon.png, 상대 경로), canonical과 og:url(https://guineeeeeeeeeeeeeeeeeeeeeeeerm.github.io로 시작하는 그 페이지의 절대 주소, 폴더 방식, 태그는 퍼센트 인코딩), og:site_name, og:title, og:description, meta description, og:type(글 article, 나머지 website), og:image(절대 주소 …/assets/og-default.png)와 width 1200·height 630·alt, og:locale(ko_KR/en_US)과 짝이 있을 때만 og:locale:alternate, twitter:card summary_large_image; <title> 규칙(피드는 사이트 이름만, 나머지는 '<페이지 제목> — GuinEeeeeeeeeeeeeeeeeeeeeeeerm', 제목 없는 글은 첫 문단 80자, 소개/About, 태그: X/Tag: X); 설명 규칙(글은 적용된 본문 첫 문단 160자와 잘리면 …, 피드·소개·태그는 언어별 사이트 설명 문장); docs/assets의 세 이미지가 public/assets와 바이트 같음. tests/test_about.py의 '<title>소개</title>'와 tests/test_tags.py의 '<title>태그: 기록</title>' 확인은 새 제목 규칙에 맞게 고친다(다른 계약은 그대로). tests/support.py는 수정하지 않는다. 보고의 tests 목록에는 테스트 파일 경로만 적는다. 지금 코드는 새 테스트를 통과하지 못하는 것이 정상이다.",
+    "closes": [
+      "Q-meta"
+    ],
+    "needs": [],
+    "checks": [],
+    "tests": [
+      "tests/test_meta.py",
+      "tests/test_about.py",
+      "tests/test_tags.py"
+    ],
+    "gate": null
+  },
+  "seq": 2,
+  "added": "2026-09-26T12:04:51+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so",
+    "(provider) \"favicon은 아바타(content/images/avatar_paint_primary.png)의 가운데 육각형을 잘라 만든 것이고\" — output tests cannot verify the asset’s visual provenance.",
+    "(provider) \"사이트 주소는 ... (src/lib/의 상수 하나)\" — output tests verify emitted URLs, not the internal single-constant implementation.",
+    "(provider) \"빌드할 때 이미지를 만들지 않는다\" — byte equality cannot distinguish copying from generating identical bytes."
+  ],
+  "response": {
+    "status": "done",
+    "summary": "Q-meta tests added and existing about/tag title expectations updated. Direct runs fail on the missing metadata/title behavior as intended; asset-copy coverage already passes.",
+    "tests": [
+      "tests/test_meta.py",
+      "tests/test_about.py",
+      "tests/test_tags.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-meta",
+        "tests": [
+          "test_Q_meta_all_pages_have_relative_favicon_links_and_folder_canonical_urls",
+          "test_Q_meta_every_page_has_the_shared_site_name_image_dimensions_alt_and_twitter_card",
+          "test_Q_meta_page_type_and_titles_are_specific_without_a_site_suffix_in_og_title",
+          "test_Q_meta_descriptions_use_the_applied_post_first_paragraph_and_language_site_sentences",
+          "test_Q_meta_locales_have_an_alternate_only_when_the_page_has_a_pair",
+          "test_Q_meta_public_preview_images_are_copied_byte_for_byte_with_declared_dimensions"
+        ]
+      }
+    ],
+    "non-claims": [
+      "\"favicon은 아바타(content/images/avatar_paint_primary.png)의 가운데 육각형을 잘라 만든 것이고\" — output tests cannot verify the asset’s visual provenance.",
+      "\"사이트 주소는 ... (src/lib/의 상수 하나)\" — output tests verify emitted URLs, not the internal single-constant implementation.",
+      "\"빌드할 때 이미지를 만들지 않는다\" — byte equality cannot distinguish copying from generating identical bytes."
+    ],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  },
+  "touched_by_provider": [
+    "tests/test_about.py",
+    "tests/test_meta.py",
+    "tests/test_tags.py"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "teujip",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.7.1",
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "update ./tests/test_about.py",
+        "add ./tests/test_meta.py",
+        "update ./tests/test_tags.py",
+        "update ./tests/test_meta.py"
+      ],
+      "commands-run": 19,
+      "commands-failed": 5
+    }
+  },
+  "checks": [],
+  "touched": [
+    "tests/test_about.py",
+    "tests/test_meta.py",
+    "tests/test_tags.py"
+  ]
+}
