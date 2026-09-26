@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.12.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "i18n-tests",
     "role": "nitpick",
@@ -24,9 +24,8 @@
     "no check decides this task; done means the agent said so"
   ],
   "touched_by_provider": [
-    "tests/support.py",
-    "tests/test_frame.py",
-    "tests/test_i18n.py"
+    "tests/test_i18n.py",
+    "tests/test_readme.py"
   ],
   "performed_by": {
     "provider": "command",
@@ -57,20 +56,40 @@
     },
     "trace": {
       "changed": [
-        "update ./tests/support.py",
-        "update ./tests/test_frame.py",
-        "add ./tests/test_i18n.py",
-        "update ./tests/test_i18n.py"
+        "update ./tests/test_i18n.py",
+        "update ./tests/test_readme.py"
       ],
-      "commands-run": 21,
-      "commands-failed": 6
+      "commands-run": 10,
+      "commands-failed": 1
     }
   },
   "checks": [],
   "touched": [
-    "tests/support.py",
-    "tests/test_frame.py",
-    "tests/test_i18n.py"
+    "README.md",
+    "content/about.en.md",
+    "content/posts/20260924-075921.en.md",
+    "content/posts/20260924-085456.en.md",
+    "content/posts/20260925-103715.en.md",
+    "content/posts/20260926-044433.en.md",
+    "scripts/build.mjs",
+    "src/components/FeedItem.astro",
+    "src/components/Footnotes.astro",
+    "src/components/Header.astro",
+    "src/components/IncomingLinks.astro",
+    "src/components/PatchView.astro",
+    "src/components/TagCloud.astro",
+    "src/layouts/BaseLayout.astro",
+    "src/lib/site.ts",
+    "src/pages/about/index.astro",
+    "src/pages/en/about/index.astro",
+    "src/pages/en/index.astro",
+    "src/pages/en/p/[id]/index.astro",
+    "src/pages/en/tags/[tag]/index.astro",
+    "src/pages/index.astro",
+    "src/pages/p/[id]/index.astro",
+    "src/pages/tags/[tag]/index.astro",
+    "tests/test_i18n.py",
+    "tests/test_readme.py"
   ],
   "attempts": [
     {
@@ -180,5 +199,35 @@
       "contract_quote": "영어판 태그 페이지와 클라우드는 번역된 글만 세고, 번역된 글이 없는 태그는 영어판에 없다.",
       "why": "테스트 정규식 r'>shared<\\span class=\"count\">1</span>'는 정상적인 <a>shared</a><span ...> 마크업과 일치하지 않아, 계약에 없는 인위적인 숨김 마커를 추가해야만 통과합니다."
     }
-  ]
+  ],
+  "response": {
+    "status": "done",
+    "summary": "분쟁된 상대 경로·태그 마크업·배지 경로를 계약에 맞게 수정하고 README fixture에 필수 about.en.md를 추가했습니다. i18n 검사는 현재 구현에서 기대대로 실패하며 frame/README 검사는 통과합니다.",
+    "tests": [
+      "tests/test_i18n.py",
+      "tests/test_readme.py"
+    ],
+    "covers": [
+      {
+        "section": "Q-i18n",
+        "tests": [
+          "tests/test_i18n.py"
+        ]
+      },
+      {
+        "section": "Q-ui source:loc-03",
+        "tests": [
+          "test_Q_ui_source_loc_03_keeps_korean_source_and_puts_english_under_a_separate_tree"
+        ]
+      }
+    ],
+    "non-claims": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    },
+    "member": "teujip",
+    "domain": "code"
+  }
 }
