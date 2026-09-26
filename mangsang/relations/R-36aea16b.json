@@ -5,11 +5,23 @@
   "dst": "concept:translation",
   "evidence": "한국어가 원본이고 영어판을 더한다.",
   "seen": {
-    "plan/PLAN.md#Q-i18n — 영어판": "7fcd401edd9b",
+    "plan/PLAN.md#Q-i18n — 영어판": "f7e898799d0b",
     "concept:translation": "f1329a883360"
   },
   "confirmed": {
-    "delegated": "영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말"
+    "delegated": "Claude가 언어 드롭다운(source:lg-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-i18n — 영어판": "7fcd401edd9b",
+        "concept:translation": "f1329a883360"
+      },
+      "evidence": "한국어가 원본이고 영어판을 더한다."
+    }
+  ],
   "written_by": "mangsang 1.10.0"
 }
