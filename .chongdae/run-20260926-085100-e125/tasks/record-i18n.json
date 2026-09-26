@@ -1,0 +1,42 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.12.0",
+  "status": "done",
+  "def": {
+    "id": "record-i18n",
+    "role": "session",
+    "brief": "소유자 결정(영어판)을 원문으로 남기고 계획서에 Q-i18n을 쓰고 ui-language 개념을 고치고 translation 개념을 더한다",
+    "closes": [],
+    "needs": [],
+    "checks": [],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-26T08:51:00+00:00",
+  "non-claims": [
+    "no check decides this task; done means the agent said so"
+  ],
+  "checks": [],
+  "touched": [
+    "plan/PLAN.md"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-283_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 4,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-26T08:51:00+00:00"
+    }
+  }
+}

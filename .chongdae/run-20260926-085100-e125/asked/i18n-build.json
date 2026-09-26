@@ -1,0 +1,57 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "build",
+  "run": "run-20260926-085100-e125",
+  "task": "i18n-build",
+  "role": "implementer",
+  "target": ".",
+  "goal": "영어판 추가: /en/ 아래 번역 파일 기반, 원본은 한국어",
+  "brief": "plan/PLAN.md의 새 절 Q-i18n과 Q-ui의 source:loc-03 문단을 구현한다: 영어판(/en/ 아래 피드·글·소개·태그 페이지, docs/en/…), 번역 파일(content/posts/<id>.en.md, content/about.en.md 필수), 번역 없는 글은 영어판에서 빠짐, 영어 화면 글자, 상단 띠의 언어 전환 링크(.site-nav 마지막 a.lang-switch, hreflang/lang, 짝 페이지 규칙)와 <link rel=alternate hreflang>, 링크 표의 translated 사건(영어 앵커·사유, 없으면 빠짐, 앵커 오류는 그 사건 줄), 패치의 lang: en(번역 본문에만, 영어 패치 보기), 영어판 태그(번역된 글만, 사유 없음), 공유 배지. 규칙은 src/lib/에 한 곳만 두고(validateSite가 번역도 검사해 Astro 전에 실패), 마크업은 컴포넌트·템플릿이 짓는다(한국어판과 같은 컴포넌트에 언어별 글자 사전을 넘기는 방식 권장). 한국어판 출력은 상단 띠의 전환 링크와 alternate 링크 말고는 바뀌지 않는다. README.md에 '영어판' 절을 더한다(번역 파일 쓰는 법, 링크 translated 사건, 패치 lang). 저장소의 content/에는 아직 about.en.md가 없으므로 npm run build를 체크로 돌리지 않는다 — 세션이 번역을 넣은 뒤 run 마지막에 전체 테스트와 빌드를 돌린다. 새 패키지는 설치하지 않는다(더 필요하면 blocked). 테스트 파일은 건드리지 않는다(HEAD의 tests/*.py가 계약이다). 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
+  "closes": [
+    "Q-i18n"
+  ],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_i18n.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_frame.py"
+    ]
+  ],
+  "tests": [
+    "tests/support.py",
+    "tests/test_about.py",
+    "tests/test_external_links.py",
+    "tests/test_feed_layout.py",
+    "tests/test_frame.py",
+    "tests/test_i18n.py",
+    "tests/test_ids.py",
+    "tests/test_image_zoom.py",
+    "tests/test_images.py",
+    "tests/test_linebreaks.py",
+    "tests/test_markdown.py",
+    "tests/test_readme.py",
+    "tests/test_s1.py",
+    "tests/test_s2.py",
+    "tests/test_s3.py",
+    "tests/test_shares.py",
+    "tests/test_tags.py"
+  ],
+  "response": "./.chongdae/run-20260926-085100-e125/local/i18n-build.response.json"
+}
