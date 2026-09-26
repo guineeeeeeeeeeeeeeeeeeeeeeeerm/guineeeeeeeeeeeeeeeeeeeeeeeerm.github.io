@@ -257,7 +257,8 @@ Concept: `site-build`.
 
 Decided (owner, `source:og-03`, `source:og-05`, 요청 `source:og-01`, 제안 `source:og-02`, `source:og-04`): 사이트 이름은
 "GuinEeeeeeeeeeeeeeeeeeeeeeeerm"이다. favicon은 아바타(`content/images/avatar_paint_primary.png`)의 가운데 육각형을 잘라 만든 것이고,
-링크 미리보기(OG) 이미지는 모든 페이지가 같은 사이트 기본 이미지 하나(밝은 바탕 가운데 아바타, 아래에 사이트 이름, 1200×630)다.
+링크 미리보기(OG) 이미지는 모든 페이지가 같은 사이트 기본 이미지 하나(밝은 바탕 가운데 아바타, 1200×630)다. Decided (owner,
+`source:og-06`; 처음의 "아래에 사이트 이름"을 바꿈): OG 이미지에는 글자를 넣지 않는다 — 아바타만 있다.
 
 - **이미지 파일:** `public/assets/favicon-32.png`(32×32), `public/assets/apple-touch-icon.png`(180×180),
   `public/assets/og-default.png`(1200×630)는 소유자가 확인한 파일이고 빌드가 바이트 그대로 `docs/assets/`로 복사한다. 빌드할 때 이미지를
