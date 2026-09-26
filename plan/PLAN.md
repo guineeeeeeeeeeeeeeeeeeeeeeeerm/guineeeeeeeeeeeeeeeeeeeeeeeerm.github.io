@@ -47,6 +47,17 @@ Decided (owner, `source:as-01`, `source:as-03`, `source:as-05`; 제안 `source:a
 - **테스트:** 계약 테스트는 `tests/`의 Python unittest로 남고 `python3 -m unittest discover -s tests`로 돈다(`source:as-04`의
   권고). 테스트는 빌드를 밖에서 실행하고 결과만 본다 — `tests/support.py`가 새 임시 디렉터리를 작업 디렉터리로 두고
   `node <저장소>/scripts/build.mjs`를 실행한다. 정적 파일을 바이트 그대로 비교하는 테스트의 원본은 `public/assets/`다.
+- **테스트 시간 (owner, `source:tf-03`, 요청 `source:tf-01`, 제안 `source:tf-02`):** 테스트 한 번이 빌드 222번(약 83초)이었고
+  그 절반이 입력 오류를 확인하는 빌드였다. 다음을 따른다.
+  1. 빌드 스크립트는 Astro를 띄우기 전에 `content/`의 글·기록 표·소개를 `src/lib/`의 같은 검사로 먼저 읽는다. 잘못된 입력이면
+     Astro를 띄우지 않고 지금과 같은 오류(stderr에 파일 경로가 든 줄, 종료 코드 1, `docs/` 그대로)로 끝난다. 검사 규칙은 한 곳
+     (`src/lib/`)에만 있다.
+  2. 같은 입력으로 여러 가지를 확인하는 테스트는 그 입력을 한 번만 빌드해 나눠 쓴다(클래스 단위 준비). 확인하는 계약과 오류 사례는
+     줄지 않는다.
+  3. run 안에서 작업의 체크는 그 작업이 건드린 절의 테스트 파일만 돌린다. 전체 테스트는 run을 닫기 전 마지막 작업의 체크로 한 번
+     돈다. 체크가 확인한 것을 세션이 따로 다시 돌리지 않는다.
+  4. 효과에 비해 의미가 적은 테스트(다른 파일과 겹치는 것, 계약이 아닌 부수 마크업을 고정하는 것, 바뀐 결정을 확인하는 것)는 목록을
+     먼저 만들어 소유자에게 보이고, 승인받은 것만 줄이거나 지운다.
 - **엔진:** Node `>=22`(hunsu.json `engines`), 테스트용 Python `>=3.9`.
 - **의존성 (technical, session — astro-frame 첫 시도를 되돌린 뒤):** 페이지 HTML은 Astro가 `src/pages/`와 `src/layouts/`의
   템플릿으로 실제로 만든다. `scripts/build.mjs`가 옛 Python 생성기(`build.py`·`sitegen/`)를 부르거나 HTML을 Astro 밖에서 문자열로

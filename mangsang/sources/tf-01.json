@@ -1,0 +1,8 @@
+{
+  "id": "tf-01",
+  "text": "푸시하자. 그리고 다음 작업 진행하기 전에, 지금 테스트 도는 방식이 별로 안 좋은것 같아. 작은 수정에 전체 테스트를 계속 돌리는데, 작업 규모에 비해서 테스트에 소요되는 시간이 합리적이지 않은것 같아. 이미 체크가 완료된 테스트가 추가적으로 도는 것도 있어보이고. 그리고 효과에 비해 의미가 없는 테스트들은 규모를 축소시키거나 제거하는 건 어떨지?",
+  "speaker": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+  "locator": "session 917a4cc5-c9e3-4c56-919b-d30286207f34, person a785d6db-aa0d-4160-a5c2-5e48847afb95 at 2026-09-26T03:22:18.603Z",
+  "verbatim-from": "host transcript",
+  "written_by": "mangsang 1.10.0"
+}
