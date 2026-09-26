@@ -1,0 +1,481 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260926-192156-203a",
+  "since": "cd8c6c4fc5f3f64116c2ffda383aa232f485999a",
+  "head": "400e61bc09f2cc240f9c66d4ffa381dda7c892ac",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "self-performed",
+      "where": "run-20260926-085100-e125/full-check-2",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): run 마지막의 전체 테스트와 실제 빌드(공유 언어 변경 뒤)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "self-performed",
+      "where": "run-20260926-085100-e125/full-check",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): run 마지막의 전체 테스트와 실제 빌드(Q-build 테스트 시간 3번)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260926-085100-e125/full-check attempt 1",
+      "text": "retry after session passed by delegation: 검증자 지적(한국어 소개의 영어 전환·alternate 링크가 /about/en/about/로 감)은 맞음: src/pages/about/index.astro와 그 값을 기대하던 tests/test_i18n.py 두 줄을 ../en/about/로 고침; 실제 빌드의 전환·alternate 링크 24개가 모두 있는 페이지를 가리킴을 확인",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260926-085100-e125/full-check attempt 1: src/pages/about/index.astro:9",
+      "text": "anomaly: From /about/index.html these relative URLs resolve to /about/en/about/ rather than the English counterpart /en/about/, breaking both the language switch and alternate link. — record: “” — tree: “switchHref=\"en/about/\" alternateHref=\"en/about/\"” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260926-085100-e125/i18n-build",
+      "text": "provider decisions (3) passed by delegation: 기술 결정(영어판 그림 복사)은 위임 범위(source:plan-06); 계획서 Q-i18n에 적음. 작업자가 content/에 쓴 자기 번역은 버리고 소유자가 확인한 초안으로 되돌림",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260926-085100-e125/i18n-build attempt 2: src/lib/site.ts:1056-1061,1621",
+      "text": "plan-vs-code: 번역 글이 하나도 없으면 `about.en.md`가 없어도 빌드가 성공해 필수 파일 규칙을 어깁니다. — record: “소개의 번역은 `content/about.en.md`이고 반드시 있다(없으면 빌드 오류).” — tree: “const aboutEn = parseAboutTranslation(root, about, translations.size > 0);” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260926-085100-e125/i18n-build attempt 2: scripts/build.mjs:74-76",
+      "text": "plan-vs-code: 유효한 `about.en.md`가 있어도 번역 글이 없으면 전체 영어 트리를 삭제해 필수 영어 피드·소개 페이지가 생성되지 않습니다. — record: “영어판은 `/en/`(피드)와 `/en/about/`(소개)이며 출력은 `docs/en/…`이다.” — tree: “if (!site.translations.size) await rm(path.join(staging, \"en\"), { recursive: true, force: true });” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260926-085100-e125/i18n-build attempt 2: src/lib/site.ts:1570,1644-1645",
+      "text": "plan-vs-code: translated 앵커를 영어 패치 적용 전의 원문에서만 검증하고, 적용 후 사라지면 빌드 오류 대신 영어 주석에서 조용히 제외합니다. — record: “그 앵커가 번역 본문에 정확히 한 번 나오지 않으면 빌드 오류이고 오류 줄은 그 사건의 줄이다.” — tree: “const positions = occurrences(translation.body, event.anchor); ... occurrences(state.body, link.anchor).length === 1” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "self-performed",
+      "where": "run-20260926-085100-e125/share-lang",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): 선택 필드 하나와 배지 거르기의 작은 변경이라 이 세션이 직접(계약·코드·테스트)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-01200917 source:loc-03 realizes concept:translation",
+      "text": "re-confirmed by delegation: 영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-08081f17 src/lib/site.ts realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-14ca1660 source:loc-03 realizes concept:ui-language",
+      "text": "re-confirmed by delegation: 영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-1e78dde8 tests/test_frame.py realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-29a40373 README.md#공유 기록 남기기 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-336ec2d1 src/lib/site.ts realizes concept:record-table",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-34758265 source:plan-09 realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-36aea16b plan/PLAN.md#Q-i18n — 영어판 realizes concept:translation",
+      "text": "re-confirmed by delegation: 영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-53fbd1a4 src/components/FeedItem.astro realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-5702c5c3 src/pages/about/index.astro realizes concept:about",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 소개 페이지 틀에 언어 전환이 더해짐 — 근거를 새 줄로",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-5cd66501 src/pages/index.astro realizes concept:feed",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 피드 틀에 언어 전환이 더해짐 — 근거를 새 줄로",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-60c68fc4 source:loc-01 realizes concept:translation",
+      "text": "re-confirmed by delegation: 영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6a9cbb87 plan/PLAN.md#Q-share — 공유 기록과 배지 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6cd16b55 tests/test_s1.py:S1GeneratorContractTests realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6d9bd2ce src/components/Footnotes.astro realizes concept:link",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-76dd9c6e src/lib/site.ts realizes concept:tag",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-78215438 src/components/PatchView.astro realizes concept:patch-view",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 토글 글자가 언어별 사전으로 바뀜 — 근거를 새 줄로",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-84c9fb21 src/components/TagCloud.astro realizes concept:tag",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-84f4d744 tests/test_i18n.py realizes concept:translation",
+      "text": "re-confirmed by delegation: 영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8b52435a src/lib/site.ts realizes concept:link",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8d71106e src/components/IncomingLinks.astro realizes concept:link",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 제목 글자가 언어별 사전으로 바뀜 — 근거를 새 줄로",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-92d1fb6e src/layouts/BaseLayout.astro realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: ui-language의 새 뜻(한국어판은 ko, 영어판은 en)을 이 줄이 실현함",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-a49c5030 src/lib/site.ts realizes concept:translation",
+      "text": "re-confirmed by delegation: 영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-aa7d41f5 src/lib/site.ts realizes concept:post",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-bca01b82 plan/PLAN.md#Q-ui — 화면 언어 realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-c30dba09 source:plan-08 realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-c640c7ce src/layouts/BaseLayout.astro realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 공통 틀의 문서 머리 줄이 언어별로 바뀜 — 근거를 새 줄로",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d606064c scripts/build.mjs realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-e0a01bf2 src/lib/site.ts realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 공유 파싱이 번역을 받아 lang을 검사함 — 근거를 새 줄로",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-ea87eca4 source:plan-09t realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f08b2d38 src/lib/site.ts realizes concept:post-type",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f128ed15 src/pages/tags/[tag]/index.astro realizes concept:tag",
+      "text": "re-confirmed by delegation: Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-084254-d8ee, run-20260926-085100-e125",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-085100-e125",
+      "text": "(provider) 이번 검증에서 보호 테스트 파일은 수정하지 않았습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-085100-e125",
+      "text": "(provider) 모든 가능한 외부 fixture 조합이 아니라 현재 저장소와 보호 테스트 fixture를 검증했습니다.",
+      "layer": "objection"
+    },
+    {
+      "kind": "review-debt",
+      "where": "review-20260926-174314-a452",
+      "source": "dwitbuk",
+      "layer": "observation",
+      "text": "previous review review-20260926-174314-a452 still has 1 undisposed objection(s), carried here"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 62,
+      "text": "62 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 62)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-202344-fc6a",
+      "seen-in": "review-20260925-202344-fc6a",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260925-202344-fc6a and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-234959-4023",
+      "seen-in": "review-20260925-234959-4023",
+      "count": 7,
+      "text": "7 observation(s) written in review-20260925-234959-4023 and unchanged since (agent-proposed 1, delegated 6)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-120908-3415",
+      "seen-in": "review-20260926-120908-3415",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260926-120908-3415 and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-132632-e2df",
+      "seen-in": "review-20260926-132632-e2df",
+      "count": 16,
+      "text": "16 observation(s) written in review-20260926-132632-e2df and unchanged since (delegated 16)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-173922-be51",
+      "seen-in": "review-20260926-173922-be51",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-173922-be51 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-174115-4090",
+      "seen-in": "review-20260926-174115-4090",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-174115-4090 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-084113-1138, run-20260926-084254-d8ee",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-174314-a452): no check decides this task  [x2]",
+      "first-seen": "review-20260926-174314-a452",
+      "carries": [
+        "non-claim",
+        "run-20260926-084113-1138, run-20260926-084254-d8ee",
+        "no check decides this task"
+      ]
+    }
+  ]
+}

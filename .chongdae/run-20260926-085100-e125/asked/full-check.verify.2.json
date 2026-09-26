@@ -1,0 +1,86 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-085100-e125",
+  "task": "full-check",
+  "role": "verifier",
+  "target": ".",
+  "goal": "영어판 추가: /en/ 아래 번역 파일 기반, 원본은 한국어",
+  "brief": "영어판과 소유자가 확인한 번역을 넣은 상태로 전체 테스트와 실제 빌드",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260926-085100-e125/local/full-check.verify.2.response.json",
+  "attempts": [
+    {
+      "status": "session",
+      "summary": null,
+      "verified": null,
+      "decisions": null,
+      "non-claims": null,
+      "retried": {
+        "delegated": "검증자 지적(한국어 소개의 영어 전환·alternate 링크가 /about/en/about/로 감)은 맞음: src/pages/about/index.astro와 그 값을 기대하던 tests/test_i18n.py 두 줄을 ../en/about/로 고침; 실제 빌드의 전환·alternate 링크 24개가 모두 있는 페이지를 가리킴을 확인",
+        "at": "2026-09-26T09:54:17+00:00",
+        "chongdae": "chongdae 1.12.0"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "anomaly",
+            "where": "src/pages/about/index.astro:9",
+            "record_quote": "",
+            "tree_quote": "switchHref=\"en/about/\" alternateHref=\"en/about/\"",
+            "why": "From /about/index.html these relative URLs resolve to /about/en/about/ rather than the English counterpart /en/about/, breaking both the language switch and alternate link."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh",
+          "session": "01a0dd1f-4904-7dc0-ac9e-8ddd38e03f1a",
+          "transcript": "full-check.verify.response.transcript.jsonl"
+        }
+      },
+      "disputed-tests": null,
+      "reopened": null
+    }
+  ],
+  "touched": [
+    "src/pages/about/index.astro",
+    "tests/test_i18n.py"
+  ],
+  "built": null,
+  "recheck": {
+    "findings": [
+      {
+        "kind": "anomaly",
+        "where": "src/pages/about/index.astro:9",
+        "record_quote": "",
+        "tree_quote": "switchHref=\"en/about/\" alternateHref=\"en/about/\"",
+        "why": "From /about/index.html these relative URLs resolve to /about/en/about/ rather than the English counterpart /en/about/, breaking both the language switch and alternate link."
+      }
+    ],
+    "changed_since": [
+      "src/pages/about/index.astro",
+      "tests/test_i18n.py"
+    ]
+  }
+}

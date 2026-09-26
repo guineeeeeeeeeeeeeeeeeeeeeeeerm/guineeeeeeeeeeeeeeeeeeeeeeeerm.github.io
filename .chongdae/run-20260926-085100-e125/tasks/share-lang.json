@@ -1,0 +1,157 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.12.0",
+  "status": "done",
+  "def": {
+    "id": "share-lang",
+    "role": "session",
+    "brief": "소유자 결정(source:loc-07): 공유 기록에 lang을 두어 한국어·영어 배지를 나눈다",
+    "closes": [],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_shares.py"
+      ],
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_i18n.py"
+      ],
+      [
+        "npm",
+        "run",
+        "build"
+      ]
+    ],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 5,
+  "added": "2026-09-26T10:13:59+00:00",
+  "self-performed": {
+    "instead-of": "implementer",
+    "why": "선택 필드 하나와 배지 거르기의 작은 변경이라 이 세션이 직접(계약·코드·테스트)",
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "at": "2026-09-26T10:13:59+00:00",
+    "chongdae": "chongdae 1.12.0"
+  },
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "reviewed_tree": {
+    "README.md": "94ec95d8bd80367dbc7857bbd6c81363ad0e0c7d",
+    "content/posts/20260926-044433.en.md": "0a74240a2ede311c6b186f685c51f16ba64c5e2d",
+    "plan/PLAN.md": "b931ae47e8e8dff6d821db419f24949d770f5eda",
+    "src/components/FeedItem.astro": "f53146df9ccd949e70e48dfa283fc9fe12c18889",
+    "src/lib/site.ts": "632ba9b591cbb6f4f2da47dffe6b8e6cf6b0fbb0",
+    "src/pages/en/p/[id]/index.astro": "845462e2754adc2671c1c2b41914ba384f86eba2",
+    "src/pages/p/[id]/index.astro": "ab38c7f200709abd3c2e271464bd2a3c6e8effca",
+    "tests/test_i18n.py": "877bf105d3a4fec6434196249f8a1ca88a268f64"
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.8.0",
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 13,
+      "commands-failed": 0
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_shares.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_i18n.py"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "touched": [
+    "README.md",
+    "plan/PLAN.md",
+    "src/components/FeedItem.astro",
+    "src/lib/site.ts",
+    "src/pages/en/p/[id]/index.astro",
+    "src/pages/p/[id]/index.astro",
+    "tests/test_i18n.py"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-283_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "edit ./tests/test_i18n.py"
+      ],
+      "commands-run": 8,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-26T10:13:59+00:00"
+    }
+  }
+}
