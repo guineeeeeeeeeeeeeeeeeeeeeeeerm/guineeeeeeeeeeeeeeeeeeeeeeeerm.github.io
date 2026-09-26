@@ -96,6 +96,10 @@ class FrameContractTests(unittest.TestCase):
                     r'<a\b[^>]*\bhref="([^"]+)"[^>]*>([^<]*)</a>',
                     current_nav,
                 )
+                self.assertEqual(
+                    [text for _, text in links], ["피드", "소개", "English"],
+                    msg=current_nav,
+                )
                 feed_index = next(
                     (index for index, (_, text) in enumerate(links) if text == "피드"),
                     None,
@@ -109,6 +113,10 @@ class FrameContractTests(unittest.TestCase):
                 self.assertLess(feed_index, about_index)
                 self.assertEqual(links[feed_index][0], feed_href)
                 self.assertEqual(links[about_index][0], about_href)
+                self.assertRegex(
+                    current_nav,
+                    r'<a class="lang-switch"[^>]*\bhreflang="en"[^>]*\blang="en"[^>]*>English</a>\s*$',
+                )
                 body = re.search(r"(?s)<body\b[^>]*>(.*?)</body>", document)
                 self.assertIsNotNone(body, msg=document)
                 self.assertRegex(body.group(1), r'class="[^"]*\bframe\b[^"]*"')

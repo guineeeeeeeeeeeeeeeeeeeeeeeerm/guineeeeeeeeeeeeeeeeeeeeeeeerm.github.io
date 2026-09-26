@@ -43,6 +43,17 @@ def _write_text_files(content, files):
         path.write_text(text, encoding="utf-8")
 
 
+def _write_translation_files(posts, translations):
+    if not translations:
+        return
+    entries = translations.items() if isinstance(translations, dict) else translations
+    for post_id, text in entries:
+        filename = post_id if str(post_id).endswith(".en.md") else f"{post_id}.en.md"
+        path = posts / filename
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+
 def _write_jsonl(content, name, rows):
     if rows:
         (content / name).write_text("\n".join(rows) + "\n", encoding="utf-8")
@@ -71,8 +82,10 @@ def temporary_site(
     root_index=None,
     *,
     about="소개\n",
+    about_en="About\n",
     posts=None,
     post_files=None,
+    translations=None,
     patches=None,
     links=None,
     shares=None,
@@ -85,8 +98,11 @@ def temporary_site(
 
         if about is not None:
             (content / "about.md").write_text(about, encoding="utf-8")
+        if about_en is not None:
+            (content / "about.en.md").write_text(about_en, encoding="utf-8")
         if post_files:
             _write_text_files(content / "posts", post_files)
+        _write_translation_files(content / "posts", translations)
         _write_text_files(content, posts)
         _write_text_files(content, files)
 
