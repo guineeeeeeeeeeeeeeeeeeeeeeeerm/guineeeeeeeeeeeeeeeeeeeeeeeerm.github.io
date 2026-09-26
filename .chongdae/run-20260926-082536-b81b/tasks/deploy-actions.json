@@ -1,0 +1,152 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.12.0",
+  "status": "done",
+  "def": {
+    "id": "deploy-actions",
+    "role": "session",
+    "brief": "워크플로 push, Pages 출처를 GitHub Actions로, 배포 확인, docs/ 추적 해제",
+    "closes": [],
+    "needs": [],
+    "checks": [
+      [
+        "npm",
+        "run",
+        "build"
+      ]
+    ],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 2,
+  "added": "2026-09-26T08:35:36+00:00",
+  "self-performed": {
+    "instead-of": "implementer",
+    "why": "배포 설정과 저장소 정리는 이 세션의 몫(소유자가 순서를 확인함)",
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "at": "2026-09-26T08:35:36+00:00",
+    "chongdae": "chongdae 1.12.0"
+  },
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "reviewed_tree": {
+    ".gitignore": "082daae2cdb998ef341074692a0b5164dc44e08d",
+    "README.md": "00ad50cbbf40526407db19b5a5ae2346190e5faa",
+    "docs/.nojekyll": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "docs/about/index.html": "24acb90111a49165daf068310cc37d9d112c7962",
+    "docs/assets/brands/bluesky.svg": "3269500074f4669e6265eb8a722f77cc903eb4b0",
+    "docs/assets/brands/linkedin.png": "ac99bf445764c04ca267a78d472ee8f2975c194e",
+    "docs/assets/brands/substack.png": "07e32ceef4dbf6ef6bbe30ae11822ee4565c092f",
+    "docs/assets/brands/threads.svg": "9df22fadfd30b32e73e21b195a6ad7a34187b558",
+    "docs/assets/brands/x.svg": "e0d87ecf151268e9ec35f76cba693edc6898cb74",
+    "docs/assets/site.css": "821f2141d18670c1f31c048097d84df55c7dfac5",
+    "docs/assets/time.js": "6d1899f221e2cf2a7028c7196a7bce10a5c3644a",
+    "docs/assets/zoom.js": "ffac610d11c9d6c1b7d66dbb71627e12d64a00c5",
+    "docs/images/avatar_paint_primary.png": "15e9c5c83ad49197677b6a71863699531bd4e099",
+    "docs/images/bathroom-from-door.jpg": "00c66666e03f184f42f638c26015f41dd3e98ab0",
+    "docs/images/bathroom-gpt-weird.png": "cbba482b0cbf466ddd1851e6585502cd24ac8e8c",
+    "docs/images/bathroom-gpt.png": "37d46f3e5b91af8f8e6a2ea22cfc564cf686b02a",
+    "docs/images/bathroom-model.png": "d155ac3b79403c9dce6fe27b1c5c4da0c3d235a4",
+    "docs/images/bathroom-shower-holder.jpg": "847c5a853972a0fe360a3ed10bd50124cd3b084a",
+    "docs/images/bathroom-towel-bar.jpg": "ed885b93bca02d4d075bf822f65e91166b291bd8",
+    "docs/images/org_logo.png": "9655b7d7f7828a75880e51919acfa3f4d8097498",
+    "docs/index.html": "9fb49a046dd24ea03e5cb17790ccdd4b43bff9f6",
+    "docs/p/20260924-075921/index.html": "86395fc32896aa77411d344b60dc5de9f88d1c4e",
+    "docs/p/20260924-085456/index.html": "2cd8361973b12a07867812b364c45e3b67580466",
+    "docs/p/20260925-103715/index.html": "20f10cf07c34be11c863eb31a4dbb91c5d3b2ffe",
+    "docs/p/20260926-044433/index.html": "b659a189da86cd3a67f3cf40fd9db8dd826466c2"
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.8.0",
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 16,
+      "commands-failed": 0
+    }
+  },
+  "checks": [
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "touched": [
+    ".gitignore",
+    "README.md",
+    "docs/.nojekyll",
+    "docs/about/index.html",
+    "docs/assets/brands/bluesky.svg",
+    "docs/assets/brands/linkedin.png",
+    "docs/assets/brands/substack.png",
+    "docs/assets/brands/threads.svg",
+    "docs/assets/brands/x.svg",
+    "docs/assets/site.css",
+    "docs/assets/time.js",
+    "docs/assets/zoom.js",
+    "docs/images/avatar_paint_primary.png",
+    "docs/images/bathroom-from-door.jpg",
+    "docs/images/bathroom-gpt-weird.png",
+    "docs/images/bathroom-gpt.png",
+    "docs/images/bathroom-model.png",
+    "docs/images/bathroom-shower-holder.jpg",
+    "docs/images/bathroom-towel-bar.jpg",
+    "docs/images/org_logo.png",
+    "docs/index.html",
+    "docs/p/20260924-075921/index.html",
+    "docs/p/20260924-085456/index.html",
+    "docs/p/20260925-103715/index.html",
+    "docs/p/20260926-044433/index.html"
+  ],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-283_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "edit ./README.md"
+      ],
+      "commands-run": 6,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-26T08:35:36+00:00"
+    }
+  }
+}

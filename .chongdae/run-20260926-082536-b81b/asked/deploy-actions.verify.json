@@ -1,0 +1,50 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-082536-b81b",
+  "task": "deploy-actions",
+  "role": "verifier",
+  "target": ".",
+  "goal": "GitHub Actions로 배포하고 docs/를 저장소에서 뺌",
+  "brief": "워크플로 push, Pages 출처를 GitHub Actions로, 배포 확인, docs/ 추적 해제",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260926-082536-b81b/local/deploy-actions.verify.response.json",
+  "touched": [
+    ".gitignore",
+    "README.md",
+    "docs/.nojekyll",
+    "docs/about/index.html",
+    "docs/assets/brands/bluesky.svg",
+    "docs/assets/brands/linkedin.png",
+    "docs/assets/brands/substack.png",
+    "docs/assets/brands/threads.svg",
+    "docs/assets/brands/x.svg",
+    "docs/assets/site.css",
+    "docs/assets/time.js",
+    "docs/assets/zoom.js",
+    "docs/images/avatar_paint_primary.png",
+    "docs/images/bathroom-from-door.jpg",
+    "docs/images/bathroom-gpt-weird.png",
+    "docs/images/bathroom-gpt.png",
+    "docs/images/bathroom-model.png",
+    "docs/images/bathroom-shower-holder.jpg",
+    "docs/images/bathroom-towel-bar.jpg",
+    "docs/images/org_logo.png",
+    "docs/index.html",
+    "docs/p/20260924-075921/index.html",
+    "docs/p/20260924-085456/index.html",
+    "docs/p/20260925-103715/index.html",
+    "docs/p/20260926-044433/index.html"
+  ],
+  "built": null
+}
