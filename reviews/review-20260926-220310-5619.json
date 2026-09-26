@@ -1,0 +1,608 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260926-220310-5619",
+  "since": "302b3e83088aadbb7d5a6c6d2d4b2bf00e7aacd3",
+  "head": "1418eb724d647458cad020529f44e6caa42bbea6",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "delegated",
+      "where": "R-0257ab55 source:og-01 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-05c2f196 tests/test_shares.py:ShareContractTests realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-08081f17 src/lib/site.ts realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-13649af8 source:about-07 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-15cb7f6a source:tb-01 realizes concept:record-table",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-1e78dde8 tests/test_frame.py realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-2050c498 source:as-03 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-239592ec source:tb-03 realizes concept:record-table",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-255f6e70 plan/PLAN.md#Q-readme — 글쓴이의 안내서 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-29a40373 README.md#공유 기록 남기기 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-31bf2464 plan/PLAN.md#Q-build — 생성기와 출력 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-336ec2d1 src/lib/site.ts realizes concept:record-table",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-3bff092e README.md#사이트 만들기 — 빌드 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-4dd07452 source:fd-01 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-5c34cc96 source:tb-04 realizes concept:record-table",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-610b15de README.md#기록 표에 대해 realizes concept:record-table",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-62d4db1c plan/PLAN.md#Q-patch — 패치 realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6a9cbb87 plan/PLAN.md#Q-share — 공유 기록과 배지 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-808b04e4 source:about-08 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8a48d960 source:tb-02 realizes concept:record-table",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8b026186 source:as-05 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8b66abbb source:fd-00 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8e89e4a4 source:plan-04 realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-93e7262a source:fd-03 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-964681c3 source:plan-01 realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-9db64855 source:plan-05 realizes concept:erasure",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-a274ede1 source:as-04 realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-b2351df1 tests/test_s3.py:S3PatchContractTests realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-c0b35146 plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG) realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-c640c7ce src/layouts/BaseLayout.astro realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-cf5a38bf tests/test_s2.py:S2LinkContractTests realizes concept:record-table",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d3f2cb80 tests/test_s1.py:S1GeneratorContractTests realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d3f87769 src/components/ShareBadges.astro realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-d606064c scripts/build.mjs realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-dee4c930 source:plan-03 realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-e0a01bf2 src/lib/site.ts realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f60c968f tests/test_meta.py realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "agent-proposed",
+      "where": "concept:erasure, concept:patch, concept:record-table, concept:share, concept:site-build, cq:erasure-when, cq:patch-on-patch",
+      "text": "7 declaration(s) stand on a person's approval of the agent's own proposal (approval-of), not on the person's words",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-check",
+      "layer": "observation"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-125215-115f",
+      "text": "no check decides this task",
+      "layer": "objection"
+    },
+    {
+      "kind": "review-debt",
+      "where": "review-20260926-214749-830c",
+      "source": "dwitbuk",
+      "layer": "observation",
+      "text": "previous review review-20260926-214749-830c still has 12 undisposed objection(s), carried here"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 48,
+      "text": "48 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 48)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-202344-fc6a",
+      "seen-in": "review-20260925-202344-fc6a",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260925-202344-fc6a and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-234959-4023",
+      "seen-in": "review-20260925-234959-4023",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260925-234959-4023 and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-120908-3415",
+      "seen-in": "review-20260926-120908-3415",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260926-120908-3415 and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-132632-e2df",
+      "seen-in": "review-20260926-132632-e2df",
+      "count": 6,
+      "text": "6 observation(s) written in review-20260926-132632-e2df and unchanged since (delegated 6)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-192156-203a",
+      "seen-in": "review-20260926-192156-203a",
+      "count": 13,
+      "text": "13 observation(s) written in review-20260926-192156-203a and unchanged since (delegated 13)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-193138-870b",
+      "seen-in": "review-20260926-193138-870b",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-193138-870b and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-212327-cbe8",
+      "seen-in": "review-20260926-212327-cbe8",
+      "count": 16,
+      "text": "16 observation(s) written in review-20260926-212327-cbe8 and unchanged since (delegated 16)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-214749-830c",
+      "seen-in": "review-20260926-214749-830c",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-214749-830c and unchanged since (self-performed 1)"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-120419-6a91",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-214749-830c): no check decides this task",
+      "first-seen": "review-20260926-214749-830c",
+      "carries": [
+        "non-claim",
+        "run-20260926-120419-6a91",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-120419-6a91",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-212327-cbe8): (provider) \"favicon은 아바타(content/images/avatar_paint_primary.png)의 가운데 육각형을 잘라 만",
+      "first-seen": "review-20260926-212327-cbe8",
+      "carries": [
+        "non-claim",
+        "run-20260926-120419-6a91",
+        "(provider) \"favicon은 아바타(content/images/avatar_paint_primary.png)의 가운데 육각형을 잘라 만든 것이고\" — output tests cannot verify the asset’s visual provenance."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-120419-6a91",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-212327-cbe8): (provider) \"사이트 주소는 ... (src/lib/의 상수 하나)\" — output tests verify emitted URLs, n",
+      "first-seen": "review-20260926-212327-cbe8",
+      "carries": [
+        "non-claim",
+        "run-20260926-120419-6a91",
+        "(provider) \"사이트 주소는 ... (src/lib/의 상수 하나)\" — output tests verify emitted URLs, not the internal single-constant implementation."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-120419-6a91",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-212327-cbe8): (provider) \"빌드할 때 이미지를 만들지 않는다\" — byte equality cannot distinguish copying from ",
+      "first-seen": "review-20260926-212327-cbe8",
+      "carries": [
+        "non-claim",
+        "run-20260926-120419-6a91",
+        "(provider) \"빌드할 때 이미지를 만들지 않는다\" — byte equality cannot distinguish copying from generating identical bytes."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-120419-6a91",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-212327-cbe8): (provider) 지정된 세 체크 외 전체 테스트 스위트는 실행하지 않았습니다.",
+      "first-seen": "review-20260926-212327-cbe8",
+      "carries": [
+        "non-claim",
+        "run-20260926-120419-6a91",
+        "(provider) 지정된 세 체크 외 전체 테스트 스위트는 실행하지 않았습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-110304-ee8e, run-20260926-120419-6a91",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-212327-cbe8): no check decides this task  [x2]",
+      "first-seen": "review-20260926-212327-cbe8",
+      "carries": [
+        "non-claim",
+        "run-20260926-110304-ee8e, run-20260926-120419-6a91",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-102716-20c9, run-20260926-110304-ee8e",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-201143-e45b): no check decides this task  [x2]",
+      "first-seen": "review-20260926-201143-e45b",
+      "carries": [
+        "non-claim",
+        "run-20260926-102716-20c9, run-20260926-110304-ee8e",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-085100-e125, run-20260926-102716-20c9",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-193138-870b): no check decides this task  [x2]",
+      "first-seen": "review-20260926-193138-870b",
+      "carries": [
+        "non-claim",
+        "run-20260926-085100-e125, run-20260926-102716-20c9",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): (provider) 이번 검증에서 보호 테스트 파일은 수정하지 않았습니다.",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-085100-e125",
+        "(provider) 이번 검증에서 보호 테스트 파일은 수정하지 않았습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): (provider) 모든 가능한 외부 fixture 조합이 아니라 현재 저장소와 보호 테스트 fixture를 검증했습니다.",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-085100-e125",
+        "(provider) 모든 가능한 외부 fixture 조합이 아니라 현재 저장소와 보호 테스트 fixture를 검증했습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-084254-d8ee, run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): no check decides this task  [x2]",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-084254-d8ee, run-20260926-085100-e125",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-084113-1138, run-20260926-084254-d8ee",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-174314-a452): no check decides this task  [x2]",
+      "first-seen": "review-20260926-174314-a452",
+      "carries": [
+        "non-claim",
+        "run-20260926-084113-1138, run-20260926-084254-d8ee",
+        "no check decides this task"
+      ]
+    }
+  ]
+}
