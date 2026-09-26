@@ -5,11 +5,23 @@
   "dst": "concept:site-build",
   "evidence": "def test_Q_build_every_page_has_the_same_frame_and_ordered_feed_about_nav(self):",
   "seen": {
-    "tests/test_frame.py": "32a519392103",
+    "tests/test_frame.py": "0a480261fa95",
     "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+      },
+      "seen": {
+        "tests/test_frame.py": "32a519392103",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "def test_Q_build_every_page_has_the_same_frame_and_ordered_feed_about_nav(self):"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

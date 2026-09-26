@@ -5,11 +5,11 @@
   "dst": "concept:about",
   "evidence": "def test_the_about_page_looks_like_a_post_page(self):",
   "seen": {
-    "tests/test_about.py:AboutPageContractTests": "a3041ee3f1fa",
+    "tests/test_about.py:AboutPageContractTests": "9f65f58086aa",
     "concept:about": "fda8469aebbf"
   },
   "confirmed": {
-    "delegated": "Claude가 바깥 링크 변경(source:el-02) 뒤 근거 문장을 다시 읽음: 8개 모두 글자 그대로 남아 있고, 개념 설명에 '소개 페이지에서만'을 담은 것이 없음"
+    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
   },
   "history": [
     {
@@ -21,7 +21,17 @@
         "concept:about": "fda8469aebbf"
       },
       "evidence": "def test_the_about_page_looks_like_a_post_page(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 바깥 링크 변경(source:el-02) 뒤 근거 문장을 다시 읽음: 8개 모두 글자 그대로 남아 있고, 개념 설명에 '소개 페이지에서만'을 담은 것이 없음"
+      },
+      "seen": {
+        "tests/test_about.py:AboutPageContractTests": "a3041ee3f1fa",
+        "concept:about": "fda8469aebbf"
+      },
+      "evidence": "def test_the_about_page_looks_like_a_post_page(self):"
     }
   ],
-  "written_by": "mangsang 1.9.0"
+  "written_by": "mangsang 1.10.0"
 }

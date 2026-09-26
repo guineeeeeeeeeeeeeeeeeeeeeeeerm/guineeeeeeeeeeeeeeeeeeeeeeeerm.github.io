@@ -5,10 +5,23 @@
   "dst": "concept:feed",
   "evidence": "def test_Q_feed_orders_newest_first(self):",
   "seen": {
-    "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
+    "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
     "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
+      },
+      "seen": {
+        "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
+        "concept:feed": "033b1f6b1672"
+      },
+      "evidence": "def test_Q_feed_orders_newest_first(self):"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

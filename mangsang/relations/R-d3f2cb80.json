@@ -3,13 +3,13 @@
   "src": "tests/test_s1.py:S1GeneratorContractTests",
   "predicate": "realizes",
   "dst": "concept:site-build",
-  "evidence": "def test_Q_build_same_input_is_byte_identical_on_second_build(self):",
+  "evidence": "def test_Q_build_recreates_the_feed_posts_assets_images_and_nojekyll(self):",
   "seen": {
-    "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
+    "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
     "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)"
+    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 같은 출력 테스트가 목록 A로 test_frame에 합쳐져, 같은 클래스의 빌드 출력 테스트로 근거를 옮김"
   },
   "history": [
     {
@@ -21,7 +21,17 @@
         "concept:site-build": "66de2d1eaeaa"
       },
       "evidence": "def test_Q_build_same_input_is_byte_identical_on_second_build(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)"
+      },
+      "seen": {
+        "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "def test_Q_build_same_input_is_byte_identical_on_second_build(self):"
     }
   ],
-  "written_by": "mangsang 1.9.0"
+  "written_by": "mangsang 1.10.0"
 }

@@ -5,11 +5,11 @@
   "dst": "concept:post",
   "evidence": "def test_a_line_break_inside_a_paragraph_is_a_line_break_on_the_page(self):",
   "seen": {
-    "tests/test_linebreaks.py:LineBreakContractTests": "2a81c6c2b762",
+    "tests/test_linebreaks.py:LineBreakContractTests": "ef1dfd0abfac",
     "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude가 마크다운 변경(source:md-03, md-05) 뒤 다시 읽음: 12개 인용이 모두 글자 그대로 남아 있고, 바뀐 것은 본문 렌더 방식뿐이라 개념과 맞음"
+    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "tests/test_linebreaks.py:LineBreakContractTests": "03952add96d4",
+        "concept:post": "700e2db936c8"
+      },
+      "evidence": "def test_a_line_break_inside_a_paragraph_is_a_line_break_on_the_page(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 마크다운 변경(source:md-03, md-05) 뒤 다시 읽음: 12개 인용이 모두 글자 그대로 남아 있고, 바뀐 것은 본문 렌더 방식뿐이라 개념과 맞음"
+      },
+      "seen": {
+        "tests/test_linebreaks.py:LineBreakContractTests": "2a81c6c2b762",
         "concept:post": "700e2db936c8"
       },
       "evidence": "def test_a_line_break_inside_a_paragraph_is_a_line_break_on_the_page(self):"

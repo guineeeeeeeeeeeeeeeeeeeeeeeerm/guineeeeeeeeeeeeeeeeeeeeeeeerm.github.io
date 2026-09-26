@@ -5,10 +5,23 @@
   "dst": "concept:post",
   "evidence": "def test_a_name_for_another_moment_than_written_is_a_build_error(self):",
   "seen": {
-    "tests/test_ids.py:PostIdIsTheMomentItWasWrittenTests": "9d89c2ecf609",
+    "tests/test_ids.py:PostIdIsTheMomentItWasWrittenTests": "5e19eed09c96",
     "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
-  }
+    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
+      },
+      "seen": {
+        "tests/test_ids.py:PostIdIsTheMomentItWasWrittenTests": "9d89c2ecf609",
+        "concept:post": "700e2db936c8"
+      },
+      "evidence": "def test_a_name_for_another_moment_than_written_is_a_build_error(self):"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

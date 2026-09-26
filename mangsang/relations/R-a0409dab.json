@@ -3,12 +3,25 @@
   "src": "tests/test_s1.py:S1GeneratorContractTests",
   "predicate": "realizes",
   "dst": "concept:post",
-  "evidence": "def test_Q_post_written_is_required(self):",
+  "evidence": "def test_Q_build_bad_input_is_atomic_and_reports_one_bad_file_line(self):",
   "seen": {
-    "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
+    "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
     "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: written 필수 테스트가 목록 A로 지워지고 같은 입력을 이 테스트가 덮음 — 근거를 옮김"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
+      },
+      "seen": {
+        "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
+        "concept:post": "700e2db936c8"
+      },
+      "evidence": "def test_Q_post_written_is_required(self):"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

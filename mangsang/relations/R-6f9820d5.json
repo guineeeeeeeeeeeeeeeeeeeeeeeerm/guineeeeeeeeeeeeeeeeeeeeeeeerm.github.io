@@ -3,12 +3,25 @@
   "src": "tests/test_images.py:ImageWidthContractTests",
   "predicate": "realizes",
   "dst": "concept:post",
-  "evidence": "def test_a_width_after_the_bar_sets_the_display_width_and_leaves_the_alt(self):",
+  "evidence": "def test_a_zero_width_is_a_build_error_naming_the_post(self):",
   "seen": {
-    "tests/test_images.py:ImageWidthContractTests": "1e2b258a94ee",
+    "tests/test_images.py:ImageWidthContractTests": "1c62cb56aa48",
     "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
-  }
+    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 인용한 테스트가 목록 A로 지워져 같은 클래스의 남은 너비 계약 테스트로 근거를 옮김"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "테스트 도우미만 tests/support.py로 옮겨졌다: 세션이 확인한 바 테스트 id 98개가 전과 같고 모든 assert 줄이 글자 그대로다; 클래스가 확인하는 계약은 그대로다"
+      },
+      "seen": {
+        "tests/test_images.py:ImageWidthContractTests": "1e2b258a94ee",
+        "concept:post": "700e2db936c8"
+      },
+      "evidence": "def test_a_width_after_the_bar_sets_the_display_width_and_leaves_the_alt(self):"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

@@ -5,11 +5,11 @@
   "dst": "concept:share",
   "evidence": "def test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):",
   "seen": {
-    "tests/test_shares.py:ShareContractTests": "6225e36757c5",
+    "tests/test_shares.py:ShareContractTests": "ba6608a82a6d",
     "concept:share": "ae8d0b44fd09"
   },
   "confirmed": {
-    "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)"
+    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
   },
   "history": [
     {
@@ -41,7 +41,17 @@
         "concept:share": "ae8d0b44fd09"
       },
       "evidence": "def test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 인용이 글자 그대로 남아 있고, 개념과 맞음(규칙은 옮기며 바뀌지 않음)"
+      },
+      "seen": {
+        "tests/test_shares.py:ShareContractTests": "6225e36757c5",
+        "concept:share": "ae8d0b44fd09"
+      },
+      "evidence": "def test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):"
     }
   ],
-  "written_by": "mangsang 1.9.0"
+  "written_by": "mangsang 1.10.0"
 }
