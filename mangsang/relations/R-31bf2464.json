@@ -6,10 +6,10 @@
   "evidence": "생성기는 Astro 프로젝트다.",
   "seen": {
     "plan/PLAN.md#Q-build — 생성기와 출력": "36b9f82a2579",
-    "concept:site-build": "dc5fb39ad68a"
+    "concept:site-build": "51a2ebb53299"
   },
   "confirmed": {
-    "delegated": "Claude가 러너 고정 뒤 다시 읽음: 인용이 그대로이고 site-build와 맞음"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -68,6 +68,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-build — 생성기와 출력": "c1e3b50eff11",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "생성기는 Astro 프로젝트다."
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 러너 고정 뒤 다시 읽음: 인용이 그대로이고 site-build와 맞음"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-build — 생성기와 출력": "36b9f82a2579",
         "concept:site-build": "dc5fb39ad68a"
       },
       "evidence": "생성기는 Astro 프로젝트다."

@@ -1,0 +1,7 @@
+{
+  "id": "mt-01",
+  "text": "등록 목록에서 지운 파일 6개를 뺐습니다. 검사는 모두 통과합니다.\n\n다음은 어긋난 개념의 새 문장입니다. 두 곳은 정하셔야 할 결정이 들어 있어서, 문장을 먼저 보여 드리고 여쭙겠습니다.\n\n**새 문장 (제안)**\n\n| 개념 | 새 뜻 |\n|---|---|\n| `share` | 글을 올린 뒤 다른 곳(X, 스레드, 링크드인, Substack, Bluesky, DEV 등)에 공유한 기록. 공유마다 공유 표에 한 줄로 남고, 공유한 언어(한국어·영어)의 페이지에만 각 곳의 공식 로고 배지로 보이며, 배지를 누르면 공유한 글로 간다. |\n| `site-build` | 글과 기록 표에서 Astro 생성기가 공통 틀을 이어받는 템플릿으로 한국어판과 영어판의 정적 HTML을 만들고, main에 push하면 GitHub Actions가 빌드해 GitHub Pages로 배포한다. |\n| `patch` | 글 하나의 범위 안에서 일정 영역을 고치거나, 더하거나, 지우는 기생 글. 추가된 시각과 사유가 기록되어 패치 보기로 이력이 보이고, 패치가 적용된 글에 또 패치를 붙일 수 있다. **[결정 1]** |\n| `record-table` | 글에 붙는 기록(링크, 패치, 공유, 태그)을 종류마다 JSONL 표 하나에 행으로 모으는 방식. 줄을 덧붙이기만 해서 이력이 표에 남고, 현재 상태는 빌드가 계산한다. **[결정 2]** |\n| `erasure` | 기록을 지우거나 지난 기록을 고치는 일. **[결정 2]** |\n\n**열린 질문**\n- **`patch-on-patch`:** `patch`의 새 문장(\"패치가 적용된 글에 또 패치를 붙일 수 있다\")으로 답합니다.\n- **`erasure-when`:** 결정 2로 답합니다.\n",
+  "speaker": "Claude (claude-opus-5-5)",
+  "locator": "session 917a4cc5-c9e3-4c56-919b-d30286207f34, 2026-09-26 ~12:53Z: Claude's text in the turn that asked mt-02; the host transcript kept only the tool call, so the words were copied verbatim from the agent's own context",
+  "written_by": "mangsang 1.10.0"
+}

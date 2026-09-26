@@ -1,10 +1,10 @@
 {
   "name": "site-build",
-  "means": "글과 기록 표에서 Astro 생성기가 공통 틀을 이어받는 템플릿으로 정적 HTML을 docs/에 만들고, Pages가 그것을 서비스한다.",
+  "means": "글과 기록 표에서 Astro 생성기가 공통 틀을 이어받는 템플릿으로 한국어판과 영어판의 정적 HTML을 만들고, main에 push하면 GitHub Actions가 빌드해 GitHub Pages로 배포한다.",
   "declared": {
     "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
-    "approved-in": "source:as-05",
-    "approval-of": "source:as-04"
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
   },
   "history": [
     {
@@ -12,7 +12,15 @@
       "declared": {
         "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
       }
+    },
+    {
+      "means": "글과 기록 표에서 Astro 생성기가 공통 틀을 이어받는 템플릿으로 정적 HTML을 docs/에 만들고, Pages가 그것을 서비스한다.",
+      "declared": {
+        "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+        "approved-in": "source:as-05",
+        "approval-of": "source:as-04"
+      }
     }
   ],
-  "written_by": "mangsang 1.9.0"
+  "written_by": "mangsang 1.10.0"
 }

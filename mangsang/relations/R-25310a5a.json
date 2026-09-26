@@ -1,0 +1,17 @@
+{
+  "id": "R-25310a5a",
+  "src": "source:mt-01",
+  "predicate": "realizes",
+  "dst": "concept:share",
+  "evidence": "공유마다 공유 표에 한 줄로 남고, 공유한 언어(한국어·영어)의 페이지에만 각 곳의 공식 로고 배지로 보이며",
+  "seen": {
+    "source:mt-01": "0e24c286fe7a",
+    "concept:share": "cfe8d13d0697"
+  },
+  "confirmed": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
+  },
+  "written_by": "mangsang 1.10.0"
+}

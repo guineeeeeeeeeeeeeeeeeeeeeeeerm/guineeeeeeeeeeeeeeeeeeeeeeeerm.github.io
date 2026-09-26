@@ -5,10 +5,23 @@
   "dst": "concept:patch",
   "evidence": "그래서 앞선\n패치가 만든 글에 패치를 붙일 수 있다.",
   "seen": {
-    "plan/PLAN.md#Q-patch — 패치": "9de28e1c8fef",
-    "concept:patch": "5a85490ec568"
+    "plan/PLAN.md#Q-patch — 패치": "a0cd9f4e4b83",
+    "concept:patch": "0472c1802225"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Claude (claude-opus-5-5) re-read each after the record tables and tag events (run-20260924-091515-9861): each quote still stands in its anchor and still grounds or projects its concept; the storage moved into tables, the rules did not. Technical, delegated (plan-07)"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-patch — 패치": "9de28e1c8fef",
+        "concept:patch": "5a85490ec568"
+      },
+      "evidence": "그래서 앞선\n패치가 만든 글에 패치를 붙일 수 있다."
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

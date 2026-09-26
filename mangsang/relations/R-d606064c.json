@@ -6,10 +6,10 @@
   "evidence": "await rename(staging, docs);",
   "seen": {
     "scripts/build.mjs": "99eb0570c102",
-    "concept:site-build": "dc5fb39ad68a"
+    "concept:site-build": "51a2ebb53299"
   },
   "confirmed": {
-    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -28,6 +28,16 @@
       },
       "seen": {
         "scripts/build.mjs": "ce46e979dc03",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "await rename(staging, docs);"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+      },
+      "seen": {
+        "scripts/build.mjs": "99eb0570c102",
         "concept:site-build": "dc5fb39ad68a"
       },
       "evidence": "await rename(staging, docs);"

@@ -6,9 +6,22 @@
   "evidence": "이번에 뒷단 구조를 동시에 손보면 어때?",
   "seen": {
     "source:tb-02": "cc4f82a4cd4f",
-    "concept:record-table": "ce5af6e7c90f"
+    "concept:record-table": "18cb3ef96ebb"
   },
   "confirmed": {
-    "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "The tag concept's new projections and the record-table concept grounded in the owner's words (tg-01..04, tb-01..04) and projected in plan, README, code and tests, proposed by Claude (claude-opus-5-5) after tables-build passed its checks and the verifier; technical, delegated (plan-07)"
+      },
+      "seen": {
+        "source:tb-02": "cc4f82a4cd4f",
+        "concept:record-table": "ce5af6e7c90f"
+      },
+      "evidence": "이번에 뒷단 구조를 동시에 손보면 어때?"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

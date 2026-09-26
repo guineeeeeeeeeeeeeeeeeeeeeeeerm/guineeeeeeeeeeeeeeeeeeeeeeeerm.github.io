@@ -2,9 +2,26 @@
   "id": "patch-on-patch",
   "text": "패치 위의 패치를 어떤 구조로 저장하고 적용하나? (구현하면서 정하기로 함)",
   "verify": {
-    "kind": "open"
+    "kind": "answered-by",
+    "concepts": [
+      "patch"
+    ]
   },
   "declared": {
-    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
-  }
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
+  },
+  "history": [
+    {
+      "text": "패치 위의 패치를 어떤 구조로 저장하고 적용하나? (구현하면서 정하기로 함)",
+      "verify": {
+        "kind": "open"
+      },
+      "declared": {
+        "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+      }
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

@@ -1,8 +1,18 @@
 {
   "name": "erasure",
-  "means": "패치가 아니라 기록 자체를 완전히 지우는 일. 불가피한 특수한 경우에만 한다.",
+  "means": "기록 표의 지난 줄을 고치거나 지우는 일. 기록의 사실 자체가 바뀐 경우(계정 이전, 게시물 삭제 등)에 소유자가 정할 때만 하고, 흔적은 저장소 이력(커밋 메시지)에 남긴다.",
   "declared": {
-    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "means": "패치가 아니라 기록 자체를 완전히 지우는 일. 불가피한 특수한 경우에만 한다.",
+      "declared": {
+        "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+      }
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

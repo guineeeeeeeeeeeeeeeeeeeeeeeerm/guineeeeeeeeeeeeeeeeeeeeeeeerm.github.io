@@ -1,0 +1,17 @@
+{
+  "id": "R-3d6ff821",
+  "src": "source:mt-01",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "main에 push하면 GitHub Actions가 빌드해 GitHub Pages로 배포한다.",
+  "seen": {
+    "source:mt-01": "0e24c286fe7a",
+    "concept:site-build": "51a2ebb53299"
+  },
+  "confirmed": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
+  },
+  "written_by": "mangsang 1.10.0"
+}

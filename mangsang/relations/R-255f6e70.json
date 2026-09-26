@@ -6,10 +6,10 @@
   "evidence": "사이트를 만드는 명령(처음 한 번 `npm install`, 그 뒤 `npm run build`)과 결과가",
   "seen": {
     "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "6be00b69a95f",
-    "concept:site-build": "dc5fb39ad68a"
+    "concept:site-build": "51a2ebb53299"
   },
   "confirmed": {
-    "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: Q-readme의 빌드 명령이 바뀌어 인용을 새 문장으로"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -21,7 +21,17 @@
         "concept:site-build": "66de2d1eaeaa"
       },
       "evidence": "사이트를 만드는 명령(`python3 build.py`)과 결과가"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: Q-readme의 빌드 명령이 바뀌어 인용을 새 문장으로"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-readme — 글쓴이의 안내서": "6be00b69a95f",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "사이트를 만드는 명령(처음 한 번 `npm install`, 그 뒤 `npm run build`)과 결과가"
     }
   ],
-  "written_by": "mangsang 1.9.0"
+  "written_by": "mangsang 1.10.0"
 }

@@ -6,10 +6,10 @@
   "evidence": "class S3PatchContractTests(unittest.TestCase):",
   "seen": {
     "tests/test_s3.py:S3PatchContractTests": "ed98e70207a4",
-    "concept:patch": "5a85490ec568"
+    "concept:patch": "0472c1802225"
   },
   "confirmed": {
-    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "tests/test_s3.py:S3PatchContractTests": "985899a3d5b6",
+        "concept:patch": "5a85490ec568"
+      },
+      "evidence": "class S3PatchContractTests(unittest.TestCase):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+      },
+      "seen": {
+        "tests/test_s3.py:S3PatchContractTests": "ed98e70207a4",
         "concept:patch": "5a85490ec568"
       },
       "evidence": "class S3PatchContractTests(unittest.TestCase):"

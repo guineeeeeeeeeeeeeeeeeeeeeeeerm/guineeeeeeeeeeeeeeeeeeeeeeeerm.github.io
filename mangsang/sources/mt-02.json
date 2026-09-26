@@ -1,0 +1,9 @@
+{
+  "id": "mt-02",
+  "text": "{\n \"questions\": [\n  {\n   \"question\": \"[결정 1] 올린 글을 고칠 때, 글 파일을 직접 고쳐도 되나요?\",\n   \"header\": \"글 수정\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"직접 고쳐도 됨 (추천)\",\n     \"description\": \"지금까지 해 온 대로(오타, 인용, 번역 문장). patch에 '글 파일을 직접 고칠 수도 있고, 패치는 고친 이력을 독자에게 남기고 싶을 때 쓴다'를 더합니다.\"\n    },\n    {\n     \"label\": \"반드시 패치로\",\n     \"description\": \"올린 뒤에는 패치로만 고칩니다. 게시 전 초안 단계의 수정만 직접 고칩니다. 모든 수정 이력이 독자에게 보입니다.\"\n    }\n   ]\n  },\n  {\n   \"question\": \"[결정 2] 기록 표의 지난 줄을 고치거나 지우는 일(예: 스레드 계정 이전으로 주소를 바꾼 일)은 어떻게 다룰까요?\",\n   \"header\": \"예외\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"소유자가 정한 예외만, 이유는 커밋에 (추천)\",\n     \"description\": \"기록의 사실 자체가 바뀐 경우(계정 이전, 게시물 삭제 등)에만 소유자 결정으로 지난 줄을 고치거나 지우고, 흔적은 저장소 이력(커밋 메시지)에 남깁니다. 이번 스레드 수정이 그 예입니다.\"\n    },\n    {\n     \"label\": \"바꿈 사건으로 덧붙이기\",\n     \"description\": \"지난 줄은 절대 고치지 않고, 공유 표에도 '바꿈/지움' 사건을 도입합니다. 기능 변경이 필요하고, 이미 고친 두 줄은 예외로 남습니다.\"\n    }\n   ]\n  },\n  {\n   \"question\": \"위 표의 share·site-build 새 문장은 이대로 괜찮나요?\",\n   \"header\": \"문장\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"이대로 승인\",\n     \"description\": \"보여 드린 문장 그대로 선언합니다. 소유자 이름으로 서명하고, 승인하신 답을 근거로 남깁니다.\"\n    },\n    {\n     \"label\": \"고칠 곳 있음\",\n     \"description\": \"고칠 부분을 다음에 말씀해 주세요.\"\n    }\n   ]\n  }\n ]\n}",
+  "speaker": "Claude (claude-opus-5-5)",
+  "locator": "session 917a4cc5-c9e3-4c56-919b-d30286207f34, question fb3f813e-23b6-4485-88d5-e1f0f92e7c20 at 2026-09-26T12:53:07.632Z",
+  "replies-to": "mt-01",
+  "verbatim-from": "host transcript",
+  "written_by": "mangsang 1.10.0"
+}

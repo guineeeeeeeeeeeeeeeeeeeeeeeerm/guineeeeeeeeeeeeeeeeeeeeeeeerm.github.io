@@ -6,10 +6,10 @@
   "evidence": "npm run build",
   "seen": {
     "README.md#사이트 만들기 — 빌드": "b3a5f7101375",
-    "concept:site-build": "dc5fb39ad68a"
+    "concept:site-build": "51a2ebb53299"
   },
   "confirmed": {
-    "delegated": "Claude가 배포 변경(source:dp-03) 뒤 다시 읽음: 인용('생성기는 Astro 프로젝트다.', 'npm run build')이 그대로이고 site-build의 뜻(docs/에 만들고 Pages가 서비스)과 맞음"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -28,6 +28,16 @@
       },
       "seen": {
         "README.md#사이트 만들기 — 빌드": "352560ff446c",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "npm run build"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 배포 변경(source:dp-03) 뒤 다시 읽음: 인용('생성기는 Astro 프로젝트다.', 'npm run build')이 그대로이고 site-build의 뜻(docs/에 만들고 Pages가 서비스)과 맞음"
+      },
+      "seen": {
+        "README.md#사이트 만들기 — 빌드": "b3a5f7101375",
         "concept:site-build": "dc5fb39ad68a"
       },
       "evidence": "npm run build"

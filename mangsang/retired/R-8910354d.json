@@ -10,5 +10,9 @@
   },
   "confirmed": {
     "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
-  }
+  },
+  "retired": {
+    "why": "소유자가 '올린 글도 파일을 직접 고칠 수 있다'로 정함(source:mt-03): 이 원문('일반적으로는 패치로 수정하도록 하자')은 patch의 옛 뜻('올린 글을 고치는 일반적인 방법')의 근거였다"
+  },
+  "written_by": "mangsang 1.10.0"
 }

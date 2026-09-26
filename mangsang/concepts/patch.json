@@ -1,8 +1,18 @@
 {
   "name": "patch",
-  "means": "글 하나의 범위 안에서 일정 영역을 고치거나, 더하거나, 지우는 기생 글. 길이 제한은 없다. 추가된 시각과 사유가 기록되고, 패치가 적용된 뒤의 글을 기준으로 또 패치를 붙일 수 있다. 올린 글을 고치는 일반적인 방법이다.",
+  "means": "글 하나의 범위 안에서 일정 영역을 고치거나, 더하거나, 지우는 기생 글. 추가된 시각과 사유가 기록되어 패치 보기로 이력이 보이고, 패치가 적용된 글에 또 패치를 붙일 수 있다. 글 파일을 직접 고칠 수도 있으며, 패치는 고친 이력을 독자에게 남기고 싶을 때 쓴다.",
   "declared": {
-    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "means": "글 하나의 범위 안에서 일정 영역을 고치거나, 더하거나, 지우는 기생 글. 길이 제한은 없다. 추가된 시각과 사유가 기록되고, 패치가 적용된 뒤의 글을 기준으로 또 패치를 붙일 수 있다. 올린 글을 고치는 일반적인 방법이다.",
+      "declared": {
+        "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm"
+      }
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

@@ -6,10 +6,10 @@
   "evidence": "def test_Q_build_recreates_the_feed_posts_assets_images_and_nojekyll(self):",
   "seen": {
     "tests/test_s1.py:S1GeneratorContractTests": "6ef89a0b4d5c",
-    "concept:site-build": "dc5fb39ad68a"
+    "concept:site-build": "51a2ebb53299"
   },
   "confirmed": {
-    "delegated": "Claude가 canonical 예외(Q-meta) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -38,6 +38,16 @@
       },
       "seen": {
         "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "def test_Q_build_recreates_the_feed_posts_assets_images_and_nojekyll(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 canonical 예외(Q-meta) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+      },
+      "seen": {
+        "tests/test_s1.py:S1GeneratorContractTests": "6ef89a0b4d5c",
         "concept:site-build": "dc5fb39ad68a"
       },
       "evidence": "def test_Q_build_recreates_the_feed_posts_assets_images_and_nojekyll(self):"

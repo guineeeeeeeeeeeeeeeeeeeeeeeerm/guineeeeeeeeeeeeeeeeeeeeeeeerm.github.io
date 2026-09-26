@@ -1,9 +1,19 @@
 {
   "name": "record-table",
-  "means": "글에 붙는 기록(링크, 패치, 공유, 태그)을 관계형 DB의 표처럼 종류마다 JSONL 파일 하나에 행으로 모으는 방식. 줄을 덧붙이기만 하고 지난 줄은 고치지 않아 이력이 표에 남으며, 지금 살아 있는 링크나 지금 달린 태그 같은 현재 상태는 빌드가 표에서 계산한다.",
+  "means": "글에 붙는 기록(링크, 패치, 공유, 태그)을 종류마다 JSONL 표 하나에 행으로 모으는 방식. 줄을 덧붙이기만 해서 이력이 표에 남고, 지금 살아 있는 링크나 지금 달린 태그 같은 현재 상태는 빌드가 표에서 계산한다. 지난 줄을 고치거나 지우는 일은 소유자가 정한 예외(erasure)뿐이다.",
   "declared": {
     "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
-    "approved-in": "source:tb-04"
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "means": "글에 붙는 기록(링크, 패치, 공유, 태그)을 관계형 DB의 표처럼 종류마다 JSONL 파일 하나에 행으로 모으는 방식. 줄을 덧붙이기만 하고 지난 줄은 고치지 않아 이력이 표에 남으며, 지금 살아 있는 링크나 지금 달린 태그 같은 현재 상태는 빌드가 표에서 계산한다.",
+      "declared": {
+        "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+        "approved-in": "source:tb-04"
+      }
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

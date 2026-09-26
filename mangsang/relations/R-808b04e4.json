@@ -6,10 +6,10 @@
   "evidence": "ㄱㄱ 추천대로",
   "seen": {
     "source:about-08": "8b1856bfe754",
-    "concept:site-build": "dc5fb39ad68a"
+    "concept:site-build": "51a2ebb53299"
   },
   "confirmed": {
-    "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 폴더 방식 주소는 새 빌드에서도 그대로(Q-build)라 이 원문과 그 승인은 여전히 site-build의 근거"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -21,7 +21,17 @@
         "concept:site-build": "66de2d1eaeaa"
       },
       "evidence": "ㄱㄱ 추천대로"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 Astro 이전(source:as-05) 뒤 다시 읽음: 폴더 방식 주소는 새 빌드에서도 그대로(Q-build)라 이 원문과 그 승인은 여전히 site-build의 근거"
+      },
+      "seen": {
+        "source:about-08": "8b1856bfe754",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "ㄱㄱ 추천대로"
     }
   ],
-  "written_by": "mangsang 1.9.0"
+  "written_by": "mangsang 1.10.0"
 }

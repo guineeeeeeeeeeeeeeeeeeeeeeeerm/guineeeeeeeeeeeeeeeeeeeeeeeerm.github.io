@@ -1,0 +1,17 @@
+{
+  "id": "R-873cf3b8",
+  "src": "source:mt-03",
+  "predicate": "realizes",
+  "dst": "concept:patch",
+  "evidence": "직접 고쳐도 됨 (추천)",
+  "seen": {
+    "source:mt-03": "50e1107b09de",
+    "concept:patch": "0472c1802225"
+  },
+  "confirmed": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
+  },
+  "written_by": "mangsang 1.10.0"
+}

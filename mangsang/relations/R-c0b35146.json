@@ -6,10 +6,10 @@
   "evidence": "사이트 이름은\n\"GuinEeeeeeeeeeeeeeeeeeeeeeeerm\"이다.",
   "seen": {
     "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "f4a94aae6dcb",
-    "concept:site-build": "dc5fb39ad68a"
+    "concept:site-build": "51a2ebb53299"
   },
   "confirmed": {
-    "delegated": "Claude가 OG 이미지 변경(source:og-06) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -28,6 +28,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "8d2de52db9e6",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "사이트 이름은\n\"GuinEeeeeeeeeeeeeeeeeeeeeeeerm\"이다."
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 OG 이미지 변경(source:og-06) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "f4a94aae6dcb",
         "concept:site-build": "dc5fb39ad68a"
       },
       "evidence": "사이트 이름은\n\"GuinEeeeeeeeeeeeeeeeeeeeeeeerm\"이다."

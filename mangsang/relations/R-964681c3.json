@@ -6,9 +6,22 @@
   "evidence": "특정 글 위에 기생하는 '패치' 종류의 글도 있어야해.",
   "seen": {
     "source:plan-01": "cd3ce4b8b9cc",
-    "concept:patch": "5a85490ec568"
+    "concept:patch": "0472c1802225"
   },
   "confirmed": {
-    "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
-  }
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Grounding of the concepts the owner approved (plan-05), proposed by Claude (claude-opus-5-5): each concept tied to the owner's words and, where Claude wrote the sentence, to Claude's phrasing. The owner approved the concepts, not each of these links."
+      },
+      "seen": {
+        "source:plan-01": "cd3ce4b8b9cc",
+        "concept:patch": "5a85490ec568"
+      },
+      "evidence": "특정 글 위에 기생하는 '패치' 종류의 글도 있어야해."
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

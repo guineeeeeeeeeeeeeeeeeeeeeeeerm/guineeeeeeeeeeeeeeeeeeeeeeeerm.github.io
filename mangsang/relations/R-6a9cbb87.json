@@ -6,10 +6,10 @@
   "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다",
   "seen": {
     "plan/PLAN.md#Q-share — 공유 기록과 배지": "9932d0e6ba9f",
-    "concept:share": "ae8d0b44fd09"
+    "concept:share": "cfe8d13d0697"
   },
   "confirmed": {
-    "delegated": "Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -68,6 +68,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-share — 공유 기록과 배지": "20d002a378fa",
+        "concept:share": "ae8d0b44fd09"
+      },
+      "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-share — 공유 기록과 배지": "9932d0e6ba9f",
         "concept:share": "ae8d0b44fd09"
       },
       "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다"

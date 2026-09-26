@@ -1,0 +1,17 @@
+{
+  "id": "R-8ea20972",
+  "src": "source:mt-03",
+  "predicate": "realizes",
+  "dst": "concept:erasure",
+  "evidence": "소유자가 정한 예외만, 이유는 커밋에 (추천)",
+  "seen": {
+    "source:mt-03": "50e1107b09de",
+    "concept:erasure": "65663d436bf0"
+  },
+  "confirmed": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
+  },
+  "written_by": "mangsang 1.10.0"
+}

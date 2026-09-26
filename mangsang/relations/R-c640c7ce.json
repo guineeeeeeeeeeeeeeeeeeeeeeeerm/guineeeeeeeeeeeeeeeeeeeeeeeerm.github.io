@@ -6,10 +6,10 @@
   "evidence": "<html lang={locale}>",
   "seen": {
     "src/layouts/BaseLayout.astro": "27987a302560",
-    "concept:site-build": "dc5fb39ad68a"
+    "concept:site-build": "51a2ebb53299"
   },
   "confirmed": {
-    "delegated": "Claude가 favicon·OG(source:og-05) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+    "delegated": "Claude가 새 뜻(source:mt-03)에 비추어 하나씩 다시 읽음: 인용이 새 뜻과 어긋나지 않음(append-only 원칙 인용은 새 record-table의 기본 원칙이고 예외는 따로 적힘; plan-05의 불가피한 완전 삭제 발언은 새 erasure와 맞음)"
   },
   "history": [
     {
@@ -38,6 +38,16 @@
       },
       "seen": {
         "src/layouts/BaseLayout.astro": "b03c8b69053f",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "<html lang={locale}>"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 favicon·OG(source:og-05) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+      },
+      "seen": {
+        "src/layouts/BaseLayout.astro": "27987a302560",
         "concept:site-build": "dc5fb39ad68a"
       },
       "evidence": "<html lang={locale}>"

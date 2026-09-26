@@ -1,0 +1,17 @@
+{
+  "id": "R-d2fd1d0a",
+  "src": "source:mt-03",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "이대로 승인",
+  "seen": {
+    "source:mt-03": "50e1107b09de",
+    "concept:site-build": "51a2ebb53299"
+  },
+  "confirmed": {
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "approved-in": "source:mt-03",
+    "approval-of": "source:mt-02"
+  },
+  "written_by": "mangsang 1.10.0"
+}
