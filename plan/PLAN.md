@@ -282,7 +282,10 @@ Decided (owner, `source:loc-03`, 요청 `source:loc-01`, 제안 `source:loc-02`;
   "en"` 패치가 있으면 빌드 오류다.
 - **태그(Q-tag):** 태그 이름은 번역하지 않는다. 영어판 태그 페이지와 클라우드는 번역된 글만 세고, 번역된 글이 없는 태그는 영어판에
   없다. 태그를 단 사유는 영어판에서 보여 주지 않는다.
-- **공유 배지(Q-share):** 영어판에도 같은 배지가 붙는다.
+- **공유 배지(Q-share):** 언어마다 따로다(owner, `source:loc-07`, 요청 `source:loc-05`, 제안 `source:loc-06`; 처음의 "영어판에도 같은
+  배지"를 바꿈) — 한국어판과 영어판은 서로 다른 곳에 올라간다. 공유 줄의 선택 필드 `"lang"`이 `"en"`이면 영어 공유이고, 없거나
+  `"ko"`이면 한국어 공유다. 한국어 페이지에는 한국어 공유 배지만, 영어 페이지에는 영어 공유 배지만 붙는다. `lang`이 `en`·`ko`가 아니거나,
+  번역 파일이 없는 글에 `"lang": "en"` 공유가 있으면 빌드 오류이고 오류 줄은 그 공유 줄이다. 공유할 수 있는 곳의 목록은 두 언어가 같다.
 - **소개(Q-about):** 영어판 소개는 `about.en.md`로 만들고, 바깥 링크 규칙은 같다.
 Decided after build (i18n-build, technical, delegated): 영어판 본문의 그림 `images/…`는 `docs/en/images/`로 한 벌 더 복사해
 영어 페이지 위치 기준 상대 경로로 가리킨다(원본과 바이트가 같다). Decided after dispute (i18n-build, technical, session): 테스트의 상대
@@ -413,7 +416,7 @@ Decided (owner, `source:fd-01`, `source:fd-03`; 제안 `source:fd-00`): 글이 �
 않았고, 공유할 때 기록 파일 하나를 더하면 되도록 간단해야 한다.
 
 Decided (technical, session): 공유는 글을 올린 뒤에 생기는 일이라 글 파일의 헤더가 아니라 링크·패치처럼 별도의 기록이다.
-공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다: `{"post": <글 id>, "where": <곳>, "url": <주소>, "at": <UTC 시각>}`
+공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다: `{"post": <글 id>, "where": <곳>, "url": <주소>, "at": <UTC 시각>}`(선택 필드 `"lang"`은 Q-i18n)
 (표로 옮김 `source:tb-04`). `where`는 빌드가 아는 곳 중 하나다 — 처음은 `x`, `threads`,
 `linkedin`이었고(뒤에 `substack`), 곳을 늘리는 일은 빌드에 이름과 아이콘을 더하는 사이트 작업이다. `url`은 `https://`로 시작한다. JSON 객체가
 아니거나, 키 집합이 위와 다르거나, `post`가 없는 글이거나, `where`가 모르는 곳이거나, `url`·`at`의 형식이 틀리면 빌드 오류이고

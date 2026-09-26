@@ -7,6 +7,11 @@ export class BuildError extends Error {}
 
 export type Locale = "ko" | "en";
 
+/** Q-i18n: each edition shows only the shares made in its own language. */
+export function sharesFor(site: SiteData, postId: string, locale: Locale): Share[] {
+  return (site.shares.get(postId) || []).filter((share) => share.lang === locale);
+}
+
 export const SCREEN_TEXT: Record<Locale, {
   feed: string;
   about: string;
@@ -64,6 +69,7 @@ export interface Share {
   where: string;
   url: string;
   at: string;
+  lang: Locale;
   line: number;
 }
 
@@ -998,18 +1004,22 @@ function validTag(tag: string): boolean {
   return tag.length > 0 && tag.length <= 40 && tag === tag.trim() && ![".", ".."].includes(tag) && !/[\\/\n\r]/.test(tag);
 }
 
-function parseShares(root: string, posts: Post[]): Map<string, Share[]> {
+function parseShares(root: string, posts: Post[], translations: Map<string, Post>): Map<string, Share[]> {
   const knownPosts = new Set(posts.map((post) => post.id));
   const shares: Share[] = [];
   for (const row of tableRows(root, "shares.jsonl")) {
-    if (Object.keys(row.value).sort().join("|") !== "at|post|url|where") fail(row.file);
+    const keys = Object.keys(row.value).sort().join("|");
+    if (keys !== "at|post|url|where" && keys !== "at|lang|post|url|where") fail(row.file);
+    const lang = row.value.lang === undefined ? "ko" : stringValue(row.value.lang, row.file);
+    if (lang !== "ko" && lang !== "en") fail(row.file);
     const post = stringValue(row.value.post, row.file);
     const where = stringValue(row.value.where, row.file);
     const url = stringValue(row.value.url, row.file);
     const at = stringValue(row.value.at, row.file);
     if (!knownPosts.has(post) || !(where in SHARE_PLACES) || !/^https:\/\/\S+$/.test(url)) fail(row.file);
     parseWritten(at, row.file);
-    shares.push({ post, where, url, at, line: row.line });
+    if (lang === "en" && !translations.has(post)) fail(row.file);
+    shares.push({ post, where, url, at, lang, line: row.line });
   }
   shares.sort((a, b) => a.at.localeCompare(b.at) || a.line - b.line);
   const result = new Map<string, Share[]>();
@@ -1648,7 +1658,7 @@ export function loadSite(): SiteData {
     if (markdownCodeSpans(state.body).some(([codeStart, codeEnd]) => start < codeEnd && codeStart < end)) fail(event.source || link.source);
     if (externalLinkSpans(state.body).some(([linkStart, linkEnd]) => start < linkEnd && linkStart < end)) fail(event.source || link.source);
   }
-  const site: SiteData = { contentRoot: root, aboutPath: path.join(root, "about.md"), aboutBody: about.body, aboutEnPath: aboutEn.path, aboutEnBody: aboutEn.body, posts, translations, links, patchStates, translationPatchStates, shares: parseShares(root, posts), taggings: parseTags(root, posts) };
+  const site: SiteData = { contentRoot: root, aboutPath: path.join(root, "about.md"), aboutBody: about.body, aboutEnPath: aboutEn.path, aboutEnBody: aboutEn.body, posts, translations, links, patchStates, translationPatchStates, shares: parseShares(root, posts, translations), taggings: parseTags(root, posts) };
   for (const post of posts) post.firstText = firstParagraphText(patchStates.get(post.id)!.body, root, post.source);
   for (const post of translations.values()) post.firstText = firstParagraphText(translationPatchStates.get(post.id)!.body, root, post.source);
   return site;

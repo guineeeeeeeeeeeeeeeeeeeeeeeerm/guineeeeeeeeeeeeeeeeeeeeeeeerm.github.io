@@ -521,14 +521,21 @@ class I18nContractTests(unittest.TestCase):
         ) as root:
             self.assert_fails_at(root, "content/about.en.md")
 
-    def test_Q_i18n_share_badges_are_present_on_english_feed_and_post_pages(self):
+    def test_Q_i18n_each_edition_shows_only_its_own_language_shares(self):
         shares = {
-            "x": {
+            "ko-x": {
                 "post": ID,
                 "where": "x",
                 "url": "https://x.com/someone/status/1",
                 "at": "2024-02-04T00:00:00Z",
-            }
+            },
+            "en-bluesky": {
+                "post": ID,
+                "where": "bluesky",
+                "url": "https://bsky.app/profile/someone/post/2",
+                "at": "2024-02-04T00:01:00Z",
+                "lang": "en",
+            },
         }
         with temporary_site(
             posts={f"posts/{ID}.md": post_text(body="post")},
@@ -536,14 +543,32 @@ class I18nContractTests(unittest.TestCase):
             shares=shares,
         ) as root:
             self.assert_builds(root)
-            feed = read(root, "en/index.html")
-            post = read(root, f"en/p/{ID}/index.html")
-            for document, source in ((feed, "../assets/brands/x.svg"), (post, "../../../assets/brands/x.svg")):
-                with self.subTest(page="post" if document is post else "feed"):
-                    badge = re.search(r'(?s)<a class="share-badge".*?</a>', document)
-                    self.assertIsNotNone(badge, msg=document)
-                    self.assertIn('href="https://x.com/someone/status/1"', badge.group(0))
-                    self.assertIn(f'src="{source}"', badge.group(0))
+            pages = (
+                ("ko-feed", read(root, "index.html"), "https://x.com/someone/status/1", "assets/brands/x.svg"),
+                ("ko-post", read(root, f"p/{ID}/index.html"), "https://x.com/someone/status/1", "../../assets/brands/x.svg"),
+                ("en-feed", read(root, "en/index.html"), "https://bsky.app/profile/someone/post/2", "../assets/brands/bluesky.svg"),
+                ("en-post", read(root, f"en/p/{ID}/index.html"), "https://bsky.app/profile/someone/post/2", "../../../assets/brands/bluesky.svg"),
+            )
+            for name, document, url, source in pages:
+                with self.subTest(page=name):
+                    badges = re.findall(r'(?s)<a class="share-badge".*?</a>', document)
+                    self.assertEqual(len(badges), 1, msg=document)
+                    self.assertIn(f'href="{url}"', badges[0])
+                    self.assertIn(f'src="{source}"', badges[0])
+
+    def test_Q_i18n_bad_share_language_is_a_build_error_on_the_share_row(self):
+        cases = {
+            "unknown-lang": ({ID: translation_text("post")}, "ja"),
+            "english-share-without-translation": ({}, "en"),
+        }
+        for name, (translations, lang) in cases.items():
+            with self.subTest(case=name):
+                with temporary_site(
+                    posts={f"posts/{ID}.md": post_text(body="post")},
+                    translations=translations,
+                    shares={"s": {"post": ID, "where": "x", "url": "https://x.com/s/1", "at": "2024-02-04T00:00:00Z", "lang": lang}},
+                ) as root:
+                    self.assert_fails_at(root, "shares.jsonl")
 
 
 if __name__ == "__main__":

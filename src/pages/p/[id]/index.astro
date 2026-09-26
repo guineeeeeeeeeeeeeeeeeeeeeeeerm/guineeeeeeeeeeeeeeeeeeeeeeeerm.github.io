@@ -5,7 +5,7 @@ import Footnotes from "../../../components/Footnotes.astro";
 import IncomingLinks from "../../../components/IncomingLinks.astro";
 import PatchView from "../../../components/PatchView.astro";
 import PostBody from "../../../components/PostBody.astro";
-import { incomingLinks, loadSite, outgoingLinks, postTags, renderPostBody, type SiteData } from "../../../lib/site";
+import { incomingLinks, loadSite, outgoingLinks, postTags, renderPostBody, sharesFor, type SiteData } from "../../../lib/site";
 
 export function getStaticPaths() {
   const site = loadSite();
@@ -34,7 +34,7 @@ const body = renderPostBody(site, post, "../../");
       )}
       {state.hasPatches && <PatchView state={state} locale="ko" />}
       <div class="body"><PostBody body={body} /></div>
-      <ItemFooter post={post} shares={site.shares.get(post.id) || []} root="../../" />
+      <ItemFooter post={post} shares={sharesFor(site, post.id, "ko")} root="../../" />
       <Footnotes site={site} post={post} links={outgoing} locale="ko" />
       <IncomingLinks site={site} post={post} links={incoming} locale="ko" />
     </article>
