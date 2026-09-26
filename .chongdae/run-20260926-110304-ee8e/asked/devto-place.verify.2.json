@@ -1,0 +1,89 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-110304-ee8e",
+  "task": "devto-place",
+  "role": "verifier",
+  "target": ".",
+  "goal": "dev.to를 공유 장소로 추가",
+  "brief": "소유자가 준 DEV 공식 배지(source:dv-01)를 brands/에 들이고 devto를 공유 장소로",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_shares.py"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260926-110304-ee8e/local/devto-place.verify.2.response.json",
+  "attempts": [
+    {
+      "status": "session",
+      "summary": null,
+      "verified": null,
+      "decisions": null,
+      "non-claims": null,
+      "retried": {
+        "delegated": "검증자 지적(원본의 바이트 복사가 아님)은 사실과 다름: https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg(dev.to/brand가 링크한 공식 SVG)를 다시 받아 비교하니 sha256 787fc3c6…630bd로 public/assets/brands/devto.svg·docs 복사본과 바이트가 같음 — 공식 배지 자체가 448x512 viewBox의 검정 모양임",
+        "at": "2026-09-26T11:09:08+00:00",
+        "chongdae": "chongdae 1.12.0"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "public/assets/brands/devto.svg:1",
+            "record_quote": "DEV `devto.svg`(dev.to/brand의 공식 배지, 검정 바탕에 흰 글자 — `source:dv-01`) — 빌드는 그 파일을 바이트 그대로 `docs/assets/brands/`에 복사한다.",
+            "tree_quote": "<svg role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><path fill=\"#000000\" d=\"M120.12 208.29...",
+            "why": "추가된 파일은 소유자가 준 DEV CDN 배지의 바이트 복사가 아니라 Font Awesome 계열의 448x512 변형 아이콘이다. 따라서 공식 원본을 그대로 복사한다는 계약을 위반한다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh",
+          "session": "01a0dd62-58e0-71d0-b0d9-4e7c1379447c",
+          "transcript": "devto-place.verify.response.transcript.jsonl"
+        }
+      },
+      "disputed-tests": null,
+      "reopened": null
+    }
+  ],
+  "touched": [
+    "README.md",
+    "content/shares.jsonl",
+    "plan/PLAN.md",
+    "public/assets/brands/devto.svg",
+    "src/lib/site.ts",
+    "tests/test_shares.py"
+  ],
+  "built": null,
+  "recheck": {
+    "findings": [
+      {
+        "kind": "plan-vs-code",
+        "where": "public/assets/brands/devto.svg:1",
+        "record_quote": "DEV `devto.svg`(dev.to/brand의 공식 배지, 검정 바탕에 흰 글자 — `source:dv-01`) — 빌드는 그 파일을 바이트 그대로 `docs/assets/brands/`에 복사한다.",
+        "tree_quote": "<svg role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><path fill=\"#000000\" d=\"M120.12 208.29...",
+        "why": "추가된 파일은 소유자가 준 DEV CDN 배지의 바이트 복사가 아니라 Font Awesome 계열의 448x512 변형 아이콘이다. 따라서 공식 원본을 그대로 복사한다는 계약을 위반한다."
+      }
+    ],
+    "changed_since": []
+  }
+}

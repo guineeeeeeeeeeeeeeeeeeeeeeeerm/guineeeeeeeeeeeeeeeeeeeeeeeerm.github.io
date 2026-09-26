@@ -1,0 +1,32 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-110304-ee8e",
+  "task": "full-check",
+  "role": "verifier",
+  "target": ".",
+  "goal": "dev.to를 공유 장소로 추가",
+  "brief": "dev.to를 넣은 상태로 전체 테스트와 실제 빌드",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260926-110304-ee8e/local/full-check.verify.response.json",
+  "touched": [],
+  "built": null
+}

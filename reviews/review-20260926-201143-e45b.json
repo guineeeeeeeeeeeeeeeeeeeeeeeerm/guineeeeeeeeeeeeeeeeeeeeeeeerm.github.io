@@ -1,0 +1,300 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260926-201143-e45b",
+  "since": "904c27dca927ce3d3bbd465ff66f62fd985358cc",
+  "head": "48f44add703eed447166123dfccf0239923dbe72",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "self-performed",
+      "where": "run-20260926-110304-ee8e/devto-place",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): 공식 로고 파일 하나와 곳 목록 한 줄의 작은 변경이라 이 세션이 직접",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "run-20260926-110304-ee8e/devto-place attempt 1",
+      "text": "retry after session passed by delegation: 검증자 지적(원본의 바이트 복사가 아님)은 사실과 다름: https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg(dev.to/brand가 링크한 공식 SVG)를 다시 받아 비교하니 sha256 787fc3c6…630bd로 public/assets/brands/devto.svg·docs 복사본과 바이트가 같음 — 공식 배지 자체가 448x512 viewBox의 검정 모양임",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "verifier-reject",
+      "where": "run-20260926-110304-ee8e/devto-place attempt 1: public/assets/brands/devto.svg:1",
+      "text": "plan-vs-code: 추가된 파일은 소유자가 준 DEV CDN 배지의 바이트 복사가 아니라 Font Awesome 계열의 448x512 변형 아이콘이다. 따라서 공식 원본을 그대로 복사한다는 계약을 위반한다. — record: “DEV `devto.svg`(dev.to/brand의 공식 배지, 검정 바탕에 흰 글자 — `source:dv-01`) — 빌드는 그 파일을 바이트 그대로 `docs/assets/brands/`에 복사한다.” — tree: “<svg role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><path fill=\"#000000\" d=\"M120.12 208.29...” (a later attempt was accepted by the verifier)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "self-performed",
+      "where": "run-20260926-110304-ee8e/full-check",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): run 마지막의 전체 테스트와 실제 빌드",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-08081f17 src/lib/site.ts realizes concept:patch",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-29a40373 README.md#공유 기록 남기기 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-336ec2d1 src/lib/site.ts realizes concept:record-table",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-6a9cbb87 plan/PLAN.md#Q-share — 공유 기록과 배지 realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-76dd9c6e src/lib/site.ts realizes concept:tag",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-8b52435a src/lib/site.ts realizes concept:link",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-a49c5030 src/lib/site.ts realizes concept:translation",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-aa7d41f5 src/lib/site.ts realizes concept:post",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-e0a01bf2 src/lib/site.ts realizes concept:share",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-f08b2d38 src/lib/site.ts realizes concept:post-type",
+      "text": "re-confirmed by delegation: Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-102716-20c9, run-20260926-110304-ee8e",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "review-debt",
+      "where": "review-20260926-193138-870b",
+      "source": "dwitbuk",
+      "layer": "observation",
+      "text": "previous review review-20260926-193138-870b still has 5 undisposed objection(s), carried here"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 62,
+      "text": "62 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 62)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-202344-fc6a",
+      "seen-in": "review-20260925-202344-fc6a",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260925-202344-fc6a and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-234959-4023",
+      "seen-in": "review-20260925-234959-4023",
+      "count": 7,
+      "text": "7 observation(s) written in review-20260925-234959-4023 and unchanged since (agent-proposed 1, delegated 6)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-120908-3415",
+      "seen-in": "review-20260926-120908-3415",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260926-120908-3415 and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-132632-e2df",
+      "seen-in": "review-20260926-132632-e2df",
+      "count": 16,
+      "text": "16 observation(s) written in review-20260926-132632-e2df and unchanged since (delegated 16)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-173922-be51",
+      "seen-in": "review-20260926-173922-be51",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-173922-be51 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-174115-4090",
+      "seen-in": "review-20260926-174115-4090",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-174115-4090 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-192156-203a",
+      "seen-in": "review-20260926-192156-203a",
+      "count": 18,
+      "text": "18 observation(s) written in review-20260926-192156-203a and unchanged since (delegated 18)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-193138-870b",
+      "seen-in": "review-20260926-193138-870b",
+      "count": 6,
+      "text": "6 observation(s) written in review-20260926-193138-870b and unchanged since (delegated 4, self-performed 2)"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-085100-e125, run-20260926-102716-20c9",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-193138-870b): no check decides this task  [x2]",
+      "first-seen": "review-20260926-193138-870b",
+      "carries": [
+        "non-claim",
+        "run-20260926-085100-e125, run-20260926-102716-20c9",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): (provider) 이번 검증에서 보호 테스트 파일은 수정하지 않았습니다.",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-085100-e125",
+        "(provider) 이번 검증에서 보호 테스트 파일은 수정하지 않았습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): (provider) 모든 가능한 외부 fixture 조합이 아니라 현재 저장소와 보호 테스트 fixture를 검증했습니다.",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-085100-e125",
+        "(provider) 모든 가능한 외부 fixture 조합이 아니라 현재 저장소와 보호 테스트 fixture를 검증했습니다."
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-084254-d8ee, run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): no check decides this task  [x2]",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-084254-d8ee, run-20260926-085100-e125",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-084113-1138, run-20260926-084254-d8ee",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-174314-a452): no check decides this task  [x2]",
+      "first-seen": "review-20260926-174314-a452",
+      "carries": [
+        "non-claim",
+        "run-20260926-084113-1138, run-20260926-084254-d8ee",
+        "no check decides this task"
+      ]
+    }
+  ]
+}
