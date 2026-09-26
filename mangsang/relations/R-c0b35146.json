@@ -5,11 +5,11 @@
   "dst": "concept:site-build",
   "evidence": "사이트 이름은\n\"GuinEeeeeeeeeeeeeeeeeeeeeeeerm\"이다.",
   "seen": {
-    "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "8d2de52db9e6",
+    "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "f4a94aae6dcb",
     "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "Claude가 canonical 예외(Q-meta) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+    "delegated": "Claude가 OG 이미지 변경(source:og-06) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "66e68f9dc8aa",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "사이트 이름은\n\"GuinEeeeeeeeeeeeeeeeeeeeeeeerm\"이다."
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 canonical 예외(Q-meta) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "8d2de52db9e6",
         "concept:site-build": "dc5fb39ad68a"
       },
       "evidence": "사이트 이름은\n\"GuinEeeeeeeeeeeeeeeeeeeeeeeerm\"이다."
