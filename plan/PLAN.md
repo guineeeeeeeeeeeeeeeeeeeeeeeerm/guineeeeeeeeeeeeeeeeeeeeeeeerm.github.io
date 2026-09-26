@@ -52,6 +52,8 @@ Decided (owner, `source:as-01`, `source:as-03`, `source:as-05`; 제안 `source:a
   1. 빌드 스크립트는 Astro를 띄우기 전에 `content/`의 글·기록 표·소개를 `src/lib/`의 같은 검사로 먼저 읽는다. 잘못된 입력이면
      Astro를 띄우지 않고 지금과 같은 오류(stderr에 파일 경로가 든 줄, 종료 코드 1, `docs/` 그대로)로 끝난다. 검사 규칙은 한 곳
      (`src/lib/`)에만 있다.
+     Decided after build (fastfail, technical, delegated): 그 검사는 `src/lib/site.ts`의 `validateSite()`이고, 글·기록 표를 읽는
+     `loadSite()`와 본문 렌더(소개와 글의 본문 검사)를 함께 돌린다.
   2. 같은 입력으로 여러 가지를 확인하는 테스트는 그 입력을 한 번만 빌드해 나눠 쓴다(클래스 단위 준비). 확인하는 계약과 오류 사례는
      줄지 않는다.
   3. run 안에서 작업의 체크는 그 작업이 건드린 절의 테스트 파일만 돌린다. 전체 테스트는 run을 닫기 전 마지막 작업의 체크로 한 번

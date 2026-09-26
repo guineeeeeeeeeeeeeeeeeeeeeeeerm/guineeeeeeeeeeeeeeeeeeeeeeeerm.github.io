@@ -1,7 +1,7 @@
-import { build as astroBuild } from "astro";
 import { cp, mkdir, mkdtemp, rename, rm, stat, symlink, unlink, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { loadSite, validateSite } from "../src/lib/site.ts";
 
 const projectRoot = path.resolve(fileURLToPath(new URL("..", import.meta.url)));
 
@@ -50,14 +50,16 @@ async function build() {
   const root = process.cwd();
   const contentRoot = path.join(root, "content");
   const docs = path.join(root, "docs");
+  process.env.GUIN_CONTENT_ROOT = contentRoot;
+  validateSite(loadSite());
   const workspace = await mkdtemp(path.join(root, ".docs-build-"));
   const staging = path.join(workspace, "output");
   await mkdir(staging);
   let installed = false;
   try {
     await symlink(path.join(projectRoot, "node_modules"), path.join(workspace, "node_modules"), "dir");
-    process.env.GUIN_CONTENT_ROOT = contentRoot;
     process.env.ASTRO_TELEMETRY_DISABLED = "1";
+    const { build: astroBuild } = await import("astro");
     await astroBuild({
       root: projectRoot,
       srcDir: path.join(projectRoot, "src"),

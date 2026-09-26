@@ -1399,6 +1399,11 @@ export function renderPostBody(site: SiteData, post: Post, root: string): PostBo
   };
 }
 
+export function validateSite(site: SiteData): void {
+  renderAboutBody(site, "");
+  for (const post of site.posts) renderPostBody(site, post, "");
+}
+
 export function patchData(state: PatchState): { body: string; patches: Array<Record<string, unknown>>; regions: Array<Record<string, unknown>>; "region-data": Array<Record<string, unknown>>; "patch-history": boolean } {
   const marked = state.markedBody();
   const record = (patch: Patch): Record<string, unknown> => ({
