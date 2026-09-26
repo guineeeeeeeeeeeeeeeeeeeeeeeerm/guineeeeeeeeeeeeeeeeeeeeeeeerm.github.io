@@ -61,7 +61,7 @@ class AboutPageContractTests(unittest.TestCase):
             self.assert_builds(root)
             page = read(root, "about/index.html")
             self.assertIn('<html lang="ko">', page)
-            self.assertIn("<title>소개</title>", page)
+            self.assertIn("<title>소개 — GuinEeeeeeeeeeeeeeeeeeeeeeeerm</title>", page)
             self.assertIn('<article class="post">', page)
             self.assertIn('<div class="body">', page)
             self.assertIn('src="../images/avatar.png"', page)

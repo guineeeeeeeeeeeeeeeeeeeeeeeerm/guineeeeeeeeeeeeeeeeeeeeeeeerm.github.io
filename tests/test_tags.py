@@ -73,7 +73,7 @@ class TagContractTests(unittest.TestCase):
         with temporary_site(posts=TAG_POSTS, tags=rows) as root:
             self.build(root)
             page = read(root, "tags/기록/index.html")
-            self.assertIn("<title>태그: 기록</title>", page)
+            self.assertIn("<title>태그: 기록 — GuinEeeeeeeeeeeeeeeeeeeeeeeerm</title>", page)
             self.assertLess(page.index(f"p/{NEW}/"), page.index(f"p/{OLD}/"))
             self.assertIn("처음 쓴 기록", page)
             self.assertIn("이어진 기록", page)
