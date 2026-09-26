@@ -270,8 +270,12 @@ Decided (owner, `source:loc-03`, 요청 `source:loc-01`, 제안 `source:loc-02`;
 - **언어 전환:** 상단 띠의 메뉴 뒤에 다른 언어로 가는 링크 하나가 있다 — 한국어 페이지에는 `English`, 영어 페이지에는 `한국어`.
   짝이 되는 페이지로 간다(글은 번역이 있으면 그 번역, 없으면 영어 피드; 피드·소개·태그 페이지는 서로의 짝, 짝 태그 페이지가 없으면
   피드). 짝이 있는 페이지는 `<link rel="alternate" hreflang="…">`로 서로를 가리킨다.
-  Decided (technical, session): 전환 링크는 `.site-nav` 안의 마지막 `<a class="lang-switch" hreflang="en|ko" lang="en|ko">`이고 띠의
-  오른쪽 끝에 놓인다. "피드·소개"(영어판은 Feed·About)가 그 앞에 이 순서로 온다(Q-build의 상단 띠).
+  Decided (owner, `source:lg-01`): 언어 전환은 상단 띠 오른쪽 끝의 드롭다운이다. Decided (technical, session): 드롭다운은
+  `.site-nav` 안의 마지막 요소 `<details class="lang-menu">`다 — `<summary>`에 지금 언어 이름(한국어 / English)이 보이고, 펼치면 지금
+  언어(`<span aria-current="true">`, 링크 아님)와 다른 언어로 가는 `<a class="lang-switch" hreflang="en|ko" lang="en|ko">`가 나온다.
+  그래서 `a.lang-switch`는 띠의 마지막 링크다. "피드·소개"(영어판은 Feed·About)가 그 앞에 이 순서로 온다(Q-build의 상단 띠).
+  드롭다운은 스크립트 없이 열고 닫히며, `assets/menu.js`(`public/assets/menu.js`를 바이트 그대로 복사, 모든 페이지에 `defer`)가
+  바깥을 누르거나 Esc를 누르면 닫는다.
 - **주석(링크, Q-link):** 링크 표에 번역 사건 `{"link", "action": "translated", "lang": "en", "anchor": <영어 본문의 앵커>, "why":
   <영어 사유>, "at"}`을 더할 수 있다. 영어판 글 페이지에는 지금 살아 있는 링크 중 두 글이 모두 번역되었고 번역 사건이 있는 것만
   나오며, 앵커와 사유는 마지막 `translated` 사건의 것이다. 그 앵커가 번역 본문에 정확히 한 번 나오지 않으면 빌드 오류이고 오류 줄은

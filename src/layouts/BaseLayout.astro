@@ -20,6 +20,7 @@ const feedHref = current === "feed" ? "./" : rootLink || "./";
 const aboutHref = current === "about" ? "./" : `${rootLink}about/`;
 const stylesheetHref = `${assetRoot}assets/site.css`;
 const timeHref = `${assetRoot}assets/time.js`;
+const menuHref = `${assetRoot}assets/menu.js`;
 const zoomHref = `${assetRoot}assets/zoom.js`;
 ---
 
@@ -32,6 +33,7 @@ const zoomHref = `${assetRoot}assets/zoom.js`;
     {alternateHref && <link rel="alternate" hreflang={alternateLang} href={alternateHref} />}
     <link rel="stylesheet" href={stylesheetHref} />
     <script src={timeHref} defer></script>
+    <script src={menuHref} defer></script>
     {includeZoom && <script src={zoomHref} defer></script>}
   </head>
   <body>

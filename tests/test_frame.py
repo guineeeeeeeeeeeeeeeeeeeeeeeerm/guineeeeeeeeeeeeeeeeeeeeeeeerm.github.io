@@ -115,7 +115,10 @@ class FrameContractTests(unittest.TestCase):
                 self.assertEqual(links[about_index][0], about_href)
                 self.assertRegex(
                     current_nav,
-                    r'<a class="lang-switch"[^>]*\bhreflang="en"[^>]*\blang="en"[^>]*>English</a>\s*$',
+                    r'(?s)<details class="lang-menu"><summary>한국어</summary><ul>'
+                    r'<li><span aria-current="true" lang="ko">한국어</span></li>'
+                    r'<li><a class="lang-switch"[^>]*\bhreflang="en"[^>]*\blang="en"[^>]*>English</a></li>'
+                    r'</ul></details>\s*$',
                 )
                 body = re.search(r"(?s)<body\b[^>]*>(.*?)</body>", document)
                 self.assertIsNotNone(body, msg=document)
