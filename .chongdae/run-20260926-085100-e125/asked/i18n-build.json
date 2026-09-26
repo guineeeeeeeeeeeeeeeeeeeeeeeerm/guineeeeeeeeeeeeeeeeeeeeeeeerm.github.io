@@ -136,6 +136,86 @@
         }
       ],
       "reopened": null
+    },
+    {
+      "status": "done",
+      "summary": "영어판 구현을 마무리했습니다. 번역 검증, 영어 페이지·태그·링크·패치·공유 배지·언어 전환·README를 반영했습니다.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests -p test_i18n.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_frame.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 0
+        },
+        {
+          "check": "npm run build",
+          "exit": 0
+        },
+        {
+          "check": "git diff --check",
+          "exit": 0
+        }
+      ],
+      "decisions": [
+        {
+          "what": "영어 글 본문의 이미지 경로",
+          "chosen": "영어 글 본문은 `../../images/`를 사용하고 빌드 시 `docs/en/images`에 이미지를 복사합니다.",
+          "alternatives": [
+            "공통 루트의 `../../../images/`만 사용합니다."
+          ]
+        }
+      ],
+      "non-claims": [
+        "이전 시도에서 변경된 보호 테스트와 `.chongdae/` 기록은 이번 이어받은 작업에서 수정하지 않았습니다."
+      ],
+      "retried": {
+        "by": "chongdae",
+        "auto": "the verifier rejected: 3 finding(s)",
+        "at": "2026-09-26T09:38:43+00:00",
+        "chongdae": "chongdae 1.12.0"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:1056-1061,1621",
+            "record_quote": "소개의 번역은 `content/about.en.md`이고 반드시 있다(없으면 빌드 오류).",
+            "tree_quote": "const aboutEn = parseAboutTranslation(root, about, translations.size > 0);",
+            "why": "번역 글이 하나도 없으면 `about.en.md`가 없어도 빌드가 성공해 필수 파일 규칙을 어깁니다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "scripts/build.mjs:74-76",
+            "record_quote": "영어판은 `/en/`(피드)와 `/en/about/`(소개)이며 출력은 `docs/en/…`이다.",
+            "tree_quote": "if (!site.translations.size) await rm(path.join(staging, \"en\"), { recursive: true, force: true });",
+            "why": "유효한 `about.en.md`가 있어도 번역 글이 없으면 전체 영어 트리를 삭제해 필수 영어 피드·소개 페이지가 생성되지 않습니다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:1570,1644-1645",
+            "record_quote": "그 앵커가 번역 본문에 정확히 한 번 나오지 않으면 빌드 오류이고 오류 줄은 그 사건의 줄이다.",
+            "tree_quote": "const positions = occurrences(translation.body, event.anchor); ... occurrences(state.body, link.anchor).length === 1",
+            "why": "translated 앵커를 영어 패치 적용 전의 원문에서만 검증하고, 적용 후 사라지면 빌드 오류 대신 영어 주석에서 조용히 제외합니다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh",
+          "session": "01a0dd0f-637b-7d00-877c-308ada8ec8a5",
+          "transcript": "i18n-build.verify.2.response.transcript.jsonl"
+        }
+      },
+      "disputed-tests": [],
+      "reopened": null
     }
   ],
   "touched": [
@@ -145,6 +225,7 @@
     "content/posts/20260924-085456.en.md",
     "content/posts/20260925-103715.en.md",
     "content/posts/20260926-044433.en.md",
+    "plan/PLAN.md",
     "scripts/build.mjs",
     "src/components/FeedItem.astro",
     "src/components/Footnotes.astro",

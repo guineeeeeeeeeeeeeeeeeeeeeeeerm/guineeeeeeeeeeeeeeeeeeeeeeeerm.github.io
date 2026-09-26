@@ -57,9 +57,7 @@
   "added": "2026-09-26T09:04:37+00:00",
   "touched_by_provider": [
     "scripts/build.mjs",
-    "src/pages/en/about/index.astro",
-    "src/pages/en/p/[id]/index.astro",
-    "src/pages/en/tags/[tag]/index.astro"
+    "src/lib/site.ts"
   ],
   "performed_by": {
     "provider": "command",
@@ -90,13 +88,11 @@
     },
     "trace": {
       "changed": [
-        "update ./src/pages/en/about/index.astro",
-        "update ./src/pages/en/p/[id]/index.astro",
-        "update ./src/pages/en/tags/[tag]/index.astro",
-        "update ./scripts/build.mjs"
+        "update ./scripts/build.mjs",
+        "update ./src/lib/site.ts"
       ],
-      "commands-run": 26,
-      "commands-failed": 2
+      "commands-run": 15,
+      "commands-failed": 3
     }
   },
   "attempts": [
@@ -340,6 +336,86 @@
         "src/pages/en/index.astro": "1c0efd73a5eaa28199168186a6ce3e7b0679773a",
         "src/pages/en/p/[id]/index.astro": "42abaf6c1bff14d9c2938e41c0cc6660c022f882",
         "src/pages/en/tags/[tag]/index.astro": "7f75017be6896d6588a168e8367392577152592e"
+      }
+    },
+    {
+      "status": "blocked",
+      "summary": "검토 지적 3건은 수정했습니다. 실제 빌드는 성공했지만 보호 테스트 2건이 계약과 충돌해 지정 테스트를 모두 통과시킬 수 없습니다.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests -p test_i18n.py",
+          "exit": 1
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_frame.py",
+          "exit": 1
+        },
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 1
+        },
+        {
+          "check": "npm run build",
+          "exit": 0
+        },
+        {
+          "check": "git diff --check",
+          "exit": 0
+        }
+      ],
+      "decisions": [
+        {
+          "what": "영어판에 번역 글이 없는 경우",
+          "chosen": "계약대로 docs/en/ 피드·소개 트리를 유지합니다.",
+          "alternatives": [
+            "빈 영어 트리를 삭제합니다."
+          ]
+        },
+        {
+          "what": "translated 앵커 검증 시점",
+          "chosen": "lang: en 패치 적용 후 최종 영어 본문에서 정확히 한 번인지 검증합니다.",
+          "alternatives": [
+            "번역 파일 원문에서만 검증합니다."
+          ]
+        }
+      ],
+      "non-claims": [
+        "이번 수정에서 보호 테스트 파일은 변경하지 않았습니다.",
+        "전체 테스트 실패는 아래 계약 충돌 테스트 2건입니다.",
+        "실제 저장소 콘텐츠의 npm run build 성공만 확인했으며 모든 fixture 조합의 빌드를 의미하지 않습니다."
+      ],
+      "disputed-tests": [
+        {
+          "test": "tests/test_frame.py::FrameContractTests.test_Q_build_docs_root_has_only_the_declared_top_level_entries",
+          "contract_quote": "영어판은 `/en/`(피드), `/en/p/<id>/`(글), `/en/about/`(소개), `/en/tags/<태그>/`(태그)다. 출력은 `docs/en/…`이다.",
+          "why": "테스트 fixture에 about.en.md가 있고 번역 글이 없어도 계약상 docs/en/ 피드·소개 출력이 필요하지만, 테스트는 docs 최상위에 en이 없어야 한다고 요구합니다."
+        },
+        {
+          "test": "tests/test_i18n.py::I18nContractTests.test_Q_i18n_english_pages_use_the_declared_english_screen_text",
+          "contract_quote": "그 앵커가 번역 본문에 정확히 한 번 나오지 않으면 빌드 오류이고 오류 줄은 그 사건의 줄이다.",
+          "why": "fixture의 translated 앵커를 lang: en 패치가 제거한 뒤에도 테스트는 빌드 성공을 요구합니다. 최종 영어 본문 검증은 계약상 links.jsonl:2에서 오류여야 합니다."
+        }
+      ],
+      "worker": {
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "effort": "xhigh"
+      },
+      "member": "dakdol",
+      "domain": "code",
+      "retried": {
+        "by": "chongdae",
+        "auto": "tests disputed; i18n-tests reopened to amend tests/test_frame.py, tests/test_i18n.py",
+        "at": "2026-09-26T09:42:36+00:00",
+        "chongdae": "chongdae 1.12.0"
+      },
+      "trace": {
+        "changed": [
+          "update ./scripts/build.mjs",
+          "update ./src/lib/site.ts"
+        ],
+        "commands-run": 15,
+        "commands-failed": 3
       }
     }
   ],
