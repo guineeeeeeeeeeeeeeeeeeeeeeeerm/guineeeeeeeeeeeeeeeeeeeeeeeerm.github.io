@@ -1,0 +1,41 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-110304-ee8e",
+  "task": "devto-place",
+  "role": "verifier",
+  "target": ".",
+  "goal": "dev.to를 공유 장소로 추가",
+  "brief": "소유자가 준 DEV 공식 배지(source:dv-01)를 brands/에 들이고 devto를 공유 장소로",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_shares.py"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260926-110304-ee8e/local/devto-place.verify.response.json",
+  "touched": [
+    "README.md",
+    "content/shares.jsonl",
+    "plan/PLAN.md",
+    "public/assets/brands/devto.svg",
+    "src/lib/site.ts",
+    "tests/test_shares.py"
+  ],
+  "built": null
+}

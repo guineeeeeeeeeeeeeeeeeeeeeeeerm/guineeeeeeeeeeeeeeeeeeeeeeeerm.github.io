@@ -1,0 +1,111 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.12.0",
+  "status": "todo",
+  "def": {
+    "id": "devto-place",
+    "role": "session",
+    "brief": "소유자가 준 DEV 공식 배지(source:dv-01)를 brands/에 들이고 devto를 공유 장소로",
+    "closes": [],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_shares.py"
+      ],
+      [
+        "npm",
+        "run",
+        "build"
+      ]
+    ],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 1,
+  "added": "2026-09-26T11:03:05+00:00",
+  "self-performed": {
+    "instead-of": "implementer",
+    "why": "공식 로고 파일 하나와 곳 목록 한 줄의 작은 변경이라 이 세션이 직접",
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "at": "2026-09-26T11:03:05+00:00",
+    "chongdae": "chongdae 1.12.0"
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.8.0",
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 13,
+      "commands-failed": 1
+    }
+  },
+  "attempts": [
+    {
+      "status": "session",
+      "retried": {
+        "delegated": "검증자 지적(원본의 바이트 복사가 아님)은 사실과 다름: https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg(dev.to/brand가 링크한 공식 SVG)를 다시 받아 비교하니 sha256 787fc3c6…630bd로 public/assets/brands/devto.svg·docs 복사본과 바이트가 같음 — 공식 배지 자체가 448x512 viewBox의 검정 모양임",
+        "at": "2026-09-26T11:09:08+00:00",
+        "chongdae": "chongdae 1.12.0"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "public/assets/brands/devto.svg:1",
+            "record_quote": "DEV `devto.svg`(dev.to/brand의 공식 배지, 검정 바탕에 흰 글자 — `source:dv-01`) — 빌드는 그 파일을 바이트 그대로 `docs/assets/brands/`에 복사한다.",
+            "tree_quote": "<svg role=\"img\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><path fill=\"#000000\" d=\"M120.12 208.29...",
+            "why": "추가된 파일은 소유자가 준 DEV CDN 배지의 바이트 복사가 아니라 Font Awesome 계열의 448x512 변형 아이콘이다. 따라서 공식 원본을 그대로 복사한다는 계약을 위반한다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "1 finding(s)"
+      },
+      "reviewed_tree": {
+        "README.md": "7c5426f9d63f1aba6b98322e88a29ce45ff5636c",
+        "content/shares.jsonl": "a14d0ee6c2bb1b83be77b0df13efc38498b73967",
+        "plan/PLAN.md": "8197aa5cc89d9fa75ac51c5eec8cdd98e8f2e59c",
+        "src/lib/site.ts": "4562f27999ee6b980a73af6233304577bd424275",
+        "tests/test_shares.py": "70186e09c251c4eae6dd8f2bcfc60db6ff82d427",
+        "public/assets/brands/devto.svg": "01d7effd274d23f0075617f90cdd38c59541ede8"
+      }
+    }
+  ]
+}
