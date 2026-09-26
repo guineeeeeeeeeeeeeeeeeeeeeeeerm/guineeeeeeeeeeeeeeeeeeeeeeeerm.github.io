@@ -3,13 +3,13 @@
   "src": "src/pages/about/index.astro",
   "predicate": "realizes",
   "dst": "concept:about",
-  "evidence": "<BaseLayout title=\"소개\" rootLink=\"../\" current=\"about\" switchHref=\"../en/about/\" switchLabel=\"English\" switchLang=\"en\" alternateHref=\"../en/about/\" alternateLang=\"en\" includeZoom={true}>",
+  "evidence": "<BaseLayout metadata={metadata} rootLink=\"../\" current=\"about\" switchHref=\"../en/about/\" switchLabel=\"English\" switchLang=\"en\" alternateHref=\"../en/about/\" alternateLang=\"en\" includeZoom={true}>",
   "seen": {
-    "src/pages/about/index.astro": "5b49b5813e54",
+    "src/pages/about/index.astro": "bb5801911509",
     "concept:about": "fda8469aebbf"
   },
   "confirmed": {
-    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 소개 페이지 틀에 언어 전환이 더해짐 — 근거를 새 줄로"
+    "delegated": "Claude가 favicon·OG(source:og-05) 뒤 다시 읽음: 소개 페이지 틀이 메타를 받게 됨 — 근거를 새 줄로"
   },
   "history": [
     {
@@ -21,6 +21,16 @@
         "concept:about": "fda8469aebbf"
       },
       "evidence": "<BaseLayout title=\"소개\" rootLink=\"../\" current=\"about\" includeZoom={true}>"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 소개 페이지 틀에 언어 전환이 더해짐 — 근거를 새 줄로"
+      },
+      "seen": {
+        "src/pages/about/index.astro": "5b49b5813e54",
+        "concept:about": "fda8469aebbf"
+      },
+      "evidence": "<BaseLayout title=\"소개\" rootLink=\"../\" current=\"about\" switchHref=\"../en/about/\" switchLabel=\"English\" switchLang=\"en\" alternateHref=\"../en/about/\" alternateLang=\"en\" includeZoom={true}>"
     }
   ],
   "written_by": "mangsang 1.10.0"

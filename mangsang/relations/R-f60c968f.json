@@ -1,0 +1,15 @@
+{
+  "id": "R-f60c968f",
+  "src": "tests/test_meta.py",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "def test_Q_meta_all_pages_have_relative_favicon_links_and_folder_canonical_urls(self):",
+  "seen": {
+    "tests/test_meta.py": "adacf215afc3",
+    "concept:site-build": "dc5fb39ad68a"
+  },
+  "confirmed": {
+    "delegated": "favicon·OG 조각(source:og-05 승인)의 개념 연결: 계획서 Q-meta, 계약 테스트, 소유자의 요청"
+  },
+  "written_by": "mangsang 1.10.0"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "R-c0b35146",
+  "src": "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "사이트 이름은\n\"GuinEeeeeeeeeeeeeeeeeeeeeeeerm\"이다.",
+  "seen": {
+    "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "66e68f9dc8aa",
+    "concept:site-build": "dc5fb39ad68a"
+  },
+  "confirmed": {
+    "delegated": "favicon·OG 조각(source:og-05 승인)의 개념 연결: 계획서 Q-meta, 계약 테스트, 소유자의 요청"
+  },
+  "written_by": "mangsang 1.10.0"
+}

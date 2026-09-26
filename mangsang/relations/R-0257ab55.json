@@ -1,0 +1,15 @@
+{
+  "id": "R-0257ab55",
+  "src": "source:og-01",
+  "predicate": "realizes",
+  "dst": "concept:site-build",
+  "evidence": "이 사이트의 favicon을 만들고 싶어. og도 만들고 싶고.",
+  "seen": {
+    "source:og-01": "0a9a419c8ecf",
+    "concept:site-build": "dc5fb39ad68a"
+  },
+  "confirmed": {
+    "delegated": "favicon·OG 조각(source:og-05 승인)의 개념 연결: 계획서 Q-meta, 계약 테스트, 소유자의 요청"
+  },
+  "written_by": "mangsang 1.10.0"
+}

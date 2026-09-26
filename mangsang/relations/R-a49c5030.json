@@ -5,11 +5,11 @@
   "dst": "concept:translation",
   "evidence": "function parseTranslations(root: string, posts: Post[]): Map<string, Post> {",
   "seen": {
-    "src/lib/site.ts": "038e75b00ee8",
+    "src/lib/site.ts": "d148210ede41",
     "concept:translation": "f1329a883360"
   },
   "confirmed": {
-    "delegated": "Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+    "delegated": "Claude가 favicon·OG(source:og-05) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "src/lib/site.ts": "558aa0ea6f87",
+        "concept:translation": "f1329a883360"
+      },
+      "evidence": "function parseTranslations(root: string, posts: Post[]): Map<string, Post> {"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+      },
+      "seen": {
+        "src/lib/site.ts": "038e75b00ee8",
         "concept:translation": "f1329a883360"
       },
       "evidence": "function parseTranslations(root: string, posts: Post[]): Map<string, Post> {"

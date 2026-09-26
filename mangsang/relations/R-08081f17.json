@@ -5,11 +5,11 @@
   "dst": "concept:patch",
   "evidence": "function applyPatches(posts: Post[], patches: Patch[]): Map<string, PatchState> {",
   "seen": {
-    "src/lib/site.ts": "038e75b00ee8",
+    "src/lib/site.ts": "d148210ede41",
     "concept:patch": "5a85490ec568"
   },
   "confirmed": {
-    "delegated": "Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+    "delegated": "Claude가 favicon·OG(source:og-05) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
   "history": [
     {
@@ -48,6 +48,16 @@
       },
       "seen": {
         "src/lib/site.ts": "558aa0ea6f87",
+        "concept:patch": "5a85490ec568"
+      },
+      "evidence": "function applyPatches(posts: Post[], patches: Patch[]): Map<string, PatchState> {"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
+      },
+      "seen": {
+        "src/lib/site.ts": "038e75b00ee8",
         "concept:patch": "5a85490ec568"
       },
       "evidence": "function applyPatches(posts: Post[], patches: Patch[]): Map<string, PatchState> {"

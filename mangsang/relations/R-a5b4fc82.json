@@ -5,11 +5,11 @@
   "dst": "concept:tag",
   "evidence": "def test_the_cloud_sits_beside_the_feed_and_counts_each_current_tag(self):",
   "seen": {
-    "tests/test_tags.py:TagContractTests": "d851f485100c",
+    "tests/test_tags.py:TagContractTests": "16355ce166d9",
     "concept:tag": "7bfee5732100"
   },
   "confirmed": {
-    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+    "delegated": "Claude가 favicon·OG(source:og-05) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "tests/test_tags.py:TagContractTests": "0ad1df6184c5",
+        "concept:tag": "7bfee5732100"
+      },
+      "evidence": "def test_the_cloud_sits_beside_the_feed_and_counts_each_current_tag(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+      },
+      "seen": {
+        "tests/test_tags.py:TagContractTests": "d851f485100c",
         "concept:tag": "7bfee5732100"
       },
       "evidence": "def test_the_cloud_sits_beside_the_feed_and_counts_each_current_tag(self):"

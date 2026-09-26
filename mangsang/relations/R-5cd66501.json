@@ -3,13 +3,13 @@
   "src": "src/pages/index.astro",
   "predicate": "realizes",
   "dst": "concept:feed",
-  "evidence": "<BaseLayout title=\"피드\" rootLink=\"\" current=\"feed\" switchHref=\"en/\" switchLabel=\"English\" switchLang=\"en\" alternateHref=\"en/\" alternateLang=\"en\">",
+  "evidence": "<BaseLayout metadata={metadata} rootLink=\"\" current=\"feed\" switchHref=\"en/\" switchLabel=\"English\" switchLang=\"en\" alternateHref=\"en/\" alternateLang=\"en\">",
   "seen": {
-    "src/pages/index.astro": "25b55af37cb2",
+    "src/pages/index.astro": "856783304c82",
     "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 피드 틀에 언어 전환이 더해짐 — 근거를 새 줄로"
+    "delegated": "Claude가 favicon·OG(source:og-05) 뒤 다시 읽음: 피드 틀이 메타를 받게 됨 — 근거를 새 줄로"
   },
   "history": [
     {
@@ -21,6 +21,16 @@
         "concept:feed": "033b1f6b1672"
       },
       "evidence": "<BaseLayout title=\"피드\" rootLink=\"\" current=\"feed\">"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 피드 틀에 언어 전환이 더해짐 — 근거를 새 줄로"
+      },
+      "seen": {
+        "src/pages/index.astro": "25b55af37cb2",
+        "concept:feed": "033b1f6b1672"
+      },
+      "evidence": "<BaseLayout title=\"피드\" rootLink=\"\" current=\"feed\" switchHref=\"en/\" switchLabel=\"English\" switchLang=\"en\" alternateHref=\"en/\" alternateLang=\"en\">"
     }
   ],
   "written_by": "mangsang 1.10.0"

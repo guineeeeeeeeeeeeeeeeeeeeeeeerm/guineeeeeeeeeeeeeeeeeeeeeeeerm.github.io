@@ -115,5 +115,8 @@
   },
   {
     "path": "tests/test_i18n.py"
+  },
+  {
+    "path": "tests/test_meta.py"
   }
 ]
