@@ -81,8 +81,8 @@
       "changed": [
         "update ./src/lib/site.ts"
       ],
-      "commands-run": 25,
-      "commands-failed": 2
+      "commands-run": 23,
+      "commands-failed": 1
     }
   },
   "non-claims": [],
@@ -113,8 +113,8 @@
     },
     "trace": {
       "changed": [],
-      "commands-run": 68,
-      "commands-failed": 5
+      "commands-run": 21,
+      "commands-failed": 2
     }
   },
   "attempts": [
@@ -191,6 +191,67 @@
       "rejected": {
         "by": "verifier",
         "why": "3 finding(s)"
+      }
+    },
+    {
+      "status": "done",
+      "summary": "markdown-it 기반 구현의 반려된 세 문제를 수정했습니다: 표 안 이미지 너비 표식, 코드 블록 내부 참조 정의, 실제 setext 밑줄 판별.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 0
+        },
+        {
+          "check": "npm run build",
+          "exit": 0
+        }
+      ],
+      "decisions": [],
+      "non-claims": [
+        "배포 환경 동작은 확인하지 않았습니다."
+      ],
+      "disputed-tests": [],
+      "worker": {
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "effort": "xhigh"
+      },
+      "member": "dakdol",
+      "domain": "code",
+      "retried": {
+        "by": "chongdae",
+        "auto": "the verifier rejected: 1 finding(s)",
+        "at": "2026-09-26T02:45:17+00:00",
+        "chongdae": "chongdae 1.11.0"
+      },
+      "trace": {
+        "changed": [
+          "update ./src/lib/site.ts"
+        ],
+        "commands-run": 23,
+        "commands-failed": 1
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:763-769",
+            "record_quote": "패치 보기의 영역이 그림 표시 `![…](…)`의 일부만 덮으면 ... 그림 전체를 덮거나 겹치지 않으면 된다.",
+            "tree_quote": "const before = line.slice(0, column + 1); const imageWidthBar = /!\\[[^\\]\\n]*\\|\\d+$/.test(before) && /^\\d+\\](?:\\(|\\[)/.test(line.slice(column + 1)); if (!imageWidthBar) add(lineNumber, column, column + 1);",
+            "why": "표 안의 `![x|120](...)`에서 너비 구분자 위치의 `before`에는 `120`이 아직 포함되지 않으므로 판정이 항상 false다. 따라서 그림 전체를 덮는 패치도 너비 구분자를 문법 기호로 잘못 기록해 빌드 오류가 된다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "1 finding(s)"
       }
     }
   ]

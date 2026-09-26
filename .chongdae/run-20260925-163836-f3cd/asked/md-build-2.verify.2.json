@@ -1,10 +1,10 @@
 {
   "artifact-type": "chongdae/request@1",
   "written_by": "chongdae 1.11.0",
-  "stage": "build",
+  "stage": "verify",
   "run": "run-20260925-163836-f3cd",
   "task": "md-build-2",
-  "role": "implementer",
+  "role": "verifier",
   "target": ".",
   "goal": "본문 마크다운을 markdown-it으로: 표준 마크다운·표·취소선",
   "brief": "plan/PLAN.md Q-post의 markdown-it 결정들(source:md-03부터 source:md-05까지의 'Decided' 문단 전부)을 마무리한다. 작업 트리에는 앞 작업 md-build(내려놓음)의 구현이 커밋되지 않은 채 남아 있다 — src/lib/site.ts, README.md — 이것을 이어받아 고친다(처음부터 다시 쓰지 않는다). 앞 작업에서 검증자가 반려한 것: 인용 안 여러 문단의 깨진 마크업(이제 계약은 <blockquote><p>…</p></blockquote>이므로 <p>를 떼어 내는 처리를 없앤다), setext 밑줄 줄에 걸린 패치(이제 계약은 패치 영역이 마크다운 문법 기호에 걸리면 그 패치 줄을 가리키는 빌드 오류), 그림 일부만 덮는 패치의 오류 누락, 참조 정의 줄이 링크 순번을 차지하는 결함, 사용자가 쓴 표식 문자열(이제 계약은 본문의 제어 문자가 빌드 오류). 새 패키지는 설치하지 않는다(더 필요하면 blocked). 테스트 파일은 건드리지 않는다(HEAD의 tests/*.py가 계약이다). 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
@@ -45,7 +45,7 @@
     "tests/test_shares.py",
     "tests/test_tags.py"
   ],
-  "response": "./.chongdae/run-20260925-163836-f3cd/local/md-build-2.response.json",
+  "response": "./.chongdae/run-20260925-163836-f3cd/local/md-build-2.verify.2.response.json",
   "attempts": [
     {
       "status": "done",
@@ -109,9 +109,23 @@
     }
   ],
   "touched": [
-    "README.md",
-    "docs/about/index.html",
-    "docs/p/20260925-103715/index.html",
     "src/lib/site.ts"
-  ]
+  ],
+  "built": {
+    "summary": "markdown-it 기반 구현의 반려된 세 문제를 수정했습니다: 표 안 이미지 너비 표식, 코드 블록 내부 참조 정의, 실제 setext 밑줄 판별.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "npm run build",
+        "exit": 0
+      }
+    ],
+    "non-claims": [
+      "배포 환경 동작은 확인하지 않았습니다."
+    ]
+  },
+  "touched_since": []
 }
