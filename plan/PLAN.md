@@ -42,8 +42,12 @@ Decided (owner, `source:as-01`, `source:as-03`, `source:as-05`; 제안 `source:a
   남는다 — Astro는 출력 폴더를 먼저 비우므로, 빌드 스크립트가 새 출력을 임시 디렉터리에 만든 뒤 교체한다. 잘못된 입력은 이 문서의
   각 절이 "빌드 오류"라고 적은 경우다.
 - **본문 문법:** Q-post를 따른다. 옮기는 동안은 부분집합 그대로였고(`source:as-04`), 옮긴 뒤 `source:md-03`으로 넓혔다.
-- **배포:** 옮기는 동안에는 지금처럼 로컬에서 빌드한 `docs/`를 커밋하고 Pages가 main의 `/docs`를 서비스한다(`source:as-04`의
-  권고). GitHub Actions 배포는 나중에 따로 정한다.
+- **배포 (owner, `source:dp-03`, 요청 `source:dp-01`, 제안 `source:dp-02`; 옮기는 동안의 `docs/` 커밋(`source:as-04`)을 바꿈):**
+  빌드 결과는 저장소에 커밋하지 않는다 — `docs/`는 `.gitignore`에 있다. main에 push하면 GitHub Actions 워크플로
+  `.github/workflows/pages.yml`이 `npm ci`와 `npm run build`로 `docs/`를 만들어 GitHub Pages로 배포한다(Pages 설정의 출처는
+  "GitHub Actions"). 빌드가 실패하면 배포하지 않고 이전 사이트가 그대로 남는다. 커밋에는 실제로 바꾼 원본(`content/`, `src/` 등)만
+  보인다. 로컬 미리보기는 지금처럼 `npm run build`로 만든 `docs/`다. Decided (technical, session): 워크플로는 Node 24로 돌고,
+  계약 테스트는 워크플로에서 돌리지 않는다(테스트는 run 안의 체크가 맡는다).
 - **테스트:** 계약 테스트는 `tests/`의 Python unittest로 남고 `python3 -m unittest discover -s tests`로 돈다(`source:as-04`의
   권고). 테스트는 빌드를 밖에서 실행하고 결과만 본다 — `tests/support.py`가 새 임시 디렉터리를 작업 디렉터리로 두고
   `node <저장소>/scripts/build.mjs`를 실행한다. 정적 파일을 바이트 그대로 비교하는 테스트의 원본은 `public/assets/`다.
@@ -94,7 +98,7 @@ Decided (owner, `source:about-06`, `source:about-08`): 주소는 폴더 방식�
 모든 페이지 위쪽 메뉴에 "피드"와 "소개" 링크가 항상 있다.
 
 Decided (technical, delegated): 저장소 루트의 기존 `index.html`은 `docs/`로 옮겨지지 않는다 — 피드가 새 첫 화면이다. Pages의
-서비스 위치를 main의 `/docs`로 바꾸는 것은 푸시할 때 소유자가 한다.
+서비스 위치를 main의 `/docs`로 바꾸는 것은 푸시할 때 소유자가 한다. (배포는 위의 `source:dp-03` 결정으로 GitHub Actions가 맡는다.)
 
 ## Q-post — 글 하나
 
