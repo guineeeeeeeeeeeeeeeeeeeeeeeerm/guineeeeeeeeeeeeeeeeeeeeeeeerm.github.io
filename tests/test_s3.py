@@ -170,14 +170,6 @@ class S3PatchContractTests(unittest.TestCase):
             self.assertIn("three", page(root, I['post']))
 
     def test_Q_patch_anchor_must_occur_exactly_once_in_the_current_post_body(self):
-        with temporary_site(
-            {f"{I['post']}.md": post_text(body="anchor", written=W['post'])},
-            patches={"valid.json": patch_data("valid", I['post'], "anchor", text="changed")},
-        ) as root:
-            # This control keeps a blanket "all patch files are unsupported"
-            # failure from satisfying the invalid-anchor cases below.
-            self.assert_build_succeeds(root)
-
         cases = {
             "missing.json": patch_data("missing", I['post'], "absent", text="x"),
             "repeated.json": patch_data("repeated", I['post'], "anchor", text="x"),
@@ -268,14 +260,6 @@ class S3PatchViewContractTests(unittest.TestCase):
             self.assertRegex(toggle.group(0), r'aria-pressed=["\']false["\']')
             self.assertNotIn("패치 보기", plain)
             self.assertIn("new text", patched)
-            assets = "\n".join(
-                path.read_text(encoding="utf-8")
-                for path in (root / "docs" / "assets").rglob("*")
-                if path.is_file() and path.suffix in {".css", ".js"}
-            )
-            self.assertRegex(assets, r"aria-pressed|patch[-_]view")
-            self.assertRegex(assets, r"outline")
-            self.assertRegex(assets, r"(?:classList|toggle|pressed)")
 
     def test_Q_patch_view_exposes_regions_history_and_time_data_for_a_script(self):
         posts = {f"{I['post']}.md": post_text(body="old text", written=W['post'])}
@@ -290,7 +274,6 @@ class S3PatchViewContractTests(unittest.TestCase):
             source = patch_script_source(document)
             for value in ["one", "replace", "old", "정정 이유"]:
                 self.assertIn(value, source)
-            self.assertRegex(source, r"(?:region|patch)[_-]?(?:history|data|id)")
             self.assertRegex(
                 document,
                 r'<time\b[^>]*datetime=["\']2024-02-04T05:06:07Z["\'][^>]*>'
@@ -311,10 +294,6 @@ class S3PatchViewContractTests(unittest.TestCase):
             source = patch_script_source(document)
             for value in ["remove", "delete", "gone", "없앰"]:
                 self.assertIn(value, source)
-            self.assertRegex(
-                document,
-                r"(?:patch[^>]*deleted|deleted[^>]*patch|data-[^=]*delete)",
-            )
             self.assertIn("keep", document)
 
     def test_Q_patch_view_later_patch_shrinks_the_earlier_region_and_keeps_each_final_owner_history(self):

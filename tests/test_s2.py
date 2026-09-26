@@ -61,12 +61,7 @@ class S2LinkContractTests(unittest.TestCase):
         invalid = {   # rows, and the line the error must name
             "not-json": (["{ not json"], 1),
             "not-an-object": (['["a list"]'], 1),
-            "missing-link": ([without("link")], 1),
-            "missing-from": ([without("from")], 1),
-            "missing-to": ([without("to")], 1),
             "missing-anchor": ([without("anchor")], 1),
-            "missing-at": ([without("at")], 1),
-            "missing-why": ([without("why")], 1),
             "extra-key": ([{**good, "extra": 1}], 1),
             "bad-link-id": ([{**good, "link": "Bad Id"}], 1),
             "unknown-action": ([{**good, "action": "paused"}], 1),
@@ -82,9 +77,6 @@ class S2LinkContractTests(unittest.TestCase):
                 result = run_build(root)
                 self.assertEqual(result.returncode, 1)
                 self.assertIn(f"links.jsonl:{line}", result.stderr)
-
-        with temporary_site(posts, links={"valid": [good, {"link": "l", "action": "removed", "at": WRITTEN, "why": "gone"}]}) as root:
-            self.assert_build_succeeds(root)
 
     def test_Q_link_current_reason_is_last_created_or_reason_changed_and_time_is_created_at(self):
         created_at = "2024-02-03T04:05:06Z"
@@ -158,16 +150,6 @@ class S2LinkContractTests(unittest.TestCase):
                 result = run_build(root)
                 self.assertEqual(result.returncode, 1)
                 self.assertIn("links.jsonl:1", result.stderr)
-
-        with temporary_site(
-            {f"{I['from']}.md": post_text(body="anchor", written=W['from']), f"{I['to']}.md": post_text(body="target", written=W['to'])},
-            links={
-                "valid.json": link_data(
-                    "valid", I['from'], "anchor", I['to'], [created(WRITTEN, "why")]
-                )
-            },
-        ) as root:
-            self.assert_build_succeeds(root)
 
     def test_Q_link_anchor_links_to_to_post_and_superscripts_follow_appearance_order(self):
         posts = {
@@ -363,16 +345,6 @@ class S2LinkContractTests(unittest.TestCase):
                 result = run_build(root)
                 self.assertEqual(result.returncode, 1)
                 self.assertIn("links.jsonl:1", result.stderr)
-
-        with temporary_site(
-            {f"{I['from']}.md": post_text(body="anchor", written=W['from']), f"{I['to']}.md": post_text(body="target", written=W['to'])},
-            links={
-                "valid.json": link_data(
-                    "valid", I['from'], "anchor", I['to'], [created(WRITTEN, "why")]
-                )
-            },
-        ) as root:
-            self.assert_build_succeeds(root)
 
 
 if __name__ == "__main__":

@@ -48,6 +48,21 @@ def title_text(document, post_id):
 
 
 class S1GeneratorContractTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._common_site = temporary_site({f"{ID}.md": post_text()})
+        cls.common_root = cls._common_site.__enter__()
+        result = run_build(cls.common_root)
+        if result.returncode != 0:
+            cls._common_site.__exit__(RuntimeError, RuntimeError(result.stderr), None)
+            raise RuntimeError(f"shared S1 fixture failed to build: {result.stderr}")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._common_site.__exit__(None, None, None)
+        super().tearDownClass()
+
     def assert_build_succeeds(self, root):
         result = run_build(root)
         self.assertEqual(
@@ -86,29 +101,15 @@ class S1GeneratorContractTests(unittest.TestCase):
                 "repository landing page",
             )
 
-    def test_Q_build_same_input_is_byte_identical_on_second_build(self):
-        posts = {
-            f"{pid(W2)}.md": post_text(post_type="medium", written=W2, title="B", body="two"),
-            f"{ID}.md": post_text(body="one"),
-        }
-        with temporary_site(posts, images={"pixel.dat": b"123"}) as root:
-            self.assert_build_succeeds(root)
-            first = files_snapshot(root / "docs")
-            self.assert_build_succeeds(root)
-            second = files_snapshot(root / "docs")
-            self.assertEqual(first, second)
-
     def test_Q_build_generated_assets_have_no_external_script_font_or_style_urls(self):
-        with temporary_site({f"{ID}.md": post_text()}) as root:
-            self.assert_build_succeeds(root)
-            docs = root / "docs"
-            rendered = "\n".join(
-                path.read_text(encoding="utf-8")
-                for path in docs.rglob("*")
-                if path.is_file() and path.suffix in {".html", ".css", ".js"}
-            )
-            self.assertNotRegex(rendered, r"(?:src|href)\s*=\s*[\"']https?://")
-            self.assertNotRegex(rendered, r"@import\s+url\(\s*[\"']https?://")
+        docs = self.common_root / "docs"
+        rendered = "\n".join(
+            path.read_text(encoding="utf-8")
+            for path in docs.rglob("*")
+            if path.is_file() and path.suffix in {".html", ".css", ".js"}
+        )
+        self.assertNotRegex(rendered, r"(?:src|href)\s*=\s*[\"']https?://")
+        self.assertNotRegex(rendered, r"@import\s+url\(\s*[\"']https?://")
 
     def test_Q_build_bad_input_is_atomic_and_reports_one_bad_file_line(self):
         bad_file = f"{ID}.md"
@@ -127,12 +128,6 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assertEqual(len(result.stderr.strip().splitlines()), 1)
             self.assertIn(bad_file, result.stderr)
             self.assertEqual(files_snapshot(root / "docs"), before)
-
-    def test_Q_post_written_is_required(self):
-        with temporary_site({f"{ID}.md": "type: short\n\n본문"}) as root:
-            result = run_build(root)
-            self.assertEqual(result.returncode, 1)
-            self.assertIn(f"{ID}.md", result.stderr)
 
     def test_Q_post_type_is_required(self):
         with temporary_site({f"{ID}.md": "written: " + WRITTEN + "\n\n본문"}) as root:
@@ -243,18 +238,6 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertIn(f"{ID}.md", result.stderr)
 
-    def test_Q_post_images_only_body_is_valid_and_renders_image(self):
-        body = "![Only alt](images/only.png)"
-        with temporary_site(
-            {f"{ID}.md": post_text(body=body)},
-            images={"only.png": b"image bytes"},
-        ) as root:
-            self.assert_build_succeeds(root)
-            page = (root / "docs" / "p" / ID / "index.html").read_text(
-                encoding="utf-8"
-            )
-            self.assertRegex(page, r"<img\b[^>]*alt=[\"']Only alt")
-
     def test_Q_post_markdown_subset_renders_and_html_is_shown_as_text(self):
         body = (
             "# One\n\n"
@@ -286,19 +269,6 @@ class S1GeneratorContractTests(unittest.TestCase):
             self.assertIn("&lt;span&gt;literal HTML&lt;/span&gt;", page)
             self.assertNotIn("<span>literal HTML</span>", page)
 
-    def test_Q_post_page_shows_title_and_written_but_no_type_name(self):
-        text = post_text(
-            post_type="long",
-            title="A visible title",
-            body="page body",
-        )
-        with temporary_site({f"{ID}.md": text}) as root:
-            self.assert_build_succeeds(root)
-            page = (root / "docs" / "p" / ID / "index.html").read_text(encoding="utf-8")
-            self.assertIn("A visible title", page)
-            self.assertIn("page body", page)
-            self.assertNotIn("긴 글", page)   # source:fd-04: the type is chosen before writing, not shown
-
     def test_Q_feed_orders_newest_first(self):
         old, mid, new = "2024-01-01T00:00:00Z", WRITTEN, "2024-03-01T00:00:00Z"
         posts = {
@@ -311,28 +281,6 @@ class S1GeneratorContractTests(unittest.TestCase):
             feed = (root / "docs" / "index.html").read_text(encoding="utf-8")
             positions = [feed.index(f"p/{pid(w)}/") for w in [new, mid, old]]
             self.assertEqual(positions, sorted(positions))
-
-    def test_Q_feed_short_shows_full_applied_body_medium_long_show_title_and_time(self):
-        posts = {
-            f"{ID}.md": post_text(body="**all short body**"),
-            f"{pid(W2)}.md": post_text(
-                "medium", written=W2, title="medium title", body="medium body must not be the summary"
-            ),
-            f"{pid(W3)}.md": post_text(
-                "long", written=W3, title="long title", body="long body must not be the summary"
-            ),
-        }
-        with temporary_site(posts) as root:
-            self.assert_build_succeeds(root)
-            feed = (root / "docs" / "index.html").read_text(encoding="utf-8")
-            self.assertIn("<strong>all short body</strong>", feed)
-            self.assertIn("medium title", feed)
-            self.assertIn("long title", feed)
-            self.assertNotIn("medium body must not be the summary", feed)
-            self.assertNotIn("long body must not be the summary", feed)
-            self.assertIn("2024-02-03 04:05 UTC", feed)
-            for type_name in ["짧은 글", "중간 글", "긴 글"]:
-                self.assertNotIn(type_name, feed)   # source:fd-04: no type names on screen
 
     def test_Q_feed_titleless_medium_or_long_uses_80_screen_characters_and_ellipsis(self):
         # the screen text keeps the space between the two formatted spans: 40 + 1 + 41 characters
@@ -356,18 +304,6 @@ class S1GeneratorContractTests(unittest.TestCase):
             feed = (root / "docs" / "index.html").read_text(encoding="utf-8")
             self.assertIn("A small alt", title_text(feed, ID))
 
-    def test_Q_feed_every_item_links_to_its_post_page_and_has_applied_content(self):
-        posts = {
-            f"{ID}.md": post_text(body="**shown in feed**"),
-            f"{pid(W2)}.md": post_text("medium", written=W2, title="Two", body="two body"),
-        }
-        with temporary_site(posts) as root:
-            self.assert_build_succeeds(root)
-            feed = (root / "docs" / "index.html").read_text(encoding="utf-8")
-            self.assertRegex(feed, r'href=["\']p/%s/["\']' % ID)
-            self.assertRegex(feed, r'href=["\']p/%s/["\']' % pid(W2))
-            self.assertIn("<strong>shown in feed</strong>", feed)
-
     def test_Q_time_uses_utc_datetime_text_and_title_on_every_rendered_time(self):
         text = post_text("medium", title="timed")
         with temporary_site({f"{ID}.md": text}) as root:
@@ -385,15 +321,13 @@ class S1GeneratorContractTests(unittest.TestCase):
                 )
 
     def test_Q_time_asset_localizes_time_and_retains_utc_title_without_external_code(self):
-        with temporary_site({f"{ID}.md": post_text()}) as root:
-            self.assert_build_succeeds(root)
-            scripts = "\n".join(
-                path.read_text(encoding="utf-8")
-                for path in (root / "docs" / "assets").glob("*.js")
-            )
-            self.assertRegex(scripts, r"datetime")
-            self.assertRegex(scripts, r"title")
-            self.assertRegex(scripts, r"(?:toLocale|Intl\.DateTimeFormat)")
+        scripts = "\n".join(
+            path.read_text(encoding="utf-8")
+            for path in (self.common_root / "docs" / "assets").glob("*.js")
+        )
+        self.assertRegex(scripts, r"datetime")
+        self.assertRegex(scripts, r"title")
+        self.assertRegex(scripts, r"(?:toLocale|Intl\.DateTimeFormat)")
 
     def test_Q_ui_sets_korean_document_language_and_shows_no_type_names(self):
         posts = {

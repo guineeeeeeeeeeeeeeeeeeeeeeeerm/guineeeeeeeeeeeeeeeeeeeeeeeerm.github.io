@@ -20,15 +20,30 @@ def body_of(document):
 
 
 class LineBreakContractTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._common_site = temporary_site(
+            {f"posts/{ID}.md": post_text("첫 줄\n둘째 줄")}
+        )
+        cls.common_root = cls._common_site.__enter__()
+        result = run_build(cls.common_root)
+        if result.returncode != 0:
+            cls._common_site.__exit__(RuntimeError, RuntimeError(result.stderr), None)
+            raise RuntimeError(f"shared line-break fixture failed to build: {result.stderr}")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._common_site.__exit__(None, None, None)
+        super().tearDownClass()
+
     def assert_builds(self, root):
         result = run_build(root)
         self.assertEqual(result.returncode, 0, msg=f"stderr={result.stderr!r}")
 
     def test_a_line_break_inside_a_paragraph_is_a_line_break_on_the_page(self):
-        with temporary_site({f"posts/{ID}.md": post_text("첫 줄\n둘째 줄")}) as root:
-            self.assert_builds(root)
-            body = body_of(read(root, f"p/{ID}/index.html"))
-            self.assertRegex(body, r"<p>첫 줄<br>\s*둘째 줄</p>")
+        body = body_of(read(self.common_root, f"p/{ID}/index.html"))
+        self.assertRegex(body, r"<p>첫 줄<br>\s*둘째 줄</p>")
 
     def test_a_blank_line_still_separates_paragraphs(self):
         with temporary_site({f"posts/{ID}.md": post_text("첫 문단\n\n둘째 문단")}) as root:
@@ -54,9 +69,7 @@ class LineBreakContractTests(unittest.TestCase):
             self.assertRegex(body, r"<strong>굵게</strong> 첫 줄<br>\s*<em>기울임</em> 둘째 줄")
 
     def test_the_feed_shows_a_short_posts_line_breaks_too(self):
-        with temporary_site({f"posts/{ID}.md": post_text("첫 줄\n둘째 줄")}) as root:
-            self.assert_builds(root)
-            self.assertRegex(read(root, "index.html"), r"첫 줄<br>\s*둘째 줄")
+        self.assertRegex(read(self.common_root, "index.html"), r"첫 줄<br>\s*둘째 줄")
 
     def test_the_about_page_takes_the_same_line_breaks(self):
         with temporary_site({"about.md": "안녕하세요.\n생각을 씁니다.\n"}) as root:

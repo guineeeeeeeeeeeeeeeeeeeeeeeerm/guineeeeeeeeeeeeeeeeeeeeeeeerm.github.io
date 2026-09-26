@@ -133,6 +133,14 @@ class QReadmeContractTests(unittest.TestCase):
                 msg=f"stdout={result.stdout!r}, stderr={result.stderr!r}",
             )
 
+            about_example = next(
+                match for match in FENCED_EXAMPLE.finditer(text)
+                if match.group("kind") == "about"
+            )
+            heading = text.rfind("\n## ", 0, about_example.start())
+            self.assertIn("소개", text[heading : text.find("\n", heading + 1)])
+            self.assertTrue((root / "docs" / "about" / "index.html").is_file())
+
             for example in by_kind["post"]:
                 post_id = Path(example["path"]).stem
                 document = root / "docs" / "p" / post_id / "index.html"

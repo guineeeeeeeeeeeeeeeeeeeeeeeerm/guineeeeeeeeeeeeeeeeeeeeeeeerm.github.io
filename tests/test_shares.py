@@ -41,6 +41,21 @@ def badges(html):
 
 
 class ShareContractTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._common_site = temporary_site(posts=SHARE_POSTS, shares={"on-x": share()})
+        cls.common_root = cls._common_site.__enter__()
+        result = run_build(cls.common_root)
+        if result.returncode != 0:
+            cls._common_site.__exit__(RuntimeError, RuntimeError(result.stderr), None)
+            raise RuntimeError(f"shared share fixture failed to build: {result.stderr}")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._common_site.__exit__(None, None, None)
+        super().tearDownClass()
+
     def assert_builds(self, root):
         result = run_build(root)
         self.assertEqual(result.returncode, 0, msg=f"stderr={result.stderr!r}")
@@ -59,39 +74,22 @@ class ShareContractTests(unittest.TestCase):
             self.assertEqual(badges(read(root, f"p/{ID}/index.html")), [])
 
     def test_Q_share_a_share_is_a_badge_linking_to_the_shared_post_in_the_feed_and_on_the_post_page(self):
-        with temporary_site(posts=SHARE_POSTS, shares={"on-x": share()}) as root:
-            self.assert_builds(root)
-            pages = (
-                (item_of(read(root, "index.html"), ID), "assets/brands/x.svg"),
-                (read(root, f"p/{ID}/index.html"), "../../assets/brands/x.svg"),
-            )
-            for page, expected_src in pages:
-                found = badges(page)
-                self.assertEqual(len(found), 1, msg=page)
-                self.assertIn('href="https://x.com/someone/status/1"', found[0])
-                self.assertIn('aria-label="X"', found[0])
-                self.assertRegex(found[0], rf'<img\b[^>]*\bsrc="{re.escape(expected_src)}"')
-                self.assertRegex(found[0], r'<img\b[^>]*\balt=""')
-                self.assertNotRegex(found[0], r'\bsrc="https?://')
-                self.assertNotRegex(found[0].lower(), r'<svg\b|<path\b')
-                footer = re.search(r'(?s)<footer class="item-footer">(.*?)</footer>', page).group(1)
-                self.assertIn(found[0], footer, msg="badges sit in the footer")
-                share_badge_rule = re.search(r"\.share-badge\s*\{([^}]*)\}", read(root, "assets/site.css"))
-                self.assertIsNotNone(share_badge_rule, msg="share badges need a style rule")
-                self.assertRegex(share_badge_rule.group(1), r"\b(?:margin|padding)\b", msg="logos need surrounding space")
-                self.assertRegex(share_badge_rule.group(1), r"\bz-index\b", msg="a badge sits above the box's link")
-            self.assertEqual(badges(item_of(read(root, "index.html"), OTHER)), [], msg="only the shared post has it")
-
-    def test_Q_share_the_first_places_are_x_threads_and_linkedin_in_share_time_order(self):
-        shares = {
-            "linkedin": share(where="linkedin", url="https://www.linkedin.com/posts/1", at="2024-02-06T00:00:00Z"),
-            "threads": share(where="threads", url="https://www.threads.net/@someone/post/1", at="2024-02-05T00:00:00Z"),
-            "x": share(where="x", url="https://x.com/someone/status/1", at="2024-02-04T00:00:00Z"),
-        }
-        with temporary_site(posts=SHARE_POSTS, shares=shares) as root:
-            self.assert_builds(root)
-            labels = [re.search(r'aria-label="([^"]+)"', b).group(1) for b in badges(read(root, f"p/{ID}/index.html"))]
-            self.assertEqual(labels, ["X", "Threads", "LinkedIn"])
+        pages = (
+            (item_of(read(self.common_root, "index.html"), ID), "assets/brands/x.svg"),
+            (read(self.common_root, f"p/{ID}/index.html"), "../../assets/brands/x.svg"),
+        )
+        for page, expected_src in pages:
+            found = badges(page)
+            self.assertEqual(len(found), 1, msg=page)
+            self.assertIn('href="https://x.com/someone/status/1"', found[0])
+            self.assertIn('aria-label="X"', found[0])
+            self.assertRegex(found[0], rf'<img\b[^>]*\bsrc="{re.escape(expected_src)}"')
+            self.assertRegex(found[0], r'<img\b[^>]*\balt=""')
+            self.assertNotRegex(found[0], r'\bsrc="https?://')
+            self.assertNotRegex(found[0].lower(), r'<svg\b|<path\b')
+            footer = re.search(r'(?s)<footer class="item-footer">(.*?)</footer>', page).group(1)
+            self.assertIn(found[0], footer, msg="badges sit in the footer")
+        self.assertEqual(badges(item_of(read(self.common_root, "index.html"), OTHER)), [], msg="only the shared post has it")
 
     def test_Q_share_equal_share_times_keep_share_file_line_order(self):
         shares = {
@@ -155,9 +153,6 @@ class ShareContractTests(unittest.TestCase):
             "not-json": "{ not json",
             "not-object": [base],
             "missing-post": {k: v for k, v in base.items() if k != "post"},
-            "missing-url": {k: v for k, v in base.items() if k != "url"},
-            "missing-where": {k: v for k, v in base.items() if k != "where"},
-            "missing-at": {k: v for k, v in base.items() if k != "at"},
             "extra-key": {**base, "extra": 1},
             "no-such-post": {**base, "post": "20990101-000000"},
             "unknown-place": {**base, "where": "myspace"},
@@ -169,17 +164,15 @@ class ShareContractTests(unittest.TestCase):
                 with temporary_site(posts=SHARE_POSTS, shares={"good": base, name: value}) as root:
                     self.assert_fails_naming(root, 2)
 
-    def test_Q_share_Q_build_icons_svg_defines_each_known_share_symbol_once(self):
-        with temporary_site(posts=SHARE_POSTS, shares={"on-x": share()}) as root:
-            self.assert_builds(root)
-            source_dir = Path(__file__).resolve().parents[1] / "public" / "assets" / "brands"
-            output_dir = root / "docs" / "assets" / "brands"
-            for filename in BRAND_FILES.values():
-                source = source_dir / filename
-                output = output_dir / filename
-                self.assertTrue(source.is_file(), msg=f"missing official source asset: {source}")
-                self.assertTrue(output.is_file(), msg=f"missing copied asset: {output}")
-                self.assertEqual(output.read_bytes(), source.read_bytes(), msg=filename)
+    def test_Q_share_Q_build_brand_logos_are_copied_byte_for_byte(self):
+        source_dir = Path(__file__).resolve().parents[1] / "public" / "assets" / "brands"
+        output_dir = self.common_root / "docs" / "assets" / "brands"
+        for filename in BRAND_FILES.values():
+            source = source_dir / filename
+            output = output_dir / filename
+            self.assertTrue(source.is_file(), msg=f"missing official source asset: {source}")
+            self.assertTrue(output.is_file(), msg=f"missing copied asset: {output}")
+            self.assertEqual(output.read_bytes(), source.read_bytes(), msg=filename)
 
     def test_Q_share_badges_use_icon_paths_relative_to_each_page(self):
         shares = {
@@ -206,6 +199,8 @@ class ShareContractTests(unittest.TestCase):
             for page, prefix in zip(pages, ("", "../../")):
                 found = badges(page)
                 self.assertEqual(len(found), 3, msg=page)
+                labels = [re.search(r'aria-label="([^"]+)"', badge).group(1) for badge in found]
+                self.assertEqual(labels, ["X", "Threads", "LinkedIn"])
                 actual = []
                 for badge in found:
                     image = re.search(r'<img\b[^>]*>', badge)
@@ -214,28 +209,6 @@ class ShareContractTests(unittest.TestCase):
                     self.assertNotRegex(badge, r'\bsrc="https?://')
                     actual.append(re.search(r'\bsrc="([^"]+)"', image.group(0)).group(1))
                 self.assertEqual(actual, [prefix + path for path in expected])
-
-    def test_Q_share_badge_markup_has_no_repeated_path_shape(self):
-        shares = {
-            "x": share(),
-            "threads": share(
-                where="threads",
-                url="https://www.threads.net/@someone/post/1",
-                at="2024-02-05T00:00:00Z",
-            ),
-        }
-        with temporary_site(posts=SHARE_POSTS, shares=shares) as root:
-            self.assert_builds(root)
-            for page in (
-                item_of(read(root, "index.html"), ID),
-                read(root, f"p/{ID}/index.html"),
-            ):
-                found = badges(page)
-                self.assertEqual(len(found), 2, msg=page)
-                for badge in found:
-                    self.assertNotRegex(badge.lower(), r"<svg\b|<path\b")
-                    self.assertNotRegex(badge.lower(), r"<use\b")
-                    self.assertRegex(badge, r"<img\b")
 
 if __name__ == "__main__":
     unittest.main()

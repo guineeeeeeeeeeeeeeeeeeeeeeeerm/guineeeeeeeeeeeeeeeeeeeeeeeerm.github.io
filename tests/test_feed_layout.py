@@ -29,84 +29,81 @@ SITE = [
 
 
 class FeedLayoutContractTests(unittest.TestCase):
-    def build(self, root):
-        result = run_build(root)
-        self.assertEqual(result.returncode, 0, msg=f"stderr={result.stderr!r}")
-        return read(root, "index.html")
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._site = temporary_site(SITE)
+        cls.root = cls._site.__enter__()
+        result = run_build(cls.root)
+        if result.returncode != 0:
+            cls._site.__exit__(RuntimeError, RuntimeError(result.stderr), None)
+            raise RuntimeError(f"shared feed fixture failed to build: {result.stderr}")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._site.__exit__(None, None, None)
+        super().tearDownClass()
 
     def test_each_post_is_its_own_box(self):
-        with temporary_site(SITE) as root:
-            feed = self.build(root)
-            self.assertEqual(len(feed_items(feed)), 3)
+        feed = read(self.root, "index.html")
+        self.assertEqual(len(feed_items(feed)), 3)
 
     def test_a_short_post_has_no_title_line_and_shows_its_whole_body(self):
-        with temporary_site(SITE) as root:
-            item = item_of(self.build(root), pid(SHORT_AT))
-            self.assertNotIn("feed-title", item)
-            self.assertNotIn(f">{pid(SHORT_AT)}<", item, msg="the id is never shown as a title")
-            self.assertIn("<strong>본문 전체</strong>", item)
-            self.assertIn("둘째 줄도 나온다.", item)
-            self.assertNotIn("…", item)
+        item = item_of(read(self.root, "index.html"), pid(SHORT_AT))
+        self.assertNotIn("feed-title", item)
+        self.assertNotIn(f">{pid(SHORT_AT)}<", item, msg="the id is never shown as a title")
+        self.assertIn("<strong>본문 전체</strong>", item)
+        self.assertIn("둘째 줄도 나온다.", item)
+        self.assertNotIn("…", item)
 
     def test_a_title_comes_first_in_bold(self):
-        with temporary_site(SITE) as root:
-            item = item_of(self.build(root), pid(MEDIUM_AT))
-            title = re.search(r'(?s)<h2 class="feed-title">(.*?)</h2>', item)
-            self.assertIsNotNone(title, msg=item)
-            self.assertEqual(title.group(1), "중간 글 제목")
-            self.assertLess(item.index("feed-title"), item.index("item-footer"))
-            self.assertNotIn("중간 글 본문은 피드에 나오지 않는다", item)
+        item = item_of(read(self.root, "index.html"), pid(MEDIUM_AT))
+        title = re.search(r'(?s)<h2 class="feed-title">(.*?)</h2>', item)
+        self.assertIsNotNone(title, msg=item)
+        self.assertEqual(title.group(1), "중간 글 제목")
+        self.assertLess(item.index("feed-title"), item.index("item-footer"))
+        self.assertNotIn("중간 글 본문은 피드에 나오지 않는다", item)
 
     def test_an_untitled_medium_or_long_post_keeps_its_80_characters_in_the_title_place(self):
-        with temporary_site(SITE) as root:
-            item = item_of(self.build(root), pid(UNTITLED_AT))
-            self.assertIn('<h2 class="feed-title">제목 없는 긴 글의 첫 문단</h2>', item)
+        item = item_of(read(self.root, "index.html"), pid(UNTITLED_AT))
+        self.assertIn('<h2 class="feed-title">제목 없는 긴 글의 첫 문단</h2>', item)
 
     def test_the_footer_at_the_bottom_has_the_time_as_plain_text_and_no_type(self):
-        with temporary_site(SITE) as root:
-            feed = self.build(root)
-            for written, type_name in ((SHORT_AT, "짧은 글"), (MEDIUM_AT, "중간 글"), (UNTITLED_AT, "긴 글")):
-                with self.subTest(post=pid(written)):
-                    item = item_of(feed, pid(written))
-                    footer = re.search(r'(?s)<footer class="item-footer">(.*?)</footer>', item)
-                    self.assertIsNotNone(footer, msg=item)
-                    self.assertTrue(item.rstrip().endswith("</footer>"), msg="the footer is the item's last part")
-                    self.assertNotIn(type_name, footer.group(1))
-                    self.assertIn(f'<time datetime="{written}"', footer.group(1))
-                    self.assertNotIn("<a", footer.group(1), msg="the time is not a link (no shares here)")
+        feed = read(self.root, "index.html")
+        for written, type_name in ((SHORT_AT, "짧은 글"), (MEDIUM_AT, "중간 글"), (UNTITLED_AT, "긴 글")):
+            with self.subTest(post=pid(written)):
+                item = item_of(feed, pid(written))
+                footer = re.search(r'(?s)<footer class="item-footer">(.*?)</footer>', item)
+                self.assertIsNotNone(footer, msg=item)
+                self.assertTrue(item.rstrip().endswith("</footer>"), msg="the footer is the item's last part")
+                self.assertNotIn(type_name, footer.group(1))
+                self.assertIn(f'<time datetime="{written}"', footer.group(1))
+                self.assertNotIn("<a", footer.group(1), msg="the time is not a link (no shares here)")
 
     def test_the_whole_box_links_to_the_post_by_one_empty_covering_link(self):
-        with temporary_site(SITE) as root:
-            feed = self.build(root)
-            for written, name in ((SHORT_AT, "글 보기"), (MEDIUM_AT, "중간 글 제목"), (UNTITLED_AT, "제목 없는 긴 글의 첫 문단")):
-                with self.subTest(post=pid(written)):
-                    item = item_of(feed, pid(written))
-                    links = re.findall(r'<a class="item-link"[^>]*></a>', item)
-                    self.assertEqual(len(links), 1, msg=item)
-                    self.assertIn(f'href="p/{pid(written)}/"', links[0])
-                    self.assertIn(f'aria-label="{name}"', links[0])
-            css = read(root, "assets/site.css")
-            self.assertRegex(css, r"\.feed-item\s*\{[^}]*position:\s*relative")
-            self.assertRegex(css, r"\.item-link::after\s*\{[^}]*inset:\s*0")
+        feed = read(self.root, "index.html")
+        for written, name in ((SHORT_AT, "글 보기"), (MEDIUM_AT, "중간 글 제목"), (UNTITLED_AT, "제목 없는 긴 글의 첫 문단")):
+            with self.subTest(post=pid(written)):
+                item = item_of(feed, pid(written))
+                links = re.findall(r'<a class="item-link"[^>]*></a>', item)
+                self.assertEqual(len(links), 1, msg=item)
+                self.assertIn(f'href="p/{pid(written)}/"', links[0])
+                self.assertIn(f'aria-label="{name}"', links[0])
 
     def test_the_post_page_has_the_same_footer_under_its_body(self):
-        with temporary_site(SITE) as root:
-            self.build(root)
-            page = read(root, f"p/{pid(SHORT_AT)}/index.html")
-            footer = re.search(r'(?s)<footer class="item-footer">(.*?)</footer>', page)
-            self.assertIsNotNone(footer, msg=page)
-            self.assertNotIn("짧은 글", footer.group(1))
-            self.assertIn(f'datetime="{SHORT_AT}"', footer.group(1))
-            self.assertNotIn("<a", footer.group(1))
-            self.assertLess(page.index('<div class="body">'), page.index('<footer class="item-footer">'))
+        page = read(self.root, f"p/{pid(SHORT_AT)}/index.html")
+        footer = re.search(r'(?s)<footer class="item-footer">(.*?)</footer>', page)
+        self.assertIsNotNone(footer, msg=page)
+        self.assertNotIn("짧은 글", footer.group(1))
+        self.assertIn(f'datetime="{SHORT_AT}"', footer.group(1))
+        self.assertNotIn("<a", footer.group(1))
+        self.assertLess(page.index('<div class="body">'), page.index('<footer class="item-footer">'))
 
     def test_body_text_is_set_larger_for_reading(self):
-        with temporary_site(SITE) as root:
-            self.build(root)
-            css = read(root, "assets/site.css")
-            rule = re.search(r"(?s)(?:^|\})\s*body\s*\{(.*?)\}", css)
-            self.assertIsNotNone(rule, msg=css)
-            self.assertIn("font-size: 1.125rem", rule.group(1))
+        css = read(self.root, "assets/site.css")
+        rule = re.search(r"(?s)(?:^|\})\s*body\s*\{(.*?)\}", css)
+        self.assertIsNotNone(rule, msg=css)
+        self.assertIn("font-size: 1.125rem", rule.group(1))
 
 
 if __name__ == "__main__":

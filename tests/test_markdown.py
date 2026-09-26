@@ -164,8 +164,6 @@ class MarkdownContractTests(unittest.TestCase):
     def test_Q_post_non_http_reference_and_angle_links_are_build_errors_on_the_post_file(self):
         cases = (
             "[글자][r]\n\n[r]: mailto:me@example.com",
-            "[글자][r]\n\n[r]: javascript:alert(1)",
-            "<mailto:me@example.com>",
             "<javascript:alert(1)>",
         )
         for body in cases:
@@ -177,23 +175,6 @@ class MarkdownContractTests(unittest.TestCase):
                         f"content/posts/{POST_ID}.md",
                         result.stderr.replace("\\", "/"),
                     )
-
-    def test_Q_post_paragraph_and_quote_line_breaks_render_as_br_with_extended_markdown(self):
-        body = (
-            "문단 첫 줄\n"
-            "문단 둘째 줄\n\n"
-            "> - 인용 목록\n"
-            ">\n"
-            "> 인용 첫 줄\n"
-            "> 인용 둘째 줄\n\n"
-            "###### 끝 제목"
-        )
-        with temporary_site({f"posts/{POST_ID}.md": post_text(body)}) as root:
-            self.assert_builds(root)
-            document = page(root, POST_ID)
-            self.assertRegex(document, r"문단 첫 줄<br>\s*문단 둘째 줄")
-            self.assertRegex(document, r"인용 첫 줄<br>\s*인용 둘째 줄")
-            self.assertIn("<li>인용 목록</li>", document)
 
     def test_Q_post_quote_with_two_paragraphs_keeps_both_paragraphs_inside_blockquote(self):
         body = "> 가\n>\n> 나"

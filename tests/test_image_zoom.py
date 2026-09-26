@@ -28,6 +28,34 @@ def patch_data(patch_id, post, anchor, text):
 
 
 class ImageZoomContractTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        tags = [
+            {
+                "post": ID,
+                "tag": "기록",
+                "action": "added",
+                "at": "2024-02-04T00:00:00Z",
+                "why": "분류",
+            }
+        ]
+        cls._common_site = temporary_site(
+            {"about.md": "![설명](images/a.png)\n", f"posts/{ID}.md": post_text("본문")},
+            images={"a.png": b"source"},
+            tags=tags,
+        )
+        cls.common_root = cls._common_site.__enter__()
+        result = run_build(cls.common_root)
+        if result.returncode != 0:
+            cls._common_site.__exit__(RuntimeError, RuntimeError(result.stderr), None)
+            raise RuntimeError(f"shared image-zoom fixture failed to build: {result.stderr}")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._common_site.__exit__(None, None, None)
+        super().tearDownClass()
+
     def assert_builds(self, root):
         result = run_build(root)
         self.assertEqual(result.returncode, 0, msg=f"stderr={result.stderr!r}")
@@ -40,56 +68,53 @@ class ImageZoomContractTests(unittest.TestCase):
             self.assert_builds(root)
             document = read(root, f"p/{ID}/index.html")
 
-            self.assertIn(
-                '<a class="image-zoom" href="../../images/a.png">'
-                '<img src="../../images/a.png" alt="설명"></a>',
-                document,
-            )
             wrapped = re.findall(
                 r'<a class="image-zoom" href="([^"]+)"><img ([^>]+)></a>',
                 document,
             )
             self.assertEqual(len(wrapped), 2, msg=document)
             self.assertEqual([href for href, _ in wrapped], ["../../images/a.png"] * 2)
+            first_image = next(attrs for _, attrs in wrapped if 'alt="설명"' in attrs)
+            self.assertIn('src="../../images/a.png"', first_image)
+            self.assertIn('alt="설명"', first_image)
+            self.assertNotIn("width=", first_image)
             width_image = next(attrs for _, attrs in wrapped if 'alt="너비 그림"' in attrs)
             self.assertIn('src="../../images/a.png"', width_image)
+            self.assertIn('alt="너비 그림"', width_image)
             self.assertIn('width="240"', width_image)
 
     def test_Q_post_image_on_the_about_page_uses_the_about_page_original(self):
-        with temporary_site(
-            {"about.md": "![설명](images/a.png)\n"}, images={"a.png": b"source"}
-        ) as root:
-            self.assert_builds(root)
-            document = read(root, "about/index.html")
-            self.assertIn(
-                '<a class="image-zoom" href="../images/a.png">'
-                '<img src="../images/a.png" alt="설명"></a>',
-                document,
-            )
+        document = read(self.common_root, "about/index.html")
+        wrapper = re.search(
+            r'<a class="image-zoom" href="([^"]+)"><img ([^>]+)></a>',
+            document,
+        )
+        self.assertIsNotNone(wrapper, msg=document)
+        self.assertEqual(wrapper.group(1), "../images/a.png")
+        self.assertIn('src="../images/a.png"', wrapper.group(2))
+        self.assertIn('alt="설명"', wrapper.group(2))
+        self.assertNotIn("width=", wrapper.group(2))
 
     def test_Q_post_zoom_script_is_on_post_and_about_pages_but_not_feed_or_tag_pages(self):
-        tags = [
-            {
-                "post": ID,
-                "tag": "기록",
-                "action": "added",
-                "at": "2024-02-04T00:00:00Z",
-                "why": "분류",
-            }
-        ]
-        with temporary_site(
-            {"about.md": "소개\n", f"posts/{ID}.md": post_text("본문")}, tags=tags
-        ) as root:
-            self.assert_builds(root)
-            post = read(root, f"p/{ID}/index.html")
-            about = read(root, "about/index.html")
-            feed = read(root, "index.html")
-            tag = read(root, "tags/기록/index.html")
+        post = read(self.common_root, f"p/{ID}/index.html")
+        about = read(self.common_root, "about/index.html")
+        feed = read(self.common_root, "index.html")
+        tag = read(self.common_root, "tags/기록/index.html")
 
-            self.assertIn('<script src="../../assets/zoom.js" defer></script>', post)
-            self.assertIn('<script src="../assets/zoom.js" defer></script>', about)
-            self.assertNotIn("zoom.js", feed)
-            self.assertNotIn("zoom.js", tag)
+        for document, src in ((post, "../../assets/zoom.js"), (about, "../assets/zoom.js")):
+            script = next(
+                (
+                    tag
+                    for tag in re.findall(r"<script\b[^>]*>\s*</script>", document)
+                    if f'src="{src}"' in tag
+                ),
+                None,
+            )
+            self.assertIsNotNone(script, msg=document)
+            self.assertIn(f'src="{src}"', script)
+            self.assertRegex(script, r"\bdefer(?:\s*=\s*[\"']?[^\s>\"']+[\"']?)?\b")
+        self.assertNotIn("zoom.js", feed)
+        self.assertNotIn("zoom.js", tag)
 
     def test_Q_post_short_post_image_in_the_feed_is_not_an_image_zoom_link(self):
         with temporary_site(
@@ -98,7 +123,6 @@ class ImageZoomContractTests(unittest.TestCase):
         ) as root:
             self.assert_builds(root)
             feed = read(root, "index.html")
-            self.assertIn('<img src="images/a.png" alt="피드 그림">', feed)
             self.assertNotIn('class="image-zoom"', feed)
 
     def test_Q_post_build_copies_zoom_asset_byte_for_byte(self):
@@ -121,11 +145,15 @@ class ImageZoomContractTests(unittest.TestCase):
         ) as root:
             self.assert_builds(root)
             document = read(root, f"p/{ID}/index.html")
-            self.assertIn(
-                '<a class="image-zoom" href="../../images/a.png">'
-                '<img src="../../images/a.png" alt="패치 그림"></a>',
+            wrapper = re.search(
+                r'<a class="image-zoom" href="([^"]+)"><img ([^>]+)></a>',
                 document,
             )
+            self.assertIsNotNone(wrapper, msg=document)
+            self.assertEqual(wrapper.group(1), "../../images/a.png")
+            self.assertIn('src="../../images/a.png"', wrapper.group(2))
+            self.assertIn('alt="패치 그림"', wrapper.group(2))
+            self.assertNotIn("width=", wrapper.group(2))
 
 
 if __name__ == "__main__":

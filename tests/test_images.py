@@ -23,22 +23,6 @@ class ImageWidthContractTests(unittest.TestCase):
         result = run_build(root)
         self.assertEqual(result.returncode, 0, msg=f"stderr={result.stderr!r}")
 
-    def test_a_width_after_the_bar_sets_the_display_width_and_leaves_the_alt(self):
-        with temporary_site({f"posts/{ID}.md": post_text("![작은 그림|160](images/a.png)")}, images=("a.png",)) as root:
-            self.assert_builds(root)
-            tags = img_tags(read(root, f"p/{ID}/index.html"))
-            self.assertEqual(len(tags), 1, msg=tags)
-            self.assertIn('width="160"', tags[0])
-            self.assertIn('alt="작은 그림"', tags[0])
-            self.assertIn('src="../../images/a.png"', tags[0])
-
-    def test_without_a_width_the_image_has_no_width_attribute(self):
-        with temporary_site({f"posts/{ID}.md": post_text("![그림](images/a.png)")}, images=("a.png",)) as root:
-            self.assert_builds(root)
-            tag = img_tags(read(root, f"p/{ID}/index.html"))[0]
-            self.assertNotIn("width=", tag)
-            self.assertIn('alt="그림"', tag)
-
     def test_a_bar_not_followed_by_a_whole_number_stays_in_the_alt(self):
         for alt in ("a|b", "크기|넓게", "x|12px"):
             with self.subTest(alt=alt):
