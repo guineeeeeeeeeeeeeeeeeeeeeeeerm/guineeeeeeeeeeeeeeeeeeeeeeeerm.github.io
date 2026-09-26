@@ -14,7 +14,7 @@
       "marketplace": "hunsu"
     },
     "chongdae": {
-      "version": "1.11.0",
+      "version": "1.12.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/chongdae",
       "marketplace": "chongdae"
     },
@@ -24,12 +24,12 @@
       "marketplace": "mangsang"
     },
     "dwitbuk": {
-      "version": "1.7.0",
+      "version": "1.8.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/dwitbuk",
       "marketplace": "dwitbuk"
     },
     "hacheong": {
-      "version": "1.7.0",
+      "version": "1.7.1",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hacheong",
       "marketplace": "hacheong"
     }

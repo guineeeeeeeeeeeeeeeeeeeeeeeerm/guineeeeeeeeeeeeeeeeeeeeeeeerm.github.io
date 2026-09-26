@@ -1,6 +1,6 @@
 {
   "artifact-type": "hunsu/judgments@1",
-  "skills-fingerprint": "2f89da3e4dfe",
+  "skills-fingerprint": "f4341cb5063d",
   "skills": [
     "chongdae:run",
     "dwitbuk:review",
@@ -146,22 +146,6 @@
       "findings-fingerprint": "4f53cda18c2b"
     },
     {
-      "situation": "building a slice",
-      "members": [
-        "hacheong:build"
-      ],
-      "modes": [
-        "plugin:chongdae",
-        "plugin:dwitbuk",
-        "plugin:hunsu"
-      ],
-      "members-fingerprint": "12acb74bc782",
-      "members-text-fingerprint": "7f952bca042d",
-      "judged-by": "codex gpt-5.6-luna",
-      "findings": [],
-      "findings-fingerprint": "4f53cda18c2b"
-    },
-    {
       "situation": "orchestrating a project run",
       "members": [
         "chongdae:run"
@@ -173,6 +157,22 @@
       ],
       "members-fingerprint": "b131f22910c4",
       "members-text-fingerprint": "fed1bdc37119",
+      "judged-by": "codex gpt-5.6-luna",
+      "findings": [],
+      "findings-fingerprint": "4f53cda18c2b"
+    },
+    {
+      "situation": "building a slice",
+      "members": [
+        "hacheong:build"
+      ],
+      "modes": [
+        "plugin:chongdae",
+        "plugin:dwitbuk",
+        "plugin:hunsu"
+      ],
+      "members-fingerprint": "96a3a8c54467",
+      "members-text-fingerprint": "4d6b973d4ef6",
       "judged-by": "codex gpt-5.6-luna",
       "findings": [],
       "findings-fingerprint": "4f53cda18c2b"

@@ -2,7 +2,7 @@
   "artifact-type": "hunsu/lock@1",
   "host": "claude-code",
   "engines": {
-    "claude-code": "2.1.282",
+    "claude-code": "2.1.283",
     "node": "26.8.1",
     "python": "3.12.14"
   },
@@ -14,10 +14,10 @@
       "fingerprint": "136bef4a1035"
     },
     "chongdae": {
-      "version": "1.11.0",
+      "version": "1.12.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/chongdae",
       "marketplace": "chongdae",
-      "fingerprint": "342fdc66ce65"
+      "fingerprint": "40d4120289a9"
     },
     "mangsang": {
       "version": "1.10.0",
@@ -26,16 +26,16 @@
       "fingerprint": "af9fb5d42319"
     },
     "dwitbuk": {
-      "version": "1.7.0",
+      "version": "1.8.0",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/dwitbuk",
       "marketplace": "dwitbuk",
-      "fingerprint": "4cb493c9fc59"
+      "fingerprint": "668d21b047f9"
     },
     "hacheong": {
-      "version": "1.7.0",
+      "version": "1.7.1",
       "source": "github:guinjaaaaaaaaaaaaaaaaaaaaakeop/hacheong",
       "marketplace": "hacheong",
-      "fingerprint": "abd1106700a5"
+      "fingerprint": "58a691a94768"
     }
   },
   "skills": [
@@ -46,7 +46,7 @@
     "mangsang:operate"
   ],
   "denied": [],
-  "skills-fingerprint": "2f89da3e4dfe",
+  "skills-fingerprint": "f4341cb5063d",
   "hooks": [
     {
       "event": "SessionStart",
