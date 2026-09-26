@@ -108,6 +108,8 @@ class S1GeneratorContractTests(unittest.TestCase):
             for path in docs.rglob("*")
             if path.is_file() and path.suffix in {".html", ".css", ".js"}
         )
+        # Q-meta: the canonical link names the page's own absolute address; it loads nothing.
+        rendered = re.sub(r'<link rel="canonical" href="https://guineeeeeeeeeeeeeeeeeeeeeeeerm\.github\.io/[^"]*">', "", rendered)
         self.assertNotRegex(rendered, r"(?:src|href)\s*=\s*[\"']https?://")
         self.assertNotRegex(rendered, r"@import\s+url\(\s*[\"']https?://")
 

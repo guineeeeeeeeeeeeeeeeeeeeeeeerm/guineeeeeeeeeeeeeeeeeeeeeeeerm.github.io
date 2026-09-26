@@ -265,6 +265,8 @@ Decided (owner, `source:og-03`, `source:og-05`, 요청 `source:og-01`, 제안 `s
   줄였다.
 - **주소:** 사이트 주소는 `https://guineeeeeeeeeeeeeeeeeeeeeeeerm.github.io`다(`src/lib/`의 상수 하나). OG와 canonical은 이 주소로 시작하는
   절대 주소다. 페이지 사이의 링크는 지금처럼 상대 경로다.
+  Decided (technical, session — full-check에서 옛 테스트와 부딪힘): canonical `<link>`는 외부 파일을 불러오지 않으므로 Q-build의 "외부에서 가져오는
+  스크립트·글꼴·스타일은 없다"에 어긋나지 않는다. 그 확인은 사이트 자신의 canonical 링크를 빼고 본다.
 - **모든 페이지의 머리:** `<link rel="icon" type="image/png" sizes="32x32" href="<root>assets/favicon-32.png">`, `<link
   rel="apple-touch-icon" href="<root>assets/apple-touch-icon.png">`, `<link rel="canonical" href="<그 페이지의 절대 주소>">`,
   `<meta name="description">`, 그리고 OG·트위터 카드 — `og:site_name`(사이트 이름), `og:title`, `og:description`, `og:type`(글
