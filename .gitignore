@@ -7,3 +7,4 @@ __pycache__/
 .orca/
 node_modules/
 .astro/
+docs/
