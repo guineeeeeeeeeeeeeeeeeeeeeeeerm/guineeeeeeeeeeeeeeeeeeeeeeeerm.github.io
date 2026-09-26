@@ -1,0 +1,197 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.11.0",
+  "status": "todo",
+  "def": {
+    "id": "md-build-2",
+    "role": "implementer",
+    "brief": "plan/PLAN.md Q-post의 markdown-it 결정들(source:md-03부터 source:md-05까지의 'Decided' 문단 전부)을 마무리한다. 작업 트리에는 앞 작업 md-build(내려놓음)의 구현이 커밋되지 않은 채 남아 있다 — src/lib/site.ts, README.md — 이것을 이어받아 고친다(처음부터 다시 쓰지 않는다). 앞 작업에서 검증자가 반려한 것: 인용 안 여러 문단의 깨진 마크업(이제 계약은 <blockquote><p>…</p></blockquote>이므로 <p>를 떼어 내는 처리를 없앤다), setext 밑줄 줄에 걸린 패치(이제 계약은 패치 영역이 마크다운 문법 기호에 걸리면 그 패치 줄을 가리키는 빌드 오류), 그림 일부만 덮는 패치의 오류 누락, 참조 정의 줄이 링크 순번을 차지하는 결함, 사용자가 쓴 표식 문자열(이제 계약은 본문의 제어 문자가 빌드 오류). 새 패키지는 설치하지 않는다(더 필요하면 blocked). 테스트 파일은 건드리지 않는다(HEAD의 tests/*.py가 계약이다). 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
+    "closes": [
+      "Q-post"
+    ],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      [
+        "npm",
+        "run",
+        "build"
+      ]
+    ],
+    "tests": [
+      "tests/support.py",
+      "tests/test_about.py",
+      "tests/test_external_links.py",
+      "tests/test_feed_layout.py",
+      "tests/test_frame.py",
+      "tests/test_ids.py",
+      "tests/test_image_zoom.py",
+      "tests/test_images.py",
+      "tests/test_linebreaks.py",
+      "tests/test_markdown.py",
+      "tests/test_readme.py",
+      "tests/test_s1.py",
+      "tests/test_s2.py",
+      "tests/test_s3.py",
+      "tests/test_shares.py",
+      "tests/test_tags.py"
+    ],
+    "gate": null
+  },
+  "seq": 5,
+  "added": "2026-09-26T02:09:51+00:00",
+  "touched_by_provider": [
+    "src/lib/site.ts"
+  ],
+  "performed_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:hacheong}/worker.py",
+      "--member",
+      "dakdol",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "hacheong": "1.7.0",
+        "chongdae": "1.11.0"
+      }
+    },
+    "trace": {
+      "changed": [
+        "update ./src/lib/site.ts"
+      ],
+      "commands-run": 25,
+      "commands-failed": 2
+    }
+  },
+  "non-claims": [],
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.7.0",
+        "chongdae": "1.11.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 68,
+      "commands-failed": 5
+    }
+  },
+  "attempts": [
+    {
+      "status": "done",
+      "summary": "markdown-it 기반 표준 Markdown·표·취소선 렌더링, 인용문 문단 보존, 패치의 Markdown 문법 겹침 검사를 완료했습니다.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 0
+        },
+        {
+          "check": "npm run build",
+          "exit": 0
+        }
+      ],
+      "decisions": [],
+      "non-claims": [
+        "배포 환경 동작은 확인하지 않았습니다."
+      ],
+      "disputed-tests": [],
+      "worker": {
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "effort": "xhigh"
+      },
+      "member": "dakdol",
+      "domain": "code",
+      "retried": {
+        "by": "chongdae",
+        "auto": "the verifier rejected: 3 finding(s)",
+        "at": "2026-09-26T02:32:04+00:00",
+        "chongdae": "chongdae 1.11.0"
+      },
+      "trace": {
+        "changed": [
+          "update ./src/lib/site.ts"
+        ],
+        "commands-run": 25,
+        "commands-failed": 2
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:753-759,773-785",
+            "record_quote": "그림 표시의 일부만 덮으면 빌드 오류이고 ... 그림 전체를 덮거나 겹치지 않으면 된다.",
+            "tree_quote": "const before = line.slice(0, column); const imageWidthBar = /!\\[[^\\]\\n]*\\|\\d+$/.test(before) && /^\\d+\\](?:\\(|\\[)/.test(line.slice(column + 1)); if (!imageWidthBar) add(lineNumber, column, column + 1);",
+            "why": "표 안의 `![alt|120](...)`에서 현재 열의 `|`는 `before`에 포함되지 않으므로 imageWidthBar 판정이 항상 실패한다. 너비 표식이 표의 칸 경계로 기록되어, 그림 전체를 덮는 패치도 문법 겹침 오류가 된다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:661-678",
+            "record_quote": "코드(인라인 코드와 코드 블록) 안의 글자는 해석하지 않는다 — 그 안의 `![…](…)`는 글자다.",
+            "tree_quote": "for (const match of value.matchAll(pattern)) references.set(referenceKey(match[1]), match[2] || match[3] || \"\"); ... const end = markdownImageEnd(value, index, references); if (end !== undefined) ... spans.push(...)",
+            "why": "markdownImageSpans의 참조 정의 수집은 codeSpans와 겹치는 정의를 제외하지 않는다. 펜스 코드 안의 `[r]: images/a.png`가 실제 정의로 등록되어, 코드 밖의 `![x][r]`까지 이미지로 오인하고 부분 패치를 거부한다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:748-749",
+            "record_quote": "본문은 표준 마크다운(CommonMark) 전부에 ... 문법이다. 문법 기호는 ... setext 밑줄 `===`/`---`이다.",
+            "tree_quote": "if (/^(?:=+|-+)[ \\t]*$/.test(content)) add(lineNumber, contentStart, line.length);",
+            "why": "앞 줄이 같은 문단이어야 하는지 확인하지 않아, 문서 시작이나 빈 줄 뒤의 일반 텍스트 `===`도 setext 문법으로 표시한다. 그런 리터럴 `===`를 바꾸는 패치가 실제 문법 기호를 덮지 않았는데 빌드 오류가 된다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "3 finding(s)"
+      }
+    }
+  ]
+}

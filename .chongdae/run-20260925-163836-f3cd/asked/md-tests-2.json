@@ -1,0 +1,35 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.11.0",
+  "stage": "build",
+  "run": "run-20260925-163836-f3cd",
+  "task": "md-tests-2",
+  "role": "nitpick",
+  "target": ".",
+  "goal": "본문 마크다운을 markdown-it으로: 표준 마크다운·표·취소선",
+  "brief": "plan/PLAN.md Q-post의 'Decided (owner, source:md-05 ...)' 문단을 계약 테스트로 쓴다. (1) tests/test_linebreaks.py 45행의 인용 기대 마크업을 새 결정에 맞게 <blockquote><p>인용 첫 줄<br>\\n인용 둘째 줄</p></blockquote> 모양(공백 허용 정규식)으로 고친다 — 이 파일의 다른 계약은 바꾸지 않는다. (2) tests/test_markdown.py에 더한다: 인용 안의 두 문단('> 가\\n>\\n> 나')이 <blockquote> 안에 <p>가>…와 <p>나</p> 두 개로, 깨진 마크업 없이 나온다; 패치(patches.jsonl)의 영역이 마크다운 문법 기호에 걸리면 빌드 오류이고 오류 줄에 patches.jsonl:1 — 경우별 subTest: 제목 표시 '# '를 포함하는 앵커를 replace, setext 밑줄 '---' 줄을 replace, 목록 기호 '- '를 포함하는 앵커를 replace, 표의 칸 경계 '|'를 포함하는 앵커를 replace; 반대로 제목·목록·표 칸 안의 글자만 바꾸는 패치는 빌드되고 적용된 글자가 보인다. 기존 테스트 메서드 이름과 tests/support.py는 바꾸지 않는다. 보고의 tests 목록에는 테스트 파일 경로만 적는다.",
+  "closes": [
+    "Q-post"
+  ],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [
+    "tests/test_markdown.py",
+    "tests/test_linebreaks.py"
+  ],
+  "response": "./.chongdae/run-20260925-163836-f3cd/local/md-tests-2.response.json"
+}
