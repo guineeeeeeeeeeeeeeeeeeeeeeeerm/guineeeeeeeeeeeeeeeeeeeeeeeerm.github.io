@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.12.0",
+  "goal": "favicon과 OG 미리보기",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
