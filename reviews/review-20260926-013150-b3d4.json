@@ -64,84 +64,180 @@
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab, run-20260925-162941-d917",
       "text": "no check decides this task  [x2]",
-      "layer": "objection"
+      "layer": "objection",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260926-013150-b3d4): no check decides this task  [x2]",
+        "where": "run-20260925-130036-08ab, run-20260925-162941-d917",
+        "via": "review-20260926-174115-4090/47"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "dropped, not done: 결과를 받지 않음: Astro를 쓰지 않고 옛 Python 생성기를 불렀고, 네트워크 없이 잠금 파일을 손으로 만듦 — 작업 트리를 되돌렸고 astro-frame-2로 다시 냄",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): dropped, not done: 결과를 받지 않음: Astro를 쓰지 않고 옛 Python 생성기를 불렀고, 네트워크 없이 잠금 파일을 손으로",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/48"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) links.jsonl·patches.jsonl 고급 기능은 이번 체크 범위에서 옮기지 않았습니다.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) links.jsonl·patches.jsonl 고급 기능은 이번 체크 범위에서 옮기지 않았습니다.",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/49"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) 테스트 파일과 package.json/package-lock.json은 수정하지 않았습니다.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) 테스트 파일과 package.json/package-lock.json은 수정하지 않았습니다.",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/50"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) links.jsonl·patches.jsonl의 고급 링크/패치 기능은 이번 조각에서 구현하지 않았습니다.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) links.jsonl·patches.jsonl의 고급 링크/패치 기능은 이번 조각에서 구현하지 않았습니다.",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/51"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) 추가로 실행한 test_external_links.py와 test_image_zoom.py에서는 기존 패치 기능 관련 테스트가 실패했으며, 이번 지정 checks의 범위에는 포함되지 않습니다.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) 추가로 실행한 test_external_links.py와 test_image_zoom.py에서는 기존 패치 기능 관련 테스트",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/52"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) tests와 package.json/package-lock.json은 수정하지 않았습니다.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) tests와 package.json/package-lock.json은 수정하지 않았습니다.",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/53"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) Q-link and Q-patch behavior were not covered by the requested checks.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) Q-link and Q-patch behavior were not covered by the requested checks.",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/54"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) Tests and package dependency files were not modified.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) Tests and package dependency files were not modified.",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/55"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) test_readme의 npm run build README 요구는 조각 3 범위라 README를 수정하지 않았습니다.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) test_readme의 npm run build README 요구는 조각 3 범위라 README를 수정하지 않았습니다.",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/56"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) 브라우저에서 실제 클릭·hover 동작은 테스트하지 않았습니다.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) 브라우저에서 실제 클릭·hover 동작은 테스트하지 않았습니다.",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/57"
+      }
     },
     {
       "kind": "non-claim",
       "where": "run-20260925-130036-08ab",
       "text": "(provider) 실제 브라우저에서 hover/click 동작은 실행하지 않았습니다.",
       "layer": "objection",
-      "first-seen": "review-20260925-234959-4023"
+      "first-seen": "review-20260925-234959-4023",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): (provider) 실제 브라우저에서 hover/click 동작은 실행하지 않았습니다.",
+        "where": "run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/58"
+      }
     },
     {
       "kind": "review-debt",
@@ -216,7 +312,15 @@
         "verifier-reject",
         "run-20260925-130036-08ab/astro-frame-2 attempt 1: src/pages/index.astro; src/pages/about/index.astro; src/pages/p/[id]/index.astro; src/lib/site.ts",
         "plan-vs-code: 페이지별 피드·글·소개·태그 마크업을 Astro 템플릿이나 컴포넌트가 만들지 않고 src/lib/site.ts가 HTML 문자열로 생성한 뒤 set:html로 주입한다. 이는 이번 결정의 Astro 템플릿 구현 요구와 직접 충돌한다. — record: “이번에는 페이지 HTML을 Astro가 src/pages/·src/layouts/ 템플릿으로 실제로 만들어야 한다.” — tree: “src/pages/index.astro: <div class=\"frame\" set:html={renderFeed(site)}></div>; src/lib/site.ts: return `<article class=\"feed-item\">\\n<a class=\"item-link\" href=\"${root}p/${post.id}/\" aria-label=\"${escapeHtml(title || \"글 보기\")}\"></a>\\n${top}\\n${why}${itemFooter(post, shares, root)}\\n</article>`;”"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 검증자 반려는 당시 사실이었고, 같은 작업의 뒤 시도에서 고쳐졌거나 계획서의 결정·Known edge(patch-view-edges, source:md-05)로 미뤄짐; 최종 트리는 계약 테스트를 통과",
+        "by": null,
+        "finding_text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: 페이지별 피드·글·소개·태그 마크업을 Astro 템플릿이나 컴포넌트가 만들지 않고 src/lib/site.ts가 HTM",
+        "where": "run-20260925-130036-08ab/astro-frame-2 attempt 1: src/pages/index.astro; src/pages/about/index.astro; src/pages/p/[id]/index.astro; src/lib/site.ts",
+        "via": "review-20260926-174115-4090/59"
+      }
     },
     {
       "kind": "undisposed",
@@ -228,7 +332,15 @@
         "verifier-reject",
         "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/layouts/BaseLayout.astro",
         "plan-vs-code: BaseLayout.astro에는 .frame 본문 틀이 없고, 각 페이지가 개별적으로 이를 감싼다. — record: “BaseLayout.astro(상단 띠 <header class=\"site-header\"><nav class=\"site-nav\">…</nav></header>, 본문 틀 .frame)” — tree: “<Header feedHref={feedHref} aboutHref={aboutHref} />\n    <slot />”"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 검증자 반려는 당시 사실이었고, 같은 작업의 뒤 시도에서 고쳐졌거나 계획서의 결정·Known edge(patch-view-edges, source:md-05)로 미뤄짐; 최종 트리는 계약 테스트를 통과",
+        "by": null,
+        "finding_text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: BaseLayout.astro에는 .frame 본문 틀이 없고, 각 페이지가 개별적으로 이를 감싼다. — record:",
+        "where": "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/layouts/BaseLayout.astro",
+        "via": "review-20260926-174115-4090/60"
+      }
     },
     {
       "kind": "undisposed",
@@ -240,7 +352,15 @@
         "verifier-reject",
         "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/lib/site.ts:imageInfo",
         "plan-vs-code: |10000처럼 정수지만 허용 범위를 벗어난 너비가 오류가 아니라 alt 문자열로 처리되어 빌드된다. — record: “N은 1부터 9999까지의 정수이고 ... 설명 끝의 | 뒤가 정수가 아니면 설명의 일부로 본다.” — tree: “const match = /^(.*)\\|(\\d{1,4})$/.exec(alt);\nif (!match) return { alt };”"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 검증자 반려는 당시 사실이었고, 같은 작업의 뒤 시도에서 고쳐졌거나 계획서의 결정·Known edge(patch-view-edges, source:md-05)로 미뤄짐; 최종 트리는 계약 테스트를 통과",
+        "by": null,
+        "finding_text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: |10000처럼 정수지만 허용 범위를 벗어난 너비가 오류가 아니라 alt 문자열로 처리되어 빌드된다. — record:",
+        "where": "run-20260925-130036-08ab/astro-frame-2 attempt 2: src/lib/site.ts:imageInfo",
+        "via": "review-20260926-174115-4090/61"
+      }
     },
     {
       "kind": "undisposed",
@@ -252,7 +372,15 @@
         "verifier-reject",
         "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:58-60; src/lib/site.ts:696-700, 821-825",
         "plan-vs-code: src/lib/site.ts still constructs patch-region spans and link/superscript markup strings, contrary to the template requirement that these fragments be produced by Astro components/pages. — record: “src/lib/는 글과 기록 표를 읽고 계산한 데이터와 본문 마크다운의 HTML만 돌려주며 ... 패치 보기 같은 마크업을 문자열로 짓지 않는다.” — tree: “tokens.set(patchStart(index), `<span${attributes}>`); ... `<a href=\"...\">...</a><sup><a href=\"#fn-...\">[...]</a></sup>`”"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 검증자 반려는 당시 사실이었고, 같은 작업의 뒤 시도에서 고쳐졌거나 계획서의 결정·Known edge(patch-view-edges, source:md-05)로 미뤄짐; 최종 트리는 계약 테스트를 통과",
+        "by": null,
+        "finding_text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: src/lib/site.ts still constructs patch-region spans and link/super",
+        "where": "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:58-60; src/lib/site.ts:696-700, 821-825",
+        "via": "review-20260926-174115-4090/62"
+      }
     },
     {
       "kind": "undisposed",
@@ -264,7 +392,15 @@
         "verifier-reject",
         "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:260-264; public/assets/time.js:36-40",
         "plan-vs-code: Hover history is created dynamically as plain text with the raw UTC timestamp; it is not a time element and is never localized by the earlier time-element pass. — record: “각 항목의 시각은 Q-time의 `<time>` 표기와 같은 규칙으로 독자 현지 시각이 된다.” — tree: “item.textContent = `${patch.op} — ${patch.at} — ${patch.why} — 이전 글자: ${patch.previous_text}`;”"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 검증자 반려는 당시 사실이었고, 같은 작업의 뒤 시도에서 고쳐졌거나 계획서의 결정·Known edge(patch-view-edges, source:md-05)로 미뤄짐; 최종 트리는 계약 테스트를 통과",
+        "by": null,
+        "finding_text": "verifier-reject (first seen review-20260925-234959-4023): plan-vs-code: Hover history is created dynamically as plain text with the raw UT",
+        "where": "run-20260925-130036-08ab/astro-logic attempt 1: plan/PLAN.md:260-264; public/assets/time.js:36-40",
+        "via": "review-20260926-174115-4090/63"
+      }
     },
     {
       "kind": "undisposed",
@@ -276,7 +412,15 @@
         "non-claim",
         "run-20260925-125521-eb0d, run-20260925-130036-08ab",
         "no check decides this task"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-234959-4023): no check decides this task  [x2]",
+        "where": "run-20260925-125521-eb0d, run-20260925-130036-08ab",
+        "via": "review-20260926-174115-4090/64"
+      }
     },
     {
       "kind": "undisposed",
@@ -288,7 +432,15 @@
         "non-claim",
         "run-20260925-123911-322a, run-20260925-125521-eb0d",
         "no check decides this task"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-215651-75eb): no check decides this task  [x2]",
+        "where": "run-20260925-123911-322a, run-20260925-125521-eb0d",
+        "via": "review-20260926-174115-4090/65"
+      }
     },
     {
       "kind": "undisposed",
@@ -300,7 +452,15 @@
         "non-claim",
         "run-20260925-123911-322a",
         "(provider) \"글 페이지와 소개 페이지 본문의 그림을 누르면, 페이지를 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게 보인다. 배경을 누르거나 Esc를 누르면 닫힌다.\" — 요청대로 JavaScript 화면 동작은 테스트하지 않음."
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-215046-27ec): (provider) \"글 페이지와 소개 페이지 본문의 그림을 누르면, 페이지를 떠나지 않고 어두운 배경 위에 원본 파일이 화면 크기에 맞춰 크게",
+        "where": "run-20260925-123911-322a",
+        "via": "review-20260926-174115-4090/66"
+      }
     },
     {
       "kind": "undisposed",
@@ -312,7 +472,15 @@
         "non-claim",
         "run-20260925-123911-322a",
         "(provider) 브라우저에서 실제 클릭·Esc 상호작용은 자동화 테스트하지 않았습니다."
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-215046-27ec): (provider) 브라우저에서 실제 클릭·Esc 상호작용은 자동화 테스트하지 않았습니다.",
+        "where": "run-20260925-123911-322a",
+        "via": "review-20260926-174115-4090/67"
+      }
     },
     {
       "kind": "undisposed",
@@ -324,7 +492,15 @@
         "drift",
         "plugin chongdae",
         "plugin chongdae: manifest 1.9.0, host 1.10.0"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 플러그인 버전 차이와 오래된 판정은 이후 세 번의 버전 맞추기(hunsu 잠금, 재판정)로 해소됨; 지금 hunsu check 오류 0",
+        "by": null,
+        "finding_text": "drift (first seen review-20260925-202344-fc6a): plugin chongdae: manifest 1.9.0, host 1.10.0",
+        "where": "plugin chongdae",
+        "via": "review-20260926-174115-4090/68"
+      }
     },
     {
       "kind": "undisposed",
@@ -336,7 +512,15 @@
         "drift",
         "plugin dwitbuk",
         "plugin dwitbuk: manifest 1.5.0, host 1.6.0"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 플러그인 버전 차이와 오래된 판정은 이후 세 번의 버전 맞추기(hunsu 잠금, 재판정)로 해소됨; 지금 hunsu check 오류 0",
+        "by": null,
+        "finding_text": "drift (first seen review-20260925-202344-fc6a): plugin dwitbuk: manifest 1.5.0, host 1.6.0",
+        "where": "plugin dwitbuk",
+        "via": "review-20260926-174115-4090/69"
+      }
     },
     {
       "kind": "undisposed",
@@ -348,7 +532,15 @@
         "drift",
         "plugin hacheong",
         "plugin hacheong: manifest 1.5.0, host 1.6.0"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 플러그인 버전 차이와 오래된 판정은 이후 세 번의 버전 맞추기(hunsu 잠금, 재판정)로 해소됨; 지금 hunsu check 오류 0",
+        "by": null,
+        "finding_text": "drift (first seen review-20260925-202344-fc6a): plugin hacheong: manifest 1.5.0, host 1.6.0",
+        "where": "plugin hacheong",
+        "via": "review-20260926-174115-4090/70"
+      }
     },
     {
       "kind": "undisposed",
@@ -360,7 +552,15 @@
         "drift",
         "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
         "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 플러그인 버전 차이와 오래된 판정은 이후 세 번의 버전 맞추기(hunsu 잠금, 재판정)로 해소됨; 지금 hunsu check 오류 0",
+        "by": null,
+        "finding_text": "drift (first seen review-20260925-202344-fc6a): 2 situation(s) were judged about other text of their members (building a slice; ",
+        "where": "2 situation(s) were judged about other text of their members (building a slice; orchestrating a project run) — `hunsu judge request --out DIR --stale`, judge those packets, `consume`",
+        "via": "review-20260926-174115-4090/71"
+      }
     },
     {
       "kind": "undisposed",
@@ -372,7 +572,15 @@
         "non-claim",
         "run-20260925-123911-322a",
         "no check decides this task"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-215046-27ec): no check decides this task",
+        "where": "run-20260925-123911-322a",
+        "via": "review-20260926-174115-4090/72"
+      }
     },
     {
       "kind": "undisposed",
@@ -384,7 +592,15 @@
         "verifier-reject",
         "run-20260925-105441-2c2e/extlink-build attempt 1: sitegen/patches.py:159-161, sitegen/markdown.py:243-250, sitegen/patches.py:340-349",
         "plan-vs-code: A delete patch inside a still-valid URL (for example, deleting `/qwerty` from `[글](https://example.com/qwerty)`) is skipped by patch_ranges, so it is allowed, but its zero-width markers are inserted before Markdown rendering and later replaced with HTML spans inside the href attribute. The resulting link is malformed instead of rendering the fully applied external link. — record: “패치(Q-patch)는 적용된 본문을 바꾸는 것이므로 바깥 링크를 넣거나 고치거나 지울 수 있다 — 바깥 링크는 패치가 모두 적용된 본문에서 해석된다. 끄면 표시가 사라지고 적용된 본문만 보인다.” — tree: “if isinstance(unit, DeletedUnit): unit_index += 1; continue; body, regions = patch_state.regions_and_marked_body(); rendered_blocks = [render_block(block, content_root, post_path, image_prefix, external_links=True) for block in blocks]; rendered_blocks = render_patched_blocks(rendered_blocks, patch_tokens); tokens[start] = f\"<span{attributes}>\"”"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 검증자 반려는 당시 사실이었고, 같은 작업의 뒤 시도에서 고쳐졌거나 계획서의 결정·Known edge(patch-view-edges, source:md-05)로 미뤄짐; 최종 트리는 계약 테스트를 통과",
+        "by": null,
+        "finding_text": "verifier-reject (first seen review-20260925-202344-fc6a): plan-vs-code: A delete patch inside a still-valid URL (for example, deleting `/q",
+        "where": "run-20260925-105441-2c2e/extlink-build attempt 1: sitegen/patches.py:159-161, sitegen/markdown.py:243-250, sitegen/patches.py:340-349",
+        "via": "review-20260926-174115-4090/73"
+      }
     },
     {
       "kind": "undisposed",
@@ -396,7 +612,15 @@
         "non-claim",
         "run-20260925-105441-2c2e",
         "no check decides this task"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-213718-646e): no check decides this task",
+        "where": "run-20260925-105441-2c2e",
+        "via": "review-20260926-174115-4090/74"
+      }
     },
     {
       "kind": "undisposed",
@@ -408,7 +632,15 @@
         "non-claim",
         "run-20260925-105441-2c2e",
         "(provider) 브라우저에서 실제 클릭까지는 검증하지 않고 계약 테스트와 생성 HTML/CSS로 확인했습니다."
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 브라우저에서 실제 클릭까지는 검증하지 않고 계약 테스트와 생성 HTML/CSS로 확인했습니다.",
+        "where": "run-20260925-105441-2c2e",
+        "via": "review-20260926-174115-4090/75"
+      }
     },
     {
       "kind": "undisposed",
@@ -420,7 +652,15 @@
         "non-claim",
         "run-20260925-105441-2c2e",
         "(provider) 빌드 실행으로 docs 생성물이 갱신되었습니다."
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 빌드 실행으로 docs 생성물이 갱신되었습니다.",
+        "where": "run-20260925-105441-2c2e",
+        "via": "review-20260926-174115-4090/76"
+      }
     },
     {
       "kind": "undisposed",
@@ -432,7 +672,15 @@
         "non-claim",
         "run-20260925-105441-2c2e",
         "(provider) 브라우저에서 실제 클릭 동작은 검증하지 않았습니다."
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-202344-fc6a): (provider) 브라우저에서 실제 클릭 동작은 검증하지 않았습니다.",
+        "where": "run-20260925-105441-2c2e",
+        "via": "review-20260926-174115-4090/77"
+      }
     },
     {
       "kind": "undisposed",
@@ -444,7 +692,15 @@
         "non-claim",
         "run-20260925-093306-3b60, run-20260925-105441-2c2e",
         "no check decides this task"
-      ]
+      ],
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 묶음별 처리 제안(source:rv-01, source:rv-02)을 보고 '처리 진행'(source:rv-03)으로 승인; 건별로 읽지 않아 위임으로 기록 — 작업자·세션이 스스로 밝힌 한계(체크 없는 작업, 범위 밖, 브라우저 실제 동작 미검증 등)로 사실이며, 알려진 한계로 받아들임",
+        "by": null,
+        "finding_text": "non-claim (first seen review-20260925-202344-fc6a): no check decides this task  [x2]",
+        "where": "run-20260925-093306-3b60, run-20260925-105441-2c2e",
+        "via": "review-20260926-174115-4090/78"
+      }
     }
   ]
 }
