@@ -1,0 +1,9 @@
+{
+  "id": "og-02",
+  "text": "{\n \"questions\": [\n  {\n   \"question\": \"favicon은 어떤 이미지로 만들까요?\",\n   \"header\": \"favicon\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"아바타 (추천)\",\n     \"description\": \"소개 페이지의 avatar_paint_primary.png. 개인 사이트라 나를 나타내는 이미지가 자연스럽습니다. 작게 줄었을 때 알아볼 수 있는지는 만든 뒤 확인합니다.\"\n    },\n    {\n     \"label\": \"org 로고\",\n     \"description\": \"소개 페이지의 org_logo.png(긴작업 org).\"\n    },\n    {\n     \"label\": \"내가 따로 줌\",\n     \"description\": \"favicon용 이미지를 따로 준비해서 주겠습니다.\"\n    }\n   ]\n  },\n  {\n   \"question\": \"OG 미리보기 이미지는 어떻게 할까요?\",\n   \"header\": \"OG 이미지\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"글의 첫 그림, 없으면 사이트 기본 (추천)\",\n     \"description\": \"글에 그림이 있으면 첫 그림(예: 화장실 사진)을, 없으면 사이트 공통 이미지 하나를 씁니다. 공통 이미지는 아바타와 사이트 이름으로 만듭니다.\"\n    },\n    {\n     \"label\": \"글마다 제목 카드 생성\",\n     \"description\": \"빌드가 글마다 제목(짧은 글은 본문)을 넣은 1200×630 이미지를 만듭니다. 눈에 잘 띄지만, 한글 글꼴과 이미지 생성 패키지가 필요하고 빌드가 느려집니다.\"\n    },\n    {\n     \"label\": \"사이트 기본 하나만\",\n     \"description\": \"모든 페이지가 같은 이미지를 씁니다. 가장 단순합니다.\"\n    }\n   ]\n  },\n  {\n   \"question\": \"사이트 이름(탭 제목과 OG site_name)은 무엇으로 할까요? 지금은 탭 제목이 '피드', '소개', 글 제목뿐이라 사이트 이름이 없습니다.\",\n   \"header\": \"사이트 이름\",\n   \"multiSelect\": false,\n   \"options\": [\n    {\n     \"label\": \"GuinEeeeeeeeeeeeeeeeeeeeeeeerm (추천)\",\n     \"description\": \"소개에 쓰신 이름. 탭 제목은 '글 제목 — GuinEeeeeeeeeeeeeeeeeeeeeeeerm'처럼 됩니다.\"\n    },\n    {\n     \"label\": \"guin-site\",\n     \"description\": \"저장소 이름.\"\n    },\n    {\n     \"label\": \"이름 없이\",\n     \"description\": \"탭 제목은 지금처럼 두고, OG site_name은 넣지 않습니다.\"\n    }\n   ]\n  }\n ]\n}",
+  "speaker": "Claude (claude-opus-5-5)",
+  "locator": "session 917a4cc5-c9e3-4c56-919b-d30286207f34, question 3e5eeac0-1399-40c9-8ba9-bd7e231dae3a at 2026-09-26T11:23:02.417Z",
+  "replies-to": "og-01",
+  "verbatim-from": "host transcript",
+  "written_by": "mangsang 1.10.0"
+}

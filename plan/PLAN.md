@@ -251,6 +251,33 @@ Concept: `ui-language`.
 Decided (owner, `source:loc-03`, 요청 `source:loc-01`, 제안 `source:loc-02`): 원본 사이트는 한국어 그대로이고, 영어판이 `/en/` 아래에
 따로 있다(Q-i18n). 영어판이 만드는 글자는 영어이고 `<html lang="en">`이다.
 
+## Q-meta — 탭 제목, favicon, 링크 미리보기(OG)
+
+Concept: `site-build`.
+
+Decided (owner, `source:og-03`, `source:og-05`, 요청 `source:og-01`, 제안 `source:og-02`, `source:og-04`): 사이트 이름은
+"GuinEeeeeeeeeeeeeeeeeeeeeeeerm"이다. favicon은 아바타(`content/images/avatar_paint_primary.png`)의 가운데 육각형을 잘라 만든 것이고,
+링크 미리보기(OG) 이미지는 모든 페이지가 같은 사이트 기본 이미지 하나(밝은 바탕 가운데 아바타, 아래에 사이트 이름, 1200×630)다.
+
+- **이미지 파일:** `public/assets/favicon-32.png`(32×32), `public/assets/apple-touch-icon.png`(180×180),
+  `public/assets/og-default.png`(1200×630)는 소유자가 확인한 파일이고 빌드가 바이트 그대로 `docs/assets/`로 복사한다. 빌드할 때 이미지를
+  만들지 않는다. Decided (technical, session): 한 번 만들 때 Astro와 함께 설치된 `sharp`로 아바타의 (96, 88)에서 336×336을 잘라
+  줄였다.
+- **주소:** 사이트 주소는 `https://guineeeeeeeeeeeeeeeeeeeeeeeerm.github.io`다(`src/lib/`의 상수 하나). OG와 canonical은 이 주소로 시작하는
+  절대 주소다. 페이지 사이의 링크는 지금처럼 상대 경로다.
+- **모든 페이지의 머리:** `<link rel="icon" type="image/png" sizes="32x32" href="<root>assets/favicon-32.png">`, `<link
+  rel="apple-touch-icon" href="<root>assets/apple-touch-icon.png">`, `<link rel="canonical" href="<그 페이지의 절대 주소>">`,
+  `<meta name="description">`, 그리고 OG·트위터 카드 — `og:site_name`(사이트 이름), `og:title`, `og:description`, `og:type`(글
+  페이지는 `article`, 나머지는 `website`), `og:url`(canonical과 같음), `og:image`(`<사이트 주소>/assets/og-default.png`),
+  `og:image:width` 1200, `og:image:height` 630, `og:image:alt`(사이트 이름), `og:locale`(한국어판 `ko_KR`, 영어판 `en_US`), 짝
+  페이지가 있으면 `og:locale:alternate`, `twitter:card` `summary_large_image`.
+- **제목:** 탭 제목(`<title>`)은 피드에서 사이트 이름 그대로이고, 다른 페이지에서는 `<페이지 제목> — <사이트 이름>`이다(영어판도
+  같다). 글 페이지의 페이지 제목은 글의 제목, 제목이 없으면 피드의 제목 자리와 같은 첫 문단 80자다. 소개는 "소개"/"About", 태그
+  페이지는 "태그: <태그>"/"Tag: <태그>"다. `og:title`은 사이트 이름을 붙이지 않은 페이지 제목이다(피드는 사이트 이름).
+- **설명:** 글 페이지의 `description`과 `og:description`은 적용된 본문 첫 문단의 화면 글자에서 앞 160자(잘렸으면 `…`)다. 피드·소개·
+  태그 페이지는 사이트 설명 — 한국어판 "생각난 것들을 쓰고, 만들고, 부숩니다.", 영어판 "I write, build, and break whatever comes to
+  mind." (둘 다 소개 글의 문장)이다.
+
 ## Q-i18n — 영어판
 
 Concept: `translation`, `ui-language`.
