@@ -1,0 +1,15 @@
+{
+  "id": "R-36aea16b",
+  "src": "plan/PLAN.md#Q-i18n — 영어판",
+  "predicate": "realizes",
+  "dst": "concept:translation",
+  "evidence": "한국어가 원본이고 영어판을 더한다.",
+  "seen": {
+    "plan/PLAN.md#Q-i18n — 영어판": "7fcd401edd9b",
+    "concept:translation": "f1329a883360"
+  },
+  "confirmed": {
+    "delegated": "영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말"
+  },
+  "written_by": "mangsang 1.10.0"
+}

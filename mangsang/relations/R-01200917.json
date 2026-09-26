@@ -1,0 +1,15 @@
+{
+  "id": "R-01200917",
+  "src": "source:loc-03",
+  "predicate": "realizes",
+  "dst": "concept:translation",
+  "evidence": "영어판으로도 완전해야해.",
+  "seen": {
+    "source:loc-03": "6606bb03704e",
+    "concept:translation": "f1329a883360"
+  },
+  "confirmed": {
+    "delegated": "영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말"
+  },
+  "written_by": "mangsang 1.10.0"
+}

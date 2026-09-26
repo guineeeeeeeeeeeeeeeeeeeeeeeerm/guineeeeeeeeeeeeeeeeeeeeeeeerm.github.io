@@ -5,11 +5,23 @@
   "dst": "concept:tag",
   "evidence": "<aside class=\"tag-cloud\">",
   "seen": {
-    "src/components/TagCloud.astro": "43477042f82c",
+    "src/components/TagCloud.astro": "18411c1132bf",
     "concept:tag": "7bfee5732100"
   },
   "confirmed": {
-    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+      },
+      "seen": {
+        "src/components/TagCloud.astro": "43477042f82c",
+        "concept:tag": "7bfee5732100"
+      },
+      "evidence": "<aside class=\"tag-cloud\">"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

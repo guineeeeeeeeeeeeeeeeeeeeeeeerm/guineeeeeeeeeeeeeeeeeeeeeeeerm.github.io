@@ -3,13 +3,25 @@
   "src": "src/pages/index.astro",
   "predicate": "realizes",
   "dst": "concept:feed",
-  "evidence": "<BaseLayout title=\"피드\" rootLink=\"\" current=\"feed\">",
+  "evidence": "<BaseLayout title=\"피드\" rootLink=\"\" current=\"feed\" switchHref=\"en/\" switchLabel=\"English\" switchLang=\"en\" alternateHref=\"en/\" alternateLang=\"en\">",
   "seen": {
-    "src/pages/index.astro": "9afd1f957fff",
+    "src/pages/index.astro": "25b55af37cb2",
     "concept:feed": "033b1f6b1672"
   },
   "confirmed": {
-    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 피드 틀에 언어 전환이 더해짐 — 근거를 새 줄로"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+      },
+      "seen": {
+        "src/pages/index.astro": "9afd1f957fff",
+        "concept:feed": "033b1f6b1672"
+      },
+      "evidence": "<BaseLayout title=\"피드\" rootLink=\"\" current=\"feed\">"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

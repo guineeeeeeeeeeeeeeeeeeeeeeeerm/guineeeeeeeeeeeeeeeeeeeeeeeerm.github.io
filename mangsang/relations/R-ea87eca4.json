@@ -6,9 +6,22 @@
   "evidence": "=\"한국어\"",
   "seen": {
     "source:plan-09t": "6d7b916a643a",
-    "concept:ui-language": "e2a0a380d7e4"
+    "concept:ui-language": "ffe0c1f22b68"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)"
-  }
+    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Claude (claude-opus-5-5): the same groundings as plan-07/plan-09, now on the answers as the host recorded them (plan-06t..09t); plan-06 and plan-08 were Claude's reconstruction of the question UI, kept as they are (a source never changes)"
+      },
+      "seen": {
+        "source:plan-09t": "6d7b916a643a",
+        "concept:ui-language": "e2a0a380d7e4"
+      },
+      "evidence": "=\"한국어\""
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

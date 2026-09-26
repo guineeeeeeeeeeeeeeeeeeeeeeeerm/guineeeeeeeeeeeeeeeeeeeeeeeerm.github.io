@@ -5,10 +5,23 @@
   "dst": "concept:ui-language",
   "evidence": "사이트가 만드는 글자는 한국어다.",
   "seen": {
-    "plan/PLAN.md#Q-ui — 화면 언어": "1ba1ca889cb4",
-    "concept:ui-language": "e2a0a380d7e4"
+    "plan/PLAN.md#Q-ui — 화면 언어": "17bffd271c80",
+    "concept:ui-language": "ffe0c1f22b68"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Claude (claude-opus-5-5) re-read each after fd-04 (no type names, the time as text, the whole box as the post's link; run-20260924-083701-d8bf): each quote still stands and still grounds or projects its concept; the earlier owner turns remain the concept's history. Technical, delegated (plan-07)"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-ui — 화면 언어": "1ba1ca889cb4",
+        "concept:ui-language": "e2a0a380d7e4"
+      },
+      "evidence": "사이트가 만드는 글자는 한국어다."
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

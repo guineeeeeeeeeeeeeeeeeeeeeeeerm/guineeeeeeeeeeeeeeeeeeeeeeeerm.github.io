@@ -3,13 +3,25 @@
   "src": "src/layouts/BaseLayout.astro",
   "predicate": "realizes",
   "dst": "concept:site-build",
-  "evidence": "<html lang=\"ko\">",
+  "evidence": "<html lang={locale}>",
   "seen": {
-    "src/layouts/BaseLayout.astro": "29c1968c2f09",
+    "src/layouts/BaseLayout.astro": "b976cd89f928",
     "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 공통 틀의 문서 머리 줄이 언어별로 바뀜 — 근거를 새 줄로"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+      },
+      "seen": {
+        "src/layouts/BaseLayout.astro": "29c1968c2f09",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "<html lang=\"ko\">"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

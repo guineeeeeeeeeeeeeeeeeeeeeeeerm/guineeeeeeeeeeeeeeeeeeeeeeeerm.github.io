@@ -3,13 +3,25 @@
   "src": "src/layouts/BaseLayout.astro",
   "predicate": "realizes",
   "dst": "concept:ui-language",
-  "evidence": "<html lang=\"ko\">",
+  "evidence": "<html lang={locale}>",
   "seen": {
-    "src/layouts/BaseLayout.astro": "29c1968c2f09",
-    "concept:ui-language": "e2a0a380d7e4"
+    "src/layouts/BaseLayout.astro": "b976cd89f928",
+    "concept:ui-language": "ffe0c1f22b68"
   },
   "confirmed": {
-    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: ui-language의 새 뜻(한국어판은 ko, 영어판은 en)을 이 줄이 실현함"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+      },
+      "seen": {
+        "src/layouts/BaseLayout.astro": "29c1968c2f09",
+        "concept:ui-language": "e2a0a380d7e4"
+      },
+      "evidence": "<html lang=\"ko\">"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

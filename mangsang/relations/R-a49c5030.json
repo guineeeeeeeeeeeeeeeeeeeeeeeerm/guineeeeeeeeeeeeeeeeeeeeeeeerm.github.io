@@ -1,0 +1,15 @@
+{
+  "id": "R-a49c5030",
+  "src": "src/lib/site.ts",
+  "predicate": "realizes",
+  "dst": "concept:translation",
+  "evidence": "function parseTranslations(root: string, posts: Post[]): Map<string, Post> {",
+  "seen": {
+    "src/lib/site.ts": "558aa0ea6f87",
+    "concept:translation": "f1329a883360"
+  },
+  "confirmed": {
+    "delegated": "영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말"
+  },
+  "written_by": "mangsang 1.10.0"
+}

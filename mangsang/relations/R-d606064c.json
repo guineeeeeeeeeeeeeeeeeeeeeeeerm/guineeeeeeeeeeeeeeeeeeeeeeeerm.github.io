@@ -5,11 +5,11 @@
   "dst": "concept:site-build",
   "evidence": "await rename(staging, docs);",
   "seen": {
-    "scripts/build.mjs": "ce46e979dc03",
+    "scripts/build.mjs": "99eb0570c102",
     "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "scripts/build.mjs": "1af322dcb50a",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "await rename(staging, docs);"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+      },
+      "seen": {
+        "scripts/build.mjs": "ce46e979dc03",
         "concept:site-build": "dc5fb39ad68a"
       },
       "evidence": "await rename(staging, docs);"

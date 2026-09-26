@@ -3,13 +3,25 @@
   "src": "src/components/PatchView.astro",
   "predicate": "realizes",
   "dst": "concept:patch-view",
-  "evidence": "<button type=\"button\" class=\"patch-view-toggle\" aria-pressed=\"false\">패치 보기</button>",
+  "evidence": "<button type=\"button\" class=\"patch-view-toggle\" aria-pressed=\"false\">{text.showPatches}</button>",
   "seen": {
-    "src/components/PatchView.astro": "b30c94b710a9",
+    "src/components/PatchView.astro": "68ca6ae2f953",
     "concept:patch-view": "6be15e820155"
   },
   "confirmed": {
-    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 토글 글자가 언어별 사전으로 바뀜 — 근거를 새 줄로"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+      },
+      "seen": {
+        "src/components/PatchView.astro": "b30c94b710a9",
+        "concept:patch-view": "6be15e820155"
+      },
+      "evidence": "<button type=\"button\" class=\"patch-view-toggle\" aria-pressed=\"false\">패치 보기</button>"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

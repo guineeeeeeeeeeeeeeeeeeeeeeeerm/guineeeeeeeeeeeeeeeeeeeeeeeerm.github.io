@@ -3,13 +3,25 @@
   "src": "src/components/IncomingLinks.astro",
   "predicate": "realizes",
   "dst": "concept:link",
-  "evidence": "<h2>이 글을 가리키는 글</h2>",
+  "evidence": "<h2>{text.linkedFrom}</h2>",
   "seen": {
-    "src/components/IncomingLinks.astro": "a9033d6ce1e8",
+    "src/components/IncomingLinks.astro": "72a3ed22dfa0",
     "concept:link": "7fd16ce1dc5b"
   },
   "confirmed": {
-    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 제목 글자가 언어별 사전으로 바뀜 — 근거를 새 줄로"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+      },
+      "seen": {
+        "src/components/IncomingLinks.astro": "a9033d6ce1e8",
+        "concept:link": "7fd16ce1dc5b"
+      },
+      "evidence": "<h2>이 글을 가리키는 글</h2>"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

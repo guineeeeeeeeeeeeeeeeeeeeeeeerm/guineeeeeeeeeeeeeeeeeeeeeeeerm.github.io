@@ -1,0 +1,15 @@
+{
+  "id": "R-84f4d744",
+  "src": "tests/test_i18n.py",
+  "predicate": "realizes",
+  "dst": "concept:translation",
+  "evidence": "def test_Q_i18n_translation_allows_only_title_and_uses_the_original_written_and_type(self):",
+  "seen": {
+    "tests/test_i18n.py": "c8518a7f5f0a",
+    "concept:translation": "f1329a883360"
+  },
+  "confirmed": {
+    "delegated": "영어판 조각(source:loc-03, loc-04 승인)의 개념 연결: 계획서 Q-i18n, 번역 파싱 코드, 계약 테스트, 소유자의 말"
+  },
+  "written_by": "mangsang 1.10.0"
+}

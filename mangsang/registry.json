@@ -100,5 +100,20 @@
   },
   {
     "path": "tests/test_frame.py"
+  },
+  {
+    "path": "src/pages/en/index.astro"
+  },
+  {
+    "path": "src/pages/en/about/index.astro"
+  },
+  {
+    "path": "src/pages/en/p/[id]/index.astro"
+  },
+  {
+    "path": "src/pages/en/tags/[tag]/index.astro"
+  },
+  {
+    "path": "tests/test_i18n.py"
   }
 ]
