@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.12.0",
+  "goal": "배포 워크플로 러너를 ubuntu-24.04로 고정",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
