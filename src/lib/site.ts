@@ -287,6 +287,7 @@ export const SHARE_PLACES: Record<string, [string, string]> = {
   linkedin: ["LinkedIn", "linkedin.png"],
   substack: ["Substack", "substack.png"],
   bluesky: ["Bluesky", "bluesky.svg"],
+  devto: ["DEV", "devto.svg"],
 };
 
 const TABLES = new Set(["links.jsonl", "patches.jsonl", "shares.jsonl", "tags.jsonl"]);

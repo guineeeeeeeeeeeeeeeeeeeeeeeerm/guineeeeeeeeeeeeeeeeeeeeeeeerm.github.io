@@ -29,6 +29,7 @@ BRAND_FILES = {
     "linkedin": "linkedin.png",
     "substack": "substack.png",
     "bluesky": "bluesky.svg",
+    "devto": "devto.svg",
 }
 
 
