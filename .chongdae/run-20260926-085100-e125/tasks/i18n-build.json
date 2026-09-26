@@ -215,6 +215,132 @@
         "commands-run": 52,
         "commands-failed": 6
       }
+    },
+    {
+      "status": "done",
+      "summary": "영어판 구현을 마무리했습니다. 번역 검증, 영어 페이지·태그·링크·패치·공유 배지·언어 전환·README를 반영했습니다.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests -p test_i18n.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_frame.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 0
+        },
+        {
+          "check": "npm run build",
+          "exit": 0
+        },
+        {
+          "check": "git diff --check",
+          "exit": 0
+        }
+      ],
+      "decisions": [
+        {
+          "what": "영어 글 본문의 이미지 경로",
+          "chosen": "영어 글 본문은 `../../images/`를 사용하고 빌드 시 `docs/en/images`에 이미지를 복사합니다.",
+          "alternatives": [
+            "공통 루트의 `../../../images/`만 사용합니다."
+          ]
+        }
+      ],
+      "non-claims": [
+        "이전 시도에서 변경된 보호 테스트와 `.chongdae/` 기록은 이번 이어받은 작업에서 수정하지 않았습니다."
+      ],
+      "disputed-tests": [],
+      "worker": {
+        "host": "codex",
+        "model": "gpt-5.6-luna",
+        "effort": "xhigh"
+      },
+      "member": "dakdol",
+      "domain": "code",
+      "retried": {
+        "by": "chongdae",
+        "auto": "the verifier rejected: 3 finding(s)",
+        "at": "2026-09-26T09:38:43+00:00",
+        "chongdae": "chongdae 1.12.0"
+      },
+      "trace": {
+        "changed": [
+          "update ./src/pages/en/about/index.astro",
+          "update ./src/pages/en/p/[id]/index.astro",
+          "update ./src/pages/en/tags/[tag]/index.astro",
+          "update ./scripts/build.mjs"
+        ],
+        "commands-run": 26,
+        "commands-failed": 2
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:1056-1061,1621",
+            "record_quote": "소개의 번역은 `content/about.en.md`이고 반드시 있다(없으면 빌드 오류).",
+            "tree_quote": "const aboutEn = parseAboutTranslation(root, about, translations.size > 0);",
+            "why": "번역 글이 하나도 없으면 `about.en.md`가 없어도 빌드가 성공해 필수 파일 규칙을 어깁니다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "scripts/build.mjs:74-76",
+            "record_quote": "영어판은 `/en/`(피드)와 `/en/about/`(소개)이며 출력은 `docs/en/…`이다.",
+            "tree_quote": "if (!site.translations.size) await rm(path.join(staging, \"en\"), { recursive: true, force: true });",
+            "why": "유효한 `about.en.md`가 있어도 번역 글이 없으면 전체 영어 트리를 삭제해 필수 영어 피드·소개 페이지가 생성되지 않습니다."
+          },
+          {
+            "kind": "plan-vs-code",
+            "where": "src/lib/site.ts:1570,1644-1645",
+            "record_quote": "그 앵커가 번역 본문에 정확히 한 번 나오지 않으면 빌드 오류이고 오류 줄은 그 사건의 줄이다.",
+            "tree_quote": "const positions = occurrences(translation.body, event.anchor); ... occurrences(state.body, link.anchor).length === 1",
+            "why": "translated 앵커를 영어 패치 적용 전의 원문에서만 검증하고, 적용 후 사라지면 빌드 오류 대신 영어 주석에서 조용히 제외합니다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "3 finding(s)"
+      },
+      "reviewed_tree": {
+        "README.md": "a90859a6f751261047c57f7934c41b3af2bf23c2",
+        "plan/PLAN.md": "66ce2a8470aab8924106a0a55816bdab6d03b737",
+        "scripts/build.mjs": "b1b3b32c551342ff701a95db6b644174bc33c324",
+        "src/components/FeedItem.astro": "a089bf47bea65d8c1211828a910d8b453e6cd230",
+        "src/components/Footnotes.astro": "d6674d9655b0c0355b5e4f7022e7fc8f34edb5cb",
+        "src/components/Header.astro": "0d803469aeb64a697f2ec5d10876ce493d9b5255",
+        "src/components/IncomingLinks.astro": "ad200d578398b38cfb76b6d79b7385a2c178c891",
+        "src/components/PatchView.astro": "712ff7b7b1f2e2833564cc92df7a690d11323d09",
+        "src/components/TagCloud.astro": "e14a881c3e575c95ee76e2963e73ada256de36c1",
+        "src/layouts/BaseLayout.astro": "0bf2942777bc2aeae7fb49c7f3a40bc8a9152210",
+        "src/lib/site.ts": "18495103ab311c47d8e2f84808a6a2ae09b1dda2",
+        "src/pages/about/index.astro": "8525a31d8427a6fdc33a3a3cc88f7aebb9600ff3",
+        "src/pages/index.astro": "3403e1d8eceb5dad3c48ab6f58d025e0063c7074",
+        "src/pages/p/[id]/index.astro": "83c6fd887eb5671907cd8306955041dcc24a9cd8",
+        "src/pages/tags/[tag]/index.astro": "2003787c4d21c5e3ab471964cb3ccb28ebd4deee",
+        "tests/test_i18n.py": "8ba26cdcbe59b230f9e326e6f85d745f6feb65e3",
+        "tests/test_readme.py": "2bc91864253e29f6446770d41bbd4a080cc18c86",
+        "content/about.en.md": "f3c3c0967e4f2eb7e69ad4fdf591ee9cd0b523ec",
+        "content/posts/20260924-075921.en.md": "0014cf7dd5a604642c321d6d5992443fc0441952",
+        "content/posts/20260924-085456.en.md": "09419178aff0d3f3e3cb3836ae0683371c2c853d",
+        "content/posts/20260925-103715.en.md": "3e1cbf67f441d456bc28e6501375345a28785cb7",
+        "content/posts/20260926-044433.en.md": "0965f777cb523f5795b553721f96b7b6ac5c96c1",
+        "src/pages/en/about/index.astro": "3db6a42801d229f2f418233c8ea4feebf862c30e",
+        "src/pages/en/index.astro": "1c0efd73a5eaa28199168186a6ce3e7b0679773a",
+        "src/pages/en/p/[id]/index.astro": "42abaf6c1bff14d9c2938e41c0cc6660c022f882",
+        "src/pages/en/tags/[tag]/index.astro": "7f75017be6896d6588a168e8367392577152592e"
+      }
     }
   ],
   "rebaselined": [
@@ -227,55 +353,41 @@
       "chongdae": "chongdae 1.12.0"
     }
   ],
-  "response": {
-    "status": "done",
-    "summary": "영어판 구현을 마무리했습니다. 번역 검증, 영어 페이지·태그·링크·패치·공유 배지·언어 전환·README를 반영했습니다.",
-    "verified": [
-      {
-        "check": "python3 -m unittest discover -s tests -p test_i18n.py",
-        "exit": 0
-      },
-      {
-        "check": "python3 -m unittest discover -s tests -p test_frame.py",
-        "exit": 0
-      },
-      {
-        "check": "python3 -m unittest discover -s tests",
-        "exit": 0
-      },
-      {
-        "check": "npm run build",
-        "exit": 0
-      },
-      {
-        "check": "git diff --check",
-        "exit": 0
-      }
-    ],
-    "decisions": [
-      {
-        "what": "영어 글 본문의 이미지 경로",
-        "chosen": "영어 글 본문은 `../../images/`를 사용하고 빌드 시 `docs/en/images`에 이미지를 복사합니다.",
-        "alternatives": [
-          "공통 루트의 `../../../images/`만 사용합니다."
-        ]
-      }
-    ],
-    "non-claims": [
-      "이전 시도에서 변경된 보호 테스트와 `.chongdae/` 기록은 이번 이어받은 작업에서 수정하지 않았습니다."
-    ],
-    "disputed-tests": [],
-    "worker": {
-      "host": "codex",
-      "model": "gpt-5.6-luna",
-      "effort": "xhigh"
-    },
-    "member": "dakdol",
-    "domain": "code"
-  },
   "accepted": {
     "delegated": "기술 결정(영어판 그림 복사)은 위임 범위(source:plan-06); 계획서 Q-i18n에 적음. 작업자가 content/에 쓴 자기 번역은 버리고 소유자가 확인한 초안으로 되돌림",
     "at": "2026-09-26T09:32:35+00:00",
     "chongdae": "chongdae 1.12.0"
+  },
+  "non-claims": [],
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.8.0",
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 33,
+      "commands-failed": 0
+    }
   }
 }

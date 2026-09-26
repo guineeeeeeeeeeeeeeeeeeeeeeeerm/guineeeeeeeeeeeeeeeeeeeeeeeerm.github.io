@@ -1,0 +1,197 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-085100-e125",
+  "task": "i18n-build",
+  "role": "verifier",
+  "target": ".",
+  "goal": "영어판 추가: /en/ 아래 번역 파일 기반, 원본은 한국어",
+  "brief": "plan/PLAN.md의 새 절 Q-i18n과 Q-ui의 source:loc-03 문단을 구현한다: 영어판(/en/ 아래 피드·글·소개·태그 페이지, docs/en/…), 번역 파일(content/posts/<id>.en.md, content/about.en.md 필수), 번역 없는 글은 영어판에서 빠짐, 영어 화면 글자, 상단 띠의 언어 전환 링크(.site-nav 마지막 a.lang-switch, hreflang/lang, 짝 페이지 규칙)와 <link rel=alternate hreflang>, 링크 표의 translated 사건(영어 앵커·사유, 없으면 빠짐, 앵커 오류는 그 사건 줄), 패치의 lang: en(번역 본문에만, 영어 패치 보기), 영어판 태그(번역된 글만, 사유 없음), 공유 배지. 규칙은 src/lib/에 한 곳만 두고(validateSite가 번역도 검사해 Astro 전에 실패), 마크업은 컴포넌트·템플릿이 짓는다(한국어판과 같은 컴포넌트에 언어별 글자 사전을 넘기는 방식 권장). 한국어판 출력은 상단 띠의 전환 링크와 alternate 링크 말고는 바뀌지 않는다. README.md에 '영어판' 절을 더한다(번역 파일 쓰는 법, 링크 translated 사건, 패치 lang). 저장소의 content/에는 아직 about.en.md가 없으므로 npm run build를 체크로 돌리지 않는다 — 세션이 번역을 넣은 뒤 run 마지막에 전체 테스트와 빌드를 돌린다. 새 패키지는 설치하지 않는다(더 필요하면 blocked). 테스트 파일은 건드리지 않는다(HEAD의 tests/*.py가 계약이다). 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
+  "closes": [
+    "Q-i18n"
+  ],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_i18n.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_frame.py"
+    ]
+  ],
+  "tests": [
+    "tests/support.py",
+    "tests/test_about.py",
+    "tests/test_external_links.py",
+    "tests/test_feed_layout.py",
+    "tests/test_frame.py",
+    "tests/test_i18n.py",
+    "tests/test_ids.py",
+    "tests/test_image_zoom.py",
+    "tests/test_images.py",
+    "tests/test_linebreaks.py",
+    "tests/test_markdown.py",
+    "tests/test_readme.py",
+    "tests/test_s1.py",
+    "tests/test_s2.py",
+    "tests/test_s3.py",
+    "tests/test_shares.py",
+    "tests/test_tags.py"
+  ],
+  "response": "./.chongdae/run-20260926-085100-e125/local/i18n-build.verify.2.response.json",
+  "attempts": [
+    {
+      "status": "blocked",
+      "summary": "영어판 구현과 실제 빌드는 완료했지만, 보호된 테스트 일부가 계약의 상대 URL·필수 번역 파일 규칙과 충돌해 지정 i18n 체크를 통과시킬 수 없습니다.",
+      "verified": [
+        {
+          "check": "python3 -m unittest discover -s tests -p test_i18n.py",
+          "exit": 1
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_frame.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests -p test_readme.py",
+          "exit": 0
+        },
+        {
+          "check": "python3 -m unittest discover -s tests",
+          "exit": 1
+        },
+        {
+          "check": "npm run build",
+          "exit": 0
+        }
+      ],
+      "decisions": [
+        {
+          "what": "번역 글이 없는 fixture의 영어 출력",
+          "chosen": "영어 번역 글이 없으면 staging의 빈 docs/en 트리를 제거",
+          "alternatives": [
+            "about.en.md가 있어도 항상 docs/en을 생성"
+          ]
+        },
+        {
+          "what": "영어 패치가 번역 링크 앵커를 제거하는 경우",
+          "chosen": "원문 번역 파일에서 앵커를 검증하고 최종 패치 본문에서 사라진 링크는 본문 주석에서 제외",
+          "alternatives": [
+            "적용된 영어 본문에서 앵커를 검증해 빌드 오류"
+          ]
+        }
+      ],
+      "non-claims": [
+        "tests/test_i18n.py는 보호 테스트이며 수정하지 않았습니다.",
+        "지정 i18n 체크의 남은 실패는 상대 URL/마크업 기대 불일치입니다.",
+        "전체 테스트는 i18n 3건과 README fixture 1건이 실패했습니다."
+      ],
+      "retried": {
+        "by": "chongdae",
+        "auto": "tests disputed; i18n-tests reopened to amend tests/test_i18n.py, tests/test_readme.py",
+        "at": "2026-09-26T09:21:23+00:00",
+        "chongdae": "chongdae 1.12.0"
+      },
+      "review": null,
+      "disputed-tests": [
+        {
+          "test": "tests/test_i18n.py::I18nContractTests.test_Q_i18n_language_switch_is_last_in_nav_and_points_to_the_pair_or_english_feed",
+          "contract_quote": "짝이 되는 페이지로 간다(글은 번역이 있으면 그 번역, 없으면 영어 피드; 피드·소개·태그 페이지는 서로의 짝, 짝 태그 페이지가 없으면 피드).",
+          "why": "테스트가 영어 소개·글·태그 페이지에서 ../about/, ../../p/, ../../tags/를 요구하지만 표준 상대 URL 해석으로는 한국어 짝 페이지가 아니라 영어 트리의 현재/영어 페이지를 가리킵니다."
+        },
+        {
+          "test": "tests/test_i18n.py::I18nContractTests.test_Q_i18n_posts_without_translations_are_absent_from_english_feed_tags_and_cloud",
+          "contract_quote": "공통 파일과 이미지도 각 페이지 위치 기준의 상대 경로다.",
+          "why": "영어 태그 페이지의 올바른 영어 글 링크는 ../../p/<id>/인데 테스트는 문서 안에 en/p/<id>/ 문자열을 요구합니다. 이를 맞추면 실제 상대 링크가 잘못됩니다."
+        },
+        {
+          "test": "tests/test_i18n.py::I18nContractTests.test_Q_i18n_share_badges_are_present_on_english_feed_and_post_pages",
+          "contract_quote": "공통 파일과 이미지도 각 페이지 위치 기준의 상대 경로다.",
+          "why": "docs/en/index.html에서 docs/assets의 배지로 가는 올바른 상대 경로는 ../assets/brands/...인데 테스트는 assets/brands/...를 요구해 존재하지 않는 docs/en/assets를 가리키게 합니다."
+        },
+        {
+          "test": "tests/test_readme.py::QReadmeContractTests.test_Q_readme_fenced_post_link_and_patch_examples_build_and_render",
+          "contract_quote": "소개의 번역은 `about.en.md`로 만들고 반드시 있다(없으면 빌드 오류).",
+          "why": "테스트 fixture는 content/about.md만 만들고 content/about.en.md를 만들지 않으면서 빌드 성공을 요구합니다."
+        },
+        {
+          "test": "tests/test_i18n.py::I18nContractTests.test_Q_i18n_english_tags_count_only_translated_posts_and_show_no_tag_reason",
+          "contract_quote": "영어판 태그 페이지와 클라우드는 번역된 글만 세고, 번역된 글이 없는 태그는 영어판에 없다.",
+          "why": "테스트 정규식 r'>shared<\\span class=\"count\">1</span>'는 정상적인 <a>shared</a><span ...> 마크업과 일치하지 않아, 계약에 없는 인위적인 숨김 마커를 추가해야만 통과합니다."
+        }
+      ],
+      "reopened": null
+    }
+  ],
+  "touched": [
+    "scripts/build.mjs",
+    "src/pages/en/about/index.astro",
+    "src/pages/en/p/[id]/index.astro",
+    "src/pages/en/tags/[tag]/index.astro"
+  ],
+  "built": {
+    "summary": "영어판 구현을 마무리했습니다. 번역 검증, 영어 페이지·태그·링크·패치·공유 배지·언어 전환·README를 반영했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests -p test_i18n.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_frame.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests",
+        "exit": 0
+      },
+      {
+        "check": "npm run build",
+        "exit": 0
+      },
+      {
+        "check": "git diff --check",
+        "exit": 0
+      }
+    ],
+    "non-claims": [
+      "이전 시도에서 변경된 보호 테스트와 `.chongdae/` 기록은 이번 이어받은 작업에서 수정하지 않았습니다."
+    ]
+  },
+  "touched_since": [
+    "README.md",
+    "content/about.en.md",
+    "content/posts/20260924-075921.en.md",
+    "content/posts/20260924-085456.en.md",
+    "content/posts/20260925-103715.en.md",
+    "content/posts/20260926-044433.en.md",
+    "plan/PLAN.md",
+    "src/components/FeedItem.astro",
+    "src/components/Footnotes.astro",
+    "src/components/Header.astro",
+    "src/components/IncomingLinks.astro",
+    "src/components/PatchView.astro",
+    "src/components/TagCloud.astro",
+    "src/layouts/BaseLayout.astro",
+    "src/lib/site.ts",
+    "src/pages/about/index.astro",
+    "src/pages/en/index.astro",
+    "src/pages/index.astro",
+    "src/pages/p/[id]/index.astro",
+    "src/pages/tags/[tag]/index.astro"
+  ]
+}
