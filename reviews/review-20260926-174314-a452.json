@@ -1,0 +1,107 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260926-174314-a452",
+  "since": "054b2b5e95b17af8032dfb6395bb60bd65d7a500",
+  "head": "cd8c6c4fc5f3f64116c2ffda383aa232f485999a",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-084113-1138, run-20260926-084254-d8ee",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 66,
+      "text": "66 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 66)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-183155-0726",
+      "seen-in": "review-20260925-183155-0726",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260925-183155-0726 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-202344-fc6a",
+      "seen-in": "review-20260925-202344-fc6a",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260925-202344-fc6a and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-234959-4023",
+      "seen-in": "review-20260925-234959-4023",
+      "count": 18,
+      "text": "18 observation(s) written in review-20260925-234959-4023 and unchanged since (agent-proposed 1, delegated 17)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-120908-3415",
+      "seen-in": "review-20260926-120908-3415",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260926-120908-3415 and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-132632-e2df",
+      "seen-in": "review-20260926-132632-e2df",
+      "count": 26,
+      "text": "26 observation(s) written in review-20260926-132632-e2df and unchanged since (delegated 26)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-173922-be51",
+      "seen-in": "review-20260926-173922-be51",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-173922-be51 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-174115-4090",
+      "seen-in": "review-20260926-174115-4090",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-174115-4090 and unchanged since (delegated 1)"
+    }
+  ]
+}
