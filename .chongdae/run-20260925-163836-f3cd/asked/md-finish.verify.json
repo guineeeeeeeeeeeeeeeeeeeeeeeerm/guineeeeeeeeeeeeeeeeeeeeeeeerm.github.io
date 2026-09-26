@@ -1,0 +1,32 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.11.0",
+  "stage": "verify",
+  "run": "run-20260925-163836-f3cd",
+  "task": "md-finish",
+  "role": "verifier",
+  "target": ".",
+  "goal": "본문 마크다운을 markdown-it으로: 표준 마크다운·표·취소선",
+  "brief": "md-build-2가 남긴 작업 트리(src/lib/site.ts, README.md)를 체크로 확인해 받는다",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260925-163836-f3cd/local/md-finish.verify.response.json",
+  "touched": [],
+  "built": null
+}

@@ -1,0 +1,101 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.11.0",
+  "status": "todo",
+  "def": {
+    "id": "md-finish",
+    "role": "session",
+    "brief": "md-build-2가 남긴 작업 트리(src/lib/site.ts, README.md)를 체크로 확인해 받는다",
+    "closes": [],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      [
+        "npm",
+        "run",
+        "build"
+      ]
+    ],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 6,
+  "added": "2026-09-26T02:58:29+00:00",
+  "self-performed": {
+    "instead-of": "implementer",
+    "why": "md-build-2의 트리를 받는 일: 남은 반려는 소유자가 미룬 경계 사례",
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "at": "2026-09-26T02:58:29+00:00",
+    "chongdae": "chongdae 1.11.0"
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.7.0",
+        "chongdae": "1.11.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 19,
+      "commands-failed": 2
+    }
+  },
+  "attempts": [
+    {
+      "status": "session",
+      "retried": {
+        "delegated": "검증자 지적(표 칸 안 ![x|120]의 | 를 칸 경계로 봄)은 사실과 다름: site.ts 763-769의 판별식을 node로 직접 돌리면 true/true, 표 칸 안 그림 전체를 바꾸는 패치로 실제 빌드하면 종료 코드 0이고 alt=\"y\" width=\"120\"이 나옴 — 트리를 고치지 않고 다시 확인받음",
+        "at": "2026-09-26T03:06:12+00:00",
+        "chongdae": "chongdae 1.11.0"
+      },
+      "review": {
+        "artifact-type": "dwitbuk/review@1",
+        "verdict": "reject",
+        "findings": [
+          {
+            "kind": "record-vs-tree",
+            "where": "src/lib/site.ts:763-769; .chongdae/run-20260925-163836-f3cd/tasks/md-build-2.json",
+            "record_quote": "표 안 이미지 너비 표식 판정을 수정했습니다.",
+            "tree_quote": "const before = line.slice(0, column + 1); const imageWidthBar = /!\\[[^\\]\\n]*\\|\\d+$/.test(before) && /^\\d+\\](?:\\(|\\[)/.test(line.slice(column + 1)); if (!imageWidthBar) add(lineNumber, column, column + 1);",
+            "why": "현재 열이 `![x|120](...)`의 너비 구분자 `|`일 때 `before`에는 뒤따르는 숫자가 없어 첫 정규식이 항상 false다. 따라서 너비 구분자를 표 칸 경계로 기록해, 이미지 전체를 덮는 패치도 문법 겹침 오류가 된다."
+          }
+        ],
+        "worker": {
+          "host": "codex",
+          "model": "gpt-5.6-luna",
+          "effort": "xhigh"
+        }
+      },
+      "rejected": {
+        "by": "verifier",
+        "why": "1 finding(s)"
+      }
+    }
+  ]
+}
