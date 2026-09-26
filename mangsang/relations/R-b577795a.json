@@ -5,11 +5,11 @@
   "dst": "concept:post-type",
   "evidence": "def test_Q_post_type_must_be_short_medium_or_long(self):",
   "seen": {
-    "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
+    "tests/test_s1.py:S1GeneratorContractTests": "6ef89a0b4d5c",
     "concept:post-type": "dce6f00332ed"
   },
   "confirmed": {
-    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+    "delegated": "Claude가 canonical 예외(Q-meta) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
   "history": [
     {
@@ -18,6 +18,16 @@
       },
       "seen": {
         "tests/test_s1.py:S1GeneratorContractTests": "40f5bbdfff94",
+        "concept:post-type": "dce6f00332ed"
+      },
+      "evidence": "def test_Q_post_type_must_be_short_medium_or_long(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: 24개 인용이 모두 글자 그대로 남아 있고 개념과 맞음"
+      },
+      "seen": {
+        "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
         "concept:post-type": "dce6f00332ed"
       },
       "evidence": "def test_Q_post_type_must_be_short_medium_or_long(self):"

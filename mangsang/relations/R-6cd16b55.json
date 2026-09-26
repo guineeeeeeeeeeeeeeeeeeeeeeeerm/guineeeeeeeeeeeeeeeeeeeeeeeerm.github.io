@@ -5,11 +5,11 @@
   "dst": "concept:ui-language",
   "evidence": "def test_Q_ui_sets_korean_document_language_and_shows_no_type_names(self):",
   "seen": {
-    "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
+    "tests/test_s1.py:S1GeneratorContractTests": "6ef89a0b4d5c",
     "concept:ui-language": "ffe0c1f22b68"
   },
   "confirmed": {
-    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+    "delegated": "Claude가 canonical 예외(Q-meta) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
   "history": [
     {
@@ -29,6 +29,16 @@
       "seen": {
         "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
         "concept:ui-language": "e2a0a380d7e4"
+      },
+      "evidence": "def test_Q_ui_sets_korean_document_language_and_shows_no_type_names(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+      },
+      "seen": {
+        "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
+        "concept:ui-language": "ffe0c1f22b68"
       },
       "evidence": "def test_Q_ui_sets_korean_document_language_and_shows_no_type_names(self):"
     }

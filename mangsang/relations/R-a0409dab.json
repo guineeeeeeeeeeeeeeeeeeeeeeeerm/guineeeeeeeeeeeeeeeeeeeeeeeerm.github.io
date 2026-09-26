@@ -5,11 +5,11 @@
   "dst": "concept:post",
   "evidence": "def test_Q_build_bad_input_is_atomic_and_reports_one_bad_file_line(self):",
   "seen": {
-    "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
+    "tests/test_s1.py:S1GeneratorContractTests": "6ef89a0b4d5c",
     "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: written 필수 테스트가 목록 A로 지워지고 같은 입력을 이 테스트가 덮음 — 근거를 옮김"
+    "delegated": "Claude가 canonical 예외(Q-meta) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
   "history": [
     {
@@ -21,6 +21,16 @@
         "concept:post": "700e2db936c8"
       },
       "evidence": "def test_Q_post_written_is_required(self):"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 테스트 정리(source:tf-05, plan/TEST-PRUNE.md) 뒤 다시 읽음: written 필수 테스트가 목록 A로 지워지고 같은 입력을 이 테스트가 덮음 — 근거를 옮김"
+      },
+      "seen": {
+        "tests/test_s1.py:S1GeneratorContractTests": "6012517394c2",
+        "concept:post": "700e2db936c8"
+      },
+      "evidence": "def test_Q_build_bad_input_is_atomic_and_reports_one_bad_file_line(self):"
     }
   ],
   "written_by": "mangsang 1.10.0"

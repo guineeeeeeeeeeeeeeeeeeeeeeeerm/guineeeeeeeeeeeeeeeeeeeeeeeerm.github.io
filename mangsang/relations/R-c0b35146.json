@@ -5,11 +5,23 @@
   "dst": "concept:site-build",
   "evidence": "사이트 이름은\n\"GuinEeeeeeeeeeeeeeeeeeeeeeeerm\"이다.",
   "seen": {
-    "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "66e68f9dc8aa",
+    "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "8d2de52db9e6",
     "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "favicon·OG 조각(source:og-05 승인)의 개념 연결: 계획서 Q-meta, 계약 테스트, 소유자의 요청"
+    "delegated": "Claude가 canonical 예외(Q-meta) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "favicon·OG 조각(source:og-05 승인)의 개념 연결: 계획서 Q-meta, 계약 테스트, 소유자의 요청"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-meta — 탭 제목, favicon, 링크 미리보기(OG)": "66e68f9dc8aa",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "사이트 이름은\n\"GuinEeeeeeeeeeeeeeeeeeeeeeeerm\"이다."
+    }
+  ],
   "written_by": "mangsang 1.10.0"
 }
