@@ -1,0 +1,76 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.11.0",
+  "stage": "build",
+  "run": "run-20260926-034012-fed2",
+  "task": "prune-tests",
+  "role": "nitpick",
+  "target": ".",
+  "goal": "테스트 시간 줄이기: 오류 빨리 끝내기, 빌드 나눠 쓰기, 체크 범위, 효과 없는 테스트 목록",
+  "brief": "plan/TEST-PRUNE.md(소유자 승인 source:tf-05)를 그대로 테스트에 반영한다 — A 삭제, B 삭제·이름 변경, C 사례 줄이기, D 단언 느슨하게, E 같은 입력의 빌드를 클래스 단위로 한 번만 하고 나눠 씀(unittest setUpClass/tearDownClass로 임시 사이트를 만들고 빌드; 공통 도우미가 필요하면 tests/support.py에 더해도 된다). 목록에 없는 계약은 줄이지 않는다. '남기는 것'은 건드리지 않는다. 옮기라고 적힌 단언(frame 준비물의 그림, readme의 소개 확인, icon_paths의 aria-label 순서, image_zoom의 width 없음)은 빠뜨리지 않는다. 목록의 이름이 실제와 조금 다르면 가장 가까운 것에 적용하고 보고의 non-claims에 적는다. 끝나면 전체 테스트가 통과해야 한다(지금 코드는 바뀌지 않으므로 모두 통과가 정상). 보고의 summary에 바뀐 뒤의 테스트 수와 run_build 호출 수를 적는다. 보고의 tests 목록에는 테스트 파일 경로만 적는다.",
+  "closes": [
+    "Q-build"
+  ],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_frame.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s1.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s2.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s3.py"
+    ]
+  ],
+  "tests": [
+    "tests/support.py",
+    "tests/test_about.py",
+    "tests/test_external_links.py",
+    "tests/test_feed_layout.py",
+    "tests/test_frame.py",
+    "tests/test_ids.py",
+    "tests/test_image_zoom.py",
+    "tests/test_images.py",
+    "tests/test_linebreaks.py",
+    "tests/test_markdown.py",
+    "tests/test_readme.py",
+    "tests/test_s1.py",
+    "tests/test_s2.py",
+    "tests/test_s3.py",
+    "tests/test_shares.py",
+    "tests/test_tags.py"
+  ],
+  "response": "./.chongdae/run-20260926-034012-fed2/local/prune-tests.response.json"
+}

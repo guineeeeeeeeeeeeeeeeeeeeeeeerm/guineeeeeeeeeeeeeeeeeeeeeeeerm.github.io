@@ -1,0 +1,112 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.11.0",
+  "stage": "verify",
+  "run": "run-20260926-034012-fed2",
+  "task": "fastfail",
+  "role": "verifier",
+  "target": ".",
+  "goal": "테스트 시간 줄이기: 오류 빨리 끝내기, 빌드 나눠 쓰기, 체크 범위, 효과 없는 테스트 목록",
+  "brief": "plan/PLAN.md Q-build '테스트 시간' 항목의 1번을 구현한다: scripts/build.mjs가 Astro build를 부르기 전에 src/lib/의 같은 검사로 content/(글, 기록 표 4개, 소개, 그림 경로, 패치 적용·링크 앵커·겹침 검사 등 빌드 오류를 내는 모든 검사)를 먼저 읽고, 잘못된 입력이면 Astro를 띄우지 않고 지금과 같은 오류(stderr에 그 파일 경로가 든 줄, 종료 코드 1, 기존 docs/ 그대로)로 끝낸다. 검사 규칙을 build.mjs에 새로 쓰지 않는다 — src/lib/site.ts의 loadSite(또는 그 검사 부분)를 그대로 불러 쓴다(Node는 .ts를 타입 제거로 불러올 수 있다; 안 되면 가장 작은 방법을 쓰고 보고에 적는다). 성공하는 입력의 출력은 바이트 단위로 지금과 같다. 체크는 적힌 테스트 파일들이고, 전체 테스트는 run 마지막 작업이 돌린다 — 이 작업에서 전체 테스트를 따로 돌리지 않는다. 오류 사례 빌드가 실제로 빨라졌는지 한 사례의 시간을 보고의 summary에 적는다. 새 패키지는 설치하지 않는다. 테스트 파일은 건드리지 않는다(HEAD의 tests/*.py가 계약이다). 체크는 적힌 명령 그대로 돌리고, 보고의 verified에는 실제로 돌린 명령만 적는다.",
+  "closes": [
+    "Q-build"
+  ],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_frame.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s1.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s2.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s3.py"
+    ]
+  ],
+  "tests": [
+    "tests/support.py",
+    "tests/test_about.py",
+    "tests/test_external_links.py",
+    "tests/test_feed_layout.py",
+    "tests/test_frame.py",
+    "tests/test_ids.py",
+    "tests/test_image_zoom.py",
+    "tests/test_images.py",
+    "tests/test_linebreaks.py",
+    "tests/test_markdown.py",
+    "tests/test_readme.py",
+    "tests/test_s1.py",
+    "tests/test_s2.py",
+    "tests/test_s3.py",
+    "tests/test_shares.py",
+    "tests/test_tags.py"
+  ],
+  "response": "./.chongdae/run-20260926-034012-fed2/local/fastfail.verify.response.json",
+  "touched": [
+    "scripts/build.mjs",
+    "src/lib/site.ts"
+  ],
+  "built": {
+    "summary": "구현 완료. Astro 전에 src/lib 검사를 실행하며, 잘못된 소개 그림 사례가 stderr 경로·종료 코드 1·docs 보존으로 0.253초에 종료됐습니다. 지정된 네 체크 모두 통과했습니다.",
+    "verified": [
+      {
+        "check": "python3 -m unittest discover -s tests -p test_frame.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_s1.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_s2.py",
+        "exit": 0
+      },
+      {
+        "check": "python3 -m unittest discover -s tests -p test_s3.py",
+        "exit": 0
+      },
+      {
+        "check": "git diff --check && git diff --stat && git diff -- tests && git status --short",
+        "exit": 0
+      }
+    ],
+    "non-claims": [
+      "요청에 따라 전체 테스트 suite는 실행하지 않았습니다.",
+      "변경 전 동일 fixture의 별도 기준 시간은 측정하지 않았습니다."
+    ]
+  },
+  "touched_since": [
+    "plan/PLAN.md"
+  ]
+}

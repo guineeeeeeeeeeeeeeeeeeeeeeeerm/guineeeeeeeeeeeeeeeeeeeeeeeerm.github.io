@@ -1,7 +1,7 @@
 {
   "artifact-type": "chongdae/task@1",
   "written_by": "chongdae 1.11.0",
-  "status": "todo",
+  "status": "done",
   "def": {
     "id": "fastfail",
     "role": "implementer",
@@ -166,5 +166,97 @@
     "delegated": "기술 결정(검사 함수의 위치와 구성)은 위임 범위(source:plan-06); '검사 규칙은 한 곳에'와 맞음; 계획서 Q-build에 적음",
     "at": "2026-09-26T03:46:13+00:00",
     "chongdae": "chongdae 1.11.0"
-  }
+  },
+  "non-claims": [
+    "(provider) 요청에 따라 전체 테스트 suite는 실행하지 않았습니다.",
+    "(provider) 변경 전 동일 fixture의 별도 기준 시간은 측정하지 않았습니다."
+  ],
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.8.0",
+        "chongdae": "1.11.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 14,
+      "commands-failed": 1
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_frame.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s1.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s2.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_s3.py"
+    ]
+  ],
+  "touched": [
+    "plan/PLAN.md",
+    "scripts/build.mjs",
+    "src/lib/site.ts"
+  ]
 }
