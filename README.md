@@ -151,6 +151,33 @@ type: short
 LLM 시대의 개발 도구를 만듭니다. [저장소 보기](https://github.com/example)
 ```
 
+## 영어판
+
+한국어 글이 원본이고, 번역은 선택적으로 `content/posts/<id>.en.md`에 씁니다. 번역 파일에는 원본의
+`written`과 `type`을 다시 쓰지 않고, `medium`과 `long` 글만 `title`을 하나 쓸 수 있습니다.
+빈 줄 뒤에 영어 Markdown 본문을 둡니다. 번역 파일이 없는 글은 영어 피드와 태그에서 빠집니다.
+
+```translation content/posts/20260923-140000.en.md
+
+This is the English body of the post.
+```
+
+소개 페이지의 영어판은 `content/about.en.md`에 쓰며, 이 파일은 반드시 둡니다. 영어판은 `/en/` 아래에
+만들어지고 메뉴와 안내 문구도 영어로 표시됩니다. 한국어 페이지의 메뉴 뒤 `English` 링크와 영어 페이지의
+`한국어` 링크는 짝이 되는 페이지로 갑니다.
+
+링크를 영어로 옮겼다면 `content/links.jsonl`에 같은 `link`로 `translated` 사건을 덧붙입니다. 사건에는
+영어 본문에 실제로 한 번 나오는 `anchor`, `lang: "en"`, 영어 `why`, `at`을 씁니다. 번역되지 않은 글이나
+번역 사건이 없는 링크는 영어판 주석에서 빠집니다.
+
+```translation content/links.jsonl
+{"link": "first-link", "action": "translated", "lang": "en", "anchor": "English anchor", "at": "2026-09-23T14:06:00Z", "why": "English explanation"}
+```
+
+영어 번역 본문만 고치는 패치는 `content/patches.jsonl`에 기존 패치 필드와 함께 `"lang": "en"`을
+넣습니다. `lang`이 없으면 한국어 원문에 적용됩니다. 영어 패치의 `anchor`와 `text`도 번역 본문을 기준으로
+검사하며, 영어 글의 패치 보기에는 영어 패치만 나타납니다.
+
 ## 사이트 만들기 — 빌드
 
 처음 한 번은 저장소 루트에서 필요한 패키지를 설치합니다(Node 22 이상).

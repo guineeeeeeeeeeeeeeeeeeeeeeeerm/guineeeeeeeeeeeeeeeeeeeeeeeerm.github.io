@@ -1,17 +1,19 @@
 ---
-import { tagCounts, type SiteData } from "../lib/site";
+import { SCREEN_TEXT, tagCounts, type Locale, type SiteData } from "../lib/site";
 
 interface Props {
   site: SiteData;
+  locale?: Locale;
 }
 
-const { site } = Astro.props;
-const counts = tagCounts(site);
+const { site, locale = "ko" } = Astro.props;
+const counts = tagCounts(site, locale);
+const text = SCREEN_TEXT[locale];
 ---
 
 {counts.length > 0 && (
   <aside class="tag-cloud">
-    <h2>태그</h2>
+    <h2>{text.tags}</h2>
     <ul>
       {counts.map((entry) => <li><a class="tag" href={`tags/${encodeURIComponent(entry.tag)}/`} style={`font-size: ${entry.size.toFixed(2)}rem`}>{entry.tag}</a><span class="count">{entry.count}</span></li>)}
     </ul>

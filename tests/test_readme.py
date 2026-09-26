@@ -125,6 +125,7 @@ class QReadmeContractTests(unittest.TestCase):
                 for image in re.findall(r"!\[[^\]]*\]\((images/[^)]+)\)", example["body"]):
                     (root / "content" / image).parent.mkdir(parents=True, exist_ok=True)
                     (root / "content" / image).write_bytes(b"image")   # an example's image stands in as bytes
+            (root / "content" / "about.en.md").write_text("English introduction\n", encoding="utf-8")
 
             result = run_build(root)
             self.assertEqual(

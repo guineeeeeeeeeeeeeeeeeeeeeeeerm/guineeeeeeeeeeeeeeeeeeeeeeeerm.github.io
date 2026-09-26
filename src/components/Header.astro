@@ -1,7 +1,7 @@
 ---
-const { feedHref, aboutHref } = Astro.props;
+const { feedHref, aboutHref, locale = "ko", switchHref, switchLabel, switchLang } = Astro.props;
 ---
 
 <header class="site-header">
-  <nav class="site-nav"><a href={feedHref}>피드</a><a href={aboutHref}>소개</a></nav>
+  <nav class="site-nav"><a href={feedHref}>{locale === "en" ? "Feed" : "피드"}</a><a href={aboutHref}>{locale === "en" ? "About" : "소개"}</a><a class="lang-switch" href={switchHref} hreflang={switchLang} lang={switchLang}>{switchLabel}</a></nav>
 </header>

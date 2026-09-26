@@ -5,7 +5,7 @@ import Footnotes from "../../../components/Footnotes.astro";
 import IncomingLinks from "../../../components/IncomingLinks.astro";
 import PatchView from "../../../components/PatchView.astro";
 import PostBody from "../../../components/PostBody.astro";
-import { loadSite, postTags, renderPostBody, type SiteData } from "../../../lib/site";
+import { incomingLinks, loadSite, outgoingLinks, postTags, renderPostBody, type SiteData } from "../../../lib/site";
 
 export function getStaticPaths() {
   const site = loadSite();
@@ -18,12 +18,12 @@ const post = site.posts.find((candidate) => candidate.id === postId);
 if (!post) throw new Error(`content/posts/${postId}.md`);
 const state = site.patchStates.get(post.id)!;
 const tags = postTags(site, post);
-const outgoing = site.links.filter((link) => link.active && link.fromId === post.id).sort((a, b) => site.patchStates.get(post.id)!.body.indexOf(a.anchor) - site.patchStates.get(post.id)!.body.indexOf(b.anchor) || a.id.localeCompare(b.id));
-const incoming = site.links.filter((link) => link.active && link.toId === post.id);
+const outgoing = outgoingLinks(site, post, "ko");
+const incoming = incomingLinks(site, post, "ko");
 const body = renderPostBody(site, post, "../../");
 ---
 
-<BaseLayout title={post.title || "글"} rootLink="../../" includeZoom={true}>
+<BaseLayout title={post.title || "글"} rootLink="../../" switchHref={site.translations.has(post.id) ? `../../en/p/${post.id}/` : "../../en/"} switchLabel="English" switchLang="en" alternateHref={site.translations.has(post.id) ? `../../en/p/${post.id}/` : undefined} alternateLang="en" includeZoom={true}>
   <main>
     <article class="post">
       {post.title && <h1 class="post-title">{post.title}</h1>}
@@ -32,11 +32,11 @@ const body = renderPostBody(site, post, "../../");
           태그: {tags.map((item, index) => <><a class="tag" href={`../../tags/${encodeURIComponent(item.tag)}/`}>{item.tag}</a>{index < tags.length - 1 && ", "}</>)}
         </div>
       )}
-      {state.hasPatches && <PatchView state={state} />}
+      {state.hasPatches && <PatchView state={state} locale="ko" />}
       <div class="body"><PostBody body={body} /></div>
       <ItemFooter post={post} shares={site.shares.get(post.id) || []} root="../../" />
-      <Footnotes site={site} post={post} links={outgoing} />
-      <IncomingLinks site={site} post={post} links={incoming} />
+      <Footnotes site={site} post={post} links={outgoing} locale="ko" />
+      <IncomingLinks site={site} post={post} links={incoming} locale="ko" />
     </article>
   </main>
 </BaseLayout>

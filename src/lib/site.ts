@@ -5,6 +5,49 @@ import type { Token } from "markdown-it";
 
 export class BuildError extends Error {}
 
+export type Locale = "ko" | "en";
+
+export const SCREEN_TEXT: Record<Locale, {
+  feed: string;
+  about: string;
+  notes: string;
+  linkedFrom: string;
+  showPatches: string;
+  tags: string;
+  tag: string;
+  viewPost: string;
+  tagReason: string;
+  previousText: string;
+  newlyInserted: string;
+}> = {
+  ko: {
+    feed: "피드",
+    about: "소개",
+    notes: "주석",
+    linkedFrom: "이 글을 가리키는 글",
+    showPatches: "패치 보기",
+    tags: "태그",
+    tag: "태그",
+    viewPost: "글 보기",
+    tagReason: "이 태그를 단 이유",
+    previousText: "이전 글자",
+    newlyInserted: "새로 넣음",
+  },
+  en: {
+    feed: "Feed",
+    about: "About",
+    notes: "Notes",
+    linkedFrom: "Linked from",
+    showPatches: "Show patches",
+    tags: "Tags",
+    tag: "Tag",
+    viewPost: "View post",
+    tagReason: "Reason for this tag",
+    previousText: "Previous text",
+    newlyInserted: "newly inserted",
+  },
+};
+
 export interface Post {
   id: string;
   source: string;
@@ -31,9 +74,12 @@ export interface Tagging {
 }
 
 export interface LinkEvent {
-  action: "created" | "reason-changed" | "removed";
+  action: "created" | "reason-changed" | "removed" | "translated";
   at: string;
   why: string;
+  lang?: "en";
+  anchor?: string;
+  source?: string;
 }
 
 export interface Link {
@@ -61,6 +107,7 @@ export interface Patch {
   op: PatchOp;
   anchor: string;
   text?: string;
+  lang?: "en";
 }
 
 export interface PatchRegion {
@@ -217,9 +264,13 @@ export interface SiteData {
   contentRoot: string;
   aboutPath: string;
   aboutBody: string;
+  aboutEnPath: string;
+  aboutEnBody: string;
   posts: Post[];
+  translations: Map<string, Post>;
   links: Link[];
   patchStates: Map<string, PatchState>;
+  translationPatchStates: Map<string, PatchState>;
   shares: Map<string, Share[]>;
   taggings: Map<string, Tagging[]>;
 }
@@ -397,13 +448,55 @@ function parsePosts(root: string): Post[] {
   for (const file of allFiles(root).sort()) {
     const relative = path.relative(root, file).split(path.sep);
     const relativeName = relative.join("/");
-    if (relative[0] === "images" || relativeName === "about.md" || TABLES.has(relativeName)) continue;
+    if (relative[0] === "images" || relativeName === "about.md" || relativeName === "about.en.md" || TABLES.has(relativeName)) continue;
+    if (relative[0] === "posts" && relativeName.endsWith(".en.md")) continue;
     const post = parsePost(file, root);
     if (ids.has(post.id)) fail(file);
     ids.add(post.id);
     posts.push(post);
   }
   return posts;
+}
+
+function parseTranslation(file: string, original: Post): Post {
+  const lines = readUtf8(file).split(/\r\n?|\n/);
+  const separator = lines.findIndex((line) => line.trim() === "");
+  if (separator < 0) fail(file);
+  const fields: Record<string, string> = {};
+  for (const line of lines.slice(0, separator)) {
+    const colon = line.indexOf(":");
+    if (colon < 0) fail(file);
+    const key = line.slice(0, colon).trim();
+    const value = line.slice(colon + 1).trim();
+    if (key !== "title" || key in fields) fail(file);
+    fields[key] = value;
+  }
+  if (original.type === "short" && "title" in fields) fail(file);
+  const body = lines.slice(separator + 1).join("\n");
+  if (!body.trim()) fail(file);
+  validateBodyCharacters(body, file);
+  return {
+    ...original,
+    source: file,
+    fields,
+    body,
+    firstText: "",
+    title: fields.title || "",
+  };
+}
+
+function parseTranslations(root: string, posts: Post[]): Map<string, Post> {
+  const byId = new Map(posts.map((post) => [post.id, post]));
+  const translations = new Map<string, Post>();
+  for (const file of allFiles(path.join(root, "posts")).sort()) {
+    if (!file.endsWith(".en.md")) continue;
+    const filename = path.basename(file);
+    const id = filename.slice(0, -".en.md".length);
+    const original = byId.get(id);
+    if (!original || translations.has(id)) fail(file);
+    translations.set(id, parseTranslation(file, original));
+  }
+  return translations;
 }
 
 function parsePatches(root: string, posts: Post[]): Patch[] {
@@ -415,7 +508,7 @@ function parsePatches(root: string, posts: Post[]): Patch[] {
     if (!common.every((key) => key in row.value)) fail(row.file);
     const op = stringValue(row.value.op, row.file);
     if (!["replace", "insert-before", "insert-after", "delete"].includes(op)) fail(row.file);
-    const expected = new Set([...common, ...(op === "delete" ? [] : ["text"])]);
+    const expected = new Set([...common, ...(op === "delete" ? [] : ["text"]), ...(row.value.lang === undefined ? [] : ["lang"])]);
     if (Object.keys(row.value).sort().join("|") !== [...expected].sort().join("|")) fail(row.file);
     const id = stringValue(row.value.id, row.file);
     const postId = stringValue(row.value.post, row.file);
@@ -427,7 +520,12 @@ function parsePatches(root: string, posts: Post[]): Patch[] {
     parseWritten(at, row.file);
     const text = op === "delete" ? undefined : stringValue(row.value.text, row.file);
     if (text !== undefined) validateBodyCharacters(text, row.file);
-    patches.push({ source: row.file, line: row.line, id, postId, at, why, op: op as PatchOp, anchor, ...(text === undefined ? {} : { text }) });
+    let lang: "en" | undefined;
+    if (row.value.lang !== undefined) {
+      lang = stringValue(row.value.lang, row.file) as "en";
+      if (lang !== "en") fail(row.file);
+    }
+    patches.push({ source: row.file, line: row.line, id, postId, at, why, op: op as PatchOp, anchor, ...(text === undefined ? {} : { text }), ...(lang ? { lang } : {}) });
   }
   return patches;
 }
@@ -859,6 +957,12 @@ function parseLinks(root: string, posts: Post[], states: Map<string, PatchState>
       if (Object.keys(row.value).sort().join("|") !== "action|at|link|why") fail(row.file);
       const id = stringValue(row.value.link, row.file);
       if (!byId.has(id)) fail(row.file);
+    } else if (action === "translated") {
+      if (Object.keys(row.value).sort().join("|") !== "action|anchor|at|lang|link|why") fail(row.file);
+      const id = stringValue(row.value.link, row.file);
+      const lang = stringValue(row.value.lang, row.file);
+      const anchor = stringValue(row.value.anchor, row.file);
+      if (lang !== "en" || !anchor || !byId.has(id)) fail(row.file);
     } else {
       fail(row.file);
     }
@@ -866,13 +970,19 @@ function parseLinks(root: string, posts: Post[], states: Map<string, PatchState>
     const why = stringValue(row.value.why, row.file);
     const link = byId.get(stringValue(row.value.link, row.file))!;
     if (link.events.length && at < link.events[link.events.length - 1].at) fail(row.file);
-    link.events.push({ action, at, why });
+    link.events.push({
+      action,
+      at,
+      why,
+      ...(action === "translated" ? { lang: "en" as const, anchor: stringValue(row.value.anchor, row.file) } : {}),
+      source: row.file,
+    });
   }
 
   const links = [...byId.values()];
   for (const link of links) {
     link.createdAt = link.events[0].at;
-    link.currentReason = [...link.events].reverse().find((event) => event.action !== "removed")?.why || "";
+    link.currentReason = [...link.events].reverse().find((event) => event.action === "created" || event.action === "reason-changed")?.why || "";
     link.active = link.events[link.events.length - 1].action !== "removed";
     const body = states.get(link.fromId)!.body;
     if (occurrences(body, link.anchor).length !== 1) fail(link.source);
@@ -937,6 +1047,18 @@ function parseTags(root: string, posts: Post[]): Map<string, Tagging[]> {
 function parseAbout(root: string): { path: string; body: string } {
   const file = path.join(root, "about.md");
   if (!fs.existsSync(file)) fail(file);
+  const body = readUtf8(file);
+  if (!body.trim()) fail(file);
+  validateBodyCharacters(body, file);
+  return { path: file, body };
+}
+
+function parseAboutTranslation(root: string, fallback: { path: string; body: string }, required: boolean): { path: string; body: string } {
+  const file = path.join(root, "about.en.md");
+  if (!fs.existsSync(file)) {
+    if (required) fail(file);
+    return fallback;
+  }
   const body = readUtf8(file);
   if (!body.trim()) fail(file);
   validateBodyCharacters(body, file);
@@ -1335,7 +1457,23 @@ export function formatUtc(written: string): string {
 }
 
 export function feedPosts(site: SiteData): Post[] {
-  return [...site.posts].sort((a, b) => b.written.localeCompare(a.written) || b.id.localeCompare(a.id));
+  return feedPostsFor(site, "ko");
+}
+
+export function localizedPosts(site: SiteData, locale: Locale): Post[] {
+  return locale === "en" ? [...site.translations.values()] : [...site.posts];
+}
+
+export function postForLocale(site: SiteData, postId: string, locale: Locale): Post | undefined {
+  return locale === "en" ? site.translations.get(postId) : site.posts.find((post) => post.id === postId);
+}
+
+export function stateForLocale(site: SiteData, postId: string, locale: Locale): PatchState | undefined {
+  return (locale === "en" ? site.translationPatchStates : site.patchStates).get(postId);
+}
+
+export function feedPostsFor(site: SiteData, locale: Locale): Post[] {
+  return localizedPosts(site, locale).sort((a, b) => b.written.localeCompare(a.written) || b.id.localeCompare(a.id));
 }
 
 export function feedTitle(post: Post): string {
@@ -1343,11 +1481,11 @@ export function feedTitle(post: Post): string {
   return post.firstText.slice(0, 80) + (post.firstText.length > 80 ? "…" : "");
 }
 
-export function taggedPosts(site: SiteData, tag: string): Post[] {
-  return site.posts.filter((post) => (site.taggings.get(post.id) || []).some((item) => item.tag === tag)).sort((a, b) => b.written.localeCompare(a.written));
+export function taggedPosts(site: SiteData, tag: string, locale: Locale = "ko"): Post[] {
+  return localizedPosts(site, locale).filter((post) => (site.taggings.get(post.id) || []).some((item) => item.tag === tag)).sort((a, b) => b.written.localeCompare(a.written));
 }
 
-export function postTags(site: SiteData, post: Post): Tagging[] {
+export function postTags(site: SiteData, post: Post, _locale: Locale = "ko"): Tagging[] {
   return [...(site.taggings.get(post.id) || [])].sort((a, b) => a.tag.localeCompare(b.tag));
 }
 
@@ -1357,9 +1495,13 @@ export interface TagCount {
   size: number;
 }
 
-export function tagCounts(site: SiteData): TagCount[] {
+export function tagCounts(site: SiteData, locale: Locale = "ko"): TagCount[] {
   const counts = new Map<string, number>();
-  for (const items of site.taggings.values()) for (const item of items) counts.set(item.tag, (counts.get(item.tag) || 0) + 1);
+  const ids = new Set(localizedPosts(site, locale).map((post) => post.id));
+  for (const [post, items] of site.taggings.entries()) {
+    if (!ids.has(post)) continue;
+    for (const item of items) counts.set(item.tag, (counts.get(item.tag) || 0) + 1);
+  }
   if (!counts.size) return [];
   const values = [...counts.values()];
   const low = Math.min(...values);
@@ -1370,20 +1512,62 @@ export function tagCounts(site: SiteData): TagCount[] {
   });
 }
 
-export function renderFeedBody(site: SiteData, post: Post, root: string): string {
-  return renderBodyHtml(site.patchStates.get(post.id)!.body, site.contentRoot, post.source, `${root}images/`, false);
+export function renderFeedBody(site: SiteData, post: Post, root: string, locale: Locale = "ko"): string {
+  const state = stateForLocale(site, post.id, locale)!;
+  return renderBodyHtml(state.body, site.contentRoot, post.source, `${root}images/`, false);
 }
 
-export function renderAboutBody(site: SiteData, root: string): string {
-  return renderBodyHtml(site.aboutBody, site.contentRoot, site.aboutPath, `${root}images/`, true);
+export function renderAboutBody(site: SiteData, root: string, locale: Locale = "ko"): string {
+  const body = locale === "en" ? site.aboutEnBody : site.aboutBody;
+  const file = locale === "en" ? site.aboutEnPath : site.aboutPath;
+  return renderBodyHtml(body, site.contentRoot, file, `${root}images/`, true);
 }
 
-export function renderPostBody(site: SiteData, post: Post, root: string): PostBodyMarkup {
-  const state = site.patchStates.get(post.id)!;
-  const outgoing = site.links.filter((link) => link.active && link.fromId === post.id).sort((a, b) => {
+function translatedEvent(link: Link): LinkEvent | undefined {
+  return [...link.events].reverse().find((event) => event.action === "translated");
+}
+
+function localizedLink(site: SiteData, link: Link, locale: Locale): Link {
+  if (locale !== "en") return link;
+  const event = translatedEvent(link);
+  if (!event?.anchor) return link;
+  return { ...link, anchor: event.anchor, currentReason: event.why };
+}
+
+function translatedLinkIsVisible(site: SiteData, link: Link): boolean {
+  const event = translatedEvent(link);
+  const state = site.translationPatchStates.get(link.fromId);
+  return Boolean(event?.anchor && state && occurrences(state.body, event.anchor).length === 1);
+}
+
+export function outgoingLinks(site: SiteData, post: Post, locale: Locale = "ko"): Link[] {
+  const state = stateForLocale(site, post.id, locale)!;
+  return site.links
+    .filter((link) => {
+      if (!link.active || link.fromId !== post.id) return false;
+      if (locale === "ko") return true;
+      return Boolean(site.translations.has(link.fromId) && site.translations.has(link.toId) && translatedEvent(link));
+    })
+    .map((link) => localizedLink(site, link, locale))
+    .sort((a, b) => {
     const position = state.body.indexOf(a.anchor) - state.body.indexOf(b.anchor);
     return position || a.id.localeCompare(b.id);
   });
+}
+
+export function incomingLinks(site: SiteData, post: Post, locale: Locale = "ko"): Link[] {
+  return site.links
+    .filter((link) => {
+      if (!link.active || link.toId !== post.id) return false;
+      if (locale === "ko") return true;
+      return Boolean(site.translations.has(link.fromId) && site.translations.has(link.toId) && translatedEvent(link));
+    })
+    .map((link) => localizedLink(site, link, locale));
+}
+
+export function renderPostBody(site: SiteData, post: Post, root: string, locale: Locale = "ko"): PostBodyMarkup {
+  const state = stateForLocale(site, post.id, locale)!;
+  const outgoing = outgoingLinks(site, post, locale).filter((link) => locale === "ko" || occurrences(state.body, link.anchor).length === 1);
   const links = outgoing.map((link, index) => ({
     token: `\u0000guin-link-${index}\u0000`,
     href: `../${link.toId}/`,
@@ -1402,18 +1586,22 @@ export function renderPostBody(site: SiteData, post: Post, root: string): PostBo
 export function validateSite(site: SiteData): void {
   renderAboutBody(site, "");
   for (const post of site.posts) renderPostBody(site, post, "");
+  renderAboutBody(site, "", "en");
+  for (const post of site.translations.values()) renderPostBody(site, post, "", "en");
 }
 
-export function patchData(state: PatchState): { body: string; patches: Array<Record<string, unknown>>; regions: Array<Record<string, unknown>>; "region-data": Array<Record<string, unknown>>; "patch-history": boolean } {
+export function patchData(state: PatchState, locale: Locale = "ko"): { body: string; patches: Array<Record<string, unknown>>; regions: Array<Record<string, unknown>>; "region-data": Array<Record<string, unknown>>; "patch-history": boolean } {
   const marked = state.markedBody();
+  const inserted = SCREEN_TEXT[locale].newlyInserted;
   const record = (patch: Patch): Record<string, unknown> => ({
     id: patch.id,
     at: patch.at,
     why: patch.why,
     op: patch.op,
     anchor: patch.anchor,
-    previous: patch.op === "replace" || patch.op === "delete" ? patch.anchor : "새로 넣음",
-    previous_text: patch.op === "replace" || patch.op === "delete" ? patch.anchor : "새로 넣음",
+    ...(patch.lang ? { lang: patch.lang } : {}),
+    previous: patch.op === "replace" || patch.op === "delete" ? patch.anchor : inserted,
+    previous_text: patch.op === "replace" || patch.op === "delete" ? patch.anchor : inserted,
     ...(patch.text === undefined ? {} : { text: patch.text }),
   });
   return {
@@ -1429,13 +1617,39 @@ export function loadSite(): SiteData {
   const root = rootPath();
   const about = parseAbout(root);
   const posts = parsePosts(root);
-  const patchStates = applyPatches(posts, parsePatches(root, posts));
+  const translations = parseTranslations(root, posts);
+  const aboutEn = parseAboutTranslation(root, about, true);
+  const translationPosts = [...translations.values()];
+  const patches = parsePatches(root, posts);
+  const patchStates = applyPatches(posts, patches.filter((patch) => !patch.lang));
+  const translationPatchStates = applyPatches(translationPosts, patches.filter((patch) => {
+    if (!patch.lang) return false;
+    if (!translations.has(patch.postId)) fail(patch.source);
+    return true;
+  }));
   validatePatchCodeOverlaps(patchStates);
   validatePatchImageOverlaps(patchStates);
   validatePatchExternalOverlaps(patchStates);
   validatePatchSyntaxOverlaps(patchStates);
+  validatePatchCodeOverlaps(translationPatchStates);
+  validatePatchImageOverlaps(translationPatchStates);
+  validatePatchExternalOverlaps(translationPatchStates);
+  validatePatchSyntaxOverlaps(translationPatchStates);
   const links = parseLinks(root, posts, patchStates);
-  const site: SiteData = { contentRoot: root, aboutPath: path.join(root, "about.md"), aboutBody: about.body, posts, links, patchStates, shares: parseShares(root, posts), taggings: parseTags(root, posts) };
+  for (const link of links) {
+    const event = translatedEvent(link);
+    if (!event?.anchor) continue;
+    const state = translationPatchStates.get(link.fromId);
+    if (!state) continue;
+    const positions = occurrences(state.body, event.anchor);
+    if (positions.length !== 1) fail(event.source || link.source);
+    const start = codePointOffset(state.body, positions[0]);
+    const end = start + Array.from(event.anchor).length;
+    if (markdownCodeSpans(state.body).some(([codeStart, codeEnd]) => start < codeEnd && codeStart < end)) fail(event.source || link.source);
+    if (externalLinkSpans(state.body).some(([linkStart, linkEnd]) => start < linkEnd && linkStart < end)) fail(event.source || link.source);
+  }
+  const site: SiteData = { contentRoot: root, aboutPath: path.join(root, "about.md"), aboutBody: about.body, aboutEnPath: aboutEn.path, aboutEnBody: aboutEn.body, posts, translations, links, patchStates, translationPatchStates, shares: parseShares(root, posts), taggings: parseTags(root, posts) };
   for (const post of posts) post.firstText = firstParagraphText(patchStates.get(post.id)!.body, root, post.source);
+  for (const post of translations.values()) post.firstText = firstParagraphText(translationPatchStates.get(post.id)!.body, root, post.source);
   return site;
 }

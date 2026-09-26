@@ -3,10 +3,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { loadSite, renderAboutBody } from "../../lib/site";
 
 const site = loadSite();
-const body = renderAboutBody(site, "../");
+const body = renderAboutBody(site, "../", "ko");
 ---
 
-<BaseLayout title="소개" rootLink="../" current="about" includeZoom={true}>
+<BaseLayout title="소개" rootLink="../" current="about" switchHref="../en/about/" switchLabel="English" switchLang="en" alternateHref="../en/about/" alternateLang="en" includeZoom={true}>
   <main>
     <article class="post">
       <div class="body" set:html={body}></div>

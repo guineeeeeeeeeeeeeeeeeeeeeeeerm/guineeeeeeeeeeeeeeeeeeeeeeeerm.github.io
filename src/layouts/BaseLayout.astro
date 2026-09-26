@@ -4,30 +4,38 @@ import Header from "../components/Header.astro";
 interface Props {
   title: string;
   rootLink: string;
+  assetRoot?: string;
+  locale?: "ko" | "en";
   current?: "feed" | "about" | "";
+  switchHref: string;
+  switchLabel: string;
+  switchLang: "ko" | "en";
+  alternateHref?: string;
+  alternateLang?: "ko" | "en";
   includeZoom?: boolean;
 }
 
-const { title, rootLink, current = "", includeZoom = false } = Astro.props;
+const { title, rootLink, assetRoot = rootLink, locale = "ko", current = "", switchHref, switchLabel, switchLang, alternateHref, alternateLang, includeZoom = false } = Astro.props;
 const feedHref = current === "feed" ? "./" : rootLink || "./";
 const aboutHref = current === "about" ? "./" : `${rootLink}about/`;
-const stylesheetHref = `${rootLink}assets/site.css`;
-const timeHref = `${rootLink}assets/time.js`;
-const zoomHref = `${rootLink}assets/zoom.js`;
+const stylesheetHref = `${assetRoot}assets/site.css`;
+const timeHref = `${assetRoot}assets/time.js`;
+const zoomHref = `${assetRoot}assets/zoom.js`;
 ---
 
 <!doctype html>
-<html lang="ko">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
+    {alternateHref && <link rel="alternate" hreflang={alternateLang} href={alternateHref} />}
     <link rel="stylesheet" href={stylesheetHref} />
     <script src={timeHref} defer></script>
     {includeZoom && <script src={zoomHref} defer></script>}
   </head>
   <body>
-    <Header feedHref={feedHref} aboutHref={aboutHref} />
+    <Header feedHref={feedHref} aboutHref={aboutHref} locale={locale} switchHref={switchHref} switchLabel={switchLabel} switchLang={switchLang} />
     <div class="frame">
       <slot />
     </div>

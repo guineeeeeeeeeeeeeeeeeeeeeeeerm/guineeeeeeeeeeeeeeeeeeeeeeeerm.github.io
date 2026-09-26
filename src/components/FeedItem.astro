@@ -1,26 +1,29 @@
 ---
 import ItemFooter from "./ItemFooter.astro";
-import { feedTitle, formatUtc, renderFeedBody, type Post, type SiteData, type Tagging } from "../lib/site";
+import { feedTitle, formatUtc, renderFeedBody, SCREEN_TEXT, type Locale, type Post, type SiteData, type Tagging } from "../lib/site";
 
 interface Props {
   site: SiteData;
   post: Post;
   root: string;
+  assetRoot?: string;
+  locale?: Locale;
   reason?: Tagging;
 }
 
-const { site, post, root, reason } = Astro.props;
+const { site, post, root, assetRoot = root, locale = "ko", reason } = Astro.props;
+const text = SCREEN_TEXT[locale];
 const title = feedTitle(post);
-const body = renderFeedBody(site, post, root);
+const body = renderFeedBody(site, post, assetRoot, locale);
 ---
 
 <article class="feed-item">
-  <a class="item-link" href={`${root}p/${post.id}/`} aria-label={post.type === "short" ? "글 보기" : title}></a>
+  <a class="item-link" href={`${root}p/${post.id}/`} aria-label={post.type === "short" ? text.viewPost : title}></a>
   {post.type === "short" ? (
     <div class="body" set:html={body}></div>
   ) : (
     <h2 class="feed-title">{title}</h2>
   )}
-  {reason && <p class="tag-reason">이 태그를 단 이유: {reason.why} · <time datetime={reason.at} title={formatUtc(reason.at)}>{formatUtc(reason.at)}</time></p>}
-  <ItemFooter post={post} shares={site.shares.get(post.id) || []} root={root} />
+  {reason && locale === "ko" && <p class="tag-reason">{text.tagReason}: {reason.why} · <time datetime={reason.at} title={formatUtc(reason.at)}>{formatUtc(reason.at)}</time></p>}
+  <ItemFooter post={post} shares={site.shares.get(post.id) || []} root={assetRoot} />
 </article>

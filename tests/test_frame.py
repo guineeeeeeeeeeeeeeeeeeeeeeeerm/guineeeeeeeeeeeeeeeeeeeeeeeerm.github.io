@@ -145,7 +145,7 @@ class FrameContractTests(unittest.TestCase):
         actual = {path.name for path in (self.root / "docs").iterdir()}
         self.assertEqual(
             actual,
-            {"index.html", "p", "about", "tags", "assets", "images", ".nojekyll"},
+            {"index.html", "p", "about", "tags", "en", "assets", "images", ".nojekyll"},
         )
 
     def test_Q_build_same_content_twice_produces_byte_identical_docs(self):

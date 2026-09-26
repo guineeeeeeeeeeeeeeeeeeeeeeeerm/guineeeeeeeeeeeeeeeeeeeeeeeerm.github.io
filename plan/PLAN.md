@@ -284,6 +284,10 @@ Decided (owner, `source:loc-03`, 요청 `source:loc-01`, 제안 `source:loc-02`;
   없다. 태그를 단 사유는 영어판에서 보여 주지 않는다.
 - **공유 배지(Q-share):** 영어판에도 같은 배지가 붙는다.
 - **소개(Q-about):** 영어판 소개는 `about.en.md`로 만들고, 바깥 링크 규칙은 같다.
+Decided after build (i18n-build, technical, delegated): 영어판 본문의 그림 `images/…`는 `docs/en/images/`로 한 벌 더 복사해
+영어 페이지 위치 기준 상대 경로로 가리킨다(원본과 바이트가 같다). Decided after dispute (i18n-build, technical, session): 테스트의 상대
+경로 기대값을 바로잡았다 — 영어 페이지에서 한국어 짝으로 가는 주소는 `/en/`이 한 단계 더 깊으므로 `../../about/`, `../../../p/<id>/`
+같은 모양이다. Decided (technical, session): 번역 파일은 소유자가 확인한 것만 `content/`에 들어간다 — 작업자는 `content/`를 쓰지 않는다.
 
 ## Q-link — 주석으로 거는 링크
 

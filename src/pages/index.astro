@@ -8,14 +8,14 @@ const site = loadSite();
 const posts = feedPosts(site);
 ---
 
-<BaseLayout title="피드" rootLink="" current="feed">
+<BaseLayout title="피드" rootLink="" current="feed" switchHref="en/" switchLabel="English" switchLang="en" alternateHref="en/" alternateLang="en">
   <div class="feed-layout">
     <main>
       <h1>피드</h1>
       <section class="feed">
-        {posts.map((post) => <FeedItem site={site} post={post} root="" />)}
+        {posts.map((post) => <FeedItem site={site} post={post} root="" assetRoot="" />)}
       </section>
     </main>
-    <TagCloud site={site} />
+    <TagCloud site={site} locale="ko" />
   </div>
 </BaseLayout>

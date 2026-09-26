@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { loadSite, renderAboutBody } from "../../../lib/site";
+
+const site = loadSite();
+const body = renderAboutBody(site, "../../", "en");
+---
+
+<BaseLayout title="About" rootLink="../" assetRoot="../../" locale="en" current="about" switchHref="../../about/" switchLabel="한국어" switchLang="ko" alternateHref="../../about/" alternateLang="ko" includeZoom={true}>
+  <main>
+    <article class="post">
+      <div class="body" set:html={body}></div>
+    </article>
+  </main>
+</BaseLayout>

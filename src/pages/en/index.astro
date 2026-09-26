@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FeedItem from "../../components/FeedItem.astro";
+import TagCloud from "../../components/TagCloud.astro";
+import { feedPostsFor, loadSite } from "../../lib/site";
+
+const site = loadSite();
+const posts = feedPostsFor(site, "en");
+---
+
+<BaseLayout title="Feed" rootLink="" assetRoot="../" locale="en" current="feed" switchHref="../" switchLabel="한국어" switchLang="ko" alternateHref="../" alternateLang="ko">
+  <div class="feed-layout">
+    <main>
+      <h1>Feed</h1>
+      <section class="feed">
+        {posts.map((post) => <FeedItem site={site} post={post} root="" assetRoot="../" locale="en" />)}
+      </section>
+    </main>
+    <TagCloud site={site} locale="en" />
+  </div>
+</BaseLayout>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import ItemFooter from "../../../../components/ItemFooter.astro";
+import Footnotes from "../../../../components/Footnotes.astro";
+import IncomingLinks from "../../../../components/IncomingLinks.astro";
+import PatchView from "../../../../components/PatchView.astro";
+import PostBody from "../../../../components/PostBody.astro";
+import { incomingLinks, loadSite, outgoingLinks, postTags, renderPostBody, type SiteData } from "../../../../lib/site";
+
+export function getStaticPaths() {
+  const site = loadSite();
+  return [...site.translations.values()].map((post) => ({ params: { id: post.id }, props: { site } }));
+}
+
+const { site } = Astro.props as { site: SiteData };
+const postId = Astro.params.id ?? "";
+const post = site.translations.get(postId);
+if (!post) throw new Error(`content/posts/${postId}.en.md`);
+const state = site.translationPatchStates.get(post.id)!;
+const tags = postTags(site, post, "en");
+const outgoing = outgoingLinks(site, post, "en");
+const incoming = incomingLinks(site, post, "en");
+const body = renderPostBody(site, post, "../../", "en");
+---
+
+<BaseLayout title={post.title || "Post"} rootLink="../../" assetRoot="../../../" locale="en" switchHref={`../../../p/${post.id}/`} switchLabel="한국어" switchLang="ko" alternateHref={`../../../p/${post.id}/`} alternateLang="ko" includeZoom={true}>
+  <main>
+    <article class="post">
+      {post.title && <h1 class="post-title">{post.title}</h1>}
+      {tags.length > 0 && (
+        <div class="tags">
+          Tags: {tags.map((item, index) => <><a class="tag" href={`../../tags/${encodeURIComponent(item.tag)}/`}>{item.tag}</a>{index < tags.length - 1 && ", "}</>)}
+        </div>
+      )}
+      {state.hasPatches && <PatchView state={state} locale="en" />}
+      <div class="body"><PostBody body={body} /></div>
+      <ItemFooter post={post} shares={site.shares.get(post.id) || []} root="../../../" />
+      <Footnotes site={site} post={post} links={outgoing} locale="en" />
+      <IncomingLinks site={site} post={post} links={incoming} locale="en" />
+    </article>
+  </main>
+</BaseLayout>

@@ -51,7 +51,8 @@ async function build() {
   const contentRoot = path.join(root, "content");
   const docs = path.join(root, "docs");
   process.env.GUIN_CONTENT_ROOT = contentRoot;
-  validateSite(loadSite());
+  const site = loadSite();
+  validateSite(site);
   const workspace = await mkdtemp(path.join(root, ".docs-build-"));
   const staging = path.join(workspace, "output");
   await mkdir(staging);
@@ -71,6 +72,7 @@ async function build() {
     await unlink(path.join(workspace, "node_modules"));
     await rm(path.join(workspace, ".astro"), { recursive: true, force: true });
     await copyContentImages(contentRoot, staging);
+    await copyContentImages(contentRoot, path.join(staging, "en"));
     await writeFile(path.join(staging, ".nojekyll"), "");
     await install(staging, docs);
     installed = true;

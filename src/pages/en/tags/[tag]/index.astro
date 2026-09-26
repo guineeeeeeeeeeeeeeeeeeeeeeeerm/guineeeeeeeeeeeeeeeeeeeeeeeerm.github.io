@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import FeedItem from "../../../../components/FeedItem.astro";
+import { loadSite, taggedPosts, type SiteData } from "../../../../lib/site";
+
+export function getStaticPaths() {
+  const site = loadSite();
+  return [...site.taggings.values()]
+    .flatMap((items) => items.map((item) => item.tag))
+    .filter((tag, index, all) => all.indexOf(tag) === index)
+    .filter((tag) => taggedPosts(site, tag, "en").length > 0)
+    .sort()
+    .map((tag) => ({ params: { tag }, props: { site } }));
+}
+
+const { site } = Astro.props as { site: SiteData };
+const tag = Astro.params.tag ?? "";
+const posts = taggedPosts(site, tag, "en");
+---
+
+<BaseLayout title={`Tag: ${tag}`} rootLink="../../" assetRoot="../../../" locale="en" switchHref={`../../../tags/${encodeURIComponent(tag)}/`} switchLabel="한국어" switchLang="ko" alternateHref={`../../../tags/${encodeURIComponent(tag)}/`} alternateLang="ko">
+  <main>
+    <h1>Tag: {tag}</h1>
+    <section class="feed">
+      {posts.map((post) => <FeedItem site={site} post={post} root="../../" assetRoot="../../../" locale="en" />)}
+    </section>
+  </main>
+</BaseLayout>

@@ -253,17 +253,17 @@ class I18nContractTests(unittest.TestCase):
             feed = read(root, "en/index.html")
             self.assertIn("translated source", feed)
             self.assertNotIn("한국에만 있는 글", feed)
-            self.assertNotIn(f"en/p/{OTHER_ID}/", feed)
+            self.assertNotRegex(feed, rf'href="p/{OTHER_ID}/"')
             self.assertIn("공통", tag_cloud(feed))
             self.assertNotIn("한국만", tag_cloud(feed))
             common_tag = read(root, "en/tags/공통/index.html")
-            self.assertIn(f"en/p/{ID}/", common_tag)
-            self.assertNotIn(f"p/{OTHER_ID}/", common_tag)
+            self.assertRegex(common_tag, rf'href="../../p/{ID}/"')
+            self.assertNotRegex(common_tag, rf'href="../../p/{OTHER_ID}/"')
             self.assertFalse((root / "docs" / "en" / "tags" / "한국만").exists())
 
     def test_Q_i18n_english_pages_use_the_declared_english_screen_text(self):
         posts = {
-            f"posts/{ID}.md": post_text(body="source anchor"),
+            f"posts/{ID}.md": post_text(body="source anchor plus"),
             f"posts/{OTHER_ID}.md": post_text(
                 OTHER_WRITTEN, body="target body", post_type="medium", title="Target"
             ),
@@ -275,9 +275,9 @@ class I18nContractTests(unittest.TestCase):
         }
         with temporary_site(
             posts=posts,
-            translations={ID: translation_text("source anchor"), OTHER_ID: translation_text("target body", title="Target")},
+            translations={ID: translation_text("source anchor plus"), OTHER_ID: translation_text("target body", title="Target")},
             links=links,
-            patches={"english": patch_row("english", ID, "source anchor", "patched source", lang="en")},
+            patches={"english": patch_row("english", ID, "plus", "patched", lang="en")},
             tags=[tag_row(OTHER_ID, tag="topic")],
         ) as root:
             self.assert_builds(root)
@@ -309,13 +309,13 @@ class I18nContractTests(unittest.TestCase):
             pages = (
                 ("ko-feed", read(root, "index.html"), "English", "en/"),
                 ("en-feed", read(root, "en/index.html"), "한국어", "../"),
-                ("ko-about", read(root, "about/index.html"), "English", "en/about/"),
-                ("en-about", read(root, "en/about/index.html"), "한국어", "../about/"),
+                ("ko-about", read(root, "about/index.html"), "English", "../en/about/"),
+                ("en-about", read(root, "en/about/index.html"), "한국어", "../../about/"),
                 ("ko-translated-post", read(root, f"p/{ID}/index.html"), "English", f"../../en/p/{ID}/"),
-                ("en-translated-post", read(root, f"en/p/{ID}/index.html"), "한국어", f"../../p/{ID}/"),
+                ("en-translated-post", read(root, f"en/p/{ID}/index.html"), "한국어", f"../../../p/{ID}/"),
                 ("ko-untranslated-post", read(root, f"p/{OTHER_ID}/index.html"), "English", "../../en/"),
                 ("ko-tag", read(root, f"tags/{TAG}/index.html"), "English", f"../../en/tags/{tag_path}/"),
-                ("en-tag", read(root, f"en/tags/{TAG}/index.html"), "한국어", f"../../tags/{tag_path}/"),
+                ("en-tag", read(root, f"en/tags/{TAG}/index.html"), "한국어", f"../../../tags/{tag_path}/"),
                 ("ko-untranslated-tag", read(root, "tags/한국만/index.html"), "English", "../../en/"),
             )
             for name, document, label, href in pages:
@@ -331,11 +331,11 @@ class I18nContractTests(unittest.TestCase):
             self.assertEqual(alternate_href(read(root, "index.html"), "en"), "en/")
             self.assertEqual(alternate_href(read(root, "en/index.html"), "ko"), "../")
             self.assertEqual(alternate_href(read(root, f"p/{ID}/index.html"), "en"), f"../../en/p/{ID}/")
-            self.assertEqual(alternate_href(read(root, f"en/p/{ID}/index.html"), "ko"), f"../../p/{ID}/")
-            self.assertEqual(alternate_href(read(root, "about/index.html"), "en"), "en/about/")
-            self.assertEqual(alternate_href(read(root, "en/about/index.html"), "ko"), "../about/")
+            self.assertEqual(alternate_href(read(root, f"en/p/{ID}/index.html"), "ko"), f"../../../p/{ID}/")
+            self.assertEqual(alternate_href(read(root, "about/index.html"), "en"), "../en/about/")
+            self.assertEqual(alternate_href(read(root, "en/about/index.html"), "ko"), "../../about/")
             self.assertEqual(alternate_href(read(root, f"tags/{TAG}/index.html"), "en"), f"../../en/tags/{tag_path}/")
-            self.assertEqual(alternate_href(read(root, f"en/tags/{TAG}/index.html"), "ko"), f"../../tags/{tag_path}/")
+            self.assertEqual(alternate_href(read(root, f"en/tags/{TAG}/index.html"), "ko"), f"../../../tags/{tag_path}/")
 
     def test_Q_i18n_translated_link_uses_the_last_translated_anchor_and_reason(self):
         links = {
@@ -492,7 +492,7 @@ class I18nContractTests(unittest.TestCase):
         ) as root:
             self.assert_builds(root)
             feed = read(root, "en/index.html")
-            self.assertRegex(tag_cloud(feed), r'>shared<\span class="count">1</span>')
+            self.assertRegex(tag_cloud(feed), r'>shared</a>\s*<span class="count">1</span>')
             self.assertNotIn("korean-only", tag_cloud(feed))
             shared = read(root, "en/tags/shared/index.html")
             self.assertIn("translated", shared)
@@ -538,7 +538,7 @@ class I18nContractTests(unittest.TestCase):
             self.assert_builds(root)
             feed = read(root, "en/index.html")
             post = read(root, f"en/p/{ID}/index.html")
-            for document, source in ((feed, "assets/brands/x.svg"), (post, "../../assets/brands/x.svg")):
+            for document, source in ((feed, "../assets/brands/x.svg"), (post, "../../../assets/brands/x.svg")):
                 with self.subTest(page="post" if document is post else "feed"):
                     badge = re.search(r'(?s)<a class="share-badge".*?</a>', document)
                     self.assertIsNotNone(badge, msg=document)

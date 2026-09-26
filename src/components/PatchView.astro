@@ -1,9 +1,10 @@
 ---
-import { formatUtc, patchData, type PatchState } from "../lib/site";
+import { formatUtc, patchData, SCREEN_TEXT, type Locale, type PatchState } from "../lib/site";
 
-interface Props { state: PatchState; }
-const { state } = Astro.props;
-const data = patchData(state);
+interface Props { state: PatchState; locale?: Locale; }
+const { state, locale = "ko" } = Astro.props;
+const text = SCREEN_TEXT[locale];
+const data = patchData(state, locale);
 const serialized = JSON.stringify(data)
   .replace(/"alpha"/g, '"a\\u006cpha"')
   .replace(/"beta"/g, '"b\\u0065ta"')
@@ -15,13 +16,13 @@ const patchText = (value: string) => value === "alpha" ? "a<wbr>lpha" : value ==
 ---
 
 <div class="patch-controls">
-  <button type="button" class="patch-view-toggle" aria-pressed="false">패치 보기</button>
+  <button type="button" class="patch-view-toggle" aria-pressed="false">{text.showPatches}</button>
 </div>
 <div class="patch-history-catalog" hidden>
   <ul>
     {state.patches.map((patch) => {
-      const previous = patch.op === "replace" || patch.op === "delete" ? patch.anchor : "새로 넣음";
-      return <li data-patch-id={patch.id}><time datetime={patch.at} title={formatUtc(patch.at)}>{formatUtc(patch.at)}</time> — {patch.why} — {patch.op} — 이전 글자: {previous === "alpha" || previous === "beta" ? <span set:html={patchText(previous)}></span> : previous}</li>;
+      const previous = patch.op === "replace" || patch.op === "delete" ? patch.anchor : text.newlyInserted;
+      return <li data-patch-id={patch.id}><time datetime={patch.at} title={formatUtc(patch.at)}>{formatUtc(patch.at)}</time> — {patch.why} — {patch.op} — {text.previousText}: {previous === "alpha" || previous === "beta" ? <span set:html={patchText(previous)}></span> : previous}</li>;
     })}
   </ul>
 </div>
