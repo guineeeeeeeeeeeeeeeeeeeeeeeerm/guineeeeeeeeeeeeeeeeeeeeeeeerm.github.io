@@ -5,10 +5,23 @@
   "dst": "concept:post",
   "evidence": "def test_a_line_break_inside_a_paragraph_is_a_line_break_on_the_page(self):",
   "seen": {
-    "tests/test_linebreaks.py:LineBreakContractTests": "03952add96d4",
+    "tests/test_linebreaks.py:LineBreakContractTests": "2a81c6c2b762",
     "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
-  }
+    "delegated": "Claude가 마크다운 변경(source:md-03, md-05) 뒤 다시 읽음: 12개 인용이 모두 글자 그대로 남아 있고, 바뀐 것은 본문 렌더 방식뿐이라 개념과 맞음"
+  },
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Claude (claude-opus-5-5) re-read each against the revised post meaning (source:id-02: a post's id is the moment it was written; a title is metadata, identity is in tags, links and revisions) and the id rule (run-20260924-080644-6c6d): each quote still stands; test fixtures were renamed to moments without changing what they check. Technical, delegated (plan-07)"
+      },
+      "seen": {
+        "tests/test_linebreaks.py:LineBreakContractTests": "03952add96d4",
+        "concept:post": "700e2db936c8"
+      },
+      "evidence": "def test_a_line_break_inside_a_paragraph_is_a_line_break_on_the_page(self):"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

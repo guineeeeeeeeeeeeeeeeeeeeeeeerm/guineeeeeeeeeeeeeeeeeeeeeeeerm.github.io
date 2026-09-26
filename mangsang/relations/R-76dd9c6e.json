@@ -5,11 +5,23 @@
   "dst": "concept:tag",
   "evidence": "function parseTags(root: string, posts: Post[]): Map<string, Tagging[]> {",
   "seen": {
-    "src/lib/site.ts": "b1393f2e6611",
+    "src/lib/site.ts": "6042cd138506",
     "concept:tag": "7bfee5732100"
   },
   "confirmed": {
-    "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+    "delegated": "Claude가 마크다운 변경(source:md-03, md-05) 뒤 다시 읽음: 12개 인용이 모두 글자 그대로 남아 있고, 바뀐 것은 본문 렌더 방식뿐이라 개념과 맞음"
   },
-  "written_by": "mangsang 1.9.0"
+  "history": [
+    {
+      "confirmed": {
+        "delegated": "Astro 이전의 정리 조각(source:as-04의 '(3) 정리: … 망상 관계', 승인 source:as-05): 옛 sitegen 관계를 같은 개념으로 새 파일에 다시 건다; 인용은 각 파일의 실제 줄"
+      },
+      "seen": {
+        "src/lib/site.ts": "b1393f2e6611",
+        "concept:tag": "7bfee5732100"
+      },
+      "evidence": "function parseTags(root: string, posts: Post[]): Map<string, Tagging[]> {"
+    }
+  ],
+  "written_by": "mangsang 1.10.0"
 }

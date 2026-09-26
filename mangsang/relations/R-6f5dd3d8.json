@@ -5,11 +5,11 @@
   "dst": "concept:post",
   "evidence": "새 글은 `content/posts/<id>.md`로 저장합니다.",
   "seen": {
-    "README.md#새 글 쓰기": "22ca939af098",
+    "README.md#새 글 쓰기": "662a12de364c",
     "concept:post": "700e2db936c8"
   },
   "confirmed": {
-    "delegated": "Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음"
+    "delegated": "Claude가 마크다운 변경(source:md-03, md-05) 뒤 다시 읽음: 12개 인용이 모두 글자 그대로 남아 있고, 바뀐 것은 본문 렌더 방식뿐이라 개념과 맞음"
   },
   "history": [
     {
@@ -31,7 +31,17 @@
         "concept:post": "700e2db936c8"
       },
       "evidence": "새 글은 `content/posts/<id>.md`로 저장합니다."
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 그림 확대 변경(source:zm-03) 뒤 다시 읽음: 근거 문장이 글자 그대로 남아 있고 개념의 뜻과 맞음"
+      },
+      "seen": {
+        "README.md#새 글 쓰기": "22ca939af098",
+        "concept:post": "700e2db936c8"
+      },
+      "evidence": "새 글은 `content/posts/<id>.md`로 저장합니다."
     }
   ],
-  "written_by": "mangsang 1.9.0"
+  "written_by": "mangsang 1.10.0"
 }
