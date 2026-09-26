@@ -1,0 +1,51 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-102716-20c9",
+  "task": "lang-menu",
+  "role": "verifier",
+  "target": ".",
+  "goal": "언어 전환을 상단 띠 오른쪽 드롭다운으로",
+  "brief": "소유자 요청(source:lg-01): 언어 전환을 띠 오른쪽 끝의 드롭다운으로",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_frame.py"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_i18n.py"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260926-102716-20c9/local/lang-menu.verify.response.json",
+  "touched": [
+    "plan/PLAN.md",
+    "public/assets/menu.js",
+    "public/assets/site.css",
+    "src/components/Header.astro",
+    "src/layouts/BaseLayout.astro",
+    "tests/test_frame.py"
+  ],
+  "built": null
+}

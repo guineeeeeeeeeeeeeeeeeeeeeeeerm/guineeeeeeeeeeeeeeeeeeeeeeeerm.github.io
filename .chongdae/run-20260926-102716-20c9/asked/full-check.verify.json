@@ -1,0 +1,32 @@
+{
+  "artifact-type": "chongdae/request@1",
+  "written_by": "chongdae 1.12.0",
+  "stage": "verify",
+  "run": "run-20260926-102716-20c9",
+  "task": "full-check",
+  "role": "verifier",
+  "target": ".",
+  "goal": "언어 전환을 상단 띠 오른쪽 드롭다운으로",
+  "brief": "드롭다운을 넣은 상태로 전체 테스트와 실제 빌드",
+  "closes": [],
+  "contract": {},
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "tests": [],
+  "response": "./.chongdae/run-20260926-102716-20c9/local/full-check.verify.response.json",
+  "touched": [],
+  "built": null
+}

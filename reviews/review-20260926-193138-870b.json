@@ -1,0 +1,202 @@
+{
+  "artifact-type": "dwitbuk/review@1",
+  "id": "review-20260926-193138-870b",
+  "since": "400e61bc09f2cc240f9c66d4ffa381dda7c892ac",
+  "head": "904c27dca927ce3d3bbd465ff66f62fd985358cc",
+  "reporters": [
+    "chongdae",
+    "hunsu",
+    "mangsang-check",
+    "mangsang-cq",
+    "mangsang-impact"
+  ],
+  "findings": [
+    {
+      "kind": "self-performed",
+      "where": "run-20260926-102716-20c9/full-check",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): run 마지막의 전체 테스트와 실제 빌드",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "self-performed",
+      "where": "run-20260926-102716-20c9/lang-menu",
+      "text": "the session did this itself instead of the lock's implementer (guineeeeeeeeeeeeeeeeeeeeeeeerm): 상단 띠 마크업·CSS와 작은 스크립트의 변경이라 이 세션이 직접(계약·코드·테스트)",
+      "source": "chongdae",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-1e78dde8 tests/test_frame.py realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 언어 드롭다운(source:lg-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-36aea16b plan/PLAN.md#Q-i18n — 영어판 realizes concept:translation",
+      "text": "re-confirmed by delegation: Claude가 언어 드롭다운(source:lg-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-92d1fb6e src/layouts/BaseLayout.astro realizes concept:ui-language",
+      "text": "re-confirmed by delegation: Claude가 언어 드롭다운(source:lg-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "delegated",
+      "where": "R-c640c7ce src/layouts/BaseLayout.astro realizes concept:site-build",
+      "text": "re-confirmed by delegation: Claude가 언어 드롭다운(source:lg-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음",
+      "source": "mangsang",
+      "standing": true,
+      "reporter": "mangsang-impact",
+      "layer": "observation"
+    },
+    {
+      "kind": "non-claim",
+      "where": "settings.chongdae.outside-runs",
+      "text": "content, docs: the project's own procedure, declared in hunsu.json",
+      "layer": "objection",
+      "first-seen": "review-20260924-200341-8680",
+      "disposition": {
+        "as": "accepted",
+        "delegated": "소유자가 처리안을 승인했다(2026-09-24 'ㄱㄱ'); 개별 지적은 소유자가 읽지 않았다 — 사실인 한계 선언이나 drop 이유: 테스트 98개 통과와 docs/ 바이트 동일은 세션이 직접 확인했다",
+        "by": null,
+        "finding_text": "content, docs: the project's own procedure, declared in hunsu.json",
+        "where": "settings.chongdae.outside-runs"
+      }
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-085100-e125, run-20260926-102716-20c9",
+      "text": "no check decides this task  [x2]",
+      "layer": "objection"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-085100-e125",
+      "text": "(provider) 이번 검증에서 보호 테스트 파일은 수정하지 않았습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260926-192156-203a"
+    },
+    {
+      "kind": "non-claim",
+      "where": "run-20260926-085100-e125",
+      "text": "(provider) 모든 가능한 외부 fixture 조합이 아니라 현재 저장소와 보호 테스트 fixture를 검증했습니다.",
+      "layer": "objection",
+      "first-seen": "review-20260926-192156-203a"
+    },
+    {
+      "kind": "review-debt",
+      "where": "review-20260926-192156-203a",
+      "source": "dwitbuk",
+      "layer": "observation",
+      "text": "previous review review-20260926-192156-203a still has 4 undisposed objection(s), carried here"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260924-195304-ccf5",
+      "seen-in": "review-20260924-195304-ccf5",
+      "count": 62,
+      "text": "62 observation(s) written in review-20260924-195304-ccf5 and unchanged since (delegated 62)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-170739-68de",
+      "seen-in": "review-20260925-170739-68de",
+      "count": 5,
+      "text": "5 observation(s) written in review-20260925-170739-68de and unchanged since (cq-open 5)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-202344-fc6a",
+      "seen-in": "review-20260925-202344-fc6a",
+      "count": 2,
+      "text": "2 observation(s) written in review-20260925-202344-fc6a and unchanged since (delegated 2)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260925-234959-4023",
+      "seen-in": "review-20260925-234959-4023",
+      "count": 7,
+      "text": "7 observation(s) written in review-20260925-234959-4023 and unchanged since (agent-proposed 1, delegated 6)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-120908-3415",
+      "seen-in": "review-20260926-120908-3415",
+      "count": 3,
+      "text": "3 observation(s) written in review-20260926-120908-3415 and unchanged since (delegated 3)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-132632-e2df",
+      "seen-in": "review-20260926-132632-e2df",
+      "count": 16,
+      "text": "16 observation(s) written in review-20260926-132632-e2df and unchanged since (delegated 16)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-173922-be51",
+      "seen-in": "review-20260926-173922-be51",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-173922-be51 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-174115-4090",
+      "seen-in": "review-20260926-174115-4090",
+      "count": 1,
+      "text": "1 observation(s) written in review-20260926-174115-4090 and unchanged since (delegated 1)"
+    },
+    {
+      "kind": "unchanged",
+      "layer": "observation",
+      "where": "review-20260926-192156-203a",
+      "seen-in": "review-20260926-192156-203a",
+      "count": 37,
+      "text": "37 observation(s) written in review-20260926-192156-203a and unchanged since (delegated 30, self-performed 3, verifier-reject 4)"
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-084254-d8ee, run-20260926-085100-e125",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-192156-203a): no check decides this task  [x2]",
+      "first-seen": "review-20260926-192156-203a",
+      "carries": [
+        "non-claim",
+        "run-20260926-084254-d8ee, run-20260926-085100-e125",
+        "no check decides this task"
+      ]
+    },
+    {
+      "kind": "undisposed",
+      "where": "run-20260926-084113-1138, run-20260926-084254-d8ee",
+      "layer": "objection",
+      "text": "non-claim (first seen review-20260926-174314-a452): no check decides this task  [x2]",
+      "first-seen": "review-20260926-174314-a452",
+      "carries": [
+        "non-claim",
+        "run-20260926-084113-1138, run-20260926-084254-d8ee",
+        "no check decides this task"
+      ]
+    }
+  ]
+}

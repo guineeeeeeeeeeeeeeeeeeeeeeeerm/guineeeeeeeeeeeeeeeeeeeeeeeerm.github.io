@@ -1,0 +1,114 @@
+{
+  "artifact-type": "chongdae/task@1",
+  "written_by": "chongdae 1.12.0",
+  "status": "done",
+  "def": {
+    "id": "full-check",
+    "role": "session",
+    "brief": "드롭다운을 넣은 상태로 전체 테스트와 실제 빌드",
+    "closes": [],
+    "needs": [],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ],
+      [
+        "npm",
+        "run",
+        "build"
+      ]
+    ],
+    "tests": [],
+    "gate": null
+  },
+  "seq": 3,
+  "added": "2026-09-26T10:30:09+00:00",
+  "self-performed": {
+    "instead-of": "implementer",
+    "why": "run 마지막의 전체 테스트와 실제 빌드",
+    "by": "guineeeeeeeeeeeeeeeeeeeeeeeerm",
+    "at": "2026-09-26T10:30:09+00:00",
+    "chongdae": "chongdae 1.12.0"
+  },
+  "review": {
+    "artifact-type": "dwitbuk/review@1",
+    "verdict": "accept",
+    "findings": [],
+    "worker": {
+      "host": "codex",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh"
+    }
+  },
+  "reviewed_tree": {},
+  "verified_by": {
+    "provider": "command",
+    "argv": [
+      "python3",
+      "{plugin:dwitbuk}/eyes_worker.py",
+      "--request",
+      "{request}",
+      "--response",
+      "{response}",
+      "--host",
+      "codex",
+      "--model",
+      "gpt-5.6-luna",
+      "--effort",
+      "xhigh"
+    ],
+    "host": "codex",
+    "model": "gpt-5.6-luna",
+    "effort": "xhigh",
+    "versions": {
+      "used": {
+        "dwitbuk": "1.8.0",
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 4,
+      "commands-failed": 0
+    }
+  },
+  "checks": [
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests"
+    ],
+    [
+      "npm",
+      "run",
+      "build"
+    ]
+  ],
+  "touched": [],
+  "performed_by": {
+    "provider": "session",
+    "host": "claude-code",
+    "agent": "claude-code_2-1-283_agent",
+    "effort": "medium",
+    "model": "claude-opus-5-5",
+    "versions": {
+      "used": {
+        "chongdae": "1.12.0"
+      }
+    },
+    "trace": {
+      "changed": [],
+      "commands-run": 0,
+      "command-lines": "kept in the local session transcript, not in the record",
+      "window-from": "2026-09-26T10:30:09+00:00"
+    }
+  }
+}
