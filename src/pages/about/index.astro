@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { loadSite, renderAboutBody } from "../../lib/site";
+import { loadSite, metadataForPage, renderAboutBody } from "../../lib/site";
 
 const site = loadSite();
 const body = renderAboutBody(site, "../", "ko");
+const metadata = metadataForPage({ locale: "ko", kind: "about", hasAlternate: true });
 ---
 
-<BaseLayout title="소개" rootLink="../" current="about" switchHref="../en/about/" switchLabel="English" switchLang="en" alternateHref="../en/about/" alternateLang="en" includeZoom={true}>
+<BaseLayout metadata={metadata} rootLink="../" current="about" switchHref="../en/about/" switchLabel="English" switchLang="en" alternateHref="../en/about/" alternateLang="en" includeZoom={true}>
   <main>
     <article class="post">
       <div class="body" set:html={body}></div>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import FeedItem from "../../../../components/FeedItem.astro";
-import { loadSite, taggedPosts, type SiteData } from "../../../../lib/site";
+import { loadSite, metadataForPage, taggedPosts, type SiteData } from "../../../../lib/site";
 
 export function getStaticPaths() {
   const site = loadSite();
@@ -16,9 +16,10 @@ export function getStaticPaths() {
 const { site } = Astro.props as { site: SiteData };
 const tag = Astro.params.tag ?? "";
 const posts = taggedPosts(site, tag, "en");
+const metadata = metadataForPage({ locale: "en", kind: "tag", tag, hasAlternate: true });
 ---
 
-<BaseLayout title={`Tag: ${tag}`} rootLink="../../" assetRoot="../../../" locale="en" switchHref={`../../../tags/${encodeURIComponent(tag)}/`} switchLabel="한국어" switchLang="ko" alternateHref={`../../../tags/${encodeURIComponent(tag)}/`} alternateLang="ko">
+<BaseLayout metadata={metadata} rootLink="../../" assetRoot="../../../" locale="en" switchHref={`../../../tags/${encodeURIComponent(tag)}/`} switchLabel="한국어" switchLang="ko" alternateHref={`../../../tags/${encodeURIComponent(tag)}/`} alternateLang="ko">
   <main>
     <h1>Tag: {tag}</h1>
     <section class="feed">

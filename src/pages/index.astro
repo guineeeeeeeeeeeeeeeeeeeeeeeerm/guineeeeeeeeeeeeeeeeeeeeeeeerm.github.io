@@ -2,13 +2,14 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FeedItem from "../components/FeedItem.astro";
 import TagCloud from "../components/TagCloud.astro";
-import { feedPosts, loadSite } from "../lib/site";
+import { feedPosts, loadSite, metadataForPage } from "../lib/site";
 
 const site = loadSite();
 const posts = feedPosts(site);
+const metadata = metadataForPage({ locale: "ko", kind: "feed", hasAlternate: true });
 ---
 
-<BaseLayout title="피드" rootLink="" current="feed" switchHref="en/" switchLabel="English" switchLang="en" alternateHref="en/" alternateLang="en">
+<BaseLayout metadata={metadata} rootLink="" current="feed" switchHref="en/" switchLabel="English" switchLang="en" alternateHref="en/" alternateLang="en">
   <div class="feed-layout">
     <main>
       <h1>피드</h1>

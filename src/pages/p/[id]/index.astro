@@ -5,7 +5,7 @@ import Footnotes from "../../../components/Footnotes.astro";
 import IncomingLinks from "../../../components/IncomingLinks.astro";
 import PatchView from "../../../components/PatchView.astro";
 import PostBody from "../../../components/PostBody.astro";
-import { incomingLinks, loadSite, outgoingLinks, postTags, renderPostBody, sharesFor, type SiteData } from "../../../lib/site";
+import { incomingLinks, loadSite, metadataForPage, outgoingLinks, postTags, renderPostBody, sharesFor, type SiteData } from "../../../lib/site";
 
 export function getStaticPaths() {
   const site = loadSite();
@@ -21,9 +21,10 @@ const tags = postTags(site, post);
 const outgoing = outgoingLinks(site, post, "ko");
 const incoming = incomingLinks(site, post, "ko");
 const body = renderPostBody(site, post, "../../");
+const metadata = metadataForPage({ locale: "ko", kind: "post", post, hasAlternate: site.translations.has(post.id) });
 ---
 
-<BaseLayout title={post.title || "글"} rootLink="../../" switchHref={site.translations.has(post.id) ? `../../en/p/${post.id}/` : "../../en/"} switchLabel="English" switchLang="en" alternateHref={site.translations.has(post.id) ? `../../en/p/${post.id}/` : undefined} alternateLang="en" includeZoom={true}>
+<BaseLayout metadata={metadata} rootLink="../../" switchHref={site.translations.has(post.id) ? `../../en/p/${post.id}/` : "../../en/"} switchLabel="English" switchLang="en" alternateHref={site.translations.has(post.id) ? `../../en/p/${post.id}/` : undefined} alternateLang="en" includeZoom={true}>
   <main>
     <article class="post">
       {post.title && <h1 class="post-title">{post.title}</h1>}

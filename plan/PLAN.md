@@ -277,6 +277,8 @@ Decided (owner, `source:og-03`, `source:og-05`, 요청 `source:og-01`, 제안 `s
 - **설명:** 글 페이지의 `description`과 `og:description`은 적용된 본문 첫 문단의 화면 글자에서 앞 160자(잘렸으면 `…`)다. 피드·소개·
   태그 페이지는 사이트 설명 — 한국어판 "생각난 것들을 쓰고, 만들고, 부숩니다.", 영어판 "I write, build, and break whatever comes to
   mind." (둘 다 소개 글의 문장)이다.
+Decided after build (meta-build, technical, delegated): 페이지의 제목·설명·`og:type`·절대 주소·OG 언어는 `src/lib/`의 `metadataForPage` 한 곳에서
+계산한다. 글의 설명과 제목 없는 글의 제목은 패치가 적용된 본문(영어판은 번역 본문)의 첫 문단 글자와 피드의 제목 규칙(`feedTitle`)을 쓴다.
 
 ## Q-i18n — 영어판
 

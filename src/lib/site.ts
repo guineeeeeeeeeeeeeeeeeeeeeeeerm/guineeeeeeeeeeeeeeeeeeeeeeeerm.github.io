@@ -7,6 +7,13 @@ export class BuildError extends Error {}
 
 export type Locale = "ko" | "en";
 
+export const SITE_NAME = "GuinEeeeeeeeeeeeeeeeeeeeeeeerm";
+export const SITE_URL = "https://guineeeeeeeeeeeeeeeeeeeeeeeerm.github.io";
+export const SITE_DESCRIPTIONS: Record<Locale, string> = {
+  ko: "생각난 것들을 쓰고, 만들고, 부숩니다.",
+  en: "I write, build, and break whatever comes to mind.",
+};
+
 /** Q-i18n: each edition shows only the shares made in its own language. */
 export function sharesFor(site: SiteData, postId: string, locale: Locale): Share[] {
   return (site.shares.get(postId) || []).filter((share) => share.lang === locale);
@@ -62,6 +69,26 @@ export interface Post {
   type: "short" | "medium" | "long";
   written: string;
   title: string;
+}
+
+export type PageKind = "feed" | "post" | "about" | "tag";
+
+export interface PageMetadata {
+  title: string;
+  ogTitle: string;
+  description: string;
+  url: string;
+  type: "website" | "article";
+  ogLocale: "ko_KR" | "en_US";
+  alternateLocale?: "ko_KR" | "en_US";
+}
+
+interface PageMetadataInput {
+  locale: Locale;
+  kind: PageKind;
+  post?: Post;
+  tag?: string;
+  hasAlternate?: boolean;
 }
 
 export interface Share {
@@ -1490,6 +1517,47 @@ export function feedPostsFor(site: SiteData, locale: Locale): Post[] {
 export function feedTitle(post: Post): string {
   if (post.title) return post.title;
   return post.firstText.slice(0, 80) + (post.firstText.length > 80 ? "…" : "");
+}
+
+function truncateText(text: string, limit: number): string {
+  return text.length > limit ? text.slice(0, limit) + "…" : text;
+}
+
+export function metadataForPage({ locale, kind, post, tag, hasAlternate = false }: PageMetadataInput): PageMetadata {
+  const prefix = locale === "en" ? "/en" : "";
+  let pathname: string;
+  let ogTitle: string;
+  let description: string;
+
+  if (kind === "feed") {
+    pathname = `${prefix}/`;
+    ogTitle = SITE_NAME;
+    description = SITE_DESCRIPTIONS[locale];
+  } else if (kind === "about") {
+    pathname = `${prefix}/about/`;
+    ogTitle = locale === "en" ? "About" : "소개";
+    description = SITE_DESCRIPTIONS[locale];
+  } else if (kind === "tag") {
+    if (tag === undefined) throw new Error("tag metadata requires a tag");
+    pathname = `${prefix}/tags/${encodeURIComponent(tag)}/`;
+    ogTitle = `${locale === "en" ? "Tag" : "태그"}: ${tag}`;
+    description = SITE_DESCRIPTIONS[locale];
+  } else {
+    if (!post) throw new Error("post metadata requires a post");
+    pathname = `${prefix}/p/${encodeURIComponent(post.id)}/`;
+    ogTitle = feedTitle(post);
+    description = truncateText(post.firstText, 160);
+  }
+
+  return {
+    title: kind === "feed" ? SITE_NAME : `${ogTitle} — ${SITE_NAME}`,
+    ogTitle,
+    description,
+    url: `${SITE_URL}${pathname}`,
+    type: kind === "post" ? "article" : "website",
+    ogLocale: locale === "en" ? "en_US" : "ko_KR",
+    ...(hasAlternate ? { alternateLocale: locale === "en" ? "ko_KR" : "en_US" } : {}),
+  };
 }
 
 export function taggedPosts(site: SiteData, tag: string, locale: Locale = "ko"): Post[] {

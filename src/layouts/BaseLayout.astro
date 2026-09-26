@@ -1,8 +1,9 @@
 ---
 import Header from "../components/Header.astro";
+import { SITE_NAME, SITE_URL, type PageMetadata } from "../lib/site";
 
 interface Props {
-  title: string;
+  metadata: PageMetadata;
   rootLink: string;
   assetRoot?: string;
   locale?: "ko" | "en";
@@ -15,7 +16,7 @@ interface Props {
   includeZoom?: boolean;
 }
 
-const { title, rootLink, assetRoot = rootLink, locale = "ko", current = "", switchHref, switchLabel, switchLang, alternateHref, alternateLang, includeZoom = false } = Astro.props;
+const { metadata, rootLink, assetRoot = rootLink, locale = "ko", current = "", switchHref, switchLabel, switchLang, alternateHref, alternateLang, includeZoom = false } = Astro.props;
 const feedHref = current === "feed" ? "./" : rootLink || "./";
 const aboutHref = current === "about" ? "./" : `${rootLink}about/`;
 const stylesheetHref = `${assetRoot}assets/site.css`;
@@ -29,7 +30,23 @@ const zoomHref = `${assetRoot}assets/zoom.js`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{metadata.title}</title>
+    <link rel="icon" type="image/png" sizes="32x32" href={`${assetRoot}assets/favicon-32.png`} />
+    <link rel="apple-touch-icon" href={`${assetRoot}assets/apple-touch-icon.png`} />
+    <link rel="canonical" href={metadata.url} />
+    <meta name="description" content={metadata.description} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={metadata.ogTitle} />
+    <meta property="og:description" content={metadata.description} />
+    <meta property="og:type" content={metadata.type} />
+    <meta property="og:url" content={metadata.url} />
+    <meta property="og:image" content={`${SITE_URL}/assets/og-default.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={SITE_NAME} />
+    <meta property="og:locale" content={metadata.ogLocale} />
+    {metadata.alternateLocale && <meta property="og:locale:alternate" content={metadata.alternateLocale} />}
+    <meta name="twitter:card" content="summary_large_image" />
     {alternateHref && <link rel="alternate" hreflang={alternateLang} href={alternateHref} />}
     <link rel="stylesheet" href={stylesheetHref} />
     <script src={timeHref} defer></script>
