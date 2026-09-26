@@ -5,11 +5,11 @@
   "dst": "concept:site-build",
   "evidence": "생성기는 Astro 프로젝트다.",
   "seen": {
-    "plan/PLAN.md#Q-build — 생성기와 출력": "c1e3b50eff11",
+    "plan/PLAN.md#Q-build — 생성기와 출력": "36b9f82a2579",
     "concept:site-build": "dc5fb39ad68a"
   },
   "confirmed": {
-    "delegated": "Claude가 배포 변경(source:dp-03) 뒤 다시 읽음: 인용('생성기는 Astro 프로젝트다.', 'npm run build')이 그대로이고 site-build의 뜻(docs/에 만들고 Pages가 서비스)과 맞음"
+    "delegated": "Claude가 러너 고정 뒤 다시 읽음: 인용이 그대로이고 site-build와 맞음"
   },
   "history": [
     {
@@ -58,6 +58,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-build — 생성기와 출력": "10e9560603c8",
+        "concept:site-build": "dc5fb39ad68a"
+      },
+      "evidence": "생성기는 Astro 프로젝트다."
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 배포 변경(source:dp-03) 뒤 다시 읽음: 인용('생성기는 Astro 프로젝트다.', 'npm run build')이 그대로이고 site-build의 뜻(docs/에 만들고 Pages가 서비스)과 맞음"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-build — 생성기와 출력": "c1e3b50eff11",
         "concept:site-build": "dc5fb39ad68a"
       },
       "evidence": "생성기는 Astro 프로젝트다."
