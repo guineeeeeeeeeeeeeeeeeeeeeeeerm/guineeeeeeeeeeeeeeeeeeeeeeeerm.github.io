@@ -5,11 +5,11 @@
   "dst": "concept:share",
   "evidence": "`content/shares.jsonl`에 줄을 하나 더합니다.",
   "seen": {
-    "README.md#공유 기록 남기기": "1afefd3cdb15",
+    "README.md#공유 기록 남기기": "e5936908797b",
     "concept:share": "ae8d0b44fd09"
   },
   "confirmed": {
-    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+    "delegated": "Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
   "history": [
     {
@@ -38,6 +38,16 @@
       },
       "seen": {
         "README.md#공유 기록 남기기": "e389edd7761b",
+        "concept:share": "ae8d0b44fd09"
+      },
+      "evidence": "`content/shares.jsonl`에 줄을 하나 더합니다."
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+      },
+      "seen": {
+        "README.md#공유 기록 남기기": "1afefd3cdb15",
         "concept:share": "ae8d0b44fd09"
       },
       "evidence": "`content/shares.jsonl`에 줄을 하나 더합니다."

@@ -5,11 +5,11 @@
   "dst": "concept:share",
   "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다",
   "seen": {
-    "plan/PLAN.md#Q-share — 공유 기록과 배지": "20d002a378fa",
+    "plan/PLAN.md#Q-share — 공유 기록과 배지": "9932d0e6ba9f",
     "concept:share": "ae8d0b44fd09"
   },
   "confirmed": {
-    "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+    "delegated": "Claude가 dev.to 추가(source:dv-01) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음"
   },
   "history": [
     {
@@ -58,6 +58,16 @@
       },
       "seen": {
         "plan/PLAN.md#Q-share — 공유 기록과 배지": "e22fc5017ab8",
+        "concept:share": "ae8d0b44fd09"
+      },
+      "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다"
+    },
+    {
+      "confirmed": {
+        "delegated": "Claude가 영어판(source:loc-03, loc-07) 뒤 다시 읽음: 인용이 그대로이고 개념과 맞음 — ui-language의 옛 근거(한국어 화면)는 새 뜻의 '원본 한국어판'을 여전히 받침"
+      },
+      "seen": {
+        "plan/PLAN.md#Q-share — 공유 기록과 배지": "20d002a378fa",
         "concept:share": "ae8d0b44fd09"
       },
       "evidence": "공유 표 `content/shares.jsonl`의 한 줄이 공유 하나다"
