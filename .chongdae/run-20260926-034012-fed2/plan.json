@@ -1,0 +1,10 @@
+{
+  "artifact-type": "chongdae/plan@1",
+  "written_by": "chongdae 1.11.0",
+  "goal": "테스트 시간 줄이기: 오류 빨리 끝내기, 빌드 나눠 쓰기, 체크 범위, 효과 없는 테스트 목록",
+  "kind": "session",
+  "tasks": [],
+  "providers": {
+    "session": "session"
+  }
+}
